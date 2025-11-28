@@ -58,7 +58,7 @@ export default function RootLayout({
     <html lang="en-GB">
       <body className={`${montserrat.variable} ${bebasNeue.variable} font-sans min-h-screen bg-[#1c1c1c] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.1),#1c1c1c_70%)] text-white flex justify-center px-2 sm:px-4`}>
         <Providers>
-          <div className="w-full max-w-4xl bg-[#111111] shadow-2xl rounded-lg overflow-hidden border border-zinc-800 px-3 sm:px-6 md:px-10">
+          <div className="w-[80%] bg-[#111111] shadow-2xl rounded-lg overflow-hidden border border-zinc-800 px-3 sm:px-6 md:px-10">
             <Header />
             <main className="min-h-screen">
               {children}
