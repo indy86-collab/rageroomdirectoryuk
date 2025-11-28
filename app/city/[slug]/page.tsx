@@ -11,16 +11,17 @@ interface CityPageProps {
   params: { slug: string }
 }
 
-export async function generateStaticParams() {
-  const { getDistinctCities } = await import("@/lib/listings")
-  const { cityToSlug } = await import("@/lib/location")
-  
-  const cities = await getDistinctCities()
-  
-  return cities.map((city) => ({
-    slug: cityToSlug(city),
-  }))
-}
+// Disable static generation - we'll use dynamic rendering instead
+// export async function generateStaticParams() {
+//   const { getDistinctCities } = await import("@/lib/listings")
+//   const { cityToSlug } = await import("@/lib/location")
+//   
+//   const cities = await getDistinctCities()
+//   
+//   return cities.map((city) => ({
+//     slug: cityToSlug(city),
+//   }))
+// }
 
 export async function generateMetadata({
   params,
