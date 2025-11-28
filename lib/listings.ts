@@ -213,8 +213,8 @@ export async function getDistinctCities(): Promise<string[]> {
   })
 
   return listings
-    .map((listing) => listing.city)
-    .filter((city) => city.trim() !== "")
+    .map((listing: { city: string }) => listing.city)
+    .filter((city: string) => city.trim() !== "")
     .sort()
 }
 
