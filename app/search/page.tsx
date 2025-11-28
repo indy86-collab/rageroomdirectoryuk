@@ -7,6 +7,9 @@ interface SearchPageProps {
   searchParams: { query?: string }
 }
 
+// Mark this route as dynamic
+export const dynamic = 'force-dynamic'
+
 export async function generateMetadata({
   searchParams,
 }: SearchPageProps): Promise<Metadata> {

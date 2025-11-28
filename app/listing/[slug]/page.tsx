@@ -20,6 +20,10 @@ interface ListingPageProps {
   params: { slug: string }
 }
 
+// Mark this route as dynamic
+export const dynamic = 'force-dynamic'
+export const dynamicParams = true
+
 // Helper to check if a string looks like a UUID
 function isUUID(str: string): boolean {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str)
