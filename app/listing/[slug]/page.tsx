@@ -141,14 +141,14 @@ export default async function ListingPage({ params }: ListingPageProps) {
   // Calculate average rating from site reviews
   const siteAverageRating =
     listing.reviews.length > 0
-      ? listing.reviews.reduce((sum, review) => sum + review.rating, 0) /
+      ? listing.reviews.reduce((sum: number, review: any) => sum + review.rating, 0) /
         listing.reviews.length
       : null
 
   // Calculate average rating from Google reviews
   const googleAverageRating =
     googleReviews.length > 0
-      ? googleReviews.reduce((sum, review) => sum + review.rating, 0) /
+      ? googleReviews.reduce((sum: number, review: any) => sum + review.rating, 0) /
         googleReviews.length
       : null
 
@@ -870,7 +870,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
             <div className={googleReviews.length > 0 ? "mt-8 pt-8 border-t border-zinc-700" : ""}>
               <h3 className="text-lg font-semibold text-white mb-4">Site Reviews</h3>
               <div className="space-y-6">
-                {listing.reviews.map((review) => (
+                {listing.reviews.map((review: any) => (
                   <div
                     key={review.id}
                     className="border-b border-zinc-700 pb-6 last:border-0 last:pb-0"

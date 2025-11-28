@@ -1,8 +1,13 @@
-import { prisma } from "@/lib/prisma"
 import { Listing } from "@prisma/client"
+
+// Lazy load Prisma to avoid build-time initialization
+function getPrisma() {
+  return require("@/lib/prisma").prisma
+}
 
 export async function getFeaturedListings(limit: number = 6): Promise<Listing[]> {
   // Get all listings
+  const prisma = getPrisma()
   const allListings = await prisma.listing.findMany({
     orderBy: {
       createdAt: "desc",
@@ -43,6 +48,7 @@ export async function searchListings(
   }
 
   const searchTerm = query.trim()
+  const prisma = getPrisma()
 
   return await prisma.listing.findMany({
     where: {
@@ -61,12 +67,14 @@ export async function searchListings(
 }
 
 export async function getListingById(id: string): Promise<Listing | null> {
+  const prisma = getPrisma()
   return await prisma.listing.findUnique({
     where: { id },
   })
 }
 
 export async function getListingBySlug(slug: string) {
+  const prisma = getPrisma()
   return await prisma.listing.findUnique({
     where: { slug },
     include: {
@@ -90,6 +98,7 @@ export async function getListingBySlug(slug: string) {
 }
 
 export async function getListingWithReviews(idOrSlug: string) {
+  const prisma = getPrisma()
   // Try slug first, then fall back to ID for backwards compatibility
   const bySlug = await prisma.listing.findUnique({
     where: { slug: idOrSlug },
@@ -138,6 +147,7 @@ export async function getListingWithReviews(idOrSlug: string) {
 }
 
 export async function getAllListingsForAdmin(): Promise<Listing[]> {
+  const prisma = getPrisma()
   return await prisma.listing.findMany({
     orderBy: {
       createdAt: "desc",
@@ -146,12 +156,14 @@ export async function getAllListingsForAdmin(): Promise<Listing[]> {
 }
 
 export async function getListingByIdForAdmin(id: string): Promise<Listing | null> {
+  const prisma = getPrisma()
   return await prisma.listing.findUnique({
     where: { id },
   })
 }
 
 export async function getListingsByCity(city: string): Promise<Listing[]> {
+  const prisma = getPrisma()
   // Try multiple formats since database has inconsistent formatting
   // Some cities use hyphens (Weston-super-Mare), others use spaces (Newcastle upon Tyne)
   const normalizedWithHyphens = city.replace(/\s+/g, "-")
@@ -187,6 +199,7 @@ export async function getListingsByCity(city: string): Promise<Listing[]> {
 }
 
 export async function getDistinctCities(): Promise<string[]> {
+  const prisma = getPrisma()
   const listings = await prisma.listing.findMany({
     select: {
       city: true,
@@ -206,6 +219,7 @@ export async function getDistinctCities(): Promise<string[]> {
 }
 
 export async function getListingsByRegion(region: string): Promise<Listing[]> {
+  const prisma = getPrisma()
   return await prisma.listing.findMany({
     where: {
       region: {
@@ -225,6 +239,7 @@ export async function getSimilarListings(
   limit: number = 4,
   currentLocation?: { lat: number; lng: number }
 ): Promise<Listing[]> {
+  const prisma = getPrisma()
   const listings = await prisma.listing.findMany({
     where: {
       city: {
@@ -267,6 +282,7 @@ export async function getSimilarListings(
 }
 
 export async function getDistinctRegions(): Promise<string[]> {
+  const prisma = getPrisma()
   const listings = await prisma.listing.findMany({
     select: {
       region: true,
