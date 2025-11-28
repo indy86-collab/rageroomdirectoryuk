@@ -261,7 +261,7 @@ export async function getSimilarListings(
     const { calculateDistance } = await import("./distance")
     
     return listings
-      .map((listing) => {
+      .map((listing: any) => {
         const location = listing.location as { lat: number; lng: number } | null
         if (!location) return { listing, distance: Infinity }
         
