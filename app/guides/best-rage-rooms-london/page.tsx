@@ -1,5 +1,4 @@
 import { Metadata } from "next"
-import { getListingsByCity } from "@/lib/listings"
 import Link from "next/link"
 import ListingCard from "@/components/ListingCard"
 import FAQ from "@/components/FAQ"
@@ -15,7 +14,12 @@ export const metadata: Metadata = {
   },
 }
 
+// Mark this route as dynamic to prevent build-time data collection
+export const dynamic = 'force-dynamic'
+
 export default async function BestRageRoomsLondonPage() {
+  // Lazy load to prevent build-time initialization
+  const { getListingsByCity } = await import("@/lib/listings")
   const listings = await getListingsByCity("London")
 
   // Article schema for the guide

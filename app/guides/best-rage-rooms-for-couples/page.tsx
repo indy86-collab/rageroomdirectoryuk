@@ -1,5 +1,4 @@
 import { Metadata } from "next"
-import { searchListings } from "@/lib/listings"
 import Link from "next/link"
 import FAQ from "@/components/FAQ"
 import { globalFAQs } from "@/lib/faqs"
@@ -14,7 +13,12 @@ export const metadata: Metadata = {
   },
 }
 
+// Mark this route as dynamic to prevent build-time data collection
+export const dynamic = 'force-dynamic'
+
 export default async function BestRageRoomsForCouplesPage() {
+  // Lazy load to prevent build-time initialization
+  const { searchListings } = await import("@/lib/listings")
   // Get all listings (we'll filter/rank them for couples)
   const allListings = await searchListings(undefined)
 
