@@ -6,6 +6,10 @@ import FAQ from "@/components/FAQ"
 import { globalFAQs } from "@/lib/faqs"
 import Link from "next/link"
 
+// Mark homepage as dynamic since it queries the database
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export default async function Home() {
   const featuredListings = await getFeaturedListings(6) // Show 6 listings, rotated daily
   const cities = await getDistinctCities()
