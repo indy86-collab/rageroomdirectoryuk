@@ -5,12 +5,6 @@ function getPrisma() {
   return require("@/lib/prisma").prisma
 }
 
-// Lazy load auth functions to avoid build-time initialization
-async function requireAdmin() {
-  const { requireAdmin: reqAdmin } = await import("@/lib/auth")
-  return reqAdmin()
-}
-
 // Mark this route as dynamic to prevent static generation
 export const dynamic = 'force-dynamic'
 export const dynamicParams = true
