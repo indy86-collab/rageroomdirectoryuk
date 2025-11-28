@@ -27,11 +27,6 @@ export const metadata: Metadata = {
   description:
     "Discover and compare rage rooms and smash rooms across the UK. Browse by city, view prices, packages, opening hours and book your next stress-relief session.",
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"),
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
-  },
   openGraph: {
     type: "website",
     title: "RageRoom Directory",
@@ -47,6 +42,12 @@ export const metadata: Metadata = {
       "Discover UK rage rooms, compare packages and book your next smash session.",
   },
 } satisfies Metadata
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+}
 
 export default function RootLayout({
   children,

@@ -1,6 +1,6 @@
 import { Metadata } from "next"
 import { getListingsByCity } from "@/lib/listings"
-import { slugToCity } from "@/lib/location"
+import { slugToCity, cityToSlug } from "@/lib/location"
 import ListingsGrid from "@/components/ListingsGrid"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import FAQ from "@/components/FAQ"

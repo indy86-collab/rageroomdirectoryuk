@@ -818,9 +818,11 @@ export default async function ListingPage({ params }: ListingPageProps) {
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex items-center space-x-3">
                         {review.profile_photo_url && (
-                          <img
+                          <Image
                             src={review.profile_photo_url}
                             alt={review.author_name}
+                            width={32}
+                            height={32}
                             className="w-8 h-8 rounded-full"
                           />
                         )}

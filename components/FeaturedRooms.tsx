@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Listing } from "@prisma/client"
 
 interface FeaturedRoomsProps {
@@ -29,10 +30,12 @@ export default function FeaturedRooms({ listings }: FeaturedRoomsProps) {
             {/* Image with orange diagonal */}
             <div className="relative w-full h-48 flex-shrink-0">
               {listing.image ? (
-                <img
+                <Image
                   src={listing.image}
                   alt={`${listing.name} rage room in ${listing.city}`}
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               ) : (
                 <div className="w-full h-full bg-zinc-800 flex items-center justify-center">

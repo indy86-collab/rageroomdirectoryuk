@@ -130,6 +130,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     <div className="py-8">
       <div className="max-w-4xl mx-auto px-4">
         <Script
+          id="article-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
         />

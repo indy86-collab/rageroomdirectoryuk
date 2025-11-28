@@ -53,7 +53,7 @@ export default function ListingFilters({ listings, onFiltered }: ListingFiltersP
     })
 
     onFiltered(filtered)
-  }, [listings, priceRange, verifiedOnly, sortBy])
+  }, [listings, priceRange, verifiedOnly, sortBy, onFiltered])
 
   return (
     <div className="bg-[#181818] rounded-lg border border-zinc-800 p-6 mb-8">
