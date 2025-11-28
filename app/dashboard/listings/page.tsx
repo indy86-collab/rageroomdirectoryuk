@@ -1,6 +1,4 @@
 import { redirect } from "next/navigation"
-import { requireAdmin } from "@/lib/auth"
-import { getAllListingsForAdmin } from "@/lib/listings"
 import Link from "next/link"
 
 // Mark this route as dynamic
@@ -8,11 +6,15 @@ export const dynamic = 'force-dynamic'
 
 export default async function AdminListingsPage() {
   try {
+    // Lazy load to prevent build-time initialization
+    const { requireAdmin } = await import("@/lib/auth")
     await requireAdmin()
   } catch (error) {
     redirect("/dashboard")
   }
 
+  // Lazy load to prevent build-time initialization
+  const { getAllListingsForAdmin } = await import("@/lib/listings")
   const listings = await getAllListingsForAdmin()
 
   return (

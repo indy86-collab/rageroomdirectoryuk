@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation"
-import { getCurrentUser } from "@/lib/auth"
 import { Role } from "@prisma/client"
 import Link from "next/link"
 
@@ -7,6 +6,8 @@ import Link from "next/link"
 export const dynamic = 'force-dynamic'
 
 export default async function DashboardPage() {
+  // Lazy load to prevent build-time initialization
+  const { getCurrentUser } = await import("@/lib/auth")
   const user = await getCurrentUser()
 
   if (!user) {

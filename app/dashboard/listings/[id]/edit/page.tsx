@@ -1,6 +1,4 @@
 import { redirect, notFound } from "next/navigation"
-import { requireAdmin } from "@/lib/auth"
-import { getListingByIdForAdmin } from "@/lib/listings"
 import ListingForm from "@/components/ListingForm"
 
 // Mark this route as dynamic
@@ -13,11 +11,15 @@ export default async function EditListingPage({
   params: { id: string }
 }) {
   try {
+    // Lazy load to prevent build-time initialization
+    const { requireAdmin } = await import("@/lib/auth")
     await requireAdmin()
   } catch (error) {
     redirect("/dashboard")
   }
 
+  // Lazy load to prevent build-time initialization
+  const { getListingByIdForAdmin } = await import("@/lib/listings")
   const listing = await getListingByIdForAdmin(params.id)
 
   if (!listing) {

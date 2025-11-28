@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation"
-import { requireAdmin } from "@/lib/auth"
 import ListingForm from "@/components/ListingForm"
 
 // Mark this route as dynamic
@@ -7,6 +6,8 @@ export const dynamic = 'force-dynamic'
 
 export default async function NewListingPage() {
   try {
+    // Lazy load to prevent build-time initialization
+    const { requireAdmin } = await import("@/lib/auth")
     await requireAdmin()
   } catch (error) {
     redirect("/dashboard")
