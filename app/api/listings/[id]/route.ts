@@ -1,9 +1,14 @@
 import { NextRequest, NextResponse } from "next/server"
-import { requireAdmin } from "@/lib/auth"
 
 // Lazy load Prisma to avoid build-time initialization
 function getPrisma() {
   return require("@/lib/prisma").prisma
+}
+
+// Lazy load auth functions to avoid build-time initialization
+async function requireAdmin() {
+  const { requireAdmin: reqAdmin } = await import("@/lib/auth")
+  return reqAdmin()
 }
 
 // Mark this route as dynamic to prevent static generation
@@ -19,7 +24,8 @@ export async function PATCH(
   const { id } = params
   try {
     // Ensure user is admin
-    await requireAdmin()
+    const { requireAdmin: reqAdmin } = await import("@/lib/auth")
+    await reqAdmin()
   } catch (error) {
     return NextResponse.json(
       { error: "Unauthorized: Admin access required" },

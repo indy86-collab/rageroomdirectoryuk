@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server"
-import { requireAdmin } from "@/lib/auth"
 
 // Lazy load Prisma to avoid build-time initialization
 function getPrisma() {
@@ -14,6 +13,7 @@ export const revalidate = 0
 export async function POST(request: NextRequest) {
   try {
     // Ensure user is admin
+    const { requireAdmin } = await import("@/lib/auth")
     await requireAdmin()
   } catch (error) {
     return NextResponse.json(
