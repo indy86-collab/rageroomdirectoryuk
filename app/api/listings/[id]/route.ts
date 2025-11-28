@@ -2,10 +2,15 @@ import { NextRequest, NextResponse } from "next/server"
 import { requireAdmin } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 
+// Mark this route as dynamic to prevent static generation
+export const dynamic = 'force-dynamic'
+export const dynamicParams = true
+
 export async function PATCH(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const { id } = params
   try {
     // Ensure user is admin
     await requireAdmin()
@@ -18,7 +23,7 @@ export async function PATCH(
 
   try {
     const body = await request.json()
-    const listingId = params.id
+    const listingId = id
 
     // Check if listing exists
     const existingListing = await prisma.listing.findUnique({
