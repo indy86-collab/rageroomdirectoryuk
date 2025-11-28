@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma"
 
 // Mark this route as dynamic to prevent static generation
 export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
 
 export async function POST(request: NextRequest) {
   try {

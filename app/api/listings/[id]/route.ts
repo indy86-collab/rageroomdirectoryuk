@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma"
 // Mark this route as dynamic to prevent static generation
 export const dynamic = 'force-dynamic'
 export const dynamicParams = true
+export const runtime = 'nodejs'
 
 export async function PATCH(
   request: NextRequest,
