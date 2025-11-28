@@ -3,6 +3,8 @@ import { authOptions } from "@/lib/auth-options"
 
 // Mark this route as dynamic
 export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+export const revalidate = 0
 
 const handler = NextAuth(authOptions)
 
