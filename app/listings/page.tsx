@@ -1,5 +1,4 @@
 import { Metadata } from "next"
-import { searchListings } from "@/lib/listings"
 import ListingsGrid from "@/components/ListingsGrid"
 import UGCButtons from "@/components/UGCButtons"
 
@@ -8,7 +7,12 @@ export const metadata: Metadata = {
   description: "Browse all rage rooms and smash rooms across the UK. Compare venues, prices, packages, opening hours and reviews to find the perfect rage room experience.",
 }
 
+// Mark this route as dynamic to prevent build-time data collection
+export const dynamic = 'force-dynamic'
+
 export default async function AllListingsPage() {
+  // Lazy load to prevent build-time initialization
+  const { searchListings } = await import("@/lib/listings")
   // Get all listings by searching with no query
   const listings = await searchListings(undefined)
 
