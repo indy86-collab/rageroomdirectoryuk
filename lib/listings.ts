@@ -273,9 +273,9 @@ export async function getSimilarListings(
         )
         return { listing, distance }
       })
-      .sort((a, b) => a.distance - b.distance)
+      .sort((a: any, b: any) => a.distance - b.distance)
       .slice(0, limit)
-      .map((item) => item.listing)
+      .map((item: any) => item.listing)
   }
 
   return listings.slice(0, limit)
