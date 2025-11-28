@@ -1,0 +1,23 @@
+import { redirect } from "next/navigation"
+import { requireAdmin } from "@/lib/auth"
+import ListingForm from "@/components/ListingForm"
+
+export default async function NewListingPage() {
+  try {
+    await requireAdmin()
+  } catch (error) {
+    redirect("/dashboard")
+  }
+
+  return (
+    <div className="py-8 px-4 max-w-4xl mx-auto">
+      <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+        Create New Listing
+      </h1>
+      <ListingForm mode="create" />
+    </div>
+  )
+}
+
+
+

@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  hashedPassword String?
+  image         String?
+  role          Role      @default(USER)
+  reviews       Review[]
+  listings      Listing[] @relation("OwnerListings")
+  createdAt     DateTime  @default(now())
+
+  @@map("users")
+}
+
+model Listing {
+  id            String    @id @default(cuid())
+  name          String
+  description   String
+  city          String
+  region        String
+  postcode      String
+  location      Json // stores latitude/longitude as { lat: number, lng: number }
+  website       String?
+  phone         String?
+  price         Float?
+  image         String?
+  verified      Boolean   @default(false)
+  googlePlaceId String?  // Google Places API Place ID for fetching reviews
+  slug          String?   @unique // SEO-friendly URL slug
+  ownerId       String?
+  owner         User?     @relation("OwnerListings", fields: [ownerId], references: [id])
+  reviews       Review[]
+  createdAt     DateTime  @default(now())
+
+  @@map("listings")
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  rating    Int      // 1-5 rating
+  comment   String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listingId String
+  listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@map("reviews")
+}
+
+
+
+
