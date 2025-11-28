@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation"
 import { Metadata } from "next"
-import { getListingsByRegion } from "@/lib/listings"
 import { slugToRegion } from "@/lib/location"
 import ListingsGrid from "@/components/ListingsGrid"
 
@@ -8,16 +7,17 @@ interface RegionPageProps {
   params: { slug: string }
 }
 
-export async function generateStaticParams() {
-  const { getDistinctRegions } = await import("@/lib/listings")
-  const { regionToSlug } = await import("@/lib/location")
-  
-  const regions = await getDistinctRegions()
-  
-  return regions.map((region) => ({
-    slug: regionToSlug(region),
-  }))
-}
+// Disable static generation - we'll use dynamic rendering instead
+// export async function generateStaticParams() {
+//   const { getDistinctRegions } = await import("@/lib/listings")
+//   const { regionToSlug } = await import("@/lib/location")
+//   
+//   const regions = await getDistinctRegions()
+//   
+//   return regions.map((region) => ({
+//     slug: regionToSlug(region),
+//   }))
+// }
 
 export async function generateMetadata({
   params,
@@ -35,8 +35,14 @@ export async function generateMetadata({
   }
 }
 
+// Mark this route as dynamic to prevent build-time data collection
+export const dynamic = 'force-dynamic'
+export const dynamicParams = true
+
 export default async function RegionPage({ params }: RegionPageProps) {
   const regionName = slugToRegion(params.slug)
+  // Lazy load to prevent build-time initialization
+  const { getListingsByRegion } = await import("@/lib/listings")
   const listings = await getListingsByRegion(regionName)
 
   // If no listings found, show 404
