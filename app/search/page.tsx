@@ -1,5 +1,4 @@
 import { Metadata } from "next"
-import { searchListings } from "@/lib/listings"
 import ListingsGrid from "@/components/ListingsGrid"
 import HomeSearchBox from "@/components/HomeSearchBox"
 
@@ -25,6 +24,8 @@ export async function generateMetadata({
 
 export default async function SearchPage({ searchParams }: SearchPageProps) {
   const query = searchParams.query
+  // Lazy load to prevent build-time initialization
+  const { searchListings } = await import("@/lib/listings")
   const listings = await searchListings(query)
 
   return (

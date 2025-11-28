@@ -1,4 +1,3 @@
-import { getFeaturedListings, getDistinctCities } from "@/lib/listings"
 import { cityToSlug } from "@/lib/location"
 import Hero from "@/components/Hero"
 import FeaturedRooms from "@/components/FeaturedRooms"
@@ -11,6 +10,8 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export default async function Home() {
+  // Lazy load to prevent build-time initialization
+  const { getFeaturedListings, getDistinctCities } = await import("@/lib/listings")
   const featuredListings = await getFeaturedListings(6) // Show 6 listings, rotated daily
   const cities = await getDistinctCities()
 
