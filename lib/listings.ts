@@ -296,8 +296,8 @@ export async function getDistinctRegions(): Promise<string[]> {
   })
 
   return listings
-    .map((listing) => listing.region)
-    .filter((region) => region.trim() !== "")
+    .map((listing: any) => listing.region)
+    .filter((region: string) => region.trim() !== "")
     .sort()
 }
 
