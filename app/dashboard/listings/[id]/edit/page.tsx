@@ -3,6 +3,10 @@ import { requireAdmin } from "@/lib/auth"
 import { getListingByIdForAdmin } from "@/lib/listings"
 import ListingForm from "@/components/ListingForm"
 
+// Mark this route as dynamic
+export const dynamic = 'force-dynamic'
+export const dynamicParams = true
+
 export default async function EditListingPage({
   params,
 }: {

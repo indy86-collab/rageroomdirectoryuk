@@ -3,6 +3,9 @@ import { requireAdmin } from "@/lib/auth"
 import { getAllListingsForAdmin } from "@/lib/listings"
 import Link from "next/link"
 
+// Mark this route as dynamic
+export const dynamic = 'force-dynamic'
+
 export default async function AdminListingsPage() {
   try {
     await requireAdmin()

@@ -3,6 +3,9 @@ import { getCurrentUser } from "@/lib/auth"
 import { Role } from "@prisma/client"
 import Link from "next/link"
 
+// Mark this route as dynamic
+export const dynamic = 'force-dynamic'
+
 export default async function DashboardPage() {
   const user = await getCurrentUser()
 
