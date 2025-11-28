@@ -14,8 +14,10 @@ function getPrisma() {
   return prismaInstance
 }
 
-export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(getPrisma()) as any,
+// Export as a function to prevent build-time initialization
+export function getAuthOptions(): NextAuthOptions {
+  return {
+    adapter: PrismaAdapter(getPrisma()) as any,
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -76,9 +78,13 @@ export const authOptions: NextAuthOptions = {
       return session
     },
   },
-  pages: {
-    signIn: "/login",
-  },
-  secret: process.env.NEXTAUTH_SECRET,
+    pages: {
+      signIn: "/login",
+    },
+    secret: process.env.NEXTAUTH_SECRET,
+  }
 }
+
+// For backward compatibility, export a getter
+export const authOptions = getAuthOptions()
 

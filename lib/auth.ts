@@ -1,9 +1,9 @@
 import { getServerSession } from "next-auth"
-import { authOptions } from "@/lib/auth-options"
+import { getAuthOptions } from "@/lib/auth-options"
 import { Role } from "@prisma/client"
 
 export async function getCurrentSession() {
-  return await getServerSession(authOptions)
+  return await getServerSession(getAuthOptions())
 }
 
 export async function getCurrentUser() {
