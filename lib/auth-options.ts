@@ -1,12 +1,21 @@
 import { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { PrismaAdapter } from "@auth/prisma-adapter"
-import { prisma } from "@/lib/prisma"
 import bcrypt from "bcryptjs"
 import { Role } from "@prisma/client"
 
+// Lazy load Prisma to avoid build-time initialization
+// This prevents database connection during Next.js build phase
+let prismaInstance: any = null
+function getPrisma() {
+  if (!prismaInstance) {
+    prismaInstance = require("@/lib/prisma").prisma
+  }
+  return prismaInstance
+}
+
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma) as any,
+  adapter: PrismaAdapter(getPrisma()) as any,
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -19,6 +28,7 @@ export const authOptions: NextAuthOptions = {
           return null
         }
 
+        const prisma = getPrisma()
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
         })
