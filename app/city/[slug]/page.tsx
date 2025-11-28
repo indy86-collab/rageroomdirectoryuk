@@ -1,5 +1,4 @@
 import { Metadata } from "next"
-import { getListingsByCity } from "@/lib/listings"
 import { slugToCity, cityToSlug } from "@/lib/location"
 import ListingsGrid from "@/components/ListingsGrid"
 import Breadcrumbs from "@/components/Breadcrumbs"
@@ -27,6 +26,9 @@ export async function generateMetadata({
   params,
 }: CityPageProps): Promise<Metadata> {
   const cityName = slugToCity(params.slug)
+  // Lazy load to prevent build-time initialization
+  const { getListingsByCity } = await import("@/lib/listings")
+  const listings = await getListingsByCity(cityName)
   
   return {
     title: `Rage Rooms in ${cityName}`,
@@ -39,8 +41,14 @@ export async function generateMetadata({
   }
 }
 
+// Mark this route as dynamic to prevent build-time data collection
+export const dynamic = 'force-dynamic'
+export const dynamicParams = true
+
 export default async function CityPage({ params }: CityPageProps) {
   const cityName = slugToCity(params.slug)
+  // Lazy load to prevent build-time initialization
+  const { getListingsByCity } = await import("@/lib/listings")
   const listings = await getListingsByCity(cityName)
 
   // ItemList Schema for city page
