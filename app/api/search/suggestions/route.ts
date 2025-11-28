@@ -3,6 +3,9 @@ import { getDistinctCities } from "@/lib/listings"
 import { searchListings } from "@/lib/listings"
 import { cityToSlug } from "@/lib/location"
 
+// Mark this route as dynamic
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
   const query = searchParams.get("q")?.trim() || ""
