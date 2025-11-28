@@ -42,8 +42,8 @@ export default async function Home() {
 
       {/* SEO Intro Paragraph */}
       <section className="w-full bg-transparent py-4 sm:py-6">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="text-base sm:text-lg text-zinc-300 max-w-3xl mx-auto space-y-3 sm:space-y-4">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="text-base sm:text-lg text-zinc-300 space-y-3 sm:space-y-4">
             <p>
               Rage rooms (also called smash rooms or anger rooms) are safe, controlled environments where you can release stress and tension by breaking items like plates, electronics, and glass bottles. These unique experiences have become increasingly popular across the UK as an alternative form of stress relief and entertainment.
             </p>

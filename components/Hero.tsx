@@ -18,20 +18,20 @@ export default function Hero() {
 
   return (
     <section className="w-full bg-transparent py-8 sm:py-14">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="max-w-3xl mx-auto text-center">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="text-center">
         {/* Headline */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white uppercase leading-tight px-2">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white uppercase leading-tight">
           UNLEASH. DE-STRESS. DESTROY.
         </h1>
 
         {/* Sub-text */}
-        <p className="mt-3 sm:mt-4 text-base sm:text-lg text-[#b3b3b3] px-2">
+        <p className="mt-3 sm:mt-4 text-base sm:text-lg text-[#b3b3b3]">
           Discover the best rage rooms and smash experiences across the UK.
         </p>
 
         {/* Search Bar */}
-        <form onSubmit={handleSubmit} className="mt-6 sm:mt-8 px-2">
+        <form onSubmit={handleSubmit} className="mt-6 sm:mt-8">
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
             <input
               type="text"
