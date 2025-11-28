@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server"
 import { requireAdmin } from "@/lib/auth"
-import { prisma } from "@/lib/prisma"
+
+// Lazy load Prisma to avoid build-time initialization
+function getPrisma() {
+  return require("@/lib/prisma").prisma
+}
 
 // Mark this route as dynamic to prevent static generation
 export const dynamic = 'force-dynamic'
@@ -28,6 +32,7 @@ export async function PATCH(
     const listingId = id
 
     // Check if listing exists
+    const prisma = getPrisma()
     const existingListing = await prisma.listing.findUnique({
       where: { id: listingId },
     })

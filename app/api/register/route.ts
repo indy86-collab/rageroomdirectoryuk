@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server"
-import { prisma } from "@/lib/prisma"
 import bcrypt from "bcryptjs"
+
+// Lazy load Prisma to avoid build-time initialization
+function getPrisma() {
+  return require("@/lib/prisma").prisma
+}
 
 // Mark this route as dynamic
 export const dynamic = 'force-dynamic'
@@ -26,6 +30,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if user already exists
+    const prisma = getPrisma()
     const existingUser = await prisma.user.findUnique({
       where: { email },
     })

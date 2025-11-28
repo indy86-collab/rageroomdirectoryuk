@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server"
 import { requireAdmin } from "@/lib/auth"
-import { prisma } from "@/lib/prisma"
+
+// Lazy load Prisma to avoid build-time initialization
+function getPrisma() {
+  return require("@/lib/prisma").prisma
+}
 
 // Mark this route as dynamic to prevent static generation
 export const dynamic = 'force-dynamic'
@@ -43,6 +47,7 @@ export async function POST(request: NextRequest) {
     const location = body.location || { lat: 0, lng: 0 }
 
     // Create listing
+    const prisma = getPrisma()
     const listing = await prisma.listing.create({
       data: {
         name: body.name.trim(),
