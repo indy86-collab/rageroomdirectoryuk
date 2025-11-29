@@ -1,3 +1,4 @@
+import { Metadata } from "next"
 import { cityToSlug } from "@/lib/location"
 import Hero from "@/components/Hero"
 import FeaturedRooms from "@/components/FeaturedRooms"
@@ -9,34 +10,37 @@ import Link from "next/link"
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
+
+export const metadata: Metadata = {
+  title: "RageRoom Directory UK | Compare Rage Rooms, Prices & Locations",
+  description:
+    "Find and compare the best rage rooms across the UK. View prices, packages, photos, reviews and book your next stress-relief smash session.",
+  openGraph: {
+    title: "RageRoom Directory UK",
+    description:
+      "Discover and compare UK rage rooms with prices, locations and booking links.",
+    url: baseUrl,
+    siteName: "RageRoom Directory",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "RageRoom Directory",
+      },
+    ],
+  },
+}
+
 export default async function Home() {
   // Lazy load to prevent build-time initialization
   const { getFeaturedListings, getDistinctCities } = await import("@/lib/listings")
   const featuredListings = await getFeaturedListings(6) // Show 6 listings, rotated daily
   const cities = await getDistinctCities()
 
-  // WebSite Schema for homepage
-  const websiteSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "RageRoom Directory",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"}/search?query={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
-  }
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-      />
       {/* Hero Section */}
       <Hero />
 

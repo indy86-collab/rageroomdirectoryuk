@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rageroomdirectory.co.uk/sitemap.xml
+

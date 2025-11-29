@@ -20,6 +20,8 @@ const bebasNeue = Bebas_Neue({
   display: "swap",
 })
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
+
 export const metadata: Metadata = {
   title: {
     default: "RageRoom Directory | Find Rage Rooms & Smash Rooms Across the UK",
@@ -27,13 +29,23 @@ export const metadata: Metadata = {
   },
   description:
     "Discover and compare rage rooms and smash rooms across the UK. Browse by city, view prices, packages, opening hours and book your next stress-relief session.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"),
+  metadataBase: new URL(baseUrl),
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   openGraph: {
     type: "website",
     title: "RageRoom Directory",
     description:
       "Find the best rage rooms and smash experiences near you in the UK.",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk",
+    url: baseUrl,
     siteName: "RageRoom Directory",
   },
   twitter: {
@@ -55,8 +67,51 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
+
+  // Organization Schema
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "RageRoom Directory",
+    url: baseUrl,
+    logo: `${baseUrl}/logo.png`,
+    sameAs: [
+      "https://instagram.com/rageroomdirectory",
+      "https://twitter.com/rageroomdirectory",
+    ],
+  }
+
+  // Website Schema (Sitelinks Search Box)
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    url: baseUrl,
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${baseUrl}/search?query={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  }
+
   return (
     <html lang="en-GB">
+      <head>
+        {/* Organization Schema - JSON-LD in head for optimal SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        
+        {/* Website Schema - JSON-LD in head for optimal SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+      </head>
       <body className={`${montserrat.variable} ${bebasNeue.variable} font-sans min-h-screen bg-[#1c1c1c] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.1),#1c1c1c_70%)] text-white flex justify-center px-2 sm:px-4`}>
         <Providers>
           <div className="w-[80%] bg-[#111111] shadow-2xl rounded-lg overflow-hidden border border-zinc-800 px-3 sm:px-6 md:px-10">
