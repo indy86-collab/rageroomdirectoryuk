@@ -111,6 +111,14 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
+        
+        {/* Cloudflare Web Analytics */}
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon='{"token": "96418e10c1f84246b90bd34546f8ca66"}'
+        />
+        {/* End Cloudflare Web Analytics */}
       </head>
       <body className={`${montserrat.variable} ${bebasNeue.variable} font-sans min-h-screen bg-[#1c1c1c] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.1),#1c1c1c_70%)] text-white flex justify-center px-2 sm:px-4`}>
         <Providers>
