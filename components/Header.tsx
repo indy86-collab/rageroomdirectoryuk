@@ -8,6 +8,7 @@ import Logo from "./Logo"
 
 const navItems = [
   { label: "Home", href: "/" },
+  { label: "Prices", href: "/rage-room-prices-uk" },
   { label: "Cities", href: "/listings" },
   { label: "All Listings", href: "/listings" },
   { label: "Blog", href: "/blog" },

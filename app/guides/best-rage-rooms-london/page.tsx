@@ -5,10 +5,10 @@ import FAQ from "@/components/FAQ"
 import { getCityFAQs } from "@/lib/faqs"
 
 export const metadata: Metadata = {
-  title: "Best Rage Rooms in London | Top 5 Ranked 2024",
+  title: "Best Rage Rooms in London | Top 5 Ranked 2025",
   description: "Discover the best rage rooms in London. Our comprehensive guide ranks the top 5 smash rooms, compares prices, packages, and helps you find the perfect stress-relief experience in the capital.",
   openGraph: {
-    title: "Best Rage Rooms in London | Top 5 Ranked",
+    title: "Best Rage Rooms in London | Top 5 Ranked 2025",
     description: "Find the best rage rooms and smash rooms in London. Compare venues, prices, and book your stress-relief session.",
     type: "article",
   },
@@ -26,7 +26,7 @@ export default async function BestRageRoomsLondonPage() {
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: "Best Rage Rooms in London | Top 5 Ranked 2024",
+    headline: "Best Rage Rooms in London | Top 5 Ranked 2025",
     description: "Comprehensive guide to the best rage rooms and smash rooms in London, including rankings, prices, and booking information.",
     author: {
       "@type": "Organization",
@@ -36,7 +36,7 @@ export default async function BestRageRoomsLondonPage() {
       "@type": "Organization",
       name: "RageRoom Directory",
     },
-    datePublished: "2024-01-01",
+    datePublished: "2025-01-01",
     dateModified: new Date().toISOString().split("T")[0],
     mainEntityOfPage: {
       "@type": "WebPage",
@@ -74,11 +74,11 @@ export default async function BestRageRoomsLondonPage() {
 
         <article>
           <h1 className="text-4xl font-bold mb-4 text-white">
-            Best Rage Rooms in London: Top 5 Ranked (2024)
+            Best Rage Rooms in London: Top 5 Ranked (2025)
           </h1>
 
           <p className="text-lg text-zinc-300 mb-6">
-            London is home to some of the UK's best rage rooms and smash room experiences. Whether you're looking for stress relief, a unique date night, or a corporate team building activity, our guide ranks the top rage rooms in the capital based on customer reviews, pricing, packages, and overall experience.
+            London is home to some of the UK's best rage rooms and smash room experiences. Whether you're looking for stress relief, a unique date night, or a corporate team building activity, our guide ranks the top rage rooms in the capital based on customer reviews, <Link href="/rage-room-prices-uk" className="text-orange-500 hover:text-orange-600 underline">pricing</Link>, packages, and overall experience.
           </p>
 
           <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-6 mb-8">

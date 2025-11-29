@@ -4,10 +4,10 @@ import FAQ from "@/components/FAQ"
 import { getCityFAQs } from "@/lib/faqs"
 
 export const metadata: Metadata = {
-  title: "Best Rage Rooms in Birmingham | Top 5 Ranked 2024",
+  title: "Best Rage Rooms in Birmingham | Top 5 Ranked 2025",
   description: "Discover the best rage rooms in Birmingham. Our guide ranks the top 5 smash rooms, compares prices, packages, and helps you find the perfect stress-relief experience in the Midlands.",
   openGraph: {
-    title: "Best Rage Rooms in Birmingham | Top 5 Ranked",
+    title: "Best Rage Rooms in Birmingham | Top 5 Ranked 2025",
     description: "Find the best rage rooms and smash rooms in Birmingham. Compare venues, prices, and book your stress-relief session.",
     type: "article",
   },
@@ -24,13 +24,13 @@ export default async function BestRageRoomsBirminghamPage() {
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: "Best Rage Rooms in Birmingham | Top 5 Ranked 2024",
+    headline: "Best Rage Rooms in Birmingham | Top 5 Ranked 2025",
     description: "Comprehensive guide to the best rage rooms and smash rooms in Birmingham.",
     author: {
       "@type": "Organization",
       name: "RageRoom Directory",
     },
-    datePublished: "2024-01-01",
+    datePublished: "2025-01-01",
     dateModified: new Date().toISOString().split("T")[0],
   }
 
@@ -64,7 +64,7 @@ export default async function BestRageRoomsBirminghamPage() {
 
         <article>
           <h1 className="text-4xl font-bold mb-4 text-white">
-            Best Rage Rooms in Birmingham: Top 5 Ranked (2024)
+            Best Rage Rooms in Birmingham: Top 5 Ranked (2025)
           </h1>
 
           <p className="text-lg text-zinc-300 mb-6">

@@ -4,7 +4,7 @@ import FAQ from "@/components/FAQ"
 import { globalFAQs } from "@/lib/faqs"
 
 export const metadata: Metadata = {
-  title: "Best Rage Rooms for Couples | Date Night Guide 2024",
+  title: "Best Rage Rooms for Couples | Date Night Guide 2025",
   description: "Discover the best rage rooms for couples and date nights. Find romantic smash room experiences perfect for couples looking for unique activities and stress relief together.",
   openGraph: {
     title: "Best Rage Rooms for Couples | Date Night Guide",
@@ -25,13 +25,13 @@ export default async function BestRageRoomsForCouplesPage() {
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: "Best Rage Rooms for Couples | Date Night Guide 2024",
+    headline: "Best Rage Rooms for Couples | Date Night Guide 2025",
     description: "Comprehensive guide to the best rage rooms for couples, date nights, and romantic stress-relief experiences.",
     author: {
       "@type": "Organization",
       name: "RageRoom Directory",
     },
-    datePublished: "2024-01-01",
+    datePublished: "2025-01-01",
     dateModified: new Date().toISOString().split("T")[0],
   }
 
@@ -82,7 +82,7 @@ export default async function BestRageRoomsForCouplesPage() {
 
         <article>
           <h1 className="text-4xl font-bold mb-4 text-white">
-            Best Rage Rooms for Couples: Ultimate Date Night Guide (2024)
+            Best Rage Rooms for Couples: Ultimate Date Night Guide (2025)
           </h1>
 
           <p className="text-lg text-zinc-300 mb-6">

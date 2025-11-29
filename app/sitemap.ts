@@ -31,7 +31,55 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/near-me`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/rage-room-prices-uk`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/rage-room-london`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/london-map`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/smash-room-uk`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/break-room-uk`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/anger-room-uk`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/guides`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
@@ -73,6 +121,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
   ]
+
+  // Guide pages
+  const guidePages = [
+    "best-rage-rooms-london",
+    "best-rage-rooms-birmingham",
+    "best-rage-rooms-manchester",
+    "best-rage-rooms-bristol",
+    "best-rage-rooms-newcastle",
+    "best-rage-rooms-nottingham",
+    "best-rage-rooms-leeds",
+    "best-rage-rooms-liverpool",
+    "best-rage-rooms-sheffield",
+    "best-rage-rooms-for-couples",
+    "best-rage-rooms-for-team-building",
+  ]
+
+  guidePages.forEach((guide) => {
+    routes.push({
+      url: `${baseUrl}/guides/${guide}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    })
+  })
 
   // City pages
   cities.forEach((city) => {

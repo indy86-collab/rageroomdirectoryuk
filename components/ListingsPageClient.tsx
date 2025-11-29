@@ -33,3 +33,4 @@ export default function ListingsPageClient({ initialListings }: ListingsPageClie
   )
 }
 
+

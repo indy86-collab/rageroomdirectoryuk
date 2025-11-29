@@ -67,3 +67,4 @@ These are **essential** for your application to work:
 - After adding variables, redeploy your application
 - You can use the same `NEXTAUTH_SECRET` for all environments, but it's recommended to use different ones for production vs development
 
+

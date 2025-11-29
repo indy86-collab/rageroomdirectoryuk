@@ -2,30 +2,29 @@ import { Metadata } from "next"
 import Link from "next/link"
 import FAQ from "@/components/FAQ"
 import { getCityFAQs } from "@/lib/faqs"
+import { cityToSlug } from "@/lib/location"
 
 export const metadata: Metadata = {
-  title: "Best Rage Rooms in Manchester | Top Ranked Guide 2025",
-  description: "Discover the best rage rooms in Manchester. Compare top-rated smash rooms, view prices, packages, and find the perfect stress-relief experience in the North West.",
+  title: "Best Rage Rooms in Nottingham | Top 5 Ranked 2025",
+  description: "Discover the best rage rooms in Nottingham. Our comprehensive guide ranks the top 5 smash rooms, compares prices, packages, and helps you find the perfect stress-relief experience in the East Midlands.",
   openGraph: {
-    title: "Best Rage Rooms in Manchester | Top Ranked 2025",
-    description: "Find the best rage rooms and smash rooms in Manchester. Compare venues, prices, and book your session.",
+    title: "Best Rage Rooms in Nottingham | Top 5 Ranked 2025",
+    description: "Find the best rage rooms and smash rooms in Nottingham. Compare venues, prices, and book your stress-relief session.",
     type: "article",
   },
 }
 
-// Mark this route as dynamic to prevent build-time data collection
 export const dynamic = 'force-dynamic'
 
-export default async function BestRageRoomsManchesterPage() {
-  // Lazy load to prevent build-time initialization
+export default async function BestRageRoomsNottinghamPage() {
   const { getListingsByCity } = await import("@/lib/listings")
-  const listings = await getListingsByCity("Manchester")
+  const listings = await getListingsByCity("Nottingham")
 
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: "Best Rage Rooms in Manchester | Top Ranked Guide 2025",
-    description: "Comprehensive guide to the best rage rooms and smash rooms in Manchester.",
+    headline: "Best Rage Rooms in Nottingham | Top 5 Ranked 2025",
+    description: "Comprehensive guide to the best rage rooms and smash rooms in Nottingham.",
     author: {
       "@type": "Organization",
       name: "RageRoom Directory",
@@ -34,7 +33,7 @@ export default async function BestRageRoomsManchesterPage() {
     dateModified: new Date().toISOString().split("T")[0],
   }
 
-  const manchesterFAQs = getCityFAQs("Manchester")
+  const nottinghamFAQs = getCityFAQs("Nottingham")
 
   return (
     <div className="py-8">
@@ -58,26 +57,26 @@ export default async function BestRageRoomsManchesterPage() {
               </Link>
             </li>
             <li>/</li>
-            <li className="text-white">Best Rage Rooms in Manchester</li>
+            <li className="text-white">Best Rage Rooms in Nottingham</li>
           </ol>
         </nav>
 
         <article>
           <h1 className="text-4xl font-bold mb-4 text-white">
-            Best Rage Rooms in Manchester: Top Ranked Guide (2025)
+            Best Rage Rooms in Nottingham: Top 5 Ranked (2025)
           </h1>
 
           <p className="text-lg text-zinc-300 mb-6">
-            Manchester offers excellent rage room experiences in the North West of England. Our guide highlights the top-rated smash rooms in Manchester, helping you find the perfect venue for stress relief, team building, or a unique night out.
+            Nottingham offers excellent rage room experiences in the East Midlands. Our comprehensive guide ranks the top 5 rage rooms in Nottingham based on customer reviews, value for money, safety standards, and overall experience quality.
           </p>
 
           {listings.length > 0 ? (
             <>
               <h2 className="text-3xl font-bold text-white mb-6">
-                Top Rage Rooms in Manchester
+                Top 5 Rage Rooms in Nottingham
               </h2>
               <div className="space-y-8 mb-12">
-                {listings.map((listing, index) => (
+                {listings.slice(0, 5).map((listing, index) => (
                   <div key={listing.id} className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-6">
                     <div className="flex items-start gap-4">
                       <div className="flex-shrink-0 w-12 h-12 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold text-xl">
@@ -107,7 +106,7 @@ export default async function BestRageRoomsManchesterPage() {
                           </p>
                         )}
                         <Link
-                          href={`/listing/${listing.id}`}
+                          href={`/listing/${listing.slug || listing.id}`}
                           className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-2 rounded-md transition-colors"
                         >
                           View Details & Book
@@ -121,7 +120,7 @@ export default async function BestRageRoomsManchesterPage() {
           ) : (
             <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-8 text-center mb-8">
               <p className="text-xl text-white mb-4">
-                More rage rooms coming to Manchester soon!
+                More rage rooms coming to Nottingham soon!
               </p>
               <Link
                 href="/listings"
@@ -132,14 +131,14 @@ export default async function BestRageRoomsManchesterPage() {
             </div>
           )}
 
-          <FAQ items={manchesterFAQs} title="Frequently Asked Questions About Rage Rooms in Manchester" />
+          <FAQ items={nottinghamFAQs} title="Frequently Asked Questions About Rage Rooms in Nottingham" />
 
           <div className="mt-12 text-center">
             <Link
-              href="/city/manchester"
+              href={`/city/${cityToSlug("Nottingham")}`}
               className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-md transition-colors"
             >
-              View All Manchester Rage Rooms
+              View All Nottingham Rage Rooms
             </Link>
           </div>
         </article>
@@ -147,5 +146,4 @@ export default async function BestRageRoomsManchesterPage() {
     </div>
   )
 }
-
 

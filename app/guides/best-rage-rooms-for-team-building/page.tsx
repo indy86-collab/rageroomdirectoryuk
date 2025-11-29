@@ -3,7 +3,7 @@ import Link from "next/link"
 import FAQ from "@/components/FAQ"
 
 export const metadata: Metadata = {
-  title: "Best Rage Rooms for Team Building & Corporate Events | Guide 2024",
+  title: "Best Rage Rooms for Team Building & Corporate Events | Guide 2025",
   description: "Discover the best rage rooms for corporate team building events. Find venues that accommodate large groups, offer team packages, and provide excellent team building experiences.",
   openGraph: {
     title: "Best Rage Rooms for Team Building & Corporate Events",
@@ -23,13 +23,13 @@ export default async function BestRageRoomsForTeamBuildingPage() {
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: "Best Rage Rooms for Team Building & Corporate Events | Guide 2024",
+    headline: "Best Rage Rooms for Team Building & Corporate Events | Guide 2025",
     description: "Comprehensive guide to the best rage rooms for corporate team building and group events.",
     author: {
       "@type": "Organization",
       name: "RageRoom Directory",
     },
-    datePublished: "2024-01-01",
+    datePublished: "2025-01-01",
     dateModified: new Date().toISOString().split("T")[0],
   }
 
@@ -84,7 +84,7 @@ export default async function BestRageRoomsForTeamBuildingPage() {
 
         <article>
           <h1 className="text-4xl font-bold mb-4 text-white">
-            Best Rage Rooms for Team Building & Corporate Events (2024)
+            Best Rage Rooms for Team Building & Corporate Events (2025)
           </h1>
 
           <p className="text-lg text-zinc-300 mb-6">

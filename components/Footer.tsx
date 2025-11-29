@@ -12,6 +12,9 @@ export default function Footer() {
             <Link href="/about" className="text-zinc-500 hover:text-white transition-colors py-1">
               About Us
             </Link>
+            <Link href="/rage-room-prices-uk" className="text-zinc-500 hover:text-white transition-colors py-1">
+              Prices
+            </Link>
             <Link href="/contact" className="text-zinc-500 hover:text-white transition-colors py-1">
               Contact
             </Link>
