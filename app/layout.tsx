@@ -47,12 +47,22 @@ export const metadata: Metadata = {
       "Find the best rage rooms and smash experiences near you in the UK.",
     url: baseUrl,
     siteName: "RageRoom Directory",
+    images: [
+      {
+        url: `${baseUrl}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "RageRoom Directory - Find Rage Rooms Across the UK",
+      },
+    ],
   },
+  manifest: "/site.webmanifest",
   twitter: {
     card: "summary_large_image",
     title: "RageRoom Directory",
     description:
       "Discover UK rage rooms, compare packages and book your next smash session.",
+    images: [`${baseUrl}/og-image.png`],
   },
 } satisfies Metadata
 
@@ -75,7 +85,12 @@ export default function RootLayout({
     "@type": "Organization",
     name: "RageRoom Directory",
     url: baseUrl,
-    logo: `${baseUrl}/logo.png`,
+    logo: {
+      "@type": "ImageObject",
+      url: `${baseUrl}/logo.png`,
+      width: 512,
+      height: 512,
+    },
     sameAs: [
       "https://instagram.com/rageroomdirectory",
       "https://twitter.com/rageroomdirectory",
