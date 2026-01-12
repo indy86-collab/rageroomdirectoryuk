@@ -22,12 +22,12 @@ export default function ListingCard({ listing }: ListingCardProps) {
                 src={listing.image}
                 alt={`${listing.name} rage room in ${listing.city} - smash room experience`}
                 fill
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 loading="lazy"
               />
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-transparent to-transparent opacity-60"></div>
+              {/* Gradient overlay - Reduced opacity for performance */}
+              <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 via-transparent to-transparent pointer-events-none"></div>
             </>
           ) : (
             <div className="aspect-video w-full bg-gradient-to-br from-dark-800 to-dark-900 flex items-center justify-center">
@@ -38,9 +38,9 @@ export default function ListingCard({ listing }: ListingCardProps) {
           {/* Impact corner - enhanced */}
           <div className="absolute bottom-0 right-0 w-0 h-0 border-l-[70px] border-l-transparent border-b-[70px] border-b-rage-600 opacity-90 transition-all duration-300 group-hover:border-b-rage-500"></div>
           
-          {/* Verified badge */}
+          {/* Verified badge - Removed backdrop-blur */}
           {listing.verified && (
-            <div className="absolute top-3 left-3 px-3 py-1 bg-rage-500/90 backdrop-blur-sm rounded-full text-xs font-bold text-white border border-rage-400/50">
+            <div className="absolute top-3 left-3 px-3 py-1 bg-rage-500 rounded-full text-xs font-bold text-white border border-rage-400/50 shadow-lg">
               VERIFIED
             </div>
           )}

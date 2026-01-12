@@ -136,9 +136,8 @@ export default function RootLayout({
         {/* End Cloudflare Web Analytics */}
       </head>
       <body className={`${montserrat.variable} ${bebasNeue.variable} font-sans min-h-screen bg-dark-950 text-white scrollbar-rage`}>
-        {/* Background effects */}
-        <div className="fixed inset-0 bg-gradient-to-br from-dark-950 via-dark-900 to-rage-950/20 -z-10"></div>
-        <div className="fixed inset-0 bg-noise opacity-10 -z-10"></div>
+        {/* Background effects - Simplified for performance */}
+        <div className="fixed inset-0 bg-gradient-to-br from-dark-950 via-dark-900 to-rage-950/10 -z-10 pointer-events-none"></div>
         
         <Providers>
           <div className="relative w-full max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-6">

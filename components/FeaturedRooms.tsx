@@ -35,11 +35,11 @@ export default function FeaturedRooms({ listings }: FeaturedRoomsProps) {
                     src={listing.image}
                     alt={`${listing.name} rage room in ${listing.city}`}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-transparent to-transparent opacity-60"></div>
+                  {/* Gradient overlay - Simplified */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-dark-900/70 via-transparent to-transparent pointer-events-none"></div>
                 </>
               ) : (
                 <div className="w-full h-full bg-gradient-to-br from-dark-800 to-dark-900 flex items-center justify-center">
@@ -49,8 +49,8 @@ export default function FeaturedRooms({ listings }: FeaturedRoomsProps) {
               {/* Enhanced impact corner */}
               <div className="absolute bottom-0 right-0 w-0 h-0 border-l-[60px] border-l-transparent border-b-[60px] border-b-rage-600 opacity-90 transition-all duration-300 group-hover:border-b-rage-500 group-hover:opacity-100"></div>
               
-              {/* Featured badge */}
-              <div className="absolute top-3 right-3 px-3 py-1.5 bg-gradient-rage backdrop-blur-sm rounded-full">
+              {/* Featured badge - Removed backdrop-blur */}
+              <div className="absolute top-3 right-3 px-3 py-1.5 bg-gradient-rage rounded-full shadow-lg">
                 <span className="text-xs font-bold text-white uppercase tracking-wider">Featured</span>
               </div>
             </div>
