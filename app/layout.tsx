@@ -135,14 +135,20 @@ export default function RootLayout({
         />
         {/* End Cloudflare Web Analytics */}
       </head>
-      <body className={`${montserrat.variable} ${bebasNeue.variable} font-sans min-h-screen bg-[#1c1c1c] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.1),#1c1c1c_70%)] text-white flex justify-center px-2 sm:px-4`}>
+      <body className={`${montserrat.variable} ${bebasNeue.variable} font-sans min-h-screen bg-dark-950 text-white scrollbar-rage`}>
+        {/* Background effects */}
+        <div className="fixed inset-0 bg-gradient-to-br from-dark-950 via-dark-900 to-rage-950/20 -z-10"></div>
+        <div className="fixed inset-0 bg-noise opacity-10 -z-10"></div>
+        
         <Providers>
-          <div className="w-[80%] bg-[#111111] shadow-2xl rounded-lg overflow-hidden border border-zinc-800 px-3 sm:px-6 md:px-10">
-            <Header />
-            <main className="min-h-screen">
-              {children}
-            </main>
-            <Footer />
+          <div className="relative w-full max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-6">
+            <div className="bg-dark-900/40 backdrop-blur-sm shadow-2xl border-x border-zinc-800/50">
+              <Header />
+              <main className="min-h-screen">
+                {children}
+              </main>
+              <Footer />
+            </div>
           </div>
         </Providers>
         <Analytics />

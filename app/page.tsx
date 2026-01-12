@@ -44,35 +44,46 @@ export default async function Home() {
       {/* Hero Section */}
       <Hero />
 
-      {/* SEO Intro Paragraph */}
-      <section className="w-full bg-transparent py-4 sm:py-6">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-base sm:text-lg text-zinc-300 space-y-3 sm:space-y-4">
-            <p>
-              Rage rooms (also called smash rooms or anger rooms) are safe, controlled environments where you can release stress and tension by breaking items like plates, electronics, and glass bottles. These unique experiences have become increasingly popular across the UK as an alternative form of stress relief and entertainment.
+      {/* SEO Intro Paragraph - Enhanced */}
+      <section className="w-full py-8 sm:py-12 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-rage-950/5 to-transparent"></div>
+        <div className="max-w-6xl mx-auto px-4 relative">
+          <div className="card-base p-6 sm:p-8 space-y-4 sm:space-y-5">
+            <p className="text-base sm:text-lg text-zinc-300 leading-relaxed">
+              <span className="text-rage-400 font-semibold">Rage rooms</span> (also called <span className="text-rage-400 font-semibold">smash rooms</span> or <span className="text-rage-400 font-semibold">anger rooms</span>) are safe, controlled environments where you can release stress and tension by breaking items like plates, electronics, and glass bottles. These unique experiences have become increasingly popular across the UK as an alternative form of stress relief and entertainment.
             </p>
-            <p>
-              <strong>RageRoom Directory</strong> is the UK's comprehensive guide to finding and comparing rage room experiences. Our purpose is to help you discover the best smash rooms in your area, <Link href="/rage-room-prices-uk" className="text-orange-500 hover:text-orange-600 underline">compare prices and packages</Link>, and make informed decisions about where to <Link href="/listings" className="text-orange-500 hover:text-orange-600 underline">book a rage room in the UK</Link>. We cover major cities including <Link href="/city/birmingham" className="text-orange-500 hover:text-orange-600 underline">Birmingham</Link>, <Link href="/city/london" className="text-orange-500 hover:text-orange-600 underline">London</Link>, <Link href="/city/manchester" className="text-orange-500 hover:text-orange-600 underline">Manchester</Link>, and many more locations across the country.
+            <p className="text-base sm:text-lg text-zinc-300 leading-relaxed">
+              <strong className="text-white">RageRoom Directory</strong> is the UK's comprehensive guide to finding and comparing rage room experiences. Our purpose is to help you discover the best smash rooms in your area, <Link href="/rage-room-prices-uk" className="text-rage-400 hover:text-rage-300 underline underline-offset-2 font-medium transition-colors">compare prices and packages</Link>, and make informed decisions about where to <Link href="/listings" className="text-rage-400 hover:text-rage-300 underline underline-offset-2 font-medium transition-colors">book a rage room in the UK</Link>. We cover major cities including <Link href="/city/birmingham" className="text-rage-400 hover:text-rage-300 underline underline-offset-2 font-medium transition-colors">Birmingham</Link>, <Link href="/city/london" className="text-rage-400 hover:text-rage-300 underline underline-offset-2 font-medium transition-colors">London</Link>, <Link href="/city/manchester" className="text-rage-400 hover:text-rage-300 underline underline-offset-2 font-medium transition-colors">Manchester</Link>, and many more locations across the country.
             </p>
-            <p>
-              Whether you're looking for a fun date night activity, corporate team building event, or simply need to let off steam, you can <Link href="/listings" className="text-orange-500 hover:text-orange-600 underline">browse all rage rooms</Link> in our directory to view prices, packages, opening hours, and book your next stress-relief session. Each listing includes detailed information about what to expect, safety requirements, and nearby alternatives.
+            <p className="text-base sm:text-lg text-zinc-300 leading-relaxed">
+              Whether you're looking for a fun date night activity, corporate team building event, or simply need to let off steam, you can <Link href="/listings" className="text-rage-400 hover:text-rage-300 underline underline-offset-2 font-medium transition-colors">browse all rage rooms</Link> in our directory to view prices, packages, opening hours, and book your next stress-relief session. Each listing includes detailed information about what to expect, safety requirements, and nearby alternatives.
             </p>
           </div>
         </div>
       </section>
 
       {/* Top Rated Rage Rooms */}
-      <section aria-labelledby="top-rated-heading" className="w-full bg-transparent py-10">
+      <section aria-labelledby="top-rated-heading" className="w-full py-12 sm:py-16">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 id="top-rated-heading" className="text-2xl font-bold text-white mb-8">
-            Top Rated Rage Rooms
-          </h2>
+          <div className="text-center mb-10 sm:mb-12">
+            <h2 id="top-rated-heading" className="text-3xl sm:text-4xl font-display font-bold text-white mb-3 uppercase impact-line">
+              <span className="text-gradient">Top Rated</span> Rage Rooms
+            </h2>
+            <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+              Discover the highest-rated smash rooms across the UK, verified by real customers
+            </p>
+          </div>
+          
           <FeaturedRooms listings={featuredListings} />
-          <div className="mt-8 text-center">
+          
+          <div className="mt-10 sm:mt-12 text-center">
             <Link
               href="/listings"
-              className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-md transition-colors"
+              className="btn-rage inline-flex items-center gap-2 text-lg"
             >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+              </svg>
               Browse All Rage Rooms
             </Link>
           </div>
@@ -80,15 +91,18 @@ export default async function Home() {
       </section>
 
       {/* Top Cities for Rage Rooms in the UK */}
-      <section aria-labelledby="top-cities-heading" className="w-full bg-transparent py-10">
+      <section aria-labelledby="top-cities-heading" className="section-textured py-12 sm:py-16">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 id="top-cities-heading" className="text-2xl font-bold text-white mb-6">
-            Top Cities for Rage Rooms in the UK
-          </h2>
-          <p className="text-zinc-300 mb-6">
-            Discover rage rooms in the UK's most popular cities. Each city offers unique venues with different packages, prices, and experiences.
-          </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mb-6">
+          <div className="text-center mb-10 sm:mb-12">
+            <h2 id="top-cities-heading" className="text-3xl sm:text-4xl font-display font-bold text-white mb-3 uppercase">
+              Rage Rooms By <span className="text-gradient">City</span>
+            </h2>
+            <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+              Discover rage rooms in the UK's most popular cities. Each offers unique venues with different packages and experiences.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 mb-8">
             {[
               { city: "London", href: "/city/london", guide: "/guides/best-rage-rooms-london" },
               { city: "Birmingham", href: "/city/birmingham", guide: "/guides/best-rage-rooms-birmingham" },
@@ -103,101 +117,170 @@ export default async function Home() {
               <div key={city} className="flex flex-col gap-2">
                 <Link
                   href={href}
-                  className="bg-[#181818] hover:bg-[#252525] border border-zinc-800 hover:border-orange-500 text-white font-medium py-3 px-4 rounded-md transition-all text-center"
+                  className="group card-base card-hover text-center p-4 relative overflow-hidden"
                 >
-                  {city}
+                  <span className="relative z-10 text-white font-semibold text-sm sm:text-base group-hover:text-gradient transition-all">
+                    {city}
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-rage opacity-0 group-hover:opacity-10 transition-opacity"></div>
                 </Link>
                 <Link
                   href={guide}
-                  className="text-xs text-orange-500 hover:text-orange-400 text-center"
+                  className="text-xs text-rage-400 hover:text-rage-300 text-center font-medium transition-colors"
                 >
                   Best in {city} →
                 </Link>
               </div>
             ))}
           </div>
-          <div className="text-center space-x-4">
+          
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
             <Link
               href="/near-me"
-              className="text-orange-500 hover:text-orange-600 font-medium"
+              className="inline-flex items-center gap-2 text-rage-400 hover:text-rage-300 font-semibold transition-colors group"
             >
-              Find rage rooms near me →
+              <svg className="w-5 h-5 group-hover:animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              Find rage rooms near me
             </Link>
-            <span className="text-zinc-500">|</span>
+            <span className="text-zinc-700">|</span>
             <Link
               href="/rage-room-prices-uk"
-              className="text-orange-500 hover:text-orange-600 font-medium"
+              className="inline-flex items-center gap-2 text-rage-400 hover:text-rage-300 font-semibold transition-colors group"
             >
-              Compare prices →
+              <svg className="w-5 h-5 group-hover:animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Compare prices
             </Link>
           </div>
         </div>
       </section>
 
       {/* Best Rage Rooms for Couples */}
-      <section aria-labelledby="couples-heading" className="w-full bg-transparent py-10">
+      <section aria-labelledby="couples-heading" className="w-full py-12 sm:py-16">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 id="couples-heading" className="text-2xl font-bold text-white mb-6">
-            Best Rage Rooms for Couples
-          </h2>
-          <p className="text-zinc-300 mb-6">
-            Looking for a unique date night? Rage rooms offer couples an exciting, stress-relieving experience that's perfect for breaking the routine. Many venues offer private sessions, extended time, and special couple packages.
-          </p>
-          <div className="bg-[#181818] rounded-lg border border-zinc-800 p-6 mb-6">
-            <h3 className="text-xl font-bold text-white mb-4">Why Rage Rooms Make Great Date Nights</h3>
-            <ul className="list-disc list-inside text-zinc-300 space-y-2 mb-4">
-              <li>Unique experience that stands out from typical dates</li>
-              <li>Shared bonding activity that creates lasting memories</li>
-              <li>Stress relief together - release tension as a couple</li>
-              <li>Fun and laughter guaranteed</li>
-              <li>Perfect for anniversaries, birthdays, or just because</li>
-            </ul>
+          <div className="text-center mb-10 sm:mb-12">
+            <h2 id="couples-heading" className="text-3xl sm:text-4xl font-display font-bold text-white mb-3 uppercase">
+              Perfect For <span className="text-gradient">Couples</span>
+            </h2>
+            <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+              Looking for a unique date night? Rage rooms offer an exciting, stress-relieving experience that's perfect for breaking the routine.
+            </p>
+          </div>
+          
+          <div className="card-base p-6 sm:p-8 mb-8">
+            <h3 className="text-xl sm:text-2xl font-bold text-white mb-6 flex items-center gap-3">
+              <svg className="w-7 h-7 text-rage-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+              </svg>
+              Why Rage Rooms Make Great Date Nights
+            </h3>
+            <div className="grid sm:grid-cols-2 gap-4 mb-6">
+              {[
+                { icon: "✨", text: "Unique experience that stands out from typical dates" },
+                { icon: "🤝", text: "Shared bonding activity that creates lasting memories" },
+                { icon: "💆", text: "Stress relief together - release tension as a couple" },
+                { icon: "😄", text: "Fun and laughter guaranteed" },
+                { icon: "🎉", text: "Perfect for anniversaries, birthdays, or just because" },
+              ].map((item, i) => (
+                <div key={i} className="flex items-start gap-3 p-3 bg-dark-800/50 rounded-lg border border-zinc-800/50">
+                  <span className="text-2xl flex-shrink-0">{item.icon}</span>
+                  <span className="text-zinc-300">{item.text}</span>
+                </div>
+              ))}
+            </div>
             <Link
               href="/guides/best-rage-rooms-for-couples"
-              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-md transition-colors"
+              className="btn-rage inline-flex items-center gap-2"
             >
               Read Complete Couples Guide
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </Link>
           </div>
         </div>
       </section>
 
       {/* Best Rage Rooms for Stress Relief */}
-      <section aria-labelledby="stress-relief-heading" className="w-full bg-transparent py-10">
+      <section aria-labelledby="stress-relief-heading" className="section-textured py-12 sm:py-16">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 id="stress-relief-heading" className="text-2xl font-bold text-white mb-6">
-            Best Rage Rooms for Stress Relief
-          </h2>
-          <p className="text-zinc-300 mb-6">
-            Rage rooms provide an effective, immediate way to release stress and tension. The physical act of smashing items in a safe, controlled environment offers cathartic release that many find more satisfying than traditional stress-relief methods.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div className="bg-[#181818] rounded-lg border border-zinc-800 p-6">
-              <h3 className="text-xl font-bold text-white mb-4">Benefits of Rage Rooms for Stress Relief</h3>
-              <ul className="list-disc list-inside text-zinc-300 space-y-2">
-                <li>Immediate physical release of tension</li>
-                <li>Endorphin boost from physical activity</li>
-                <li>Safe outlet for frustration and anger</li>
-                <li>No judgment - break things without consequences</li>
-                <li>Controlled environment with professional supervision</li>
+          <div className="text-center mb-10 sm:mb-12">
+            <h2 id="stress-relief-heading" className="text-3xl sm:text-4xl font-display font-bold text-white mb-3 uppercase">
+              Ultimate <span className="text-gradient">Stress Relief</span>
+            </h2>
+            <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+              Rage rooms provide an effective, immediate way to release stress and tension through controlled destruction.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <div className="card-base p-6 sm:p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 bg-rage-500/20 rounded-lg border border-rage-500/30">
+                  <svg className="w-6 h-6 text-rage-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-white">Benefits of Rage Rooms</h3>
+              </div>
+              <ul className="space-y-3 text-zinc-300">
+                {[
+                  "Immediate physical release of tension",
+                  "Endorphin boost from physical activity",
+                  "Safe outlet for frustration and anger",
+                  "No judgment - break things without consequences",
+                  "Controlled environment with professional supervision"
+                ].map((benefit, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <svg className="w-5 h-5 text-rage-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span>{benefit}</span>
+                  </li>
+                ))}
               </ul>
             </div>
-            <div className="bg-[#181818] rounded-lg border border-zinc-800 p-6">
-              <h3 className="text-xl font-bold text-white mb-4">Who Benefits Most?</h3>
-              <ul className="list-disc list-inside text-zinc-300 space-y-2">
-                <li>People with high-stress jobs</li>
-                <li>Anyone dealing with daily pressures</li>
-                <li>Those who need physical stress release</li>
-                <li>People looking for alternative therapy</li>
-                <li>Anyone needing to let off steam safely</li>
+            
+            <div className="card-base p-6 sm:p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 bg-rage-500/20 rounded-lg border border-rage-500/30">
+                  <svg className="w-6 h-6 text-rage-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-white">Who Benefits Most?</h3>
+              </div>
+              <ul className="space-y-3 text-zinc-300">
+                {[
+                  "People with high-stress jobs",
+                  "Anyone dealing with daily pressures",
+                  "Those who need physical stress release",
+                  "People looking for alternative therapy",
+                  "Anyone needing to let off steam safely"
+                ].map((person, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <svg className="w-5 h-5 text-rage-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span>{person}</span>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
+          
           <div className="text-center">
             <Link
               href="/listings"
-              className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-md transition-colors"
+              className="btn-rage inline-flex items-center gap-2 text-lg"
             >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+              </svg>
               Find Stress Relief Near You
             </Link>
           </div>

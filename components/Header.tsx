@@ -20,38 +20,39 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="w-full bg-transparent">
+    <header className="sticky top-0 z-50 w-full bg-dark-900/80 backdrop-blur-lg border-b border-zinc-800/50 shadow-lg">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Brand */}
-          <Logo />
+          <div className="flex-shrink-0">
+            <Logo />
+          </div>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-2">
+          <nav className="hidden md:flex items-center gap-1">
             {navItems.map((item) => {
               const isActive = pathname === item.href
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="flex flex-col items-center"
+                  className="group relative px-4 py-2 transition-all duration-300"
                 >
                   <span
-                    className={`text-sm font-medium px-3 py-1 transition-colors ${
+                    className={`text-sm font-semibold transition-colors relative z-10 ${
                       isActive
-                        ? "text-white"
-                        : "text-zinc-300 hover:text-white"
+                        ? "text-rage-500"
+                        : "text-zinc-300 group-hover:text-white"
                     }`}
                   >
                     {item.label}
                   </span>
-                  <span
-                    className={`mt-1 h-0.5 rounded-full transition-all ${
-                      isActive
-                        ? "w-6 bg-orange-500"
-                        : "w-0 bg-transparent"
-                    }`}
-                  />
+                  {/* Active indicator */}
+                  {isActive && (
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-1 bg-gradient-rage rounded-full"></div>
+                  )}
+                  {/* Hover background */}
+                  <div className="absolute inset-0 bg-rage-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </Link>
               )
             })}
@@ -60,7 +61,7 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-zinc-300 hover:text-white transition-colors"
+            className="md:hidden p-2.5 text-zinc-300 hover:text-white hover:bg-rage-500/10 rounded-lg transition-all"
             aria-label="Toggle menu"
             aria-expanded={mobileMenuOpen}
           >
@@ -74,8 +75,8 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <nav className="md:hidden border-t border-zinc-800 mt-2 pt-4 pb-4">
-            <div className="flex flex-col space-y-2">
+          <nav className="md:hidden border-t border-zinc-800/50 py-4 animate-in slide-in-from-top duration-200">
+            <div className="flex flex-col space-y-1">
               {navItems.map((item) => {
                 const isActive = pathname === item.href
                 return (
@@ -83,13 +84,16 @@ export default function Header() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`px-4 py-3 rounded-md text-base font-medium transition-colors ${
+                    className={`relative px-4 py-3.5 rounded-lg text-base font-semibold transition-all ${
                       isActive
-                        ? "bg-orange-500/20 text-orange-500"
-                        : "text-zinc-300 hover:bg-zinc-800 hover:text-white"
+                        ? "bg-gradient-rage text-white shadow-glow"
+                        : "text-zinc-300 hover:bg-dark-800 hover:text-white"
                     }`}
                   >
                     {item.label}
+                    {isActive && (
+                      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-white rounded-r-full"></div>
+                    )}
                   </Link>
                 )
               })}
