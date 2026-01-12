@@ -42,13 +42,19 @@ export async function searchListings(
   query: string | undefined,
   limit?: number
 ): Promise<Listing[]> {
+  const prisma = getPrisma()
+  
   if (!query || query.trim() === "") {
-    // If no query, return featured listings
-    return await getFeaturedListings(limit || 20)
+    // If no query, return all listings (not just featured)
+    return await prisma.listing.findMany({
+      ...(limit ? { take: limit } : {}),
+      orderBy: {
+        createdAt: "desc",
+      },
+    })
   }
 
   const searchTerm = query.trim()
-  const prisma = getPrisma()
 
   return await prisma.listing.findMany({
     where: {

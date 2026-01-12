@@ -5,3 +5,5 @@ ALTER TABLE "listings" ADD COLUMN "slug" TEXT;
 CREATE UNIQUE INDEX "listings_slug_key" ON "listings"("slug");
 
 
+
+
