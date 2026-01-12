@@ -103,6 +103,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.5,
     },
     {
+      url: `${baseUrl}/privacy-policy`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    {
       url: `${baseUrl}/terms`,
       lastModified: new Date(),
       changeFrequency: "monthly",
@@ -135,6 +141,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "best-rage-rooms-sheffield",
     "best-rage-rooms-for-couples",
     "best-rage-rooms-for-team-building",
+    "are-rage-rooms-safe-uk",
+    "how-much-do-rage-rooms-cost-uk",
+    "what-happens-in-a-rage-room",
   ]
 
   guidePages.forEach((guide) => {

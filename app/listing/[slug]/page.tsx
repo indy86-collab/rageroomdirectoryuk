@@ -627,6 +627,80 @@ export default async function ListingPage({ params }: ListingPageProps) {
           </div>
         </div>
 
+        {/* What to Expect Section */}
+        <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
+            What to Expect
+          </h2>
+          <div className="space-y-3 text-zinc-300">
+            <p>
+              When you arrive at {listing.name}, you'll be greeted by staff who will guide you through the safety briefing. You'll receive all necessary protective equipment including coveralls, safety glasses, and a helmet to ensure your protection throughout the session.
+            </p>
+            <p>
+              Once suited up, you'll enter the rage room where you'll find a variety of breakable items such as glass bottles, ceramics, electronics, and other objects ready to be smashed. You'll be provided with tools like sledgehammers, baseball bats, or crowbars to use during your session.
+            </p>
+            <p>
+              Most sessions last between 30 to 60 minutes, giving you plenty of time to release stress and have fun. Many venues also offer music systems so you can play your favorite tracks while smashing. The experience is designed to be both cathartic and entertaining, providing a unique way to let off steam in a controlled, safe environment.
+            </p>
+            <p>
+              After your session, staff will help you clean up and you can take photos or videos (if permitted) to remember the experience. Some venues also offer refreshments or additional activities like axe throwing or escape rooms.
+            </p>
+          </div>
+        </div>
+
+        {/* Who It's For Section */}
+        <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
+            Who It's For
+          </h2>
+          <div className="space-y-3 text-zinc-300">
+            <p>
+              Rage rooms are perfect for a wide range of people looking for unique experiences. They're particularly popular with:
+            </p>
+            <ul className="list-disc list-inside space-y-2 ml-4">
+              <li><strong>Stress Relief Seekers:</strong> Anyone dealing with work pressure, daily frustrations, or just needing an outlet for pent-up energy will find rage rooms therapeutic and satisfying.</li>
+              <li><strong>Couples:</strong> Many couples enjoy rage rooms as an unconventional date activity. It's a fun way to bond while doing something completely different from typical date nights.</li>
+              <li><strong>Corporate Groups:</strong> Team building events at rage rooms help colleagues blow off steam together, improve communication, and create memorable shared experiences outside the office.</li>
+              <li><strong>Stag and Hen Parties:</strong> Rage rooms provide an exciting pre-wedding activity that's both fun and memorable for wedding parties.</li>
+              <li><strong>Birthday Celebrations:</strong> Whether it's a milestone birthday or just a unique way to celebrate, rage rooms offer an unforgettable experience.</li>
+              <li><strong>Anyone Seeking Adventure:</strong> If you're looking for something different from typical entertainment options, rage rooms provide a thrilling, hands-on experience you won't forget.</li>
+            </ul>
+            <p>
+              {listing.name} welcomes individuals, pairs, and groups of various sizes. Whether you're coming solo to release stress or bringing a group for a special occasion, the venue can accommodate your needs.
+            </p>
+          </div>
+        </div>
+
+        {/* Safety & Age Requirements Section */}
+        <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
+            Safety & Age Requirements
+          </h2>
+          <div className="space-y-3 text-zinc-300">
+            <p>
+              Safety is the top priority at {listing.name}. All participants must follow strict safety guidelines to ensure a secure and enjoyable experience.
+            </p>
+            <p>
+              <strong>Age Requirements:</strong> Most rage rooms in the UK require participants to be at least 16 years old. Some venues may allow younger participants (typically 12-15) with adult supervision, but this varies by location. It's always best to check with {listing.name} directly about their specific age policies before booking.
+            </p>
+            <p>
+              <strong>Safety Equipment:</strong> All necessary protective gear is provided, including full-body coveralls, safety glasses or goggles, helmets, and sturdy gloves. This equipment is mandatory and must be worn at all times during the session.
+            </p>
+            <p>
+              <strong>Safety Briefing:</strong> Before entering the rage room, all participants receive a comprehensive safety briefing covering proper tool usage, safe smashing techniques, and emergency procedures. Staff are always available to answer questions and ensure everyone understands the safety protocols.
+            </p>
+            <p>
+              <strong>Health Considerations:</strong> Participants should be in good physical health as rage room activities involve physical exertion. If you have any medical conditions, injuries, or concerns, please inform staff before your session. Pregnant individuals are typically advised not to participate.
+            </p>
+            <p>
+              <strong>Supervision:</strong> Trained staff monitor all sessions to ensure safety rules are followed. The rage room environment is controlled and designed to minimize risks while maximizing the therapeutic and fun aspects of the experience.
+            </p>
+            <p>
+              If you have any questions about safety requirements or age restrictions, please contact {listing.name} directly at {listing.phone || "their website"} before booking your session.
+            </p>
+          </div>
+        </div>
+
         {/* About Section with AI Summary */}
         <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
           <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">

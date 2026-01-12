@@ -38,6 +38,24 @@ export default function GuidesPage() {
       href: "/guides/best-rage-rooms-for-team-building",
       category: "Corporate",
     },
+    {
+      title: "Are Rage Rooms Safe in the UK?",
+      description: "Complete safety guide covering safety equipment, UK regulations, common misconceptions, and what makes a rage room safe.",
+      href: "/guides/are-rage-rooms-safe-uk",
+      category: "Safety",
+    },
+    {
+      title: "How Much Do Rage Rooms Cost in the UK?",
+      description: "Comprehensive pricing guide covering typical costs, what affects pricing, group vs solo rates, and how to find the best deals.",
+      href: "/guides/how-much-do-rage-rooms-cost-uk",
+      category: "Pricing",
+    },
+    {
+      title: "What Happens in a Rage Room?",
+      description: "Step-by-step first-time guide covering everything from booking to smashing. Learn what to expect during your first rage room session.",
+      href: "/guides/what-happens-in-a-rage-room",
+      category: "First-Time Guide",
+    },
   ]
 
   return (

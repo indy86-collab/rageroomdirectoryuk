@@ -84,11 +84,12 @@ export default function PrivacyPage() {
             <h3 className="text-lg sm:text-xl font-semibold text-white mt-4 sm:mt-6 mb-2 sm:mb-3">
               D. Cookies and Tracking
             </h3>
-            <p>We use cookies and analytics tools to improve website performance.</p>
-            <p className="mt-2">If Google Analytics or Plausible is used, specify:</p>
+            <p>We use cookies and analytics tools to improve website performance and provide relevant content.</p>
             <ul className="list-disc list-inside space-y-2 ml-4">
-              <li>Cookies for analytics</li>
-              <li>Cookies for functionality</li>
+              <li>Google Analytics cookies for understanding how visitors use our site</li>
+              <li>Cloudflare cookies for security and performance</li>
+              <li>Google AdSense cookies (when applicable) for showing relevant advertisements</li>
+              <li>Functional cookies for website features</li>
             </ul>
           </section>
 
@@ -130,13 +131,14 @@ export default function PrivacyPage() {
             </h2>
             <p>We may share data with:</p>
             <ul className="list-disc list-inside space-y-2 ml-4">
-              <li>Hosting provider (Vercel or equivalent)</li>
-              <li>Database provider (Supabase, Neon)</li>
-              <li>Analytics provider (Plausible, GA4)</li>
-              <li>Email service (if using contact form)</li>
+              <li><strong>Vercel</strong> - Our hosting provider, which processes your IP address and request data</li>
+              <li><strong>Google Analytics</strong> - For website analytics and understanding visitor behavior. Google Analytics collects anonymized data about how you use our site</li>
+              <li><strong>Cloudflare</strong> - For website security, performance optimization, and DDoS protection. Cloudflare may collect IP addresses and request metadata</li>
+              <li><strong>Google AdSense</strong> - If we display advertisements, Google AdSense may use cookies to show you relevant ads based on your browsing history</li>
+              <li>Email service providers (if using contact forms)</li>
             </ul>
             <p className="mt-4">
-              All providers comply with GDPR.
+              All providers comply with UK GDPR and data protection regulations. We only share data necessary for these services to function.
             </p>
           </section>
 
@@ -191,7 +193,41 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="text-xl sm:text-2xl font-bold text-white mt-6 sm:mt-8 mb-3 sm:mb-4">
-              8. Third-Party Links
+              8. Google Services
+            </h2>
+            <p>
+              We use several Google services on our website:
+            </p>
+            <ul className="list-disc list-inside space-y-2 ml-4">
+              <li><strong>Google Analytics</strong> - Helps us understand how visitors use our site. Google Analytics may collect information such as your IP address, browser type, pages visited, and time spent on pages. This data is anonymized and used to improve our website.</li>
+              <li><strong>Google AdSense</strong> - If we display advertisements, Google AdSense uses cookies to serve ads based on your prior visits to our website or other websites. You can opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-600 underline">Google's Ad Settings</a>.</li>
+            </ul>
+            <p className="mt-4">
+              Google's use of information is governed by their <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-600 underline">Privacy Policy</a>.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl sm:text-2xl font-bold text-white mt-6 sm:mt-8 mb-3 sm:mb-4">
+              9. Cloudflare
+            </h2>
+            <p>
+              We use Cloudflare to protect our website and improve performance. Cloudflare may collect:
+            </p>
+            <ul className="list-disc list-inside space-y-2 ml-4">
+              <li>IP addresses</li>
+              <li>Request metadata</li>
+              <li>Browser information</li>
+              <li>Security logs</li>
+            </ul>
+            <p className="mt-4">
+              Cloudflare's privacy practices are detailed in their <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-600 underline">Privacy Policy</a>.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl sm:text-2xl font-bold text-white mt-6 sm:mt-8 mb-3 sm:mb-4">
+              10. Third-Party Links
             </h2>
             <p>
               Our site links to external businesses. We are not responsible for their privacy practices.
@@ -200,10 +236,22 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="text-xl sm:text-2xl font-bold text-white mt-6 sm:mt-8 mb-3 sm:mb-4">
-              9. Changes to this Policy
+              11. Changes to this Policy
             </h2>
             <p>
-              We may update this policy as needed. Changes will be posted on this page.
+              We may update this policy as needed. Changes will be posted on this page with an updated "Last updated" date.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl sm:text-2xl font-bold text-white mt-6 sm:mt-8 mb-3 sm:mb-4">
+              12. Contact Us
+            </h2>
+            <p>
+              If you have questions about this Privacy Policy or wish to exercise your data protection rights, please contact us:
+            </p>
+            <p className="mt-4">
+              Email: <a href="mailto:ukrageroom@gmail.com" className="text-orange-500 hover:text-orange-600 underline">ukrageroom@gmail.com</a>
             </p>
           </section>
         </div>

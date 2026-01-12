@@ -112,6 +112,15 @@ export default async function CityPage({ params }: CityPageProps) {
             <section aria-label={`Rage rooms in ${cityName}`}>
               <ListingsGrid listings={listings} />
             </section>
+            
+            {/* Closing paragraph - who should book */}
+            <div className="mt-8 mb-6">
+              <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6">
+                <p className="text-base sm:text-lg text-zinc-300">
+                  Rage rooms in {cityName} are perfect for locals and visitors alike who want to try something completely different. Whether you're a {cityName} resident looking for a new way to unwind after work, a corporate team planning a unique team-building event, or a visitor seeking an unforgettable experience, the rage rooms here offer a safe and controlled environment to release stress. These venues are particularly popular with groups celebrating special occasions, couples looking for an unconventional date activity, and individuals who simply want to try something new. With professional staff, comprehensive safety equipment, and a variety of packages available, booking a rage room session in {cityName} is straightforward and accessible. Most venues offer flexible booking options and can accommodate both walk-ins and advance reservations, making it easy to fit a session into your schedule.
+                </p>
+              </div>
+            </div>
           </>
         ) : (
           <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-8 text-center">

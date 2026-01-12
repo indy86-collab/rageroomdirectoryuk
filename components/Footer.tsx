@@ -18,8 +18,8 @@ export default function Footer() {
             <Link href="/contact" className="text-zinc-500 hover:text-white transition-colors py-1">
               Contact
             </Link>
-            <Link href="/privacy" className="text-zinc-500 hover:text-white transition-colors py-1">
-              Privacy
+            <Link href="/privacy-policy" className="text-zinc-500 hover:text-white transition-colors py-1">
+              Privacy Policy
             </Link>
             <Link href="/terms" className="text-zinc-500 hover:text-white transition-colors py-1">
               Terms
