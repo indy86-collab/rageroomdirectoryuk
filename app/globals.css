@@ -22,11 +22,11 @@
 }
 
 @layer components {
-  /* Rage Button - Primary CTA - Further optimized for scroll performance */
+  /* Rage Button - Primary CTA - Optimized for performance */
   .btn-rage {
-    @apply relative bg-gradient-rage text-white font-bold px-6 py-3 rounded-lg transition-colors duration-150;
-    @apply hover:bg-rage-600 active:bg-rage-700;
-    @apply border border-rage-600/50;
+    @apply relative bg-rage-600 text-white font-bold px-6 py-3 rounded-lg;
+    @apply hover:bg-rage-500 transition-colors duration-150;
+    @apply border border-rage-700;
   }
   
   /* Secondary Button */
@@ -35,14 +35,13 @@
     @apply hover:bg-dark-600 hover:border-rage-500/50 transition-all duration-300;
   }
   
-  /* Card Base - Optimized for scroll performance */
+  /* Card Base - Optimized for performance */
   .card-base {
-    @apply bg-dark-800 border border-zinc-800 rounded-xl;
-    @apply transition-colors duration-150;
+    @apply bg-dark-800 border border-zinc-800/80 rounded-xl;
   }
   
   .card-hover {
-    @apply hover:border-rage-500/50;
+    @apply hover:border-rage-500/50 transition-colors duration-150;
   }
   
   /* Glass effect - Simplified: removed backdrop-blur */
@@ -50,9 +49,9 @@
     @apply bg-dark-900/80 border border-white/10;
   }
   
-  /* Gradient text */
+  /* Gradient text - Simplified for performance */
   .text-gradient {
-    @apply bg-gradient-rage bg-clip-text text-transparent;
+    @apply text-rage-500;
   }
   
   /* Impact line decoration */
@@ -101,6 +100,16 @@
   
   .scrollbar-rage::-webkit-scrollbar-thumb:hover {
     @apply bg-rage-500;
+  }
+  
+  /* Text shadow for impact - Disabled for performance */
+  .text-impact {
+    /* Removed for performance */
+  }
+  
+  /* Glow text - Disabled for performance */
+  .text-glow {
+    /* Removed for performance */
   }
 }
 

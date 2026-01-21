@@ -44,9 +44,9 @@ export default async function Home() {
       {/* Hero Section */}
       <Hero />
 
-      {/* SEO Intro Paragraph - Optimized for performance */}
-      <section className="w-full py-8 sm:py-12 relative">
-        <div className="max-w-6xl mx-auto px-4 relative">
+      {/* SEO Intro Paragraph - Enhanced */}
+      <section className="w-full py-8 sm:py-12">
+        <div className="max-w-6xl mx-auto px-4">
           <div className="card-base p-6 sm:p-8 space-y-4 sm:space-y-5">
             <p className="text-base sm:text-lg text-zinc-300 leading-relaxed">
               <span className="text-rage-400 font-semibold">Rage rooms</span> (also called <span className="text-rage-400 font-semibold">smash rooms</span> or <span className="text-rage-400 font-semibold">anger rooms</span>) are safe, controlled environments where you can release stress and tension by breaking items like plates, electronics, and glass bottles. These unique experiences have become increasingly popular across the UK as an alternative form of stress relief and entertainment.
@@ -116,9 +116,9 @@ export default async function Home() {
               <div key={city} className="flex flex-col gap-2">
                 <Link
                   href={href}
-                  className="card-base card-hover text-center p-4"
+                  className="group card-base card-hover text-center p-4 relative overflow-hidden"
                 >
-                  <span className="text-white font-semibold text-sm sm:text-base">
+                  <span className="text-white font-semibold text-sm sm:text-base group-hover:text-rage-400 transition-colors duration-150">
                     {city}
                   </span>
                 </Link>

@@ -19,25 +19,25 @@ export default function Hero() {
 
   return (
     <section className="relative w-full py-12 sm:py-20 overflow-hidden">
-      {/* Background effects removed for scroll performance */}
+      {/* Background effects removed for performance */}
       
       <div className="relative max-w-6xl mx-auto px-4">
         <div className="text-center space-y-6 sm:space-y-8">
-          {/* Impact badge - Simplified for performance */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-dark-800 border border-rage-500/30 rounded-full">
+          {/* Impact badge - Simplified */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-dark-800 border border-rage-600 rounded-full">
             <Zap className="w-4 h-4 text-rage-500" fill="currentColor" />
             <span className="text-sm font-semibold text-rage-400">UK's Leading Rage Room Directory</span>
           </div>
           
-          {/* Main headline - Simplified for scroll performance */}
+          {/* Main headline with gradient */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold uppercase leading-tight">
-            <span className="block text-gradient">
+            <span className="block text-gradient text-glow">
               UNLEASH.
             </span>
-            <span className="block text-white">
+            <span className="block text-white text-impact">
               DE-STRESS.
             </span>
-            <span className="block text-gradient">
+            <span className="block text-gradient text-glow">
               DESTROY.
             </span>
           </h1>
@@ -47,7 +47,7 @@ export default function Hero() {
             Discover the best <span className="text-rage-400 font-semibold">rage rooms</span> and <span className="text-rage-400 font-semibold">smash experiences</span> across the UK.
           </p>
 
-          {/* Enhanced search bar - Optimized for performance */}
+          {/* Search bar - Simplified for performance */}
           <form onSubmit={handleSubmit} className="mt-8 sm:mt-10">
             <div className="max-w-2xl mx-auto">
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 p-2 bg-dark-800 border border-zinc-800 rounded-2xl">
@@ -58,7 +58,7 @@ export default function Hero() {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Enter city or postcode..."
-                    className="w-full pl-12 pr-4 py-4 bg-dark-700 border border-zinc-700 text-white placeholder-zinc-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-rage-500 focus:border-transparent text-base font-medium"
+                    className="w-full pl-12 pr-4 py-4 bg-dark-700 border border-zinc-700 text-white placeholder-zinc-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-rage-500 focus:border-transparent transition-colors duration-150 text-base font-medium"
                   />
                 </div>
                 <button
@@ -71,7 +71,7 @@ export default function Hero() {
             </div>
           </form>
 
-          {/* Quick stats - Animations removed for performance */}
+          {/* Quick stats - Removed animations for performance */}
           <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 mt-8 text-sm">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-rage-500 rounded-full"></div>

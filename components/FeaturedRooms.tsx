@@ -27,7 +27,7 @@ export default function FeaturedRooms({ listings }: FeaturedRoomsProps) {
       {listings.map((listing) => (
         <Link key={listing.id} href={`/listing/${listing.slug || listing.id}`} className="group h-full">
           <div className="card-base card-hover overflow-hidden h-full flex flex-col shadow-xl">
-            {/* Image with effects - Optimized for scroll performance */}
+            {/* Image with effects */}
             <div className="relative w-full h-56 flex-shrink-0 overflow-hidden">
               {listing.image ? (
                 <>
@@ -35,23 +35,21 @@ export default function FeaturedRooms({ listings }: FeaturedRoomsProps) {
                     src={listing.image}
                     alt={`${listing.name} rage room in ${listing.city}`}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-200 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    loading="lazy"
                   />
-                  {/* Gradient overlay - Simplified */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-dark-900/70 to-transparent pointer-events-none"></div>
+                  {/* Gradient overlay - Removed for performance */}
                 </>
               ) : (
-                <div className="w-full h-full bg-dark-800 flex items-center justify-center">
+                <div className="w-full h-full bg-gradient-to-br from-dark-800 to-dark-900 flex items-center justify-center">
                   <span className="text-zinc-600 text-sm font-medium">No image</span>
                 </div>
               )}
-              {/* Impact corner - Simplified */}
-              <div className="absolute bottom-0 right-0 w-0 h-0 border-l-[60px] border-l-transparent border-b-[60px] border-b-rage-600"></div>
+              {/* Impact corner - Simplified for performance */}
+              <div className="absolute bottom-0 right-0 w-12 h-12 bg-rage-600 opacity-80" style={{ clipPath: 'polygon(100% 0, 100% 100%, 0 100%)' }}></div>
               
-              {/* Featured badge - Simplified */}
-              <div className="absolute top-3 right-3 px-3 py-1.5 bg-rage-600 rounded-full">
+              {/* Featured badge - Removed backdrop-blur */}
+              <div className="absolute top-3 right-3 px-3 py-1.5 bg-gradient-rage rounded-full shadow-lg">
                 <span className="text-xs font-bold text-white uppercase tracking-wider">Featured</span>
               </div>
             </div>
@@ -72,7 +70,7 @@ export default function FeaturedRooms({ listings }: FeaturedRoomsProps) {
                 ))}
               </div>
               
-              <h3 className="text-xl font-bold text-white mb-2 line-clamp-2">
+              <h3 className="text-xl font-bold text-white mb-2 line-clamp-2 group-hover:text-rage-400 transition-colors duration-150">
                 {listing.name}
               </h3>
               

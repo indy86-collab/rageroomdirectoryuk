@@ -20,7 +20,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-dark-900 border-b border-zinc-800/50">
+    <header className="sticky top-0 z-50 w-full bg-dark-900/95 border-b border-zinc-800/50 shadow-lg">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-20">
           {/* Brand */}
@@ -36,7 +36,7 @@ export default function Header() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="group relative px-4 py-2 transition-all duration-300"
+                  className="group relative px-4 py-2 transition-colors duration-200"
                 >
                   <span
                     className={`text-sm font-semibold transition-colors relative z-10 ${
@@ -47,9 +47,9 @@ export default function Header() {
                   >
                     {item.label}
                   </span>
-                  {/* Active indicator */}
+                  {/* Active indicator - Simplified for performance */}
                   {isActive && (
-                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-1 bg-gradient-rage rounded-full"></div>
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-1 bg-rage-500 rounded-full"></div>
                   )}
                   {/* Hover background */}
                   <div className="absolute inset-0 bg-rage-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -84,9 +84,9 @@ export default function Header() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`relative px-4 py-3.5 rounded-lg text-base font-semibold transition-all ${
+                    className={`relative px-4 py-3.5 rounded-lg text-base font-semibold transition-colors duration-200 ${
                       isActive
-                        ? "bg-gradient-rage text-white shadow-glow"
+                        ? "bg-rage-600 text-white"
                         : "text-zinc-300 hover:bg-dark-800 hover:text-white"
                     }`}
                   >
