@@ -21,8 +21,8 @@ export default function Logo() {
               <stop offset="100%" stopColor="#FDBA74" />
             </linearGradient>
             <linearGradient id="logoBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#3B82F6" />
-              <stop offset="100%" stopColor="#2563EB" />
+              <stop offset="0%" stopColor="#1a1a1a" />
+              <stop offset="100%" stopColor="#252525" />
             </linearGradient>
             <filter id="logoGlow">
               <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
@@ -110,9 +110,9 @@ export default function Logo() {
             />
             
             {/* Handle grip texture */}
-            <line x1="23.5" y1="30" x2="23.5" y2="44" stroke="#ffffff" strokeWidth="0.8" opacity="0.3" />
-            <line x1="25" y1="30" x2="25" y2="44" stroke="#ffffff" strokeWidth="0.8" opacity="0.3" />
-            <line x1="26.5" y1="30" x2="26.5" y2="44" stroke="#ffffff" strokeWidth="0.8" opacity="0.3" />
+            <line x1="23.5" y1="30" x2="23.5" y2="44" stroke="#1a1a1a" strokeWidth="0.8" opacity="0.4" />
+            <line x1="25" y1="30" x2="25" y2="44" stroke="#1a1a1a" strokeWidth="0.8" opacity="0.4" />
+            <line x1="26.5" y1="30" x2="26.5" y2="44" stroke="#1a1a1a" strokeWidth="0.8" opacity="0.4" />
             
             {/* Handle end cap */}
             <ellipse cx="25" cy="46" rx="3" ry="1.5" fill="url(#logoHammerGrad)" opacity="0.7" />
@@ -208,7 +208,7 @@ export default function Logo() {
             RageRoom
           </span>
         </div>
-        <div className="text-[10px] sm:text-[11px] font-medium text-gray-600 uppercase tracking-[0.25em] sm:tracking-[0.3em] mt-0.5 group-hover:text-gray-700 transition-colors">
+        <div className="text-[10px] sm:text-[11px] font-medium text-zinc-400 uppercase tracking-[0.25em] sm:tracking-[0.3em] mt-0.5 group-hover:text-zinc-300 transition-colors">
           Directory
         </div>
       </div>

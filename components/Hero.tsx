@@ -18,78 +18,77 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative w-full py-16 sm:py-24 bg-gradient-to-br from-primary-50 via-white to-accent-50">
-      {/* Decorative elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style={{animationDelay: '2s'}}></div>
-      </div>
+    <section className="relative w-full py-12 sm:py-20 overflow-hidden">
+      {/* Background effects removed for scroll performance */}
       
       <div className="relative max-w-6xl mx-auto px-4">
-        <div className="text-center space-y-8">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-100 border border-primary-200 rounded-full">
-            <Zap className="w-4 h-4 text-primary-600" fill="currentColor" />
-            <span className="text-sm font-semibold text-primary-700">UK's Leading Rage Room Directory</span>
+        <div className="text-center space-y-6 sm:space-y-8">
+          {/* Impact badge - Simplified for performance */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-dark-800 border border-rage-500/30 rounded-full">
+            <Zap className="w-4 h-4 text-rage-500" fill="currentColor" />
+            <span className="text-sm font-semibold text-rage-400">UK's Leading Rage Room Directory</span>
           </div>
           
-          {/* Main headline */}
+          {/* Main headline - Simplified for scroll performance */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold uppercase leading-tight">
-            <span className="block text-gray-900">
-              Find Your Perfect
+            <span className="block text-gradient">
+              UNLEASH.
             </span>
-            <span className="block text-gradient mt-2">
-              Rage Room
+            <span className="block text-white">
+              DE-STRESS.
+            </span>
+            <span className="block text-gradient">
+              DESTROY.
             </span>
           </h1>
 
           {/* Sub-headline */}
-          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto font-medium">
-            Discover and compare the best <span className="text-accent-600 font-semibold">rage rooms</span> and <span className="text-accent-600 font-semibold">smash experiences</span> across the UK.
+          <p className="mt-4 sm:mt-6 text-lg sm:text-xl text-zinc-300 max-w-2xl mx-auto font-medium">
+            Discover the best <span className="text-rage-400 font-semibold">rage rooms</span> and <span className="text-rage-400 font-semibold">smash experiences</span> across the UK.
           </p>
 
-          {/* Search bar */}
-          <form onSubmit={handleSubmit} className="mt-10">
+          {/* Enhanced search bar - Optimized for performance */}
+          <form onSubmit={handleSubmit} className="mt-8 sm:mt-10">
             <div className="max-w-2xl mx-auto">
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 p-2 bg-white border border-gray-200 rounded-2xl shadow-soft-lg">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 p-2 bg-dark-800 border border-zinc-800 rounded-2xl">
                 <div className="relative flex-1">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400" />
                   <input
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Enter city or postcode..."
-                    className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-base font-medium"
+                    className="w-full pl-12 pr-4 py-4 bg-dark-700 border border-zinc-700 text-white placeholder-zinc-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-rage-500 focus:border-transparent text-base font-medium"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="btn-rage uppercase font-bold text-base tracking-wide whitespace-nowrap px-8 py-4 rounded-xl"
+                  className="btn-rage uppercase font-bold text-base tracking-wide whitespace-nowrap px-8 py-4 rounded-xl sm:rounded-xl"
                 >
-                  Search Now
+                  Find Your Rage
                 </button>
               </div>
             </div>
           </form>
 
-          {/* Quick stats */}
+          {/* Quick stats - Animations removed for performance */}
           <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 mt-8 text-sm">
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
-              <span className="text-gray-600">
-                <span className="text-gray-900 font-bold">30+</span> Locations
+              <div className="w-2 h-2 bg-rage-500 rounded-full"></div>
+              <span className="text-zinc-400">
+                <span className="text-white font-bold">30+</span> Locations
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-primary-500 rounded-full animate-pulse" style={{ animationDelay: '0.3s' }}></div>
-              <span className="text-gray-600">
-                <span className="text-gray-900 font-bold">1000+</span> Sessions Booked
+              <div className="w-2 h-2 bg-rage-500 rounded-full"></div>
+              <span className="text-zinc-400">
+                <span className="text-white font-bold">1000+</span> Sessions Booked
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-primary-500 rounded-full animate-pulse" style={{ animationDelay: '0.6s' }}></div>
-              <span className="text-gray-600">
-                <span className="text-gray-900 font-bold">100%</span> Stress Free
+              <div className="w-2 h-2 bg-rage-500 rounded-full"></div>
+              <span className="text-zinc-400">
+                <span className="text-white font-bold">100%</span> Stress Free
               </span>
             </div>
           </div>
@@ -98,3 +97,4 @@ export default function Hero() {
     </section>
   )
 }
+
