@@ -20,7 +20,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-dark-900/95 border-b border-zinc-800/50 shadow-lg">
+    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-soft">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-20">
           {/* Brand */}
@@ -41,18 +41,18 @@ export default function Header() {
                   <span
                     className={`text-sm font-semibold transition-colors relative z-10 ${
                       isActive
-                        ? "text-rage-500"
-                        : "text-zinc-300 group-hover:text-white"
+                        ? "text-primary-600"
+                        : "text-gray-600 group-hover:text-gray-900"
                     }`}
                   >
                     {item.label}
                   </span>
                   {/* Active indicator */}
                   {isActive && (
-                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-1 bg-gradient-rage rounded-full"></div>
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-1 bg-gradient-primary rounded-full"></div>
                   )}
                   {/* Hover background */}
-                  <div className="absolute inset-0 bg-rage-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <div className="absolute inset-0 bg-primary-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </Link>
               )
             })}
@@ -61,7 +61,7 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2.5 text-zinc-300 hover:text-white hover:bg-rage-500/10 rounded-lg transition-all"
+            className="md:hidden p-2.5 text-gray-600 hover:text-gray-900 hover:bg-primary-50 rounded-lg transition-all"
             aria-label="Toggle menu"
             aria-expanded={mobileMenuOpen}
           >
@@ -75,7 +75,7 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <nav className="md:hidden border-t border-zinc-800/50 py-4 animate-in slide-in-from-top duration-200">
+          <nav className="md:hidden border-t border-gray-200 py-4 bg-white">
             <div className="flex flex-col space-y-1">
               {navItems.map((item) => {
                 const isActive = pathname === item.href
@@ -86,8 +86,8 @@ export default function Header() {
                     onClick={() => setMobileMenuOpen(false)}
                     className={`relative px-4 py-3.5 rounded-lg text-base font-semibold transition-all ${
                       isActive
-                        ? "bg-gradient-rage text-white shadow-glow"
-                        : "text-zinc-300 hover:bg-dark-800 hover:text-white"
+                        ? "bg-primary-600 text-white shadow-primary"
+                        : "text-gray-700 hover:bg-gray-100"
                     }`}
                   >
                     {item.label}

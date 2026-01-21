@@ -13,65 +13,58 @@ module.exports = {
         display: ['var(--font-bebas)', 'sans-serif'],
       },
       colors: {
-        // Enhanced rage room color system
-        rage: {
-          50: '#FFF5F0',
-          100: '#FFE8DC',
-          200: '#FFCAB3',
-          300: '#FFAC8A',
-          400: '#FF8E61',
-          500: '#F97316', // Primary orange
-          600: '#EA580C',
-          700: '#DC2626', // Red accent
-          800: '#B91C1C',
-          900: '#7F1D1D',
-          950: '#450A0A',
+        // Professional light theme color system
+        primary: {
+          50: '#EFF6FF',
+          100: '#DBEAFE',
+          200: '#BFDBFE',
+          300: '#93C5FD',
+          400: '#60A5FA',
+          500: '#3B82F6', // Primary blue
+          600: '#2563EB',
+          700: '#1D4ED8',
+          800: '#1E40AF',
+          900: '#1E3A8A',
+          950: '#172554',
         },
-        dark: {
-          50: '#E5E5E5',
-          100: '#B3B3B3',
-          200: '#808080',
-          300: '#4D4D4D',
-          400: '#262626',
-          500: '#1A1A1A', // Primary dark
-          600: '#141414',
-          700: '#0F0F0F',
-          800: '#0A0A0A',
-          900: '#050505',
-          950: '#000000',
+        accent: {
+          50: '#FFF7ED',
+          100: '#FFEDD5',
+          200: '#FED7AA',
+          300: '#FDBA74',
+          400: '#FB923C',
+          500: '#F97316', // Energetic orange
+          600: '#EA580C',
+          700: '#C2410C',
+          800: '#9A3412',
+          900: '#7C2D12',
         },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-rage': 'linear-gradient(135deg, #F97316 0%, #EA580C 50%, #DC2626 100%)',
-        'gradient-dark': 'linear-gradient(180deg, #0A0A0A 0%, #1A1A1A 100%)',
-        'noise': "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E\")",
+        'gradient-primary': 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)',
+        'gradient-accent': 'linear-gradient(135deg, #F97316 0%, #EA580C 100%)',
+        'gradient-light': 'linear-gradient(180deg, #FFFFFF 0%, #F9FAFB 100%)',
       },
       boxShadow: {
-        'glow-sm': '0 0 10px rgba(249, 115, 22, 0.3)',
-        'glow': '0 0 20px rgba(249, 115, 22, 0.4)',
-        'glow-lg': '0 0 30px rgba(249, 115, 22, 0.5)',
-        'rage': '0 4px 20px rgba(220, 38, 38, 0.3)',
-        'rage-lg': '0 8px 40px rgba(220, 38, 38, 0.4)',
+        'soft': '0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px 0 rgba(0, 0, 0, 0.04)',
+        'soft-lg': '0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04)',
+        'soft-xl': '0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.03)',
+        'accent': '0 4px 14px 0 rgba(249, 115, 22, 0.25)',
+        'primary': '0 4px 14px 0 rgba(59, 130, 246, 0.25)',
       },
       animation: {
-        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
-        'shake': 'shake 0.5s ease-in-out',
-        'float': 'float 3s ease-in-out infinite',
+        'fade-in': 'fade-in 0.5s ease-out',
+        'slide-up': 'slide-up 0.5s ease-out',
       },
       keyframes: {
-        'pulse-glow': {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(249, 115, 22, 0.4)' },
-          '50%': { boxShadow: '0 0 30px rgba(249, 115, 22, 0.6)' },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
         },
-        'shake': {
-          '0%, 100%': { transform: 'translateX(0)' },
-          '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-2px)' },
-          '20%, 40%, 60%, 80%': { transform: 'translateX(2px)' },
-        },
-        'float': {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-10px)' },
+        'slide-up': {
+          '0%': { transform: 'translateY(10px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
         },
       },
     },
