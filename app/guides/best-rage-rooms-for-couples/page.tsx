@@ -32,7 +32,7 @@ export default async function BestRageRoomsForCouplesPage() {
       name: "RageRoom Directory",
     },
     datePublished: "2025-01-01",
-    dateModified: new Date().toISOString().split("T")[0],
+    dateModified: "2025-12-01",
   }
 
   const couplesFAQs: typeof globalFAQs = [

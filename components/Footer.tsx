@@ -47,6 +47,9 @@ export default function Footer() {
               <Link href="/contact" className="text-sm text-zinc-500 hover:text-rage-500 transition-colors">
                 Contact
               </Link>
+              <Link href="/editorial-policy" className="text-sm text-zinc-500 hover:text-rage-500 transition-colors">
+                Editorial Policy
+              </Link>
             </div>
           </div>
           

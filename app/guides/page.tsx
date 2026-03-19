@@ -2,15 +2,15 @@ import { Metadata } from "next"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "Rage Room Guides | Expert Tips & City Rankings",
-  description: "Comprehensive guides to rage rooms across the UK. Find the best venues by city, for couples, team building, and more. Expert tips and rankings.",
+  title: "Rage Room Guides | Tips, Safety & City Guides",
+  description: "Guides to rage rooms across the UK. Browse city-by-city venue guides, safety information, pricing breakdowns, and tips for first-timers, couples, and team events.",
 }
 
 export default function GuidesPage() {
   const guides = [
     {
       title: "Best Rage Rooms in London",
-      description: "Discover the top-rated rage rooms in London. Our comprehensive guide ranks the best smash rooms in the capital based on reviews, pricing, and experience quality.",
+      description: "A guide to rage rooms operating in London. Browse venues across the capital, compare starting prices, and find the right experience for you.",
       href: "/guides/best-rage-rooms-london",
       city: "London",
     },
@@ -22,7 +22,7 @@ export default function GuidesPage() {
     },
     {
       title: "Best Rage Rooms in Birmingham",
-      description: "Top 5 ranked rage rooms in Birmingham. Compare venues, prices, packages, and find the perfect smash room experience in the Midlands.",
+      description: "A guide to rage rooms in Birmingham. Browse Midlands venues, compare prices, and find the right smash room experience for you.",
       href: "/guides/best-rage-rooms-birmingham",
       city: "Birmingham",
     },
@@ -65,7 +65,7 @@ export default function GuidesPage() {
           Rage Room Guides
         </h1>
         <p className="text-lg text-zinc-300 mb-8">
-          Expert guides to help you find the perfect rage room experience. Whether you're looking for the best venues in your city, planning a date night, or organizing a corporate event, our comprehensive guides have you covered.
+          Guides to help you find and prepare for a rage room experience in the UK. Browse city-by-city venue listings, read up on safety and pricing, or get tips for specific occasions like date nights and corporate team events.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -30,7 +30,7 @@ export default async function BestRageRoomsForTeamBuildingPage() {
       name: "RageRoom Directory",
     },
     datePublished: "2025-01-01",
-    dateModified: new Date().toISOString().split("T")[0],
+    dateModified: "2025-12-01",
   }
 
   const teamBuildingFAQs = [

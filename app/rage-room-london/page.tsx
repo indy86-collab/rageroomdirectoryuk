@@ -69,7 +69,7 @@ export default async function RageRoomLondonPage() {
             London is home to some of the UK's premier rage room and smash room experiences. Whether you're looking for stress relief after a long week, a unique date night activity, or a corporate team building event, London's rage rooms offer world-class facilities with state-of-the-art safety equipment and diverse package options.
           </p>
           <p>
-            Our comprehensive guide ranks the top rage rooms in London based on customer reviews, pricing, safety standards, and overall experience. Each venue provides comprehensive safety equipment including coveralls, helmets, and safety glasses, along with a variety of smashing tools and breakable items.
+            Below you'll find rage rooms currently operating in London. Each venue provides safety equipment including coveralls, helmets, and safety glasses, along with a variety of smashing tools and breakable items. Visit each venue's website for their latest pricing and availability.
           </p>
           <p>
             Most rage rooms in London offer 30-minute sessions starting from around £25-30 per person, with premium packages including extended time and additional items available for £40-50. <Link href="/rage-room-prices-uk" className="text-orange-500 hover:text-orange-600 underline">Compare detailed pricing across the UK</Link> to find the best value. All venues require advance booking, especially for weekends and group sessions.

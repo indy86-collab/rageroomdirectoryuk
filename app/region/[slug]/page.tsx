@@ -1,76 +1,173 @@
 import { notFound } from "next/navigation"
 import { Metadata } from "next"
-import { slugToRegion } from "@/lib/location"
+import { slugToRegion, cityToSlug } from "@/lib/location"
+import { getRegionContent, getGenericRegionContent } from "@/lib/region-content"
 import ListingsGrid from "@/components/ListingsGrid"
+import Breadcrumbs from "@/components/Breadcrumbs"
+import UGCButtons from "@/components/UGCButtons"
+import Link from "next/link"
 
 interface RegionPageProps {
   params: { slug: string }
 }
 
-// Disable static generation - we'll use dynamic rendering instead
-// export async function generateStaticParams() {
-//   const { getDistinctRegions } = await import("@/lib/listings")
-//   const { regionToSlug } = await import("@/lib/location")
-//   
-//   const regions = await getDistinctRegions()
-//   
-//   return regions.map((region) => ({
-//     slug: regionToSlug(region),
-//   }))
-// }
-
 export async function generateMetadata({
   params,
 }: RegionPageProps): Promise<Metadata> {
   const regionName = slugToRegion(params.slug)
+  const { getListingsByRegion } = await import("@/lib/listings")
+  const listings = await getListingsByRegion(regionName)
+  const count = listings.length
   
   return {
-    title: `Rage Rooms in ${regionName} | Rage Room Directory UK`,
-    description: `Discover rage rooms and smash rooms in ${regionName}. Compare venues, prices, and reviews to find the perfect rage room experience.`,
+    title: `Rage Rooms in ${regionName} — ${count} ${count === 1 ? "Venue" : "Venues"} | Rage Room Directory UK`,
+    description: `Find rage rooms in ${regionName}. Browse ${count} ${count === 1 ? "venue" : "venues"}, compare prices and reviews, and book a destruction therapy session in the ${regionName} area.`,
     openGraph: {
       title: `Rage Rooms in ${regionName} | Rage Room Directory UK`,
-      description: `Discover rage rooms and smash rooms in ${regionName}. Compare venues, prices, and reviews.`,
+      description: `Discover ${count} rage ${count === 1 ? "room" : "rooms"} in ${regionName}. Compare venues, prices, and reviews.`,
       type: "website",
     },
   }
 }
 
-// Mark this route as dynamic to prevent build-time data collection
 export const dynamic = 'force-dynamic'
 export const dynamicParams = true
 
 export default async function RegionPage({ params }: RegionPageProps) {
   const regionName = slugToRegion(params.slug)
-  // Lazy load to prevent build-time initialization
   const { getListingsByRegion } = await import("@/lib/listings")
   const listings = await getListingsByRegion(regionName)
 
-  // If no listings found, show 404
   if (listings.length === 0) {
     notFound()
   }
 
+  const regionContent = getRegionContent(regionName) || getGenericRegionContent(regionName, listings.length)
+
+  const citiesInRegion = [...new Set(listings.map(l => l.city))].sort()
+
+  const priceRange = listings.filter(l => l.price).map(l => l.price!)
+  const minPrice = priceRange.length > 0 ? Math.min(...priceRange) : null
+  const maxPrice = priceRange.length > 0 ? Math.max(...priceRange) : null
+
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `Rage Rooms in ${regionName}`,
+    description: `Directory of rage rooms in the ${regionName} region of the UK`,
+    numberOfItems: listings.length,
+    itemListElement: listings.map((listing, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "LocalBusiness",
+        name: listing.name,
+        url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"}/listing/${listing.slug || listing.id}`,
+      },
+    })),
+  }
+
   return (
-    <div className="py-8 px-4">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">
+    <div className="py-6 sm:py-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "All Rage Rooms", href: "/listings" },
+            { label: regionName },
+          ]}
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+        />
+
+        <h1 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 text-white">
           Rage Rooms in {regionName}
         </h1>
-        <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-          Find the best rage rooms and smash rooms in {regionName}. Browse our directory to compare venues, read reviews, and book your next rage room experience.
-        </p>
-        
-        <div className="mb-6">
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            {listings.length} {listings.length === 1 ? "rage room" : "rage rooms"} found in {regionName}
-          </p>
+
+        <div className="text-base sm:text-lg text-zinc-300 mb-6 space-y-3">
+          <p>{regionContent.description}</p>
+          <p>{regionContent.coverageNote}</p>
         </div>
 
-        <ListingsGrid listings={listings} />
+        {/* Stats bar */}
+        <div className="bg-[#181818] rounded-lg border border-zinc-800 p-4 mb-6 flex flex-wrap gap-4 sm:gap-8">
+          <div>
+            <p className="text-zinc-400 text-xs uppercase tracking-wider">Venues</p>
+            <p className="text-white text-xl font-bold">{listings.length}</p>
+          </div>
+          <div>
+            <p className="text-zinc-400 text-xs uppercase tracking-wider">Cities</p>
+            <p className="text-white text-xl font-bold">{citiesInRegion.length}</p>
+          </div>
+          {minPrice !== null && (
+            <div>
+              <p className="text-zinc-400 text-xs uppercase tracking-wider">From</p>
+              <p className="text-orange-500 text-xl font-bold">£{minPrice.toFixed(0)}</p>
+            </div>
+          )}
+          {maxPrice !== null && minPrice !== maxPrice && (
+            <div>
+              <p className="text-zinc-400 text-xs uppercase tracking-wider">Up To</p>
+              <p className="text-orange-500 text-xl font-bold">£{maxPrice.toFixed(0)}</p>
+            </div>
+          )}
+        </div>
+
+        {/* Cities in this region */}
+        {citiesInRegion.length > 1 && (
+          <div className="mb-6">
+            <h2 className="text-lg font-bold text-white mb-3">
+              Cities in {regionName} with Rage Rooms
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              {citiesInRegion.map(city => (
+                <Link
+                  key={city}
+                  href={`/city/${cityToSlug(city)}`}
+                  className="px-3 py-1.5 bg-[#181818] border border-zinc-700 rounded-full text-sm text-zinc-300 hover:text-orange-500 hover:border-orange-500/50 transition-colors"
+                >
+                  {city}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <section aria-label={`Rage rooms in ${regionName}`}>
+          <ListingsGrid listings={listings} />
+        </section>
+
+        {/* Cross-links */}
+        <div className="mt-8 mb-6 flex flex-wrap gap-3">
+          <Link
+            href="/listings"
+            className="text-sm text-orange-500 hover:text-orange-600 underline"
+          >
+            Browse All UK Rage Rooms
+          </Link>
+          <span className="text-zinc-600">|</span>
+          <Link
+            href="/guides/how-much-do-rage-rooms-cost-uk"
+            className="text-sm text-orange-500 hover:text-orange-600 underline"
+          >
+            UK Pricing Guide
+          </Link>
+          <span className="text-zinc-600">|</span>
+          <Link
+            href="/guides/are-rage-rooms-safe-uk"
+            className="text-sm text-orange-500 hover:text-orange-600 underline"
+          >
+            Safety Guide
+          </Link>
+        </div>
+
+        <div className="mt-8">
+          <UGCButtons />
+        </div>
       </div>
     </div>
   )
 }
-
-
-

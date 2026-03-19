@@ -151,7 +151,7 @@ export default async function LondonMapPage() {
               className="bg-[#181818] hover:bg-[#252525] border border-zinc-800 hover:border-orange-500 rounded-lg p-6 transition-all"
             >
               <h3 className="text-xl font-bold text-white mb-2">Rage Room London Guide</h3>
-              <p className="text-zinc-400">Complete guide to the best rage rooms in London with rankings and comparisons</p>
+              <p className="text-zinc-400">Guide to rage rooms in London with venue details and price comparisons</p>
             </Link>
             <Link
               href="/city/london"
@@ -165,7 +165,7 @@ export default async function LondonMapPage() {
               className="bg-[#181818] hover:bg-[#252525] border border-zinc-800 hover:border-orange-500 rounded-lg p-6 transition-all"
             >
               <h3 className="text-xl font-bold text-white mb-2">Best Rage Rooms in London</h3>
-              <p className="text-zinc-400">Read our comprehensive guide ranking the top rage rooms in London</p>
+              <p className="text-zinc-400">Browse London rage room venues with pricing and local tips</p>
             </Link>
             <Link
               href="/rage-room-prices-uk"

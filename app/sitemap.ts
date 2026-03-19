@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next"
-import { getAllListingsForAdmin, getDistinctCities } from "@/lib/listings"
-import { cityToSlug } from "@/lib/location"
+import { getAllListingsForAdmin, getDistinctCities, getDistinctRegions } from "@/lib/listings"
+import { cityToSlug, regionToSlug } from "@/lib/location"
 import { getAllBlogPosts } from "@/lib/blog-posts"
 
 // Mark sitemap as dynamic since it queries the database
@@ -9,10 +9,11 @@ export const dynamic = 'force-dynamic'
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
 
-  // Get all listings, cities, and blog posts
-  const [listings, cities, blogPosts] = await Promise.all([
+  // Get all listings, cities, regions, and blog posts
+  const [listings, cities, regions, blogPosts] = await Promise.all([
     getAllListingsForAdmin(),
     getDistinctCities(),
+    getDistinctRegions(),
     Promise.resolve(getAllBlogPosts()),
   ])
 
@@ -97,6 +98,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     },
     {
+      url: `${baseUrl}/editorial-policy`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
       url: `${baseUrl}/privacy`,
       lastModified: new Date(),
       changeFrequency: "monthly",
@@ -124,6 +131,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/list-your-rage-room`,
       lastModified: new Date(),
       changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/search`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
       priority: 0.7,
     },
   ]
@@ -162,6 +175,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
+    })
+  })
+
+  // Region pages
+  regions.forEach((region) => {
+    routes.push({
+      url: `${baseUrl}/region/${regionToSlug(region)}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.7,
     })
   })
 

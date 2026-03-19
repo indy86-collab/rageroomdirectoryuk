@@ -66,10 +66,10 @@ export default async function Home() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-10 sm:mb-12">
             <h2 id="top-rated-heading" className="text-3xl sm:text-4xl font-display font-bold text-white mb-3 uppercase impact-line">
-              <span className="text-gradient">Top Rated</span> Rage Rooms
+              <span className="text-gradient">Featured</span> Rage Rooms
             </h2>
             <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
-              Discover the highest-rated smash rooms across the UK, verified by real customers
+              Explore rage rooms and smash rooms from across the UK
             </p>
           </div>
           

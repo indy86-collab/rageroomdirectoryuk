@@ -52,13 +52,10 @@ export default async function SmashRoomUKPage() {
 
         <div className="text-base sm:text-lg text-zinc-300 mb-6 sm:mb-8 space-y-3 sm:space-y-4">
           <p>
-            Looking for a smash room in the UK? You've found the right place. Smash rooms (also known as rage rooms, break rooms, or anger rooms) are safe, controlled environments where you can release stress and tension by breaking items like plates, electronics, and glass bottles.
+            Smash rooms have become one of the UK's fastest-growing alternative activities. The premise is straightforward: you're given safety gear and a room full of breakable items — then you smash everything in sight. It's physical, it's loud, and it's surprisingly satisfying. Whether people call them smash rooms, <Link href="/break-room-uk" className="text-orange-500 hover:text-orange-600 underline">break rooms</Link>, or <Link href="/anger-room-uk" className="text-orange-500 hover:text-orange-600 underline">anger rooms</Link>, they all offer the same core experience.
           </p>
           <p>
-            Our comprehensive directory helps you find and <Link href="/rage-room-prices-uk" className="text-orange-500 hover:text-orange-600 underline">compare smash rooms</Link> across the UK, from London to Manchester, Birmingham to Newcastle, and everywhere in between. Each venue provides protective gear, smashing tools, and breakable items for a unique stress-relief experience.
-          </p>
-          <p>
-            Whether you're looking for a fun date night activity, corporate team building event, or simply need to let off steam, browse our directory to find the perfect smash room near you. Compare prices, packages, and book your session today.
+            Our directory lists smash room venues operating across the UK. Each listing includes the venue's location, starting price where available, and a link to their website for booking. Use the listings below to find a venue, or narrow your search by city.
           </p>
         </div>
 
@@ -100,15 +97,15 @@ export default async function SmashRoomUKPage() {
           <h2 id="what-is-heading" className="text-2xl sm:text-3xl font-bold text-white mb-6">
             What is a Smash Room?
           </h2>
-          <div className="bg-[#181818] rounded-lg border border-zinc-800 p-6">
-            <p className="text-zinc-300 mb-4">
-              A smash room (also called a rage room, break room, or anger room) is a controlled environment designed for stress relief and entertainment. Participants are provided with protective gear, smashing tools (hammers, bats, crowbars), and breakable items (plates, electronics, glass bottles) to destroy in a safe, supervised setting.
-            </p>
-            <p className="text-zinc-300 mb-4">
-              Smash rooms have become increasingly popular across the UK as an alternative form of stress relief, team building, and entertainment. Sessions typically last 30 minutes, with all safety equipment and items included in the price.
+          <div className="bg-[#181818] rounded-lg border border-zinc-800 p-6 space-y-4">
+            <p className="text-zinc-300">
+              A smash room is a venue where you pay to break things. The concept is simple: you're given safety gear, a selection of tools — typically baseball bats, sledgehammers, or crowbars — and a room full of items to destroy. Plates, mugs, glass bottles, old printers, keyboards, and TVs are common targets. The focus is on the physical, hands-on act of destruction.
             </p>
             <p className="text-zinc-300">
-              All smash rooms in the UK follow strict safety protocols, with mandatory safety briefings, professional supervision, and high-quality protective equipment. Whether you're visiting solo, as a couple, or with a group, smash rooms cater to all experience levels.
+              The term "smash room" tends to emphasise the physical experience over the therapeutic angle. While <Link href="/anger-room-uk" className="text-orange-500 hover:text-orange-600 underline">anger rooms</Link> are often framed around emotional release, smash rooms lean into the entertainment factor — loud music, big swings, and the satisfaction of watching things shatter. This makes them especially popular for birthday parties, stag and hen dos, and group outings where fun is the primary goal.
+            </p>
+            <p className="text-zinc-300">
+              In the UK, smash rooms typically charge between £25 and £50 per person for a 30-minute session. All items and safety equipment are included. Most venues require advance booking, and participants usually need to be at least 16 years old. Sessions are supervised by staff who conduct a safety briefing before you start. For a full breakdown of what to expect, read our <Link href="/guides/what-happens-in-a-rage-room" className="text-orange-500 hover:text-orange-600 underline">first-time guide</Link>.
             </p>
           </div>
         </section>

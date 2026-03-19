@@ -31,9 +31,25 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   return (
     <div className="py-8">
       <div className="max-w-6xl mx-auto px-4">
-        <h1 className="text-4xl font-bold mb-6 text-white">
-          {query ? `Search results for "${query}"` : "Browse rage rooms"}
+        <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-white">
+          {query ? `Search results for "${query}"` : "Search Rage Rooms"}
         </h1>
+
+        {!query && (
+          <p className="text-base sm:text-lg text-zinc-300 mb-6">
+            Search our UK directory by venue name, city, or postcode to find rage rooms near you.
+            You can also browse the full directory from our{" "}
+            <a href="/listings" className="text-orange-500 hover:text-orange-600 underline">all listings</a>{" "}
+            page or explore by{" "}
+            <a href="/near-me" className="text-orange-500 hover:text-orange-600 underline">location</a>.
+          </p>
+        )}
+
+        {query && (
+          <p className="text-sm text-zinc-400 mb-4">
+            {listings.length} {listings.length === 1 ? "result" : "results"} found for &ldquo;{query}&rdquo;
+          </p>
+        )}
 
         <div className="mb-8">
           <HomeSearchBox />

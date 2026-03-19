@@ -95,7 +95,7 @@ export default async function NearMePage() {
         {nearbyListings.length > 0 && (
           <section aria-labelledby="nearby-heading" className="mb-12">
             <h2 id="nearby-heading" className="text-2xl font-bold text-white mb-6">
-              Popular Rage Rooms Near You
+              Rage Rooms Across the UK
             </h2>
             <ListingsGrid listings={nearbyListings} />
           </section>
@@ -129,12 +129,12 @@ export default async function NearMePage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
-              { city: "London", description: "Discover the best rage rooms in the capital city" },
-              { city: "Birmingham", description: "Find smash rooms in the heart of the Midlands" },
-              { city: "Manchester", description: "Explore rage rooms in the North West" },
-              { city: "Bristol", description: "Book your stress-relief session in the South West" },
-              { city: "Newcastle", description: "Find rage rooms in the North East" },
-              { city: "Leeds", description: "Discover smash rooms in Yorkshire" },
+              { city: "London", description: "The UK's largest selection of rage rooms across multiple boroughs, from East London warehouses to central venues" },
+              { city: "Birmingham", description: "The Midlands' main hub for destruction therapy, with competitive pricing and easy access from across the West Midlands" },
+              { city: "Manchester", description: "A strong rage room scene in the North West, popular for corporate events and group celebrations" },
+              { city: "Bristol", description: "The South West's creative capital offers rage rooms with an independent, character-driven atmosphere" },
+              { city: "Newcastle", description: "The North East's go-to city for group rage room experiences, especially popular with party bookings" },
+              { city: "Leeds", description: "West Yorkshire's growing rage room options, with competitive northern pricing and good city-centre access" },
             ].map(({ city, description }) => (
               <Link
                 key={city}
@@ -144,7 +144,7 @@ export default async function NearMePage() {
                 <h3 className="text-xl font-bold text-white mb-2 group-hover:text-orange-500 transition-colors">
                   Rage Rooms in {city}
                 </h3>
-                <p className="text-zinc-400">{description}</p>
+                <p className="text-zinc-400 text-sm">{description}</p>
               </Link>
             ))}
           </div>

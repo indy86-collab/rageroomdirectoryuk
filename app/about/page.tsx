@@ -150,6 +150,8 @@ export default function AboutPage() {
           </ul>
           <p className="mt-4">
             We aim to be the most accurate and trustworthy source for rage rooms in the UK.
+            Read our full <Link href="/editorial-policy" className="text-orange-500 hover:text-orange-600 underline">editorial policy</Link> for
+            more detail on how we verify and maintain listings.
           </p>
 
           <h2 className="text-xl sm:text-2xl font-bold text-white mt-6 sm:mt-8 mb-3 sm:mb-4">

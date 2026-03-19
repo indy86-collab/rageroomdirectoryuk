@@ -52,13 +52,10 @@ export default async function BreakRoomUKPage() {
 
         <div className="text-base sm:text-lg text-zinc-300 mb-6 sm:mb-8 space-y-3 sm:space-y-4">
           <p>
-            Looking for a break room in the UK? You've found the right place. Break rooms (also known as rage rooms, smash rooms, or anger rooms) are safe, controlled environments where you can release stress and tension by breaking items like plates, electronics, and glass bottles.
+            Break rooms offer a physical approach to stress relief that's gaining traction across the UK. The idea is rooted in the therapeutic benefit of channelling tension into controlled destruction — you book a session, gear up, and spend your time breaking plates, glassware, electronics, and other items in a purpose-built room. It's the same activity as a <Link href="/smash-room-uk" className="text-orange-500 hover:text-orange-600 underline">smash room</Link> or rage room, but the "break room" name reflects the stress-relief angle many visitors are looking for.
           </p>
           <p>
-            Our comprehensive directory helps you find and <Link href="/rage-room-prices-uk" className="text-orange-500 hover:text-orange-600 underline">compare break rooms</Link> across the UK, from London to Manchester, Birmingham to Newcastle, and everywhere in between. Each venue provides protective gear, smashing tools, and breakable items for a unique stress-relief experience.
-          </p>
-          <p>
-            Whether you're looking for a fun date night activity, corporate team building event, or simply need to let off steam, browse our directory to find the perfect break room near you. Compare prices, packages, and book your session today.
+            Browse our UK directory below to find break room venues near you. Each listing shows the venue's location and starting price where available, with links to their websites for full details and booking.
           </p>
         </div>
 
@@ -100,15 +97,15 @@ export default async function BreakRoomUKPage() {
           <h2 id="what-is-heading" className="text-2xl sm:text-3xl font-bold text-white mb-6">
             What is a Break Room?
           </h2>
-          <div className="bg-[#181818] rounded-lg border border-zinc-800 p-6">
-            <p className="text-zinc-300 mb-4">
-              A break room (also called a rage room, smash room, or anger room) is a controlled environment designed for stress relief and entertainment. Participants are provided with protective gear, smashing tools (hammers, bats, crowbars), and breakable items (plates, electronics, glass bottles) to destroy in a safe, supervised setting.
-            </p>
-            <p className="text-zinc-300 mb-4">
-              Break rooms have become increasingly popular across the UK as an alternative form of stress relief, team building, and entertainment. Sessions typically last 30 minutes, with all safety equipment and items included in the price.
+          <div className="bg-[#181818] rounded-lg border border-zinc-800 p-6 space-y-4">
+            <p className="text-zinc-300">
+              A break room — sometimes called a destruction room or wreck room — is a supervised space where people go to physically break objects as a form of stress relief. Unlike the more entertainment-focused <Link href="/smash-room-uk" className="text-orange-500 hover:text-orange-600 underline">smash room</Link>, the "break room" name often appeals to people who are specifically seeking a way to process frustration, work stress, or emotional tension through physical activity.
             </p>
             <p className="text-zinc-300">
-              All break rooms in the UK follow strict safety protocols, with mandatory safety briefings, professional supervision, and high-quality protective equipment. Whether you're visiting solo, as a couple, or with a group, break rooms cater to all experience levels.
+              The experience at a break room is straightforward: you book a time slot, arrive at the venue, receive a safety briefing and protective gear, and then spend your session breaking provided items like crockery, glassware, and electronics. The physical exertion involved — swinging bats, throwing plates, smashing glass — engages your body in a way that many people find genuinely relieving, especially after periods of sitting at a desk or dealing with daily stressors.
+            </p>
+            <p className="text-zinc-300">
+              Break rooms in the UK have grown alongside the broader wellness and stress-management trend. They are particularly popular with corporate groups as <Link href="/guides/best-rage-rooms-for-team-building" className="text-orange-500 hover:text-orange-600 underline">team-building activities</Link> and with individuals looking for an alternative to gym sessions or meditation. Sessions are typically 30 minutes and cost between £25–£50 per person. Read our <Link href="/guides/how-much-do-rage-rooms-cost-uk" className="text-orange-500 hover:text-orange-600 underline">UK pricing guide</Link> for more detail.
             </p>
           </div>
         </section>

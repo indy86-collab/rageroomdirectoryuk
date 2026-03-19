@@ -17,7 +17,7 @@ export default function PrivacyPage() {
     { label: "Privacy", href: "/privacy" },
   ]
 
-  const lastUpdated = new Date().toLocaleDateString("en-GB", { year: "numeric", month: "long", day: "numeric" })
+  const lastUpdated = "18 March 2026"
 
   return (
     <div className="py-6 sm:py-8">

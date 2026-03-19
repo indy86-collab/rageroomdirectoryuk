@@ -52,13 +52,10 @@ export default async function AngerRoomUKPage() {
 
         <div className="text-base sm:text-lg text-zinc-300 mb-6 sm:mb-8 space-y-3 sm:space-y-4">
           <p>
-            Looking for an anger room in the UK? You've found the right place. Anger rooms (also known as rage rooms, smash rooms, or break rooms) are safe, controlled environments where you can release stress and tension by breaking items like plates, electronics, and glass bottles.
+            Anger rooms provide a space specifically designed for people who need to let out frustration in a physical, immediate way. While the activity is the same as a <Link href="/smash-room-uk" className="text-orange-500 hover:text-orange-600 underline">smash room</Link> or <Link href="/break-room-uk" className="text-orange-500 hover:text-orange-600 underline">break room</Link> — breaking items in a supervised environment — the anger room framing speaks to visitors who are coming specifically to process real frustration or stress rather than just looking for a novelty activity.
           </p>
           <p>
-            Our comprehensive directory helps you find and <Link href="/rage-room-prices-uk" className="text-orange-500 hover:text-orange-600 underline">compare anger rooms</Link> across the UK, from London to Manchester, Birmingham to Newcastle, and everywhere in between. Each venue provides protective gear, smashing tools, and breakable items for a unique stress-relief experience.
-          </p>
-          <p>
-            Whether you're looking for a fun date night activity, corporate team building event, or simply need to let off steam, browse our directory to find the perfect anger room near you. Compare prices, packages, and book your session today.
+            Our directory lists anger room and destruction therapy venues across the UK. Each listing includes location, starting price, and a link to the venue's website. Browse below or filter by city to find an anger room near you.
           </p>
         </div>
 
@@ -100,15 +97,15 @@ export default async function AngerRoomUKPage() {
           <h2 id="what-is-heading" className="text-2xl sm:text-3xl font-bold text-white mb-6">
             What is an Anger Room?
           </h2>
-          <div className="bg-[#181818] rounded-lg border border-zinc-800 p-6">
-            <p className="text-zinc-300 mb-4">
-              An anger room (also called a rage room, smash room, or break room) is a controlled environment designed for stress relief and entertainment. Participants are provided with protective gear, smashing tools (hammers, bats, crowbars), and breakable items (plates, electronics, glass bottles) to destroy in a safe, supervised setting.
-            </p>
-            <p className="text-zinc-300 mb-4">
-              Anger rooms have become increasingly popular across the UK as an alternative form of stress relief, team building, and entertainment. Sessions typically last 30 minutes, with all safety equipment and items included in the price.
+          <div className="bg-[#181818] rounded-lg border border-zinc-800 p-6 space-y-4">
+            <p className="text-zinc-300">
+              An anger room is a controlled environment specifically designed to help people release pent-up anger and frustration through physical destruction. While all destruction therapy venues involve breaking things, the "anger room" name places the emphasis squarely on the emotional release aspect — using physical activity as an outlet for genuine frustration, stress, or anger rather than purely for entertainment.
             </p>
             <p className="text-zinc-300">
-              All anger rooms in the UK follow strict safety protocols, with mandatory safety briefings, professional supervision, and high-quality protective equipment. Whether you're visiting solo, as a couple, or with a group, anger rooms cater to all experience levels.
+              The concept draws on the idea that sometimes, redirecting anger into a safe physical activity can provide immediate relief. An anger room gives you that outlet in a supervised setting with protective equipment and purpose-built rooms. Unlike talking therapies or meditation, it's a raw, physical approach — you pick up a bat, and you swing. For some people, especially those who struggle with passive stress-management techniques, this directness is exactly what works.
+            </p>
+            <p className="text-zinc-300">
+              It's worth noting that anger rooms are not a substitute for professional mental health support. They work best as a complementary activity — a way to let off steam in the moment, not a long-term anger management strategy. That said, many visitors report feeling noticeably lighter and calmer after a session. Whether you're dealing with workplace frustration, relationship stress, or just a difficult week, an anger room provides a space where it's not just acceptable to let it out — it's the entire point. Learn more about <Link href="/guides/are-rage-rooms-safe-uk" className="text-orange-500 hover:text-orange-600 underline">safety and how these venues operate</Link>.
             </p>
           </div>
         </section>

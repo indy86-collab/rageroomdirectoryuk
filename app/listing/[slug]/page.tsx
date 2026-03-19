@@ -2,17 +2,16 @@ import { notFound, redirect } from "next/navigation"
 import { Metadata } from "next"
 import Image from "next/image"
 import { 
-  Shield, Hammer, Music, Package, Clock, Users, ParkingCircle, 
-  CheckCircle, Star, MapPin, AlertTriangle, Plus, Zap, RefreshCw, UserCheck
+  Shield, Package, Users, 
+  CheckCircle, Star, MapPin, Zap
 } from "lucide-react"
 import { getListingBySlug, getListingById, getSimilarListings } from "@/lib/listings"
 import { cityToSlug } from "@/lib/location"
 import { getGoogleReviews } from "@/lib/google-places"
-import { generateListingContent } from "@/lib/ai-content"
+import { generateListingContent, generateListingFAQs } from "@/lib/ai-content"
 import { calculateDistance } from "@/lib/distance"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import Link from "next/link"
-import ListingCard from "@/components/ListingCard"
 import SimilarListingCard from "@/components/SimilarListingCard"
 import UGCButtons from "@/components/UGCButtons"
 
@@ -171,6 +170,13 @@ export default async function ListingPage({ params }: ListingPageProps) {
 
   // Generate AI-optimized content
   const aiContent = await generateListingContent(listing, similarListings)
+  const listingFAQs = generateListingFAQs(listing, similarListings)
+
+  // Price comparison data
+  const similarWithPrice = similarListings.filter(l => l.price)
+  const avgCityPrice = similarWithPrice.length > 0
+    ? similarWithPrice.reduce((sum, l) => sum + (l.price || 0), 0) / similarWithPrice.length
+    : null
 
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
   const listingUrl = `${baseUrl}/listing/${listing.slug}`
@@ -198,26 +204,6 @@ export default async function ListingPage({ params }: ListingPageProps) {
       },
     }),
     ...(listing.price && { priceRange: `£${listing.price.toFixed(0)}` }),
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "10:00",
-        closes: "20:00",
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Saturday",
-        opens: "09:00",
-        closes: "21:00",
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Sunday",
-        opens: "10:00",
-        closes: "18:00",
-      },
-    ],
     ...(overallRating && totalReviews > 0 && {
       aggregateRating: {
         "@type": "AggregateRating",
@@ -254,6 +240,20 @@ export default async function ListingPage({ params }: ListingPageProps) {
     ],
   }
 
+  // FAQ Schema
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: listingFAQs.map(faq => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  }
+
   return (
     <div className="py-6 sm:py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -264,6 +264,10 @@ export default async function ListingPage({ params }: ListingPageProps) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
 
         <Breadcrumbs
@@ -342,6 +346,12 @@ export default async function ListingPage({ params }: ListingPageProps) {
                 </div>
               </div>
 
+              {/* Listing freshness indicator */}
+              <p className="text-xs text-zinc-500 mb-3">
+                Listing added {listing.createdAt.toLocaleDateString("en-GB", { month: "long", year: "numeric" })}
+                {listing.verified && " · Verified by RageRoom Directory"}
+              </p>
+
               {/* Location */}
               <div className="mb-4">
                 <p className="text-white">
@@ -395,35 +405,41 @@ export default async function ListingPage({ params }: ListingPageProps) {
           </div>
         </div>
 
-        {/* Packages & Pricing */}
+        {/* Pricing Overview */}
         <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
           <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
-            Packages & Pricing
+            Pricing
           </h2>
-          <div className="space-y-3">
-            {listing.price ? (
-              <>
-                <div className="flex justify-between items-center py-2 border-b border-zinc-700">
-                  <span className="text-white">30-minute smash session</span>
-                  <span className="text-orange-500 font-semibold">From £{listing.price.toFixed(0)}</span>
+          {listing.price ? (
+            <div className="space-y-3">
+              <div className="flex justify-between items-center py-2 border-b border-zinc-700">
+                <span className="text-white">Starting price per person</span>
+                <span className="text-orange-500 font-semibold text-lg">From £{listing.price.toFixed(0)}</span>
+              </div>
+              {avgCityPrice && similarWithPrice.length >= 2 && (
+                <div className="flex items-center gap-2 py-2 border-b border-zinc-700">
+                  <span className="text-zinc-400 text-sm">
+                    {listing.price < avgCityPrice * 0.9
+                      ? `Below average for ${listing.city} (avg ~£${Math.round(avgCityPrice)})`
+                      : listing.price > avgCityPrice * 1.1
+                      ? `Above average for ${listing.city} (avg ~£${Math.round(avgCityPrice)})`
+                      : `In line with ${listing.city} average (~£${Math.round(avgCityPrice)})`
+                    }
+                  </span>
                 </div>
-                <div className="flex justify-between items-center py-2 border-b border-zinc-700">
-                  <span className="text-white">Couples smash (60 minutes)</span>
-                  <span className="text-orange-500 font-semibold">From £{(listing.price * 1.6).toFixed(0)}</span>
-                </div>
-                <div className="flex justify-between items-center py-2 border-b border-zinc-700">
-                  <span className="text-white">Group session (4+ people)</span>
-                  <span className="text-orange-500 font-semibold">From £{(listing.price * 0.9).toFixed(0)} per person</span>
-                </div>
-                <div className="flex justify-between items-center py-2">
-                  <span className="text-white">Premium package (extended time + extras)</span>
-                  <span className="text-orange-500 font-semibold">From £{(listing.price * 1.5).toFixed(0)}</span>
-                </div>
-              </>
-            ) : (
-              <p className="text-zinc-400">Pricing varies by package. Please contact the venue for current rates.</p>
-            )}
-          </div>
+              )}
+              <p className="text-zinc-400 text-sm">
+                This is the starting price listed by {listing.name}. Most rage rooms offer a range of packages
+                at different price points, including options for couples, groups, and premium experiences.
+                Visit the venue's website for their full and up-to-date pricing.
+              </p>
+            </div>
+          ) : (
+            <p className="text-zinc-400">
+              Pricing information is not currently available for {listing.name}. Contact the venue
+              directly for their latest rates and package options.
+            </p>
+          )}
           {listing.website && (
             <div className="mt-4">
               <a
@@ -432,123 +448,43 @@ export default async function ListingPage({ params }: ListingPageProps) {
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors"
               >
-                View Full Pricing & Book →
+                View Full Pricing on Their Website →
               </a>
             </div>
           )}
         </div>
 
-        {/* Quick Facts */}
-        <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
-          <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
-            Quick Facts
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
-                <UserCheck className="w-5 h-5 text-orange-500" />
-              </div>
-              <div>
-                <h3 className="text-white font-semibold mb-1">Age Limit</h3>
-                <p className="text-zinc-400 text-sm">16+ years</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
-                <Clock className="w-5 h-5 text-orange-500" />
-              </div>
-              <div>
-                <h3 className="text-white font-semibold mb-1">Session Length</h3>
-                <p className="text-zinc-400 text-sm">30-60 minutes</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
-                <Users className="w-5 h-5 text-orange-500" />
-              </div>
-              <div>
-                <h3 className="text-white font-semibold mb-1">Group Size</h3>
-                <p className="text-zinc-400 text-sm">1-6 people</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
-                <ParkingCircle className="w-5 h-5 text-orange-500" />
-              </div>
-              <div>
-                <h3 className="text-white font-semibold mb-1">Parking</h3>
-                <p className="text-zinc-400 text-sm">Available on-site</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
-                <Shield className="w-5 h-5 text-orange-500" />
-              </div>
-              <div>
-                <h3 className="text-white font-semibold mb-1">Safety Gear</h3>
-                <p className="text-zinc-400 text-sm">Provided</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
-                <Hammer className="w-5 h-5 text-orange-500" />
-              </div>
-              <div>
-                <h3 className="text-white font-semibold mb-1">Tools</h3>
-                <p className="text-zinc-400 text-sm">Provided</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
-                <Package className="w-5 h-5 text-orange-500" />
-              </div>
-              <div>
-                <h3 className="text-white font-semibold mb-1">Smash Items</h3>
-                <p className="text-zinc-400 text-sm">Included</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
-                <Music className="w-5 h-5 text-orange-500" />
-              </div>
-              <div>
-                <h3 className="text-white font-semibold mb-1">Music</h3>
-                <p className="text-zinc-400 text-sm">Available</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Opening Hours */}
+        {/* Venue Details & Booking Info */}
         <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
           <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
-            Opening Hours
+            Booking & Visit Information
           </h2>
-          <div className="space-y-2 mb-4">
-            <div className="flex justify-between items-center py-2 border-b border-zinc-700">
-              <span className="text-white">Monday - Friday</span>
-              <span className="text-zinc-300">10:00 - 20:00</span>
-            </div>
-            <div className="flex justify-between items-center py-2 border-b border-zinc-700">
-              <span className="text-white">Saturday</span>
-              <span className="text-zinc-300">09:00 - 21:00</span>
-            </div>
-            <div className="flex justify-between items-center py-2">
-              <span className="text-white">Sunday</span>
-              <span className="text-zinc-300">10:00 - 18:00</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-2 mt-4">
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-600 text-white">
-              Open now
-            </span>
-            <span className="text-zinc-400 text-sm">(Hours may vary, please confirm with venue)</span>
-          </div>
-          {listing.phone && (
-            <p className="text-zinc-400 text-sm mt-2">
-              Call <a href={`tel:${listing.phone}`} className="text-orange-500 hover:text-orange-600">{listing.phone}</a> to confirm current hours
+          <div className="space-y-3 text-zinc-300">
+            <p>
+              Opening hours, session availability, and booking requirements vary. We recommend checking directly
+              with {listing.name} before your visit to confirm their current schedule and any booking requirements.
             </p>
-          )}
+            <div className="flex flex-col sm:flex-row gap-3 mt-4">
+              {listing.website && (
+                <a
+                  href={listing.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors text-sm font-semibold"
+                >
+                  Visit Website for Hours & Booking
+                </a>
+              )}
+              {listing.phone && (
+                <a
+                  href={`tel:${listing.phone}`}
+                  className="inline-flex items-center justify-center px-4 py-2 bg-zinc-700 text-white rounded-md hover:bg-zinc-600 transition-colors text-sm font-semibold"
+                >
+                  Call {listing.phone}
+                </a>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Map & Directions */}
@@ -627,77 +563,63 @@ export default async function ListingPage({ params }: ListingPageProps) {
           </div>
         </div>
 
-        {/* What to Expect Section */}
+        {/* Helpful Guides */}
         <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
           <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
-            What to Expect
+            Planning Your Visit
           </h2>
-          <div className="space-y-3 text-zinc-300">
-            <p>
-              When you arrive at {listing.name}, you'll be greeted by staff who will guide you through the safety briefing. You'll receive all necessary protective equipment including coveralls, safety glasses, and a helmet to ensure your protection throughout the session.
-            </p>
-            <p>
-              Once suited up, you'll enter the rage room where you'll find a variety of breakable items such as glass bottles, ceramics, electronics, and other objects ready to be smashed. You'll be provided with tools like sledgehammers, baseball bats, or crowbars to use during your session.
-            </p>
-            <p>
-              Most sessions last between 30 to 60 minutes, giving you plenty of time to release stress and have fun. Many venues also offer music systems so you can play your favorite tracks while smashing. The experience is designed to be both cathartic and entertaining, providing a unique way to let off steam in a controlled, safe environment.
-            </p>
-            <p>
-              After your session, staff will help you clean up and you can take photos or videos (if permitted) to remember the experience. Some venues also offer refreshments or additional activities like axe throwing or escape rooms.
-            </p>
-          </div>
-        </div>
-
-        {/* Who It's For Section */}
-        <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
-          <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
-            Who It's For
-          </h2>
-          <div className="space-y-3 text-zinc-300">
-            <p>
-              Rage rooms are perfect for a wide range of people looking for unique experiences. They're particularly popular with:
-            </p>
-            <ul className="list-disc list-inside space-y-2 ml-4">
-              <li><strong>Stress Relief Seekers:</strong> Anyone dealing with work pressure, daily frustrations, or just needing an outlet for pent-up energy will find rage rooms therapeutic and satisfying.</li>
-              <li><strong>Couples:</strong> Many couples enjoy rage rooms as an unconventional date activity. It's a fun way to bond while doing something completely different from typical date nights.</li>
-              <li><strong>Corporate Groups:</strong> Team building events at rage rooms help colleagues blow off steam together, improve communication, and create memorable shared experiences outside the office.</li>
-              <li><strong>Stag and Hen Parties:</strong> Rage rooms provide an exciting pre-wedding activity that's both fun and memorable for wedding parties.</li>
-              <li><strong>Birthday Celebrations:</strong> Whether it's a milestone birthday or just a unique way to celebrate, rage rooms offer an unforgettable experience.</li>
-              <li><strong>Anyone Seeking Adventure:</strong> If you're looking for something different from typical entertainment options, rage rooms provide a thrilling, hands-on experience you won't forget.</li>
-            </ul>
-            <p>
-              {listing.name} welcomes individuals, pairs, and groups of various sizes. Whether you're coming solo to release stress or bringing a group for a special occasion, the venue can accommodate your needs.
-            </p>
-          </div>
-        </div>
-
-        {/* Safety & Age Requirements Section */}
-        <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
-          <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
-            Safety & Age Requirements
-          </h2>
-          <div className="space-y-3 text-zinc-300">
-            <p>
-              Safety is the top priority at {listing.name}. All participants must follow strict safety guidelines to ensure a secure and enjoyable experience.
-            </p>
-            <p>
-              <strong>Age Requirements:</strong> Most rage rooms in the UK require participants to be at least 16 years old. Some venues may allow younger participants (typically 12-15) with adult supervision, but this varies by location. It's always best to check with {listing.name} directly about their specific age policies before booking.
-            </p>
-            <p>
-              <strong>Safety Equipment:</strong> All necessary protective gear is provided, including full-body coveralls, safety glasses or goggles, helmets, and sturdy gloves. This equipment is mandatory and must be worn at all times during the session.
-            </p>
-            <p>
-              <strong>Safety Briefing:</strong> Before entering the rage room, all participants receive a comprehensive safety briefing covering proper tool usage, safe smashing techniques, and emergency procedures. Staff are always available to answer questions and ensure everyone understands the safety protocols.
-            </p>
-            <p>
-              <strong>Health Considerations:</strong> Participants should be in good physical health as rage room activities involve physical exertion. If you have any medical conditions, injuries, or concerns, please inform staff before your session. Pregnant individuals are typically advised not to participate.
-            </p>
-            <p>
-              <strong>Supervision:</strong> Trained staff monitor all sessions to ensure safety rules are followed. The rage room environment is controlled and designed to minimize risks while maximizing the therapeutic and fun aspects of the experience.
-            </p>
-            <p>
-              If you have any questions about safety requirements or age restrictions, please contact {listing.name} directly at {listing.phone || "their website"} before booking your session.
-            </p>
+          <p className="text-zinc-300 mb-4">
+            New to rage rooms? These guides cover everything you need to know before booking your session at {listing.name}.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <Link
+              href="/guides/what-happens-in-a-rage-room"
+              className="flex items-center gap-3 p-3 rounded-lg border border-zinc-700 hover:border-orange-500/50 transition-colors group"
+            >
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
+                <Zap className="w-5 h-5 text-orange-500" />
+              </div>
+              <div>
+                <p className="text-white font-semibold text-sm group-hover:text-orange-500 transition-colors">What Happens in a Rage Room</p>
+                <p className="text-zinc-400 text-xs">Step-by-step first visit guide</p>
+              </div>
+            </Link>
+            <Link
+              href="/guides/are-rage-rooms-safe-uk"
+              className="flex items-center gap-3 p-3 rounded-lg border border-zinc-700 hover:border-orange-500/50 transition-colors group"
+            >
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
+                <Shield className="w-5 h-5 text-orange-500" />
+              </div>
+              <div>
+                <p className="text-white font-semibold text-sm group-hover:text-orange-500 transition-colors">Safety & Age Requirements</p>
+                <p className="text-zinc-400 text-xs">Gear, rules, and age policies</p>
+              </div>
+            </Link>
+            <Link
+              href="/guides/how-much-do-rage-rooms-cost-uk"
+              className="flex items-center gap-3 p-3 rounded-lg border border-zinc-700 hover:border-orange-500/50 transition-colors group"
+            >
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
+                <Package className="w-5 h-5 text-orange-500" />
+              </div>
+              <div>
+                <p className="text-white font-semibold text-sm group-hover:text-orange-500 transition-colors">UK Rage Room Pricing Guide</p>
+                <p className="text-zinc-400 text-xs">What to expect price-wise</p>
+              </div>
+            </Link>
+            <Link
+              href="/guides/best-rage-rooms-for-couples"
+              className="flex items-center gap-3 p-3 rounded-lg border border-zinc-700 hover:border-orange-500/50 transition-colors group"
+            >
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
+                <Users className="w-5 h-5 text-orange-500" />
+              </div>
+              <div>
+                <p className="text-white font-semibold text-sm group-hover:text-orange-500 transition-colors">Rage Rooms for Couples</p>
+                <p className="text-zinc-400 text-xs">Date night ideas and tips</p>
+              </div>
+            </Link>
           </div>
         </div>
 
@@ -763,78 +685,6 @@ export default async function ListingPage({ params }: ListingPageProps) {
           </div>
         )}
 
-        {/* Safety Notes */}
-        <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-6 mb-8">
-          <h2 className="text-2xl font-bold text-white mb-4">
-            Safety Notes
-          </h2>
-          <ul className="space-y-2">
-            {aiContent.safetyNotes.map((note, index) => (
-              <li key={index} className="flex items-start gap-3">
-                <Shield className="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" />
-                <span className="text-zinc-300">{note}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* What You'll Get / Included Gear Section */}
-        <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
-          <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
-            What You'll Get
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
-                <Shield className="w-6 h-6 text-orange-500" />
-              </div>
-              <div>
-                <h3 className="text-white font-semibold mb-1">Protective Gear</h3>
-                <p className="text-zinc-400 text-sm">Safety equipment provided for your protection</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
-                <Hammer className="w-6 h-6 text-orange-500" />
-              </div>
-              <div>
-                <h3 className="text-white font-semibold mb-1">Choice of Weapon</h3>
-                <p className="text-zinc-400 text-sm">Select from various smashing tools</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
-                <Music className="w-6 h-6 text-orange-500" />
-              </div>
-              <div>
-                <h3 className="text-white font-semibold mb-1">Music System</h3>
-                <p className="text-zinc-400 text-sm">Pump up the volume while you smash</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
-                <Zap className="w-6 h-6 text-orange-500" />
-              </div>
-              <div>
-                <h3 className="text-white font-semibold mb-1">Smash Items Included</h3>
-                <p className="text-zinc-400 text-sm">All breakable items provided</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center">
-                <RefreshCw className="w-6 h-6 text-orange-500" />
-              </div>
-              <div>
-                <h3 className="text-white font-semibold mb-1">Add-on Upgrades</h3>
-                <p className="text-zinc-400 text-sm">Enhance your experience with extras</p>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* Similar Rage Rooms Nearby */}
         {similarListings.length > 0 && (
@@ -868,6 +718,28 @@ export default async function ListingPage({ params }: ListingPageProps) {
 
         {/* UGC Buttons */}
         <UGCButtons listingId={listing.id} listingName={listing.name} />
+
+        {/* Venue FAQ */}
+        {listingFAQs.length > 0 && (
+          <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
+              Frequently Asked Questions About {listing.name}
+            </h2>
+            <div className="space-y-4">
+              {listingFAQs.map((faq, index) => (
+                <details key={index} className="group border-b border-zinc-700 last:border-0 pb-4 last:pb-0">
+                  <summary className="flex items-center justify-between cursor-pointer text-white font-medium py-1 hover:text-orange-500 transition-colors">
+                    {faq.question}
+                    <svg className="w-5 h-5 text-zinc-400 group-open:rotate-180 transition-transform flex-shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <p className="text-zinc-300 text-sm mt-2 leading-relaxed">{faq.answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Reviews Section */}
         <section aria-labelledby="reviews-heading" className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6">
@@ -984,10 +856,10 @@ export default async function ListingPage({ params }: ListingPageProps) {
             </div>
           )}
 
-          {/* No reviews message */}
           {listing.reviews.length === 0 && googleReviews.length === 0 && (
             <p className="text-zinc-400">
-              No reviews yet. Be the first to review this rage room!
+              No reviews available for this venue yet. Check back later, or visit their
+              website to see reviews on other platforms.
             </p>
           )}
         </section>

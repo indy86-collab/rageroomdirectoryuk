@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import { slugToCity, cityToSlug } from "@/lib/location"
+import { getCityContent, getGenericCityContent } from "@/lib/city-content"
 import ListingsGrid from "@/components/ListingsGrid"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import FAQ from "@/components/FAQ"
@@ -11,53 +12,38 @@ interface CityPageProps {
   params: { slug: string }
 }
 
-// Disable static generation - we'll use dynamic rendering instead
-// export async function generateStaticParams() {
-//   const { getDistinctCities } = await import("@/lib/listings")
-//   const { cityToSlug } = await import("@/lib/location")
-//   
-//   const cities = await getDistinctCities()
-//   
-//   return cities.map((city) => ({
-//     slug: cityToSlug(city),
-//   }))
-// }
-
 export async function generateMetadata({
   params,
 }: CityPageProps): Promise<Metadata> {
   const cityName = slugToCity(params.slug)
-  // Lazy load to prevent build-time initialization
   const { getListingsByCity } = await import("@/lib/listings")
   const listings = await getListingsByCity(cityName)
+  const count = listings.length
   
   return {
-    title: `Rage Rooms in ${cityName}`,
-    description: `Browse rage rooms and smash rooms in ${cityName}, view prices, packages, opening hours and reviews. Find the best rage room experience near you.`,
+    title: `Rage Rooms in ${cityName} — ${count} ${count === 1 ? "Venue" : "Venues"} Listed`,
+    description: `Find rage rooms in ${cityName}. Compare ${count} ${count === 1 ? "venue" : "venues"}, view starting prices, read reviews, and book a destruction therapy session near you.`,
     openGraph: {
       title: `Rage Rooms in ${cityName} | RageRoom Directory`,
-      description: `Browse rage rooms and smash rooms in ${cityName}, view prices, packages, opening hours and reviews.`,
+      description: `Browse ${count} rage ${count === 1 ? "room" : "rooms"} in ${cityName}. Compare venues, prices, and reviews.`,
       type: "website",
     },
   }
 }
 
-// Mark this route as dynamic to prevent build-time data collection
 export const dynamic = 'force-dynamic'
 export const dynamicParams = true
 
 export default async function CityPage({ params }: CityPageProps) {
   const cityName = slugToCity(params.slug)
-  // Lazy load to prevent build-time initialization
   const { getListingsByCity } = await import("@/lib/listings")
   const listings = await getListingsByCity(cityName)
 
-  // ItemList Schema for city page
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: `Rage Rooms in ${cityName}`,
-    description: `List of rage rooms and smash rooms in ${cityName}`,
+    description: `Directory of rage rooms and smash rooms in ${cityName}`,
     numberOfItems: listings.length,
     itemListElement: listings.map((listing, index) => ({
       "@type": "ListItem",
@@ -71,6 +57,11 @@ export default async function CityPage({ params }: CityPageProps) {
   }
 
   const cityFAQs = getCityFAQs(cityName)
+  const cityContent = getCityContent(cityName) || getGenericCityContent(cityName, listings.length)
+
+  const priceRange = listings.filter(l => l.price).map(l => l.price!)
+  const minPrice = priceRange.length > 0 ? Math.min(...priceRange) : null
+  const maxPrice = priceRange.length > 0 ? Math.max(...priceRange) : null
 
   return (
     <div className="py-6 sm:py-8">
@@ -78,6 +69,7 @@ export default async function CityPage({ params }: CityPageProps) {
         <Breadcrumbs
           items={[
             { label: "Home", href: "/" },
+            { label: "All Rage Rooms", href: "/listings" },
             { label: cityName },
           ]}
         />
@@ -90,36 +82,73 @@ export default async function CityPage({ params }: CityPageProps) {
         <h1 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 text-white">
           Rage Rooms in {cityName}
         </h1>
+
+        {/* Unique city-specific intro */}
         <div className="text-base sm:text-lg text-zinc-300 mb-6 sm:mb-8 space-y-3 sm:space-y-4">
-          <p>
-            {cityName} offers a growing number of rage room and smash room experiences for stress relief, team building, and fun activities. These controlled environments provide a safe space to release tension by breaking items like glass bottles, ceramics, and electronics using provided tools and protective gear.
-          </p>
-          <p>
-            Whether you're looking for a unique date night, corporate event, or simply need to let off steam, browse our directory of rage rooms in {cityName} to <Link href="/rage-room-prices-uk" className="text-orange-500 hover:text-orange-600 underline">compare prices and packages</Link>, and book your session. Popular with young adults, corporate groups, and anyone seeking an alternative stress-relief activity, rage rooms in {cityName} typically offer 30-minute sessions starting from around £25-30 per person.
-          </p>
-          <p>
-            Each venue provides comprehensive safety equipment including coveralls, helmets, and safety glasses, along with a variety of smashing tools and breakable items. Most rage rooms in {cityName} require advance booking, especially for weekends and group sessions. <Link href="/listings" className="text-orange-500 hover:text-orange-600 underline">Browse all rage rooms</Link> across the UK or explore <Link href={`/city/${cityToSlug(cityName)}`} className="text-orange-500 hover:text-orange-600 underline">rage rooms in {cityName}</Link> specifically.
-          </p>
+          <p>{cityContent.intro}</p>
+          <p>{cityContent.localContext}</p>
         </div>
+
+        {/* Quick stats bar */}
+        {listings.length > 0 && (
+          <div className="bg-[#181818] rounded-lg border border-zinc-800 p-4 mb-6 flex flex-wrap gap-4 sm:gap-8">
+            <div>
+              <p className="text-zinc-400 text-xs uppercase tracking-wider">Venues Listed</p>
+              <p className="text-white text-xl font-bold">{listings.length}</p>
+            </div>
+            {minPrice !== null && (
+              <div>
+                <p className="text-zinc-400 text-xs uppercase tracking-wider">Starting From</p>
+                <p className="text-orange-500 text-xl font-bold">£{minPrice.toFixed(0)}</p>
+              </div>
+            )}
+            {maxPrice !== null && minPrice !== maxPrice && (
+              <div>
+                <p className="text-zinc-400 text-xs uppercase tracking-wider">Up To</p>
+                <p className="text-orange-500 text-xl font-bold">£{maxPrice.toFixed(0)}</p>
+              </div>
+            )}
+          </div>
+        )}
         
         {listings.length > 0 ? (
           <>
-            <div className="mb-6">
-              <p className="text-sm text-zinc-400">
-                {listings.length} {listings.length === 1 ? "rage room" : "rage rooms"} found in {cityName}
-              </p>
-            </div>
             <section aria-label={`Rage rooms in ${cityName}`}>
               <ListingsGrid listings={listings} />
             </section>
             
-            {/* Closing paragraph - who should book */}
+            {/* Travel tip */}
             <div className="mt-8 mb-6">
               <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6">
-                <p className="text-base sm:text-lg text-zinc-300">
-                  Rage rooms in {cityName} are perfect for locals and visitors alike who want to try something completely different. Whether you're a {cityName} resident looking for a new way to unwind after work, a corporate team planning a unique team-building event, or a visitor seeking an unforgettable experience, the rage rooms here offer a safe and controlled environment to release stress. These venues are particularly popular with groups celebrating special occasions, couples looking for an unconventional date activity, and individuals who simply want to try something new. With professional staff, comprehensive safety equipment, and a variety of packages available, booking a rage room session in {cityName} is straightforward and accessible. Most venues offer flexible booking options and can accommodate both walk-ins and advance reservations, making it easy to fit a session into your schedule.
+                <h2 className="text-lg font-bold text-white mb-2">Getting There</h2>
+                <p className="text-base text-zinc-300">
+                  {cityContent.travelTip}
                 </p>
               </div>
+            </div>
+
+            {/* Cross-links */}
+            <div className="mt-4 mb-6 flex flex-wrap gap-3">
+              <Link
+                href="/listings"
+                className="text-sm text-orange-500 hover:text-orange-600 underline"
+              >
+                Browse All UK Rage Rooms
+              </Link>
+              <span className="text-zinc-600">|</span>
+              <Link
+                href="/guides/how-much-do-rage-rooms-cost-uk"
+                className="text-sm text-orange-500 hover:text-orange-600 underline"
+              >
+                UK Pricing Guide
+              </Link>
+              <span className="text-zinc-600">|</span>
+              <Link
+                href="/guides/what-happens-in-a-rage-room"
+                className="text-sm text-orange-500 hover:text-orange-600 underline"
+              >
+                First Time Guide
+              </Link>
             </div>
           </>
         ) : (
@@ -147,10 +176,8 @@ export default async function CityPage({ params }: CityPageProps) {
           </div>
         )}
 
-        {/* FAQ Section */}
         <FAQ items={cityFAQs} title={`Frequently Asked Questions About Rage Rooms in ${cityName}`} />
 
-        {/* UGC Section */}
         <div className="mt-12">
           <UGCButtons />
         </div>
@@ -158,5 +185,3 @@ export default async function CityPage({ params }: CityPageProps) {
     </div>
   )
 }
-
-
