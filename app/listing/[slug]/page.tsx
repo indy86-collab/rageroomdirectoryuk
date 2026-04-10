@@ -7,7 +7,7 @@ import {
 } from "lucide-react"
 import { getListingBySlug, getListingById, getSimilarListings } from "@/lib/listings"
 import { cityToSlug } from "@/lib/location"
-import { getGoogleReviews } from "@/lib/google-places"
+import { getGooglePlaceReviewData } from "@/lib/google-places"
 import { generateListingContent, generateListingFAQs } from "@/lib/ai-content"
 import { calculateDistance } from "@/lib/distance"
 import Breadcrumbs from "@/components/Breadcrumbs"
@@ -132,33 +132,46 @@ export default async function ListingPage({ params }: ListingPageProps) {
 
   const location = listing.location as { lat: number; lng: number } | null
 
-  // Get Google reviews if place ID exists
-  const googleReviews = listing.googlePlaceId
-    ? await getGoogleReviews(listing.googlePlaceId)
-    : []
+  // Google: API returns at most 5 review texts; userRatingsTotal is the real count (e.g. 133)
+  const googleReviewData = listing.googlePlaceId
+    ? await getGooglePlaceReviewData(listing.googlePlaceId)
+    : { reviews: [], rating: null, userRatingsTotal: null }
 
-  // Calculate average rating from site reviews
+  const googleReviews = googleReviewData.reviews
+  const googleOfficialRating = googleReviewData.rating
+  const googleUserRatingsTotal = googleReviewData.userRatingsTotal
+
+  const siteReviewCount = listing.reviews.length
   const siteAverageRating =
-    listing.reviews.length > 0
+    siteReviewCount > 0
       ? listing.reviews.reduce((sum: number, review: any) => sum + review.rating, 0) /
-        listing.reviews.length
+        siteReviewCount
       : null
 
-  // Calculate average rating from Google reviews
-  const googleAverageRating =
-    googleReviews.length > 0
-      ? googleReviews.reduce((sum: number, review: any) => sum + review.rating, 0) /
-        googleReviews.length
-      : null
+  const googleCountForStats = googleUserRatingsTotal ?? 0
+  let overallRating: number | null = null
+  if (siteReviewCount > 0 && googleOfficialRating != null && googleCountForStats > 0) {
+    overallRating =
+      ((siteAverageRating ?? 0) * siteReviewCount +
+        googleOfficialRating * googleCountForStats) /
+      (siteReviewCount + googleCountForStats)
+  } else if (siteReviewCount > 0) {
+    overallRating = siteAverageRating
+  } else if (googleOfficialRating != null) {
+    overallRating = googleOfficialRating
+  } else if (googleReviews.length > 0) {
+    overallRating =
+      googleReviews.reduce((sum, r) => sum + r.rating, 0) / googleReviews.length
+  }
 
-  // Calculate overall average rating (combining both)
-  const totalReviews = listing.reviews.length + googleReviews.length
-  const overallRating =
-    totalReviews > 0
-      ? ((siteAverageRating || 0) * listing.reviews.length +
-          (googleAverageRating || 0) * googleReviews.length) /
-        totalReviews
-      : null
+  const totalReviewCount =
+    siteReviewCount + (googleUserRatingsTotal ?? googleReviews.length)
+
+  const googleMapsPlaceUrl = listing.googlePlaceId
+    ? `https://www.google.com/maps/search/?api=1&query_place_id=${encodeURIComponent(
+        listing.googlePlaceId
+      )}`
+    : null
 
   // Get similar listings in the same city (with distance calculation)
   const similarListings = await getSimilarListings(
@@ -204,11 +217,11 @@ export default async function ListingPage({ params }: ListingPageProps) {
       },
     }),
     ...(listing.price && { priceRange: `£${listing.price.toFixed(0)}` }),
-    ...(overallRating && totalReviews > 0 && {
+    ...(overallRating && totalReviewCount > 0 && {
       aggregateRating: {
         "@type": "AggregateRating",
         ratingValue: overallRating.toFixed(1),
-        reviewCount: totalReviews,
+        reviewCount: totalReviewCount,
       },
     }),
     ...(listing.website && { sameAs: [listing.website] }),
@@ -338,7 +351,8 @@ export default async function ListingPage({ params }: ListingPageProps) {
                           {overallRating.toFixed(1)}
                         </span>
                         <span className="text-zinc-400 text-sm">
-                          ({totalReviews} {totalReviews === 1 ? "review" : "reviews"})
+                          ({totalReviewCount}{" "}
+                          {totalReviewCount === 1 ? "review" : "reviews"})
                         </span>
                       </div>
                     )}
@@ -744,11 +758,12 @@ export default async function ListingPage({ params }: ListingPageProps) {
         {/* Reviews Section */}
         <section aria-labelledby="reviews-heading" className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6">
           <h2 id="reviews-heading" className="text-xl sm:text-2xl font-bold text-white mb-4">
-            Reviews ({listing.reviews.length + googleReviews.length})
+            Reviews ({totalReviewCount})
           </h2>
 
-          {/* Google Reviews */}
-          {googleReviews.length > 0 && (
+          {/* Google Reviews (API returns at most 5 review texts; userRatingsTotal is the full count) */}
+          {(googleReviews.length > 0 ||
+            (googleUserRatingsTotal != null && googleUserRatingsTotal > 0)) && (
             <div className="mb-8">
               <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
@@ -759,61 +774,99 @@ export default async function ListingPage({ params }: ListingPageProps) {
                 </svg>
                 Google Reviews
               </h3>
-              <div className="space-y-6">
-                {googleReviews.map((review, index) => (
-                  <div
-                    key={`google-${index}`}
-                    className="border-b border-zinc-700 pb-6 last:border-0 last:pb-0"
-                  >
-                    <div className="flex items-start justify-between mb-2">
-                      <div className="flex items-center space-x-3">
-                        {review.profile_photo_url && (
-                          <Image
-                            src={review.profile_photo_url}
-                            alt={review.author_name}
-                            width={32}
-                            height={32}
-                            className="w-8 h-8 rounded-full"
-                          />
-                        )}
-                        <div className="flex items-center space-x-2">
-                          <div className="flex items-center">
-                            {[1, 2, 3, 4, 5].map((star) => (
-                              <svg
-                                key={star}
-                                className={`w-4 h-4 ${
-                                  star <= review.rating
-                                    ? "text-yellow-400"
-                                    : "text-zinc-600"
-                                }`}
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                              >
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                              </svg>
-                            ))}
+              {(googleOfficialRating != null && googleUserRatingsTotal != null) ||
+              googleMapsPlaceUrl ? (
+                <p className="text-zinc-400 text-sm mb-4 leading-relaxed">
+                  {googleOfficialRating != null && googleUserRatingsTotal != null && (
+                    <>
+                      {googleOfficialRating.toFixed(1)}★ average from {googleUserRatingsTotal} reviews
+                      on Google.{" "}
+                    </>
+                  )}
+                  {googleUserRatingsTotal != null &&
+                    googleUserRatingsTotal > googleReviews.length &&
+                    googleReviews.length > 0 && (
+                      <>
+                        Google&apos;s Places API only allows third-party sites to display a sample of
+                        up to five reviews, not the full list.{" "}
+                      </>
+                    )}
+                  {googleMapsPlaceUrl && (
+                    <a
+                      href={googleMapsPlaceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-orange-500 hover:text-orange-600 underline"
+                    >
+                      Read all reviews on Google
+                    </a>
+                  )}
+                </p>
+              ) : null}
+              {googleReviews.length > 0 && (
+                <div className="space-y-6">
+                  {googleReviews.map((review, index) => (
+                    <div
+                      key={`google-${index}`}
+                      className="border-b border-zinc-700 pb-6 last:border-0 last:pb-0"
+                    >
+                      <div className="flex items-start justify-between mb-2">
+                        <div className="flex items-center space-x-3">
+                          {review.profile_photo_url && (
+                            <Image
+                              src={review.profile_photo_url}
+                              alt={review.author_name}
+                              width={32}
+                              height={32}
+                              className="w-8 h-8 rounded-full"
+                            />
+                          )}
+                          <div className="flex items-center space-x-2">
+                            <div className="flex items-center">
+                              {[1, 2, 3, 4, 5].map((star) => (
+                                <svg
+                                  key={star}
+                                  className={`w-4 h-4 ${
+                                    star <= review.rating
+                                      ? "text-yellow-400"
+                                      : "text-zinc-600"
+                                  }`}
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                >
+                                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                              ))}
+                            </div>
+                            <span className="text-sm font-medium text-white">
+                              {review.author_name}
+                            </span>
                           </div>
-                          <span className="text-sm font-medium text-white">
-                            {review.author_name}
-                          </span>
                         </div>
+                        <span className="text-sm text-zinc-400">
+                          {review.relative_time_description}
+                        </span>
                       </div>
-                      <span className="text-sm text-zinc-400">
-                        {review.relative_time_description}
-                      </span>
+                      <p className="text-white">
+                        {review.text}
+                      </p>
                     </div>
-                    <p className="text-white">
-                      {review.text}
-                    </p>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 
           {/* Site Reviews */}
           {listing.reviews.length > 0 && (
-            <div className={googleReviews.length > 0 ? "mt-8 pt-8 border-t border-zinc-700" : ""}>
+            <div
+              className={
+                googleReviews.length > 0 ||
+                (googleUserRatingsTotal != null && googleUserRatingsTotal > 0)
+                  ? "mt-8 pt-8 border-t border-zinc-700"
+                  : ""
+              }
+            >
               <h3 className="text-lg font-semibold text-white mb-4">Site Reviews</h3>
               <div className="space-y-6">
                 {listing.reviews.map((review: any) => (
@@ -856,7 +909,9 @@ export default async function ListingPage({ params }: ListingPageProps) {
             </div>
           )}
 
-          {listing.reviews.length === 0 && googleReviews.length === 0 && (
+          {listing.reviews.length === 0 &&
+            googleReviews.length === 0 &&
+            !(googleUserRatingsTotal != null && googleUserRatingsTotal > 0) && (
             <p className="text-zinc-400">
               No reviews available for this venue yet. Check back later, or visit their
               website to see reviews on other platforms.
