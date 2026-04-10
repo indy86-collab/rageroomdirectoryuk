@@ -36,7 +36,9 @@ export const metadata: Metadata = {
 export default async function Home() {
   // Lazy load to prevent build-time initialization
   const { getFeaturedListings, getDistinctCities } = await import("@/lib/listings")
-  const featuredListings = await getFeaturedListings(6) // Show 6 listings, rotated daily
+  const featuredListings = await getFeaturedListings(6, {
+    excludeSlugs: ["rage-x-treme-polegate"],
+  })
   const cities = await getDistinctCities()
 
   return (

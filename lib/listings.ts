@@ -5,8 +5,10 @@ function getPrisma() {
   return require("@/lib/prisma").prisma
 }
 
-export async function getFeaturedListings(limit: number = 6): Promise<Listing[]> {
-  // Get all listings
+export async function getFeaturedListings(
+  limit: number = 6,
+  options?: { excludeSlugs?: string[] }
+): Promise<Listing[]> {
   const prisma = getPrisma()
   const allListings = await prisma.listing.findMany({
     orderBy: {
@@ -14,27 +16,24 @@ export async function getFeaturedListings(limit: number = 6): Promise<Listing[]>
     },
   })
 
-  // If we have fewer listings than the limit, return all
-  if (allListings.length <= limit) {
-    return allListings
+  const exclude = new Set(options?.excludeSlugs ?? [])
+  const pool =
+    exclude.size === 0
+      ? allListings
+      : allListings.filter((l: Listing) => !l.slug || !exclude.has(l.slug))
+
+  if (pool.length <= limit) {
+    return pool
   }
 
-  // Calculate daily rotation based on current date
-  // Use days since epoch as a seed that changes daily
   const today = new Date()
   const epoch = new Date(1970, 0, 1)
   const daysSinceEpoch = Math.floor((today.getTime() - epoch.getTime()) / (1000 * 60 * 60 * 24))
-  
-  // Use modulo to get a starting index that rotates daily
-  const startIndex = daysSinceEpoch % allListings.length
-  
-  // Get listings starting from rotated position, wrapping around if needed
-  const rotatedListings = [
-    ...allListings.slice(startIndex),
-    ...allListings.slice(0, startIndex)
-  ]
 
-  // Return the first 'limit' listings
+  const startIndex = daysSinceEpoch % pool.length
+
+  const rotatedListings = [...pool.slice(startIndex), ...pool.slice(0, startIndex)]
+
   return rotatedListings.slice(0, limit)
 }
 
