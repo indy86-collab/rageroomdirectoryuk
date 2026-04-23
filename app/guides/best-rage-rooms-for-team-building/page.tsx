@@ -88,11 +88,12 @@ export default async function BestRageRoomsForTeamBuildingPage() {
             Best Rage Rooms for Team Building & Corporate Events (2025)
           </h1>
 
+          {/* TEMP DEBUG: guaranteed-visible placement — remove after ad debugging */}
+          <AdsenseInContent />
+
           <p className="text-lg text-zinc-300 mb-6">
             Rage rooms are becoming increasingly popular for corporate team building events. They offer a unique, engaging activity that helps teams bond, relieve stress, and improve workplace relationships. Our guide helps you find the best rage rooms for team building, with tips on group sizes, corporate packages, and what to expect.
           </p>
-
-          <AdsenseInContent />
 
           <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-6 mb-8">
             <h2 className="text-2xl font-bold text-white mb-4">

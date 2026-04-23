@@ -29,12 +29,13 @@ export default function HowMuchDoRageRoomsCostUKPage() {
           How Much Do Rage Rooms Cost in the UK? Complete Pricing Guide
         </h1>
 
+        {/* TEMP DEBUG: guaranteed-visible placement — remove after ad debugging */}
+        <AdsenseInContent />
+
         <div className="space-y-6 text-base sm:text-lg text-zinc-300">
           <p className="text-xl text-white font-semibold">
             Rage room prices in the UK vary depending on location, session length, group size, and package inclusions. Here's a comprehensive guide to help you understand rage room costs and find the best value for your budget.
           </p>
-
-          <AdsenseInContent />
 
           <section>
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">

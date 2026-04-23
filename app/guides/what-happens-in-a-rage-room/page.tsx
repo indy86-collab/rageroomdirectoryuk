@@ -29,12 +29,13 @@ export default function WhatHappensInARageRoomPage() {
           What Happens in a Rage Room? Complete First-Time Guide
         </h1>
 
+        {/* TEMP DEBUG: guaranteed-visible placement — remove after ad debugging */}
+        <AdsenseInContent />
+
         <div className="space-y-6 text-base sm:text-lg text-zinc-300">
           <p className="text-xl text-white font-semibold">
             If you're curious about rage rooms but unsure what to expect, this step-by-step guide will walk you through everything that happens during a typical rage room session in the UK, from booking to cleanup.
           </p>
-
-          <AdsenseInContent />
 
           <section>
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">

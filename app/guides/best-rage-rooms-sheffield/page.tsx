@@ -55,9 +55,11 @@ export default async function BestRageRoomsSheffieldPage() {
             Best Rage Rooms in Sheffield
           </h1>
 
+          {/* TEMP DEBUG: guaranteed-visible placement — remove after ad debugging */}
+          <AdsenseInContent />
+
           <div className="text-base sm:text-lg text-zinc-300 mb-8 space-y-4">
             <p>{content?.intro}</p>
-            <AdsenseInContent />
             <p>{content?.sceneDescription}</p>
           </div>
 
