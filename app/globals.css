@@ -7,14 +7,12 @@
     font-family: var(--font-montserrat), sans-serif;
     @apply bg-dark-900 text-white antialiased;
   }
-  
+
   .font-display {
     font-family: var(--font-bebas), sans-serif;
     letter-spacing: 0.02em;
   }
-  
-  /* Smooth scrolling - Removed for better performance on scroll */
-  
+
   /* Selection color */
   ::selection {
     @apply bg-rage-500 text-white;
@@ -22,53 +20,61 @@
 }
 
 @layer components {
-  /* Rage Button - Primary CTA - Optimized for performance */
+  /* Rage Button - Primary CTA */
   .btn-rage {
-    @apply relative bg-rage-600 text-white font-bold px-6 py-3 rounded-lg;
-    @apply hover:bg-rage-500 transition-colors duration-150;
-    @apply border border-rage-700;
+    @apply relative bg-rage-500 text-white font-bold px-6 py-3 rounded-md;
+    @apply hover:bg-rage-600 transition-colors duration-150;
   }
-  
+
   /* Secondary Button */
   .btn-secondary {
     @apply bg-dark-700 border border-zinc-700 text-white font-semibold px-6 py-3 rounded-lg;
     @apply hover:bg-dark-600 hover:border-rage-500/50 transition-all duration-300;
   }
-  
-  /* Card Base - Optimized for performance */
+
+  /* Card Base */
   .card-base {
-    @apply bg-dark-800 border border-zinc-800/80 rounded-xl;
+    @apply bg-[#181818] border border-zinc-800 rounded-lg;
   }
-  
+
   .card-hover {
-    @apply hover:border-rage-500/50 transition-colors duration-150;
+    @apply hover:border-rage-500/60 transition-colors duration-150;
   }
-  
-  /* Glass effect - Simplified: removed backdrop-blur */
+
+  /* Glass effect */
   .glass {
     @apply bg-dark-900/80 border border-white/10;
   }
-  
-  /* Gradient text - Simplified for performance */
+
+  /* Gradient text */
   .text-gradient {
     @apply text-rage-500;
   }
-  
+
+  /* Orange underline used for active nav item */
+  .nav-active-underline {
+    @apply relative;
+  }
+  .nav-active-underline::after {
+    content: '';
+    @apply absolute left-1/2 -translate-x-1/2 -bottom-1 w-7 h-[3px] bg-rage-500 rounded-full;
+  }
+
   /* Impact line decoration */
   .impact-line {
     @apply relative;
   }
-  
+
   .impact-line::after {
     content: '';
     @apply absolute bottom-0 left-0 w-20 h-1 bg-gradient-rage;
   }
-  
+
   /* Shatter decoration - for corners */
   .shatter-corner {
     @apply relative;
   }
-  
+
   .shatter-corner::after {
     content: '';
     @apply absolute bottom-0 right-0 w-0 h-0;
@@ -76,10 +82,19 @@
     @apply border-b-[40px] border-b-rage-600;
     @apply opacity-80;
   }
-  
-  /* Section with texture - Removed noise for performance */
+
+  /* Section with subtle background */
   .section-textured {
-    @apply relative bg-dark-800;
+    @apply relative bg-[#0f0f0f];
+  }
+
+  /* Section heading used above card grids (matches reference image) */
+  .section-title {
+    @apply text-xl sm:text-2xl font-bold text-white uppercase tracking-wide flex items-center gap-3;
+  }
+  .section-title::before {
+    content: '';
+    @apply block w-1 h-6 bg-rage-500 rounded-sm;
   }
 }
 

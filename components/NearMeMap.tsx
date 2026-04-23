@@ -14,22 +14,31 @@ export default function NearMeMap({ listings }: NearMeMapProps) {
   const [sortedListings, setSortedListings] = useState<Listing[]>(listings)
 
   useEffect(() => {
-    // Try to get user's location
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          })
-        },
-        (error) => {
-          setLocationError("Unable to detect your location. Showing all venues.")
-        }
-      )
-    } else {
+    if (!navigator.geolocation) {
       setLocationError("Geolocation is not supported by your browser.")
+      return
     }
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setUserLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        })
+      },
+      (error) => {
+        const map: Record<number, string> = {
+          1: "Location permission denied. Showing all venues.",
+          2: "Location unavailable. Showing all venues.",
+          3: "Location request timed out. Showing all venues.",
+        }
+        setLocationError(map[error.code] ?? "Unable to detect your location. Showing all venues.")
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10_000,
+        maximumAge: 60_000,
+      }
+    )
   }, [])
 
   useEffect(() => {
@@ -70,9 +79,10 @@ export default function NearMeMap({ listings }: NearMeMapProps) {
     return R * c
   }
 
-  // Get map center (user location or UK center)
-  const mapCenter = userLocation || { lat: 54.7024, lng: -3.2766 } // Center of UK
-  const zoom = userLocation ? 6 : 6
+  // When we have the user's location, zoom in to a city-level view;
+  // otherwise show the whole UK centred.
+  const mapCenter = userLocation || { lat: 54.7024, lng: -3.2766 }
+  const zoom = userLocation ? 10 : 6
 
   // Google Maps embed URL (check for API key at runtime)
   // Note: NEXT_PUBLIC_ env vars are available in client components

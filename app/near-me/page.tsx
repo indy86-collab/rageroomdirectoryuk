@@ -22,9 +22,15 @@ export const dynamic = 'force-dynamic'
 
 export default async function NearMePage() {
   // Lazy load to prevent build-time initialization
-  const { getDistinctCities, getFeaturedListings } = await import("@/lib/listings")
+  const { getDistinctCities, getFeaturedListings, getListingsWithLocation } = await import("@/lib/listings")
   const cities = await getDistinctCities()
-  const nearbyListings = await getFeaturedListings(12) // Show 12 nearby listings
+  // Pass EVERY listing with coordinates to the map so the "nearest venue"
+  // search actually considers the whole directory, not just the 12 featured
+  // rotation. Otherwise a user in London can end up with a 66km nearest match
+  // purely because no London venue was in today's featured pool.
+  const allLocatedListings = await getListingsWithLocation()
+  // Keep a smaller curated list for the non-distance grid below.
+  const nearbyListings = await getFeaturedListings(12)
 
   // LocalBusiness schema for near me page
   const localBusinessSchema = {
@@ -87,7 +93,7 @@ export default async function NearMePage() {
             Find Rage Rooms on the Map
           </h2>
           <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4">
-            <NearMeMap listings={nearbyListings} />
+            <NearMeMap listings={allLocatedListings} />
           </div>
         </section>
 

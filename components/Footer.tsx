@@ -1,102 +1,133 @@
 import Link from "next/link"
-import { Zap } from "lucide-react"
+import { Instagram, Facebook, Twitter, Youtube } from "lucide-react"
+import Logo from "./Logo"
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
-  
+
+  const columns: { heading: string; links: { label: string; href: string }[] }[] = [
+    {
+      heading: "Links",
+      links: [
+        { label: "About", href: "/about" },
+        { label: "Terms", href: "/terms" },
+      ],
+    },
+    {
+      heading: "Contact",
+      links: [
+        { label: "Contact", href: "/contact" },
+        { label: "Privacy", href: "/privacy-policy" },
+      ],
+    },
+    {
+      heading: "Careers",
+      links: [
+        { label: "Careers", href: "/list-your-rage-room" },
+        { label: "FAQ", href: "/#faq" },
+      ],
+    },
+  ]
+
   return (
-    <footer className="w-full bg-gradient-to-b from-transparent to-dark-950/50 border-t border-zinc-800/50 mt-20">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-12">
-        {/* Top section with logo and tagline */}
-        <div className="mb-8 text-center">
-          <div className="inline-flex items-center gap-2 mb-3">
-            <Zap className="w-5 h-5 text-rage-500" fill="currentColor" />
-            <span className="text-xl font-bold text-gradient">RageRoom Directory</span>
+    <footer className="w-full bg-[#0a0a0a] border-t border-zinc-800/80 mt-16">
+      <div className="w-full px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10">
+          <div className="lg:col-span-2">
+            <Logo />
+            <p className="mt-4 text-sm text-zinc-400 max-w-sm leading-relaxed">
+              The UK&rsquo;s leading directory for rage rooms and smash experiences. Compare venues, view prices and book with confidence.
+            </p>
           </div>
-          <p className="text-sm text-zinc-400 max-w-md mx-auto">
-            The UK's leading platform for discovering and comparing rage rooms and smash experiences.
-          </p>
-        </div>
 
-        {/* Links grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mb-8">
-          <div>
-            <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-3">Explore</h3>
-            <div className="flex flex-col gap-2">
-              <Link href="/listings" className="text-sm text-zinc-500 hover:text-rage-500 transition-colors">
-                All Listings
-              </Link>
-              <Link href="/near-me" className="text-sm text-zinc-500 hover:text-rage-500 transition-colors">
-                Near Me
-              </Link>
-              <Link href="/guides" className="text-sm text-zinc-500 hover:text-rage-500 transition-colors">
-                Guides
-              </Link>
+          {columns.map((col) => (
+            <div key={col.heading}>
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-white mb-3">
+                {col.heading}
+              </h3>
+              <ul className="space-y-2">
+                {col.links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-zinc-400 hover:text-rage-500 transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-          
+          ))}
+
           <div>
-            <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-3">Company</h3>
-            <div className="flex flex-col gap-2">
-              <Link href="/about" className="text-sm text-zinc-500 hover:text-rage-500 transition-colors">
-                About Us
-              </Link>
-              <Link href="/blog" className="text-sm text-zinc-500 hover:text-rage-500 transition-colors">
-                Blog
-              </Link>
-              <Link href="/contact" className="text-sm text-zinc-500 hover:text-rage-500 transition-colors">
-                Contact
-              </Link>
-              <Link href="/editorial-policy" className="text-sm text-zinc-500 hover:text-rage-500 transition-colors">
-                Editorial Policy
-              </Link>
-            </div>
-          </div>
-          
-          <div>
-            <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-3">Resources</h3>
-            <div className="flex flex-col gap-2">
-              <Link href="/rage-room-prices-uk" className="text-sm text-zinc-500 hover:text-rage-500 transition-colors">
-                Prices
-              </Link>
-              <Link href="/guides" className="text-sm text-zinc-500 hover:text-rage-500 transition-colors">
-                Safety Guide
-              </Link>
-              <Link href="/list-your-rage-room" className="text-sm text-zinc-500 hover:text-rage-500 transition-colors">
-                List Your Venue
-              </Link>
-            </div>
-          </div>
-          
-          <div>
-            <h3 className="text-xs font-bold text-zinc-400 uppercase tracking-wider mb-3">Legal</h3>
-            <div className="flex flex-col gap-2">
-              <Link href="/privacy-policy" className="text-sm text-zinc-500 hover:text-rage-500 transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className="text-sm text-zinc-500 hover:text-rage-500 transition-colors">
-                Terms
-              </Link>
-              <Link href="/disclaimer" className="text-sm text-zinc-500 hover:text-rage-500 transition-colors">
-                Disclaimer
-              </Link>
+            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-white mb-3">
+              Social
+            </h3>
+            <div className="flex items-center gap-3">
+              <a
+                href="https://instagram.com/rageroomdirectory"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="w-9 h-9 inline-flex items-center justify-center rounded-md border border-zinc-800 text-zinc-400 hover:text-white hover:border-rage-500/70 hover:bg-rage-500/10 transition-colors"
+              >
+                <Instagram className="w-4 h-4" />
+              </a>
+              <a
+                href="https://facebook.com/rageroomdirectory"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="w-9 h-9 inline-flex items-center justify-center rounded-md border border-zinc-800 text-zinc-400 hover:text-white hover:border-rage-500/70 hover:bg-rage-500/10 transition-colors"
+              >
+                <Facebook className="w-4 h-4" />
+              </a>
+              <a
+                href="https://twitter.com/rageroomdirectory"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter / X"
+                className="w-9 h-9 inline-flex items-center justify-center rounded-md border border-zinc-800 text-zinc-400 hover:text-white hover:border-rage-500/70 hover:bg-rage-500/10 transition-colors"
+              >
+                <Twitter className="w-4 h-4" />
+              </a>
+              <a
+                href="https://youtube.com/@rageroomdirectory"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+                className="w-9 h-9 inline-flex items-center justify-center rounded-md border border-zinc-800 text-zinc-400 hover:text-white hover:border-rage-500/70 hover:bg-rage-500/10 transition-colors"
+              >
+                <Youtube className="w-4 h-4" />
+              </a>
             </div>
           </div>
         </div>
 
-        {/* Bottom section */}
-        <div className="pt-8 border-t border-zinc-800/50 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-zinc-500 text-center sm:text-left">
+        <div className="mt-10 pt-6 border-t border-zinc-800/70 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-xs text-zinc-500">
             © {currentYear} RageRoom Directory. All rights reserved.
           </p>
-          <div className="flex items-center gap-2 text-sm">
-            <span className="text-zinc-600">Smash responsibly,</span>
-            <span className="text-rage-500 font-semibold">rage safely!</span>
-            <span className="text-rage-500">🔨</span>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-zinc-500">
+            <Link href="/privacy-policy" className="hover:text-rage-500 transition-colors">
+              Privacy
+            </Link>
+            <span className="text-zinc-700">·</span>
+            <Link href="/terms" className="hover:text-rage-500 transition-colors">
+              Terms
+            </Link>
+            <span className="text-zinc-700">·</span>
+            <Link href="/disclaimer" className="hover:text-rage-500 transition-colors">
+              Disclaimer
+            </Link>
+            <span className="text-zinc-700">·</span>
+            <Link href="/editorial-policy" className="hover:text-rage-500 transition-colors">
+              Editorial
+            </Link>
           </div>
         </div>
       </div>
     </footer>
   )
 }
-

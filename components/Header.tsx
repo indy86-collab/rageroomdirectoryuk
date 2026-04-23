@@ -1,67 +1,101 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Search } from "lucide-react"
 import Logo from "./Logo"
 
 const navItems = [
   { label: "Home", href: "/" },
-  { label: "Prices", href: "/rage-room-prices-uk" },
-  { label: "Cities", href: "/listings" },
-  { label: "All Listings", href: "/listings" },
-  { label: "Blog", href: "/blog" },
-  { label: "About", href: "/about" },
+  { label: "Find Near Me", href: "/near-me" },
+  { label: "Directories", href: "/listings" },
+  { label: "City Guides", href: "/guides" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "List Your Venue", href: "/list-your-rage-room" },
 ]
 
 export default function Header() {
   const pathname = usePathname()
+  const router = useRouter()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [headerQuery, setHeaderQuery] = useState("")
+
+  const handleHeaderSearch = (e: React.FormEvent) => {
+    e.preventDefault()
+    const q = headerQuery.trim()
+    router.push(q ? `/search?query=${encodeURIComponent(q)}` : "/search")
+  }
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/"
+    if (href.startsWith("/#")) return false
+    return pathname === href || pathname.startsWith(`${href}/`)
+  }
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-dark-900/95 border-b border-zinc-800/50 shadow-lg">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-20">
-          {/* Brand */}
+    <header className="sticky top-0 z-50 w-full bg-dark-900/95 border-b border-zinc-800/70">
+      <div className="w-full px-3 sm:px-5 lg:px-6">
+        <div className="flex items-center justify-between gap-4 h-16 lg:h-20">
           <div className="flex-shrink-0">
             <Logo />
           </div>
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
             {navItems.map((item) => {
-              const isActive = pathname === item.href
+              const active = isActive(item.href)
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="group relative px-4 py-2 transition-colors duration-200"
+                  className={`relative px-2.5 xl:px-3 py-2 text-[11px] xl:text-xs font-semibold uppercase tracking-[0.14em] transition-colors ${
+                    active
+                      ? "text-white nav-active-underline"
+                      : "text-zinc-300 hover:text-white"
+                  }`}
                 >
-                  <span
-                    className={`text-sm font-semibold transition-colors relative z-10 ${
-                      isActive
-                        ? "text-rage-500"
-                        : "text-zinc-300 group-hover:text-white"
-                    }`}
-                  >
-                    {item.label}
-                  </span>
-                  {/* Active indicator - Simplified for performance */}
-                  {isActive && (
-                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-1 bg-rage-500 rounded-full"></div>
-                  )}
-                  {/* Hover background */}
-                  <div className="absolute inset-0 bg-rage-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  {item.label}
                 </Link>
               )
             })}
           </nav>
 
-          {/* Mobile Menu Button */}
+          <div className="hidden md:flex items-center gap-3">
+            <form
+              onSubmit={handleHeaderSearch}
+              className="flex items-center bg-dark-800 border border-zinc-800 rounded-md overflow-hidden h-10 w-[220px] lg:w-[260px] xl:w-[300px] focus-within:border-rage-500/60 transition-colors"
+            >
+              <label htmlFor="header-search" className="sr-only">
+                Find a Rage Room near you
+              </label>
+              <input
+                id="header-search"
+                type="text"
+                value={headerQuery}
+                onChange={(e) => setHeaderQuery(e.target.value)}
+                placeholder="Find a Rage Room near you..."
+                className="flex-1 min-w-0 bg-transparent px-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none"
+              />
+              <button
+                type="button"
+                aria-label="Use my location"
+                onClick={() => router.push("/near-me")}
+                className="px-2 text-zinc-400 hover:text-rage-400 transition-colors"
+              >
+                <Search className="w-4 h-4" />
+              </button>
+              <button
+                type="submit"
+                className="h-full px-3 lg:px-4 bg-rage-500 hover:bg-rage-600 text-white text-xs font-bold uppercase tracking-wider transition-colors"
+              >
+                Search
+              </button>
+            </form>
+          </div>
+
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2.5 text-zinc-300 hover:text-white hover:bg-rage-500/10 rounded-lg transition-all"
+            className="lg:hidden p-2 text-zinc-300 hover:text-white hover:bg-rage-500/10 rounded-md transition-all"
             aria-label="Toggle menu"
             aria-expanded={mobileMenuOpen}
           >
@@ -73,35 +107,52 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <nav className="md:hidden border-t border-zinc-800/50 py-4 animate-in slide-in-from-top duration-200">
-            <div className="flex flex-col space-y-1">
+          <div className="lg:hidden border-t border-zinc-800/70 py-4 space-y-4">
+            <form
+              onSubmit={(e) => {
+                handleHeaderSearch(e)
+                setMobileMenuOpen(false)
+              }}
+              className="flex items-center bg-dark-800 border border-zinc-800 rounded-md overflow-hidden h-11"
+            >
+              <input
+                type="text"
+                value={headerQuery}
+                onChange={(e) => setHeaderQuery(e.target.value)}
+                placeholder="Find a Rage Room near you..."
+                className="flex-1 min-w-0 bg-transparent px-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none"
+              />
+              <button
+                type="submit"
+                className="h-full px-4 bg-rage-500 hover:bg-rage-600 text-white text-xs font-bold uppercase tracking-wider"
+              >
+                Search
+              </button>
+            </form>
+
+            <nav className="flex flex-col space-y-1">
               {navItems.map((item) => {
-                const isActive = pathname === item.href
+                const active = isActive(item.href)
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`relative px-4 py-3.5 rounded-lg text-base font-semibold transition-colors duration-200 ${
-                      isActive
-                        ? "bg-rage-600 text-white"
+                    className={`px-3 py-3 rounded-md text-sm font-semibold uppercase tracking-[0.12em] transition-colors ${
+                      active
+                        ? "bg-rage-500 text-white"
                         : "text-zinc-300 hover:bg-dark-800 hover:text-white"
                     }`}
                   >
                     {item.label}
-                    {isActive && (
-                      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-white rounded-r-full"></div>
-                    )}
                   </Link>
                 )
               })}
-            </div>
-          </nav>
+            </nav>
+          </div>
         )}
       </div>
     </header>
   )
 }
-

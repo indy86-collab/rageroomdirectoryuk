@@ -145,14 +145,13 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <Providers>
-          <div className="relative w-full max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-6">
-            <div className="bg-dark-900 border-x border-zinc-800/50">
-              <Header />
-              <main className="min-h-screen">
-                {children}
-              </main>
-              <Footer />
-            </div>
+          {/* Full-width site shell: no max-width rails, matches reference edge-to-edge look. */}
+          <div className="relative w-full bg-dark-900">
+            <Header />
+            <main className="min-h-screen">
+              {children}
+            </main>
+            <Footer />
           </div>
         </Providers>
         <Analytics />

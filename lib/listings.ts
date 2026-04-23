@@ -203,6 +203,34 @@ export async function getListingsByCity(city: string): Promise<Listing[]> {
   })
 }
 
+/**
+ * Returns every listing that has a non-null `location` (lat/lng).
+ * Used by the near-me / distance-sort UI so the "nearest" search runs
+ * across the whole directory, not just today's featured rotation.
+ */
+export async function getListingsWithLocation(): Promise<Listing[]> {
+  const prisma = getPrisma()
+  const listings = await prisma.listing.findMany({
+    where: {
+      location: { not: null as unknown as undefined },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  })
+  // Extra safety: drop rows where the JSON blob doesn't actually have lat/lng numbers.
+  return (listings as Listing[]).filter((l) => {
+    const loc = l.location as { lat?: unknown; lng?: unknown } | null
+    return (
+      loc != null &&
+      typeof loc.lat === "number" &&
+      typeof loc.lng === "number" &&
+      Number.isFinite(loc.lat) &&
+      Number.isFinite(loc.lng)
+    )
+  })
+}
+
 export async function getDistinctCities(): Promise<string[]> {
   const prisma = getPrisma()
   const listings = await prisma.listing.findMany({

@@ -4,9 +4,10 @@ import Hero from "@/components/Hero"
 import FeaturedRooms from "@/components/FeaturedRooms"
 import FAQ from "@/components/FAQ"
 import { globalFAQs } from "@/lib/faqs"
+import Image from "next/image"
 import Link from "next/link"
+import { ArrowRight, MapPin, Ticket, HardHat, Hammer, Heart, ShieldCheck, Users, Sparkles, Star } from "lucide-react"
 
-// Mark homepage as dynamic since it queries the database
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
@@ -33,380 +34,354 @@ export const metadata: Metadata = {
   },
 }
 
+// Featured cities render as photo tiles (see section below). `image` points to
+// assets in /public/images/cities; gradients are kept only as a fallback.
+const featuredCities: {
+  city: string
+  href: string
+  guide: string
+  image: string
+  gradient: string
+}[] = [
+  {
+    city: "London",
+    href: "/city/london",
+    guide: "/guides/best-rage-rooms-london",
+    image: "/images/cities/london.jpg",
+    gradient: "from-[#1e293b] via-[#0f172a] to-[#020617]",
+  },
+  {
+    city: "Birmingham",
+    href: "/city/birmingham",
+    guide: "/guides/best-rage-rooms-birmingham",
+    image: "/images/cities/birmingham.jpg",
+    gradient: "from-[#3b0764] via-[#1e1b4b] to-[#0b0a1e]",
+  },
+  {
+    city: "Manchester",
+    href: "/city/manchester",
+    guide: "/guides/best-rage-rooms-manchester",
+    image: "/images/cities/manchester.jpg",
+    gradient: "from-[#7f1d1d] via-[#450a0a] to-[#0f0606]",
+  },
+  {
+    city: "Bristol",
+    href: "/city/bristol",
+    guide: "/guides/best-rage-rooms-bristol",
+    image: "/images/cities/bristol.jpg",
+    gradient: "from-[#064e3b] via-[#022c22] to-[#010c08]",
+  },
+]
+
+const otherCities: { city: string; href: string; guide: string; gradient: string }[] = [
+  {
+    city: "Newcastle",
+    href: "/city/newcastle",
+    guide: "/guides/best-rage-rooms-newcastle",
+    gradient: "from-[#1e3a8a] via-[#0c1a3a] to-[#020617]",
+  },
+  {
+    city: "Leeds",
+    href: "/city/leeds",
+    guide: "/guides/best-rage-rooms-leeds",
+    gradient: "from-[#4c1d95] via-[#1e1b4b] to-[#0a081d]",
+  },
+  {
+    city: "Liverpool",
+    href: "/city/liverpool",
+    guide: "/guides/best-rage-rooms-liverpool",
+    gradient: "from-[#831843] via-[#3b0a25] to-[#10040a]",
+  },
+  {
+    city: "Sheffield",
+    href: "/city/sheffield",
+    guide: "/guides/best-rage-rooms-sheffield",
+    gradient: "from-[#78350f] via-[#3b1a05] to-[#10080a]",
+  },
+  {
+    city: "Nottingham",
+    href: "/city/nottingham",
+    guide: "/guides/best-rage-rooms-nottingham",
+    gradient: "from-[#115e59] via-[#053433] to-[#031010]",
+  },
+]
+
 export default async function Home() {
-  // Lazy load to prevent build-time initialization
-  const { getFeaturedListings, getDistinctCities } = await import("@/lib/listings")
-  const featuredListings = await getFeaturedListings(6, {
+  const { getFeaturedListings, getListingsByCity } = await import("@/lib/listings")
+  const featuredListings = await getFeaturedListings(8, {
     excludeSlugs: ["rage-x-treme-polegate"],
   })
-  const cities = await getDistinctCities()
+
+  const cityCounts = await Promise.all(
+    featuredCities.map(async (c) => {
+      const list = await getListingsByCity(c.city)
+      return { ...c, count: list.length }
+    })
+  )
 
   return (
     <>
-      {/* Hero Section */}
-      <Hero />
+      <Hero featuredListings={featuredListings} />
 
-      {/* SEO Intro Paragraph - Enhanced */}
-      <section className="w-full py-8 sm:py-12">
-        <div className="max-w-6xl mx-auto px-4">
+      <section aria-labelledby="explore-cities-heading" className="w-full pt-4 sm:pt-6 pb-10 sm:pb-14">
+        <div className="w-full px-3 sm:px-5 lg:px-6">
+          <h2 id="explore-cities-heading" className="section-title mb-5 sm:mb-6">
+            Explore UK Rage Rooms
+          </h2>
+
+          {/* City tiles: real skyline photos + dark gradient for legibility (matches reference). */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+            {cityCounts.map((c) => (
+              <Link
+                key={c.city}
+                href={c.href}
+                className="group relative overflow-hidden rounded-lg border border-zinc-800 h-32 sm:h-40 lg:h-44 flex items-end bg-dark-900"
+              >
+                <Image
+                  src={c.image}
+                  alt={`Rage rooms in ${c.city} — city skyline`}
+                  fill
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+                />
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/10"
+                />
+                <div className="relative p-3 sm:p-4 w-full">
+                  <div className="text-white font-extrabold uppercase tracking-wide text-base sm:text-lg leading-tight group-hover:text-rage-400 transition-colors">
+                    {c.city}
+                  </div>
+                  <div className="text-[11px] sm:text-xs text-zinc-200/90 font-medium">
+                    {c.count} {c.count === 1 ? "Room" : "Rooms"}
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-4 flex flex-wrap gap-2">
+            {otherCities.map((c) => (
+              <Link
+                key={c.city}
+                href={c.href}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-dark-800 border border-zinc-800 text-xs font-semibold text-zinc-200 hover:border-rage-500/60 hover:text-white transition-colors"
+              >
+                <MapPin className="w-3 h-3 text-rage-500" />
+                {c.city}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="featured-verified-heading" className="w-full py-10 sm:py-14 section-textured">
+        <div className="w-full px-3 sm:px-5 lg:px-6">
+          <div className="flex items-end justify-between mb-5 sm:mb-6 flex-wrap gap-3">
+            <h2 id="featured-verified-heading" className="section-title">
+              Featured &amp; Verified Rage Rooms
+            </h2>
+            <Link
+              href="/listings"
+              className="inline-flex items-center gap-1 text-xs sm:text-sm font-semibold uppercase tracking-widest text-rage-500 hover:text-rage-400 transition-colors"
+            >
+              Browse all
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          <FeaturedRooms listings={featuredListings} />
+        </div>
+      </section>
+
+      <section aria-label="List your rage room" className="w-full py-8 sm:py-10">
+        <div className="w-full px-3 sm:px-5 lg:px-6">
+          <div className="rounded-xl bg-[#141414] border border-zinc-800 p-5 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <h2 className="text-lg sm:text-xl font-bold text-white uppercase tracking-wide">
+                Own a Rage Room?{" "}
+                <span className="text-rage-500">List Your Venue Here!</span>
+              </h2>
+              <p className="text-sm text-zinc-400 mt-1">
+                Reach customers looking to book their next smash session across the UK.
+              </p>
+            </div>
+            <Link
+              href="/list-your-rage-room"
+              className="btn-rage inline-flex items-center gap-2 text-sm uppercase tracking-wider whitespace-nowrap"
+            >
+              List Your Venue
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full py-10 sm:py-14">
+        <div className="w-full px-3 sm:px-5 lg:px-6">
           <div className="card-base p-6 sm:p-8 space-y-4 sm:space-y-5">
+            <h2 className="section-title">What Is Destruction Therapy?</h2>
             <p className="text-base sm:text-lg text-zinc-300 leading-relaxed">
               <span className="text-rage-400 font-semibold">Rage rooms</span> (also called <span className="text-rage-400 font-semibold">smash rooms</span> or <span className="text-rage-400 font-semibold">anger rooms</span>) are safe, controlled environments where you can release stress and tension by breaking items like plates, electronics, and glass bottles. These unique experiences have become increasingly popular across the UK as an alternative form of stress relief and entertainment.
             </p>
             <p className="text-base sm:text-lg text-zinc-300 leading-relaxed">
-              <strong className="text-white">RageRoom Directory</strong> is the UK's comprehensive guide to finding and comparing rage room experiences. Our purpose is to help you discover the best smash rooms in your area, <Link href="/rage-room-prices-uk" className="text-rage-400 hover:text-rage-300 underline underline-offset-2 font-medium transition-colors">compare prices and packages</Link>, and make informed decisions about where to <Link href="/listings" className="text-rage-400 hover:text-rage-300 underline underline-offset-2 font-medium transition-colors">book a rage room in the UK</Link>. We cover major cities including <Link href="/city/birmingham" className="text-rage-400 hover:text-rage-300 underline underline-offset-2 font-medium transition-colors">Birmingham</Link>, <Link href="/city/london" className="text-rage-400 hover:text-rage-300 underline underline-offset-2 font-medium transition-colors">London</Link>, <Link href="/city/manchester" className="text-rage-400 hover:text-rage-300 underline underline-offset-2 font-medium transition-colors">Manchester</Link>, and many more locations across the country.
+              <strong className="text-white">RageRoom Directory</strong> is the UK&rsquo;s comprehensive guide to finding and comparing rage room experiences. Our purpose is to help you discover the best smash rooms in your area, <Link href="/rage-room-prices-uk" className="text-rage-400 hover:text-rage-300 underline underline-offset-2 font-medium transition-colors">compare prices and packages</Link>, and make informed decisions about where to <Link href="/listings" className="text-rage-400 hover:text-rage-300 underline underline-offset-2 font-medium transition-colors">book a rage room in the UK</Link>. We cover major cities including <Link href="/city/birmingham" className="text-rage-400 hover:text-rage-300 underline underline-offset-2 font-medium transition-colors">Birmingham</Link>, <Link href="/city/london" className="text-rage-400 hover:text-rage-300 underline underline-offset-2 font-medium transition-colors">London</Link>, <Link href="/city/manchester" className="text-rage-400 hover:text-rage-300 underline underline-offset-2 font-medium transition-colors">Manchester</Link>, and many more locations across the country.
             </p>
             <p className="text-base sm:text-lg text-zinc-300 leading-relaxed">
-              Whether you're looking for a fun date night activity, corporate team building event, or simply need to let off steam, you can <Link href="/listings" className="text-rage-400 hover:text-rage-300 underline underline-offset-2 font-medium transition-colors">browse all rage rooms</Link> in our directory to view prices, packages, opening hours, and book your next stress-relief session. Each listing includes detailed information about what to expect, safety requirements, and nearby alternatives.
+              Whether you&rsquo;re looking for a fun date night activity, corporate team building event, or simply need to let off steam, you can <Link href="/listings" className="text-rage-400 hover:text-rage-300 underline underline-offset-2 font-medium transition-colors">browse all rage rooms</Link> in our directory to view prices, packages, opening hours, and book your next stress-relief session. Each listing includes detailed information about what to expect, safety requirements, and nearby alternatives.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Top Rated Rage Rooms */}
-      <section aria-labelledby="top-rated-heading" className="w-full py-12 sm:py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-10 sm:mb-12">
-            <h2 id="top-rated-heading" className="text-3xl sm:text-4xl font-display font-bold text-white mb-3 uppercase impact-line">
-              <span className="text-gradient">Featured</span> Rage Rooms
-            </h2>
-            <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
-              Explore rage rooms and smash rooms from across the UK
-            </p>
-          </div>
-          
-          <FeaturedRooms listings={featuredListings} />
-          
-          <div className="mt-10 sm:mt-12 text-center">
-            <Link
-              href="/listings"
-              className="btn-rage inline-flex items-center gap-2 text-lg"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-              </svg>
-              Browse All Rage Rooms
-            </Link>
-          </div>
-        </div>
-      </section>
+      <section aria-labelledby="how-it-works-heading" className="w-full section-textured py-10 sm:py-14">
+        <div className="w-full px-3 sm:px-5 lg:px-6">
+          <h2 id="how-it-works-heading" className="section-title mb-6 sm:mb-8">
+            How It Works
+          </h2>
 
-      {/* Top Cities for Rage Rooms in the UK */}
-      <section aria-labelledby="top-cities-heading" className="section-textured py-12 sm:py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-10 sm:mb-12">
-            <h2 id="top-cities-heading" className="text-3xl sm:text-4xl font-display font-bold text-white mb-3 uppercase">
-              Rage Rooms By <span className="text-gradient">City</span>
-            </h2>
-            <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
-              Discover rage rooms in the UK's most popular cities. Each offers unique venues with different packages and experiences.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
             {[
-              { city: "London", href: "/city/london", guide: "/guides/best-rage-rooms-london" },
-              { city: "Birmingham", href: "/city/birmingham", guide: "/guides/best-rage-rooms-birmingham" },
-              { city: "Manchester", href: "/city/manchester", guide: "/guides/best-rage-rooms-manchester" },
-              { city: "Bristol", href: "/city/bristol", guide: "/guides/best-rage-rooms-bristol" },
-              { city: "Newcastle", href: "/city/newcastle", guide: "/guides/best-rage-rooms-newcastle" },
-              { city: "Leeds", href: "/city/leeds", guide: "/guides/best-rage-rooms-leeds" },
-              { city: "Liverpool", href: "/city/liverpool", guide: "/guides/best-rage-rooms-liverpool" },
-              { city: "Sheffield", href: "/city/sheffield", guide: "/guides/best-rage-rooms-sheffield" },
-              { city: "Nottingham", href: "/city/nottingham", guide: "/guides/best-rage-rooms-nottingham" },
-            ].map(({ city, href, guide }) => (
-              <div key={city} className="flex flex-col gap-2">
-                <Link
-                  href={href}
-                  className="group card-base card-hover text-center p-4 relative overflow-hidden"
-                >
-                  <span className="text-white font-semibold text-sm sm:text-base group-hover:text-rage-400 transition-colors duration-150">
-                    {city}
-                  </span>
-                </Link>
-                <Link
-                  href={guide}
-                  className="text-xs text-rage-400 hover:text-rage-300 text-center font-medium transition-colors"
-                >
-                  Best in {city} →
-                </Link>
+              { icon: Ticket, title: "Book Your Session", copy: "Browse venues, compare packages and reserve your slot online." },
+              { icon: HardHat, title: "Gear Up", copy: "Arrive, get a safety briefing and kit up in full protective gear." },
+              { icon: Hammer, title: "Smash It", copy: "Unleash your rage on bottles, electronics and more in a safe room." },
+            ].map(({ icon: Icon, title, copy }, i) => (
+              <div key={title} className="card-base p-6 flex items-start gap-4">
+                <div className="flex-shrink-0 w-11 h-11 rounded-md bg-rage-500/15 border border-rage-500/40 flex items-center justify-center">
+                  <Icon className="w-5 h-5 text-rage-500" />
+                </div>
+                <div>
+                  <div className="text-[11px] font-bold uppercase tracking-widest text-rage-500 mb-1">
+                    Step {i + 1}
+                  </div>
+                  <h3 className="text-base font-bold text-white uppercase tracking-wide">
+                    {title}
+                  </h3>
+                  <p className="text-sm text-zinc-400 mt-1">{copy}</p>
+                </div>
               </div>
             ))}
           </div>
-          
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-            <Link
-              href="/near-me"
-              className="inline-flex items-center gap-2 text-rage-400 hover:text-rage-300 font-semibold transition-colors"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              Find rage rooms near me
-            </Link>
-            <span className="text-zinc-700">|</span>
-            <Link
-              href="/rage-room-prices-uk"
-              className="inline-flex items-center gap-2 text-rage-400 hover:text-rage-300 font-semibold transition-colors"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              Compare prices
-            </Link>
-          </div>
         </div>
       </section>
 
-      {/* Best Rage Rooms for Couples */}
-      <section aria-labelledby="couples-heading" className="w-full py-12 sm:py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-10 sm:mb-12">
-            <h2 id="couples-heading" className="text-3xl sm:text-4xl font-display font-bold text-white mb-3 uppercase">
-              Perfect For <span className="text-gradient">Couples</span>
-            </h2>
-            <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
-              Looking for a unique date night? Rage rooms offer an exciting, stress-relieving experience that's perfect for breaking the routine.
-            </p>
-          </div>
-          
-          <div className="card-base p-6 sm:p-8 mb-8">
-            <h3 className="text-xl sm:text-2xl font-bold text-white mb-6 flex items-center gap-3">
-              <svg className="w-7 h-7 text-rage-500" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
-              </svg>
-              Why Rage Rooms Make Great Date Nights
-            </h3>
-            <div className="grid sm:grid-cols-2 gap-4 mb-6">
+      <section aria-labelledby="couples-heading" className="w-full py-10 sm:py-14">
+        <div className="w-full px-3 sm:px-5 lg:px-6">
+          <h2 id="couples-heading" className="section-title mb-5 sm:mb-6">
+            Perfect For Couples
+          </h2>
+
+          <div className="card-base p-5 sm:p-7">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-10 h-10 rounded-md bg-rage-500/15 border border-rage-500/40 flex items-center justify-center">
+                <Heart className="w-5 h-5 text-rage-500" />
+              </div>
+              <h3 className="text-lg font-bold text-white">
+                Why Rage Rooms Make Great Date Nights
+              </h3>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-3 mb-5">
               {[
-                { icon: "✨", text: "Unique experience that stands out from typical dates" },
-                { icon: "🤝", text: "Shared bonding activity that creates lasting memories" },
-                { icon: "💆", text: "Stress relief together - release tension as a couple" },
-                { icon: "😄", text: "Fun and laughter guaranteed" },
-                { icon: "🎉", text: "Perfect for anniversaries, birthdays, or just because" },
-              ].map((item, i) => (
-                <div key={i} className="flex items-start gap-3 p-3 bg-dark-800/50 rounded-lg border border-zinc-800/50">
-                  <span className="text-2xl flex-shrink-0">{item.icon}</span>
-                  <span className="text-zinc-300">{item.text}</span>
+                "Unique experience that stands out from typical dates",
+                "Shared bonding activity that creates lasting memories",
+                "Stress relief together - release tension as a couple",
+                "Fun and laughter guaranteed",
+                "Perfect for anniversaries, birthdays, or just because",
+              ].map((text) => (
+                <div key={text} className="flex items-start gap-2.5 p-3 bg-dark-800/60 rounded-md border border-zinc-800">
+                  <Sparkles className="w-4 h-4 text-rage-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-sm text-zinc-300">{text}</span>
                 </div>
               ))}
             </div>
             <Link
               href="/guides/best-rage-rooms-for-couples"
-              className="btn-rage inline-flex items-center gap-2"
+              className="btn-rage inline-flex items-center gap-2 text-sm uppercase tracking-wider"
             >
-              Read Complete Couples Guide
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+              Read Couples Guide
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Best Rage Rooms for Stress Relief */}
-      <section aria-labelledby="stress-relief-heading" className="section-textured py-12 sm:py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="text-center mb-10 sm:mb-12">
-            <h2 id="stress-relief-heading" className="text-3xl sm:text-4xl font-display font-bold text-white mb-3 uppercase">
-              Ultimate <span className="text-gradient">Stress Relief</span>
-            </h2>
-            <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
-              Rage rooms provide an effective, immediate way to release stress and tension through controlled destruction.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-            <div className="card-base p-6 sm:p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-rage-500/20 rounded-lg border border-rage-500/30">
-                  <svg className="w-6 h-6 text-rage-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
+      <section aria-labelledby="stress-relief-heading" className="w-full section-textured py-10 sm:py-14">
+        <div className="w-full px-3 sm:px-5 lg:px-6">
+          <h2 id="stress-relief-heading" className="section-title mb-5 sm:mb-6">
+            Ultimate Stress Relief
+          </h2>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 mb-6">
+            <div className="card-base p-5 sm:p-7">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-md bg-rage-500/15 border border-rage-500/40 flex items-center justify-center">
+                  <ShieldCheck className="w-5 h-5 text-rage-500" />
                 </div>
-                <h3 className="text-xl font-bold text-white">Benefits of Rage Rooms</h3>
+                <h3 className="text-base sm:text-lg font-bold text-white">Benefits of Rage Rooms</h3>
               </div>
-              <ul className="space-y-3 text-zinc-300">
+              <ul className="space-y-2 text-sm text-zinc-300">
                 {[
                   "Immediate physical release of tension",
                   "Endorphin boost from physical activity",
                   "Safe outlet for frustration and anger",
                   "No judgment - break things without consequences",
-                  "Controlled environment with professional supervision"
-                ].map((benefit, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <svg className="w-5 h-5 text-rage-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span>{benefit}</span>
+                  "Controlled environment with professional supervision",
+                ].map((b) => (
+                  <li key={b} className="flex items-start gap-2">
+                    <Star className="w-4 h-4 text-rage-500 flex-shrink-0 mt-0.5" />
+                    <span>{b}</span>
                   </li>
                 ))}
               </ul>
             </div>
-            
-            <div className="card-base p-6 sm:p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-rage-500/20 rounded-lg border border-rage-500/30">
-                  <svg className="w-6 h-6 text-rage-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
+
+            <div className="card-base p-5 sm:p-7">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-md bg-rage-500/15 border border-rage-500/40 flex items-center justify-center">
+                  <Users className="w-5 h-5 text-rage-500" />
                 </div>
-                <h3 className="text-xl font-bold text-white">Who Benefits Most?</h3>
+                <h3 className="text-base sm:text-lg font-bold text-white">Who Benefits Most?</h3>
               </div>
-              <ul className="space-y-3 text-zinc-300">
+              <ul className="space-y-2 text-sm text-zinc-300">
                 {[
                   "People with high-stress jobs",
                   "Anyone dealing with daily pressures",
                   "Those who need physical stress release",
                   "People looking for alternative therapy",
-                  "Anyone needing to let off steam safely"
-                ].map((person, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <svg className="w-5 h-5 text-rage-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span>{person}</span>
+                  "Anyone needing to let off steam safely",
+                ].map((p) => (
+                  <li key={p} className="flex items-start gap-2">
+                    <Star className="w-4 h-4 text-rage-500 flex-shrink-0 mt-0.5" />
+                    <span>{p}</span>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
-          
-          <div className="text-center">
-            <Link
-              href="/listings"
-              className="btn-rage inline-flex items-center gap-2 text-lg"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-              </svg>
-              Find Stress Relief Near You
-            </Link>
-          </div>
+
+          <Link
+            href="/listings"
+            className="btn-rage inline-flex items-center gap-2 text-sm uppercase tracking-wider"
+          >
+            Find Stress Relief Near You
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </section>
 
-      {/* How it Works */}
-      <section aria-labelledby="how-it-works-heading" className="w-full bg-transparent py-10">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <h2 id="how-it-works-heading" className="text-white text-xl font-semibold tracking-wide mb-10">
-            HOW IT WORKS
-          </h2>
-
-          {/* 3-Step Icon Row */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
-            {/* Book Your Session - Ticket/Booking Icon */}
-            <div className="flex flex-col items-center">
-              <svg
-                className="w-14 h-14 text-orange-500"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"
-                />
-              </svg>
-              <p className="mt-4 text-white font-medium text-sm tracking-wide uppercase">
-                1. Book Your Session
-              </p>
-            </div>
-
-            {/* Gear Up - Helmet Icon */}
-            <div className="flex flex-col items-center">
-              <svg
-                className="w-14 h-14 text-orange-500"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                strokeWidth={2.5}
-              >
-                {/* Helmet dome */}
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 3C8 3 5 6 5 10v2c0 2 1 4 3 5v2h8v-2c2-1 3-3 3-5v-2c0-4-3-7-7-7z"
-                />
-                {/* Helmet visor */}
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M8 12h8"
-                />
-                {/* Face shield area */}
-                <ellipse cx="12" cy="11" rx="4" ry="3" opacity="0.3" />
-              </svg>
-              <p className="mt-4 text-white font-medium text-sm tracking-wide uppercase">
-                2. Gear Up
-              </p>
-            </div>
-
-            {/* Smash It - Small Hammer Icon */}
-            <div className="flex flex-col items-center">
-              <svg
-                className="w-14 h-14 text-orange-500"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                {/* Hammer head */}
-                <rect x="9" y="7" width="8" height="6" rx="1" />
-                {/* Hammer handle */}
-                <rect x="15" y="11" width="2" height="7" rx="1" />
-                {/* Impact lines */}
-                <path
-                  d="M7 9 L10 6 M7 11 L10 14"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  opacity="0.6"
-                />
-              </svg>
-              <p className="mt-4 text-white font-medium text-sm tracking-wide uppercase">
-                3. Smash It
-              </p>
-            </div>
-          </div>
-
-          {/* City Buttons */}
-          {cities.length > 0 && (
-            <section aria-labelledby="cities-heading" className="mt-12">
-              <h2 id="cities-heading" className="text-white text-xl font-semibold tracking-wide mb-6">
-                Browse Rage Rooms by City
-              </h2>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 justify-center">
-                {cities.map((city) => (
-                  <Link
-                    key={city}
-                    href={`/city/${cityToSlug(city)}`}
-                    title={`View rage rooms in ${city}`}
-                    className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2.5 sm:py-2 px-3 sm:px-4 rounded-md transition-colors text-center text-sm sm:text-base min-h-[44px] flex items-center justify-center"
-                  >
-                    {city}
-                  </Link>
-                ))}
-              </div>
-            </section>
-          )}
-        </div>
-      </section>
-
-      {/* How Rage Rooms Work (FAQ) */}
-      <section aria-labelledby="how-rage-rooms-work-heading" className="w-full bg-transparent py-10">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 id="how-rage-rooms-work-heading" className="text-2xl font-bold text-white mb-6">
+      <section id="faq" aria-labelledby="how-rage-rooms-work-heading" className="w-full py-10 sm:py-14">
+        <div className="w-full px-3 sm:px-5 lg:px-6">
+          <h2 id="how-rage-rooms-work-heading" className="section-title mb-5 sm:mb-6">
             How Rage Rooms Work
           </h2>
           <p className="text-zinc-300 mb-6">
-            New to rage rooms? Here's everything you need to know about how they work, what to expect, and how to get the most out of your experience.
+            New to rage rooms? Here&rsquo;s everything you need to know about how they work, what to expect, and how to get the most out of your experience.
           </p>
-          <FAQ items={globalFAQs} title="Frequently Asked Questions About Rage Rooms" />
+          <div className="card-base p-5 sm:p-7">
+            <FAQ items={globalFAQs} title="Frequently Asked Questions About Rage Rooms" />
+          </div>
         </div>
       </section>
     </>
   )
 }
-
