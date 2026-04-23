@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { Instagram, Facebook, Twitter, Youtube } from "lucide-react"
 import Logo from "./Logo"
 
 export default function Footer() {
@@ -59,50 +58,6 @@ export default function Footer() {
               </ul>
             </div>
           ))}
-
-          <div>
-            <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-white mb-3">
-              Social
-            </h3>
-            <div className="flex items-center gap-3">
-              <a
-                href="https://instagram.com/rageroomdirectory"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="w-9 h-9 inline-flex items-center justify-center rounded-md border border-zinc-800 text-zinc-400 hover:text-white hover:border-rage-500/70 hover:bg-rage-500/10 transition-colors"
-              >
-                <Instagram className="w-4 h-4" />
-              </a>
-              <a
-                href="https://facebook.com/rageroomdirectory"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="w-9 h-9 inline-flex items-center justify-center rounded-md border border-zinc-800 text-zinc-400 hover:text-white hover:border-rage-500/70 hover:bg-rage-500/10 transition-colors"
-              >
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a
-                href="https://twitter.com/rageroomdirectory"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter / X"
-                className="w-9 h-9 inline-flex items-center justify-center rounded-md border border-zinc-800 text-zinc-400 hover:text-white hover:border-rage-500/70 hover:bg-rage-500/10 transition-colors"
-              >
-                <Twitter className="w-4 h-4" />
-              </a>
-              <a
-                href="https://youtube.com/@rageroomdirectory"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="YouTube"
-                className="w-9 h-9 inline-flex items-center justify-center rounded-md border border-zinc-800 text-zinc-400 hover:text-white hover:border-rage-500/70 hover:bg-rage-500/10 transition-colors"
-              >
-                <Youtube className="w-4 h-4" />
-              </a>
-            </div>
-          </div>
         </div>
 
         <div className="mt-10 pt-6 border-t border-zinc-800/70 flex flex-col sm:flex-row items-center justify-between gap-3">

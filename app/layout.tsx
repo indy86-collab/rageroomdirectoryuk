@@ -136,7 +136,9 @@ export default function RootLayout({
         />
         {/* End Cloudflare Web Analytics */}
       </head>
-      <body className={`${montserrat.variable} ${bebasNeue.variable} font-sans min-h-screen bg-dark-950 text-white scrollbar-rage`}>
+      <body
+        className={`${montserrat.variable} ${bebasNeue.variable} font-sans bg-dark-950 text-white scrollbar-rage`}
+      >
         {/* AdSense loader: once globally via next/script (not duplicated in ad components). */}
         <Script
           id="adsbygoogle-js"
@@ -145,12 +147,14 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <Providers>
-          {/* Full-width site shell: no max-width rails, matches reference edge-to-edge look. */}
-          <div className="relative w-full bg-dark-900">
+          {/*
+            Single min-h-screen flex column: avoids stacking body + main both at 100vh
+            (which pushed the footer down and left a dark strip below it / below CMP).
+            main flex-1 grows with content on long pages and fills slack on short pages.
+          */}
+          <div className="relative flex min-h-screen w-full flex-col bg-dark-900">
             <Header />
-            <main className="min-h-screen">
-              {children}
-            </main>
+            <main className="flex w-full flex-1">{children}</main>
             <Footer />
           </div>
         </Providers>
