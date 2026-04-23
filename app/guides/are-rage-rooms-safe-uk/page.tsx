@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import Breadcrumbs from "@/components/Breadcrumbs"
+import AdsenseInContent from "@/components/ads/AdsenseInContent"
 import Link from "next/link"
 
 export const metadata: Metadata = {
@@ -32,6 +33,8 @@ export default function AreRageRoomsSafeUKPage() {
           <p className="text-xl text-white font-semibold">
             Rage rooms are designed to be safe, controlled environments where you can release stress by smashing items. When proper safety protocols are followed, they pose minimal risk. Here's everything you need to know about rage room safety in the UK.
           </p>
+
+          <AdsenseInContent />
 
           <section>
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">

@@ -6,6 +6,7 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 import FAQ from "@/components/FAQ"
 import { getCityFAQs } from "@/lib/faqs"
 import UGCButtons from "@/components/UGCButtons"
+import AdsenseInContent from "@/components/ads/AdsenseInContent"
 import Link from "next/link"
 
 interface CityPageProps {
@@ -83,9 +84,10 @@ export default async function CityPage({ params }: CityPageProps) {
           Rage Rooms in {cityName}
         </h1>
 
-        {/* Unique city-specific intro */}
+        {/* Unique city-specific intro; ad after first paragraph only. */}
         <div className="text-base sm:text-lg text-zinc-300 mb-6 sm:mb-8 space-y-3 sm:space-y-4">
           <p>{cityContent.intro}</p>
+          <AdsenseInContent />
           <p>{cityContent.localContext}</p>
         </div>
 

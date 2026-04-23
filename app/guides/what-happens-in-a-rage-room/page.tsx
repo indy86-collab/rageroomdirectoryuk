@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import Breadcrumbs from "@/components/Breadcrumbs"
+import AdsenseInContent from "@/components/ads/AdsenseInContent"
 import Link from "next/link"
 
 export const metadata: Metadata = {
@@ -32,6 +33,8 @@ export default function WhatHappensInARageRoomPage() {
           <p className="text-xl text-white font-semibold">
             If you're curious about rage rooms but unsure what to expect, this step-by-step guide will walk you through everything that happens during a typical rage room session in the UK, from booking to cleanup.
           </p>
+
+          <AdsenseInContent />
 
           <section>
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">

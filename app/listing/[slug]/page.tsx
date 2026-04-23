@@ -14,6 +14,7 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 import Link from "next/link"
 import SimilarListingCard from "@/components/SimilarListingCard"
 import UGCButtons from "@/components/UGCButtons"
+import AdsenseInContent from "@/components/ads/AdsenseInContent"
 
 interface ListingPageProps {
   params: { slug: string }
@@ -184,6 +185,10 @@ export default async function ListingPage({ params }: ListingPageProps) {
   // Generate AI-optimized content
   const aiContent = await generateListingContent(listing, similarListings)
   const listingFAQs = generateListingFAQs(listing, similarListings)
+
+  const aboutTextLength =
+    aiContent.summary.length + (listing.description?.trim().length ?? 0)
+  const showAboutInContentAd = aboutTextLength >= 400
 
   // Price comparison data
   const similarWithPrice = similarListings.filter(l => l.price)
@@ -645,6 +650,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
           <p className="text-white mb-4">
             {aiContent.summary}
           </p>
+          {showAboutInContentAd && <AdsenseInContent />}
           {listing.description && (
             <p className="text-zinc-300 whitespace-pre-line text-sm">
               {listing.description}

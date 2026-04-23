@@ -4,6 +4,7 @@ import FAQ from "@/components/FAQ"
 import { getCityFAQs } from "@/lib/faqs"
 import { getGuideCityContent } from "@/lib/guide-city-content"
 import Breadcrumbs from "@/components/Breadcrumbs"
+import AdsenseInContent from "@/components/ads/AdsenseInContent"
 
 export const metadata: Metadata = {
   title: "Best Rage Rooms in London | Top Venues Ranked (2025)",
@@ -56,6 +57,7 @@ export default async function BestRageRoomsLondonPage() {
 
           <div className="text-base sm:text-lg text-zinc-300 mb-8 space-y-4">
             <p>{content?.intro}</p>
+            <AdsenseInContent />
             <p>{content?.sceneDescription}</p>
           </div>
 

@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import Link from "next/link"
+import AdsenseInContent from "@/components/ads/AdsenseInContent"
 import FAQ from "@/components/FAQ"
 
 export const metadata: Metadata = {
@@ -90,6 +91,8 @@ export default async function BestRageRoomsForTeamBuildingPage() {
           <p className="text-lg text-zinc-300 mb-6">
             Rage rooms are becoming increasingly popular for corporate team building events. They offer a unique, engaging activity that helps teams bond, relieve stress, and improve workplace relationships. Our guide helps you find the best rage rooms for team building, with tips on group sizes, corporate packages, and what to expect.
           </p>
+
+          <AdsenseInContent />
 
           <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-6 mb-8">
             <h2 className="text-2xl font-bold text-white mb-4">

@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Script from "next/script"
 import { Montserrat, Bebas_Neue } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
@@ -136,6 +137,13 @@ export default function RootLayout({
         {/* End Cloudflare Web Analytics */}
       </head>
       <body className={`${montserrat.variable} ${bebasNeue.variable} font-sans min-h-screen bg-dark-950 text-white scrollbar-rage`}>
+        {/* AdSense loader: once globally via next/script (not duplicated in ad components). */}
+        <Script
+          id="adsbygoogle-js"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9868896840591922"
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+        />
         <Providers>
           <div className="relative w-full max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-6">
             <div className="bg-dark-900 border-x border-zinc-800/50">

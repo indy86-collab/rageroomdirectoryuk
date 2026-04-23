@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import Breadcrumbs from "@/components/Breadcrumbs"
+import AdsenseInContent from "@/components/ads/AdsenseInContent"
 import Link from "next/link"
 
 export const metadata: Metadata = {
@@ -32,6 +33,8 @@ export default function HowMuchDoRageRoomsCostUKPage() {
           <p className="text-xl text-white font-semibold">
             Rage room prices in the UK vary depending on location, session length, group size, and package inclusions. Here's a comprehensive guide to help you understand rage room costs and find the best value for your budget.
           </p>
+
+          <AdsenseInContent />
 
           <section>
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">

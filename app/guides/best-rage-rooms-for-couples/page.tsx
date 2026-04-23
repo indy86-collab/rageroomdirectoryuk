@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import Link from "next/link"
+import AdsenseInContent from "@/components/ads/AdsenseInContent"
 import FAQ from "@/components/FAQ"
 import { globalFAQs } from "@/lib/faqs"
 
@@ -88,6 +89,8 @@ export default async function BestRageRoomsForCouplesPage() {
           <p className="text-lg text-zinc-300 mb-6">
             Looking for a unique date night activity? Rage rooms offer couples an exciting, stress-relieving experience that's far from the typical dinner and movie. Our guide helps you find the best rage rooms perfect for couples, with tips on what to look for and how to make the most of your romantic smashing session.
           </p>
+
+          <AdsenseInContent />
 
           <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-6 mb-8">
             <h2 className="text-2xl font-bold text-white mb-4">
