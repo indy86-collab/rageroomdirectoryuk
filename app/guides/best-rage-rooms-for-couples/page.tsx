@@ -7,6 +7,7 @@ import { globalFAQs } from "@/lib/faqs"
 export const metadata: Metadata = {
   title: "Best Rage Rooms for Couples | Date Night Guide 2025",
   description: "Discover the best rage rooms for couples and date nights. Find romantic smash room experiences perfect for couples looking for unique activities and stress relief together.",
+  alternates: { canonical: "/guides/best-rage-rooms-for-couples" },
   openGraph: {
     title: "Best Rage Rooms for Couples | Date Night Guide",
     description: "Find the best rage rooms perfect for couples and date nights. Unique romantic activities for stress relief.",
@@ -14,8 +15,8 @@ export const metadata: Metadata = {
   },
 }
 
-// Mark this route as dynamic to prevent build-time data collection
-export const dynamic = 'force-dynamic'
+// ISR: guide content updates rarely; listings data refreshes daily.
+export const revalidate = 86400
 
 export default async function BestRageRoomsForCouplesPage() {
   // Lazy load to prevent build-time initialization
@@ -86,12 +87,11 @@ export default async function BestRageRoomsForCouplesPage() {
             Best Rage Rooms for Couples: Ultimate Date Night Guide (2025)
           </h1>
 
-          {/* TEMP DEBUG: guaranteed-visible placement — remove after ad debugging */}
-          <AdsenseInContent />
-
           <p className="text-lg text-zinc-300 mb-6">
             Looking for a unique date night activity? Rage rooms offer couples an exciting, stress-relieving experience that's far from the typical dinner and movie. Our guide helps you find the best rage rooms perfect for couples, with tips on what to look for and how to make the most of your romantic smashing session.
           </p>
+
+          <AdsenseInContent />
 
           <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-6 mb-8">
             <h2 className="text-2xl font-bold text-white mb-4">

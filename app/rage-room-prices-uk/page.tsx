@@ -6,6 +6,7 @@ import FAQ from "@/components/FAQ"
 export const metadata: Metadata = {
   title: "Rage Room Prices UK | Complete Pricing Guide 2025",
   description: "Complete guide to rage room prices across the UK. Compare prices by city, package types, and venues. Learn about BYO policies and find the best value.",
+  alternates: { canonical: "/rage-room-prices-uk" },
   openGraph: {
     title: "Rage Room Prices UK | Complete Pricing Guide 2025",
     description: "Compare rage room prices across the UK. Find the best value with our comprehensive pricing guide.",
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   },
 }
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 86400
 
 export default async function RageRoomPricesUKPage() {
   // WebPage and FAQPage Schema

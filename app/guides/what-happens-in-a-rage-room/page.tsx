@@ -6,6 +6,7 @@ import Link from "next/link"
 export const metadata: Metadata = {
   title: "What Happens in a Rage Room? Complete First-Time Guide",
   description: "Step-by-step guide to your first rage room experience. Learn what to expect, how to prepare, and what happens during a rage room session in the UK.",
+  alternates: { canonical: "/guides/what-happens-in-a-rage-room" },
   openGraph: {
     title: "What Happens in a Rage Room? First-Time Visitor Guide",
     description: "Complete guide to rage room experiences: from arrival to smashing, everything you need to know for your first visit.",
@@ -29,13 +30,12 @@ export default function WhatHappensInARageRoomPage() {
           What Happens in a Rage Room? Complete First-Time Guide
         </h1>
 
-        {/* TEMP DEBUG: guaranteed-visible placement — remove after ad debugging */}
-        <AdsenseInContent />
-
         <div className="space-y-6 text-base sm:text-lg text-zinc-300">
           <p className="text-xl text-white font-semibold">
             If you're curious about rage rooms but unsure what to expect, this step-by-step guide will walk you through everything that happens during a typical rage room session in the UK, from booking to cleanup.
           </p>
+
+          <AdsenseInContent />
 
           <section>
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">

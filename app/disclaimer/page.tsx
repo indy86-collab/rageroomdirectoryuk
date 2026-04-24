@@ -4,6 +4,7 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 export const metadata: Metadata = {
   title: "Disclaimer | RageRoom Directory",
   description: "Read RageRoom Directory's disclaimer. Understand that we are an informational directory platform and are not responsible for services provided by listed businesses.",
+  alternates: { canonical: "/disclaimer" },
   openGraph: {
     title: "Disclaimer | RageRoom Directory",
     description: "Legal disclaimer for RageRoom Directory platform.",

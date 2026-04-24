@@ -4,6 +4,7 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 export const metadata: Metadata = {
   title: "Terms of Service | RageRoom Directory",
   description: "Read RageRoom Directory's terms of service. Understand the rules and guidelines for using our directory platform.",
+  alternates: { canonical: "/terms" },
   openGraph: {
     title: "Terms of Service | RageRoom Directory",
     description: "Terms and conditions for using RageRoom Directory platform.",

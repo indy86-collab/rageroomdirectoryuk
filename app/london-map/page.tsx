@@ -6,6 +6,7 @@ import NearMeMap from "@/components/NearMeMap"
 export const metadata: Metadata = {
   title: "Rage Room London Map | Find All London Rage Rooms on Map",
   description: "Interactive map showing all rage rooms in London. Find locations, compare venues, and discover the best smash rooms in the capital.",
+  alternates: { canonical: "/london-map" },
   openGraph: {
     title: "Rage Room London Map | Find All London Rage Rooms",
     description: "Interactive map of all rage rooms and smash rooms in London. Find venues near you.",
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
   },
 }
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 86400
 
 export default async function LondonMapPage() {
   // Lazy load to prevent build-time initialization

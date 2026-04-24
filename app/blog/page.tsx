@@ -7,6 +7,7 @@ import BlogListing from "@/components/BlogListing"
 export const metadata: Metadata = {
   title: "Rage Room Blog | Tips, Guides & Expert Advice",
   description: "Discover expert tips, guides, and advice about rage rooms. From first-time preparation to team building, find everything you need to know.",
+  alternates: { canonical: "/blog" },
   openGraph: {
     title: "Rage Room Blog | Tips, Guides & Expert Advice",
     description: "Expert tips and guides about rage rooms, stress relief, and unique experiences across the UK.",

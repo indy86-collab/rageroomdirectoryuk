@@ -9,6 +9,7 @@ import ListingsGrid from "@/components/ListingsGrid"
 export const metadata: Metadata = {
   title: "Smash Room UK | Find Smash Rooms Across the UK",
   description: "Discover smash rooms across the UK. Browse venues, compare prices, and book your stress-relief session. Smash rooms (also known as rage rooms) provide a safe way to release tension.",
+  alternates: { canonical: "/smash-room-uk" },
   openGraph: {
     title: "Smash Room UK | Find Smash Rooms Across the UK",
     description: "Find and compare smash rooms across the UK. Book your stress-relief session today.",
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   },
 }
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 86400
 
 export default async function SmashRoomUKPage() {
   const { getFeaturedListings, getDistinctCities } = await import("@/lib/listings")

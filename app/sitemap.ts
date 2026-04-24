@@ -3,8 +3,8 @@ import { getAllListingsForAdmin, getDistinctCities, getDistinctRegions } from "@
 import { cityToSlug, regionToSlug } from "@/lib/location"
 import { getAllBlogPosts } from "@/lib/blog-posts"
 
-// Mark sitemap as dynamic since it queries the database
-export const dynamic = 'force-dynamic'
+// ISR: sitemap reflects DB state but doesn't need to be live on every request.
+export const revalidate = 3600
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"

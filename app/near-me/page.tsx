@@ -10,6 +10,7 @@ import NearMeMap from "@/components/NearMeMap"
 export const metadata: Metadata = {
   title: "Rage Room Near Me | Find Local Smash Rooms",
   description: "Find the best rage rooms and smash rooms near you. Browse local venues, compare prices, and book your stress-relief session. Interactive map and city directory included.",
+  alternates: { canonical: "/near-me" },
   openGraph: {
     title: "Rage Room Near Me | Find Local Smash Rooms",
     description: "Discover rage rooms and smash rooms in your area. Compare venues, prices, and book your session.",
@@ -17,8 +18,8 @@ export const metadata: Metadata = {
   },
 }
 
-// Mark this route as dynamic
-export const dynamic = 'force-dynamic'
+// ISR: directory data updates infrequently; distance sort happens client-side.
+export const revalidate = 86400
 
 export default async function NearMePage() {
   // Lazy load to prevent build-time initialization

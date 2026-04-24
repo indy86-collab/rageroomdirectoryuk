@@ -4,6 +4,7 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 export const metadata: Metadata = {
   title: "Privacy Policy | RageRoom Directory - UK GDPR Compliant",
   description: "Read RageRoom Directory's UK GDPR compliant privacy policy. Learn how we collect, use, store, and protect your personal data in accordance with UK data protection laws.",
+  alternates: { canonical: "/privacy" },
   openGraph: {
     title: "Privacy Policy | RageRoom Directory",
     description: "UK GDPR compliant privacy policy explaining how we handle your personal data.",

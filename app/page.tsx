@@ -8,8 +8,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, MapPin, Ticket, HardHat, Hammer, Heart, ShieldCheck, Users, Sparkles, Star } from "lucide-react"
 
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
+export const revalidate = 900
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
 
@@ -17,6 +16,9 @@ export const metadata: Metadata = {
   title: "RageRoom Directory UK | Compare Rage Rooms, Prices & Locations",
   description:
     "Find and compare the best rage rooms across the UK. View prices, packages, photos, reviews and book your next stress-relief smash session.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "RageRoom Directory UK",
     description:

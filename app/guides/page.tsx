@@ -4,6 +4,7 @@ import Link from "next/link"
 export const metadata: Metadata = {
   title: "Rage Room Guides | Tips, Safety & City Guides",
   description: "Guides to rage rooms across the UK. Browse city-by-city venue guides, safety information, pricing breakdowns, and tips for first-timers, couples, and team events.",
+  alternates: { canonical: "/guides" },
 }
 
 export default function GuidesPage() {

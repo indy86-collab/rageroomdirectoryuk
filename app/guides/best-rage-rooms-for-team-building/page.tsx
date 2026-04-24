@@ -6,6 +6,7 @@ import FAQ from "@/components/FAQ"
 export const metadata: Metadata = {
   title: "Best Rage Rooms for Team Building & Corporate Events | Guide 2025",
   description: "Discover the best rage rooms for corporate team building events. Find venues that accommodate large groups, offer team packages, and provide excellent team building experiences.",
+  alternates: { canonical: "/guides/best-rage-rooms-for-team-building" },
   openGraph: {
     title: "Best Rage Rooms for Team Building & Corporate Events",
     description: "Find the best rage rooms for corporate team building. Group packages and team activities.",
@@ -13,8 +14,8 @@ export const metadata: Metadata = {
   },
 }
 
-// Mark this route as dynamic to prevent build-time data collection
-export const dynamic = 'force-dynamic'
+// ISR: guide content updates rarely; listings data refreshes daily.
+export const revalidate = 86400
 
 export default async function BestRageRoomsForTeamBuildingPage() {
   // Lazy load to prevent build-time initialization
@@ -88,12 +89,11 @@ export default async function BestRageRoomsForTeamBuildingPage() {
             Best Rage Rooms for Team Building & Corporate Events (2025)
           </h1>
 
-          {/* TEMP DEBUG: guaranteed-visible placement — remove after ad debugging */}
-          <AdsenseInContent />
-
           <p className="text-lg text-zinc-300 mb-6">
             Rage rooms are becoming increasingly popular for corporate team building events. They offer a unique, engaging activity that helps teams bond, relieve stress, and improve workplace relationships. Our guide helps you find the best rage rooms for team building, with tips on group sizes, corporate packages, and what to expect.
           </p>
+
+          <AdsenseInContent />
 
           <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-6 mb-8">
             <h2 className="text-2xl font-bold text-white mb-4">

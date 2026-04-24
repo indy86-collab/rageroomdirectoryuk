@@ -3,6 +3,7 @@ import Link from "next/link"
 export const metadata = {
   title: "List Your Rage Room | Rage Room Directory UK",
   description: "List your rage room business or update your existing listing. Contact us to add your rage room to the UK's premier directory.",
+  alternates: { canonical: "/list-your-rage-room" },
 }
 
 export default function ListYourRageRoomPage() {

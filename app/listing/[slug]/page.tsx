@@ -20,8 +20,10 @@ interface ListingPageProps {
   params: { slug: string }
 }
 
-// Mark this route as dynamic
-export const dynamic = 'force-dynamic'
+// ISR: listing content is mostly static; Google Places enrichment also benefits
+// from being cached here for 30 min. `dynamicParams` is kept for when we add
+// `generateStaticParams`.
+export const revalidate = 1800
 export const dynamicParams = true
 
 // Helper to check if a string looks like a UUID

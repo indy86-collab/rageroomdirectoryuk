@@ -22,6 +22,7 @@ export async function generateMetadata({
   return {
     title: `Rage Rooms in ${regionName} — ${count} ${count === 1 ? "Venue" : "Venues"} | Rage Room Directory UK`,
     description: `Find rage rooms in ${regionName}. Browse ${count} ${count === 1 ? "venue" : "venues"}, compare prices and reviews, and book a destruction therapy session in the ${regionName} area.`,
+    alternates: { canonical: `/region/${params.slug}` },
     openGraph: {
       title: `Rage Rooms in ${regionName} | Rage Room Directory UK`,
       description: `Discover ${count} rage ${count === 1 ? "room" : "rooms"} in ${regionName}. Compare venues, prices, and reviews.`,
@@ -30,7 +31,7 @@ export async function generateMetadata({
   }
 }
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 export const dynamicParams = true
 
 export default async function RegionPage({ params }: RegionPageProps) {

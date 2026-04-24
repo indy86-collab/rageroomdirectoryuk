@@ -5,6 +5,7 @@ import Link from "next/link"
 export const metadata: Metadata = {
   title: "About Us | RageRoom Directory - UK's First Dedicated Rage Room Platform",
   description: "Learn about RageRoom Directory, the UK's first dedicated platform for discovering, comparing, and exploring rage rooms, smash rooms, and destruction therapy experiences nationwide.",
+  alternates: { canonical: "/about" },
   openGraph: {
     title: "About RageRoom Directory | UK's First Rage Room Platform",
     description: "Discover the UK's first dedicated platform for rage rooms. Compare prices, find locations, and explore stress-relief experiences nationwide.",

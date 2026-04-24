@@ -9,6 +9,7 @@ import AdsenseInContent from "@/components/ads/AdsenseInContent"
 export const metadata: Metadata = {
   title: "Best Rage Rooms in Birmingham | Top Venues Ranked (2025)",
   description: "Discover the best rage rooms in Birmingham. Our guide covers top venues in the Midlands, what to look for, pricing, and local tips for booking your destruction therapy session.",
+  alternates: { canonical: "/guides/best-rage-rooms-birmingham" },
   openGraph: {
     title: "Best Rage Rooms in Birmingham | Top Venues Ranked",
     description: "Find the best rage rooms and smash rooms in Birmingham. Compare venues, prices, and book your stress-relief session.",
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   },
 }
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 86400
 
 export default async function BestRageRoomsBirminghamPage() {
   const { getListingsByCity } = await import("@/lib/listings")
@@ -55,11 +56,13 @@ export default async function BestRageRoomsBirminghamPage() {
             Best Rage Rooms in Birmingham
           </h1>
 
-          {/* TEMP DEBUG: guaranteed-visible placement — remove after ad debugging */}
+          <div className="text-base sm:text-lg text-zinc-300 mb-8 space-y-4">
+            <p>{content?.intro}</p>
+          </div>
+
           <AdsenseInContent />
 
           <div className="text-base sm:text-lg text-zinc-300 mb-8 space-y-4">
-            <p>{content?.intro}</p>
             <p>{content?.sceneDescription}</p>
           </div>
 

@@ -1,0 +1,59 @@
+# RageRoom Directory
+
+> The UK's largest independent directory of rage rooms and smash rooms. Compare verified venues by city, see starting prices and packages, and book a destruction-therapy session near you.
+
+RageRoom Directory (rageroomdirectory.co.uk) is an editorial, independent directory. We do not own any of the rage rooms listed; we aggregate, verify and compare them so visitors can find the right venue for stress relief, team-building, birthdays, hen/stag parties and date nights.
+
+All prices are shown in GBP (£). Coverage is UK-wide with strongest depth in London, Birmingham, Manchester, Leeds, Liverpool, Newcastle, Sheffield, Bristol and Nottingham.
+
+## Core directory
+
+- [Homepage](https://rageroomdirectory.co.uk/): Search rage rooms by city or postcode; featured venues and editorial guides.
+- [All rage rooms in the UK](https://rageroomdirectory.co.uk/listings): Complete directory with filters.
+- [Rage room near me](https://rageroomdirectory.co.uk/near-me): Geolocation-based nearest-venue search with interactive map.
+- [Search](https://rageroomdirectory.co.uk/search): Keyword search across venues, cities and packages.
+- [London interactive map](https://rageroomdirectory.co.uk/london-map): Map view of every London rage room.
+
+## Editorial guides
+
+- [Best rage rooms in London](https://rageroomdirectory.co.uk/guides/best-rage-rooms-london)
+- [Best rage rooms in Birmingham](https://rageroomdirectory.co.uk/guides/best-rage-rooms-birmingham)
+- [Best rage rooms in Manchester](https://rageroomdirectory.co.uk/guides/best-rage-rooms-manchester)
+- [Best rage rooms in Leeds](https://rageroomdirectory.co.uk/guides/best-rage-rooms-leeds)
+- [Best rage rooms in Liverpool](https://rageroomdirectory.co.uk/guides/best-rage-rooms-liverpool)
+- [Best rage rooms in Bristol](https://rageroomdirectory.co.uk/guides/best-rage-rooms-bristol)
+- [Best rage rooms in Newcastle](https://rageroomdirectory.co.uk/guides/best-rage-rooms-newcastle)
+- [Best rage rooms in Sheffield](https://rageroomdirectory.co.uk/guides/best-rage-rooms-sheffield)
+- [Best rage rooms in Nottingham](https://rageroomdirectory.co.uk/guides/best-rage-rooms-nottingham)
+- [Best rage rooms for couples (UK)](https://rageroomdirectory.co.uk/guides/best-rage-rooms-for-couples)
+- [Best rage rooms for team building (UK)](https://rageroomdirectory.co.uk/guides/best-rage-rooms-for-team-building)
+- [What happens in a rage room?](https://rageroomdirectory.co.uk/guides/what-happens-in-a-rage-room)
+- [Are rage rooms safe? (UK)](https://rageroomdirectory.co.uk/guides/are-rage-rooms-safe-uk)
+- [How much do rage rooms cost? (UK)](https://rageroomdirectory.co.uk/guides/how-much-do-rage-rooms-cost-uk)
+- [Guides hub](https://rageroomdirectory.co.uk/guides)
+
+## Terminology hubs
+
+- [Rage room London](https://rageroomdirectory.co.uk/rage-room-london)
+- [Rage room prices (UK)](https://rageroomdirectory.co.uk/rage-room-prices-uk)
+- [Smash room UK](https://rageroomdirectory.co.uk/smash-room-uk)
+- [Break room UK](https://rageroomdirectory.co.uk/break-room-uk)
+- [Anger room UK](https://rageroomdirectory.co.uk/anger-room-uk)
+
+## For venues
+
+- [List your rage room](https://rageroomdirectory.co.uk/list-your-rage-room): Submission form for venue owners.
+
+## Company
+
+- [About](https://rageroomdirectory.co.uk/about)
+- [Editorial policy](https://rageroomdirectory.co.uk/editorial-policy): How we review and rank venues.
+- [Contact](https://rageroomdirectory.co.uk/contact)
+- [Blog](https://rageroomdirectory.co.uk/blog)
+
+## Optional
+
+- [Privacy policy](https://rageroomdirectory.co.uk/privacy-policy)
+- [Terms](https://rageroomdirectory.co.uk/terms)
+- [Disclaimer](https://rageroomdirectory.co.uk/disclaimer)
+- [XML sitemap](https://rageroomdirectory.co.uk/sitemap.xml)

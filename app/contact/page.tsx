@@ -5,6 +5,7 @@ import Link from "next/link"
 export const metadata: Metadata = {
   title: "Contact Us | RageRoom Directory",
   description: "Get in touch with RageRoom Directory. Submit a venue, report incorrect information, ask a question, or suggest an improvement.",
+  alternates: { canonical: "/contact" },
 }
 
 export default function ContactPage() {

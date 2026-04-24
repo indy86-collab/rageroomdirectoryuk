@@ -5,6 +5,7 @@ import Link from "next/link"
 export const metadata: Metadata = {
   title: "Editorial Policy | How We Verify Listings | RageRoom Directory",
   description: "Learn how RageRoom Directory researches, verifies, and maintains its rage room listings. Our editorial process ensures accurate, trustworthy information for every venue.",
+  alternates: { canonical: "/editorial-policy" },
   openGraph: {
     title: "Editorial Policy | RageRoom Directory",
     description: "How we research, verify, and maintain our rage room listings across the UK.",

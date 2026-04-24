@@ -9,6 +9,7 @@ import ListingsGrid from "@/components/ListingsGrid"
 export const metadata: Metadata = {
   title: "Break Room UK | Find Break Rooms Across the UK",
   description: "Discover break rooms across the UK. Browse venues, compare prices, and book your stress-relief session. Break rooms (also known as rage rooms or smash rooms) provide a safe way to release tension.",
+  alternates: { canonical: "/break-room-uk" },
   openGraph: {
     title: "Break Room UK | Find Break Rooms Across the UK",
     description: "Find and compare break rooms across the UK. Book your stress-relief session today.",
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   },
 }
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 86400
 
 export default async function BreakRoomUKPage() {
   const { getFeaturedListings, getDistinctCities } = await import("@/lib/listings")

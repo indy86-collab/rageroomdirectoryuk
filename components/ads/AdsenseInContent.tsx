@@ -20,7 +20,6 @@ export default function AdsenseInContent() {
   const pushedRef = useRef(false)
 
   useEffect(() => {
-    console.log('AdsenseInContent mounted')
     if (typeof window === "undefined" || pushedRef.current || !insRef.current) return
     pushedRef.current = true
     try {

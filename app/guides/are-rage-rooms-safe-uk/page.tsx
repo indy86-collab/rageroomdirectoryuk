@@ -6,6 +6,7 @@ import Link from "next/link"
 export const metadata: Metadata = {
   title: "Are Rage Rooms Safe in the UK? Safety Guide & Regulations",
   description: "Learn about rage room safety in the UK, including safety equipment, regulations, common misconceptions, and what to expect during your session.",
+  alternates: { canonical: "/guides/are-rage-rooms-safe-uk" },
   openGraph: {
     title: "Are Rage Rooms Safe in the UK? Complete Safety Guide",
     description: "Everything you need to know about rage room safety, equipment, and UK regulations.",
@@ -29,13 +30,12 @@ export default function AreRageRoomsSafeUKPage() {
           Are Rage Rooms Safe in the UK? Complete Safety Guide
         </h1>
 
-        {/* TEMP DEBUG: guaranteed-visible placement — remove after ad debugging */}
-        <AdsenseInContent />
-
         <div className="space-y-6 text-base sm:text-lg text-zinc-300">
           <p className="text-xl text-white font-semibold">
             Rage rooms are designed to be safe, controlled environments where you can release stress by smashing items. When proper safety protocols are followed, they pose minimal risk. Here's everything you need to know about rage room safety in the UK.
           </p>
+
+          <AdsenseInContent />
 
           <section>
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">

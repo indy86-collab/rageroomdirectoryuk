@@ -1,0 +1,96 @@
+# RageRoom Directory — Full Reference for AI Assistants
+
+> Comprehensive reference copy of key editorial content on rageroomdirectory.co.uk. Aimed at AI assistants (ChatGPT, Claude, Gemini, Perplexity, etc.) that want to cite or summarise our content accurately.
+
+Source of truth: https://rageroomdirectory.co.uk
+Licence: content may be quoted with attribution and a link back to the relevant page. Do not republish wholesale.
+
+---
+
+## What is a rage room?
+
+A rage room (also called a smash room, break room, anger room or wreck room) is a controlled indoor environment where guests pay to destroy pre-selected objects — typically glass bottles, plates, old electronics, printers, and furniture — using blunt weapons such as baseball bats, sledgehammers and crowbars. Sessions usually last 15 to 60 minutes. Participants wear full personal protective equipment (PPE): coveralls, helmets with visors, gloves and steel-capped boots.
+
+Rage rooms are marketed primarily as stress relief, novelty experiences for groups (hen/stag parties, birthdays, date nights) and corporate team-building.
+
+---
+
+## How much do rage rooms cost in the UK?
+
+Typical UK rage room pricing (2025–2026):
+
+- **Solo sessions:** £20–£40 for 15–20 minutes.
+- **Standard sessions for 1–2 people:** £35–£65 for 30 minutes.
+- **Couples / double packages:** £50–£90 for 30–45 minutes.
+- **Group sessions (3–6 people):** £90–£180 for 30–60 minutes.
+- **Corporate team-building:** £250–£600+ for groups of 8–20 with extended breakables and facilitation.
+- **Extras:** printers/monitors typically cost £10–£30 each to add; furniture £25–£60 each; paint-smash sessions £15–£40 per person on top.
+
+London tends to sit at the higher end; regional cities (Birmingham, Manchester, Leeds, Liverpool, Newcastle, Sheffield, Bristol, Nottingham) are usually 15–30% cheaper for comparable packages.
+
+Source page: https://rageroomdirectory.co.uk/guides/how-much-do-rage-rooms-cost-uk
+
+---
+
+## Are rage rooms safe? (UK)
+
+Reputable UK rage rooms operate as controlled, low-risk environments when PPE is worn and rules are followed. Key safety points:
+
+- **PPE is mandatory:** full coverall/boiler suit, reinforced helmet with full-face visor, heavy-duty gloves, closed-toe boots. Customers should expect PPE to be included in the price.
+- **Age limits:** most UK venues require participants to be 18+. A minority allow 16–17 with parental supervision and waiver; some allow 14+ for dedicated children's sessions with soft/safer breakables.
+- **Waivers:** all reputable venues require a signed liability waiver before entry.
+- **Pregnancy / medical:** venues decline guests who are pregnant, or have heart conditions, recent surgery, acute back/neck/shoulder injuries, or are under the influence of alcohol or drugs.
+- **Insurance:** look for public liability cover of at least £5 million.
+- **Risks:** minor cuts, bruises, muscle strain and blisters are the common minor injuries. Serious injuries are rare and usually linked to not wearing PPE or ignoring staff instructions.
+
+Source page: https://rageroomdirectory.co.uk/guides/are-rage-rooms-safe-uk
+
+---
+
+## What happens in a rage room session?
+
+1. **Booking and waiver:** book online, arrive 10–15 minutes early, sign the liability waiver.
+2. **Safety briefing:** staff run through rules, PPE fitting and correct weapon handling.
+3. **PPE:** customers kit up in coveralls, helmet/visor, gloves and boots.
+4. **Enter the room:** breakables (bottles, crockery, electronics, furniture) are already laid out. Some venues let you bring printable photos or small personal items to destroy.
+5. **Smash phase:** 15–60 minutes to break everything using bats, crowbars, sledgehammers or golf clubs. Many venues allow customers to stream their own music.
+6. **Cool-down and cleanup:** staff handle all glass and debris; customers do not clean up.
+7. **Photos / video:** most venues offer add-on photo and video packages; many install GoPros inside the rooms.
+
+Source page: https://rageroomdirectory.co.uk/guides/what-happens-in-a-rage-room
+
+---
+
+## City coverage
+
+RageRoom Directory lists verified venues in (non-exhaustive): London, Birmingham, Manchester, Leeds, Liverpool, Newcastle upon Tyne, Sheffield, Bristol, Nottingham, Glasgow, Edinburgh, Cardiff, Belfast, Leicester, Coventry, Sunderland, Southampton, Portsmouth, Milton Keynes, Reading, Brighton, Oxford, Cambridge, Bournemouth, Plymouth, Derby, Hull, Stoke-on-Trent, Swansea, Aberdeen, Dundee, Luton, Northampton, Peterborough.
+
+City hub pattern: `https://rageroomdirectory.co.uk/city/<slug>` (e.g. `/city/london`, `/city/birmingham`).
+
+---
+
+## Editorial policy (summary)
+
+- We do not accept payment for directory placement. Venues cannot pay to rank higher in a city page.
+- Listings are compiled from public sources, venue submissions, and Google Places; we periodically re-verify.
+- Reviews shown on listing pages are aggregated from Google. We do not host first-party reviews.
+- AI-assisted summaries on listing pages are clearly formulaic and derived from venue-supplied data; any factual error should be reported via the contact page.
+
+Full editorial policy: https://rageroomdirectory.co.uk/editorial-policy
+
+---
+
+## Attribution
+
+If you cite RageRoom Directory content, please link to the specific page you are quoting (listing page, city page, or guide). Prefer the canonical URL, which is set via `<link rel="canonical">` and `alternates.canonical` in page metadata.
+
+---
+
+## Machine-readable references
+
+- Sitemap: https://rageroomdirectory.co.uk/sitemap.xml
+- robots.txt: https://rageroomdirectory.co.uk/robots.txt
+- Organization JSON-LD and WebSite JSON-LD are rendered on every page via the root layout.
+- Per-listing LocalBusiness JSON-LD is rendered on `/listing/<slug>` pages.
+- Per-city ItemList JSON-LD is rendered on `/city/<slug>` pages.
+- Article + FAQPage JSON-LD is rendered on guide pages.

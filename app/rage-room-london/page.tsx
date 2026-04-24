@@ -10,6 +10,7 @@ import NearMeMap from "@/components/NearMeMap"
 export const metadata: Metadata = {
   title: "Rage Room London | Best Smash Rooms in the Capital 2025",
   description: "Discover the best rage rooms in London. Compare top 5 smash rooms, prices, packages, and locations. Book your stress-relief session in London today.",
+  alternates: { canonical: "/rage-room-london" },
   openGraph: {
     title: "Rage Room London | Best Smash Rooms in the Capital",
     description: "Find and compare the best rage rooms in London. Top venues, prices, and booking information.",
@@ -17,8 +18,8 @@ export const metadata: Metadata = {
   },
 }
 
-// Mark this route as dynamic
-export const dynamic = 'force-dynamic'
+// ISR: content is evergreen; listings data changes infrequently.
+export const revalidate = 86400
 
 export default async function RageRoomLondonPage() {
   // Lazy load to prevent build-time initialization

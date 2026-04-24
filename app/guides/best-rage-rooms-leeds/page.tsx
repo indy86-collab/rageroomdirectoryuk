@@ -9,6 +9,7 @@ import AdsenseInContent from "@/components/ads/AdsenseInContent"
 export const metadata: Metadata = {
   title: "Best Rage Rooms in Leeds | Top Venues Ranked (2025)",
   description: "Discover the best rage rooms in Leeds. Our guide covers top venues in Yorkshire, what to look for, pricing, and local tips for booking your destruction therapy session.",
+  alternates: { canonical: "/guides/best-rage-rooms-leeds" },
   openGraph: {
     title: "Best Rage Rooms in Leeds | Top Venues Ranked",
     description: "Find the best rage rooms and smash rooms in Leeds. Compare venues, prices, and book your stress-relief session.",
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   },
 }
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 86400
 
 export default async function BestRageRoomsLeedsPage() {
   const { getListingsByCity } = await import("@/lib/listings")
@@ -55,11 +56,13 @@ export default async function BestRageRoomsLeedsPage() {
             Best Rage Rooms in Leeds
           </h1>
 
-          {/* TEMP DEBUG: guaranteed-visible placement — remove after ad debugging */}
+          <div className="text-base sm:text-lg text-zinc-300 mb-8 space-y-4">
+            <p>{content?.intro}</p>
+          </div>
+
           <AdsenseInContent />
 
           <div className="text-base sm:text-lg text-zinc-300 mb-8 space-y-4">
-            <p>{content?.intro}</p>
             <p>{content?.sceneDescription}</p>
           </div>
 

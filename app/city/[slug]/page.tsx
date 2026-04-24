@@ -24,6 +24,7 @@ export async function generateMetadata({
   return {
     title: `Rage Rooms in ${cityName} — ${count} ${count === 1 ? "Venue" : "Venues"} Listed`,
     description: `Find rage rooms in ${cityName}. Compare ${count} ${count === 1 ? "venue" : "venues"}, view starting prices, read reviews, and book a destruction therapy session near you.`,
+    alternates: { canonical: `/city/${cityToSlug(cityName)}` },
     openGraph: {
       title: `Rage Rooms in ${cityName} | RageRoom Directory`,
       description: `Browse ${count} rage ${count === 1 ? "room" : "rooms"} in ${cityName}. Compare venues, prices, and reviews.`,
@@ -32,7 +33,7 @@ export async function generateMetadata({
   }
 }
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 export const dynamicParams = true
 
 export default async function CityPage({ params }: CityPageProps) {

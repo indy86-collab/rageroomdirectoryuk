@@ -6,9 +6,10 @@ import Link from "next/link"
 export const metadata: Metadata = {
   title: "All Rage Rooms in the UK — Complete Directory",
   description: "Browse every rage room and smash room listed in the UK. Compare venues by city, view starting prices, read reviews, and find the right destruction therapy experience for you.",
+  alternates: { canonical: "/listings" },
 }
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 3600
 
 export default async function AllListingsPage() {
   const { searchListings, getDistinctCities } = await import("@/lib/listings")
