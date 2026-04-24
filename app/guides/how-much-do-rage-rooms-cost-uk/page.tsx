@@ -1,23 +1,74 @@
 import { Metadata } from "next"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import AdsenseInContent from "@/components/ads/AdsenseInContent"
+import GuideMeta from "@/components/GuideMeta"
 import Link from "next/link"
+import { buildArticleSchema, buildBreadcrumbSchema, buildOgImageUrl } from "@/lib/seo-schema"
+
+const GUIDE_PATH = "/guides/how-much-do-rage-rooms-cost-uk"
+const OG_IMAGE = buildOgImageUrl({
+  title: "How Much Do Rage Rooms Cost in the UK?",
+  subtitle: "Solo, couples, group & corporate pricing explained",
+  badge: "Pricing",
+  price: "£20–£90 pp",
+})
 
 export const metadata: Metadata = {
-  title: "How Much Do Rage Rooms Cost in the UK? Complete Pricing Guide",
-  description: "Learn about rage room prices in the UK, including typical costs, what affects pricing, group vs solo rates, and how to find the best deals.",
-  alternates: { canonical: "/guides/how-much-do-rage-rooms-cost-uk" },
+  title: "How Much Do Rage Rooms Cost in the UK? Pricing Guide (2026)",
+  description:
+    "Independent UK rage room pricing guide for 2026: typical per-person costs, group rates, regional differences, add-ons and how to save money.",
+  alternates: { canonical: GUIDE_PATH },
   openGraph: {
-    title: "Rage Room Prices in the UK - Complete Pricing Guide",
-    description: "Everything you need to know about rage room costs, packages, and pricing factors in the UK.",
+    title: "Rage Room Prices in the UK — Complete Pricing Guide",
+    description:
+      "Everything you need to know about rage room costs, packages, and pricing factors in the UK.",
     type: "article",
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "UK rage room pricing guide" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "How Much Do Rage Rooms Cost in the UK?",
+    description: "Typical per-person UK rage room pricing for 2026.",
+    images: [OG_IMAGE],
   },
 }
 
+export const revalidate = 86400
+
 export default function HowMuchDoRageRoomsCostUKPage() {
+  const articleSchema = buildArticleSchema({
+    url: GUIDE_PATH,
+    headline: "How Much Do Rage Rooms Cost in the UK? Complete Pricing Guide",
+    description:
+      "UK rage room pricing, including solo, couples and group rates, corporate team-building packages, add-ons and regional price differences.",
+    datePublished: "2025-01-01",
+    keywords: [
+      "rage room prices UK",
+      "how much do rage rooms cost",
+      "rage room cost per person",
+      "smash room prices UK",
+      "rage room packages",
+    ],
+  })
+
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Guides", url: "/guides" },
+    { name: "How Much Do Rage Rooms Cost?", url: GUIDE_PATH },
+  ])
+
   return (
     <div className="py-6 sm:py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
+
         <Breadcrumbs
           items={[
             { label: "Home", href: "/" },
@@ -29,6 +80,19 @@ export default function HowMuchDoRageRoomsCostUKPage() {
         <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4 sm:mb-6 mt-4">
           How Much Do Rage Rooms Cost in the UK? Complete Pricing Guide
         </h1>
+
+        <GuideMeta
+          updated="April 2026"
+          readingTimeMinutes={9}
+          keyTakeaways={[
+            "Solo sessions in the UK typically cost £20–£40 for 15–20 minutes.",
+            "Standard 1–2 person 30-minute sessions run £35–£65 depending on the venue.",
+            "Couples packages cost £50–£90 for 30–45 minutes, usually including extra breakables.",
+            "Group sessions (3–6 people) are £90–£180 per session; corporate team-building runs £250–£600+.",
+            "London sits at the higher end; Birmingham, Manchester, Leeds, Liverpool, Newcastle, Sheffield, Bristol and Nottingham are typically 15–30% cheaper.",
+            "Add-ons: extra printers/monitors £10–£30 each, furniture £25–£60, paint-smash £15–£40 per person.",
+          ]}
+        />
 
         <div className="space-y-6 text-base sm:text-lg text-zinc-300">
           <p className="text-xl text-white font-semibold">

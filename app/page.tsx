@@ -7,10 +7,17 @@ import { globalFAQs } from "@/lib/faqs"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, MapPin, Ticket, HardHat, Hammer, Heart, ShieldCheck, Users, Sparkles, Star } from "lucide-react"
+import { buildOgImageUrl } from "@/lib/seo-schema"
 
 export const revalidate = 900
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
+
+const HOME_OG = buildOgImageUrl({
+  title: "UK Rage Rooms",
+  subtitle: "Compare venues, prices and book in seconds",
+  badge: "Directory",
+})
 
 export const metadata: Metadata = {
   title: "RageRoom Directory UK | Compare Rage Rooms, Prices & Locations",
@@ -25,14 +32,22 @@ export const metadata: Metadata = {
       "Discover and compare UK rage rooms with prices, locations and booking links.",
     url: baseUrl,
     siteName: "RageRoom Directory",
+    type: "website",
     images: [
       {
-        url: "/og-image.png",
+        url: HOME_OG,
         width: 1200,
         height: 630,
-        alt: "RageRoom Directory",
+        alt: "RageRoom Directory — UK rage room & smash room directory",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "RageRoom Directory UK",
+    description:
+      "Find & compare UK rage rooms — prices, locations and reviews in one place.",
+    images: [HOME_OG],
   },
 }
 
@@ -219,10 +234,10 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="w-full py-10 sm:py-14">
+      <section aria-labelledby="destruction-therapy-heading" className="w-full py-10 sm:py-14">
         <div className="w-full px-3 sm:px-5 lg:px-6">
           <div className="card-base p-6 sm:p-8 space-y-4 sm:space-y-5">
-            <h2 className="section-title">What Is Destruction Therapy?</h2>
+            <h2 id="destruction-therapy-heading" className="section-title">What Is Destruction Therapy?</h2>
             <p className="text-base sm:text-lg text-zinc-300 leading-relaxed">
               <span className="text-rage-400 font-semibold">Rage rooms</span> (also called <span className="text-rage-400 font-semibold">smash rooms</span> or <span className="text-rage-400 font-semibold">anger rooms</span>) are safe, controlled environments where you can release stress and tension by breaking items like plates, electronics, and glass bottles. These unique experiences have become increasingly popular across the UK as an alternative form of stress relief and entertainment.
             </p>

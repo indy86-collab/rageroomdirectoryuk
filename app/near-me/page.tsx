@@ -157,6 +157,75 @@ export default async function NearMePage() {
           </div>
         </section>
 
+        {/* Topical guide cluster — dense internal linking for crawl depth
+            and LLM topical authority. */}
+        <section
+          aria-labelledby="guides-heading"
+          className="mb-12 bg-[#181818] rounded-lg border border-zinc-800 p-6"
+        >
+          <h2
+            id="guides-heading"
+            className="text-2xl font-bold text-white mb-4"
+          >
+            Planning your visit
+          </h2>
+          <p className="text-zinc-300 mb-4">
+            Before you book, make sure you know what to expect. Our UK rage
+            room guides cover pricing, safety, first-time tips and specialist
+            use cases like couples and corporate team building.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <Link
+              href="/guides/what-happens-in-a-rage-room"
+              className="p-3 rounded-lg border border-zinc-700 hover:border-orange-500/50 transition-colors"
+            >
+              <p className="text-white font-semibold text-sm">
+                What happens in a rage room?
+              </p>
+              <p className="text-zinc-400 text-xs mt-1">Step-by-step first visit guide</p>
+            </Link>
+            <Link
+              href="/guides/how-much-do-rage-rooms-cost-uk"
+              className="p-3 rounded-lg border border-zinc-700 hover:border-orange-500/50 transition-colors"
+            >
+              <p className="text-white font-semibold text-sm">
+                How much do rage rooms cost in the UK?
+              </p>
+              <p className="text-zinc-400 text-xs mt-1">Solo, couples, group &amp; corporate pricing</p>
+            </Link>
+            <Link
+              href="/guides/are-rage-rooms-safe-uk"
+              className="p-3 rounded-lg border border-zinc-700 hover:border-orange-500/50 transition-colors"
+            >
+              <p className="text-white font-semibold text-sm">Are rage rooms safe?</p>
+              <p className="text-zinc-400 text-xs mt-1">PPE, age limits &amp; insurance</p>
+            </Link>
+            <Link
+              href="/guides/best-rage-rooms-for-couples"
+              className="p-3 rounded-lg border border-zinc-700 hover:border-orange-500/50 transition-colors"
+            >
+              <p className="text-white font-semibold text-sm">Rage rooms for couples</p>
+              <p className="text-zinc-400 text-xs mt-1">Date night packages &amp; private sessions</p>
+            </Link>
+            <Link
+              href="/guides/best-rage-rooms-for-team-building"
+              className="p-3 rounded-lg border border-zinc-700 hover:border-orange-500/50 transition-colors"
+            >
+              <p className="text-white font-semibold text-sm">
+                Rage rooms for team building
+              </p>
+              <p className="text-zinc-400 text-xs mt-1">Corporate events &amp; away-day bookings</p>
+            </Link>
+            <Link
+              href="/guides"
+              className="p-3 rounded-lg border border-zinc-700 hover:border-orange-500/50 transition-colors"
+            >
+              <p className="text-white font-semibold text-sm">All rage room guides</p>
+              <p className="text-zinc-400 text-xs mt-1">Full editorial library</p>
+            </Link>
+          </div>
+        </section>
+
         {/* FAQ Section */}
         <FAQ items={globalFAQs} title="Frequently Asked Questions About Rage Rooms Near Me" />
 

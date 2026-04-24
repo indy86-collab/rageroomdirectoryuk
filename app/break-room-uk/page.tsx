@@ -5,15 +5,31 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 import FAQ from "@/components/FAQ"
 import { globalFAQs } from "@/lib/faqs"
 import ListingsGrid from "@/components/ListingsGrid"
+import { buildOgImageUrl } from "@/lib/seo-schema"
+
+const OG_IMAGE = buildOgImageUrl({
+  title: "Break Rooms UK",
+  subtitle: "UK break room & rage room directory",
+  badge: "Break Rooms",
+})
 
 export const metadata: Metadata = {
   title: "Break Room UK | Find Break Rooms Across the UK",
-  description: "Discover break rooms across the UK. Browse venues, compare prices, and book your stress-relief session. Break rooms (also known as rage rooms or smash rooms) provide a safe way to release tension.",
+  description:
+    "Discover break rooms across the UK. Browse venues, compare prices, and book your stress-relief session. Break rooms (also known as rage rooms or smash rooms) provide a safe way to release tension.",
   alternates: { canonical: "/break-room-uk" },
   openGraph: {
     title: "Break Room UK | Find Break Rooms Across the UK",
-    description: "Find and compare break rooms across the UK. Book your stress-relief session today.",
+    description:
+      "Find and compare break rooms across the UK. Book your stress-relief session today.",
     type: "website",
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Break rooms UK directory" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Break Room UK",
+    description: "UK break room directory — venues, prices and booking.",
+    images: [OG_IMAGE],
   },
 }
 

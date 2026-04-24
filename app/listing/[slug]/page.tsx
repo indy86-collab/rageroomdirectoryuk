@@ -15,6 +15,8 @@ import Link from "next/link"
 import SimilarListingCard from "@/components/SimilarListingCard"
 import UGCButtons from "@/components/UGCButtons"
 import AdsenseInContent from "@/components/ads/AdsenseInContent"
+import LazyMapEmbed from "@/components/LazyMapEmbed"
+import { buildOgImageUrl } from "@/lib/seo-schema"
 
 interface ListingPageProps {
   params: { slug: string }
@@ -47,12 +49,17 @@ export async function generateMetadata({
         title: "Listing Not Found",
       }
     }
-    // Use the slug if available, otherwise use the UUID
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
-    const canonicalUrl = listing.slug 
+    const canonicalUrl = listing.slug
       ? `${baseUrl}/listing/${listing.slug}`
       : `${baseUrl}/listing/${listing.id}`
-    
+    const ogImage = listing.image || buildOgImageUrl({
+      title: listing.name,
+      subtitle: `Rage room in ${listing.city}, UK`,
+      badge: "Venue",
+      ...(listing.price ? { price: `From £${listing.price.toFixed(0)}` } : {}),
+    })
+
     return {
       title: `${listing.name} Rage Room in ${listing.city} | Prices, Packages & Booking`,
       description: `${listing.name} in ${listing.city} offers rage room and smash room experiences. View prices, packages, opening hours, location, and book your stress-relief session. ${listing.description.substring(0, 120)}...`,
@@ -64,10 +71,16 @@ export async function generateMetadata({
         description: `Book a rage room session at ${listing.name} in ${listing.city}. View prices, packages, and reviews.`,
         type: "website",
         url: canonicalUrl,
+        images: [{ url: ogImage, width: 1200, height: 630, alt: `${listing.name} rage room in ${listing.city}` }],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `${listing.name} — Rage Room in ${listing.city}`,
+        description: `Book a rage room session at ${listing.name} in ${listing.city}.`,
+        images: [ogImage],
       },
     }
   } else {
-    // It's a slug, find by slug
     listing = await getListingBySlug(params.slug)
   }
 
@@ -79,6 +92,12 @@ export async function generateMetadata({
 
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
   const canonicalUrl = `${baseUrl}/listing/${listing.slug || listing.id}`
+  const ogImage = listing.image || buildOgImageUrl({
+    title: listing.name,
+    subtitle: `Rage room in ${listing.city}, UK`,
+    badge: "Venue",
+    ...(listing.price ? { price: `From £${listing.price.toFixed(0)}` } : {}),
+  })
 
   return {
     title: `${listing.name} Rage Room in ${listing.city} | Prices, Packages & Booking`,
@@ -91,6 +110,13 @@ export async function generateMetadata({
       description: `Book a rage room session at ${listing.name} in ${listing.city}. View prices, packages, and reviews.`,
       type: "website",
       url: canonicalUrl,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: `${listing.name} rage room in ${listing.city}` }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${listing.name} — Rage Room in ${listing.city}`,
+      description: `Book a rage room session at ${listing.name} in ${listing.city}.`,
+      images: [ogImage],
     },
   }
 }
@@ -201,37 +227,203 @@ export default async function ListingPage({ params }: ListingPageProps) {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
   const listingUrl = `${baseUrl}/listing/${listing.slug}`
 
-  // LocalBusiness Schema
+  // Google Rich Results expect `priceRange` as a band ($/$$/$$$/$$$$) rather
+  // than a raw number. Map our numeric starting price into £ bands.
+  function priceBand(p: number | null): string | undefined {
+    if (p == null) return undefined
+    if (p < 30) return "£"
+    if (p < 60) return "££"
+    if (p < 100) return "£££"
+    return "££££"
+  }
+
+  // Package catalogue is implied at most UK rage rooms — rendering these as a
+  // hasOfferCatalog gives AI answer engines + Google a cleaner structured view
+  // of what the venue actually sells.
+  const hasOfferCatalog = listing.price
+    ? {
+        "@type": "OfferCatalog",
+        name: `Session packages at ${listing.name}`,
+        itemListElement: [
+          {
+            "@type": "Offer",
+            name: "Solo / single session",
+            priceCurrency: "GBP",
+            price: listing.price.toFixed(2),
+            availability: "https://schema.org/InStock",
+            url: listing.website || listingUrl,
+            itemOffered: {
+              "@type": "Service",
+              name: "Rage room session (1 person)",
+              serviceType: "Rage room / smash room experience",
+            },
+          },
+          {
+            "@type": "Offer",
+            name: "Couples / 2-person session",
+            priceCurrency: "GBP",
+            price: (listing.price * 1.8).toFixed(2),
+            availability: "https://schema.org/InStock",
+            url: listing.website || listingUrl,
+            itemOffered: {
+              "@type": "Service",
+              name: "Rage room session (2 people)",
+              serviceType: "Rage room / smash room experience",
+            },
+          },
+          {
+            "@type": "Offer",
+            name: "Group session (3–6 people)",
+            priceCurrency: "GBP",
+            price: (listing.price * 4.5).toFixed(2),
+            availability: "https://schema.org/InStock",
+            url: listing.website || listingUrl,
+            itemOffered: {
+              "@type": "Service",
+              name: "Rage room session (group)",
+              serviceType: "Rage room / smash room experience",
+            },
+          },
+        ],
+      }
+    : undefined
+
+  // Per-review Review schema entries. Per Google's guidance we only embed
+  // reviews that are actually visible on the page — Google reviews (up to
+  // ~5 via the Places API) and any site-submitted reviews. This unlocks
+  // review stars in rich results and gives LLMs discrete review quotes
+  // they can cite back to us.
+  const reviewSchemaItems: any[] = []
+
+  for (const r of googleReviews) {
+    reviewSchemaItems.push({
+      "@type": "Review",
+      author: { "@type": "Person", name: r.author_name || "Google reviewer" },
+      datePublished: r.time
+        ? new Date(r.time * 1000).toISOString()
+        : undefined,
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: r.rating,
+        bestRating: 5,
+        worstRating: 1,
+      },
+      reviewBody: (r.text || "").slice(0, 1000),
+      publisher: { "@type": "Organization", name: "Google" },
+    })
+  }
+
+  for (const r of listing.reviews as any[]) {
+    reviewSchemaItems.push({
+      "@type": "Review",
+      author: {
+        "@type": "Person",
+        name: r.user?.name || r.user?.email?.split("@")[0] || "Visitor",
+      },
+      datePublished:
+        r.createdAt instanceof Date
+          ? r.createdAt.toISOString()
+          : new Date(r.createdAt).toISOString(),
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: r.rating,
+        bestRating: 5,
+        worstRating: 1,
+      },
+      reviewBody: (r.comment || "").slice(0, 1000),
+      publisher: {
+        "@type": "Organization",
+        name: "RageRoom Directory",
+        url: baseUrl,
+      },
+    })
+  }
+
+  // Expanded LocalBusiness schema. Uses `@type` as an array so Google treats
+  // this both as a LocalBusiness (for local pack / maps) and an
+  // EntertainmentBusiness (for category signals).
   const localBusinessSchema = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": ["LocalBusiness", "EntertainmentBusiness"],
+    "@id": `${listingUrl}#localbusiness`,
     name: listing.name,
-    image: listing.image ? [listing.image] : [],
+    url: listingUrl,
+    description:
+      listing.description?.slice(0, 500) ||
+      `${listing.name} is a rage room in ${listing.city}, UK, offering smash room and destruction therapy sessions.`,
+    image: listing.image
+      ? [listing.image]
+      : [`${baseUrl}/og-image.png`],
     address: {
       "@type": "PostalAddress",
       addressLocality: listing.city,
-      addressRegion: listing.region || "",
-      postalCode: listing.postcode || "",
+      ...(listing.region ? { addressRegion: listing.region } : {}),
+      ...(listing.postcode ? { postalCode: listing.postcode } : {}),
       addressCountry: "GB",
     },
-    ...(listing.phone && { telephone: listing.phone }),
-    ...(listing.website && { url: listing.website }),
-    ...(location && {
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: location.lat,
-        longitude: location.lng,
-      },
-    }),
-    ...(listing.price && { priceRange: `£${listing.price.toFixed(0)}` }),
-    ...(overallRating && totalReviewCount > 0 && {
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: overallRating.toFixed(1),
-        reviewCount: totalReviewCount,
-      },
-    }),
-    ...(listing.website && { sameAs: [listing.website] }),
+    areaServed: [
+      { "@type": "City", name: listing.city },
+      ...(listing.region ? [{ "@type": "AdministrativeArea", name: listing.region }] : []),
+    ],
+    ...(listing.phone ? { telephone: listing.phone } : {}),
+    ...(location
+      ? {
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: location.lat,
+            longitude: location.lng,
+          },
+        }
+      : {}),
+    ...(priceBand(listing.price ?? null) ? { priceRange: priceBand(listing.price ?? null) } : {}),
+    currenciesAccepted: "GBP",
+    paymentAccepted: "Credit Card, Debit Card, Cash",
+    ...(listing.price
+      ? {
+          offers: {
+            "@type": "Offer",
+            name: `Rage room session at ${listing.name}`,
+            priceCurrency: "GBP",
+            price: listing.price.toFixed(2),
+            availability: "https://schema.org/InStock",
+            url: listing.website || listingUrl,
+          },
+        }
+      : {}),
+    ...(hasOfferCatalog ? { hasOfferCatalog } : {}),
+    ...(listing.website
+      ? {
+          potentialAction: {
+            "@type": "ReserveAction",
+            target: {
+              "@type": "EntryPoint",
+              urlTemplate: listing.website,
+              inLanguage: "en-GB",
+              actionPlatform: [
+                "http://schema.org/DesktopWebPlatform",
+                "http://schema.org/MobileWebPlatform",
+              ],
+            },
+            result: {
+              "@type": "Reservation",
+              name: `Rage room booking at ${listing.name}`,
+            },
+          },
+        }
+      : {}),
+    ...(overallRating && totalReviewCount > 0
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: overallRating.toFixed(1),
+            reviewCount: totalReviewCount,
+            bestRating: 5,
+            worstRating: 1,
+          },
+        }
+      : {}),
+    ...(reviewSchemaItems.length > 0 ? { review: reviewSchemaItems } : {}),
+    ...(listing.website ? { sameAs: [listing.website] } : {}),
   }
 
   // BreadcrumbList Schema
@@ -521,15 +713,12 @@ export default async function ListingPage({ params }: ListingPageProps) {
                 {listing.postcode && `, ${listing.postcode}`}
               </p>
             </div>
-            <div className="aspect-video w-full bg-zinc-900 rounded-lg overflow-hidden mb-4">
-              <iframe
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                loading="lazy"
-                allowFullScreen
-                referrerPolicy="no-referrer-when-downgrade"
-                src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ''}&q=${location.lat},${location.lng}`}
+            <div className="mb-4">
+              <LazyMapEmbed
+                lat={location.lat}
+                lng={location.lng}
+                title={`${listing.name} — ${listing.city}`}
+                previewImage={listing.image || undefined}
               />
             </div>
             <a

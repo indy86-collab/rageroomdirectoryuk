@@ -6,23 +6,30 @@ export default function Footer() {
 
   const columns: { heading: string; links: { label: string; href: string }[] }[] = [
     {
-      heading: "Links",
+      heading: "Popular Guides",
+      links: [
+        { label: "Best Rage Rooms London", href: "/guides/best-rage-rooms-london" },
+        { label: "Rage Room vs Escape Room", href: "/rage-room-vs-escape-room" },
+        { label: "Rage Rooms for Hen Parties", href: "/guides/rage-rooms-for-hen-parties-uk" },
+        { label: "Rage Rooms for Birthdays", href: "/guides/rage-rooms-for-birthdays-uk" },
+        { label: "UK Pricing Guide", href: "/guides/how-much-do-rage-rooms-cost-uk" },
+      ],
+    },
+    {
+      heading: "Explore",
+      links: [
+        { label: "All Listings", href: "/listings" },
+        { label: "Near Me", href: "/near-me" },
+        { label: "All Guides", href: "/guides" },
+        { label: "Blog", href: "/blog" },
+      ],
+    },
+    {
+      heading: "Company",
       links: [
         { label: "About", href: "/about" },
-        { label: "Terms", href: "/terms" },
-      ],
-    },
-    {
-      heading: "Contact",
-      links: [
         { label: "Contact", href: "/contact" },
-        { label: "Privacy", href: "/privacy-policy" },
-      ],
-    },
-    {
-      heading: "Careers",
-      links: [
-        { label: "Careers", href: "/list-your-rage-room" },
+        { label: "List Your Rage Room", href: "/list-your-rage-room" },
         { label: "FAQ", href: "/#faq" },
       ],
     },

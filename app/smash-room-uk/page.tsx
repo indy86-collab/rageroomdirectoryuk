@@ -5,15 +5,31 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 import FAQ from "@/components/FAQ"
 import { globalFAQs } from "@/lib/faqs"
 import ListingsGrid from "@/components/ListingsGrid"
+import { buildOgImageUrl } from "@/lib/seo-schema"
+
+const OG_IMAGE = buildOgImageUrl({
+  title: "Smash Rooms UK",
+  subtitle: "Find & compare UK smash room venues",
+  badge: "Smash Rooms",
+})
 
 export const metadata: Metadata = {
   title: "Smash Room UK | Find Smash Rooms Across the UK",
-  description: "Discover smash rooms across the UK. Browse venues, compare prices, and book your stress-relief session. Smash rooms (also known as rage rooms) provide a safe way to release tension.",
+  description:
+    "Discover smash rooms across the UK. Browse venues, compare prices, and book your stress-relief session. Smash rooms (also known as rage rooms) provide a safe way to release tension.",
   alternates: { canonical: "/smash-room-uk" },
   openGraph: {
     title: "Smash Room UK | Find Smash Rooms Across the UK",
-    description: "Find and compare smash rooms across the UK. Book your stress-relief session today.",
+    description:
+      "Find and compare smash rooms across the UK. Book your stress-relief session today.",
     type: "website",
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Smash rooms UK directory" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Smash Room UK",
+    description: "UK smash room directory — venues, prices and booking.",
+    images: [OG_IMAGE],
   },
 }
 

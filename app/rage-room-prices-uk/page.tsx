@@ -2,15 +2,32 @@ import { Metadata } from "next"
 import Link from "next/link"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import FAQ from "@/components/FAQ"
+import { buildOgImageUrl } from "@/lib/seo-schema"
+
+const OG_IMAGE = buildOgImageUrl({
+  title: "UK Rage Room Prices",
+  subtitle: "Complete pricing guide by city & package",
+  badge: "Pricing",
+  price: "From £20",
+})
 
 export const metadata: Metadata = {
-  title: "Rage Room Prices UK | Complete Pricing Guide 2025",
-  description: "Complete guide to rage room prices across the UK. Compare prices by city, package types, and venues. Learn about BYO policies and find the best value.",
+  title: "Rage Room Prices UK | Complete Pricing Guide 2026",
+  description:
+    "Complete guide to rage room prices across the UK. Compare prices by city, package types and venues. Learn about BYO policies and find the best value.",
   alternates: { canonical: "/rage-room-prices-uk" },
   openGraph: {
-    title: "Rage Room Prices UK | Complete Pricing Guide 2025",
-    description: "Compare rage room prices across the UK. Find the best value with our comprehensive pricing guide.",
+    title: "Rage Room Prices UK | Complete Pricing Guide 2026",
+    description:
+      "Compare rage room prices across the UK. Find the best value with our comprehensive pricing guide.",
     type: "website",
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "UK rage room pricing guide" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Rage Room Prices UK",
+    description: "UK rage room pricing compared — city, package and BYO costs.",
+    images: [OG_IMAGE],
   },
 }
 

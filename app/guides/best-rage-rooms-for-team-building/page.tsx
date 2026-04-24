@@ -2,38 +2,74 @@ import { Metadata } from "next"
 import Link from "next/link"
 import AdsenseInContent from "@/components/ads/AdsenseInContent"
 import FAQ from "@/components/FAQ"
+import GuideMeta from "@/components/GuideMeta"
+import {
+  buildArticleSchema,
+  buildBreadcrumbSchema,
+  buildItemListSchema,
+  buildOgImageUrl,
+} from "@/lib/seo-schema"
+
+const GUIDE_PATH = "/guides/best-rage-rooms-for-team-building"
+const OG_IMAGE = buildOgImageUrl({
+  title: "Best Rage Rooms for Team Building",
+  subtitle: "UK corporate guide · Group packages · 8–20 people",
+  badge: "Corporate",
+})
 
 export const metadata: Metadata = {
-  title: "Best Rage Rooms for Team Building & Corporate Events | Guide 2025",
-  description: "Discover the best rage rooms for corporate team building events. Find venues that accommodate large groups, offer team packages, and provide excellent team building experiences.",
-  alternates: { canonical: "/guides/best-rage-rooms-for-team-building" },
+  title: "Best Rage Rooms for Team Building UK | Corporate Guide (2026)",
+  description:
+    "2026 UK guide to the best rage rooms for team building and corporate events. Compare group capacities, corporate packages, facilitation options and pricing.",
+  alternates: { canonical: GUIDE_PATH },
   openGraph: {
     title: "Best Rage Rooms for Team Building & Corporate Events",
-    description: "Find the best rage rooms for corporate team building. Group packages and team activities.",
+    description:
+      "Find the best rage rooms for corporate team building. Group packages and team activities.",
     type: "article",
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Best rage rooms for team building UK" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Best Rage Rooms for Team Building (UK)",
+    description: "Corporate rage room packages and group bookings across the UK.",
+    images: [OG_IMAGE],
   },
 }
 
-// ISR: guide content updates rarely; listings data refreshes daily.
 export const revalidate = 86400
 
 export default async function BestRageRoomsForTeamBuildingPage() {
-  // Lazy load to prevent build-time initialization
   const { searchListings } = await import("@/lib/listings")
   const allListings = await searchListings(undefined)
 
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: "Best Rage Rooms for Team Building & Corporate Events | Guide 2025",
-    description: "Comprehensive guide to the best rage rooms for corporate team building and group events.",
-    author: {
-      "@type": "Organization",
-      name: "RageRoom Directory",
-    },
+  const articleSchema = buildArticleSchema({
+    url: GUIDE_PATH,
+    headline: "Best Rage Rooms for Team Building & Corporate Events (UK, 2026)",
+    description:
+      "Comprehensive UK guide to the best rage rooms for corporate team building and group events, including pricing and venue capacity.",
     datePublished: "2025-01-01",
-    dateModified: "2025-12-01",
-  }
+    keywords: [
+      "rage room team building",
+      "corporate rage room UK",
+      "office team building UK",
+      "group rage room",
+      "corporate smash room",
+    ],
+  })
+
+  const itemListSchema = buildItemListSchema({
+    name: "Recommended rage rooms for team building (UK)",
+    description: "UK rage room venues well-suited for corporate team building and group events.",
+    url: GUIDE_PATH,
+    listings: allListings.slice(0, 10),
+  })
+
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Guides", url: "/guides" },
+    { name: "Best Rage Rooms for Team Building", url: GUIDE_PATH },
+  ])
 
   const teamBuildingFAQs = [
     {
@@ -65,6 +101,14 @@ export default async function BestRageRoomsForTeamBuildingPage() {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
 
         <nav className="mb-6 text-sm">
           <ol className="flex items-center space-x-2 text-white">
@@ -86,8 +130,20 @@ export default async function BestRageRoomsForTeamBuildingPage() {
 
         <article>
           <h1 className="text-4xl font-bold mb-4 text-white">
-            Best Rage Rooms for Team Building & Corporate Events (2025)
+            Best Rage Rooms for Team Building & Corporate Events (2026)
           </h1>
+
+          <GuideMeta
+            updated="April 2026"
+            readingTimeMinutes={8}
+            keyTakeaways={[
+              "Most UK rage rooms can accommodate 4–12 people; larger venues handle 20+ for full corporate bookings.",
+              "Corporate packages typically cost £250–£600+ for groups of 8–20 with extended breakables and optional facilitation.",
+              "Private group bookings are the norm for corporate — your team has the full venue to themselves.",
+              "Book at least 3–4 weeks ahead for weekday afternoon slots, which are most popular for company away-days.",
+              "Some venues offer bolt-on refreshments, meeting/debrief rooms and video capture for post-event sharing.",
+            ]}
+          />
 
           <p className="text-lg text-zinc-300 mb-6">
             Rage rooms are becoming increasingly popular for corporate team building events. They offer a unique, engaging activity that helps teams bond, relieve stress, and improve workplace relationships. Our guide helps you find the best rage rooms for team building, with tips on group sizes, corporate packages, and what to expect.

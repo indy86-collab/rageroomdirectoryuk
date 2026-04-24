@@ -2,15 +2,31 @@ import { Metadata } from "next"
 import Link from "next/link"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import NearMeMap from "@/components/NearMeMap"
+import { buildOgImageUrl } from "@/lib/seo-schema"
+
+const OG_IMAGE = buildOgImageUrl({
+  title: "London Rage Room Map",
+  subtitle: "Interactive map of every London venue",
+  badge: "Map · London",
+})
 
 export const metadata: Metadata = {
   title: "Rage Room London Map | Find All London Rage Rooms on Map",
-  description: "Interactive map showing all rage rooms in London. Find locations, compare venues, and discover the best smash rooms in the capital.",
+  description:
+    "Interactive map showing all rage rooms in London. Find locations, compare venues and discover the best smash rooms in the capital.",
   alternates: { canonical: "/london-map" },
   openGraph: {
     title: "Rage Room London Map | Find All London Rage Rooms",
-    description: "Interactive map of all rage rooms and smash rooms in London. Find venues near you.",
+    description:
+      "Interactive map of all rage rooms and smash rooms in London. Find venues near you.",
     type: "website",
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Map of London rage rooms" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Rage Room London Map",
+    description: "Interactive map of every rage room in London.",
+    images: [OG_IMAGE],
   },
 }
 

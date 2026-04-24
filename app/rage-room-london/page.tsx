@@ -6,15 +6,31 @@ import FAQ from "@/components/FAQ"
 import { getCityFAQs } from "@/lib/faqs"
 import ListingCard from "@/components/ListingCard"
 import NearMeMap from "@/components/NearMeMap"
+import { buildOgImageUrl } from "@/lib/seo-schema"
+
+const OG_IMAGE = buildOgImageUrl({
+  title: "Rage Rooms in London",
+  subtitle: "Top-rated smash rooms in the capital",
+  badge: "London",
+})
 
 export const metadata: Metadata = {
-  title: "Rage Room London | Best Smash Rooms in the Capital 2025",
-  description: "Discover the best rage rooms in London. Compare top 5 smash rooms, prices, packages, and locations. Book your stress-relief session in London today.",
+  title: "Rage Room London | Best Smash Rooms in the Capital 2026",
+  description:
+    "Discover the best rage rooms in London. Compare top smash rooms, prices, packages and locations. Book your stress-relief session in the capital today.",
   alternates: { canonical: "/rage-room-london" },
   openGraph: {
     title: "Rage Room London | Best Smash Rooms in the Capital",
-    description: "Find and compare the best rage rooms in London. Top venues, prices, and booking information.",
+    description:
+      "Find and compare the best rage rooms in London. Top venues, prices and booking information.",
     type: "website",
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Rage rooms in London" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Rage Room London | Best Smash Rooms",
+    description: "Compare London rage rooms, prices and book today.",
+    images: [OG_IMAGE],
   },
 }
 

@@ -1,23 +1,72 @@
 import { Metadata } from "next"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import AdsenseInContent from "@/components/ads/AdsenseInContent"
+import GuideMeta from "@/components/GuideMeta"
 import Link from "next/link"
+import { buildArticleSchema, buildBreadcrumbSchema, buildOgImageUrl } from "@/lib/seo-schema"
+
+const GUIDE_PATH = "/guides/are-rage-rooms-safe-uk"
+const OG_IMAGE = buildOgImageUrl({
+  title: "Are Rage Rooms Safe in the UK?",
+  subtitle: "PPE · Age limits · Insurance · Injury risks",
+  badge: "Guide",
+})
 
 export const metadata: Metadata = {
-  title: "Are Rage Rooms Safe in the UK? Safety Guide & Regulations",
-  description: "Learn about rage room safety in the UK, including safety equipment, regulations, common misconceptions, and what to expect during your session.",
-  alternates: { canonical: "/guides/are-rage-rooms-safe-uk" },
+  title: "Are Rage Rooms Safe in the UK? Safety Guide (2026)",
+  description:
+    "Independent safety guide to UK rage rooms: PPE, age limits, medical restrictions, insurance, common injuries and how to pick a safe venue. Updated 2026.",
+  alternates: { canonical: GUIDE_PATH },
   openGraph: {
     title: "Are Rage Rooms Safe in the UK? Complete Safety Guide",
     description: "Everything you need to know about rage room safety, equipment, and UK regulations.",
     type: "article",
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Are rage rooms safe in the UK" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Are Rage Rooms Safe in the UK?",
+    description: "Complete UK safety guide for rage rooms.",
+    images: [OG_IMAGE],
   },
 }
 
+export const revalidate = 86400
+
 export default function AreRageRoomsSafeUKPage() {
+  const articleSchema = buildArticleSchema({
+    url: GUIDE_PATH,
+    headline: "Are Rage Rooms Safe in the UK? Complete Safety Guide",
+    description:
+      "Complete safety guide to UK rage rooms: PPE, age limits, medical exclusions, insurance and how to identify a reputable venue.",
+    datePublished: "2025-01-01",
+    keywords: [
+      "are rage rooms safe",
+      "rage room safety UK",
+      "rage room PPE",
+      "rage room age limit",
+      "rage room insurance",
+    ],
+  })
+
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Guides", url: "/guides" },
+    { name: "Are Rage Rooms Safe?", url: GUIDE_PATH },
+  ])
+
   return (
     <div className="py-6 sm:py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
+
         <Breadcrumbs
           items={[
             { label: "Home", href: "/" },
@@ -29,6 +78,18 @@ export default function AreRageRoomsSafeUKPage() {
         <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4 sm:mb-6 mt-4">
           Are Rage Rooms Safe in the UK? Complete Safety Guide
         </h1>
+
+        <GuideMeta
+          updated="April 2026"
+          readingTimeMinutes={10}
+          keyTakeaways={[
+            "UK rage rooms are low-risk when PPE (coveralls, full-face visor helmet, gloves, boots) is worn and staff instructions are followed.",
+            "Most venues require participants to be 18+; some accept 14–17 with parental consent for dedicated youth sessions.",
+            "Pregnancy, heart conditions, recent surgery, and being under the influence are standard exclusions across UK venues.",
+            "Reputable venues carry at least £5 million public liability insurance and require a signed waiver before entry.",
+            "The most common injuries are minor: small cuts, bruises and muscle strain — serious injuries are rare and almost always linked to not wearing PPE.",
+          ]}
+        />
 
         <div className="space-y-6 text-base sm:text-lg text-zinc-300">
           <p className="text-xl text-white font-semibold">

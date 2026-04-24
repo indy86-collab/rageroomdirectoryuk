@@ -1,23 +1,137 @@
 import { Metadata } from "next"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import AdsenseInContent from "@/components/ads/AdsenseInContent"
+import GuideMeta from "@/components/GuideMeta"
 import Link from "next/link"
+import {
+  buildArticleSchema,
+  buildBreadcrumbSchema,
+  buildHowToSchema,
+  buildOgImageUrl,
+} from "@/lib/seo-schema"
+
+const GUIDE_PATH = "/guides/what-happens-in-a-rage-room"
+const OG_IMAGE = buildOgImageUrl({
+  title: "What Happens in a Rage Room?",
+  subtitle: "Step-by-step walkthrough of a UK rage room session",
+  badge: "Guide",
+})
 
 export const metadata: Metadata = {
-  title: "What Happens in a Rage Room? Complete First-Time Guide",
-  description: "Step-by-step guide to your first rage room experience. Learn what to expect, how to prepare, and what happens during a rage room session in the UK.",
-  alternates: { canonical: "/guides/what-happens-in-a-rage-room" },
+  title: "What Happens in a Rage Room? Step-by-Step Guide (2026)",
+  description:
+    "Complete step-by-step walkthrough of a UK rage room session — from booking and PPE to smashing, timing and cleanup. Updated for 2026.",
+  alternates: { canonical: GUIDE_PATH },
   openGraph: {
     title: "What Happens in a Rage Room? First-Time Visitor Guide",
-    description: "Complete guide to rage room experiences: from arrival to smashing, everything you need to know for your first visit.",
+    description:
+      "Step-by-step guide to a rage room session: arrival, safety briefing, smashing, and cleanup.",
     type: "article",
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "What happens in a rage room" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "What Happens in a Rage Room?",
+    description: "Step-by-step walkthrough of a UK rage room session.",
+    images: [OG_IMAGE],
   },
 }
 
+export const revalidate = 86400
+
 export default function WhatHappensInARageRoomPage() {
+  const articleSchema = buildArticleSchema({
+    url: GUIDE_PATH,
+    headline: "What Happens in a Rage Room? Complete Step-by-Step Guide",
+    description:
+      "Everything that happens during a UK rage room session: booking, arrival, safety briefing, PPE, smashing phase, and cleanup.",
+    datePublished: "2025-01-01",
+    keywords: [
+      "what happens in a rage room",
+      "rage room experience",
+      "rage room UK",
+      "smash room session",
+      "first rage room visit",
+    ],
+  })
+
+  const howToSchema = buildHowToSchema({
+    name: "How a UK rage room session works, step by step",
+    description:
+      "Walkthrough of a typical UK rage room visit from booking confirmation to leaving the venue.",
+    url: GUIDE_PATH,
+    totalTime: "PT60M",
+    supply: [
+      "Closed-toe shoes",
+      "Comfortable clothing",
+      "Booking confirmation",
+    ],
+    tool: [
+      "Sledgehammer",
+      "Baseball bat",
+      "Crowbar",
+      "Safety coveralls",
+      "Full-face visor helmet",
+      "Heavy-duty gloves",
+    ],
+    steps: [
+      {
+        name: "Book and prepare",
+        text: "Book online, read the venue's rules, and wear closed-toe shoes with comfortable clothes. Arrive 10–15 minutes early.",
+      },
+      {
+        name: "Check in and sign the waiver",
+        text: "At the venue, confirm your booking, show ID if asked, and sign the liability waiver. Most UK venues require participants to be 18+.",
+      },
+      {
+        name: "Attend the safety briefing",
+        text: "Staff walk you through tool handling, correct PPE use, room rules, and emergency procedures. Ask questions if anything is unclear.",
+      },
+      {
+        name: "Suit up in PPE",
+        text: "Put on coveralls, a reinforced helmet with full-face visor, heavy-duty gloves, and (usually) steel-toed boots. Staff help with fit.",
+      },
+      {
+        name: "Enter the rage room",
+        text: "Step into a reinforced, enclosed space pre-loaded with glass bottles, ceramics, electronics and small furniture, plus your chosen tools.",
+      },
+      {
+        name: "Smash during your session",
+        text: "Use sledgehammers, bats or crowbars to break items for your booked session length (15–60 minutes). Many venues let you stream your own music.",
+      },
+      {
+        name: "Wrap up and remove PPE",
+        text: "When time is up, set down your tools, exit carefully and staff help you de-kit. You don't clean up the debris — staff handle it.",
+      },
+      {
+        name: "Photos, extras and aftercare",
+        text: "Grab photos or pay for video footage if offered, rehydrate, and book a repeat session if you enjoyed it.",
+      },
+    ],
+  })
+
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Guides", url: "/guides" },
+    { name: "What Happens in a Rage Room?", url: GUIDE_PATH },
+  ])
+
   return (
     <div className="py-6 sm:py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
+
         <Breadcrumbs
           items={[
             { label: "Home", href: "/" },
@@ -29,6 +143,18 @@ export default function WhatHappensInARageRoomPage() {
         <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4 sm:mb-6 mt-4">
           What Happens in a Rage Room? Complete First-Time Guide
         </h1>
+
+        <GuideMeta
+          updated="April 2026"
+          readingTimeMinutes={10}
+          keyTakeaways={[
+            "A typical UK rage room session runs 15–60 minutes, with PPE and a safety briefing included.",
+            "You'll be kitted out in coveralls, a full-face visor helmet, heavy-duty gloves and boots before entering.",
+            "Most venues provide glass, ceramics, electronics and small furniture; tools are sledgehammers, bats and crowbars.",
+            "Staff monitor every session and handle all cleanup — customers never clear debris.",
+            "Participants must usually be 18+ in the UK (some venues accept 14–17 with parental consent).",
+          ]}
+        />
 
         <div className="space-y-6 text-base sm:text-lg text-zinc-300">
           <p className="text-xl text-white font-semibold">

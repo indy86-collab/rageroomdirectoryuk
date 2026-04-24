@@ -7,7 +7,9 @@ import FAQ from "@/components/FAQ"
 import { getCityFAQs } from "@/lib/faqs"
 import UGCButtons from "@/components/UGCButtons"
 import AdsenseInContent from "@/components/ads/AdsenseInContent"
+import CityRelatedLinks from "@/components/CityRelatedLinks"
 import Link from "next/link"
+import { buildOgImageUrl } from "@/lib/seo-schema"
 
 interface CityPageProps {
   params: { slug: string }
@@ -20,7 +22,20 @@ export async function generateMetadata({
   const { getListingsByCity } = await import("@/lib/listings")
   const listings = await getListingsByCity(cityName)
   const count = listings.length
-  
+  const pricedListings = listings.filter((l) => l.price != null) as Array<
+    typeof listings[number] & { price: number }
+  >
+  const minPrice = pricedListings.length
+    ? Math.min(...pricedListings.map((l) => l.price))
+    : null
+
+  const ogImage = buildOgImageUrl({
+    title: `Rage Rooms in ${cityName}`,
+    subtitle: `${count} verified ${count === 1 ? "venue" : "venues"} · Compare prices & book`,
+    badge: "City",
+    ...(minPrice ? { price: `From £${minPrice.toFixed(0)}` } : {}),
+  })
+
   return {
     title: `Rage Rooms in ${cityName} — ${count} ${count === 1 ? "Venue" : "Venues"} Listed`,
     description: `Find rage rooms in ${cityName}. Compare ${count} ${count === 1 ? "venue" : "venues"}, view starting prices, read reviews, and book a destruction therapy session near you.`,
@@ -29,6 +44,13 @@ export async function generateMetadata({
       title: `Rage Rooms in ${cityName} | RageRoom Directory`,
       description: `Browse ${count} rage ${count === 1 ? "room" : "rooms"} in ${cityName}. Compare venues, prices, and reviews.`,
       type: "website",
+      images: [{ url: ogImage, width: 1200, height: 630, alt: `Rage rooms in ${cityName}` }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Rage Rooms in ${cityName}`,
+      description: `${count} verified rage rooms in ${cityName}. Compare venues and prices.`,
+      images: [ogImage],
     },
   }
 }
@@ -41,21 +63,50 @@ export default async function CityPage({ params }: CityPageProps) {
   const { getListingsByCity } = await import("@/lib/listings")
   const listings = await getListingsByCity(cityName)
 
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
+  const cityUrl = `${baseUrl}/city/${cityToSlug(cityName)}`
+
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
+    "@id": `${cityUrl}#itemlist`,
     name: `Rage Rooms in ${cityName}`,
     description: `Directory of rage rooms and smash rooms in ${cityName}`,
     numberOfItems: listings.length,
-    itemListElement: listings.map((listing, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      item: {
-        "@type": "LocalBusiness",
-        name: listing.name,
-        url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"}/listing/${listing.slug || listing.id}`,
-      },
-    })),
+    itemListOrder: "https://schema.org/ItemListOrderDescending",
+    itemListElement: listings.map((listing, index) => {
+      const url = `${baseUrl}/listing/${listing.slug || listing.id}`
+      return {
+        "@type": "ListItem",
+        position: index + 1,
+        url,
+        item: {
+          "@type": ["LocalBusiness", "EntertainmentBusiness"],
+          "@id": `${url}#localbusiness`,
+          name: listing.name,
+          url,
+          image: listing.image || `${baseUrl}/og-image.png`,
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: listing.city,
+            ...(listing.region ? { addressRegion: listing.region } : {}),
+            addressCountry: "GB",
+          },
+          ...(listing.price
+            ? {
+                offers: {
+                  "@type": "Offer",
+                  priceCurrency: "GBP",
+                  price: listing.price.toFixed(2),
+                  availability: "https://schema.org/InStock",
+                  url,
+                },
+              }
+            : {}),
+        },
+      }
+    }),
   }
 
   const cityFAQs = getCityFAQs(cityName)
@@ -64,6 +115,51 @@ export default async function CityPage({ params }: CityPageProps) {
   const priceRange = listings.filter(l => l.price).map(l => l.price!)
   const minPrice = priceRange.length > 0 ? Math.min(...priceRange) : null
   const maxPrice = priceRange.length > 0 ? Math.max(...priceRange) : null
+
+  // AggregateOffer schema: the "from £X — up to £Y" signal for a whole city.
+  // Unlocks richer SERP price badging and gives LLMs an at-a-glance price
+  // range for the market, which is one of the most commonly asked questions.
+  const aggregateOfferSchema =
+    minPrice !== null && maxPrice !== null
+      ? {
+          "@context": "https://schema.org",
+          "@type": "AggregateOffer",
+          "@id": `${cityUrl}#aggregateoffer`,
+          priceCurrency: "GBP",
+          lowPrice: minPrice.toFixed(2),
+          highPrice: maxPrice.toFixed(2),
+          offerCount: priceRange.length,
+          availability: "https://schema.org/InStock",
+          url: cityUrl,
+          offeredBy: {
+            "@type": "Organization",
+            name: "RageRoom Directory",
+            url: baseUrl,
+          },
+          itemOffered: {
+            "@type": "Service",
+            name: `Rage room sessions in ${cityName}`,
+            serviceType: "Rage room / smash room experience",
+            areaServed: { "@type": "City", name: cityName },
+          },
+        }
+      : null
+
+  // Breadcrumb schema — gives this page proper hierarchy signal.
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: baseUrl },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "All Rage Rooms",
+        item: `${baseUrl}/listings`,
+      },
+      { "@type": "ListItem", position: 3, name: cityName, item: cityUrl },
+    ],
+  }
 
   return (
     <div className="py-6 sm:py-8">
@@ -80,6 +176,18 @@ export default async function CityPage({ params }: CityPageProps) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
+        {aggregateOfferSchema && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(aggregateOfferSchema),
+            }}
+          />
+        )}
 
         <h1 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 text-white">
           Rage Rooms in {cityName}
@@ -153,6 +261,11 @@ export default async function CityPage({ params }: CityPageProps) {
                 First Time Guide
               </Link>
             </div>
+
+            {/* Deep internal linking: this city's dedicated guide + related
+                city pages + full topical guide cluster. Boosts crawl depth
+                and topical authority. */}
+            <CityRelatedLinks cityName={cityName} />
           </>
         ) : (
           <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-8 text-center">

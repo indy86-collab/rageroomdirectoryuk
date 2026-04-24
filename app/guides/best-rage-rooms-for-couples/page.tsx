@@ -2,40 +2,74 @@ import { Metadata } from "next"
 import Link from "next/link"
 import AdsenseInContent from "@/components/ads/AdsenseInContent"
 import FAQ from "@/components/FAQ"
+import GuideMeta from "@/components/GuideMeta"
 import { globalFAQs } from "@/lib/faqs"
+import {
+  buildArticleSchema,
+  buildBreadcrumbSchema,
+  buildItemListSchema,
+  buildOgImageUrl,
+} from "@/lib/seo-schema"
+
+const GUIDE_PATH = "/guides/best-rage-rooms-for-couples"
+const OG_IMAGE = buildOgImageUrl({
+  title: "Best Rage Rooms for Couples",
+  subtitle: "UK date night guide · Private rooms, couples packages & pricing",
+  badge: "Couples",
+})
 
 export const metadata: Metadata = {
-  title: "Best Rage Rooms for Couples | Date Night Guide 2025",
-  description: "Discover the best rage rooms for couples and date nights. Find romantic smash room experiences perfect for couples looking for unique activities and stress relief together.",
-  alternates: { canonical: "/guides/best-rage-rooms-for-couples" },
+  title: "Best Rage Rooms for Couples | UK Date Night Guide (2026)",
+  description:
+    "Independent 2026 guide to the best UK rage rooms for couples and date nights. Compare venues, couples packages, private rooms and pricing.",
+  alternates: { canonical: GUIDE_PATH },
   openGraph: {
     title: "Best Rage Rooms for Couples | Date Night Guide",
-    description: "Find the best rage rooms perfect for couples and date nights. Unique romantic activities for stress relief.",
+    description:
+      "Find the best rage rooms perfect for couples and date nights. Unique romantic activities for stress relief.",
     type: "article",
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Best rage rooms for couples UK" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Best Rage Rooms for Couples (UK)",
+    description: "UK date night guide: couples packages, private rooms & pricing.",
+    images: [OG_IMAGE],
   },
 }
 
-// ISR: guide content updates rarely; listings data refreshes daily.
 export const revalidate = 86400
 
 export default async function BestRageRoomsForCouplesPage() {
-  // Lazy load to prevent build-time initialization
   const { searchListings } = await import("@/lib/listings")
-  // Get all listings (we'll filter/rank them for couples)
   const allListings = await searchListings(undefined)
 
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: "Best Rage Rooms for Couples | Date Night Guide 2025",
-    description: "Comprehensive guide to the best rage rooms for couples, date nights, and romantic stress-relief experiences.",
-    author: {
-      "@type": "Organization",
-      name: "RageRoom Directory",
-    },
+  const articleSchema = buildArticleSchema({
+    url: GUIDE_PATH,
+    headline: "Best Rage Rooms for Couples: UK Date Night Guide (2026)",
+    description:
+      "UK guide to the best rage rooms for couples and date nights — couples packages, private sessions, pricing and recommended venues.",
     datePublished: "2025-01-01",
-    dateModified: "2025-12-01",
-  }
+    keywords: [
+      "best rage rooms for couples",
+      "rage room date night",
+      "couples smash room",
+      "couples rage room UK",
+    ],
+  })
+
+  const itemListSchema = buildItemListSchema({
+    name: "Recommended rage rooms for couples (UK)",
+    description: "Selected UK rage room venues well-suited for couples and date nights.",
+    url: GUIDE_PATH,
+    listings: allListings.slice(0, 10),
+  })
+
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Guides", url: "/guides" },
+    { name: "Best Rage Rooms for Couples", url: GUIDE_PATH },
+  ])
 
   const couplesFAQs: typeof globalFAQs = [
     {
@@ -63,6 +97,14 @@ export default async function BestRageRoomsForCouplesPage() {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
 
         <nav className="mb-6 text-sm">
           <ol className="flex items-center space-x-2 text-white">
@@ -84,8 +126,20 @@ export default async function BestRageRoomsForCouplesPage() {
 
         <article>
           <h1 className="text-4xl font-bold mb-4 text-white">
-            Best Rage Rooms for Couples: Ultimate Date Night Guide (2025)
+            Best Rage Rooms for Couples: Ultimate Date Night Guide (2026)
           </h1>
+
+          <GuideMeta
+            updated="April 2026"
+            readingTimeMinutes={7}
+            keyTakeaways={[
+              "Couples rage room packages in the UK typically cost £50–£90 for 30–45 minutes for two.",
+              "Look for private or semi-private sessions so you have the room to yourselves.",
+              "Venues that allow your own playlist and offer longer 45–60 minute sessions work best for date nights.",
+              "Many venues offer add-ons specifically for couples: extra breakables, paint-smash, and photo/video packages.",
+              "Book weekend slots 2–3 weeks ahead — couples sessions are the most popular Friday and Saturday bookings.",
+            ]}
+          />
 
           <p className="text-lg text-zinc-300 mb-6">
             Looking for a unique date night activity? Rage rooms offer couples an exciting, stress-relieving experience that's far from the typical dinner and movie. Our guide helps you find the best rage rooms perfect for couples, with tips on what to look for and how to make the most of your romantic smashing session.

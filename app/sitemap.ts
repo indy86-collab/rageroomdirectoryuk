@@ -50,6 +50,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/rage-room-vs-escape-room`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/london-map`,
       lastModified: new Date(),
       changeFrequency: "weekly",
@@ -157,6 +163,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "are-rage-rooms-safe-uk",
     "how-much-do-rage-rooms-cost-uk",
     "what-happens-in-a-rage-room",
+    "rage-rooms-for-hen-parties-uk",
+    "rage-rooms-for-birthdays-uk",
   ]
 
   guidePages.forEach((guide) => {

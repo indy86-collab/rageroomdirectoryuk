@@ -1,145 +1,35 @@
 import { Metadata } from "next"
-import Link from "next/link"
-import FAQ from "@/components/FAQ"
-import { getCityFAQs } from "@/lib/faqs"
-import { getGuideCityContent } from "@/lib/guide-city-content"
-import Breadcrumbs from "@/components/Breadcrumbs"
-import AdsenseInContent from "@/components/ads/AdsenseInContent"
+import CityGuidePage from "@/components/CityGuidePage"
+import { buildOgImageUrl } from "@/lib/seo-schema"
+
+const OG_IMAGE = buildOgImageUrl({
+  title: "Best Rage Rooms in Liverpool",
+  subtitle: "Top venues ranked · Prices, packages & local tips",
+  badge: "Guide",
+})
 
 export const metadata: Metadata = {
-  title: "Best Rage Rooms in Liverpool | Top Venues Ranked (2025)",
-  description: "Discover the best rage rooms in Liverpool. Our guide covers top venues in Merseyside, what to look for, pricing, and local tips for booking your destruction therapy session.",
+  title: "Best Rage Rooms in Liverpool | Top Venues Ranked (2026)",
+  description:
+    "Independent guide to the best rage rooms in Liverpool. Compare verified venues, starting prices, packages and local tips — updated for 2026.",
   alternates: { canonical: "/guides/best-rage-rooms-liverpool" },
   openGraph: {
     title: "Best Rage Rooms in Liverpool | Top Venues Ranked",
-    description: "Find the best rage rooms and smash rooms in Liverpool. Compare venues, prices, and book your stress-relief session.",
+    description:
+      "Find the best rage rooms and smash rooms in Liverpool. Compare venues, prices, and book your stress-relief session.",
     type: "article",
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Best Rage Rooms in Liverpool" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Best Rage Rooms in Liverpool",
+    description: "Compare the best rage rooms in Liverpool for 2026.",
+    images: [OG_IMAGE],
   },
 }
 
 export const revalidate = 86400
 
-export default async function BestRageRoomsLiverpoolPage() {
-  const { getListingsByCity } = await import("@/lib/listings")
-  const listings = await getListingsByCity("Liverpool")
-  const content = getGuideCityContent("Liverpool")
-  const faqs = getCityFAQs("Liverpool")
-
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: "Best Rage Rooms in Liverpool",
-    description: "Guide to the best rage rooms and smash rooms in Liverpool.",
-    author: { "@type": "Organization", name: "RageRoom Directory" },
-    datePublished: "2025-01-01",
-    dateModified: "2025-12-01",
-  }
-
-  return (
-    <div className="py-8">
-      <div className="max-w-4xl mx-auto px-4">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-        />
-
-        <Breadcrumbs
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Guides", href: "/guides" },
-            { label: "Best Rage Rooms in Liverpool" },
-          ]}
-        />
-
-        <article>
-          <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-white">
-            Best Rage Rooms in Liverpool
-          </h1>
-
-          <div className="text-base sm:text-lg text-zinc-300 mb-8 space-y-4">
-            <p>{content?.intro}</p>
-          </div>
-
-          <AdsenseInContent />
-
-          <div className="text-base sm:text-lg text-zinc-300 mb-8 space-y-4">
-            <p>{content?.sceneDescription}</p>
-          </div>
-
-          {listings.length > 0 ? (
-            <>
-              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">
-                Top Rage Rooms in Liverpool
-              </h2>
-              <div className="space-y-6 mb-10">
-                {listings.slice(0, 5).map((listing, index) => (
-                  <div key={listing.id} className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-5 sm:p-6">
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold text-lg sm:text-xl">
-                        {index + 1}
-                      </div>
-                      <div className="flex-grow min-w-0">
-                        <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
-                          <Link href={`/listing/${listing.slug || listing.id}`} className="hover:text-orange-500 transition-colors">
-                            {listing.name}
-                          </Link>
-                        </h3>
-                        <p className="text-zinc-400 mb-3 text-sm">
-                          {listing.city}{listing.postcode && `, ${listing.postcode}`}
-                        </p>
-                        {listing.description && (
-                          <p className="text-zinc-300 mb-3 text-sm">
-                            {listing.description.substring(0, 200)}{listing.description.length > 200 ? "..." : ""}
-                          </p>
-                        )}
-                        <div className="flex flex-wrap items-center gap-3">
-                          {listing.price && (
-                            <span className="text-orange-500 font-semibold text-sm">
-                              From £{listing.price.toFixed(0)} per person
-                            </span>
-                          )}
-                          <Link
-                            href={`/listing/${listing.slug || listing.id}`}
-                            className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 py-1.5 rounded-md transition-colors text-sm"
-                          >
-                            View Details
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </>
-          ) : (
-            <div className="bg-[#181818] rounded-lg border border-zinc-800 p-8 text-center mb-8">
-              <p className="text-xl text-white mb-4">No rage rooms listed in Liverpool yet.</p>
-              <Link href="/listings" className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-md transition-colors mt-2">
-                Browse All Rage Rooms
-              </Link>
-            </div>
-          )}
-
-          {/* Unique editorial sections */}
-          <div className="bg-[#181818] rounded-lg border border-zinc-800 p-5 sm:p-6 mb-8">
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-3">What to Look For</h2>
-            <p className="text-zinc-300">{content?.whatToLookFor}</p>
-          </div>
-
-          <div className="bg-[#181818] rounded-lg border border-zinc-800 p-5 sm:p-6 mb-8">
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-3">Local Tip</h2>
-            <p className="text-zinc-300">{content?.localTip}</p>
-          </div>
-
-          <FAQ items={faqs} title="Frequently Asked Questions About Rage Rooms in Liverpool" />
-
-          <div className="mt-10 text-center">
-            <Link href="/city/liverpool" className="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3 rounded-md transition-colors">
-              View All Liverpool Rage Rooms
-            </Link>
-          </div>
-        </article>
-      </div>
-    </div>
-  )
+export default function BestRageRoomsLiverpoolPage() {
+  return <CityGuidePage city="Liverpool" path="/guides/best-rage-rooms-liverpool" />
 }
