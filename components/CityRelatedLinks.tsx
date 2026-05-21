@@ -113,6 +113,30 @@ export default function CityRelatedLinks({ cityName }: { cityName: string }) {
               Rage rooms for team building &amp; corporate events
             </Link>
           </li>
+          <li>
+            <Link
+              href="/guides/rage-rooms-for-stress-relief"
+              className="text-orange-500 hover:text-orange-400 underline"
+            >
+              Do rage rooms relieve stress?
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/guides/what-to-wear-to-a-rage-room"
+              className="text-orange-500 hover:text-orange-400 underline"
+            >
+              What to wear to a rage room
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/guides/rage-room-gift-vouchers-uk"
+              className="text-orange-500 hover:text-orange-400 underline"
+            >
+              Rage room gift vouchers UK
+            </Link>
+          </li>
         </ul>
       </div>
 

@@ -1,5 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      // Consolidate the non-UK variant to the canonical UK guide to avoid
+      // splitting link equity across two near-duplicate URLs.
+      {
+        source: '/guides/rage-rooms-for-birthdays',
+        destination: '/guides/rage-rooms-for-birthdays-uk',
+        permanent: true,
+      },
+    ]
+  },
   images: {
     // Modern formats first; Next/Image will negotiate via Accept headers.
     formats: ['image/avif', 'image/webp'],

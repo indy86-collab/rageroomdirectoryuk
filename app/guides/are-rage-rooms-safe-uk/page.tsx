@@ -2,6 +2,7 @@ import { Metadata } from "next"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import AdsenseInContent from "@/components/ads/AdsenseInContent"
 import GuideMeta from "@/components/GuideMeta"
+import FAQ from "@/components/FAQ"
 import Link from "next/link"
 import { buildArticleSchema, buildBreadcrumbSchema, buildOgImageUrl } from "@/lib/seo-schema"
 
@@ -33,6 +34,44 @@ export const metadata: Metadata = {
 
 export const revalidate = 86400
 
+const FAQS = [
+  {
+    question: "Are rage rooms safe in the UK?",
+    answer:
+      "Yes, when run by a reputable venue. UK rage rooms require full PPE — coveralls, full-face visor helmet, heavy-duty gloves and closed-toe boots — and staff conduct a safety briefing before every session. Serious injuries are extremely rare; minor cuts or bruises from not wearing equipment correctly are the most common issues.",
+  },
+  {
+    question: "What PPE do you get at a UK rage room?",
+    answer:
+      "Standard PPE at UK venues includes a full-body Tyvek-style coverall, a full-face visor helmet (not just safety glasses), heavy-duty leather or cut-resistant gloves, and steel-toed boots or sturdy footwear. Some venues also provide ear protection. All PPE is mandatory and fitted by staff before you enter the smash room.",
+  },
+  {
+    question: "What age do you have to be for a rage room in the UK?",
+    answer:
+      "The standard age limit at UK rage rooms is 18+. A small number of venues run dedicated 14–17 youth sessions with lighter tools, extra supervision, and mandatory parental consent forms. Under-14 participation is extremely rare and only offered at select venues with a parent present throughout. Always confirm age policy before booking.",
+  },
+  {
+    question: "Can you go to a rage room if you are pregnant?",
+    answer:
+      "No. Pregnancy is a standard exclusion at all reputable UK rage rooms due to the physical exertion, vibration from impacts, risk of flying debris, and noise levels involved. Venues will ask about this on their waiver and will decline entry.",
+  },
+  {
+    question: "Do UK rage rooms have insurance?",
+    answer:
+      "Yes — reputable venues carry a minimum of £5 million public liability insurance and require every participant to sign a waiver before entry. If a venue cannot confirm their insurance level, treat that as a red flag.",
+  },
+  {
+    question: "Can you get seriously hurt at a rage room?",
+    answer:
+      "Serious injuries are extremely rare when PPE is worn and staff instructions are followed. The controlled environment, mandatory protective gear, and pre-session safety briefing eliminate most risk. The most common minor incidents are small cuts or bruises, usually linked to improperly worn gloves or goggles.",
+  },
+  {
+    question: "What medical conditions mean you shouldn't do a rage room?",
+    answer:
+      "Standard UK exclusions include pregnancy, heart conditions, recent surgery (especially back, joint or abdominal), being under the influence of alcohol or drugs, severe asthma triggered by dust, and recent serious injuries. If in doubt, check with both your GP and the venue before booking.",
+  },
+]
+
 export default function AreRageRoomsSafeUKPage() {
   const articleSchema = buildArticleSchema({
     url: GUIDE_PATH,
@@ -55,6 +94,17 @@ export default function AreRageRoomsSafeUKPage() {
     { name: "Are Rage Rooms Safe?", url: GUIDE_PATH },
   ])
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `https://rageroomdirectory.co.uk${GUIDE_PATH}#faq`,
+    mainEntity: FAQS.map((f) => ({
+      "@type": "Question",
+      name: f.question,
+      acceptedAnswer: { "@type": "Answer", text: f.answer },
+    })),
+  }
+
   return (
     <div className="py-6 sm:py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
@@ -65,6 +115,10 @@ export default function AreRageRoomsSafeUKPage() {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
 
         <Breadcrumbs
@@ -272,6 +326,41 @@ export default function AreRageRoomsSafeUKPage() {
             </p>
           </section>
         </div>
+
+        <FAQ items={FAQS.map((f) => ({ question: f.question, answer: f.answer }))} title="Safety FAQs" />
+
+        <section aria-labelledby="related-safety-heading" className="mt-10 mb-4">
+          <h2 id="related-safety-heading" className="text-2xl font-bold text-white mb-4">
+            Related guides
+          </h2>
+          <ul className="space-y-2 text-zinc-300">
+            <li>
+              <Link href="/guides/what-happens-in-a-rage-room" className="text-orange-500 hover:text-orange-400 underline">
+                What happens in a rage room? Step-by-step guide
+              </Link>
+            </li>
+            <li>
+              <Link href="/guides/how-much-do-rage-rooms-cost-uk" className="text-orange-500 hover:text-orange-400 underline">
+                How much do rage rooms cost in the UK?
+              </Link>
+            </li>
+            <li>
+              <Link href="/guides/what-to-wear-to-a-rage-room" className="text-orange-500 hover:text-orange-400 underline">
+                What to wear to a rage room
+              </Link>
+            </li>
+            <li>
+              <Link href="/guides/rage-rooms-for-stress-relief" className="text-orange-500 hover:text-orange-400 underline">
+                Do rage rooms actually relieve stress?
+              </Link>
+            </li>
+            <li>
+              <Link href="/listings" className="text-orange-500 hover:text-orange-400 underline">
+                Browse UK rage rooms
+              </Link>
+            </li>
+          </ul>
+        </section>
       </div>
     </div>
   )

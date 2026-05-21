@@ -160,6 +160,41 @@ const TOPIC_GUIDES: Guide[] = [
     href: "/rage-room-vs-escape-room",
     category: "Comparison",
   },
+  {
+    title: "Rage Room vs Axe Throwing",
+    description:
+      "Which activity wins on price, physicality, groups and stress relief? UK head-to-head across all the factors that matter.",
+    href: "/guides/rage-room-vs-axe-throwing",
+    category: "Comparison",
+  },
+  {
+    title: "Rage Rooms for Stress Relief",
+    description:
+      "Do rage rooms actually relieve stress? We examine the psychology and evidence — and explain what to realistically expect.",
+    href: "/guides/rage-rooms-for-stress-relief",
+    category: "Wellness",
+  },
+  {
+    title: "Rage Room Gift Vouchers UK",
+    description:
+      "How to buy a UK rage room gift voucher — types, prices, expiry policies and what to check before purchasing.",
+    href: "/guides/rage-room-gift-vouchers-uk",
+    category: "Gift Ideas",
+  },
+  {
+    title: "What to Wear to a Rage Room",
+    description:
+      "UK dress code guide: best clothing, footwear, what not to wear, and how to prepare for your PPE fitting.",
+    href: "/guides/what-to-wear-to-a-rage-room",
+    category: "First-Time Guide",
+  },
+  {
+    title: "Rage Room Near Me",
+    description:
+      "Find verified rage rooms near you across 40+ UK towns and cities. Browse by city, compare prices and book online.",
+    href: "/guides/rage-room-near-me",
+    category: "Find a Venue",
+  },
 ]
 
 export default function GuidesPage() {

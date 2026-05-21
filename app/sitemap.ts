@@ -165,6 +165,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "what-happens-in-a-rage-room",
     "rage-rooms-for-hen-parties-uk",
     "rage-rooms-for-birthdays-uk",
+    // New topic guides (2026)
+    "rage-room-near-me",
+    "rage-room-gift-vouchers-uk",
+    "rage-rooms-for-stress-relief",
+    "rage-room-vs-axe-throwing",
+    "what-to-wear-to-a-rage-room",
   ]
 
   guidePages.forEach((guide) => {
