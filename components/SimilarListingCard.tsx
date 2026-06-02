@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Listing } from "@prisma/client"
+import type { Listing } from "@/types/listing"
 
 interface SimilarListingCardProps {
   listing: Listing

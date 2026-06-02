@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Listing } from "@prisma/client"
+import type { Listing } from "@/types/listing"
 import Link from "next/link"
 
 interface NearMeMapProps {

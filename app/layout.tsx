@@ -5,7 +5,6 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
-import Providers from "@/components/Providers"
 
 const montserrat = Montserrat({ 
   subsets: ["latin"],
@@ -194,23 +193,21 @@ export default function RootLayout({
           strategy="lazyOnload"
           crossOrigin="anonymous"
         />
-        <Providers>
-          {/* Skip link: becomes visible on keyboard focus. WCAG 2.4.1. */}
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-orange-500 focus:text-white focus:px-4 focus:py-2 focus:rounded-md focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-white"
-          >
-            Skip to main content
-          </a>
-          {/* Full-width site shell: no max-width rails, matches reference edge-to-edge look. */}
-          <div className="relative w-full bg-dark-900">
+        {/* Skip link: becomes visible on keyboard focus. WCAG 2.4.1. */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-orange-500 focus:text-white focus:px-4 focus:py-2 focus:rounded-md focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-white"
+        >
+          Skip to main content
+        </a>
+        {/* Full-width site shell: no max-width rails, matches reference edge-to-edge look. */}
+        <div className="relative w-full bg-dark-900">
             <Header />
             <main id="main-content" role="main" className="min-h-screen">
               {children}
             </main>
-            <Footer />
-          </div>
-        </Providers>
+          <Footer />
+        </div>
         <Analytics />
       </body>
     </html>

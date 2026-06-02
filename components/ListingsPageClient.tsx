@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Listing } from "@prisma/client"
+import type { Listing } from "@/types/listing"
 import ListingsGrid from "./ListingsGrid"
 import ListingFilters from "./ListingFilters"
 

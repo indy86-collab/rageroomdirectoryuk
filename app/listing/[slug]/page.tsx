@@ -133,23 +133,11 @@ export default async function ListingPage({ params }: ListingPageProps) {
       notFound()
     }
     
-    // If listing has a slug, redirect to slug URL (permanent redirect)
     if (listing.slug) {
       redirect(`/listing/${listing.slug}`)
     }
-    
-    // If no slug exists yet, generate one (shouldn't happen after migration)
-    const { generateUniqueSlug } = await import("@/lib/slugify")
-    const { prisma } = await import("@/lib/prisma")
-    const slug = await generateUniqueSlug(listing.name, listing.city)
-    
-    await prisma.listing.update({
-      where: { id: listing.id },
-      data: { slug },
-    })
 
-    // Redirect to the new slug
-    redirect(`/listing/${slug}`)
+    notFound()
   } else {
     // It's a slug, find by slug
     listing = await getListingBySlug(params.slug)
@@ -561,7 +549,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
 
               {/* Listing freshness indicator */}
               <p className="text-xs text-zinc-500 mb-3">
-                Listing added {listing.createdAt.toLocaleDateString("en-GB", { month: "long", year: "numeric" })}
+                Listing added {new Date(listing.createdAt).toLocaleDateString("en-GB", { month: "long", year: "numeric" })}
                 {listing.verified && " · Verified by RageRoom Directory"}
               </p>
 

@@ -5,7 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { Search, Shield, Star, Users, MapPin } from "lucide-react"
-import type { Listing } from "@prisma/client"
+import type { Listing } from "@/types/listing"
 import FeaturedRooms from "./FeaturedRooms"
 
 interface HeroProps {

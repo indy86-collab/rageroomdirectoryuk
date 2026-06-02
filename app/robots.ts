@@ -3,7 +3,7 @@ import { MetadataRoute } from "next"
 export default function robots(): MetadataRoute.Robots {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
 
-  // Block private/dashboard + API; explicitly welcome both search crawlers and
+  // Block API routes from crawlers.
   // modern AI crawlers so LLM answer engines (ChatGPT Search, Perplexity,
   // Claude, Gemini, Google's AI Overviews, etc.) index our content.
   const aiCrawlers = [
@@ -33,12 +33,12 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/dashboard/", "/api/", "/login", "/register"],
+        disallow: ["/api/"],
       },
       ...aiCrawlers.map((ua) => ({
         userAgent: ua,
         allow: "/",
-        disallow: ["/dashboard/", "/api/", "/login", "/register"],
+        disallow: ["/api/"],
       })),
     ],
     sitemap: `${baseUrl}/sitemap.xml`,

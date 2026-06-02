@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { MapPin, CheckCircle2 } from "lucide-react"
-import { Listing } from "@prisma/client"
+import type { Listing } from "@/types/listing"
 
 interface FeaturedRoomsProps {
   listings: Listing[]

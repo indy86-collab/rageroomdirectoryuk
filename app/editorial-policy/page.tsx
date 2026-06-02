@@ -323,7 +323,7 @@ export default function EditorialPolicyPage() {
                 by Google users and are displayed with the reviewer's name, rating, and comment
               </li>
               <li>
-                <strong className="text-white">Site reviews</strong> — submitted by registered users
+                <strong className="text-white">Site reviews</strong> — not currently collected; Google reviews are shown where available
                 of RageRoom Directory. These require an account and are associated with a real email
                 address
               </li>

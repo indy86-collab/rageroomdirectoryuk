@@ -1,26 +1,53 @@
-import { Listing } from "@prisma/client"
+import listingsData from "@/data/listings.json"
+import type { Listing, ListingWithReviews } from "@/types/listing"
 
-// Lazy load Prisma to avoid build-time initialization
-function getPrisma() {
-  return require("@/lib/prisma").prisma
+let cachedListings: Listing[] | null = null
+
+function loadListings(): Listing[] {
+  if (!cachedListings) {
+    cachedListings = listingsData as Listing[]
+  }
+  return cachedListings
+}
+
+function sortByCreatedAtDesc(listings: Listing[]): Listing[] {
+  return [...listings].sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  )
+}
+
+function matchesSearch(listing: Listing, searchTerm: string): boolean {
+  const term = searchTerm.toLowerCase()
+  return (
+    listing.name.toLowerCase().includes(term) ||
+    listing.city.toLowerCase().includes(term) ||
+    listing.region.toLowerCase().includes(term) ||
+    listing.postcode.toLowerCase().includes(term)
+  )
+}
+
+function hasValidLocation(listing: Listing): boolean {
+  const loc = listing.location
+  return (
+    loc != null &&
+    typeof loc.lat === "number" &&
+    typeof loc.lng === "number" &&
+    Number.isFinite(loc.lat) &&
+    Number.isFinite(loc.lng)
+  )
 }
 
 export async function getFeaturedListings(
   limit: number = 6,
   options?: { excludeSlugs?: string[] }
 ): Promise<Listing[]> {
-  const prisma = getPrisma()
-  const allListings = await prisma.listing.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-  })
+  const allListings = sortByCreatedAtDesc(loadListings())
 
   const exclude = new Set(options?.excludeSlugs ?? [])
   const pool =
     exclude.size === 0
       ? allListings
-      : allListings.filter((l: Listing) => !l.slug || !exclude.has(l.slug))
+      : allListings.filter((l) => !l.slug || !exclude.has(l.slug))
 
   if (pool.length <= limit) {
     return pool
@@ -28,10 +55,11 @@ export async function getFeaturedListings(
 
   const today = new Date()
   const epoch = new Date(1970, 0, 1)
-  const daysSinceEpoch = Math.floor((today.getTime() - epoch.getTime()) / (1000 * 60 * 60 * 24))
+  const daysSinceEpoch = Math.floor(
+    (today.getTime() - epoch.getTime()) / (1000 * 60 * 60 * 24)
+  )
 
   const startIndex = daysSinceEpoch % pool.length
-
   const rotatedListings = [...pool.slice(startIndex), ...pool.slice(0, startIndex)]
 
   return rotatedListings.slice(0, limit)
@@ -41,229 +69,86 @@ export async function searchListings(
   query: string | undefined,
   limit?: number
 ): Promise<Listing[]> {
-  const prisma = getPrisma()
-  
-  if (!query || query.trim() === "") {
-    // If no query, return all listings (not just featured)
-    return await prisma.listing.findMany({
-      ...(limit ? { take: limit } : {}),
-      orderBy: {
-        createdAt: "desc",
-      },
-    })
+  let results = sortByCreatedAtDesc(loadListings())
+
+  if (query && query.trim() !== "") {
+    const searchTerm = query.trim()
+    results = results.filter((l) => matchesSearch(l, searchTerm))
   }
 
-  const searchTerm = query.trim()
-
-  return await prisma.listing.findMany({
-    where: {
-      OR: [
-        { name: { contains: searchTerm, mode: "insensitive" } },
-        { city: { contains: searchTerm, mode: "insensitive" } },
-        { region: { contains: searchTerm, mode: "insensitive" } },
-        { postcode: { contains: searchTerm, mode: "insensitive" } },
-      ],
-    },
-    ...(limit ? { take: limit } : {}),
-    orderBy: {
-      createdAt: "desc",
-    },
-  })
+  return limit ? results.slice(0, limit) : results
 }
 
 export async function getListingById(id: string): Promise<Listing | null> {
-  const prisma = getPrisma()
-  return await prisma.listing.findUnique({
-    where: { id },
-  })
+  return loadListings().find((l) => l.id === id) ?? null
 }
 
-export async function getListingBySlug(slug: string) {
-  const prisma = getPrisma()
-  return await prisma.listing.findUnique({
-    where: { slug },
-    include: {
-      reviews: {
-        include: {
-          user: {
-            select: {
-              id: true,
-              name: true,
-              email: true,
-              image: true,
-            },
-          },
-        },
-        orderBy: {
-          createdAt: "desc",
-        },
-      },
-    },
-  })
+export async function getListingBySlug(
+  slug: string
+): Promise<ListingWithReviews | null> {
+  const listing = loadListings().find((l) => l.slug === slug)
+  if (!listing) return null
+  return { ...listing, reviews: [] }
 }
 
-export async function getListingWithReviews(idOrSlug: string) {
-  const prisma = getPrisma()
-  // Try slug first, then fall back to ID for backwards compatibility
-  const bySlug = await prisma.listing.findUnique({
-    where: { slug: idOrSlug },
-    include: {
-      reviews: {
-        include: {
-          user: {
-            select: {
-              id: true,
-              name: true,
-              email: true,
-              image: true,
-            },
-          },
-        },
-        orderBy: {
-          createdAt: "desc",
-        },
-      },
-    },
-  })
+export async function getListingWithReviews(
+  idOrSlug: string
+): Promise<ListingWithReviews | null> {
+  const listings = loadListings()
+  const bySlug = listings.find((l) => l.slug === idOrSlug)
+  if (bySlug) return { ...bySlug, reviews: [] }
 
-  if (bySlug) return bySlug
+  const byId = listings.find((l) => l.id === idOrSlug)
+  if (byId) return { ...byId, reviews: [] }
 
-  // Fallback to ID lookup
-  return await prisma.listing.findUnique({
-    where: { id: idOrSlug },
-    include: {
-      reviews: {
-        include: {
-          user: {
-            select: {
-              id: true,
-              name: true,
-              email: true,
-              image: true,
-            },
-          },
-        },
-        orderBy: {
-          createdAt: "desc",
-        },
-      },
-    },
-  })
+  return null
 }
 
 export async function getAllListingsForAdmin(): Promise<Listing[]> {
-  const prisma = getPrisma()
-  return await prisma.listing.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-  })
+  return sortByCreatedAtDesc(loadListings())
 }
 
-export async function getListingByIdForAdmin(id: string): Promise<Listing | null> {
-  const prisma = getPrisma()
-  return await prisma.listing.findUnique({
-    where: { id },
-  })
+export async function getListingByIdForAdmin(
+  id: string
+): Promise<Listing | null> {
+  return getListingById(id)
 }
 
 export async function getListingsByCity(city: string): Promise<Listing[]> {
-  const prisma = getPrisma()
-  // Try multiple formats since database has inconsistent formatting
-  // Some cities use hyphens (Weston-super-Mare), others use spaces (Newcastle upon Tyne)
   const normalizedWithHyphens = city.replace(/\s+/g, "-")
   const normalizedWithSpaces = city.replace(/-/g, " ")
-  
-  return await prisma.listing.findMany({
-    where: {
-      OR: [
-        {
-          city: {
-            equals: normalizedWithHyphens,
-            mode: "insensitive",
-          },
-        },
-        {
-          city: {
-            equals: normalizedWithSpaces,
-            mode: "insensitive",
-          },
-        },
-        {
-          city: {
-            equals: city,
-            mode: "insensitive",
-          },
-        },
-      ],
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  })
+
+  return sortByCreatedAtDesc(
+    loadListings().filter((l) => {
+      const c = l.city.toLowerCase()
+      return (
+        c === normalizedWithHyphens.toLowerCase() ||
+        c === normalizedWithSpaces.toLowerCase() ||
+        c === city.toLowerCase()
+      )
+    })
+  )
 }
 
-/**
- * Returns every listing that has a non-null `location` (lat/lng).
- * Used by the near-me / distance-sort UI so the "nearest" search runs
- * across the whole directory, not just today's featured rotation.
- */
 export async function getListingsWithLocation(): Promise<Listing[]> {
-  const prisma = getPrisma()
-  const listings = await prisma.listing.findMany({
-    where: {
-      location: { not: null as unknown as undefined },
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  })
-  // Extra safety: drop rows where the JSON blob doesn't actually have lat/lng numbers.
-  return (listings as Listing[]).filter((l) => {
-    const loc = l.location as { lat?: unknown; lng?: unknown } | null
-    return (
-      loc != null &&
-      typeof loc.lat === "number" &&
-      typeof loc.lng === "number" &&
-      Number.isFinite(loc.lat) &&
-      Number.isFinite(loc.lng)
-    )
-  })
+  return sortByCreatedAtDesc(loadListings().filter(hasValidLocation))
 }
 
 export async function getDistinctCities(): Promise<string[]> {
-  const prisma = getPrisma()
-  const listings = await prisma.listing.findMany({
-    select: {
-      city: true,
-    },
-    distinct: ["city"],
-    where: {
-      city: {
-        not: "",
-      },
-    },
-  })
-
-  return listings
-    .map((listing: { city: string }) => listing.city)
-    .filter((city: string) => city.trim() !== "")
-    .sort()
+  const cities = new Set<string>()
+  for (const listing of loadListings()) {
+    const city = listing.city.trim()
+    if (city) cities.add(city)
+  }
+  return [...cities].sort()
 }
 
 export async function getListingsByRegion(region: string): Promise<Listing[]> {
-  const prisma = getPrisma()
-  return await prisma.listing.findMany({
-    where: {
-      region: {
-        equals: region,
-        mode: "insensitive",
-      },
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  })
+  return sortByCreatedAtDesc(
+    loadListings().filter(
+      (l) => l.region.toLowerCase() === region.toLowerCase()
+    )
+  )
 }
 
 export async function getSimilarListings(
@@ -272,67 +157,43 @@ export async function getSimilarListings(
   limit: number = 4,
   currentLocation?: { lat: number; lng: number }
 ): Promise<Listing[]> {
-  const prisma = getPrisma()
-  const listings = await prisma.listing.findMany({
-    where: {
-      city: {
-        equals: city,
-        mode: "insensitive",
-      },
-      id: {
-        not: currentListingId,
-      },
-    },
-    take: limit * 2, // Get more to sort by distance
-    orderBy: {
-      createdAt: "desc",
-    },
-  })
+  const listings = sortByCreatedAtDesc(
+    loadListings().filter(
+      (l) =>
+        l.city.toLowerCase() === city.toLowerCase() &&
+        l.id !== currentListingId
+    )
+  ).slice(0, limit * 2)
 
-  // If we have location data, sort by distance
   if (currentLocation) {
     const { calculateDistance } = await import("./distance")
-    
+
     return listings
-      .map((listing: any) => {
-        const location = listing.location as { lat: number; lng: number } | null
-        if (!location) return { listing, distance: Infinity }
-        
+      .map((listing) => {
+        const location = listing.location
+        if (!hasValidLocation(listing)) return { listing, distance: Infinity }
+
         const distance = calculateDistance(
           currentLocation.lat,
           currentLocation.lng,
-          location.lat,
-          location.lng
+          location.lat as number,
+          location.lng as number
         )
         return { listing, distance }
       })
-      .sort((a: any, b: any) => a.distance - b.distance)
+      .sort((a, b) => a.distance - b.distance)
       .slice(0, limit)
-      .map((item: any) => item.listing)
+      .map((item) => item.listing)
   }
 
   return listings.slice(0, limit)
 }
 
 export async function getDistinctRegions(): Promise<string[]> {
-  const prisma = getPrisma()
-  const listings = await prisma.listing.findMany({
-    select: {
-      region: true,
-    },
-    distinct: ["region"],
-    where: {
-      region: {
-        not: "",
-      },
-    },
-  })
-
-  return listings
-    .map((listing: { region: string }) => listing.region)
-    .filter((region: string) => region.trim() !== "")
-    .sort()
+  const regions = new Set<string>()
+  for (const listing of loadListings()) {
+    const region = listing.region.trim()
+    if (region) regions.add(region)
+  }
+  return [...regions].sort()
 }
-
-
-

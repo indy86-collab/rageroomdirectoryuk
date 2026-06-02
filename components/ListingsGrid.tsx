@@ -1,4 +1,4 @@
-import { Listing } from "@prisma/client"
+import type { Listing } from "@/types/listing"
 import ListingCard from "./ListingCard"
 
 interface ListingsGridProps {

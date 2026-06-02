@@ -1,7 +1,8 @@
 import slugifyLib from "slugify"
+import listingsData from "@/data/listings.json"
+import type { Listing } from "@/types/listing"
 
-// slugify is a default export, handle it properly
-const slugify = (input: string, options?: any): string => {
+const slugify = (input: string, options?: Parameters<typeof slugifyLib>[1]): string => {
   return slugifyLib(input, options)
 }
 
@@ -14,35 +15,31 @@ export function generateSlug(name: string, city?: string): string {
   })
 }
 
-// Ensure unique slug by appending number if needed
+function getAllSlugs(): string[] {
+  return (listingsData as Listing[])
+    .map((l) => l.slug)
+    .filter((s): s is string => Boolean(s))
+}
+
 export async function generateUniqueSlug(
   name: string,
   city: string,
   existingSlug?: string | null
 ): Promise<string> {
   const baseSlug = generateSlug(name, city)
-  
-  // If this is an update and slug hasn't changed, return existing
+
   if (existingSlug === baseSlug) {
     return baseSlug
   }
 
-  // Check if slug exists
-  const { prisma } = await import("@/lib/prisma")
+  const usedSlugs = new Set(getAllSlugs())
   let slug = baseSlug
   let counter = 1
 
-  while (true) {
-    const existing = await prisma.listing.findUnique({
-      where: { slug },
-    })
-
-    if (!existing || existing.slug === existingSlug) {
-      return slug
-    }
-
+  while (usedSlugs.has(slug) && slug !== existingSlug) {
     slug = `${baseSlug}-${counter}`
     counter++
   }
-}
 
+  return slug
+}
