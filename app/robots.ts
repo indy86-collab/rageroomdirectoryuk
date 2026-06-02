@@ -3,9 +3,9 @@ import { MetadataRoute } from "next"
 export default function robots(): MetadataRoute.Robots {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
 
-  // Block API routes from crawlers.
-  // modern AI crawlers so LLM answer engines (ChatGPT Search, Perplexity,
-  // Claude, Gemini, Google's AI Overviews, etc.) index our content.
+  // Block API routes from crawlers. Explicitly allow modern AI crawlers so
+  // LLM answer engines (ChatGPT Search, Perplexity, Claude, Gemini, etc.)
+  // can index our content. See also /llms.txt for AEO discovery.
   const aiCrawlers = [
     "GPTBot",           // OpenAI — ChatGPT training/crawl
     "OAI-SearchBot",    // OpenAI — ChatGPT Search index

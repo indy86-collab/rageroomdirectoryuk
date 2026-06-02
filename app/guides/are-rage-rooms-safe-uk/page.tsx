@@ -147,7 +147,7 @@ export default function AreRageRoomsSafeUKPage() {
 
         <div className="space-y-6 text-base sm:text-lg text-zinc-300">
           <p className="text-xl text-white font-semibold">
-            Rage rooms are designed to be safe, controlled environments where you can release stress by smashing items. When proper safety protocols are followed, they pose minimal risk. Here's everything you need to know about rage room safety in the UK.
+            Yes — UK rage rooms are safe when run by a reputable venue. Full PPE (coveralls, full-face visor helmet, gloves and boots), a mandatory safety briefing, signed waivers and at least £5 million public liability insurance are standard at verified venues. Serious injuries are extremely rare when equipment is worn correctly.
           </p>
 
           <AdsenseInContent />

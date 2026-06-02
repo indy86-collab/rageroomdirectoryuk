@@ -220,26 +220,6 @@
     "createdAt": "2025-12-13T23:44:24.606Z"
   },
   {
-    "id": "41efa9d8-acb7-4247-8a5b-a4e84b7a2e99",
-    "name": "Rage Room Ireland",
-    "description": "Ireland's first rage room, located in Ballyfermot Dublin, offering 20-minute smash sessions starting from €40.",
-    "city": "Dublin",
-    "region": "County Dublin",
-    "postcode": "Dublin 10",
-    "location": {
-      "lat": 53.3358526,
-      "lng": -6.3532658
-    },
-    "website": "https://www.rageroomireland.com/",
-    "phone": "+353 87 262 3482",
-    "price": 40,
-    "image": "/images/rageroomireland.png",
-    "verified": true,
-    "googlePlaceId": "ChIJAyRnW3UNZ0gRxNcwyPxjtq4",
-    "slug": "rage-room-ireland",
-    "createdAt": "2025-12-13T23:32:58.873Z"
-  },
-  {
     "id": "fb842fd9-c195-48a5-ae21-56bcc6e90bb6",
     "name": "Axed and Enraged",
     "description": "Axed and Enraged is a rage room and axe-throwing venue in Dundee, Scotland.",
@@ -398,26 +378,6 @@
     "googlePlaceId": "ChIJAWc27UkF2UcRDLBMWoV60xk",
     "slug": "urban-xtreme-colchester-colchester",
     "createdAt": "2025-11-27T21:28:46.654Z"
-  },
-  {
-    "id": "46313bec-d877-46ae-8cdb-5ca4e4a239c5",
-    "name": "Weston Rage Rooms",
-    "description": "Weston-super-Mare's rage room and smash room facility. Features music, 30-minute sessions, weapons, speakers, PPE, printers, and TVs. Perfect for birthdays, team building, and stress relief.",
-    "city": "Weston-super-Mare",
-    "region": "",
-    "postcode": "BS23 1QF",
-    "location": {
-      "lat": 51.3492201,
-      "lng": -2.978185
-    },
-    "website": "https://theactivitydome.com/",
-    "phone": "+44 1934 707150",
-    "price": null,
-    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJP-Y-6Nz5cUgR8RhjUGkdZaU/image-1764201098064-15e13551.jpg",
-    "verified": true,
-    "googlePlaceId": "ChIJP-Y-6Nz5cUgR8RhjUGkdZaU",
-    "slug": "weston-rage-rooms-weston-super-mare",
-    "createdAt": "2025-11-27T21:28:46.613Z"
   },
   {
     "id": "258cf31a-ba0d-4769-bc70-aa17bed67157",

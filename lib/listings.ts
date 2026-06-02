@@ -197,3 +197,72 @@ export async function getDistinctRegions(): Promise<string[]> {
   }
   return [...regions].sort()
 }
+
+export interface ListingWithDistance extends Listing {
+  distanceMiles: number
+}
+
+export interface ListingsNearCityResult {
+  inCity: Listing[]
+  nearby: ListingWithDistance[]
+  allForSchema: Listing[]
+}
+
+/**
+ * Listings in a city plus nearby venues within a radius (for guide pages).
+ * London also includes listings where region === "London" (e.g. Croydon).
+ */
+export async function getListingsNearCity(
+  city: string,
+  options?: { radiusMiles?: number; nearbyLimit?: number }
+): Promise<ListingsNearCityResult> {
+  const radiusMiles = options?.radiusMiles ?? 40
+  const nearbyLimit = options?.nearbyLimit ?? 5
+  const normalizedCity = city.toLowerCase()
+  const isLondon = normalizedCity === "london"
+
+  let inCity = await getListingsByCity(city)
+
+  if (isLondon) {
+    const inCityIds = new Set(inCity.map((l) => l.id))
+    const regionListings = sortByCreatedAtDesc(
+      loadListings().filter(
+        (l) =>
+          !inCityIds.has(l.id) &&
+          l.region.toLowerCase() === "london"
+      )
+    )
+    inCity = [...inCity, ...regionListings]
+  }
+
+  const inCityIds = new Set(inCity.map((l) => l.id))
+  const { getCityCentroid } = await import("./city-centroids")
+  const centroid = getCityCentroid(city)
+
+  if (!centroid) {
+    return { inCity, nearby: [], allForSchema: inCity }
+  }
+
+  const { calculateDistance } = await import("./distance")
+
+  const nearby = sortByCreatedAtDesc(loadListings())
+    .filter((l) => !inCityIds.has(l.id) && hasValidLocation(l))
+    .map((listing) => {
+      const distanceMiles = calculateDistance(
+        centroid.lat,
+        centroid.lng,
+        listing.location!.lat as number,
+        listing.location!.lng as number
+      )
+      return { ...listing, distanceMiles }
+    })
+    .filter((l) => l.distanceMiles <= radiusMiles)
+    .sort((a, b) => a.distanceMiles - b.distanceMiles)
+    .slice(0, nearbyLimit)
+
+  return {
+    inCity,
+    nearby,
+    allForSchema: [...inCity, ...nearby],
+  }
+}

@@ -5,7 +5,7 @@ import {
   Shield, Package, Users, 
   CheckCircle, Star, MapPin, Zap
 } from "lucide-react"
-import { getListingBySlug, getListingById, getSimilarListings } from "@/lib/listings"
+import { getListingBySlug, getListingById, getSimilarListings, getAllListingsForAdmin } from "@/lib/listings"
 import { cityToSlug } from "@/lib/location"
 import { getGooglePlaceReviewData } from "@/lib/google-places"
 import { generateListingContent, generateListingFAQs } from "@/lib/ai-content"
@@ -27,6 +27,13 @@ interface ListingPageProps {
 // `generateStaticParams`.
 export const revalidate = 1800
 export const dynamicParams = true
+
+export async function generateStaticParams() {
+  const listings = await getAllListingsForAdmin()
+  return listings
+    .filter((l) => l.slug)
+    .map((l) => ({ slug: l.slug! }))
+}
 
 // Helper to check if a string looks like a UUID
 function isUUID(str: string): boolean {
@@ -414,32 +421,6 @@ export default async function ListingPage({ params }: ListingPageProps) {
     ...(listing.website ? { sameAs: [listing.website] } : {}),
   }
 
-  // BreadcrumbList Schema
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: baseUrl,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: listing.city,
-        item: `${baseUrl}/city/${cityToSlug(listing.city)}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: listing.name,
-        item: listingUrl,
-      },
-    ],
-  }
-
   // FAQ Schema
   const faqSchema = {
     "@context": "https://schema.org",
@@ -460,10 +441,6 @@ export default async function ListingPage({ params }: ListingPageProps) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
         <script
           type="application/ld+json"

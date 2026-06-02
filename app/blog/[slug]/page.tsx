@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 import { Metadata } from "next"
 import Link from "next/link"
 import { getBlogPost, getAllBlogPosts } from "@/lib/blog-posts"
+import { getBlogGuideCanonical, getBlogGuideLink } from "@/lib/blog-guide-canonicals"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import Script from "next/script"
 
@@ -27,10 +28,12 @@ export async function generateMetadata({
     }
   }
 
+  const guideCanonical = getBlogGuideCanonical(params.slug)
+
   return {
     title: `${post.title} | RageRoom Directory Blog`,
     description: post.description,
-    alternates: { canonical: `/blog/${post.slug}` },
+    alternates: { canonical: guideCanonical ?? `/blog/${post.slug}` },
     openGraph: {
       title: post.title,
       description: post.description,
@@ -126,6 +129,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   const formattedContent = formatContent(post.content)
+  const guideLink = getBlogGuideLink(params.slug)
 
   return (
     <div className="py-8">
@@ -139,6 +143,20 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         <Breadcrumbs items={breadcrumbItems} />
 
         <article className="mt-4">
+          {guideLink && (
+            <div className="mb-6 p-4 bg-[#181818] border border-orange-500/40 rounded-lg">
+              <p className="text-zinc-300 text-sm">
+                This topic is covered in our canonical guide.{" "}
+                <Link
+                  href={guideLink.href}
+                  className="text-orange-500 hover:text-orange-400 font-semibold underline"
+                >
+                  {guideLink.label} →
+                </Link>
+              </p>
+            </div>
+          )}
+
           {/* Header */}
           <header className="mb-8">
             <div className="flex items-center gap-3 mb-4">

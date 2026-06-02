@@ -16,6 +16,10 @@ const GUIDE_CITIES = [
   "Newcastle",
   "Sheffield",
   "Nottingham",
+  "Edinburgh",
+  "Leicester",
+  "Derby",
+  "Brighton",
 ] as const
 
 type GuideCity = (typeof GUIDE_CITIES)[number]
@@ -66,7 +70,7 @@ export default function CityRelatedLinks({ cityName }: { cityName: string }) {
           {hasDedicatedGuide(cityName) && (
             <li>
               <Link
-                href={`/guides/best-rage-rooms-${cityName.toLowerCase()}`}
+                href={`/guides/best-rage-rooms-${cityToSlug(cityName)}`}
                 className="text-orange-500 hover:text-orange-400 underline"
               >
                 Best rage rooms in {cityName} — editorial ranking

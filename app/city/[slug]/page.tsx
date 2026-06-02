@@ -58,6 +58,12 @@ export async function generateMetadata({
 export const revalidate = 3600
 export const dynamicParams = true
 
+export async function generateStaticParams() {
+  const { getDistinctCities } = await import("@/lib/listings")
+  const cities = await getDistinctCities()
+  return cities.map((city) => ({ slug: cityToSlug(city) }))
+}
+
 export default async function CityPage({ params }: CityPageProps) {
   const cityName = slugToCity(params.slug)
   const { getListingsByCity } = await import("@/lib/listings")

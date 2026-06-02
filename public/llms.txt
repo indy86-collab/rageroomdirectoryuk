@@ -4,7 +4,7 @@
 
 RageRoom Directory (rageroomdirectory.co.uk) is an editorial, independent directory. We do not own any of the rage rooms listed; we aggregate, verify and compare them so visitors can find the right venue for stress relief, team-building, birthdays, hen/stag parties and date nights.
 
-All prices are shown in GBP (£). Coverage is UK-wide with strongest depth in London, Birmingham, Manchester, Leeds, Liverpool, Newcastle, Sheffield, Bristol and Nottingham.
+All prices are shown in GBP (£). Coverage is UK-wide with strongest depth in London, Birmingham, Manchester, Leeds, Liverpool, Newcastle, Sheffield, Bristol, Nottingham, Edinburgh, Leicester, Derby and Brighton.
 
 ## Core directory
 
@@ -16,6 +16,7 @@ All prices are shown in GBP (£). Coverage is UK-wide with strongest depth in Lo
 
 ## Editorial guides
 
+### City guides
 - [Best rage rooms in London](https://rageroomdirectory.co.uk/guides/best-rage-rooms-london)
 - [Best rage rooms in Birmingham](https://rageroomdirectory.co.uk/guides/best-rage-rooms-birmingham)
 - [Best rage rooms in Manchester](https://rageroomdirectory.co.uk/guides/best-rage-rooms-manchester)
@@ -25,20 +26,38 @@ All prices are shown in GBP (£). Coverage is UK-wide with strongest depth in Lo
 - [Best rage rooms in Newcastle](https://rageroomdirectory.co.uk/guides/best-rage-rooms-newcastle)
 - [Best rage rooms in Sheffield](https://rageroomdirectory.co.uk/guides/best-rage-rooms-sheffield)
 - [Best rage rooms in Nottingham](https://rageroomdirectory.co.uk/guides/best-rage-rooms-nottingham)
+- [Best rage rooms in Edinburgh](https://rageroomdirectory.co.uk/guides/best-rage-rooms-edinburgh)
+- [Best rage rooms in Leicester](https://rageroomdirectory.co.uk/guides/best-rage-rooms-leicester)
+- [Best rage rooms in Derby](https://rageroomdirectory.co.uk/guides/best-rage-rooms-derby)
+- [Best rage rooms in Brighton](https://rageroomdirectory.co.uk/guides/best-rage-rooms-brighton)
+
+### Topic guides
 - [Best rage rooms for couples (UK)](https://rageroomdirectory.co.uk/guides/best-rage-rooms-for-couples)
 - [Best rage rooms for team building (UK)](https://rageroomdirectory.co.uk/guides/best-rage-rooms-for-team-building)
 - [What happens in a rage room?](https://rageroomdirectory.co.uk/guides/what-happens-in-a-rage-room)
 - [Are rage rooms safe? (UK)](https://rageroomdirectory.co.uk/guides/are-rage-rooms-safe-uk)
 - [How much do rage rooms cost? (UK)](https://rageroomdirectory.co.uk/guides/how-much-do-rage-rooms-cost-uk)
+- [Rage rooms for hen parties (UK)](https://rageroomdirectory.co.uk/guides/rage-rooms-for-hen-parties-uk)
+- [Rage rooms for birthdays (UK)](https://rageroomdirectory.co.uk/guides/rage-rooms-for-birthdays-uk)
+- [Rage rooms for stress relief](https://rageroomdirectory.co.uk/guides/rage-rooms-for-stress-relief)
+- [Rage room gift vouchers (UK)](https://rageroomdirectory.co.uk/guides/rage-room-gift-vouchers-uk)
+- [What to wear to a rage room](https://rageroomdirectory.co.uk/guides/what-to-wear-to-a-rage-room)
+- [Rage room near me](https://rageroomdirectory.co.uk/guides/rage-room-near-me)
+- [Rage room vs axe throwing](https://rageroomdirectory.co.uk/guides/rage-room-vs-axe-throwing)
 - [Guides hub](https://rageroomdirectory.co.uk/guides)
 
 ## Terminology hubs
 
 - [Rage room London](https://rageroomdirectory.co.uk/rage-room-london)
 - [Rage room prices (UK)](https://rageroomdirectory.co.uk/rage-room-prices-uk)
+- [Rage room vs escape room](https://rageroomdirectory.co.uk/rage-room-vs-escape-room)
 - [Smash room UK](https://rageroomdirectory.co.uk/smash-room-uk)
 - [Break room UK](https://rageroomdirectory.co.uk/break-room-uk)
 - [Anger room UK](https://rageroomdirectory.co.uk/anger-room-uk)
+
+## Extended reference
+
+- [Full directory reference (llms-full.txt)](https://rageroomdirectory.co.uk/llms-full.txt)
 
 ## For venues
 
@@ -53,7 +72,7 @@ All prices are shown in GBP (£). Coverage is UK-wide with strongest depth in Lo
 
 ## Optional
 
-- [Privacy policy](https://rageroomdirectory.co.uk/privacy-policy)
+- [Privacy policy](https://rageroomdirectory.co.uk/privacy)
 - [Terms](https://rageroomdirectory.co.uk/terms)
 - [Disclaimer](https://rageroomdirectory.co.uk/disclaimer)
 - [XML sitemap](https://rageroomdirectory.co.uk/sitemap.xml)

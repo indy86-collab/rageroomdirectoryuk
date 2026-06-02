@@ -3,7 +3,7 @@ import { getAllListingsForAdmin, getDistinctCities, getDistinctRegions } from "@
 import { cityToSlug, regionToSlug } from "@/lib/location"
 import { getAllBlogPosts } from "@/lib/blog-posts"
 
-// ISR: sitemap reflects DB state but doesn't need to be live on every request.
+// ISR: sitemap reflects listings.json state but doesn't need to be live on every request.
 export const revalidate = 3600
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -116,12 +116,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.5,
     },
     {
-      url: `${baseUrl}/privacy-policy`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.5,
-    },
-    {
       url: `${baseUrl}/terms`,
       lastModified: new Date(),
       changeFrequency: "monthly",
@@ -139,12 +133,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.7,
     },
-    {
-      url: `${baseUrl}/search`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.7,
-    },
   ]
 
   // Guide pages
@@ -158,6 +146,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "best-rage-rooms-leeds",
     "best-rage-rooms-liverpool",
     "best-rage-rooms-sheffield",
+    "best-rage-rooms-edinburgh",
+    "best-rage-rooms-leicester",
+    "best-rage-rooms-derby",
+    "best-rage-rooms-brighton",
     "best-rage-rooms-for-couples",
     "best-rage-rooms-for-team-building",
     "are-rage-rooms-safe-uk",

@@ -34,6 +34,13 @@ export async function generateMetadata({
 export const revalidate = 3600
 export const dynamicParams = true
 
+export async function generateStaticParams() {
+  const { getDistinctRegions } = await import("@/lib/listings")
+  const { regionToSlug } = await import("@/lib/location")
+  const regions = await getDistinctRegions()
+  return regions.map((region) => ({ slug: regionToSlug(region) }))
+}
+
 export default async function RegionPage({ params }: RegionPageProps) {
   const regionName = slugToRegion(params.slug)
   const { getListingsByRegion } = await import("@/lib/listings")

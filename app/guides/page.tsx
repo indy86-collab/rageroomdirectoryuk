@@ -101,6 +101,34 @@ const CITY_GUIDES: Guide[] = [
     href: "/guides/best-rage-rooms-nottingham",
     category: "Nottingham",
   },
+  {
+    title: "Best Rage Rooms in Edinburgh",
+    description:
+      "Scottish capital rage rooms compared — ideal for city breaks, festival visitors and corporate groups.",
+    href: "/guides/best-rage-rooms-edinburgh",
+    category: "Edinburgh",
+  },
+  {
+    title: "Best Rage Rooms in Leicester",
+    description:
+      "East Midlands hub with multiple verified venues — strong value compared to London pricing.",
+    href: "/guides/best-rage-rooms-leicester",
+    category: "Leicester",
+  },
+  {
+    title: "Best Rage Rooms in Derby",
+    description:
+      "Derby's established smash rooms, also serving Nottingham and the wider East Midlands.",
+    href: "/guides/best-rage-rooms-derby",
+    category: "Derby",
+  },
+  {
+    title: "Best Rage Rooms in Brighton",
+    description:
+      "South Coast rage rooms — popular with hen parties, birthdays and London day-trippers.",
+    href: "/guides/best-rage-rooms-brighton",
+    category: "Brighton",
+  },
 ]
 
 const TOPIC_GUIDES: Guide[] = [

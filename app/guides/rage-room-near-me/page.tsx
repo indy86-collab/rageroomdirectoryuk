@@ -173,11 +173,11 @@ export default function RageRoomNearMePage() {
             ]}
           />
 
-          <p className="text-base sm:text-lg text-zinc-300 mb-4 leading-relaxed">
-            The UK&apos;s rage room scene has expanded rapidly over the past few years, with venues now in every major city and many smaller towns. Whether you&apos;re looking for a solo stress-busting session, a birthday activity, or a group smash event, there&apos;s likely a venue within reach.
+          <p className="text-xl text-white font-semibold mb-4 leading-relaxed">
+            To find a rage room near you in the UK, use our interactive map at /near-me or browse by city below — we list 40+ verified venues across London, Birmingham, Manchester, Liverpool, Edinburgh, Brighton and smaller towns. Most major-city residents are within 30 minutes of a venue; rural areas may need 45–90 minutes travel.
           </p>
           <p className="text-base sm:text-lg text-zinc-300 mb-8 leading-relaxed">
-            This guide helps you find and compare verified rage rooms near you — with direct links to city pages, pricing info, and travel tips.
+            This guide links to every city page with pricing, travel tips and direct booking links.
           </p>
 
           <AdsenseInContent />

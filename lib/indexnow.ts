@@ -17,7 +17,12 @@
 const DEFAULT_KEY = "b8f2c7e4a9d1c3f6e2b5a8c0d7e9f1b4"
 
 export function getIndexNowKey(): string {
-  return process.env.INDEXNOW_KEY || DEFAULT_KEY
+  const key = process.env.INDEXNOW_KEY
+  if (key) return key
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("INDEXNOW_KEY environment variable is required in production")
+  }
+  return DEFAULT_KEY
 }
 
 export function getIndexNowKeyLocation(): string {

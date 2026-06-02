@@ -25,6 +25,15 @@
 - **Required APIs**: Places API (Details)
 - **Required**: Optional (Google reviews won't fetch without it)
 
+### `INDEXNOW_KEY`
+- **Description**: IndexNow API key for notifying Bing/Yandex of URL updates
+- **Format**: 32-character hex string (must match `public/indexnow-key.txt`)
+- **Required**: Recommended for faster indexing after deploys
+
+### `INDEXNOW_API_TOKEN`
+- **Description**: Bearer token protecting the `/api/indexnow` manual ping endpoint
+- **Required**: Optional (only needed if using the API route manually)
+
 ## Data storage
 
 Listings are stored in [`data/listings.json`](data/listings.json) in the repository — no database is required.
@@ -46,6 +55,7 @@ To add or edit listings:
 - [ ] `NEXT_PUBLIC_SITE_URL` — Add your production URL
 - [ ] `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` — Add if using maps (optional)
 - [ ] `GOOGLE_PLACES_API_KEY` — Add if using Google reviews (optional)
+- [ ] `INDEXNOW_KEY` — Add for IndexNow pings after deploy (`npm run ping-indexnow`)
 - [ ] Remove `DATABASE_URL` and `NEXTAUTH_SECRET` from Vercel (no longer used)
 
 ## Notes

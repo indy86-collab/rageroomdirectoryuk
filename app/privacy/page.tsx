@@ -87,7 +87,7 @@ export default function PrivacyPage() {
             </h3>
             <p>We use cookies and analytics tools to improve website performance and provide relevant content.</p>
             <ul className="list-disc list-inside space-y-2 ml-4">
-              <li>Google Analytics cookies for understanding how visitors use our site</li>
+              <li>Vercel Analytics for anonymised page-view and performance metrics</li>
               <li>Cloudflare cookies for security and performance</li>
               <li>Google AdSense cookies (when applicable) for showing relevant advertisements</li>
               <li>Functional cookies for website features</li>
@@ -133,7 +133,7 @@ export default function PrivacyPage() {
             <p>We may share data with:</p>
             <ul className="list-disc list-inside space-y-2 ml-4">
               <li><strong>Vercel</strong> - Our hosting provider, which processes your IP address and request data</li>
-              <li><strong>Google Analytics</strong> - For website analytics and understanding visitor behavior. Google Analytics collects anonymized data about how you use our site</li>
+              <li><strong>Vercel Analytics</strong> - For anonymised website analytics and performance monitoring</li>
               <li><strong>Cloudflare</strong> - For website security, performance optimization, and DDoS protection. Cloudflare may collect IP addresses and request metadata</li>
               <li><strong>Google AdSense</strong> - If we display advertisements, Google AdSense may use cookies to show you relevant ads based on your browsing history</li>
               <li>Email service providers (if using contact forms)</li>
@@ -197,14 +197,13 @@ export default function PrivacyPage() {
               8. Google Services
             </h2>
             <p>
-              We use several Google services on our website:
+              We may use Google services on our website:
             </p>
             <ul className="list-disc list-inside space-y-2 ml-4">
-              <li><strong>Google Analytics</strong> - Helps us understand how visitors use our site. Google Analytics may collect information such as your IP address, browser type, pages visited, and time spent on pages. This data is anonymized and used to improve our website.</li>
-              <li><strong>Google AdSense</strong> - If we display advertisements, Google AdSense uses cookies to serve ads based on your prior visits to our website or other websites. You can opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-600 underline">Google's Ad Settings</a>.</li>
+              <li><strong>Google AdSense</strong> - If we display advertisements, Google AdSense uses cookies to serve ads based on your prior visits to our website or other websites. You can opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-600 underline">Google&apos;s Ad Settings</a>.</li>
             </ul>
             <p className="mt-4">
-              Google's use of information is governed by their <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-600 underline">Privacy Policy</a>.
+              Google&apos;s use of information is governed by their <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-600 underline">Privacy Policy</a>.
             </p>
           </section>
 

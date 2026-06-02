@@ -1,8 +1,22 @@
 import Link from "next/link"
 import Logo from "./Logo"
+import { getDistinctRegions, getListingsByRegion } from "@/lib/listings"
+import { regionToSlug } from "@/lib/location"
 
-export default function Footer() {
+export default async function Footer() {
   const currentYear = new Date().getFullYear()
+
+  const regions = await getDistinctRegions()
+  const regionCounts = await Promise.all(
+    regions.map(async (region) => ({
+      region,
+      count: (await getListingsByRegion(region)).length,
+    }))
+  )
+  const topRegions = regionCounts
+    .filter((r) => r.count > 0)
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 6)
 
   const columns: { heading: string; links: { label: string; href: string }[] }[] = [
     {
@@ -20,8 +34,18 @@ export default function Footer() {
       links: [
         { label: "All Listings", href: "/listings" },
         { label: "Near Me", href: "/near-me" },
+        { label: "UK Prices Hub", href: "/rage-room-prices-uk" },
         { label: "All Guides", href: "/guides" },
         { label: "Blog", href: "/blog" },
+      ],
+    },
+    {
+      heading: "Terminology",
+      links: [
+        { label: "Smash Room UK", href: "/smash-room-uk" },
+        { label: "Break Room UK", href: "/break-room-uk" },
+        { label: "Anger Room UK", href: "/anger-room-uk" },
+        { label: "Rage Room vs Escape Room", href: "/rage-room-vs-escape-room" },
       ],
     },
     {
@@ -44,6 +68,24 @@ export default function Footer() {
             <p className="mt-4 text-sm text-zinc-400 max-w-sm leading-relaxed">
               The UK&rsquo;s leading directory for rage rooms and smash experiences. Compare venues, view prices and book with confidence.
             </p>
+            {topRegions.length > 0 && (
+              <div className="mt-5">
+                <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-white mb-2">
+                  Browse by Region
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {topRegions.map(({ region }) => (
+                    <Link
+                      key={region}
+                      href={`/region/${regionToSlug(region)}`}
+                      className="text-xs text-zinc-400 hover:text-rage-500 transition-colors"
+                    >
+                      {region}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {columns.map((col) => (
@@ -72,7 +114,7 @@ export default function Footer() {
             © {currentYear} RageRoom Directory. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-zinc-500">
-            <Link href="/privacy-policy" className="hover:text-rage-500 transition-colors">
+            <Link href="/privacy" className="hover:text-rage-500 transition-colors">
               Privacy
             </Link>
             <span className="text-zinc-700">·</span>

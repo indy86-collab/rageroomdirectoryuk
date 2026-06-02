@@ -51,14 +51,15 @@ export const metadata: Metadata = {
   },
 }
 
-// Featured cities render as photo tiles (see section below). `image` points to
-// assets in /public/images/cities; gradients are kept only as a fallback.
+// Featured cities render as photo tiles (see section below). `image` is optional;
+// gradient backgrounds are used when no photo is available.
 const featuredCities: {
   city: string
   href: string
   guide: string
-  image: string
+  image?: string
   gradient: string
+  subtitle?: string
 }[] = [
   {
     city: "London",
@@ -75,22 +76,40 @@ const featuredCities: {
     gradient: "from-[#3b0764] via-[#1e1b4b] to-[#0b0a1e]",
   },
   {
-    city: "Manchester",
-    href: "/city/manchester",
-    guide: "/guides/best-rage-rooms-manchester",
-    image: "/images/cities/manchester.jpg",
-    gradient: "from-[#7f1d1d] via-[#450a0a] to-[#0f0606]",
+    city: "Liverpool",
+    href: "/city/liverpool",
+    guide: "/guides/best-rage-rooms-liverpool",
+    gradient: "from-[#831843] via-[#3b0a25] to-[#10040a]",
   },
   {
-    city: "Bristol",
-    href: "/city/bristol",
-    guide: "/guides/best-rage-rooms-bristol",
-    image: "/images/cities/bristol.jpg",
-    gradient: "from-[#064e3b] via-[#022c22] to-[#010c08]",
+    city: "Brighton",
+    href: "/city/brighton",
+    guide: "/guides/best-rage-rooms-brighton",
+    gradient: "from-[#0c4a6e] via-[#082f49] to-[#020617]",
   },
 ]
 
-const otherCities: { city: string; href: string; guide: string; gradient: string }[] = [
+const otherCities: {
+  city: string
+  href: string
+  guide: string
+  gradient: string
+  subtitle?: string
+}[] = [
+  {
+    city: "Manchester",
+    href: "/city/manchester",
+    guide: "/guides/best-rage-rooms-manchester",
+    gradient: "from-[#7f1d1d] via-[#450a0a] to-[#0f0606]",
+    subtitle: "Nearby venues",
+  },
+  {
+    city: "Leeds",
+    href: "/city/leeds",
+    guide: "/guides/best-rage-rooms-leeds",
+    gradient: "from-[#4c1d95] via-[#1e1b4b] to-[#0a081d]",
+    subtitle: "Nearby venues",
+  },
   {
     city: "Newcastle",
     href: "/city/newcastle",
@@ -98,43 +117,66 @@ const otherCities: { city: string; href: string; guide: string; gradient: string
     gradient: "from-[#1e3a8a] via-[#0c1a3a] to-[#020617]",
   },
   {
-    city: "Leeds",
-    href: "/city/leeds",
-    guide: "/guides/best-rage-rooms-leeds",
-    gradient: "from-[#4c1d95] via-[#1e1b4b] to-[#0a081d]",
-  },
-  {
-    city: "Liverpool",
-    href: "/city/liverpool",
-    guide: "/guides/best-rage-rooms-liverpool",
-    gradient: "from-[#831843] via-[#3b0a25] to-[#10040a]",
-  },
-  {
     city: "Sheffield",
     href: "/city/sheffield",
     guide: "/guides/best-rage-rooms-sheffield",
     gradient: "from-[#78350f] via-[#3b1a05] to-[#10080a]",
+    subtitle: "Nearby venues",
   },
   {
     city: "Nottingham",
     href: "/city/nottingham",
     guide: "/guides/best-rage-rooms-nottingham",
     gradient: "from-[#115e59] via-[#053433] to-[#031010]",
+    subtitle: "Nearby venues",
+  },
+  {
+    city: "Edinburgh",
+    href: "/city/edinburgh",
+    guide: "/guides/best-rage-rooms-edinburgh",
+    gradient: "from-[#1e3a5f] via-[#0c1a3a] to-[#020617]",
+  },
+  {
+    city: "Derby",
+    href: "/city/derby",
+    guide: "/guides/best-rage-rooms-derby",
+    gradient: "from-[#365314] via-[#1a2e05] to-[#0a1004]",
+  },
+  {
+    city: "Bristol",
+    href: "/city/bristol",
+    guide: "/guides/best-rage-rooms-bristol",
+    gradient: "from-[#064e3b] via-[#022c22] to-[#010c08]",
+    subtitle: "Nearby venues",
   },
 ]
 
 export default async function Home() {
-  const { getFeaturedListings, getListingsByCity } = await import("@/lib/listings")
+  const { getFeaturedListings, getListingsNearCity, getDistinctRegions, getListingsByRegion } =
+    await import("@/lib/listings")
+  const { regionToSlug } = await import("@/lib/location")
   const featuredListings = await getFeaturedListings(8, {
     excludeSlugs: ["rage-x-treme-polegate"],
   })
 
   const cityCounts = await Promise.all(
     featuredCities.map(async (c) => {
-      const list = await getListingsByCity(c.city)
-      return { ...c, count: list.length }
+      const { allForSchema } = await getListingsNearCity(c.city)
+      return { ...c, count: allForSchema.length }
     })
   )
+
+  const regions = await getDistinctRegions()
+  const regionCounts = await Promise.all(
+    regions.map(async (region) => ({
+      region,
+      count: (await getListingsByRegion(region)).length,
+    }))
+  )
+  const topRegions = regionCounts
+    .filter((r) => r.count > 0)
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 8)
 
   return (
     <>
@@ -154,13 +196,20 @@ export default async function Home() {
                 href={c.href}
                 className="group relative overflow-hidden rounded-lg border border-zinc-800 h-32 sm:h-40 lg:h-44 flex items-end bg-dark-900"
               >
-                <Image
-                  src={c.image}
-                  alt={`Rage rooms in ${c.city} — city skyline`}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
-                />
+                {c.image ? (
+                  <Image
+                    src={c.image}
+                    alt={`Rage rooms in ${c.city} — city skyline`}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+                  />
+                ) : (
+                  <div
+                    aria-hidden="true"
+                    className={`absolute inset-0 bg-gradient-to-br ${c.gradient}`}
+                  />
+                )}
                 <div
                   aria-hidden="true"
                   className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/10"
@@ -170,7 +219,8 @@ export default async function Home() {
                     {c.city}
                   </div>
                   <div className="text-[11px] sm:text-xs text-zinc-200/90 font-medium">
-                    {c.count} {c.count === 1 ? "Room" : "Rooms"}
+                    {c.subtitle ??
+                      `${c.count} ${c.count === 1 ? "Room" : "Rooms"}`}
                   </div>
                 </div>
               </Link>
@@ -186,9 +236,32 @@ export default async function Home() {
               >
                 <MapPin className="w-3 h-3 text-rage-500" />
                 {c.city}
+                {c.subtitle && (
+                  <span className="text-zinc-500 font-normal">· {c.subtitle}</span>
+                )}
               </Link>
             ))}
           </div>
+
+          {topRegions.length > 0 && (
+            <div className="mt-8">
+              <h3 className="text-sm font-bold uppercase tracking-widest text-zinc-400 mb-3">
+                Browse by region
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {topRegions.map(({ region, count }) => (
+                  <Link
+                    key={region}
+                    href={`/region/${regionToSlug(region)}`}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-dark-800 border border-zinc-800 text-xs font-semibold text-zinc-200 hover:border-rage-500/60 hover:text-white transition-colors"
+                  >
+                    {region}
+                    <span className="text-zinc-500 font-normal">({count})</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 

@@ -96,7 +96,7 @@ export default function HowMuchDoRageRoomsCostUKPage() {
 
         <div className="space-y-6 text-base sm:text-lg text-zinc-300">
           <p className="text-xl text-white font-semibold">
-            Rage room prices in the UK vary depending on location, session length, group size, and package inclusions. Here's a comprehensive guide to help you understand rage room costs and find the best value for your budget.
+            UK rage rooms typically cost £20–£40 for a solo 15–20 minute session, £35–£65 for a standard 30-minute booking, and £90–£180 for groups of 3–6 people. London sits at the higher end; northern and Midlands cities are usually 15–30% cheaper for comparable packages.
           </p>
 
           <AdsenseInContent />

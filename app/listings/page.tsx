@@ -12,10 +12,22 @@ export const metadata: Metadata = {
 export const revalidate = 3600
 
 export default async function AllListingsPage() {
-  const { searchListings, getDistinctCities } = await import("@/lib/listings")
-  const { cityToSlug } = await import("@/lib/location")
+  const { searchListings, getDistinctCities, getDistinctRegions, getListingsByRegion } =
+    await import("@/lib/listings")
+  const { cityToSlug, regionToSlug } = await import("@/lib/location")
   const listings = await searchListings(undefined)
   const cities = await getDistinctCities()
+  const regions = await getDistinctRegions()
+  const regionCounts = await Promise.all(
+    regions.map(async (region) => ({
+      region,
+      count: (await getListingsByRegion(region)).length,
+    }))
+  )
+  const topRegions = regionCounts
+    .filter((r) => r.count > 0)
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 8)
 
   const priceRange = listings.filter(l => l.price).map(l => l.price!)
   const minPrice = priceRange.length > 0 ? Math.min(...priceRange) : null
@@ -101,6 +113,23 @@ export default async function AllListingsPage() {
                   className="px-3 py-1.5 bg-[#181818] border border-zinc-700 rounded-full text-sm text-zinc-300 hover:text-orange-500 hover:border-orange-500/50 transition-colors"
                 >
                   {city}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {topRegions.length > 0 && (
+          <div className="mb-8">
+            <h2 className="text-lg font-bold text-white mb-3">Browse by Region</h2>
+            <div className="flex flex-wrap gap-2">
+              {topRegions.map(({ region, count }) => (
+                <Link
+                  key={region}
+                  href={`/region/${regionToSlug(region)}`}
+                  className="px-3 py-1.5 bg-[#181818] border border-zinc-700 rounded-full text-sm text-zinc-300 hover:text-orange-500 hover:border-orange-500/50 transition-colors"
+                >
+                  {region} ({count})
                 </Link>
               ))}
             </div>
