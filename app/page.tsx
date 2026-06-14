@@ -80,12 +80,14 @@ const featuredCities: {
     city: "Liverpool",
     href: "/city/liverpool",
     guide: "/guides/best-rage-rooms-liverpool",
+    image: "/images/cities/liverpool.jpg",
     gradient: "from-[#831843] via-[#3b0a25] to-[#10040a]",
   },
   {
     city: "Brighton",
     href: "/city/brighton",
     guide: "/guides/best-rage-rooms-brighton",
+    image: "/images/cities/brighton.jpg",
     gradient: "from-[#0c4a6e] via-[#082f49] to-[#020617]",
   },
 ]
