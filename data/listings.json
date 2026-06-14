@@ -1,5 +1,105 @@
 [
   {
+    "id": "176522c9-6b9b-4aad-81f3-ddeaee3ea47f",
+    "name": "The Underground Newport",
+    "description": "Newport activity venue with a dedicated rage room at the Kingsway Centre. Smash bottles, plates, and breakables in a controlled room with safety equipment provided, with sessions bookable alongside axe throwing and other experiences.",
+    "city": "Newport",
+    "region": "Newport",
+    "postcode": "NP20 1EB",
+    "location": {
+      "lat": 51.585177,
+      "lng": -2.993131
+    },
+    "website": "https://www.theundergroundnewport.com/",
+    "phone": null,
+    "price": 30,
+    "image": "/images/TheUndergroundNewport.png",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "the-underground-newport",
+    "createdAt": "2026-06-14T12:00:00.000Z"
+  },
+  {
+    "id": "83ee5c07-1455-4b7b-9fe0-9d3f97e1c5e7",
+    "name": "Rage Room Ireland",
+    "description": "Dublin rage room in Ballyfermot where groups can smash bottles, plates, printers, and other breakables in a supervised room. Prices are listed in euros, so check the venue website for current packages before booking.",
+    "city": "Dublin",
+    "region": "County Dublin",
+    "postcode": "D10",
+    "location": {
+      "lat": 53.335672,
+      "lng": -6.350644
+    },
+    "website": "https://www.rageroomireland.com/",
+    "phone": null,
+    "price": null,
+    "image": "/images/rageroomireland.png",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "rage-room-ireland",
+    "createdAt": "2026-06-14T12:00:00.000Z"
+  },
+  {
+    "id": "a203c2d9-20ab-4ec2-a744-c022e6bd8341",
+    "name": "Down Range Rage Room",
+    "description": "Gosport rage room from Down Range Axe Throwing. A controlled smash-room experience where visitors can break household items and old electronics with protective equipment provided.",
+    "city": "Gosport",
+    "region": "Hampshire",
+    "postcode": "PO12 1BE",
+    "location": {
+      "lat": 50.796362,
+      "lng": -1.122679
+    },
+    "website": "https://downrange-axethrowing.co.uk/rage-room/",
+    "phone": null,
+    "price": null,
+    "image": "/images/down-range-rage-room-gosport.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "down-range-rage-room-gosport",
+    "createdAt": "2026-06-14T12:00:00.000Z"
+  },
+  {
+    "id": "f20a646d-6a93-4fca-a94c-4b3c93d629ec",
+    "name": "Unleashed Castleford",
+    "description": "Castleford activity venue offering rage room sessions alongside other entertainment. Book a supervised smash-room slot with safety equipment supplied and breakables prepared for the session.",
+    "city": "Castleford",
+    "region": "West Yorkshire",
+    "postcode": "WF10 5DJ",
+    "location": {
+      "lat": 53.721794,
+      "lng": -1.363922
+    },
+    "website": "https://www.sumupbookings.com/unleashed-castleford",
+    "phone": null,
+    "price": 25,
+    "image": "/images/unleashed-castleford.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "unleashed-castleford",
+    "createdAt": "2026-06-14T12:00:00.000Z"
+  },
+  {
+    "id": "9c2ad2d7-5603-47a2-b466-35f82e3f12ea",
+    "name": "ShatterHaus",
+    "description": "Cardiff city-centre rage room on Queen Street. Break crockery, glassware, and other smashable items in a supervised room with protective equipment provided.",
+    "city": "Cardiff",
+    "region": "Cardiff",
+    "postcode": "CF10 2BH",
+    "location": {
+      "lat": 51.483047,
+      "lng": -3.172573
+    },
+    "website": "https://www.shatterhaus.uk/",
+    "phone": null,
+    "price": null,
+    "image": "/images/shatterhaus-cardiff.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "shatterhaus-cardiff",
+    "createdAt": "2026-06-14T12:00:00.000Z"
+  },
+  {
     "id": "a3f1c8e2-9d4b-4a7f-b612-8e5d3c9a1f04",
     "name": "Rage It Out",
     "description": "County Durham's dedicated rage room in Consett. Smash bottles, furniture, and electronics in a safe, controlled space. Also offers axe throwing and interactive games. Book Fri–Sun sessions online.",
