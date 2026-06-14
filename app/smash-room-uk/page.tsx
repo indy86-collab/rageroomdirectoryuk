@@ -6,6 +6,7 @@ import FAQ from "@/components/FAQ"
 import { globalFAQs } from "@/lib/faqs"
 import ListingsGrid from "@/components/ListingsGrid"
 import { buildOgImageUrl } from "@/lib/seo-schema"
+import { absoluteUrl } from "@/lib/site-url"
 
 const OG_IMAGE = buildOgImageUrl({
   title: "Smash Rooms UK",
@@ -45,7 +46,7 @@ export default async function SmashRoomUKPage() {
     "@type": "LocalBusiness",
     name: "Smash Rooms UK",
     description: "Find smash rooms and rage rooms across the UK",
-    url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"}/smash-room-uk`,
+    url: absoluteUrl("/smash-room-uk"),
   }
 
   return (
@@ -187,4 +188,3 @@ export default async function SmashRoomUKPage() {
     </div>
   )
 }
-

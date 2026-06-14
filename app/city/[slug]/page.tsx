@@ -10,6 +10,7 @@ import AdsenseInContent from "@/components/ads/AdsenseInContent"
 import CityRelatedLinks from "@/components/CityRelatedLinks"
 import Link from "next/link"
 import { buildOgImageUrl } from "@/lib/seo-schema"
+import { absoluteUrl, getSiteUrl, listingUrl } from "@/lib/site-url"
 
 interface CityPageProps {
   params: { slug: string }
@@ -19,37 +20,56 @@ export async function generateMetadata({
   params,
 }: CityPageProps): Promise<Metadata> {
   const cityName = slugToCity(params.slug)
-  const { getListingsByCity } = await import("@/lib/listings")
-  const listings = await getListingsByCity(cityName)
-  const count = listings.length
-  const pricedListings = listings.filter((l) => l.price != null) as Array<
-    typeof listings[number] & { price: number }
+  const { getListingsNearCity } = await import("@/lib/listings")
+  const { inCity, nearby, allForSchema } = await getListingsNearCity(cityName)
+  const count = allForSchema.length
+  const hasNearbyOnly = inCity.length === 0 && nearby.length > 0
+  const isEmpty = count === 0
+  const pricedListings = allForSchema.filter((l) => l.price != null) as Array<
+    typeof allForSchema[number] & { price: number }
   >
   const minPrice = pricedListings.length
     ? Math.min(...pricedListings.map((l) => l.price))
     : null
 
   const ogImage = buildOgImageUrl({
-    title: `Rage Rooms in ${cityName}`,
-    subtitle: `${count} verified ${count === 1 ? "venue" : "venues"} · Compare prices & book`,
+    title: hasNearbyOnly ? `Rage Rooms Near ${cityName}` : `Rage Rooms in ${cityName}`,
+    subtitle: isEmpty
+      ? "Browse verified UK venues nearby"
+      : `${count} verified ${count === 1 ? "venue" : "venues"} · Compare prices & book`,
     badge: "City",
     ...(minPrice ? { price: `From £${minPrice.toFixed(0)}` } : {}),
   })
 
   return {
-    title: `Rage Rooms in ${cityName} — ${count} ${count === 1 ? "Venue" : "Venues"} Listed`,
-    description: `Find rage rooms in ${cityName}. Compare ${count} ${count === 1 ? "venue" : "venues"}, view starting prices, read reviews, and book a destruction therapy session near you.`,
+    title: hasNearbyOnly
+      ? `Rage Rooms Near ${cityName} — ${count} ${count === 1 ? "Venue" : "Venues"} Within Travelling Distance`
+      : isEmpty
+        ? `Rage Rooms Near ${cityName} | Find UK Smash Rooms`
+        : `Rage Rooms in ${cityName} — ${count} ${count === 1 ? "Venue" : "Venues"} Listed`,
+    description: hasNearbyOnly
+      ? `Find rage rooms near ${cityName}. Compare ${count} nearby ${count === 1 ? "venue" : "venues"} within travelling distance, view starting prices, read reviews, and book a smash room session.`
+      : isEmpty
+        ? `We do not have a verified rage room in ${cityName} yet. Browse nearby UK rage rooms, compare prices, and suggest a missing venue.`
+        : `Find rage rooms in ${cityName}. Compare ${count} ${count === 1 ? "venue" : "venues"}, view starting prices, read reviews, and book a destruction therapy session near you.`,
     alternates: { canonical: `/city/${cityToSlug(cityName)}` },
+    ...(isEmpty ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
-      title: `Rage Rooms in ${cityName} | RageRoom Directory`,
-      description: `Browse ${count} rage ${count === 1 ? "room" : "rooms"} in ${cityName}. Compare venues, prices, and reviews.`,
+      title: hasNearbyOnly
+        ? `Rage Rooms Near ${cityName} | RageRoom Directory`
+        : `Rage Rooms in ${cityName} | RageRoom Directory`,
+      description: hasNearbyOnly
+        ? `Browse ${count} rage ${count === 1 ? "room" : "rooms"} near ${cityName}. Compare venues, prices, and reviews.`
+        : `Browse ${count} rage ${count === 1 ? "room" : "rooms"} in ${cityName}. Compare venues, prices, and reviews.`,
       type: "website",
-      images: [{ url: ogImage, width: 1200, height: 630, alt: `Rage rooms in ${cityName}` }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: hasNearbyOnly ? `Rage rooms near ${cityName}` : `Rage rooms in ${cityName}` }],
     },
     twitter: {
       card: "summary_large_image",
-      title: `Rage Rooms in ${cityName}`,
-      description: `${count} verified rage rooms in ${cityName}. Compare venues and prices.`,
+      title: hasNearbyOnly ? `Rage Rooms Near ${cityName}` : `Rage Rooms in ${cityName}`,
+      description: hasNearbyOnly
+        ? `${count} verified rage rooms near ${cityName}. Compare venues and prices.`
+        : `${count} verified rage rooms in ${cityName}. Compare venues and prices.`,
       images: [ogImage],
     },
   }
@@ -66,23 +86,27 @@ export async function generateStaticParams() {
 
 export default async function CityPage({ params }: CityPageProps) {
   const cityName = slugToCity(params.slug)
-  const { getListingsByCity } = await import("@/lib/listings")
-  const listings = await getListingsByCity(cityName)
+  const { getListingsNearCity } = await import("@/lib/listings")
+  const { inCity, nearby, allForSchema } = await getListingsNearCity(cityName)
+  const listings = allForSchema
+  const hasNearbyOnly = inCity.length === 0 && nearby.length > 0
+  const isEmpty = listings.length === 0
 
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
-  const cityUrl = `${baseUrl}/city/${cityToSlug(cityName)}`
+  const baseUrl = getSiteUrl()
+  const cityUrl = absoluteUrl(`/city/${cityToSlug(cityName)}`)
 
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "@id": `${cityUrl}#itemlist`,
-    name: `Rage Rooms in ${cityName}`,
-    description: `Directory of rage rooms and smash rooms in ${cityName}`,
+    name: hasNearbyOnly ? `Rage Rooms Near ${cityName}` : `Rage Rooms in ${cityName}`,
+    description: hasNearbyOnly
+      ? `Directory of rage rooms and smash rooms near ${cityName}`
+      : `Directory of rage rooms and smash rooms in ${cityName}`,
     numberOfItems: listings.length,
     itemListOrder: "https://schema.org/ItemListOrderDescending",
     itemListElement: listings.map((listing, index) => {
-      const url = `${baseUrl}/listing/${listing.slug || listing.id}`
+      const url = listingUrl(listing.slug || listing.id)
       return {
         "@type": "ListItem",
         position: index + 1,
@@ -92,7 +116,7 @@ export default async function CityPage({ params }: CityPageProps) {
           "@id": `${url}#localbusiness`,
           name: listing.name,
           url,
-          image: listing.image || `${baseUrl}/og-image.png`,
+          image: listing.image || absoluteUrl("/og-image.png"),
           address: {
             "@type": "PostalAddress",
             addressLocality: listing.city,
@@ -144,28 +168,14 @@ export default async function CityPage({ params }: CityPageProps) {
           },
           itemOffered: {
             "@type": "Service",
-            name: `Rage room sessions in ${cityName}`,
+            name: hasNearbyOnly
+              ? `Rage room sessions near ${cityName}`
+              : `Rage room sessions in ${cityName}`,
             serviceType: "Rage room / smash room experience",
             areaServed: { "@type": "City", name: cityName },
           },
         }
       : null
-
-  // Breadcrumb schema — gives this page proper hierarchy signal.
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: baseUrl },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "All Rage Rooms",
-        item: `${baseUrl}/listings`,
-      },
-      { "@type": "ListItem", position: 3, name: cityName, item: cityUrl },
-    ],
-  }
 
   return (
     <div className="py-6 sm:py-8">
@@ -182,10 +192,6 @@ export default async function CityPage({ params }: CityPageProps) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-        />
         {aggregateOfferSchema && (
           <script
             type="application/ld+json"
@@ -196,21 +202,27 @@ export default async function CityPage({ params }: CityPageProps) {
         )}
 
         <h1 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 text-white">
-          Rage Rooms in {cityName}
+          {hasNearbyOnly ? `Rage Rooms Near ${cityName}` : `Rage Rooms in ${cityName}`}
         </h1>
 
         {/* Unique city-specific intro; ad after first paragraph only. */}
         <div className="text-base sm:text-lg text-zinc-300 mb-6 sm:mb-8 space-y-3 sm:space-y-4">
-          <p>{cityContent.intro}</p>
+          <p>
+            {hasNearbyOnly
+              ? `We do not currently list a dedicated rage room in central ${cityName}, but there ${nearby.length === 1 ? "is" : "are"} ${nearby.length} verified ${nearby.length === 1 ? "venue" : "venues"} within travelling distance. Compare the closest options below, including prices, locations and booking links.`
+              : cityContent.intro}
+          </p>
           <AdsenseInContent />
           <p>{cityContent.localContext}</p>
         </div>
 
         {/* Quick stats bar */}
-        {listings.length > 0 && (
+        {!isEmpty && (
           <div className="bg-[#181818] rounded-lg border border-zinc-800 p-4 mb-6 flex flex-wrap gap-4 sm:gap-8">
             <div>
-              <p className="text-zinc-400 text-xs uppercase tracking-wider">Venues Listed</p>
+              <p className="text-zinc-400 text-xs uppercase tracking-wider">
+                {hasNearbyOnly ? "Nearby Venues" : "Venues Listed"}
+              </p>
               <p className="text-white text-xl font-bold">{listings.length}</p>
             </div>
             {minPrice !== null && (
@@ -228,18 +240,36 @@ export default async function CityPage({ params }: CityPageProps) {
           </div>
         )}
         
-        {listings.length > 0 ? (
+        {!isEmpty ? (
           <>
-            <section aria-label={`Rage rooms in ${cityName}`}>
-              <ListingsGrid listings={listings} />
-            </section>
+            {inCity.length > 0 && (
+              <section aria-label={`Rage rooms in ${cityName}`}>
+                <ListingsGrid listings={inCity} />
+              </section>
+            )}
+
+            {nearby.length > 0 && (
+              <section
+                aria-label={`Rage rooms near ${cityName}`}
+                className={inCity.length > 0 ? "mt-10" : undefined}
+              >
+                <h2 className="text-2xl font-bold text-white mb-4">
+                  {inCity.length > 0
+                    ? `Rage Rooms Near ${cityName}`
+                    : `Nearest Rage Rooms to ${cityName}`}
+                </h2>
+                <ListingsGrid listings={nearby} />
+              </section>
+            )}
             
             {/* Travel tip */}
             <div className="mt-8 mb-6">
               <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6">
                 <h2 className="text-lg font-bold text-white mb-2">Getting There</h2>
                 <p className="text-base text-zinc-300">
-                  {cityContent.travelTip}
+                  {hasNearbyOnly
+                    ? `The nearest listed venues may require a short train journey or drive from ${cityName}. Check each listing for postcode, parking, public transport options and booking availability before travelling.`
+                    : cityContent.travelTip}
                 </p>
               </div>
             </div>
@@ -276,17 +306,17 @@ export default async function CityPage({ params }: CityPageProps) {
         ) : (
           <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-8 text-center">
             <p className="text-xl text-white mb-4">
-              No rage rooms found in {cityName} yet
+              No verified rage rooms found in {cityName} yet
             </p>
             <p className="text-zinc-400 mb-6">
-              We're always adding new rage rooms to our directory. Check back soon, or explore rage rooms in other cities.
+              We're always adding new rage rooms to our directory. Explore the UK map or full directory, and tell us if we are missing a venue in {cityName}.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/"
+                href="/near-me"
                 className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-md transition-colors text-center"
               >
-                Browse All Rage Rooms
+                Find Rage Rooms Near Me
               </Link>
               <Link
                 href="/list-your-rage-room"

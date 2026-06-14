@@ -1,8 +1,7 @@
 import { MetadataRoute } from "next"
+import { absoluteUrl, getSiteHost } from "@/lib/site-url"
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
-
   // Block API routes from crawlers. Explicitly allow modern AI crawlers so
   // LLM answer engines (ChatGPT Search, Perplexity, Claude, Gemini, etc.)
   // can index our content. See also /llms.txt for AEO discovery.
@@ -41,7 +40,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/"],
       })),
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
-    host: baseUrl.replace(/^https?:\/\//, ""),
+    sitemap: absoluteUrl("/sitemap.xml"),
+    host: getSiteHost(),
   }
 }

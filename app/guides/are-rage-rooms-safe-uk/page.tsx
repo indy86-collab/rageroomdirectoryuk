@@ -97,7 +97,7 @@ export default function AreRageRoomsSafeUKPage() {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "@id": `https://rageroomdirectory.co.uk${GUIDE_PATH}#faq`,
+    "@id": `https://www.rageroomdirectory.co.uk${GUIDE_PATH}#faq`,
     mainEntity: FAQS.map((f) => ({
       "@type": "Question",
       name: f.question,

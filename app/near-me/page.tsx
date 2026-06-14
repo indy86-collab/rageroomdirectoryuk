@@ -6,6 +6,7 @@ import FAQ from "@/components/FAQ"
 import { globalFAQs } from "@/lib/faqs"
 import ListingsGrid from "@/components/ListingsGrid"
 import NearMeMap from "@/components/NearMeMap"
+import { absoluteUrl } from "@/lib/site-url"
 
 export const metadata: Metadata = {
   title: "Rage Room Near Me | Find Local Smash Rooms",
@@ -39,7 +40,7 @@ export default async function NearMePage() {
     "@type": "LocalBusiness",
     name: "Rage Rooms Near Me",
     description: "Find rage rooms and smash rooms near your location",
-    url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"}/near-me`,
+    url: absoluteUrl("/near-me"),
   }
 
   // UK major cities list for SEO
@@ -256,4 +257,3 @@ export default async function NearMePage() {
     </div>
   )
 }
-

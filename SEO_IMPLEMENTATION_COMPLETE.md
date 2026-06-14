@@ -9,8 +9,8 @@ All SEO improvements have been implemented as requested. Here's what was added:
 - **Type**: JSON-LD
 - **Includes**:
   - Organization name: "RageRoom Directory"
-  - URL: https://rageroomdirectory.co.uk
-  - Logo: https://rageroomdirectory.co.uk/logo.png
+  - URL: https://www.rageroomdirectory.co.uk
+  - Logo: https://www.rageroomdirectory.co.uk/logo.png
   - Social media links (Instagram, Twitter)
 
 ### 2. ✅ Website Schema (Sitelinks Search Box)

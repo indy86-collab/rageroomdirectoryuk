@@ -2,12 +2,13 @@ import { MetadataRoute } from "next"
 import { getAllListingsForAdmin, getDistinctCities, getDistinctRegions } from "@/lib/listings"
 import { cityToSlug, regionToSlug } from "@/lib/location"
 import { getAllBlogPosts } from "@/lib/blog-posts"
+import { absoluteUrl, getSiteUrl, listingUrl } from "@/lib/site-url"
 
 // ISR: sitemap reflects listings.json state but doesn't need to be live on every request.
 export const revalidate = 3600
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
+  const baseUrl = getSiteUrl()
 
   // Get all listings, cities, regions, and blog posts
   const [listings, cities, regions, blogPosts] = await Promise.all([
@@ -26,109 +27,109 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     },
     {
-      url: `${baseUrl}/listings`,
+      url: absoluteUrl("/listings"),
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/near-me`,
+      url: absoluteUrl("/near-me"),
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/rage-room-prices-uk`,
+      url: absoluteUrl("/rage-room-prices-uk"),
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/rage-room-london`,
+      url: absoluteUrl("/rage-room-london"),
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/rage-room-vs-escape-room`,
+      url: absoluteUrl("/rage-room-vs-escape-room"),
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/london-map`,
+      url: absoluteUrl("/london-map"),
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/smash-room-uk`,
+      url: absoluteUrl("/smash-room-uk"),
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/break-room-uk`,
+      url: absoluteUrl("/break-room-uk"),
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/anger-room-uk`,
+      url: absoluteUrl("/anger-room-uk"),
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/blog`,
+      url: absoluteUrl("/blog"),
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/guides`,
+      url: absoluteUrl("/guides"),
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/about`,
+      url: absoluteUrl("/about"),
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
-      url: `${baseUrl}/contact`,
+      url: absoluteUrl("/contact"),
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
-      url: `${baseUrl}/editorial-policy`,
+      url: absoluteUrl("/editorial-policy"),
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
-      url: `${baseUrl}/privacy`,
+      url: absoluteUrl("/privacy"),
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.5,
     },
     {
-      url: `${baseUrl}/terms`,
+      url: absoluteUrl("/terms"),
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.5,
     },
     {
-      url: `${baseUrl}/disclaimer`,
+      url: absoluteUrl("/disclaimer"),
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.5,
     },
     {
-      url: `${baseUrl}/list-your-rage-room`,
+      url: absoluteUrl("/list-your-rage-room"),
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
@@ -167,7 +168,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   guidePages.forEach((guide) => {
     routes.push({
-      url: `${baseUrl}/guides/${guide}`,
+      url: absoluteUrl(`/guides/${guide}`),
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
@@ -177,7 +178,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // City pages
   cities.forEach((city) => {
     routes.push({
-      url: `${baseUrl}/city/${cityToSlug(city)}`,
+      url: absoluteUrl(`/city/${cityToSlug(city)}`),
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
@@ -187,7 +188,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Region pages
   regions.forEach((region) => {
     routes.push({
-      url: `${baseUrl}/region/${regionToSlug(region)}`,
+      url: absoluteUrl(`/region/${regionToSlug(region)}`),
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.7,
@@ -196,11 +197,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Listing pages (use slug if available, fallback to id)
   listings.forEach((listing) => {
-    const listingUrl = listing.slug 
-      ? `${baseUrl}/listing/${listing.slug}`
-      : `${baseUrl}/listing/${listing.id}`
+    const url = listingUrl(listing.slug || listing.id)
     routes.push({
-      url: listingUrl,
+      url,
       lastModified: listing.createdAt,
       changeFrequency: "weekly",
       priority: 0.7,
@@ -210,7 +209,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Blog posts
   blogPosts.forEach((post) => {
     routes.push({
-      url: `${baseUrl}/blog/${post.slug}`,
+      url: absoluteUrl(`/blog/${post.slug}`),
       lastModified: new Date(post.date),
       changeFrequency: "monthly",
       priority: 0.6,
@@ -219,4 +218,3 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return routes
 }
-

@@ -2,6 +2,7 @@ import { Metadata } from "next"
 import ListingsGrid from "@/components/ListingsGrid"
 import UGCButtons from "@/components/UGCButtons"
 import Link from "next/link"
+import { listingUrl } from "@/lib/site-url"
 
 export const metadata: Metadata = {
   title: "All Rage Rooms in the UK — Complete Directory",
@@ -46,7 +47,7 @@ export default async function AllListingsPage() {
       item: {
         "@type": "LocalBusiness",
         name: listing.name,
-        url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"}/listing/${listing.slug || listing.id}`,
+        url: listingUrl(listing.slug || listing.id),
       },
     })),
   }

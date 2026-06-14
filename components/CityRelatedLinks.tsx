@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { cityToSlug } from "@/lib/location"
+import { getListingsNearCity } from "@/lib/listings"
 
 /**
  * Top-9 cities that have a dedicated "Best rage rooms in X" editorial guide.
@@ -53,9 +54,17 @@ function hasDedicatedGuide(city: string): city is GuideCity {
   return (GUIDE_CITIES as readonly string[]).includes(city)
 }
 
-export default function CityRelatedLinks({ cityName }: { cityName: string }) {
+export default async function CityRelatedLinks({ cityName }: { cityName: string }) {
   const neighbours =
     NEIGHBOURS[cityName] ?? GUIDE_CITIES.filter((c) => c !== cityName).slice(0, 5)
+  const availableNeighbours = (
+    await Promise.all(
+      neighbours.map(async (city) => {
+        const { allForSchema } = await getListingsNearCity(city)
+        return allForSchema.length > 0 ? city : null
+      })
+    )
+  ).filter((city): city is string => city != null)
 
   return (
     <section
@@ -149,7 +158,7 @@ export default function CityRelatedLinks({ cityName }: { cityName: string }) {
           Rage rooms in nearby cities
         </h2>
         <ul className="space-y-2 text-zinc-300">
-          {neighbours.map((c) => (
+          {availableNeighbours.map((c) => (
             <li key={c}>
               <Link
                 href={`/city/${slugifyCity(c)}`}

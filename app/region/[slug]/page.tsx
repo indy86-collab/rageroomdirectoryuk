@@ -6,6 +6,7 @@ import ListingsGrid from "@/components/ListingsGrid"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import UGCButtons from "@/components/UGCButtons"
 import Link from "next/link"
+import { listingUrl } from "@/lib/site-url"
 
 interface RegionPageProps {
   params: { slug: string }
@@ -70,7 +71,7 @@ export default async function RegionPage({ params }: RegionPageProps) {
       item: {
         "@type": "LocalBusiness",
         name: listing.name,
-        url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"}/listing/${listing.slug || listing.id}`,
+        url: listingUrl(listing.slug || listing.id),
       },
     })),
   }

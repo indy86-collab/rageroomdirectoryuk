@@ -3,6 +3,7 @@ import Link from "next/link"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import FAQ from "@/components/FAQ"
 import { buildOgImageUrl } from "@/lib/seo-schema"
+import { absoluteUrl } from "@/lib/site-url"
 
 const OG_IMAGE = buildOgImageUrl({
   title: "UK Rage Room Prices",
@@ -40,7 +41,7 @@ export default async function RageRoomPricesUKPage() {
     "@type": "WebPage",
     name: "Rage Room Prices UK",
     description: "Complete guide to rage room prices across the UK with city comparisons and package details",
-    url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"}/rage-room-prices-uk`,
+    url: absoluteUrl("/rage-room-prices-uk"),
   }
 
   const faqItems = [
@@ -226,7 +227,7 @@ export default async function RageRoomPricesUKPage() {
         />
 
         <h1 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 text-white">
-          Rage Room Prices UK: Complete Pricing Guide 2025
+          Rage Room Prices UK: Complete Pricing Guide 2026
         </h1>
 
         <div className="text-base sm:text-lg text-zinc-300 mb-6 sm:mb-8 space-y-3 sm:space-y-4">
@@ -491,4 +492,3 @@ export default async function RageRoomPricesUKPage() {
     </div>
   )
 }
-

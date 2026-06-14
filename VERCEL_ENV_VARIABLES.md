@@ -5,8 +5,8 @@
 ### `NEXT_PUBLIC_SITE_URL`
 - **Description**: Your production site URL (used for SEO, sitemap, canonical URLs)
 - **Format**: `https://yourdomain.com`
-- **Example**: `https://rageroomdirectory.co.uk`
-- **Default**: Falls back to `https://rageroomdirectory.co.uk` if not set
+- **Example**: `https://www.rageroomdirectory.co.uk`
+- **Default**: Falls back to `https://www.rageroomdirectory.co.uk` if not set
 - **Required**: Recommended (for proper SEO)
 
 ## Optional Environment Variables

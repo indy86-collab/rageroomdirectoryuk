@@ -7,6 +7,7 @@ import { getCityFAQs } from "@/lib/faqs"
 import ListingCard from "@/components/ListingCard"
 import NearMeMap from "@/components/NearMeMap"
 import { buildOgImageUrl } from "@/lib/seo-schema"
+import { absoluteUrl } from "@/lib/site-url"
 
 const OG_IMAGE = buildOgImageUrl({
   title: "Rage Rooms in London",
@@ -56,7 +57,7 @@ export default async function RageRoomLondonPage() {
       addressCountry: "GB",
     },
     description: "Best rage rooms and smash rooms in London",
-    url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"}/rage-room-london`,
+    url: absoluteUrl("/rage-room-london"),
   }
 
   const londonFAQs = getCityFAQs("London")
@@ -358,4 +359,3 @@ export default async function RageRoomLondonPage() {
     </div>
   )
 }
-

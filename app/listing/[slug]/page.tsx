@@ -17,6 +17,7 @@ import UGCButtons from "@/components/UGCButtons"
 import AdsenseInContent from "@/components/ads/AdsenseInContent"
 import LazyMapEmbed from "@/components/LazyMapEmbed"
 import { buildOgImageUrl } from "@/lib/seo-schema"
+import { absoluteUrl, getSiteUrl, listingUrl as buildListingUrl } from "@/lib/site-url"
 
 interface ListingPageProps {
   params: { slug: string }
@@ -56,10 +57,9 @@ export async function generateMetadata({
         title: "Listing Not Found",
       }
     }
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
     const canonicalUrl = listing.slug
-      ? `${baseUrl}/listing/${listing.slug}`
-      : `${baseUrl}/listing/${listing.id}`
+      ? buildListingUrl(listing.slug)
+      : buildListingUrl(listing.id)
     const ogImage = listing.image || buildOgImageUrl({
       title: listing.name,
       subtitle: `Rage room in ${listing.city}, UK`,
@@ -97,8 +97,7 @@ export async function generateMetadata({
     }
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
-  const canonicalUrl = `${baseUrl}/listing/${listing.slug || listing.id}`
+  const canonicalUrl = buildListingUrl(listing.slug || listing.id)
   const ogImage = listing.image || buildOgImageUrl({
     title: listing.name,
     subtitle: `Rage room in ${listing.city}, UK`,
@@ -219,8 +218,9 @@ export default async function ListingPage({ params }: ListingPageProps) {
     ? similarWithPrice.reduce((sum, l) => sum + (l.price || 0), 0) / similarWithPrice.length
     : null
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
-  const listingUrl = `${baseUrl}/listing/${listing.slug}`
+  const baseUrl = getSiteUrl()
+  const listingUrl = buildListingUrl(listing.slug || listing.id)
+  const primaryBookingUrl = listing.bookingUrl || listing.website
 
   // Google Rich Results expect `priceRange` as a band ($/$$/$$$/$$$$) rather
   // than a raw number. Map our numeric starting price into £ bands.
@@ -232,54 +232,28 @@ export default async function ListingPage({ params }: ListingPageProps) {
     return "££££"
   }
 
-  // Package catalogue is implied at most UK rage rooms — rendering these as a
-  // hasOfferCatalog gives AI answer engines + Google a cleaner structured view
-  // of what the venue actually sells.
-  const hasOfferCatalog = listing.price
+  const hasOfferCatalog = listing.packages?.length
     ? {
         "@type": "OfferCatalog",
         name: `Session packages at ${listing.name}`,
-        itemListElement: [
-          {
-            "@type": "Offer",
-            name: "Solo / single session",
-            priceCurrency: "GBP",
-            price: listing.price.toFixed(2),
-            availability: "https://schema.org/InStock",
-            url: listing.website || listingUrl,
-            itemOffered: {
-              "@type": "Service",
-              name: "Rage room session (1 person)",
-              serviceType: "Rage room / smash room experience",
-            },
+        itemListElement: listing.packages.map((pkg) => ({
+          "@type": "Offer",
+          name: pkg.name,
+          ...(pkg.price
+            ? {
+                priceCurrency: "GBP",
+                price: pkg.price.toFixed(2),
+              }
+            : {}),
+          ...(pkg.description ? { description: pkg.description } : {}),
+          availability: "https://schema.org/InStock",
+          url: pkg.url || primaryBookingUrl || listingUrl,
+          itemOffered: {
+            "@type": "Service",
+            name: pkg.name,
+            serviceType: "Rage room / smash room experience",
           },
-          {
-            "@type": "Offer",
-            name: "Couples / 2-person session",
-            priceCurrency: "GBP",
-            price: (listing.price * 1.8).toFixed(2),
-            availability: "https://schema.org/InStock",
-            url: listing.website || listingUrl,
-            itemOffered: {
-              "@type": "Service",
-              name: "Rage room session (2 people)",
-              serviceType: "Rage room / smash room experience",
-            },
-          },
-          {
-            "@type": "Offer",
-            name: "Group session (3–6 people)",
-            priceCurrency: "GBP",
-            price: (listing.price * 4.5).toFixed(2),
-            availability: "https://schema.org/InStock",
-            url: listing.website || listingUrl,
-            itemOffered: {
-              "@type": "Service",
-              name: "Rage room session (group)",
-              serviceType: "Rage room / smash room experience",
-            },
-          },
-        ],
+        })),
       }
     : undefined
 
@@ -348,7 +322,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
       `${listing.name} is a rage room in ${listing.city}, UK, offering smash room and destruction therapy sessions.`,
     image: listing.image
       ? [listing.image]
-      : [`${baseUrl}/og-image.png`],
+      : [absoluteUrl("/og-image.png")],
     address: {
       "@type": "PostalAddress",
       addressLocality: listing.city,
@@ -361,6 +335,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
       ...(listing.region ? [{ "@type": "AdministrativeArea", name: listing.region }] : []),
     ],
     ...(listing.phone ? { telephone: listing.phone } : {}),
+    ...(listing.openingHours?.length ? { openingHours: listing.openingHours } : {}),
     ...(location
       ? {
           geo: {
@@ -381,18 +356,18 @@ export default async function ListingPage({ params }: ListingPageProps) {
             priceCurrency: "GBP",
             price: listing.price.toFixed(2),
             availability: "https://schema.org/InStock",
-            url: listing.website || listingUrl,
+            url: primaryBookingUrl || listingUrl,
           },
         }
       : {}),
     ...(hasOfferCatalog ? { hasOfferCatalog } : {}),
-    ...(listing.website
+    ...(primaryBookingUrl
       ? {
           potentialAction: {
             "@type": "ReserveAction",
             target: {
               "@type": "EntryPoint",
-              urlTemplate: listing.website,
+              urlTemplate: primaryBookingUrl,
               inLanguage: "en-GB",
               actionPlatform: [
                 "http://schema.org/DesktopWebPlatform",
@@ -528,6 +503,11 @@ export default async function ListingPage({ params }: ListingPageProps) {
               <p className="text-xs text-zinc-500 mb-3">
                 Listing added {new Date(listing.createdAt).toLocaleDateString("en-GB", { month: "long", year: "numeric" })}
                 {listing.verified && " · Verified by RageRoom Directory"}
+                {listing.lastVerified &&
+                  ` · Last checked ${new Date(listing.lastVerified).toLocaleDateString("en-GB", {
+                    month: "long",
+                    year: "numeric",
+                  })}`}
               </p>
 
               {/* Location */}
@@ -564,13 +544,18 @@ export default async function ListingPage({ params }: ListingPageProps) {
                     </a>
                   </div>
                 )}
+                {listing.ageMin != null && (
+                  <div>
+                    <p className="text-white">Minimum age: {listing.ageMin}+</p>
+                  </div>
+                )}
               </div>
 
               {/* Booking Link */}
-              {listing.website && (
+              {primaryBookingUrl && (
                 <div className="mb-4">
                   <a
-                    href={listing.website}
+                    href={primaryBookingUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors text-base font-semibold min-h-[44px]"
@@ -611,6 +596,9 @@ export default async function ListingPage({ params }: ListingPageProps) {
                 at different price points, including options for couples, groups, and premium experiences.
                 Visit the venue's website for their full and up-to-date pricing.
               </p>
+              {listing.priceNote && (
+                <p className="text-zinc-300 text-sm">{listing.priceNote}</p>
+              )}
             </div>
           ) : (
             <p className="text-zinc-400">
@@ -618,10 +606,28 @@ export default async function ListingPage({ params }: ListingPageProps) {
               directly for their latest rates and package options.
             </p>
           )}
-          {listing.website && (
+          {listing.packages && listing.packages.length > 0 && (
+            <div className="mt-5 space-y-3">
+              <h3 className="text-white font-semibold">Listed packages</h3>
+              {listing.packages.map((pkg) => (
+                <div key={pkg.name} className="border border-zinc-700 rounded-md p-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                    <span className="text-white font-medium">{pkg.name}</span>
+                    <span className="text-orange-500 font-semibold">
+                      {pkg.price != null ? `£${pkg.price.toFixed(0)}` : pkg.priceNote || "Check venue"}
+                    </span>
+                  </div>
+                  {pkg.description && (
+                    <p className="text-zinc-400 text-sm mt-1">{pkg.description}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+          {primaryBookingUrl && (
             <div className="mt-4">
               <a
-                href={listing.website}
+                href={primaryBookingUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors"
@@ -642,10 +648,20 @@ export default async function ListingPage({ params }: ListingPageProps) {
               Opening hours, session availability, and booking requirements vary. We recommend checking directly
               with {listing.name} before your visit to confirm their current schedule and any booking requirements.
             </p>
+            {listing.openingHours && listing.openingHours.length > 0 && (
+              <div>
+                <h3 className="text-white font-semibold mb-2">Opening hours</h3>
+                <ul className="space-y-1">
+                  {listing.openingHours.map((hours) => (
+                    <li key={hours}>{hours}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
             <div className="flex flex-col sm:flex-row gap-3 mt-4">
-              {listing.website && (
+              {primaryBookingUrl && (
                 <a
-                  href={listing.website}
+                  href={primaryBookingUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors text-sm font-semibold"
@@ -662,6 +678,19 @@ export default async function ListingPage({ params }: ListingPageProps) {
                 </a>
               )}
             </div>
+            {listing.sourceUrl && (
+              <p className="text-xs text-zinc-500">
+                Source checked:{" "}
+                <a
+                  href={listing.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-orange-500 hover:text-orange-400 underline"
+                >
+                  venue information
+                </a>
+              </p>
+            )}
           </div>
         </div>
 
@@ -1084,4 +1113,3 @@ export default async function ListingPage({ params }: ListingPageProps) {
     </div>
   )
 }
-

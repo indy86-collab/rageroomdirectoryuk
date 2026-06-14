@@ -3,8 +3,9 @@
 // Google / LLM answer engines more likely to parse our content into rich
 // results and citations.
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
+import { absoluteUrl, getSiteUrl, listingUrl } from "@/lib/site-url"
+
+const BASE_URL = getSiteUrl()
 
 /**
  * Build a dynamic Open Graph image URL via `/api/og`.
@@ -24,7 +25,7 @@ export function buildOgImageUrl(opts: {
   if (opts.subtitle) qs.set("subtitle", opts.subtitle)
   if (opts.badge) qs.set("badge", opts.badge)
   if (opts.price) qs.set("price", opts.price)
-  return `${BASE_URL}/api/og?${qs.toString()}`
+  return absoluteUrl(`/api/og?${qs.toString()}`)
 }
 
 /** Named editorial byline used across Article schemas for stronger E-E-A-T. */
@@ -63,12 +64,12 @@ interface ArticleInput {
 }
 
 export function buildArticleSchema(input: ArticleInput) {
-  const url = input.url.startsWith("http") ? input.url : `${BASE_URL}${input.url}`
+  const url = absoluteUrl(input.url)
   const image = input.image
     ? input.image.startsWith("http")
       ? input.image
-      : `${BASE_URL}${input.image}`
-    : `${BASE_URL}/og-image.png`
+      : absoluteUrl(input.image)
+    : absoluteUrl("/og-image.png")
 
   return {
     "@context": "https://schema.org",
@@ -110,7 +111,7 @@ export function buildItemListSchema(opts: {
   listings: ItemListListing[]
   limit?: number
 }) {
-  const url = opts.url.startsWith("http") ? opts.url : `${BASE_URL}${opts.url}`
+  const url = absoluteUrl(opts.url)
   const limited = opts.listings.slice(0, opts.limit ?? 10)
 
   return {
@@ -124,10 +125,10 @@ export function buildItemListSchema(opts: {
     itemListElement: limited.map((l, i) => ({
       "@type": "ListItem",
       position: i + 1,
-      url: `${BASE_URL}/listing/${l.slug || l.id}`,
+      url: listingUrl(l.slug || l.id),
       item: {
         "@type": "LocalBusiness",
-        "@id": `${BASE_URL}/listing/${l.slug || l.id}#localbusiness`,
+        "@id": `${listingUrl(l.slug || l.id)}#localbusiness`,
         name: l.name,
         ...(l.city ? { address: { "@type": "PostalAddress", addressLocality: l.city, addressCountry: "GB" } } : {}),
         ...(l.description ? { description: l.description.slice(0, 280) } : {}),
@@ -141,7 +142,7 @@ export function buildItemListSchema(opts: {
               },
             }
           : {}),
-        url: `${BASE_URL}/listing/${l.slug || l.id}`,
+        url: listingUrl(l.slug || l.id),
       },
     })),
   }
@@ -164,12 +165,12 @@ export function buildHowToSchema(opts: {
   steps: HowToStep[]
   image?: string
 }) {
-  const url = opts.url.startsWith("http") ? opts.url : `${BASE_URL}${opts.url}`
+  const url = absoluteUrl(opts.url)
   const image = opts.image
     ? opts.image.startsWith("http")
       ? opts.image
-      : `${BASE_URL}${opts.image}`
-    : `${BASE_URL}/og-image.png`
+      : absoluteUrl(opts.image)
+    : absoluteUrl("/og-image.png")
 
   return {
     "@context": "https://schema.org",
@@ -190,7 +191,7 @@ export function buildHowToSchema(opts: {
       position: i + 1,
       name: s.name,
       text: s.text,
-      ...(s.url ? { url: s.url.startsWith("http") ? s.url : `${BASE_URL}${s.url}` } : {}),
+      ...(s.url ? { url: absoluteUrl(s.url) } : {}),
     })),
     author: EDITORIAL_AUTHOR,
     publisher: EDITORIAL_PUBLISHER,
@@ -206,7 +207,7 @@ export function buildBreadcrumbSchema(items: { name: string; url: string }[]) {
       "@type": "ListItem",
       position: i + 1,
       name: item.name,
-      item: item.url.startsWith("http") ? item.url : `${BASE_URL}${item.url}`,
+      item: absoluteUrl(item.url),
     })),
   }
 }

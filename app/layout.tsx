@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
+import { absoluteUrl, getSiteUrl } from "@/lib/site-url"
 
 const montserrat = Montserrat({ 
   subsets: ["latin"],
@@ -20,7 +21,7 @@ const bebasNeue = Bebas_Neue({
   display: "swap",
 })
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
+const baseUrl = getSiteUrl()
 
 export const metadata: Metadata = {
   title: {
@@ -77,7 +78,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
+  const baseUrl = getSiteUrl()
 
   // Organization Schema — expanded with @id, description, areaServed,
   // knowsAbout and contactPoint so Google / LLMs can resolve us as a
@@ -93,11 +94,11 @@ export default function RootLayout({
       "RageRoom Directory is the UK's largest independent directory of rage rooms and smash rooms. We aggregate, verify and compare venues so visitors can find the right destination for stress relief, team building, date nights, birthdays and hen/stag parties.",
     logo: {
       "@type": "ImageObject",
-      url: `${baseUrl}/logo.png`,
+      url: absoluteUrl("/logo.png"),
       width: 512,
       height: 512,
     },
-    image: `${baseUrl}/og-image.png`,
+    image: absoluteUrl("/og-image.png"),
     inLanguage: "en-GB",
     areaServed: {
       "@type": "Country",
@@ -213,4 +214,3 @@ export default function RootLayout({
     </html>
   )
 }
-

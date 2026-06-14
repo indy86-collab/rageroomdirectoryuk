@@ -111,7 +111,7 @@ export default function RageRoomsForStressReliefPage() {
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "@id": `https://rageroomdirectory.co.uk${PATH}#faq`,
+    "@id": `https://www.rageroomdirectory.co.uk${PATH}#faq`,
     mainEntity: FAQS.map((f) => ({
       "@type": "Question",
       name: f.question,

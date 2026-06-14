@@ -1,3 +1,5 @@
+import { absoluteUrl } from "@/lib/site-url"
+
 interface BreadcrumbItem {
   label: string
   href?: string
@@ -8,8 +10,6 @@ interface BreadcrumbSchemaProps {
 }
 
 export default function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
-  
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -17,7 +17,7 @@ export default function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
       "@type": "ListItem",
       position: index + 1,
       name: item.label,
-      ...(item.href && { item: `${baseUrl}${item.href}` }),
+      ...(item.href && { item: absoluteUrl(item.href) }),
     })),
   }
 
@@ -28,4 +28,3 @@ export default function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {
     />
   )
 }
-

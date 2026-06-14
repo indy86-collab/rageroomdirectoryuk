@@ -5,6 +5,7 @@ import { getBlogPost, getAllBlogPosts } from "@/lib/blog-posts"
 import { getBlogGuideCanonical, getBlogGuideLink } from "@/lib/blog-guide-canonicals"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import Script from "next/script"
+import { absoluteUrl, getSiteUrl } from "@/lib/site-url"
 
 interface BlogPostPageProps {
   params: { slug: string }
@@ -56,8 +57,8 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     notFound()
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
-  const postUrl = `${baseUrl}/blog/${post.slug}`
+  const baseUrl = getSiteUrl()
+  const postUrl = absoluteUrl(`/blog/${post.slug}`)
 
   // Article Schema
   const articleSchema = {
@@ -230,5 +231,4 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     </div>
   )
 }
-
 

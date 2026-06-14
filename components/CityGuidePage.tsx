@@ -10,7 +10,6 @@ import type { Listing } from "@/types/listing"
 import type { ListingWithDistance } from "@/lib/listings"
 import {
   buildArticleSchema,
-  buildBreadcrumbSchema,
   buildItemListSchema,
 } from "@/lib/seo-schema"
 
@@ -125,12 +124,6 @@ export default async function CityGuidePage({
     listings: allListings.slice(0, 10),
   })
 
-  const breadcrumbSchema = buildBreadcrumbSchema([
-    { name: "Home", url: "/" },
-    { name: "Guides", url: "/guides" },
-    { name: `Best Rage Rooms in ${city}`, url: path },
-  ])
-
   const citySlug = cityToSlug(city)
 
   return (
@@ -144,11 +137,6 @@ export default async function CityGuidePage({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-        />
-
         <Breadcrumbs
           items={[
             { label: "Home", href: "/" },

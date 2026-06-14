@@ -3,6 +3,7 @@ import Link from "next/link"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import NearMeMap from "@/components/NearMeMap"
 import { buildOgImageUrl } from "@/lib/seo-schema"
+import { absoluteUrl, listingUrl } from "@/lib/site-url"
 
 const OG_IMAGE = buildOgImageUrl({
   title: "London Rage Room Map",
@@ -43,7 +44,7 @@ export default async function LondonMapPage() {
     "@type": "WebPage",
     name: "Rage Room London Map",
     description: "Interactive map showing all rage rooms in London",
-    url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"}/london-map`,
+    url: absoluteUrl("/london-map"),
   }
 
   // ItemList Schema for London venues
@@ -65,7 +66,7 @@ export default async function LondonMapPage() {
           postalCode: listing.postcode,
           addressRegion: listing.region,
         },
-        url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"}/listing/${listing.slug || listing.id}`,
+        url: listingUrl(listing.slug || listing.id),
         ...(listing.price && { priceRange: `£${listing.price.toFixed(0)}` }),
       },
     })),
@@ -221,4 +222,3 @@ export default async function LondonMapPage() {
     </div>
   )
 }
-

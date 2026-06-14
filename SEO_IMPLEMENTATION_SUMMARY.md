@@ -122,7 +122,7 @@ Implemented across the site:
 Add to your `.env` file:
 
 ```env
-NEXT_PUBLIC_SITE_URL=https://rageroomdirectory.co.uk
+NEXT_PUBLIC_SITE_URL=https://www.rageroomdirectory.co.uk
 GOOGLE_PLACES_API_KEY=your_google_places_api_key_here
 ```
 

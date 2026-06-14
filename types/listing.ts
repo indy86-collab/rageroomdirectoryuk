@@ -12,8 +12,21 @@ export interface Listing {
   postcode: string
   location: ListingLocation
   website: string | null
+  bookingUrl?: string | null
   phone: string | null
   price: number | null
+  priceNote?: string | null
+  ageMin?: number | null
+  openingHours?: string[] | null
+  lastVerified?: string | null
+  packages?: Array<{
+    name: string
+    price?: number | null
+    priceNote?: string | null
+    description?: string | null
+    url?: string | null
+  }> | null
+  sourceUrl?: string | null
   image: string | null
   verified: boolean
   googlePlaceId: string | null

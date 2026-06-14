@@ -2,9 +2,9 @@ import { Metadata } from "next"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import Link from "next/link"
 import { buildOgImageUrl, buildBreadcrumbSchema } from "@/lib/seo-schema"
+import { getSiteUrl } from "@/lib/site-url"
 
-const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
+const baseUrl = getSiteUrl()
 
 const OG_IMAGE = buildOgImageUrl({
   title: "Editorial Policy",

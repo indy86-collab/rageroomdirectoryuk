@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import Link from "next/link"
 import { buildOgImageUrl } from "@/lib/seo-schema"
+import { absoluteUrl, getSiteUrl } from "@/lib/site-url"
 
 const OG_IMAGE = buildOgImageUrl({
   title: "Rage Room Guides",
@@ -226,8 +227,7 @@ const TOPIC_GUIDES: Guide[] = [
 ]
 
 export default function GuidesPage() {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
+  const baseUrl = getSiteUrl()
 
   // Collection page schema — tells search engines this is a hub page
   // listing multiple articles under one topical theme.
@@ -245,7 +245,7 @@ export default function GuidesPage() {
     hasPart: [...CITY_GUIDES, ...TOPIC_GUIDES].map((g) => ({
       "@type": "Article",
       name: g.title,
-      url: `${baseUrl}${g.href}`,
+      url: absoluteUrl(g.href),
       description: g.description,
     })),
   }

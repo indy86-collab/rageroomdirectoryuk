@@ -13,6 +13,7 @@
  *  - To rotate, change both the file AND the `INDEXNOW_KEY` env var
  *    (or the fallback in this file). Engines cache the key for 24h.
  */
+import { absoluteUrl, getSiteHost } from "@/lib/site-url"
 
 const DEFAULT_KEY = "b8f2c7e4a9d1c3f6e2b5a8c0d7e9f1b4"
 
@@ -26,9 +27,7 @@ export function getIndexNowKey(): string {
 }
 
 export function getIndexNowKeyLocation(): string {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
-  return `${baseUrl}/indexnow-key.txt`
+  return absoluteUrl("/indexnow-key.txt")
 }
 
 export interface IndexNowResult {
@@ -51,9 +50,7 @@ export async function pingIndexNow(
 ): Promise<IndexNowResult> {
   if (urls.length === 0) return { ok: true, status: 204 }
 
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
-  const host = opts.host || new URL(baseUrl).host
+  const host = opts.host || getSiteHost()
   const endpoint = opts.endpoint || "https://api.indexnow.org/indexnow"
 
   const payload = {

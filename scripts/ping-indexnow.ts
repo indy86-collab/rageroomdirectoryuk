@@ -6,8 +6,7 @@ import { pingIndexNow } from "../lib/indexnow"
 import { getAllListingsForAdmin, getDistinctCities, getDistinctRegions } from "../lib/listings"
 import { cityToSlug, regionToSlug } from "../lib/location"
 import { getAllBlogPosts } from "../lib/blog-posts"
-
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
+import { absoluteUrl } from "../lib/site-url"
 
 const STATIC_PATHS = [
   "/",
@@ -46,15 +45,15 @@ async function collectUrls(): Promise<string[]> {
     Promise.resolve(getAllBlogPosts()),
   ])
 
-  const urls = new Set<string>(STATIC_PATHS.map((p) => `${baseUrl}${p}`))
+  const urls = new Set<string>(STATIC_PATHS.map((p) => absoluteUrl(p)))
 
-  cities.forEach((city) => urls.add(`${baseUrl}/city/${cityToSlug(city)}`))
-  regions.forEach((region) => urls.add(`${baseUrl}/region/${regionToSlug(region)}`))
+  cities.forEach((city) => urls.add(absoluteUrl(`/city/${cityToSlug(city)}`)))
+  regions.forEach((region) => urls.add(absoluteUrl(`/region/${regionToSlug(region)}`)))
   listings.forEach((listing) => {
     const slug = listing.slug || listing.id
-    urls.add(`${baseUrl}/listing/${slug}`)
+    urls.add(absoluteUrl(`/listing/${slug}`))
   })
-  blogPosts.forEach((post) => urls.add(`${baseUrl}/blog/${post.slug}`))
+  blogPosts.forEach((post) => urls.add(absoluteUrl(`/blog/${post.slug}`)))
 
   return [...urls]
 }

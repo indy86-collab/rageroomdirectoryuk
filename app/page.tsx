@@ -8,10 +8,11 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, MapPin, Ticket, HardHat, Hammer, Heart, ShieldCheck, Users, Sparkles, Star } from "lucide-react"
 import { buildOgImageUrl } from "@/lib/seo-schema"
+import { getSiteUrl } from "@/lib/site-url"
 
 export const revalidate = 900
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rageroomdirectory.co.uk"
+const baseUrl = getSiteUrl()
 
 const HOME_OG = buildOgImageUrl({
   title: "UK Rage Rooms",
