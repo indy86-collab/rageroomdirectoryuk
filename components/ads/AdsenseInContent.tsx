@@ -64,16 +64,24 @@ export default function AdsenseInContent() {
   }, [visible])
 
   return (
-    <div className="my-8 w-full flex justify-center">
-      <ins
-        ref={insRef}
-        className="adsbygoogle"
-        style={{ display: "block" }}
-        data-ad-client={AD_CLIENT}
-        data-ad-slot={AD_SLOT}
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      />
-    </div>
+    <aside
+      aria-label="Advertisement"
+      className="my-10 sm:my-12 w-full border-y border-zinc-800/70 py-5 sm:py-6"
+    >
+      <p className="mb-3 text-center text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-500">
+        Advertisement
+      </p>
+      <div className="mx-auto flex min-h-[250px] w-full max-w-[728px] items-center justify-center overflow-hidden">
+        <ins
+          ref={insRef}
+          className="adsbygoogle"
+          style={{ display: "block", width: "100%" }}
+          data-ad-client={AD_CLIENT}
+          data-ad-slot={AD_SLOT}
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
+      </div>
+    </aside>
   )
 }
