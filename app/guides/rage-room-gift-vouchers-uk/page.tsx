@@ -4,6 +4,7 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 import GuideMeta from "@/components/GuideMeta"
 import AdsenseInContent from "@/components/ads/AdsenseInContent"
 import FAQ from "@/components/FAQ"
+import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
 import {
   buildArticleSchema,
   buildBreadcrumbSchema,
@@ -198,6 +199,10 @@ export default function RageRoomGiftVouchersUKPage() {
             This guide covers everything you need to know before you buy: the different voucher types, typical prices, expiry policies, what&apos;s included, and what to watch out for.
           </p>
 
+          <div className="mb-8">
+            <DigitalDownloadCTA variant="gift" />
+          </div>
+
           <AdsenseInContent />
 
           <section aria-labelledby="types-heading" className="mb-10">
@@ -344,6 +349,10 @@ export default function RageRoomGiftVouchersUKPage() {
           </section>
 
           <FAQ items={FAQS.map((f) => ({ question: f.question, answer: f.answer }))} title="Gift voucher FAQs" />
+
+          <div className="mt-10">
+            <DigitalDownloadCTA variant="gift" />
+          </div>
 
           <div className="mt-10 text-center">
             <Link

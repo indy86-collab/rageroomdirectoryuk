@@ -5,6 +5,7 @@ const nextConfig = {
       "/download/[token]": [
         "./private/digital-downloads/rage-room-party-planner-pack.pdf",
         "./private/digital-downloads/corporate-rage-room-team-building-toolkit.pdf",
+        "./private/digital-downloads/rage-room-gift-voucher-template-pack.zip",
       ],
     },
   },

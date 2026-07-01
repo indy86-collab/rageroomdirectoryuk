@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ArrowRight, BriefcaseBusiness, PartyPopper } from "lucide-react"
+import { ArrowRight, BriefcaseBusiness, Gift, PartyPopper } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Rage Room Planning Downloads | Printable Event Packs",
@@ -13,7 +13,7 @@ const downloads = [
   {
     title: "Rage Room Party Planner Pack",
     price: "£7",
-    copy: "For birthdays, date nights, breakup nights and friends planning a group smash session.",
+    copy: "For planning birthdays, date nights and group nights.",
     cta: "View party planner",
     href: "/digital-downloads/rage-room-party-planner-pack",
     icon: PartyPopper,
@@ -21,10 +21,18 @@ const downloads = [
   {
     title: "Corporate Rage Room Team-Building Toolkit",
     price: "£19",
-    copy: "For HR teams, office managers and team leads planning a rage room work social or team-building event.",
+    copy: "For HR, office managers and work socials.",
     cta: "View corporate toolkit",
     href: "/digital-downloads/corporate-rage-room-team-building-toolkit",
     icon: BriefcaseBusiness,
+  },
+  {
+    title: "Rage Room Gift Voucher Template Pack",
+    price: "£5",
+    copy: "For giving a rage room experience as a gift.",
+    cta: "View voucher pack",
+    href: "/digital-downloads/rage-room-gift-voucher-template-pack",
+    icon: Gift,
   },
 ]
 
@@ -39,7 +47,7 @@ export default function DigitalDownloadsPage() {
           Printable planning packs for organising rage room events without starting from a blank page.
         </p>
 
-        <div className="mt-8 grid gap-5 md:grid-cols-2">
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
           {downloads.map(({ title, price, copy, cta, href, icon: Icon }) => (
             <article key={title} className="card-base p-5 sm:p-6">
               <div className="flex h-11 w-11 items-center justify-center rounded-md border border-rage-500/40 bg-rage-500/15">

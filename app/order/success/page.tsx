@@ -69,12 +69,18 @@ export default async function OrderSuccessPage({
   }
 
   const isCorporate = purchasedProduct?.id === "corporate-team-building-toolkit"
+  const isGiftVoucher =
+    purchasedProduct?.id === "rage-room-gift-voucher-template-pack"
   const productHref = purchasedProduct
     ? `/digital-downloads/${purchasedProduct.slug}`
     : "/digital-downloads"
-  const headline = isCorporate
-    ? "Your Corporate Rage Room Team-Building Toolkit is ready."
-    : "Your Rage Room Party Planner Pack is ready."
+  const headline = isGiftVoucher
+    ? "Your Rage Room Gift Voucher Template Pack is ready."
+    : isCorporate
+      ? "Your Corporate Rage Room Team-Building Toolkit is ready."
+      : "Your Rage Room Party Planner Pack is ready."
+  const downloadLabel =
+    purchasedProduct?.contentType === "application/zip" ? "Download ZIP" : "Download PDF"
 
   return (
     <div className="px-4 py-16 sm:px-6">
@@ -91,7 +97,7 @@ export default async function OrderSuccessPage({
           className="btn-rage mt-7 inline-flex min-h-[48px] items-center justify-center gap-2 text-sm uppercase tracking-wider"
         >
           <Download className="h-4 w-4" />
-          Download PDF
+          {downloadLabel}
         </Link>
         <div className="mt-5">
           <Link href={productHref} className="text-sm font-semibold text-rage-500 hover:text-rage-400">
@@ -100,7 +106,7 @@ export default async function OrderSuccessPage({
         </div>
       </div>
 
-      {!isCorporate && (
+      {purchasedProduct?.id === "rage-room-party-planner" && (
         <div className="mx-auto mt-6 max-w-2xl rounded-lg border border-zinc-800 bg-[#181818] p-5">
           <h2 className="text-lg font-bold text-white">Planning this for work?</h2>
           <p className="mt-2 text-sm text-zinc-300">
@@ -112,6 +118,22 @@ export default async function OrderSuccessPage({
             className="mt-4 inline-flex text-sm font-semibold text-rage-500 hover:text-rage-400"
           >
             View corporate toolkit
+          </Link>
+        </div>
+      )}
+
+      {isGiftVoucher && (
+        <div className="mx-auto mt-6 max-w-2xl rounded-lg border border-zinc-800 bg-[#181818] p-5">
+          <h2 className="text-lg font-bold text-white">Planning the actual event too?</h2>
+          <p className="mt-2 text-sm text-zinc-300">
+            Use the Rage Room Party Planner Pack to compare venues, track budget,
+            send invites and plan the full night.
+          </p>
+          <Link
+            href="/digital-downloads/rage-room-party-planner-pack"
+            className="mt-4 inline-flex text-sm font-semibold text-rage-500 hover:text-rage-400"
+          >
+            View party planner pack
           </Link>
         </div>
       )}

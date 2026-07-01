@@ -53,7 +53,7 @@ export async function GET(_request: Request, { params }: DownloadRouteProps) {
 
   return new NextResponse(file, {
     headers: {
-      "Content-Type": "application/pdf",
+      "Content-Type": product.contentType,
       "Content-Disposition": `attachment; filename="${product.downloadFilename}"`,
       "Cache-Control": "no-store",
     },

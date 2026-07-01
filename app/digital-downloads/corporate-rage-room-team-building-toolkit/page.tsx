@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import { AlertTriangle, BriefcaseBusiness, Check, ClipboardList, Download, Sparkles } from "lucide-react"
 import DigitalCheckoutButton from "@/components/DigitalCheckoutButton"
 import FAQ from "@/components/FAQ"
@@ -253,6 +254,17 @@ export default function CorporateToolkitPage() {
       <section className="px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-4xl card-base p-5">
           <FAQ items={faqs} title="Corporate Toolkit FAQs" />
+        </div>
+      </section>
+
+      <section className="section-textured px-4 py-8 sm:px-6 sm:py-10">
+        <div className="mx-auto max-w-4xl text-center">
+          <Link
+            href="/digital-downloads/rage-room-gift-voucher-template-pack"
+            className="text-sm font-semibold text-rage-500 hover:text-rage-400"
+          >
+            Planning a non-work gift instead? View the gift voucher pack.
+          </Link>
         </div>
       </section>
 

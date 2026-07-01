@@ -229,6 +229,24 @@ export default function RageRoomPartyPlannerPackPage() {
         </div>
       </section>
 
+      <section className="px-4 py-10 sm:px-6 sm:py-14">
+        <div className="mx-auto max-w-4xl rounded-lg border border-zinc-800 bg-[#181818] p-6">
+          <h2 className="text-xl font-bold text-white">
+            Giving the rage room experience as a gift?
+          </h2>
+          <p className="mt-3 text-sm leading-relaxed text-zinc-300">
+            Pair the planner with the Gift Voucher Template Pack so the experience feels
+            polished before the booking is even made.
+          </p>
+          <Link
+            href="/digital-downloads/rage-room-gift-voucher-template-pack"
+            className="mt-4 inline-flex text-sm font-semibold text-rage-500 hover:text-rage-400"
+          >
+            View gift voucher pack
+          </Link>
+        </div>
+      </section>
+
       <section className="px-4 pb-14 sm:px-6 sm:pb-16">
         <div className="mx-auto max-w-4xl rounded-lg border border-rage-500/30 bg-[#181818] p-6 text-center sm:p-8">
           <Download className="mx-auto h-10 w-10 text-rage-500" />

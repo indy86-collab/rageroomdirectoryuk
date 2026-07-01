@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { ArrowRight, ClipboardCheck } from "lucide-react"
 
-type DigitalDownloadCTAVariant = "party" | "corporate"
+type DigitalDownloadCTAVariant = "party" | "corporate" | "gift"
 
 type DigitalDownloadCTAProps = {
   variant?: DigitalDownloadCTAVariant
@@ -22,6 +22,13 @@ const ctaCopy = {
     copy: "Get the 16-page toolkit with approval email, budget worksheet, venue scorecard, safety questions, run sheet and feedback form.",
     button: "Get the corporate toolkit — £19",
     href: "/digital-downloads/corporate-rage-room-team-building-toolkit",
+  },
+  gift: {
+    eyebrow: "Gift idea",
+    title: "Giving a rage room experience as a gift?",
+    copy: "Make it feel more polished with printable and digital voucher templates for birthdays, date nights, breakups, best friends and holidays.",
+    button: "Get the voucher pack — £5",
+    href: "/digital-downloads/rage-room-gift-voucher-template-pack",
   },
 }
 

@@ -45,8 +45,22 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     "group booking",
     "group",
   ].some((term) => normalizedQuery.includes(term))
-  const firstResults = showCorporateCTA ? listings.slice(0, 3) : listings
-  const remainingResults = showCorporateCTA ? listings.slice(3) : []
+  const showGiftCTA = [
+    "gift",
+    "voucher",
+    "birthday",
+    "date night",
+    "breakup",
+    "present",
+    "christmas",
+    "holiday",
+    "experience gift",
+    "gift idea",
+    "best friend",
+  ].some((term) => normalizedQuery.includes(term))
+  const showDownloadCTA = showCorporateCTA || showGiftCTA
+  const firstResults = showDownloadCTA ? listings.slice(0, 3) : listings
+  const remainingResults = showDownloadCTA ? listings.slice(3) : []
 
   return (
     <div className="py-8">
@@ -77,9 +91,9 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
         <section aria-label={query ? `Search results for ${query}` : "All rage rooms"}>
           <ListingsGrid listings={firstResults} />
-          {showCorporateCTA && listings.length > 0 && (
+          {showDownloadCTA && listings.length > 0 && (
             <div className="my-8">
-              <DigitalDownloadCTA variant="corporate" />
+              <DigitalDownloadCTA variant={showGiftCTA ? "gift" : "corporate"} />
             </div>
           )}
           {remainingResults.length > 0 && (

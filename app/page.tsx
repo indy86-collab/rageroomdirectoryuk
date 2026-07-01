@@ -7,7 +7,7 @@ import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
 import { globalFAQs } from "@/lib/faqs"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, MapPin, Ticket, HardHat, Hammer, Heart, ShieldCheck, Users, Sparkles, Star } from "lucide-react"
+import { ArrowRight, MapPin, Ticket, HardHat, Hammer, Heart, ShieldCheck, Users, Sparkles, Star, Gift } from "lucide-react"
 import { buildOgImageUrl } from "@/lib/seo-schema"
 import { getSiteUrl } from "@/lib/site-url"
 
@@ -360,6 +360,39 @@ export default async function Home() {
                   ))}
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-label="Rage room gift voucher template pack" className="w-full pb-8 sm:pb-10 section-textured">
+        <div className="w-full px-3 sm:px-5 lg:px-6">
+          <div className="rounded-lg border border-zinc-800 bg-[#181818] p-5 sm:p-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-start gap-3">
+                <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-md border border-rage-500/40 bg-rage-500/15">
+                  <Gift className="h-5 w-5 text-rage-500" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-widest text-rage-500">
+                    Gift idea
+                  </p>
+                  <h2 className="mt-1 text-lg font-bold text-white uppercase tracking-wide sm:text-xl">
+                    Buying a rage room session as a gift?
+                  </h2>
+                  <p className="mt-2 max-w-3xl text-sm text-zinc-300">
+                    Download printable and digital voucher templates so the gift feels
+                    more polished than a plain booking link.
+                  </p>
+                </div>
+              </div>
+              <Link
+                href="/digital-downloads/rage-room-gift-voucher-template-pack"
+                className="btn-rage inline-flex min-h-[44px] items-center justify-center gap-2 whitespace-nowrap text-sm uppercase tracking-wider"
+              >
+                View voucher pack
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
           </div>
         </div>

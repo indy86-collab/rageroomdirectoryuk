@@ -598,6 +598,10 @@ export default async function ListingPage({ params }: ListingPageProps) {
           </div>
         )}
 
+        <div className="mb-6 sm:mb-8">
+          <DigitalDownloadCTA variant="gift" />
+        </div>
+
         {/* Pricing Overview */}
         <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
           <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
