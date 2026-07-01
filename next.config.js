@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    outputFileTracingIncludes: {
+      "/download/[token]": ["./private/digital-downloads/rage-room-party-planner-pack.pdf"],
+    },
+  },
   async redirects() {
     return [
       // Consolidate the non-UK variant to the canonical UK guide to avoid

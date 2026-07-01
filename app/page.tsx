@@ -3,6 +3,7 @@ import { cityToSlug } from "@/lib/location"
 import Hero from "@/components/Hero"
 import FeaturedRooms from "@/components/FeaturedRooms"
 import FAQ from "@/components/FAQ"
+import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
 import { globalFAQs } from "@/lib/faqs"
 import Image from "next/image"
 import Link from "next/link"
@@ -184,6 +185,12 @@ export default async function Home() {
   return (
     <>
       <Hero featuredListings={featuredListings} />
+
+      <section aria-label="Rage room party planner" className="w-full pt-4 sm:pt-6">
+        <div className="w-full px-3 sm:px-5 lg:px-6">
+          <DigitalDownloadCTA />
+        </div>
+      </section>
 
       <section aria-labelledby="explore-cities-heading" className="w-full pt-4 sm:pt-6 pb-10 sm:pb-14">
         <div className="w-full px-3 sm:px-5 lg:px-6">
