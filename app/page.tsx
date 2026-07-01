@@ -296,20 +296,71 @@ export default async function Home() {
 
       <section aria-label="Corporate rage room planning toolkit" className="w-full pb-8 sm:pb-10 section-textured">
         <div className="w-full px-3 sm:px-5 lg:px-6">
-          <div className="rounded-lg border border-zinc-800 bg-[#181818] p-5 sm:p-6">
-            <h2 className="text-lg sm:text-xl font-bold text-white uppercase tracking-wide">
-              Planning a work social or team-building day?
-            </h2>
-            <p className="mt-2 max-w-3xl text-sm text-zinc-300">
-              Use the Corporate Rage Room Team-Building Toolkit to handle budget approval,
-              venue questions, staff invites and feedback.
-            </p>
-            <Link
-              href="/digital-downloads/corporate-rage-room-team-building-toolkit"
-              className="mt-4 inline-flex text-sm font-semibold text-rage-500 hover:text-rage-400"
-            >
-              View corporate toolkit
-            </Link>
+          <div className="relative overflow-hidden rounded-lg border border-rage-500/35 bg-[#181818]">
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-0 top-0 h-1 bg-rage-500"
+            />
+            <div className="grid gap-5 p-5 sm:p-6 lg:grid-cols-[1fr_320px] lg:items-center">
+              <div>
+                <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-rage-500/30 bg-rage-500/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-rage-400">
+                  <Users className="h-3.5 w-3.5" />
+                  For work events
+                </div>
+                <h2 className="max-w-3xl text-2xl font-black uppercase tracking-wide text-white sm:text-3xl">
+                  Planning a work social or team-building day?
+                </h2>
+                <p className="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-300 sm:text-base">
+                  Get the Corporate Rage Room Team-Building Toolkit to handle budget
+                  approval, venue questions, staff invites, run sheets and feedback without
+                  building everything from scratch.
+                </p>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {["Approval email", "Budget worksheet", "Venue scorecard", "Staff invite"].map((item) => (
+                    <span
+                      key={item}
+                      className="inline-flex items-center gap-1.5 rounded-md border border-zinc-700 bg-dark-800 px-2.5 py-1.5 text-xs font-semibold text-zinc-200"
+                    >
+                      <Sparkles className="h-3.5 w-3.5 text-rage-500" />
+                      {item}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
+                  <Link
+                    href="/digital-downloads/corporate-rage-room-team-building-toolkit"
+                    className="btn-rage inline-flex min-h-[46px] items-center justify-center gap-2 text-sm uppercase tracking-wider"
+                  >
+                    View corporate toolkit
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <p className="text-sm font-semibold text-zinc-300">
+                    Printable PDF · Instant download · <span className="text-white">£19</span>
+                  </p>
+                </div>
+              </div>
+
+              <div className="rounded-lg border border-zinc-700 bg-zinc-100 p-4 text-zinc-950 shadow-xl shadow-black/30">
+                <div className="rounded-md bg-[#151515] p-4 text-white">
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-rage-500">
+                    Corporate Toolkit
+                  </p>
+                  <div className="mt-3 font-display text-4xl leading-none">
+                    Team-Building
+                    <span className="block text-rage-500">Planner</span>
+                  </div>
+                </div>
+                <div className="mt-3 grid grid-cols-2 gap-2 text-[11px] font-bold">
+                  {["Approve", "Invite", "Schedule", "Feedback"].map((item) => (
+                    <div key={item} className="rounded border border-zinc-300 bg-white p-2">
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
