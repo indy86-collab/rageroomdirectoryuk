@@ -222,6 +222,25 @@ export default async function ListingPage({ params }: ListingPageProps) {
   const baseUrl = getSiteUrl()
   const listingUrl = buildListingUrl(listing.slug || listing.id)
   const primaryBookingUrl = listing.bookingUrl || listing.website
+  const corporateSignals = [
+    listing.name,
+    listing.description,
+    listing.priceNote,
+    ...(listing.packages?.flatMap((pkg) => [pkg.name, pkg.description ?? ""]) ?? []),
+  ]
+    .join(" ")
+    .toLowerCase()
+  const showCorporateCTA = [
+    "corporate",
+    "team building",
+    "team-building",
+    "group",
+    "groups",
+    "party",
+    "parties",
+    "large group",
+    "events",
+  ].some((signal) => corporateSignals.includes(signal))
 
   // Google Rich Results expect `priceRange` as a band ($/$$/$$$/$$$$) rather
   // than a raw number. Map our numeric starting price into £ bands.
@@ -572,6 +591,12 @@ export default async function ListingPage({ params }: ListingPageProps) {
         <div className="mb-6 sm:mb-8">
           <DigitalDownloadCTA />
         </div>
+
+        {showCorporateCTA && (
+          <div className="mb-6 sm:mb-8">
+            <DigitalDownloadCTA variant="corporate" />
+          </div>
+        )}
 
         {/* Pricing Overview */}
         <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">

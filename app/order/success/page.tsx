@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { CheckCircle, Download, TriangleAlert } from "lucide-react"
 import { createDownloadToken } from "@/lib/download-token"
-import { getDigitalProduct } from "@/lib/digital-products"
+import { type DigitalProduct, getDigitalProduct } from "@/lib/digital-products"
 import { getStripe } from "@/lib/stripe"
 
 export const dynamic = "force-dynamic"
@@ -15,6 +15,7 @@ export default async function OrderSuccessPage({
 }: OrderSuccessPageProps) {
   const sessionId = searchParams.session_id
   let downloadToken: string | null = null
+  let purchasedProduct: DigitalProduct | null = null
   let errorMessage = "Payment has not been confirmed yet."
 
   if (sessionId) {
@@ -30,6 +31,7 @@ export default async function OrderSuccessPage({
         session.amount_total === product.unitAmount &&
         session.currency === product.currency
       ) {
+        purchasedProduct = product
         downloadToken = createDownloadToken({
           sessionId: session.id,
           productId: product.id,
@@ -53,28 +55,36 @@ export default async function OrderSuccessPage({
           </h1>
           <p className="mt-3 text-zinc-300">
             If you have just paid, wait a moment and refresh this page. Otherwise,
-            return to the planner pack and try again.
+            return to the downloads page and try again.
           </p>
           <Link
-            href="/digital-downloads/rage-room-party-planner-pack"
+            href="/digital-downloads"
             className="btn-rage mt-6 inline-flex min-h-[44px] items-center justify-center"
           >
-            Back to planner pack
+            Back to downloads
           </Link>
         </div>
       </div>
     )
   }
 
+  const isCorporate = purchasedProduct?.id === "corporate-team-building-toolkit"
+  const productHref = purchasedProduct
+    ? `/digital-downloads/${purchasedProduct.slug}`
+    : "/digital-downloads"
+  const headline = isCorporate
+    ? "Your Corporate Rage Room Team-Building Toolkit is ready."
+    : "Your Rage Room Party Planner Pack is ready."
+
   return (
     <div className="px-4 py-16 sm:px-6">
       <div className="mx-auto max-w-2xl rounded-lg border border-rage-500/30 bg-[#181818] p-6 text-center sm:p-8">
         <CheckCircle className="mx-auto h-12 w-12 text-rage-500" />
         <h1 className="mt-4 text-2xl font-bold text-white sm:text-3xl">
-          Your Rage Room Party Planner Pack is ready.
+          {headline}
         </h1>
         <p className="mt-3 text-zinc-300">
-          Your download link expires in 72 hours.
+          Your download link expires in 72 hours. Save a copy after downloading.
         </p>
         <Link
           href={`/download/${downloadToken}`}
@@ -83,7 +93,28 @@ export default async function OrderSuccessPage({
           <Download className="h-4 w-4" />
           Download PDF
         </Link>
+        <div className="mt-5">
+          <Link href={productHref} className="text-sm font-semibold text-rage-500 hover:text-rage-400">
+            Back to product page
+          </Link>
+        </div>
       </div>
+
+      {!isCorporate && (
+        <div className="mx-auto mt-6 max-w-2xl rounded-lg border border-zinc-800 bg-[#181818] p-5">
+          <h2 className="text-lg font-bold text-white">Planning this for work?</h2>
+          <p className="mt-2 text-sm text-zinc-300">
+            Get the Corporate Team-Building Toolkit for HR-ready planning, approval
+            templates and staff invite emails.
+          </p>
+          <Link
+            href="/digital-downloads/corporate-rage-room-team-building-toolkit"
+            className="mt-4 inline-flex text-sm font-semibold text-rage-500 hover:text-rage-400"
+          >
+            View corporate toolkit
+          </Link>
+        </div>
+      )}
     </div>
   )
 }

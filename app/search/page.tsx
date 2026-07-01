@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import ListingsGrid from "@/components/ListingsGrid"
 import HomeSearchBox from "@/components/HomeSearchBox"
+import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
 
 interface SearchPageProps {
   searchParams: { query?: string }
@@ -31,6 +32,21 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   // Lazy load to prevent build-time initialization
   const { searchListings } = await import("@/lib/listings")
   const listings = await searchListings(query)
+  const normalizedQuery = (query ?? "").toLowerCase()
+  const showCorporateCTA = [
+    "corporate",
+    "team",
+    "team building",
+    "work",
+    "office",
+    "staff",
+    "company",
+    "offsite",
+    "group booking",
+    "group",
+  ].some((term) => normalizedQuery.includes(term))
+  const firstResults = showCorporateCTA ? listings.slice(0, 3) : listings
+  const remainingResults = showCorporateCTA ? listings.slice(3) : []
 
   return (
     <div className="py-8">
@@ -60,7 +76,17 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
         </div>
 
         <section aria-label={query ? `Search results for ${query}` : "All rage rooms"}>
-          <ListingsGrid listings={listings} />
+          <ListingsGrid listings={firstResults} />
+          {showCorporateCTA && listings.length > 0 && (
+            <div className="my-8">
+              <DigitalDownloadCTA variant="corporate" />
+            </div>
+          )}
+          {remainingResults.length > 0 && (
+            <div className="mt-6">
+              <ListingsGrid listings={remainingResults} />
+            </div>
+          )}
         </section>
       </div>
     </div>

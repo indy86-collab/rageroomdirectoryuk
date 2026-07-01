@@ -1,74 +1,101 @@
 import type { Metadata } from "next"
-import Link from "next/link"
-import { Check, ClipboardList, Download, ShieldCheck, Sparkles } from "lucide-react"
+import { AlertTriangle, BriefcaseBusiness, Check, ClipboardList, Download, Sparkles } from "lucide-react"
 import DigitalCheckoutButton from "@/components/DigitalCheckoutButton"
 import FAQ from "@/components/FAQ"
 import { getDigitalProduct } from "@/lib/digital-products"
 
-const product = getDigitalProduct("rage-room-party-planner")!
+const product = getDigitalProduct("corporate-team-building-toolkit")!
 
 export const metadata: Metadata = {
-  title: "Rage Room Party Planner Pack | Printable UK Event Planner",
+  title: "Corporate Rage Room Team-Building Toolkit | HR Event Planner",
   description:
-    "Download a printable rage room party planner pack for birthdays, date nights, breakup nights and group events. Includes budget planner, venue scorecard, invite templates, safety checklist and final booking checklist.",
+    "Download a printable corporate rage room team-building toolkit for HR teams, office managers and team leads. Includes budget approval worksheet, venue scorecard, staff invite email, safety questions, run sheet and feedback form.",
   alternates: {
-    canonical: "/digital-downloads/rage-room-party-planner-pack",
+    canonical: "/digital-downloads/corporate-rage-room-team-building-toolkit",
   },
 }
 
-const trustBullets = ["Printable PDF", "15-page planning kit", "UK edition", "Instant download"]
+const trustBullets = ["Printable PDF", "16-page corporate toolkit", "HR-ready templates", "Instant download"]
 
 const includedGroups = [
   {
-    title: "Plan the event",
-    items: ["Event snapshot", "Planning timeline", "Budget planner", "RSVP tracker"],
-  },
-  {
-    title: "Choose the venue",
-    items: ["Venue scorecard", "Booking questions", "Safety checklist", "Travel planner"],
-  },
-  {
-    title: "Make it fun",
+    title: "Plan and approve",
     items: [
-      "Invite templates",
-      "Photo/video shot list",
-      "Smash night games",
-      "Mini invites",
-      "Final checklist",
+      "Internal planning checklist",
+      "Budget approval worksheet",
+      "Internal approval email",
+      "ROI and goals worksheet",
+    ],
+  },
+  {
+    title: "Choose and check the venue",
+    items: [
+      "Venue comparison scorecard",
+      "Safety questions for the venue",
+      "Group size and session plan",
+      "Risk and logistics checklist",
+    ],
+  },
+  {
+    title: "Run the event",
+    items: [
+      "Staff invite email",
+      "Event schedule / run sheet",
+      "Post-event feedback form",
+      "Team reflection worksheet",
+      "Final booking checklist",
     ],
   },
 ]
 
 const audiences = [
-  "Birthday planners",
-  "Date nights",
-  "Breakup reset nights",
-  "Group nights out",
-  "Stag/hen groups",
-  "Friends organising something different",
+  "HR managers",
+  "Office managers",
+  "Founders",
+  "Team leads",
+  "People and culture teams",
+  "Startup operators",
+  "Department heads planning team socials",
+]
+
+const benefits = [
+  "Save planning time",
+  "Make budget approval easier",
+  "Ask better venue questions",
+  "Communicate clearly with staff",
+  "Capture useful feedback after the event",
 ]
 
 const faqs = [
   {
     question: "Does this include a rage room booking?",
-    answer: "No. This is a planning template pack. You still book directly with your chosen venue.",
+    answer: "No. This is a planning toolkit. You still book directly with your chosen venue.",
+  },
+  {
+    question: "Is this only for HR teams?",
+    answer:
+      "No. It is also useful for office managers, founders, team leads and anyone organising a workplace team event.",
   },
   {
     question: "Is it UK-specific?",
-    answer: "Yes. It uses UK-focused planning language and GBP budgeting fields.",
+    answer: "Yes. It uses UK-focused language and GBP budgeting fields.",
   },
   {
     question: "Is it printable?",
-    answer: "Yes. It is designed as an A4 printable PDF.",
+    answer: "Yes. It is designed as a printable PDF.",
   },
   {
-    question: "Can I use it digitally?",
-    answer: "Yes. You can open it on phone, tablet or laptop.",
+    question: "Can I use the email templates directly?",
+    answer: "Yes. Copy, paste and adapt them for your company, venue and team.",
   },
   {
-    question: "Is this safety advice?",
+    question: "Is this legal or safety advice?",
     answer:
-      "No. It is a planning aid. Always follow the venue's rules, waiver requirements and staff instructions.",
+      "No. It is a planning aid only. Always follow venue rules, waivers, staff instructions and company policy.",
+  },
+  {
+    question: "Why does the download link expire?",
+    answer: "To keep PDF delivery private. Save a copy after purchase.",
   },
 ]
 
@@ -79,18 +106,18 @@ function ProductMockup() {
       <div className="relative overflow-hidden rounded-lg border border-zinc-700 bg-zinc-100 p-5 text-zinc-950 shadow-2xl shadow-black/40">
         <div className="rounded-md bg-[#151515] p-5 text-white">
           <p className="text-xs font-bold uppercase tracking-widest text-rage-500">
-            Printable UK Planner
+            Corporate Event Planner
           </p>
           <h2 className="mt-4 font-display text-5xl leading-none text-white">
-            Rage Room
-            <span className="block text-rage-500">Party Planner</span>
+            Team-Building
+            <span className="block text-rage-500">Toolkit</span>
           </h2>
           <p className="mt-4 text-sm text-zinc-300">
-            Event snapshot, budget, venue scorecard, invites, games and final checklist.
+            Approval email, venue scorecard, staff invite, run sheet and feedback form.
           </p>
         </div>
-        <div className="mt-5 grid grid-cols-2 gap-3 text-xs font-semibold">
-          {["Budget", "RSVP", "Safety", "Itinerary"].map((item) => (
+        <div className="mt-5 space-y-2 text-xs font-semibold">
+          {["Approval", "Venue checks", "Run sheet", "Feedback"].map((item) => (
             <div key={item} className="rounded border border-zinc-300 bg-white p-3">
               {item}
             </div>
@@ -102,26 +129,25 @@ function ProductMockup() {
   )
 }
 
-export default function RageRoomPartyPlannerPackPage() {
+export default function CorporateToolkitPage() {
   return (
     <div className="bg-dark-900">
       <section className="px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
         <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <p className="text-sm font-bold uppercase tracking-widest text-rage-500">
-              One-time digital download
+              Printable corporate toolkit
             </p>
             <h1 className="mt-4 text-4xl font-black uppercase tracking-wide text-white sm:text-5xl lg:text-6xl">
-              Rage Room Party Planner Pack
+              Corporate Rage Room Team-Building Toolkit
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-zinc-300">
-              Plan a birthday, date night, breakup night or group smash session without
-              the admin chaos.
+              Plan, approve and run a rage room team-building event without starting from a blank page.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4">
               <div className="text-3xl font-black text-white">{product.priceLabel}</div>
               <DigitalCheckoutButton productId={product.id}>
-                Get instant access — £7
+                Get instant access — £19
               </DigitalCheckoutButton>
             </div>
             <div className="mt-6 flex flex-wrap gap-2">
@@ -143,12 +169,12 @@ export default function RageRoomPartyPlannerPackPage() {
       <section className="section-textured px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-4xl">
           <h2 className="section-title">
-            Rage room nights are fun. Organising them is the annoying part.
+            Team events are easy to suggest. They are harder to get approved and organised.
           </h2>
           <p className="mt-5 text-base leading-relaxed text-zinc-300 sm:text-lg">
-            Picking the venue, confirming the group, chasing payments, checking rules,
-            sending invites and planning food after can quickly become messy. This planner
-            gives you one simple place to organise it all.
+            Between budget approval, venue questions, staff invites, safety checks, timings
+            and feedback, a simple team social can become messy. This toolkit gives HR teams,
+            office managers and team leads a ready-made structure.
           </p>
         </div>
       </section>
@@ -186,7 +212,7 @@ export default function RageRoomPartyPlannerPackPage() {
                 key={audience}
                 className="flex items-center gap-3 rounded-lg border border-zinc-800 bg-[#181818] p-4"
               >
-                <Sparkles className="h-4 w-4 flex-shrink-0 text-rage-500" />
+                <BriefcaseBusiness className="h-4 w-4 flex-shrink-0 text-rage-500" />
                 <span className="text-sm font-semibold text-zinc-200">{audience}</span>
               </div>
             ))}
@@ -195,37 +221,38 @@ export default function RageRoomPartyPlannerPackPage() {
       </section>
 
       <section className="px-4 py-10 sm:px-6 sm:py-14">
-        <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[0.8fr_1.2fr]">
-          <div className="card-base p-5">
-            <div className="flex h-11 w-11 items-center justify-center rounded-md border border-rage-500/40 bg-rage-500/15">
-              <ShieldCheck className="h-5 w-5 text-rage-500" />
-            </div>
-            <h2 className="mt-4 text-xl font-bold text-white">Instant access after payment</h2>
-            <p className="mt-3 text-sm leading-relaxed text-zinc-300">
-              Checkout is handled by Stripe. After successful payment, your secure download
-              link is generated for 72 hours.
-            </p>
-          </div>
-          <div className="card-base p-5">
-            <FAQ items={faqs} title="Planner Pack FAQs" />
+        <div className="mx-auto max-w-6xl">
+          <h2 className="section-title mb-6">Why Buy This</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {benefits.map((benefit) => (
+              <div key={benefit} className="card-base p-4">
+                <Sparkles className="h-5 w-5 text-rage-500" />
+                <h3 className="mt-3 text-sm font-bold text-white">{benefit}</h3>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       <section className="section-textured px-4 py-10 sm:px-6 sm:py-14">
-        <div className="mx-auto max-w-4xl rounded-lg border border-zinc-800 bg-[#181818] p-6">
-          <h2 className="text-xl font-bold text-white">Planning for work?</h2>
-          <p className="mt-3 text-sm leading-relaxed text-zinc-300">
-            For workplace team-building, use the Corporate Rage Room Team-Building Toolkit
-            instead. It includes approval templates, staff invite emails, a venue scorecard
-            and a feedback form.
-          </p>
-          <Link
-            href="/digital-downloads/corporate-rage-room-team-building-toolkit"
-            className="mt-4 inline-flex text-sm font-semibold text-rage-500 hover:text-rage-400"
-          >
-            View corporate toolkit
-          </Link>
+        <div className="mx-auto max-w-4xl rounded-lg border border-zinc-800 bg-[#181818] p-5 sm:p-6">
+          <div className="flex items-start gap-3">
+            <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-rage-500" />
+            <div>
+              <h2 className="text-lg font-bold text-white">Important disclaimer</h2>
+              <p className="mt-2 text-sm leading-relaxed text-zinc-300">
+                This toolkit is an entertainment planning aid. It is not medical, legal,
+                insurance, safety, or HR compliance advice. Always follow the venue’s rules,
+                waiver process, staff instructions and your company policies.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-4 py-10 sm:px-6 sm:py-14">
+        <div className="mx-auto max-w-4xl card-base p-5">
+          <FAQ items={faqs} title="Corporate Toolkit FAQs" />
         </div>
       </section>
 
@@ -233,14 +260,14 @@ export default function RageRoomPartyPlannerPackPage() {
         <div className="mx-auto max-w-4xl rounded-lg border border-rage-500/30 bg-[#181818] p-6 text-center sm:p-8">
           <Download className="mx-auto h-10 w-10 text-rage-500" />
           <h2 className="mt-4 text-2xl font-black uppercase tracking-wide text-white">
-            Download the planner pack — £7
+            Download the corporate toolkit — £19
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm text-zinc-300">
-            A printable PDF for getting the venue, group, budget and night-out details under control.
+            A printable PDF for approval, venue checks, staff communication, run sheets and feedback.
           </p>
           <div className="mt-6 flex justify-center">
             <DigitalCheckoutButton productId={product.id}>
-              Download the planner pack — £7
+              Download the corporate toolkit — £19
             </DigitalCheckoutButton>
           </div>
         </div>

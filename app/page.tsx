@@ -294,6 +294,26 @@ export default async function Home() {
         </div>
       </section>
 
+      <section aria-label="Corporate rage room planning toolkit" className="w-full pb-8 sm:pb-10 section-textured">
+        <div className="w-full px-3 sm:px-5 lg:px-6">
+          <div className="rounded-lg border border-zinc-800 bg-[#181818] p-5 sm:p-6">
+            <h2 className="text-lg sm:text-xl font-bold text-white uppercase tracking-wide">
+              Planning a work social or team-building day?
+            </h2>
+            <p className="mt-2 max-w-3xl text-sm text-zinc-300">
+              Use the Corporate Rage Room Team-Building Toolkit to handle budget approval,
+              venue questions, staff invites and feedback.
+            </p>
+            <Link
+              href="/digital-downloads/corporate-rage-room-team-building-toolkit"
+              className="mt-4 inline-flex text-sm font-semibold text-rage-500 hover:text-rage-400"
+            >
+              View corporate toolkit
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section aria-label="List your rage room" className="w-full py-8 sm:py-10">
         <div className="w-full px-3 sm:px-5 lg:px-6">
           <div className="rounded-xl bg-[#141414] border border-zinc-800 p-5 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">

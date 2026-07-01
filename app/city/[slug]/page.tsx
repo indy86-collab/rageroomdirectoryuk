@@ -8,6 +8,7 @@ import { getCityFAQs } from "@/lib/faqs"
 import UGCButtons from "@/components/UGCButtons"
 import AdsenseInContent from "@/components/ads/AdsenseInContent"
 import CityRelatedLinks from "@/components/CityRelatedLinks"
+import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
 import Link from "next/link"
 import { buildOgImageUrl } from "@/lib/seo-schema"
 import { absoluteUrl, getSiteUrl, listingUrl } from "@/lib/site-url"
@@ -272,6 +273,20 @@ export default async function CityPage({ params }: CityPageProps) {
                     : cityContent.travelTip}
                 </p>
               </div>
+            </div>
+
+            <div className="mt-8 mb-6">
+              <DigitalDownloadCTA variant="corporate" compact />
+              <p className="mt-3 text-sm text-zinc-400">
+                Planning a work event in {cityName}?{" "}
+                <Link
+                  href="/digital-downloads/corporate-rage-room-team-building-toolkit"
+                  className="text-rage-500 hover:text-rage-400 underline underline-offset-2"
+                >
+                  View the corporate toolkit
+                </Link>
+                .
+              </p>
             </div>
 
             {/* Cross-links */}
