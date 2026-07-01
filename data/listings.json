@@ -1,5 +1,85 @@
 [
   {
+    "id": "f6e6cd12-77e2-45ea-b258-e60607b7c11b",
+    "name": "Mission Classified Rage Room",
+    "description": "Grimsby escape-room venue with a dedicated rage room on Cleethorpe Road. Sessions include protective equipment and a controlled smash-room setup for breaking bottles, plates, and other prepared items.",
+    "city": "Grimsby",
+    "region": "Lincolnshire",
+    "postcode": "DN31 3ES",
+    "location": {
+      "lat": 53.575173,
+      "lng": -0.071946
+    },
+    "website": "https://missionclassified.co.uk/rage-room",
+    "phone": "+44 1472 255255",
+    "price": 25,
+    "image": "/images/mission-classified-rage-room-grimsby.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "mission-classified-rage-room-grimsby",
+    "createdAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "14b9824e-b5aa-41c2-9f44-8497a93d89fa",
+    "name": "Rage Room Hull",
+    "description": "Hull city-centre rage room with a live booking presence on Caroline Place. A straightforward smash-room experience for breaking prepared items in a supervised setting.",
+    "city": "Hull",
+    "region": "East Yorkshire",
+    "postcode": "HU2 8DR",
+    "location": {
+      "lat": 53.748801,
+      "lng": -0.338012
+    },
+    "website": "https://rageroomhull.simplybook.it/",
+    "phone": null,
+    "price": null,
+    "image": "/images/rage-room-hull.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "rage-room-hull",
+    "createdAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "02de72e2-0ff6-45cd-a7a0-15a71cc3e6b0",
+    "name": "Rage Remedies",
+    "description": "Romford rage-room and axe-throwing venue at Brooklands House. Visitors can book a supervised smash session with safety equipment and breakables prepared for stress-release experiences.",
+    "city": "Romford",
+    "region": "London",
+    "postcode": "RM1 1DX",
+    "location": {
+      "lat": 51.583247,
+      "lng": 0.174083
+    },
+    "website": "https://www.rageremedies.co.uk/",
+    "phone": null,
+    "price": null,
+    "image": "/images/rage-remedies-romford.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "rage-remedies-romford",
+    "createdAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "992780e4-0137-445f-9c95-8a213fca24bc",
+    "name": "Raging Bath",
+    "description": "Bath rage-room venue at the Old Fullers Earthworks in Odd Down. The venue offers bookable smash-room sessions with helmets, gloves, bats, crowbars, and a range of breakables.",
+    "city": "Bath",
+    "region": "Somerset",
+    "postcode": "BA2 8PD",
+    "location": {
+      "lat": 51.349319,
+      "lng": -2.391545
+    },
+    "website": "https://www.ragingbath.com/",
+    "phone": null,
+    "price": 35,
+    "image": "/images/raging-bath.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "raging-bath",
+    "createdAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
     "id": "176522c9-6b9b-4aad-81f3-ddeaee3ea47f",
     "name": "The Underground Newport",
     "description": "Newport activity venue with a dedicated rage room at the Kingsway Centre. Smash bottles, plates, and breakables in a controlled room with safety equipment provided, with sessions bookable alongside axe throwing and other experiences.",
