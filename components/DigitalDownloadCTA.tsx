@@ -1,5 +1,9 @@
-import Link from "next/link"
 import { ArrowRight, ClipboardCheck } from "lucide-react"
+import TrackedProductLink from "@/components/TrackedProductLink"
+import {
+  getDigitalProduct,
+  getDigitalProductAnalytics,
+} from "@/lib/digital-products"
 
 type DigitalDownloadCTAVariant = "party" | "corporate" | "gift"
 
@@ -15,6 +19,7 @@ const ctaCopy = {
     copy: "Get the 15-page Rage Room Party Planner Pack before you choose a venue.",
     button: "Get the planner — £7",
     href: "/digital-downloads/rage-room-party-planner-pack",
+    productId: "rage-room-party-planner",
   },
   corporate: {
     eyebrow: "For work events",
@@ -22,6 +27,7 @@ const ctaCopy = {
     copy: "Get the 16-page toolkit with approval email, budget worksheet, venue scorecard, safety questions, run sheet and feedback form.",
     button: "Get the corporate toolkit — £19",
     href: "/digital-downloads/corporate-rage-room-team-building-toolkit",
+    productId: "corporate-team-building-toolkit",
   },
   gift: {
     eyebrow: "Gift idea",
@@ -29,6 +35,7 @@ const ctaCopy = {
     copy: "Make it feel more polished with printable and digital voucher templates for birthdays, date nights, breakups, best friends and holidays.",
     button: "Get the voucher pack — £5",
     href: "/digital-downloads/rage-room-gift-voucher-template-pack",
+    productId: "rage-room-gift-voucher-template-pack",
   },
 }
 
@@ -37,6 +44,8 @@ export default function DigitalDownloadCTA({
   compact = false,
 }: DigitalDownloadCTAProps) {
   const copy = ctaCopy[variant]
+  const product = getDigitalProduct(copy.productId)
+  const analyticsProduct = product ? getDigitalProductAnalytics(product) : null
 
   return (
     <aside className="rounded-lg border border-rage-500/30 bg-[#181818] p-4 sm:p-5">
@@ -59,13 +68,17 @@ export default function DigitalDownloadCTA({
             </p>
           </div>
         </div>
-        <Link
-          href={copy.href}
-          className="btn-rage inline-flex min-h-[44px] items-center justify-center gap-2 whitespace-nowrap text-sm uppercase tracking-wider"
-        >
-          {copy.button}
-          <ArrowRight className="h-4 w-4" />
-        </Link>
+        {analyticsProduct && (
+          <TrackedProductLink
+            href={copy.href}
+            product={analyticsProduct}
+            listName="Digital Product CTA"
+            className="btn-rage inline-flex min-h-[44px] items-center justify-center gap-2 whitespace-nowrap text-sm uppercase tracking-wider"
+          >
+            {copy.button}
+            <ArrowRight className="h-4 w-4" />
+          </TrackedProductLink>
+        )}
       </div>
     </aside>
   )

@@ -2,15 +2,18 @@
 
 import { useState } from "react"
 import { ArrowRight, Loader2 } from "lucide-react"
+import { type AnalyticsProduct, trackBeginCheckout } from "@/lib/analytics"
 
 type DigitalCheckoutButtonProps = {
   productId: string
+  analyticsProduct: AnalyticsProduct
   children: React.ReactNode
   className?: string
 }
 
 export default function DigitalCheckoutButton({
   productId,
+  analyticsProduct,
   children,
   className,
 }: DigitalCheckoutButtonProps) {
@@ -22,6 +25,8 @@ export default function DigitalCheckoutButton({
     setError(null)
 
     try {
+      trackBeginCheckout(analyticsProduct)
+
       const response = await fetch("/api/checkout/digital-download", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

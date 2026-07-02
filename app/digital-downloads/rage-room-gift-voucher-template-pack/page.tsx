@@ -4,9 +4,14 @@ import Link from "next/link"
 import { AlertTriangle, Check, Gift, ListChecks, Sparkles } from "lucide-react"
 import DigitalCheckoutButton from "@/components/DigitalCheckoutButton"
 import FAQ from "@/components/FAQ"
-import { getDigitalProduct } from "@/lib/digital-products"
+import ProductViewTracker from "@/components/ProductViewTracker"
+import {
+  getDigitalProduct,
+  getDigitalProductAnalytics,
+} from "@/lib/digital-products"
 
 const product = getDigitalProduct("rage-room-gift-voucher-template-pack")!
+const analyticsProduct = getDigitalProductAnalytics(product)
 
 export const metadata: Metadata = {
   title: "Rage Room Gift Voucher Template Pack | Printable Experience Gift",
@@ -118,6 +123,7 @@ const faqs = [
 export default function GiftVoucherTemplatePackPage() {
   return (
     <div className="bg-dark-900">
+      <ProductViewTracker product={analyticsProduct} />
       <section className="px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
         <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
@@ -132,7 +138,10 @@ export default function GiftVoucherTemplatePackPage() {
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4">
               <div className="text-3xl font-black text-white">{product.priceLabel}</div>
-              <DigitalCheckoutButton productId={product.id}>
+              <DigitalCheckoutButton
+                productId={product.id}
+                analyticsProduct={analyticsProduct}
+              >
                 Get instant access — £5
               </DigitalCheckoutButton>
             </div>
@@ -276,7 +285,10 @@ export default function GiftVoucherTemplatePackPage() {
             A ZIP file with printable PDFs, digital PNG vouchers and bonus gift inserts.
           </p>
           <div className="mt-6 flex justify-center">
-            <DigitalCheckoutButton productId={product.id}>
+            <DigitalCheckoutButton
+              productId={product.id}
+              analyticsProduct={analyticsProduct}
+            >
               Download the voucher pack — £5
             </DigitalCheckoutButton>
           </div>

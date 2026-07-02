@@ -79,6 +79,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   const baseUrl = getSiteUrl()
+  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
 
   // Organization Schema — expanded with @id, description, areaServed,
   // knowsAbout and contactPoint so Google / LLMs can resolve us as a
@@ -195,18 +196,22 @@ export default function RootLayout({
           strategy="lazyOnload"
           crossOrigin="anonymous"
         />
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-ZZCN6PNKYW"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-ZZCN6PNKYW');
-          `}
-        </Script>
+        {gaMeasurementId && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${gaMeasurementId}');
+              `}
+            </Script>
+          </>
+        )}
         {/* Skip link: becomes visible on keyboard focus. WCAG 2.4.1. */}
         <a
           href="#main-content"

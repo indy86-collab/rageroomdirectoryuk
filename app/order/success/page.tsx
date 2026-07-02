@@ -1,7 +1,13 @@
 import Link from "next/link"
-import { CheckCircle, Download, TriangleAlert } from "lucide-react"
+import { CheckCircle, TriangleAlert } from "lucide-react"
+import PurchaseTracker from "@/components/PurchaseTracker"
+import TrackedDownloadLink from "@/components/TrackedDownloadLink"
 import { createDownloadToken } from "@/lib/download-token"
-import { type DigitalProduct, getDigitalProduct } from "@/lib/digital-products"
+import {
+  type DigitalProduct,
+  getDigitalProduct,
+  getDigitalProductAnalytics,
+} from "@/lib/digital-products"
 import { getStripe } from "@/lib/stripe"
 
 export const dynamic = "force-dynamic"
@@ -74,6 +80,7 @@ export default async function OrderSuccessPage({
   const productHref = purchasedProduct
     ? `/digital-downloads/${purchasedProduct.slug}`
     : "/digital-downloads"
+  const analyticsProduct = getDigitalProductAnalytics(purchasedProduct!)
   const headline = isGiftVoucher
     ? "Your Rage Room Gift Voucher Template Pack is ready."
     : isCorporate
@@ -84,6 +91,7 @@ export default async function OrderSuccessPage({
 
   return (
     <div className="px-4 py-16 sm:px-6">
+      <PurchaseTracker sessionId={sessionId!} product={analyticsProduct} />
       <div className="mx-auto max-w-2xl rounded-lg border border-rage-500/30 bg-[#181818] p-6 text-center sm:p-8">
         <CheckCircle className="mx-auto h-12 w-12 text-rage-500" />
         <h1 className="mt-4 text-2xl font-bold text-white sm:text-3xl">
@@ -92,13 +100,12 @@ export default async function OrderSuccessPage({
         <p className="mt-3 text-zinc-300">
           Your download link expires in 72 hours. Save a copy after downloading.
         </p>
-        <Link
+        <TrackedDownloadLink
           href={`/download/${downloadToken}`}
-          className="btn-rage mt-7 inline-flex min-h-[48px] items-center justify-center gap-2 text-sm uppercase tracking-wider"
-        >
-          <Download className="h-4 w-4" />
-          {downloadLabel}
-        </Link>
+          label={downloadLabel}
+          fileName={purchasedProduct!.downloadFilename}
+          product={analyticsProduct}
+        />
         <div className="mt-5">
           <Link href={productHref} className="text-sm font-semibold text-rage-500 hover:text-rage-400">
             Back to product page

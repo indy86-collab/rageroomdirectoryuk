@@ -5,6 +5,8 @@ export type DigitalProduct = {
   slug: string
   name: string
   shortName?: string
+  analyticsItemId: string
+  itemCategory: "Digital Product"
   priceLabel: string
   unitAmount: number
   currency: "gbp"
@@ -23,6 +25,8 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     id: "rage-room-party-planner",
     slug: "rage-room-party-planner-pack",
     name: "Rage Room Party Planner Pack",
+    analyticsItemId: "rage_party_planner_pack",
+    itemCategory: "Digital Product",
     priceLabel: "£7",
     unitAmount: 700,
     currency: "gbp",
@@ -57,6 +61,8 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     slug: "corporate-rage-room-team-building-toolkit",
     name: "Corporate Rage Room Team-Building Toolkit",
     shortName: "Corporate Team-Building Toolkit",
+    analyticsItemId: "corporate_team_building_pack",
+    itemCategory: "Digital Product",
     priceLabel: "£19",
     unitAmount: 1900,
     currency: "gbp",
@@ -91,6 +97,8 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     slug: "rage-room-gift-voucher-template-pack",
     name: "Rage Room Gift Voucher Template Pack",
     shortName: "Gift Voucher Template Pack",
+    analyticsItemId: "rage_gift_voucher_pack",
+    itemCategory: "Digital Product",
     priceLabel: "£5",
     unitAmount: 500,
     currency: "gbp",
@@ -139,4 +147,14 @@ export function getDigitalProductBySlug(slug: string) {
     Object.values(digitalProducts).find((product) => product.slug === slug) ??
     null
   )
+}
+
+export function getDigitalProductAnalytics(product: DigitalProduct) {
+  return {
+    item_id: product.analyticsItemId,
+    item_name: product.name,
+    item_category: product.itemCategory,
+    price: product.unitAmount / 100,
+    currency: product.currency.toUpperCase() as "GBP",
+  }
 }

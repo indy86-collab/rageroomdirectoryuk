@@ -3,9 +3,17 @@ import Link from "next/link"
 import { AlertTriangle, BriefcaseBusiness, Check, ClipboardList, Download, Sparkles } from "lucide-react"
 import DigitalCheckoutButton from "@/components/DigitalCheckoutButton"
 import FAQ from "@/components/FAQ"
-import { getDigitalProduct } from "@/lib/digital-products"
+import ProductViewTracker from "@/components/ProductViewTracker"
+import TrackedProductLink from "@/components/TrackedProductLink"
+import {
+  getDigitalProduct,
+  getDigitalProductAnalytics,
+} from "@/lib/digital-products"
 
 const product = getDigitalProduct("corporate-team-building-toolkit")!
+const analyticsProduct = getDigitalProductAnalytics(product)
+const giftProduct = getDigitalProduct("rage-room-gift-voucher-template-pack")!
+const giftAnalyticsProduct = getDigitalProductAnalytics(giftProduct)
 
 export const metadata: Metadata = {
   title: "Corporate Rage Room Team-Building Toolkit | HR Event Planner",
@@ -133,6 +141,7 @@ function ProductMockup() {
 export default function CorporateToolkitPage() {
   return (
     <div className="bg-dark-900">
+      <ProductViewTracker product={analyticsProduct} />
       <section className="px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
         <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
@@ -147,7 +156,10 @@ export default function CorporateToolkitPage() {
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4">
               <div className="text-3xl font-black text-white">{product.priceLabel}</div>
-              <DigitalCheckoutButton productId={product.id}>
+              <DigitalCheckoutButton
+                productId={product.id}
+                analyticsProduct={analyticsProduct}
+              >
                 Get instant access — £19
               </DigitalCheckoutButton>
             </div>
@@ -259,12 +271,14 @@ export default function CorporateToolkitPage() {
 
       <section className="section-textured px-4 py-8 sm:px-6 sm:py-10">
         <div className="mx-auto max-w-4xl text-center">
-          <Link
+          <TrackedProductLink
             href="/digital-downloads/rage-room-gift-voucher-template-pack"
+            product={giftAnalyticsProduct}
+            listName="Digital Product Cross-Sell"
             className="text-sm font-semibold text-rage-500 hover:text-rage-400"
           >
             Planning a non-work gift instead? View the gift voucher pack.
-          </Link>
+          </TrackedProductLink>
         </div>
       </section>
 
@@ -278,7 +292,10 @@ export default function CorporateToolkitPage() {
             A printable PDF for approval, venue checks, staff communication, run sheets and feedback.
           </p>
           <div className="mt-6 flex justify-center">
-            <DigitalCheckoutButton productId={product.id}>
+            <DigitalCheckoutButton
+              productId={product.id}
+              analyticsProduct={analyticsProduct}
+            >
               Download the corporate toolkit — £19
             </DigitalCheckoutButton>
           </div>

@@ -3,9 +3,19 @@ import Link from "next/link"
 import { Check, ClipboardList, Download, ShieldCheck, Sparkles } from "lucide-react"
 import DigitalCheckoutButton from "@/components/DigitalCheckoutButton"
 import FAQ from "@/components/FAQ"
-import { getDigitalProduct } from "@/lib/digital-products"
+import ProductViewTracker from "@/components/ProductViewTracker"
+import TrackedProductLink from "@/components/TrackedProductLink"
+import {
+  getDigitalProduct,
+  getDigitalProductAnalytics,
+} from "@/lib/digital-products"
 
 const product = getDigitalProduct("rage-room-party-planner")!
+const analyticsProduct = getDigitalProductAnalytics(product)
+const corporateProduct = getDigitalProduct("corporate-team-building-toolkit")!
+const corporateAnalyticsProduct = getDigitalProductAnalytics(corporateProduct)
+const giftProduct = getDigitalProduct("rage-room-gift-voucher-template-pack")!
+const giftAnalyticsProduct = getDigitalProductAnalytics(giftProduct)
 
 export const metadata: Metadata = {
   title: "Rage Room Party Planner Pack | Printable UK Event Planner",
@@ -105,6 +115,7 @@ function ProductMockup() {
 export default function RageRoomPartyPlannerPackPage() {
   return (
     <div className="bg-dark-900">
+      <ProductViewTracker product={analyticsProduct} />
       <section className="px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
         <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
@@ -120,7 +131,10 @@ export default function RageRoomPartyPlannerPackPage() {
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4">
               <div className="text-3xl font-black text-white">{product.priceLabel}</div>
-              <DigitalCheckoutButton productId={product.id}>
+              <DigitalCheckoutButton
+                productId={product.id}
+                analyticsProduct={analyticsProduct}
+              >
                 Get instant access — £7
               </DigitalCheckoutButton>
             </div>
@@ -220,12 +234,14 @@ export default function RageRoomPartyPlannerPackPage() {
             instead. It includes approval templates, staff invite emails, a venue scorecard
             and a feedback form.
           </p>
-          <Link
+          <TrackedProductLink
             href="/digital-downloads/corporate-rage-room-team-building-toolkit"
+            product={corporateAnalyticsProduct}
+            listName="Digital Product Cross-Sell"
             className="mt-4 inline-flex text-sm font-semibold text-rage-500 hover:text-rage-400"
           >
             View corporate toolkit
-          </Link>
+          </TrackedProductLink>
         </div>
       </section>
 
@@ -238,12 +254,14 @@ export default function RageRoomPartyPlannerPackPage() {
             Pair the planner with the Gift Voucher Template Pack so the experience feels
             polished before the booking is even made.
           </p>
-          <Link
+          <TrackedProductLink
             href="/digital-downloads/rage-room-gift-voucher-template-pack"
+            product={giftAnalyticsProduct}
+            listName="Digital Product Cross-Sell"
             className="mt-4 inline-flex text-sm font-semibold text-rage-500 hover:text-rage-400"
           >
             View gift voucher pack
-          </Link>
+          </TrackedProductLink>
         </div>
       </section>
 
@@ -257,7 +275,10 @@ export default function RageRoomPartyPlannerPackPage() {
             A printable PDF for getting the venue, group, budget and night-out details under control.
           </p>
           <div className="mt-6 flex justify-center">
-            <DigitalCheckoutButton productId={product.id}>
+            <DigitalCheckoutButton
+              productId={product.id}
+              analyticsProduct={analyticsProduct}
+            >
               Download the planner pack — £7
             </DigitalCheckoutButton>
           </div>
