@@ -7,9 +7,9 @@ import {
 } from "@/lib/digital-products"
 
 export const metadata: Metadata = {
-  title: "Rage Room Planning Downloads | Printable Event Packs",
+  title: "Digital Guides | Rage Room Planning Downloads",
   description:
-    "Browse printable rage room planning downloads for birthdays, group nights and corporate team-building events.",
+    "Browse digital rage room guides, printable planning downloads, corporate toolkits and gift voucher templates.",
   alternates: { canonical: "/digital-downloads" },
 }
 
@@ -48,10 +48,10 @@ export default function DigitalDownloadsPage() {
     <div className="px-4 py-12 sm:px-6 sm:py-16">
       <div className="mx-auto max-w-5xl">
         <h1 className="text-4xl font-black uppercase tracking-wide text-white sm:text-5xl">
-          Rage Room Planning Downloads
+          Digital Guides
         </h1>
         <p className="mt-4 max-w-3xl text-lg text-zinc-300">
-          Printable planning packs for organising rage room events without starting from a blank page.
+          Printable planning packs, corporate toolkits and gift templates for organising rage room experiences without starting from a blank page.
         </p>
 
         <div className="mt-8 grid gap-5 md:grid-cols-3">

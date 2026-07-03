@@ -11,6 +11,7 @@ const navItems = [
   { label: "Find Near Me", href: "/near-me" },
   { label: "Directories", href: "/listings" },
   { label: "City Guides", href: "/guides" },
+  { label: "Digital Guides", href: "/digital-downloads" },
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/#faq" },
   { label: "List Your Venue", href: "/list-your-rage-room" },
