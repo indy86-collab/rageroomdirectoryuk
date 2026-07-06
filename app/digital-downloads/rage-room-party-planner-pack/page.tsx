@@ -1,7 +1,11 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { Check, ClipboardList, Download, ShieldCheck, Sparkles } from "lucide-react"
+import { Check, ClipboardList, Download, Sparkles } from "lucide-react"
 import DigitalCheckoutButton from "@/components/DigitalCheckoutButton"
+import {
+  DigitalPurchaseReassurance,
+  WhatHappensAfterPayment,
+} from "@/components/DigitalPurchaseDetails"
 import FAQ from "@/components/FAQ"
 import ProductViewTracker from "@/components/ProductViewTracker"
 import TrackedProductLink from "@/components/TrackedProductLink"
@@ -26,7 +30,12 @@ export const metadata: Metadata = {
   },
 }
 
-const trustBullets = ["Printable PDF", "15-page planning kit", "UK edition", "Instant download"]
+const trustBullets = [
+  "Printable PDF",
+  "15-page planning kit",
+  "UK edition",
+  "Sample preview available",
+]
 
 const includedGroups = [
   {
@@ -79,6 +88,11 @@ const faqs = [
     question: "Is this safety advice?",
     answer:
       "No. It is a planning aid. Always follow the venue's rules, waiver requirements and staff instructions.",
+  },
+  {
+    question: "Can I get help or a refund?",
+    answer:
+      "If your download link or file does not work, contact us and we will help. Because this is instant digital content, refunds are handled case by case and are generally not offered after a successful download unless the file is faulty.",
   },
 ]
 
@@ -149,6 +163,15 @@ export default function RageRoomPartyPlannerPackPage() {
                 </span>
               ))}
             </div>
+            <DigitalPurchaseReassurance />
+            {product.previewPdf && (
+              <Link
+                href={product.previewPdf}
+                className="mt-5 inline-flex text-sm font-semibold text-rage-500 hover:text-rage-400"
+              >
+                View sample pages
+              </Link>
+            )}
           </div>
           <ProductMockup />
         </div>
@@ -210,16 +233,7 @@ export default function RageRoomPartyPlannerPackPage() {
 
       <section className="px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[0.8fr_1.2fr]">
-          <div className="card-base p-5">
-            <div className="flex h-11 w-11 items-center justify-center rounded-md border border-rage-500/40 bg-rage-500/15">
-              <ShieldCheck className="h-5 w-5 text-rage-500" />
-            </div>
-            <h2 className="mt-4 text-xl font-bold text-white">Instant access after payment</h2>
-            <p className="mt-3 text-sm leading-relaxed text-zinc-300">
-              Checkout is handled by Stripe. After successful payment, your secure download
-              link is generated for 72 hours.
-            </p>
-          </div>
+          <WhatHappensAfterPayment />
           <div className="card-base p-5">
             <FAQ items={faqs} title="Planner Pack FAQs" />
           </div>
@@ -281,6 +295,9 @@ export default function RageRoomPartyPlannerPackPage() {
             >
               Download the planner pack — £7
             </DigitalCheckoutButton>
+          </div>
+          <div className="mx-auto max-w-2xl">
+            <DigitalPurchaseReassurance className="justify-center" />
           </div>
         </div>
       </section>

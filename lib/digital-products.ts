@@ -37,6 +37,7 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     ),
     downloadFilename: "rage-room-party-planner-pack.pdf",
     contentType: "application/pdf",
+    previewPdf: "/digital-products/rage-room-party-planner-pack-sample.pdf",
     description:
       "A printable UK planning kit for rage room birthdays, date nights, breakup nights, group nights, stag and hen activities, and friends' nights out.",
     includedSections: [
@@ -73,6 +74,8 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     ),
     downloadFilename: "corporate-rage-room-team-building-toolkit.pdf",
     contentType: "application/pdf",
+    previewPdf:
+      "/digital-products/corporate-rage-room-team-building-toolkit-sample.pdf",
     description:
       "A professional planning pack for HR teams, office managers, founders and team leads planning a rage room team-building event.",
     includedSections: [

@@ -2,6 +2,10 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { AlertTriangle, BriefcaseBusiness, Check, ClipboardList, Download, Sparkles } from "lucide-react"
 import DigitalCheckoutButton from "@/components/DigitalCheckoutButton"
+import {
+  DigitalPurchaseReassurance,
+  WhatHappensAfterPayment,
+} from "@/components/DigitalPurchaseDetails"
 import FAQ from "@/components/FAQ"
 import ProductViewTracker from "@/components/ProductViewTracker"
 import TrackedProductLink from "@/components/TrackedProductLink"
@@ -24,7 +28,12 @@ export const metadata: Metadata = {
   },
 }
 
-const trustBullets = ["Printable PDF", "16-page corporate toolkit", "HR-ready templates", "Instant download"]
+const trustBullets = [
+  "Printable PDF",
+  "16-page corporate toolkit",
+  "HR-ready templates",
+  "Sample preview available",
+]
 
 const includedGroups = [
   {
@@ -106,6 +115,11 @@ const faqs = [
     question: "Why does the download link expire?",
     answer: "To keep PDF delivery private. Save a copy after purchase.",
   },
+  {
+    question: "Can I get help or a refund?",
+    answer:
+      "If your download link or file does not work, contact us and we will help. Because this is instant digital content, refunds are handled case by case and are generally not offered after a successful download unless the file is faulty.",
+  },
 ]
 
 function ProductMockup() {
@@ -174,6 +188,15 @@ export default function CorporateToolkitPage() {
                 </span>
               ))}
             </div>
+            <DigitalPurchaseReassurance />
+            {product.previewPdf && (
+              <Link
+                href={product.previewPdf}
+                className="mt-5 inline-flex text-sm font-semibold text-rage-500 hover:text-rage-400"
+              >
+                View sample pages
+              </Link>
+            )}
           </div>
           <ProductMockup />
         </div>
@@ -264,8 +287,11 @@ export default function CorporateToolkitPage() {
       </section>
 
       <section className="px-4 py-10 sm:px-6 sm:py-14">
-        <div className="mx-auto max-w-4xl card-base p-5">
-          <FAQ items={faqs} title="Corporate Toolkit FAQs" />
+        <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[0.8fr_1.2fr]">
+          <WhatHappensAfterPayment />
+          <div className="card-base p-5">
+            <FAQ items={faqs} title="Corporate Toolkit FAQs" />
+          </div>
         </div>
       </section>
 
@@ -298,6 +324,9 @@ export default function CorporateToolkitPage() {
             >
               Download the corporate toolkit — £19
             </DigitalCheckoutButton>
+          </div>
+          <div className="mx-auto max-w-2xl">
+            <DigitalPurchaseReassurance className="justify-center" />
           </div>
         </div>
       </section>

@@ -3,6 +3,10 @@ import Image from "next/image"
 import Link from "next/link"
 import { AlertTriangle, Check, Gift, ListChecks, Sparkles } from "lucide-react"
 import DigitalCheckoutButton from "@/components/DigitalCheckoutButton"
+import {
+  DigitalPurchaseReassurance,
+  WhatHappensAfterPayment,
+} from "@/components/DigitalPurchaseDetails"
 import FAQ from "@/components/FAQ"
 import ProductViewTracker from "@/components/ProductViewTracker"
 import {
@@ -26,7 +30,7 @@ const trustBullets = [
   "Printable and digital templates",
   "8 voucher themes",
   "A4, A5, mobile and square formats",
-  "Instant ZIP download",
+  "Preview catalogue available",
 ]
 
 const includedGroups = [
@@ -118,6 +122,11 @@ const faqs = [
     question: "Why does the download link expire?",
     answer: "To keep ZIP delivery private. Save a copy after purchase.",
   },
+  {
+    question: "Can I get help or a refund?",
+    answer:
+      "If your download link or file does not work, contact us and we will help. Because this is instant digital content, refunds are handled case by case and are generally not offered after a successful download unless the file is faulty.",
+  },
 ]
 
 export default function GiftVoucherTemplatePackPage() {
@@ -156,6 +165,7 @@ export default function GiftVoucherTemplatePackPage() {
                 </span>
               ))}
             </div>
+            <DigitalPurchaseReassurance />
             {product.previewPdf && (
               <Link
                 href={product.previewPdf}
@@ -214,6 +224,12 @@ export default function GiftVoucherTemplatePackPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="px-4 py-10 sm:px-6 sm:py-14">
+        <div className="mx-auto max-w-4xl">
+          <WhatHappensAfterPayment />
         </div>
       </section>
 
@@ -291,6 +307,9 @@ export default function GiftVoucherTemplatePackPage() {
             >
               Download the voucher pack — £5
             </DigitalCheckoutButton>
+          </div>
+          <div className="mx-auto max-w-2xl">
+            <DigitalPurchaseReassurance className="justify-center" />
           </div>
         </div>
       </section>

@@ -18,7 +18,7 @@ export default function TermsPage() {
     { label: "Terms", href: "/terms" },
   ]
 
-  const lastUpdated = "18 March 2026"
+  const lastUpdated = "6 July 2026"
 
   return (
     <div className="py-6 sm:py-8">
@@ -48,6 +48,7 @@ export default function TermsPage() {
               <li>Contacting businesses</li>
               <li>Viewing listings</li>
               <li>Reading blog posts</li>
+              <li>Buying digital downloads</li>
             </ul>
 
             <p className="mt-4">You agree not to:</p>
@@ -118,7 +119,22 @@ export default function TermsPage() {
 
           <section>
             <h2 className="text-xl sm:text-2xl font-bold text-white mt-6 sm:mt-8 mb-3 sm:mb-4">
-              5. Liability Disclaimer
+              5. Digital Downloads
+            </h2>
+            <p>
+              Some pages sell digital planning packs, templates, or toolkits. Checkout is handled securely by Stripe. After successful payment, a private download link is generated for a limited time.
+            </p>
+            <ul className="list-disc list-inside space-y-2 ml-4 mt-4">
+              <li>Digital downloads do not include rage room venue bookings.</li>
+              <li>You are responsible for saving your file before the download link expires.</li>
+              <li>If your download link or file does not work, contact us and we will help.</li>
+              <li>Because these are instant digital products, refunds are handled case by case and are generally not offered after a successful download unless the file is faulty.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-xl sm:text-2xl font-bold text-white mt-6 sm:mt-8 mb-3 sm:mb-4">
+              6. Liability Disclaimer
             </h2>
             <p>RageRoom Directory:</p>
             <ul className="list-disc list-inside space-y-2 ml-4">
@@ -134,7 +150,7 @@ export default function TermsPage() {
 
           <section>
             <h2 className="text-xl sm:text-2xl font-bold text-white mt-6 sm:mt-8 mb-3 sm:mb-4">
-              6. Changes to Terms
+              7. Changes to Terms
             </h2>
             <p>
               These Terms may be updated at any time. Continued use of the website means you accept updated terms.
@@ -145,4 +161,3 @@ export default function TermsPage() {
     </div>
   )
 }
-

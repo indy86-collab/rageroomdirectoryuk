@@ -2,6 +2,23 @@
 
 ## Required Environment Variables
 
+### `STRIPE_SECRET_KEY`
+- **Description**: Stripe secret key used to create Checkout Sessions and verify orders
+- **Format**: `sk_live_...` for production or `sk_test_...` for testing
+- **Required**: Required for digital download checkout
+
+### `STRIPE_WEBHOOK_SECRET`
+- **Description**: Stripe webhook signing secret for `/api/webhooks/stripe`
+- **Format**: `whsec_...`
+- **Where to get it**: Stripe Dashboard → Developers → Webhooks, after adding the endpoint
+- **Required events**: `checkout.session.completed`, `checkout.session.expired`, `checkout.session.async_payment_failed`
+- **Required**: Required for checkout completion and abandonment logs
+
+### `DOWNLOAD_TOKEN_SECRET`
+- **Description**: Secret used to sign private digital download links after payment
+- **Format**: Long random string
+- **Required**: Required for digital download fulfilment
+
 ### `NEXT_PUBLIC_SITE_URL`
 - **Description**: Your production site URL (used for SEO, sitemap, canonical URLs)
 - **Format**: `https://yourdomain.com`
@@ -52,6 +69,9 @@ To add or edit listings:
 
 ## Quick Setup Checklist
 
+- [ ] `STRIPE_SECRET_KEY` — Add for Stripe Checkout
+- [ ] `STRIPE_WEBHOOK_SECRET` — Add after creating the Stripe webhook endpoint
+- [ ] `DOWNLOAD_TOKEN_SECRET` — Add for secure download links
 - [ ] `NEXT_PUBLIC_SITE_URL` — Add your production URL
 - [ ] `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` — Add if using maps (optional)
 - [ ] `GOOGLE_PLACES_API_KEY` — Add if using Google reviews (optional)
