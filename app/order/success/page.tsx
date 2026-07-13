@@ -7,6 +7,7 @@ import {
   type DigitalProduct,
   getDigitalProduct,
   getDigitalProductAnalytics,
+  getFulfilmentProducts,
 } from "@/lib/digital-products"
 import { getStripe } from "@/lib/stripe"
 
@@ -20,8 +21,8 @@ export default async function OrderSuccessPage({
   searchParams,
 }: OrderSuccessPageProps) {
   const sessionId = searchParams.session_id
-  let downloadToken: string | null = null
   let purchasedProduct: DigitalProduct | null = null
+  let fulfilmentProducts: DigitalProduct[] = []
   let errorMessage = "Payment has not been confirmed yet."
 
   if (sessionId) {
@@ -38,10 +39,7 @@ export default async function OrderSuccessPage({
         session.currency === product.currency
       ) {
         purchasedProduct = product
-        downloadToken = createDownloadToken({
-          sessionId: session.id,
-          productId: product.id,
-        })
+        fulfilmentProducts = getFulfilmentProducts(product)
       }
     } catch (error) {
       console.error("Order success fulfilment error", error)
@@ -51,7 +49,7 @@ export default async function OrderSuccessPage({
     errorMessage = "Missing checkout session."
   }
 
-  if (!downloadToken) {
+  if (!purchasedProduct || fulfilmentProducts.length === 0) {
     return (
       <div className="px-4 py-16 sm:px-6">
         <div className="mx-auto max-w-2xl rounded-lg border border-zinc-800 bg-[#181818] p-6 text-center sm:p-8">
@@ -60,8 +58,8 @@ export default async function OrderSuccessPage({
             {errorMessage}
           </h1>
           <p className="mt-3 text-zinc-300">
-            If you have just paid, wait a moment and refresh this page. Otherwise,
-            return to the downloads page and try again.
+            If you have just paid, wait a moment and refresh this page. Check your
+            email for a download link, or return to the downloads page and try again.
           </p>
           <Link
             href="/digital-downloads"
@@ -74,20 +72,19 @@ export default async function OrderSuccessPage({
     )
   }
 
-  const isCorporate = purchasedProduct?.id === "corporate-team-building-toolkit"
+  const isCorporate = purchasedProduct.id === "corporate-team-building-toolkit"
   const isGiftVoucher =
-    purchasedProduct?.id === "rage-room-gift-voucher-template-pack"
-  const productHref = purchasedProduct
-    ? `/digital-downloads/${purchasedProduct.slug}`
-    : "/digital-downloads"
-  const analyticsProduct = getDigitalProductAnalytics(purchasedProduct!)
-  const headline = isGiftVoucher
-    ? "Your Rage Room Gift Voucher Template Pack is ready."
-    : isCorporate
-      ? "Your Corporate Rage Room Team-Building Toolkit is ready."
-      : "Your Rage Room Party Planner Pack is ready."
-  const downloadLabel =
-    purchasedProduct?.contentType === "application/zip" ? "Download ZIP" : "Download PDF"
+    purchasedProduct.id === "rage-room-gift-voucher-template-pack"
+  const isBundle = purchasedProduct.id === "party-gift-bundle"
+  const productHref = `/digital-downloads/${purchasedProduct.slug}`
+  const analyticsProduct = getDigitalProductAnalytics(purchasedProduct)
+  const headline = isBundle
+    ? "Your Party Planner + Gift Voucher Bundle is ready."
+    : isGiftVoucher
+      ? "Your Rage Room Gift Voucher Template Pack is ready."
+      : isCorporate
+        ? "Your Corporate Rage Room Team-Building Toolkit is ready."
+        : "Your Rage Room Party Planner Pack is ready."
 
   return (
     <div className="px-4 py-16 sm:px-6">
@@ -98,14 +95,32 @@ export default async function OrderSuccessPage({
           {headline}
         </h1>
         <p className="mt-3 text-zinc-300">
-          Your download link expires in 72 hours. Save a copy after downloading.
+          Your download link{fulfilmentProducts.length > 1 ? "s expire" : " expires"}{" "}
+          in 72 hours. We’ve also emailed the link to the address you used at
+          checkout. Save a copy after downloading.
         </p>
-        <TrackedDownloadLink
-          href={`/download/${downloadToken}`}
-          label={downloadLabel}
-          fileName={purchasedProduct!.downloadFilename}
-          product={analyticsProduct}
-        />
+        <div className="mt-6 space-y-3">
+          {fulfilmentProducts.map((fileProduct) => {
+            const token = createDownloadToken({
+              sessionId: sessionId!,
+              productId: fileProduct.id,
+            })
+            const downloadLabel =
+              fileProduct.contentType === "application/zip"
+                ? `Download ${fileProduct.shortName || fileProduct.name} (ZIP)`
+                : `Download ${fileProduct.shortName || fileProduct.name} (PDF)`
+
+            return (
+              <TrackedDownloadLink
+                key={fileProduct.id}
+                href={`/download/${token}`}
+                label={downloadLabel}
+                fileName={fileProduct.downloadFilename || "download"}
+                product={getDigitalProductAnalytics(fileProduct)}
+              />
+            )
+          })}
+        </div>
         <div className="mt-5">
           <Link href={productHref} className="text-sm font-semibold text-rage-500 hover:text-rage-400">
             Back to product page
@@ -113,7 +128,7 @@ export default async function OrderSuccessPage({
         </div>
       </div>
 
-      {purchasedProduct?.id === "rage-room-party-planner" && (
+      {(purchasedProduct.id === "rage-room-party-planner" || isBundle) && (
         <div className="mx-auto mt-6 max-w-2xl rounded-lg border border-zinc-800 bg-[#181818] p-5">
           <h2 className="text-lg font-bold text-white">Planning this for work?</h2>
           <p className="mt-2 text-sm text-zinc-300">
@@ -134,13 +149,13 @@ export default async function OrderSuccessPage({
           <h2 className="text-lg font-bold text-white">Planning the actual event too?</h2>
           <p className="mt-2 text-sm text-zinc-300">
             Use the Rage Room Party Planner Pack to compare venues, track budget,
-            send invites and plan the full night.
+            send invites and plan the full night — or grab the bundle and save £3.
           </p>
           <Link
-            href="/digital-downloads/rage-room-party-planner-pack"
+            href="/digital-downloads/party-planner-gift-voucher-bundle"
             className="mt-4 inline-flex text-sm font-semibold text-rage-500 hover:text-rage-400"
           >
-            View party planner pack
+            View party + gift bundle
           </Link>
         </div>
       )}

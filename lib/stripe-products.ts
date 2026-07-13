@@ -29,6 +29,9 @@ export async function getOrCreateStripePriceForProduct(productId: string) {
     metadata: {
       productId: product.id,
       digitalProduct: "true",
+      ...(product.bundleProductIds?.length
+        ? { bundleProductIds: product.bundleProductIds.join(",") }
+        : {}),
     },
     product_data: {
       name: product.name,

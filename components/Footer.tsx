@@ -25,8 +25,9 @@ export default async function Footer() {
         { label: "Best Rage Rooms London", href: "/guides/best-rage-rooms-london" },
         { label: "Rage Room vs Escape Room", href: "/rage-room-vs-escape-room" },
         { label: "Rage Rooms for Hen Parties", href: "/guides/rage-rooms-for-hen-parties-uk" },
+        { label: "Rage Rooms for Stag Parties", href: "/guides/rage-rooms-for-stag-parties-uk" },
         { label: "Rage Rooms for Birthdays", href: "/guides/rage-rooms-for-birthdays-uk" },
-        { label: "UK Pricing Guide", href: "/guides/how-much-do-rage-rooms-cost-uk" },
+        { label: "UK Pricing Guide", href: "/rage-room-prices-uk" },
       ],
     },
     {
@@ -34,6 +35,8 @@ export default async function Footer() {
       links: [
         { label: "All Listings", href: "/listings" },
         { label: "Near Me", href: "/near-me" },
+        { label: "UK Map", href: "/uk-map" },
+        { label: "UK Rage Room Report 2026", href: "/uk-rage-room-report-2026" },
         { label: "UK Prices Hub", href: "/rage-room-prices-uk" },
         { label: "All Guides", href: "/guides" },
         { label: "Blog", href: "/blog" },

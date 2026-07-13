@@ -165,11 +165,11 @@ export default async function LondonMapPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Link
-              href="/rage-room-london"
+              href="/guides/best-rage-rooms-london"
               className="bg-[#181818] hover:bg-[#252525] border border-zinc-800 hover:border-orange-500 rounded-lg p-6 transition-all"
             >
-              <h3 className="text-xl font-bold text-white mb-2">Rage Room London Guide</h3>
-              <p className="text-zinc-400">Guide to rage rooms in London with venue details and price comparisons</p>
+              <h3 className="text-xl font-bold text-white mb-2">Best Rage Rooms London</h3>
+              <p className="text-zinc-400">Editorial ranking of London smash rooms with prices and local tips</p>
             </Link>
             <Link
               href="/city/london"
@@ -211,7 +211,7 @@ export default async function LondonMapPage() {
               View All London Venues
             </Link>
             <Link
-              href="/rage-room-london"
+              href="/guides/best-rage-rooms-london"
               className="bg-[#1a1a1a] hover:bg-[#2a2a2a] text-white border border-zinc-700 font-semibold px-8 py-3 rounded-md transition-colors"
             >
               Read London Guide

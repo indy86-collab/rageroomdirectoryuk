@@ -18,6 +18,12 @@ const nextConfig = {
         destination: '/guides/rage-rooms-for-birthdays-uk',
         permanent: true,
       },
+      // London hub/spoke: /city/london is primary; keyword landing redirects.
+      {
+        source: '/rage-room-london',
+        destination: '/city/london',
+        permanent: true,
+      },
     ]
   },
   images: {

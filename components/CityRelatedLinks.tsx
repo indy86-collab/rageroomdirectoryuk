@@ -21,6 +21,9 @@ const GUIDE_CITIES = [
   "Leicester",
   "Derby",
   "Brighton",
+  "Glasgow",
+  "Cardiff",
+  "Hull",
 ] as const
 
 type GuideCity = (typeof GUIDE_CITIES)[number]
@@ -43,6 +46,7 @@ const NEIGHBOURS: Record<string, readonly string[]> = {
   Glasgow: ["Edinburgh", "Aberdeen", "Dundee", "Newcastle"],
   Edinburgh: ["Glasgow", "Newcastle", "Dundee", "Aberdeen"],
   Cardiff: ["Bristol", "Swansea", "Newport", "Bath"],
+  Hull: ["Leeds", "Sheffield", "York", "Grimsby", "Doncaster"],
   Belfast: ["Dublin", "Londonderry"],
 }
 

@@ -1,6 +1,9 @@
-import { redirect } from "next/navigation"
+import CheckoutCancelRecovery from "@/components/CheckoutCancelRecovery"
 import { logCheckoutLifecycle } from "@/lib/checkout-logging"
-import { getDigitalProduct } from "@/lib/digital-products"
+import {
+  getDigitalProduct,
+  getDigitalProductAnalytics,
+} from "@/lib/digital-products"
 
 export const dynamic = "force-dynamic"
 
@@ -31,5 +34,34 @@ export default function CheckoutCancelPage({
     clientReferenceId: searchParams.client_reference_id ?? null,
   })
 
-  redirect(product ? `/digital-downloads/${product.slug}` : "/digital-downloads")
+  if (!product) {
+    return (
+      <div className="px-4 py-16 sm:px-6">
+        <div className="mx-auto max-w-2xl rounded-lg border border-zinc-800 bg-[#181818] p-6 text-center sm:p-8">
+          <h1 className="text-2xl font-bold text-white">
+            Checkout wasn’t completed
+          </h1>
+          <p className="mt-3 text-zinc-300">
+            Return to the downloads page to pick a planner, toolkit or voucher pack.
+          </p>
+          <a
+            href="/digital-downloads"
+            className="btn-rage mt-6 inline-flex min-h-[44px] items-center justify-center"
+          >
+            Browse digital guides
+          </a>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <CheckoutCancelRecovery
+      productId={product.id}
+      productName={product.name}
+      productSlug={product.slug}
+      priceLabel={product.priceLabel}
+      analyticsProduct={getDigitalProductAnalytics(product)}
+    />
+  )
 }

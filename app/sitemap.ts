@@ -2,6 +2,8 @@ import { MetadataRoute } from "next"
 import { getAllListingsForAdmin, getDistinctCities, getDistinctRegions } from "@/lib/listings"
 import { cityToSlug, regionToSlug } from "@/lib/location"
 import { getAllBlogPosts } from "@/lib/blog-posts"
+import { getBlogGuideCanonical } from "@/lib/blog-guide-canonicals"
+import { mergeCitiesWithPriority, CITY_PRICE_PAGE_CITIES } from "@/lib/priority-seo-cities"
 import { absoluteUrl, getSiteUrl, listingUrl } from "@/lib/site-url"
 
 // ISR: sitemap reflects listings.json state but doesn't need to be live on every request.
@@ -11,12 +13,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = getSiteUrl()
 
   // Get all listings, cities, regions, and blog posts
-  const [listings, cities, regions, blogPosts] = await Promise.all([
+  const [listings, citiesFromListings, regions, blogPosts] = await Promise.all([
     getAllListingsForAdmin(),
     getDistinctCities(),
     getDistinctRegions(),
     Promise.resolve(getAllBlogPosts()),
   ])
+  const cities = mergeCitiesWithPriority(citiesFromListings)
 
   // Homepage and static pages
   const routes: MetadataRoute.Sitemap = [
@@ -45,10 +48,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
-      url: absoluteUrl("/rage-room-london"),
+      url: absoluteUrl("/uk-map"),
       lastModified: new Date(),
       changeFrequency: "weekly",
-      priority: 0.9,
+      priority: 0.8,
+    },
+    {
+      url: absoluteUrl("/uk-rage-room-report-2026"),
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
     {
       url: absoluteUrl("/rage-room-vs-escape-room"),
@@ -76,6 +85,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: absoluteUrl("/digital-downloads/rage-room-gift-voucher-template-pack"),
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: absoluteUrl("/digital-downloads/party-planner-gift-voucher-bundle"),
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
@@ -172,7 +187,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
-  // Guide pages
+  // Guide pages (how-much-do-rage-rooms-cost-uk canonicals to /rage-room-prices-uk)
   const guidePages = [
     "best-rage-rooms-london",
     "best-rage-rooms-birmingham",
@@ -187,14 +202,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "best-rage-rooms-leicester",
     "best-rage-rooms-derby",
     "best-rage-rooms-brighton",
+    "best-rage-rooms-glasgow",
+    "best-rage-rooms-cardiff",
+    "best-rage-rooms-hull",
     "best-rage-rooms-for-couples",
     "best-rage-rooms-for-team-building",
     "are-rage-rooms-safe-uk",
-    "how-much-do-rage-rooms-cost-uk",
     "what-happens-in-a-rage-room",
     "rage-rooms-for-hen-parties-uk",
+    "rage-rooms-for-stag-parties-uk",
     "rage-rooms-for-birthdays-uk",
-    // New topic guides (2026)
     "rage-room-near-me",
     "rage-room-gift-vouchers-uk",
     "rage-rooms-for-stress-relief",
@@ -211,7 +228,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   })
 
-  // City pages
+  // Programmatic city pricing pages
+  CITY_PRICE_PAGE_CITIES.forEach((city) => {
+    routes.push({
+      url: absoluteUrl(`/rage-room-prices/${cityToSlug(city)}`),
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    })
+  })
+
+  // City pages (listing cities + priority SEO cities)
   cities.forEach((city) => {
     routes.push({
       url: absoluteUrl(`/city/${cityToSlug(city)}`),
@@ -242,15 +269,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   })
 
-  // Blog posts
-  blogPosts.forEach((post) => {
-    routes.push({
-      url: absoluteUrl(`/blog/${post.slug}`),
-      lastModified: new Date(post.date),
-      changeFrequency: "monthly",
-      priority: 0.6,
+  // Blog posts that are not canonicalized to a guide
+  blogPosts
+    .filter((post) => !getBlogGuideCanonical(post.slug))
+    .forEach((post) => {
+      routes.push({
+        url: absoluteUrl(`/blog/${post.slug}`),
+        lastModified: new Date(post.date),
+        changeFrequency: "monthly",
+        priority: 0.6,
+      })
     })
-  })
 
   return routes
 }

@@ -81,7 +81,8 @@ export const dynamicParams = true
 
 export async function generateStaticParams() {
   const { getDistinctCities } = await import("@/lib/listings")
-  const cities = await getDistinctCities()
+  const { mergeCitiesWithPriority } = await import("@/lib/priority-seo-cities")
+  const cities = mergeCitiesWithPriority(await getDistinctCities())
   return cities.map((city) => ({ slug: cityToSlug(city) }))
 }
 
@@ -141,7 +142,9 @@ export default async function CityPage({ params }: CityPageProps) {
   }
 
   const cityFAQs = getCityFAQs(cityName)
-  const cityContent = getCityContent(cityName) || getGenericCityContent(cityName, listings.length)
+  const cityContent =
+    getCityContent(cityName) ||
+    getGenericCityContent(cityName, listings.length, { nearbyOnly: hasNearbyOnly })
 
   const priceRange = listings.filter(l => l.price).map(l => l.price!)
   const minPrice = priceRange.length > 0 ? Math.min(...priceRange) : null

@@ -2,93 +2,121 @@ import Link from "next/link"
 
 export const metadata = {
   title: "List Your Rage Room | Rage Room Directory UK",
-  description: "List your rage room business or update your existing listing. Contact us to add your rage room to the UK's premier directory.",
+  description:
+    "List your rage room business or update your existing listing. Priority outreach for Manchester, Glasgow, Leeds and Bristol venues.",
   alternates: { canonical: "/list-your-rage-room" },
 }
+
+const PRIORITY_CITIES = [
+  {
+    city: "Manchester",
+    why: "High search demand, thin in-city inventory — nearest venues already get Manchester traffic.",
+  },
+  {
+    city: "Glasgow",
+    why: "Scotland’s largest city and a major stag/hen destination with room for more verified listings.",
+  },
+  {
+    city: "Leeds",
+    why: "West Yorkshire search volume with limited dedicated in-city smash rooms.",
+  },
+  {
+    city: "Bristol",
+    why: "South West hub — strong group and creative-crowd demand for destruction therapy.",
+  },
+]
 
 export default function ListYourRageRoomPage() {
   return (
     <div className="py-8">
-      <div className="max-w-4xl mx-auto px-4">
-        <h1 className="text-4xl font-bold mb-4 text-white">
-          List Your Rage Room
-        </h1>
-        <p className="text-lg text-zinc-300 mb-8">
-          Are you a rage room business owner? Get your venue listed on the UK's premier rage room directory and reach thousands of potential customers.
+      <div className="mx-auto max-w-4xl px-4">
+        <h1 className="mb-4 text-4xl font-bold text-white">List Your Rage Room</h1>
+        <p className="mb-8 text-lg text-zinc-300">
+          Are you a rage room business owner? Get your venue listed on the UK&apos;s
+          premier rage room directory and reach thousands of potential customers.
         </p>
 
-        <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-6 mb-8">
-          <h2 className="text-2xl font-bold text-white mb-4">
-            For Existing Listings
+        <div className="mb-8 rounded-lg border border-rage-500/40 bg-rage-500/10 p-6">
+          <h2 className="mb-3 text-2xl font-bold text-white">
+            Priority cities we want to list next
           </h2>
-          <p className="text-white mb-4">
-            If your rage room is already listed on our directory and you'd like to update your information, add photos, or provide additional details, please contact us.
+          <p className="mb-5 text-sm leading-relaxed text-zinc-300">
+            We are actively expanding inventory in high-demand cities. If you operate
+            in Manchester, Glasgow, Leeds or Bristol (or nearby), email us first —
+            we will prioritise verification and city-page placement.
           </p>
-          <p className="text-zinc-400 text-sm">
-            We can help you enhance your listing with more information, better photos, and additional features to help customers find and book your venue.
-          </p>
-        </div>
-
-        <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-6 mb-8">
-          <h2 className="text-2xl font-bold text-white mb-4">
-            For New Listings
-          </h2>
-          <p className="text-white mb-4">
-            Want to list your rage room business? We'd love to feature you on our directory!
-          </p>
-          <p className="text-zinc-400 text-sm mb-4">
-            Listing your rage room on our directory helps you:
-          </p>
-          <ul className="list-disc list-inside text-zinc-400 text-sm space-y-2 mb-4">
-            <li>Reach thousands of potential customers searching for rage rooms</li>
-            <li>Increase your online visibility and bookings</li>
-            <li>Get featured in our search results and city pages</li>
-            <li>Build credibility with verified listings</li>
-          </ul>
-          <p className="text-zinc-400 text-sm">
-            Contact us to get started with your listing today.
-          </p>
-        </div>
-
-        <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-6">
-          <h2 className="text-2xl font-bold text-white mb-4">
-            Contact Us
-          </h2>
-          <p className="text-white mb-4">
-            Ready to list your rage room or update your existing listing? Get in touch with us:
-          </p>
-          <div className="space-y-3">
-            <div>
-              <p className="text-sm font-medium text-zinc-400 mb-1">
-                Email
-              </p>
-              <a
-                href="mailto:ukrageroom@gmail.com"
-                className="text-orange-500 hover:text-orange-600 transition-colors"
+          <ul className="mb-5 space-y-3">
+            {PRIORITY_CITIES.map(({ city, why }) => (
+              <li
+                key={city}
+                className="rounded-md border border-zinc-800 bg-[#181818] p-4"
               >
-                ukrageroom@gmail.com
-              </a>
-            </div>
-            <div>
-              <p className="text-sm font-medium text-zinc-400 mb-1">
-                What to Include
-              </p>
-              <ul className="list-disc list-inside text-zinc-400 text-sm space-y-1">
-                <li>Your business name and location</li>
-                <li>Contact information (phone, email, website)</li>
-                <li>Photos of your rage room</li>
-                <li>Pricing information</li>
-                <li>Any special features or services</li>
-              </ul>
-            </div>
-          </div>
+                <p className="font-bold text-white">{city}</p>
+                <p className="mt-1 text-sm text-zinc-400">{why}</p>
+                <Link
+                  href={`/city/${city.toLowerCase()}`}
+                  className="mt-2 inline-flex text-sm font-semibold text-orange-500 hover:text-orange-400"
+                >
+                  See current {city} coverage →
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <a
+            href="mailto:ukrageroom@gmail.com?subject=List%20my%20rage%20room%20(priority%20city)&body=Business%20name%3A%0ACity%3A%0AWebsite%3A%0AStarting%20price%20(approx)%3A%0A"
+            className="btn-rage inline-flex min-h-[44px] items-center justify-center px-5 text-sm uppercase tracking-wider"
+          >
+            Email to get listed
+          </a>
+        </div>
+
+        <div className="mb-8 overflow-hidden rounded-lg border border-zinc-800 bg-[#181818] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">For Existing Listings</h2>
+          <p className="mb-4 text-white">
+            If your rage room is already listed and you&apos;d like to update information,
+            add photos, or correct pricing, contact us.
+          </p>
+          <p className="text-sm text-zinc-400">
+            Accurate prices and photos help you appear in city price pages and rich
+            results.
+          </p>
+        </div>
+
+        <div className="mb-8 overflow-hidden rounded-lg border border-zinc-800 bg-[#181818] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">For New Listings</h2>
+          <p className="mb-4 text-white">
+            Want to list your rage room business? We&apos;d love to feature you.
+          </p>
+          <ul className="mb-4 list-disc space-y-2 pl-5 text-sm text-zinc-400">
+            <li>Reach customers searching for rage rooms near them</li>
+            <li>Appear on city, region and price comparison pages</li>
+            <li>Get included in guides and the UK map</li>
+            <li>Build credibility with a verified listing</li>
+          </ul>
+        </div>
+
+        <div className="overflow-hidden rounded-lg border border-zinc-800 bg-[#181818] p-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">Contact Us</h2>
+          <p className="mb-4 text-white">
+            Ready to list or update? Email{" "}
+            <a
+              href="mailto:ukrageroom@gmail.com"
+              className="text-orange-500 hover:text-orange-600"
+            >
+              ukrageroom@gmail.com
+            </a>
+          </p>
+          <ul className="list-disc space-y-1 pl-5 text-sm text-zinc-400">
+            <li>Business name and location</li>
+            <li>Website, phone and booking link</li>
+            <li>Photos of your rage room</li>
+            <li>Starting price / package overview</li>
+            <li>Any special features (BYO, corporate, hen/stag)</li>
+          </ul>
         </div>
 
         <div className="mt-8 text-center">
-          <Link
-            href="/"
-            className="text-orange-500 hover:text-orange-600 transition-colors"
-          >
+          <Link href="/" className="text-orange-500 hover:text-orange-600">
             ← Back to Home
           </Link>
         </div>
@@ -96,4 +124,3 @@ export default function ListYourRageRoomPage() {
     </div>
   )
 }
-

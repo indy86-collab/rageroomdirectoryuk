@@ -50,10 +50,11 @@ export default function Hero({ featuredListings = [] }: HeroProps) {
 
             <div className="relative w-full flex flex-col justify-center p-6 sm:p-10 lg:p-14">
               <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[0.95] text-white uppercase tracking-tight">
-                Release Your <span className="text-rage-500">Rage.</span>
+                Find Rage Rooms{" "}
+                <span className="text-rage-500">Across the UK.</span>
               </h1>
               <p className="mt-4 text-base sm:text-lg lg:text-xl text-zinc-300 max-w-xl font-medium">
-                Discover the UK&rsquo;s best smash rooms.
+                Compare verified smash rooms, prices and booking links — then release your rage.
               </p>
 
               <form onSubmit={handleSubmit} className="mt-6 sm:mt-8 max-w-xl">

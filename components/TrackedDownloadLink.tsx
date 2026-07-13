@@ -20,7 +20,7 @@ export default function TrackedDownloadLink({
   return (
     <Link
       href={href}
-      className="btn-rage mt-7 inline-flex min-h-[48px] items-center justify-center gap-2 text-sm uppercase tracking-wider"
+      className="btn-rage inline-flex min-h-[48px] w-full items-center justify-center gap-2 text-sm uppercase tracking-wider"
       onClick={() => {
         trackProductDownload(product, fileName)
       }}

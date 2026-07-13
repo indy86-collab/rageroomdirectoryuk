@@ -2,13 +2,19 @@
 
 import { useState } from "react"
 import { ArrowRight, Loader2 } from "lucide-react"
-import { type AnalyticsProduct, trackBeginCheckout } from "@/lib/analytics"
+import {
+  type AnalyticsProduct,
+  trackBeginCheckout,
+  trackCheckoutResumeClick,
+} from "@/lib/analytics"
 
 type DigitalCheckoutButtonProps = {
   productId: string
   analyticsProduct: AnalyticsProduct
   children: React.ReactNode
   className?: string
+  /** When true, fires checkout_resume_click instead of begin_checkout. */
+  resumeFromCancel?: boolean
 }
 
 export default function DigitalCheckoutButton({
@@ -16,6 +22,7 @@ export default function DigitalCheckoutButton({
   analyticsProduct,
   children,
   className,
+  resumeFromCancel = false,
 }: DigitalCheckoutButtonProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -25,7 +32,11 @@ export default function DigitalCheckoutButton({
     setError(null)
 
     try {
-      trackBeginCheckout(analyticsProduct)
+      if (resumeFromCancel) {
+        trackCheckoutResumeClick(analyticsProduct)
+      } else {
+        trackBeginCheckout(analyticsProduct)
+      }
 
       const response = await fetch("/api/checkout/digital-download", {
         method: "POST",

@@ -5,6 +5,12 @@ import {
   logCheckoutLifecycle,
   type CheckoutLifecycleEvent,
 } from "@/lib/checkout-logging"
+import {
+  getCheckoutSessionEmail,
+  sendAbandonedCheckoutEmail,
+  sendPurchaseDownloadEmail,
+} from "@/lib/digital-emails"
+import { getDigitalProduct } from "@/lib/digital-products"
 import { getStripe } from "@/lib/stripe"
 
 export const runtime = "nodejs"
@@ -14,6 +20,66 @@ const checkoutSessionEvents: Partial<Record<string, CheckoutLifecycleEvent>> = {
   "checkout.session.expired": "checkout_session_expired",
   "checkout.session.async_payment_failed":
     "checkout_session_async_payment_failed",
+}
+
+async function handlePaidSession(session: Stripe.Checkout.Session) {
+  if (session.payment_status !== "paid") {
+    return
+  }
+
+  const productId = session.metadata?.productId
+  const product = productId ? getDigitalProduct(productId) : null
+  const email = getCheckoutSessionEmail(session)
+
+  if (
+    !product ||
+    session.amount_total !== product.unitAmount ||
+    session.currency !== product.currency
+  ) {
+    console.warn("Paid session product mismatch — skipping email", {
+      sessionId: session.id,
+      productId,
+    })
+    return
+  }
+
+  if (!email) {
+    console.warn("Paid session missing customer email", session.id)
+    return
+  }
+
+  const result = await sendPurchaseDownloadEmail({
+    sessionId: session.id,
+    purchasedProduct: product,
+    toEmail: email,
+  })
+
+  console.info("Purchase download email", {
+    sessionId: session.id,
+    productId: product.id,
+    ...result,
+  })
+}
+
+async function handleExpiredSession(session: Stripe.Checkout.Session) {
+  const productId = session.metadata?.productId
+  const product = productId ? getDigitalProduct(productId) : null
+  const email = getCheckoutSessionEmail(session)
+
+  if (!product || !email) {
+    return
+  }
+
+  const result = await sendAbandonedCheckoutEmail({
+    purchasedProduct: product,
+    toEmail: email,
+  })
+
+  console.info("Abandoned checkout email", {
+    sessionId: session.id,
+    productId: product.id,
+    ...result,
+  })
 }
 
 export async function POST(request: Request) {
@@ -65,6 +131,17 @@ export async function POST(request: Request) {
       lifecycleEvent,
       checkoutSessionLogFields(session, event.id)
     )
+
+    try {
+      if (event.type === "checkout.session.completed") {
+        await handlePaidSession(session)
+      }
+      if (event.type === "checkout.session.expired") {
+        await handleExpiredSession(session)
+      }
+    } catch (error) {
+      console.error("Stripe webhook side-effect error", error)
+    }
   }
 
   return NextResponse.json({ received: true })

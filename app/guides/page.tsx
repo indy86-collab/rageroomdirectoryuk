@@ -130,6 +130,27 @@ const CITY_GUIDES: Guide[] = [
     href: "/guides/best-rage-rooms-brighton",
     category: "Brighton",
   },
+  {
+    title: "Best Rage Rooms in Glasgow",
+    description:
+      "Nearest smash rooms for Glasgow and the Central Belt — stag parties, birthdays and stress-relief sessions.",
+    href: "/guides/best-rage-rooms-glasgow",
+    category: "Glasgow",
+  },
+  {
+    title: "Best Rage Rooms in Cardiff",
+    description:
+      "Wales' main hub for rage rooms — compare Cardiff venues for rugby weekends, birthdays and groups.",
+    href: "/guides/best-rage-rooms-cardiff",
+    category: "Cardiff",
+  },
+  {
+    title: "Best Rage Rooms in Hull",
+    description:
+      "East Yorkshire smash rooms compared — practical pricing for locals and regional visitors.",
+    href: "/guides/best-rage-rooms-hull",
+    category: "Hull",
+  },
 ]
 
 const TOPIC_GUIDES: Guide[] = [
@@ -151,7 +172,7 @@ const TOPIC_GUIDES: Guide[] = [
     title: "How Much Do Rage Rooms Cost in the UK?",
     description:
       "UK pricing breakdown for solo, couples, group and corporate rage room bookings — with regional cost differences.",
-    href: "/guides/how-much-do-rage-rooms-cost-uk",
+    href: "/rage-room-prices-uk",
     category: "Pricing",
   },
   {
@@ -173,6 +194,13 @@ const TOPIC_GUIDES: Guide[] = [
     description:
       "Hen-party booking guide: group sizes, packages, costs and the best UK cities for a hen weekend rage room session.",
     href: "/guides/rage-rooms-for-hen-parties-uk",
+    category: "Hen & Stag",
+  },
+  {
+    title: "Rage Rooms for Stag Parties",
+    description:
+      "Stag-party booking guide: group sizes, packages, costs and the best UK cities for a stag weekend rage room session.",
+    href: "/guides/rage-rooms-for-stag-parties-uk",
     category: "Hen & Stag",
   },
   {

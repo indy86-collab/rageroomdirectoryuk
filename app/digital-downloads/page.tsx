@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { ArrowRight, BriefcaseBusiness, Gift, PartyPopper } from "lucide-react"
+import { ArrowRight, BriefcaseBusiness, Gift, Package, PartyPopper } from "lucide-react"
 import TrackedProductLink from "@/components/TrackedProductLink"
 import {
   getDigitalProduct,
@@ -9,7 +9,7 @@ import {
 export const metadata: Metadata = {
   title: "Digital Guides | Rage Room Planning Downloads",
   description:
-    "Browse digital rage room guides, printable planning downloads, corporate toolkits and gift voucher templates.",
+    "Browse digital rage room guides, printable planning downloads, corporate toolkits, gift voucher templates and money-saving bundles.",
   alternates: { canonical: "/digital-downloads" },
 }
 
@@ -18,7 +18,7 @@ const downloads = [
     title: "Rage Room Party Planner Pack",
     price: "£7",
     copy: "For planning birthdays, date nights and group nights.",
-    cta: "View party planner",
+    cta: "Plan the whole night — £7",
     href: "/digital-downloads/rage-room-party-planner-pack",
     icon: PartyPopper,
     productId: "rage-room-party-planner",
@@ -27,7 +27,7 @@ const downloads = [
     title: "Corporate Rage Room Team-Building Toolkit",
     price: "£19",
     copy: "For HR, office managers and work socials.",
-    cta: "View corporate toolkit",
+    cta: "Get HR-ready templates — £19",
     href: "/digital-downloads/corporate-rage-room-team-building-toolkit",
     icon: BriefcaseBusiness,
     productId: "corporate-team-building-toolkit",
@@ -36,7 +36,7 @@ const downloads = [
     title: "Rage Room Gift Voucher Template Pack",
     price: "£5",
     copy: "For giving a rage room experience as a gift.",
-    cta: "View voucher pack",
+    cta: "Send a polished voucher — £5",
     href: "/digital-downloads/rage-room-gift-voucher-template-pack",
     icon: Gift,
     productId: "rage-room-gift-voucher-template-pack",
@@ -44,6 +44,9 @@ const downloads = [
 ]
 
 export default function DigitalDownloadsPage() {
+  const bundle = getDigitalProduct("party-gift-bundle")!
+  const bundleAnalytics = getDigitalProductAnalytics(bundle)
+
   return (
     <div className="px-4 py-12 sm:px-6 sm:py-16">
       <div className="mx-auto max-w-5xl">
@@ -53,6 +56,39 @@ export default function DigitalDownloadsPage() {
         <p className="mt-4 max-w-3xl text-lg text-zinc-300">
           Printable planning packs, corporate toolkits and gift templates for organising rage room experiences without starting from a blank page.
         </p>
+
+        <article className="mt-8 rounded-lg border border-rage-500/40 bg-gradient-to-br from-rage-500/10 to-[#181818] p-5 sm:p-6">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-start gap-3">
+              <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-md border border-rage-500/40 bg-rage-500/15">
+                <Package className="h-5 w-5 text-rage-500" />
+              </div>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-rage-500">
+                  Bundle & save £3
+                </p>
+                <h2 className="mt-1 text-xl font-bold text-white">
+                  Party Planner + Gift Voucher Pack
+                </h2>
+                <p className="mt-2 text-sm text-zinc-300">
+                  Both downloads for {bundle.priceLabel} (normally £12).
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <span className="text-2xl font-black text-white">{bundle.priceLabel}</span>
+              <TrackedProductLink
+                href="/digital-downloads/party-planner-gift-voucher-bundle"
+                product={bundleAnalytics}
+                listName="Digital Products"
+                className="btn-rage inline-flex min-h-[44px] items-center justify-center gap-2 text-sm uppercase tracking-wider"
+              >
+                View bundle
+                <ArrowRight className="h-4 w-4" />
+              </TrackedProductLink>
+            </div>
+          </div>
+        </article>
 
         <div className="mt-8 grid gap-5 md:grid-cols-3">
           {downloads.map(({ title, price, copy, cta, href, icon: Icon, productId }) => {
@@ -68,7 +104,7 @@ export default function DigitalDownloadsPage() {
                 </div>
                 <h2 className="mt-5 text-xl font-bold text-white">{title}</h2>
                 <p className="mt-2 text-sm leading-relaxed text-zinc-300">{copy}</p>
-                <div className="mt-5 flex items-center justify-between gap-4">
+                <div className="mt-5 flex flex-col gap-3">
                   <span className="text-2xl font-black text-white">{price}</span>
                   {analyticsProduct && (
                     <TrackedProductLink

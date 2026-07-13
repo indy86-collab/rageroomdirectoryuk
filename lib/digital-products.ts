@@ -11,13 +11,17 @@ export type DigitalProduct = {
   unitAmount: number
   currency: "gbp"
   stripeLookupKey: string
-  filePath: string
-  downloadFilename: string
-  contentType: string
+  /** Present for single-file products; omitted for bundles. */
+  filePath?: string
+  downloadFilename?: string
+  contentType?: string
+  /** Child product IDs fulfilled when this bundle is purchased. */
+  bundleProductIds?: string[]
   marketingImage?: string
   previewPdf?: string
   description: string
   includedSections: string[]
+  checkoutBlurb: string
 }
 
 export const digitalProducts: Record<string, DigitalProduct> = {
@@ -40,6 +44,8 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     previewPdf: "/digital-products/rage-room-party-planner-pack-sample.pdf",
     description:
       "A printable UK planning kit for rage room birthdays, date nights, breakup nights, group nights, stag and hen activities, and friends' nights out.",
+    checkoutBlurb:
+      "Instant PDF download: plan the whole smash night with venue scorecard, budget, invites and checklists.",
     includedSections: [
       "Event snapshot",
       "Planning timeline",
@@ -78,6 +84,8 @@ export const digitalProducts: Record<string, DigitalProduct> = {
       "/digital-products/corporate-rage-room-team-building-toolkit-sample.pdf",
     description:
       "A professional planning pack for HR teams, office managers, founders and team leads planning a rage room team-building event.",
+    checkoutBlurb:
+      "Instant PDF download: HR-ready approval emails, budget worksheet, venue scorecard and run sheet.",
     includedSections: [
       "Why rage rooms work",
       "Internal planning checklist",
@@ -116,6 +124,8 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     previewPdf: "/digital-products/rage-room-gift-voucher-template-pack-preview.pdf",
     description:
       "A premium printable and digital gift voucher template pack for giving a rage room experience as a birthday, date night, breakup, best friend, holiday or generic experience gift.",
+    checkoutBlurb:
+      "Instant ZIP download: printable and digital rage room gift voucher templates ready to send today.",
     includedSections: [
       "Birthday voucher",
       "Date night voucher",
@@ -135,6 +145,30 @@ export const digitalProducts: Record<string, DigitalProduct> = {
       "Envelope insert",
       "Mini gift tag",
       "Preview catalogue",
+    ],
+  },
+  "party-gift-bundle": {
+    id: "party-gift-bundle",
+    slug: "party-planner-gift-voucher-bundle",
+    name: "Party Planner + Gift Voucher Bundle",
+    shortName: "Party + Gift Bundle",
+    analyticsItemId: "party_gift_bundle",
+    itemCategory: "Digital Product",
+    priceLabel: "£9",
+    unitAmount: 900,
+    currency: "gbp",
+    stripeLookupKey: "party_gift_bundle_gbp_900",
+    bundleProductIds: [
+      "rage-room-party-planner",
+      "rage-room-gift-voucher-template-pack",
+    ],
+    description:
+      "Bundle the Rage Room Party Planner Pack and Gift Voucher Template Pack — plan the night and present the experience as a polished gift.",
+    checkoutBlurb:
+      "Instant downloads: Party Planner PDF + Gift Voucher ZIP. Save £3 vs buying separately.",
+    includedSections: [
+      "Rage Room Party Planner Pack (PDF)",
+      "Rage Room Gift Voucher Template Pack (ZIP)",
     ],
   },
 }
@@ -160,4 +194,26 @@ export function getDigitalProductAnalytics(product: DigitalProduct) {
     price: product.unitAmount / 100,
     currency: product.currency.toUpperCase() as "GBP",
   }
+}
+
+/** Single-file products fulfilled for a purchase (bundle expands to children). */
+export function getFulfilmentProducts(product: DigitalProduct): DigitalProduct[] {
+  if (!product.bundleProductIds?.length) {
+    return product.filePath ? [product] : []
+  }
+
+  return product.bundleProductIds
+    .map((id) => getDigitalProduct(id))
+    .filter((child): child is DigitalProduct => Boolean(child?.filePath))
+}
+
+export function isProductCoveredBySession(
+  purchasedProduct: DigitalProduct,
+  downloadProductId: string
+) {
+  if (purchasedProduct.id === downloadProductId) {
+    return Boolean(purchasedProduct.filePath)
+  }
+
+  return Boolean(purchasedProduct.bundleProductIds?.includes(downloadProductId))
 }

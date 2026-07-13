@@ -70,6 +70,22 @@ export function trackBeginCheckout(product: AnalyticsProduct) {
   })
 }
 
+export function trackCheckoutCancelView(product: AnalyticsProduct) {
+  trackEvent("checkout_cancel_view", {
+    currency: product.currency,
+    value: product.price,
+    items: [productItem(product)],
+  })
+}
+
+export function trackCheckoutResumeClick(product: AnalyticsProduct) {
+  trackEvent("checkout_resume_click", {
+    currency: product.currency,
+    value: product.price,
+    items: [productItem(product)],
+  })
+}
+
 export function trackPurchase(order: AnalyticsOrder) {
   trackEvent("purchase", {
     transaction_id: order.transaction_id,

@@ -27,12 +27,22 @@ export async function POST(request: Request) {
       mode: "payment",
       client_reference_id: clientReferenceId,
       line_items: [{ price: priceId, quantity: 1 }],
+      billing_address_collection: "auto",
+      phone_number_collection: { enabled: false },
       success_url: `${absoluteUrl("/order/success")}?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${absoluteUrl("/checkout/cancel")}?product_id=${encodeURIComponent(product.id)}&client_reference_id=${encodeURIComponent(clientReferenceId)}`,
+      custom_text: {
+        submit: {
+          message: product.checkoutBlurb,
+        },
+      },
       metadata: {
         clientReferenceId,
         productId: product.id,
         productSlug: product.slug,
+        ...(product.bundleProductIds?.length
+          ? { bundleProductIds: product.bundleProductIds.join(",") }
+          : {}),
       },
     })
 

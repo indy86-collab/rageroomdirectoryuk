@@ -1,9 +1,11 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { Check, ClipboardList, Download, Sparkles } from "lucide-react"
+import DigitalBundleOffer from "@/components/DigitalBundleOffer"
 import DigitalCheckoutButton from "@/components/DigitalCheckoutButton"
 import {
   DigitalPurchaseReassurance,
+  DigitalValueStack,
   WhatHappensAfterPayment,
 } from "@/components/DigitalPurchaseDetails"
 import FAQ from "@/components/FAQ"
@@ -90,9 +92,14 @@ const faqs = [
       "No. It is a planning aid. Always follow the venue's rules, waiver requirements and staff instructions.",
   },
   {
+    question: "Why does the download link expire?",
+    answer:
+      "The secure link expires after 72 hours to keep delivery private. Once you download the PDF, it is yours to keep forever. We also email the link to the address you use at checkout.",
+  },
+  {
     question: "Can I get help or a refund?",
     answer:
-      "If your download link or file does not work, contact us and we will help. Because this is instant digital content, refunds are handled case by case and are generally not offered after a successful download unless the file is faulty.",
+      "If the file is faulty or will not open, we will replace it or refund you — contact us within 7 days. Change-of-mind refunds are not offered on instant digital downloads after a successful download.",
   },
 ]
 
@@ -144,14 +151,28 @@ export default function RageRoomPartyPlannerPackPage() {
               the admin chaos.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4">
-              <div className="text-3xl font-black text-white">{product.priceLabel}</div>
+              <div>
+                <div className="text-3xl font-black text-white">{product.priceLabel}</div>
+                <p className="mt-1 text-xs font-semibold text-zinc-400">
+                  Instant PDF download
+                </p>
+              </div>
               <DigitalCheckoutButton
                 productId={product.id}
                 analyticsProduct={analyticsProduct}
               >
-                Get instant access — £7
+                Plan the whole night — £7
               </DigitalCheckoutButton>
             </div>
+            <DigitalValueStack
+              title="Updated for UK venues 2026"
+              items={[
+                "15 printable pages — venue scorecard, budget, RSVP, invites and checklists",
+                "Built for birthdays, date nights, hen/stag and group smash nights",
+                "Sample preview available before you buy",
+              ]}
+              timeCompare="Worth hours of DIY planning for less than a coffee round."
+            />
             <div className="mt-6 flex flex-wrap gap-2">
               {trustBullets.map((bullet) => (
                 <span
@@ -192,7 +213,7 @@ export default function RageRoomPartyPlannerPackPage() {
 
       <section className="px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-6xl">
-          <h2 className="section-title mb-6">What’s Included</h2>
+          <h2 id="whats-included" className="section-title mb-6">What’s Included</h2>
           <div className="grid gap-4 md:grid-cols-3">
             {includedGroups.map((group) => (
               <div key={group.title} className="card-base p-5">
@@ -260,22 +281,20 @@ export default function RageRoomPartyPlannerPackPage() {
       </section>
 
       <section className="px-4 py-10 sm:px-6 sm:py-14">
-        <div className="mx-auto max-w-4xl rounded-lg border border-zinc-800 bg-[#181818] p-6">
-          <h2 className="text-xl font-bold text-white">
-            Giving the rage room experience as a gift?
-          </h2>
-          <p className="mt-3 text-sm leading-relaxed text-zinc-300">
-            Pair the planner with the Gift Voucher Template Pack so the experience feels
-            polished before the booking is even made.
+        <div className="mx-auto max-w-4xl">
+          <DigitalBundleOffer />
+          <p className="mt-4 text-center text-sm text-zinc-400">
+            Or get just the{" "}
+            <TrackedProductLink
+              href="/digital-downloads/rage-room-gift-voucher-template-pack"
+              product={giftAnalyticsProduct}
+              listName="Digital Product Cross-Sell"
+              className="font-semibold text-rage-500 hover:text-rage-400"
+            >
+              gift voucher pack for £5
+            </TrackedProductLink>
+            .
           </p>
-          <TrackedProductLink
-            href="/digital-downloads/rage-room-gift-voucher-template-pack"
-            product={giftAnalyticsProduct}
-            listName="Digital Product Cross-Sell"
-            className="mt-4 inline-flex text-sm font-semibold text-rage-500 hover:text-rage-400"
-          >
-            View gift voucher pack
-          </TrackedProductLink>
         </div>
       </section>
 
@@ -283,17 +302,17 @@ export default function RageRoomPartyPlannerPackPage() {
         <div className="mx-auto max-w-4xl rounded-lg border border-rage-500/30 bg-[#181818] p-6 text-center sm:p-8">
           <Download className="mx-auto h-10 w-10 text-rage-500" />
           <h2 className="mt-4 text-2xl font-black uppercase tracking-wide text-white">
-            Download the planner pack — £7
+            Plan the whole night — £7
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm text-zinc-300">
-            A printable PDF for getting the venue, group, budget and night-out details under control.
+            Instant PDF download for venue, group, budget and night-out details.
           </p>
           <div className="mt-6 flex justify-center">
             <DigitalCheckoutButton
               productId={product.id}
               analyticsProduct={analyticsProduct}
             >
-              Download the planner pack — £7
+              Plan the whole night — £7
             </DigitalCheckoutButton>
           </div>
           <div className="mx-auto max-w-2xl">

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: "How Much Do Rage Rooms Cost in the UK? Pricing Guide (2026)",
   description:
     "Independent UK rage room pricing guide for 2026: typical per-person costs, group rates, regional differences, add-ons and how to save money.",
-  alternates: { canonical: GUIDE_PATH },
+  alternates: { canonical: "/rage-room-prices-uk" },
   openGraph: {
     title: "Rage Room Prices in the UK — Complete Pricing Guide",
     description:
@@ -76,6 +76,17 @@ export default function HowMuchDoRageRoomsCostUKPage() {
             { label: "How Much Do Rage Rooms Cost in the UK?" },
           ]}
         />
+
+        <div className="mb-6 rounded-lg border border-rage-500/30 bg-rage-500/10 p-4 text-sm text-zinc-200">
+          Looking for live venue prices by city? See the{" "}
+          <Link
+            href="/rage-room-prices-uk"
+            className="font-semibold text-orange-500 hover:text-orange-400 underline"
+          >
+            UK rage room prices hub
+          </Link>{" "}
+          — this page explains how pricing works; the hub lists current starting prices.
+        </div>
 
         <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4 sm:mb-6 mt-4">
           How Much Do Rage Rooms Cost in the UK? Complete Pricing Guide

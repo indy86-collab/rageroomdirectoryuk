@@ -84,6 +84,36 @@ const guideCityContentMap: Record<string, GuideCityContent> = {
     whatToLookFor: "Brighton venues can fill up on summer weekends when tourism peaks. Compare group packages if you're booking for a celebration — some venues offer extras like personalised smash items or extended sessions.",
     localTip: "Brighton is under 90 minutes from London by train, making it a popular day trip. Combine your rage room session with dinner in the Lanes or drinks on the seafront for a full Brighton experience.",
   },
+  glasgow: {
+    intro:
+      "Glasgow is Scotland's largest city and a natural destination for stag parties, birthdays and stress-relief sessions — even when the nearest verified smash rooms sit within travelling distance of the centre.",
+    sceneDescription:
+      "Central Belt groups often travel from Glasgow for destruction therapy, then head back to Merchant City or West End bars. Nearby venues are used to Friday and Saturday group bookings.",
+    whatToLookFor:
+      "Confirm group capacity and alcohol rules before booking a stag. Compare session length and what's included in the base price.",
+    localTip:
+      "Glasgow Central and Queen Street connect easily to Edinburgh (under an hour). Book weekend slots early for stag groups.",
+  },
+  cardiff: {
+    intro:
+      "Cardiff is Wales' main hub for rage room experiences, with verified venues serving South Wales groups for rugby weekends, birthdays and corporate socials.",
+    sceneDescription:
+      "Venues around the city centre and Bay area make it easy to pair a smash session with food and drinks. Visitors from Swansea, Newport and Bristol regularly use Cardiff as their nearest hub.",
+    whatToLookFor:
+      "Check group packages and parking if you are driving in for a match weekend. Compare starting prices against Bristol options if you are flexible on location.",
+    localTip:
+      "Cardiff Central is well connected across South Wales. Principality Stadium visitors often book a pre-match afternoon slot.",
+  },
+  hull: {
+    intro:
+      "Hull has a verified rage room venue serving East Yorkshire — a practical option for locals and visitors who want destruction therapy without travelling to Leeds or Sheffield.",
+    sceneDescription:
+      "Hull's smash room scene is smaller than the big metros but convenient for regional groups. Compare packages, starting prices and booking links in the ranked list below.",
+    whatToLookFor:
+      "Confirm session length, group size limits and whether BYO smashables are allowed. Weekday slots are usually quieter for first-timers.",
+    localTip:
+      "Hull Paragon station connects well across Yorkshire. Check the listing for parking notes before you travel.",
+  },
 }
 
 export function getGuideCityContent(cityName: string): GuideCityContent | null {

@@ -1,7 +1,7 @@
 /** Blog posts that overlap with guide pages — guides are the canonical SEO URLs. */
 export const BLOG_TO_GUIDE_CANONICAL: Record<string, string> = {
-  "rage-rooms-cost-guide-pricing-explained": "/guides/how-much-do-rage-rooms-cost-uk",
-  "rage-room-prices-uk-complete-guide": "/guides/how-much-do-rage-rooms-cost-uk",
+  "rage-rooms-cost-guide-pricing-explained": "/rage-room-prices-uk",
+  "rage-room-prices-uk-complete-guide": "/rage-room-prices-uk",
   "rage-room-safety-guide-everything-you-need-to-know": "/guides/are-rage-rooms-safe-uk",
   "rage-room-safety-tips-complete-guide": "/guides/are-rage-rooms-safe-uk",
   "are-rage-rooms-safe-for-kids": "/guides/are-rage-rooms-safe-uk",
@@ -23,6 +23,7 @@ export function getBlogGuideLink(slug: string): { href: string; label: string } 
   const href = BLOG_TO_GUIDE_CANONICAL[slug]
   if (!href) return undefined
   const labels: Record<string, string> = {
+    "/rage-room-prices-uk": "See the full UK pricing hub",
     "/guides/how-much-do-rage-rooms-cost-uk": "Read the full UK pricing guide",
     "/guides/are-rage-rooms-safe-uk": "Read the full UK safety guide",
     "/guides/best-rage-rooms-for-couples": "Read the full couples guide",

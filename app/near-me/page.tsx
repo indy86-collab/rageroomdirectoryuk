@@ -82,7 +82,15 @@ export default async function NearMePage() {
             Looking for a rage room near you? You've come to the right place. Our directory helps you find the best smash rooms and anger rooms in your local area, whether you're in London, Manchester, Birmingham, or anywhere across the UK.
           </p>
           <p>
-            Use our interactive map below to discover rage rooms near your location, or browse our comprehensive city directory to find venues in specific areas. Each listing includes detailed information about <Link href="/rage-room-prices-uk" className="text-orange-500 hover:text-orange-600 underline">pricing and packages</Link>, safety equipment, and booking options.
+            Use our interactive map below to discover rage rooms near your location, or browse our city directory. Each listing includes{" "}
+            <Link href="/rage-room-prices-uk" className="text-orange-500 hover:text-orange-600 underline">
+              pricing and packages
+            </Link>
+            , safety notes, and booking options. Prefer a full UK map? See our{" "}
+            <Link href="/uk-map" className="text-orange-500 hover:text-orange-600 underline">
+              UK rage room map
+            </Link>
+            .
           </p>
           <p>
             Rage rooms (also known as smash rooms, break rooms, or anger rooms) provide a safe, controlled environment to release stress by breaking items like plates, electronics, and glass bottles. Perfect for date nights, team building, or simply letting off steam.
@@ -115,7 +123,7 @@ export default async function NearMePage() {
             Browse Rage Rooms by City
           </h2>
           <p className="text-zinc-300 mb-6">
-            Find rage rooms in major cities across the UK. Click on any city to view all available venues, compare prices, and book your session.
+            Browse major UK cities below. Where we do not yet list a venue in the city centre, the city page shows the nearest verified smash rooms within travelling distance.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
             {allCities.map((city) => (
@@ -139,10 +147,12 @@ export default async function NearMePage() {
             {[
               { city: "London", description: "The UK's largest selection of rage rooms across multiple boroughs, from East London warehouses to central venues" },
               { city: "Birmingham", description: "The Midlands' main hub for destruction therapy, with competitive pricing and easy access from across the West Midlands" },
-              { city: "Manchester", description: "A strong rage room scene in the North West, popular for corporate events and group celebrations" },
-              { city: "Bristol", description: "The South West's creative capital offers rage rooms with an independent, character-driven atmosphere" },
+              { city: "Manchester", description: "Find the nearest verified smash rooms within travelling distance of Manchester — compare prices and book nearby venues" },
+              { city: "Bristol", description: "Nearest South West smash rooms within travelling distance of Bristol, Bath and Weston-super-Mare" },
               { city: "Newcastle", description: "The North East's go-to city for group rage room experiences, especially popular with party bookings" },
-              { city: "Leeds", description: "West Yorkshire's growing rage room options, with competitive northern pricing and good city-centre access" },
+              { city: "Leeds", description: "Nearest West Yorkshire smash rooms for Leeds groups — compare nearby venues, prices and booking links" },
+              { city: "Glasgow", description: "Nearest Central Belt smash rooms for Glasgow stag parties, birthdays and stress-relief sessions" },
+              { city: "Cardiff", description: "Wales' main hub for rage rooms — compare Cardiff venues, prices and group packages" },
             ].map(({ city, description }) => (
               <Link
                 key={city}
@@ -150,7 +160,7 @@ export default async function NearMePage() {
                 className="bg-[#181818] hover:bg-[#252525] border border-zinc-800 hover:border-orange-500 rounded-lg p-6 transition-all group"
               >
                 <h3 className="text-xl font-bold text-white mb-2 group-hover:text-orange-500 transition-colors">
-                  Rage Rooms in {city}
+                  Rage Rooms Near {city}
                 </h3>
                 <p className="text-zinc-400 text-sm">{description}</p>
               </Link>

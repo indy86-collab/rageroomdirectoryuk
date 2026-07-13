@@ -40,8 +40,8 @@ export function createDownloadToken({
 }) {
   const product = getDigitalProduct(productId)
 
-  if (!product) {
-    throw new Error("Unknown digital product")
+  if (!product?.filePath) {
+    throw new Error("Unknown digital product or product has no downloadable file")
   }
 
   const payload: DownloadTokenPayload = {

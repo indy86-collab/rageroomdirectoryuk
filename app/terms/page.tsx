@@ -128,7 +128,12 @@ export default function TermsPage() {
               <li>Digital downloads do not include rage room venue bookings.</li>
               <li>You are responsible for saving your file before the download link expires.</li>
               <li>If your download link or file does not work, contact us and we will help.</li>
-              <li>Because these are instant digital products, refunds are handled case by case and are generally not offered after a successful download unless the file is faulty.</li>
+              <li>
+                If a digital download file is faulty or will not open, contact us
+                within 7 days and we will replace it or refund you. Change-of-mind
+                refunds are not offered after a successful download of instant digital
+                products.
+              </li>
             </ul>
           </section>
 

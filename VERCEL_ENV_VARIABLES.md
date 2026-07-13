@@ -19,6 +19,18 @@
 - **Format**: Long random string
 - **Required**: Required for digital download fulfilment
 
+### `RESEND_API_KEY`
+- **Description**: Resend API key for purchase download emails and abandoned-checkout recovery emails
+- **Format**: `re_...`
+- **Where to get it**: [Resend Dashboard](https://resend.com/)
+- **Required**: Recommended (emails are skipped if missing; success-page download still works)
+
+### `EMAIL_FROM`
+- **Description**: From address for transactional digital-download emails
+- **Format**: `RageRoom Directory <orders@yourdomain.com>`
+- **Default**: `RageRoom Directory <onboarding@resend.dev>` (Resend test sender)
+- **Required**: Recommended in production with a verified domain
+
 ### `NEXT_PUBLIC_SITE_URL`
 - **Description**: Your production site URL (used for SEO, sitemap, canonical URLs)
 - **Format**: `https://yourdomain.com`
@@ -72,6 +84,8 @@ To add or edit listings:
 - [ ] `STRIPE_SECRET_KEY` — Add for Stripe Checkout
 - [ ] `STRIPE_WEBHOOK_SECRET` — Add after creating the Stripe webhook endpoint
 - [ ] `DOWNLOAD_TOKEN_SECRET` — Add for secure download links
+- [ ] `RESEND_API_KEY` — Add for purchase + abandoned-checkout emails
+- [ ] `EMAIL_FROM` — Add verified from address for transactional email
 - [ ] `NEXT_PUBLIC_SITE_URL` — Add your production URL
 - [ ] `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` — Add if using maps (optional)
 - [ ] `GOOGLE_PLACES_API_KEY` — Add if using Google reviews (optional)

@@ -4,6 +4,7 @@ import { AlertTriangle, BriefcaseBusiness, Check, ClipboardList, Download, Spark
 import DigitalCheckoutButton from "@/components/DigitalCheckoutButton"
 import {
   DigitalPurchaseReassurance,
+  DigitalValueStack,
   WhatHappensAfterPayment,
 } from "@/components/DigitalPurchaseDetails"
 import FAQ from "@/components/FAQ"
@@ -113,12 +114,13 @@ const faqs = [
   },
   {
     question: "Why does the download link expire?",
-    answer: "To keep PDF delivery private. Save a copy after purchase.",
+    answer:
+      "The secure link expires after 72 hours to keep delivery private. Once you download the PDF, it is yours to keep forever. We also email the link to the address you use at checkout.",
   },
   {
     question: "Can I get help or a refund?",
     answer:
-      "If your download link or file does not work, contact us and we will help. Because this is instant digital content, refunds are handled case by case and are generally not offered after a successful download unless the file is faulty.",
+      "If the file is faulty or will not open, we will replace it or refund you — contact us within 7 days. Change-of-mind refunds are not offered on instant digital downloads after a successful download.",
   },
 ]
 
@@ -169,14 +171,28 @@ export default function CorporateToolkitPage() {
               Plan, approve and run a rage room team-building event without starting from a blank page.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4">
-              <div className="text-3xl font-black text-white">{product.priceLabel}</div>
+              <div>
+                <div className="text-3xl font-black text-white">{product.priceLabel}</div>
+                <p className="mt-1 text-xs font-semibold text-zinc-400">
+                  Instant PDF download
+                </p>
+              </div>
               <DigitalCheckoutButton
                 productId={product.id}
                 analyticsProduct={analyticsProduct}
               >
-                Get instant access — £19
+                Get HR-ready templates — £19
               </DigitalCheckoutButton>
             </div>
+            <DigitalValueStack
+              title="Worth far more than one messy team day"
+              items={[
+                "16 HR-ready pages — approval email, budget worksheet, venue scorecard, run sheet and feedback form",
+                "Email templates your manager can approve without another meeting",
+                "Updated for UK venues and GBP budgeting — 2026",
+              ]}
+              timeCompare="A poorly planned team event costs far more than £19 in time, rework and awkward follow-ups."
+            />
             <div className="mt-6 flex flex-wrap gap-2">
               {trustBullets.map((bullet) => (
                 <span
@@ -217,7 +233,7 @@ export default function CorporateToolkitPage() {
 
       <section className="px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-6xl">
-          <h2 className="section-title mb-6">What’s Included</h2>
+          <h2 id="whats-included" className="section-title mb-6">What’s Included</h2>
           <div className="grid gap-4 md:grid-cols-3">
             {includedGroups.map((group) => (
               <div key={group.title} className="card-base p-5">
@@ -312,17 +328,17 @@ export default function CorporateToolkitPage() {
         <div className="mx-auto max-w-4xl rounded-lg border border-rage-500/30 bg-[#181818] p-6 text-center sm:p-8">
           <Download className="mx-auto h-10 w-10 text-rage-500" />
           <h2 className="mt-4 text-2xl font-black uppercase tracking-wide text-white">
-            Download the corporate toolkit — £19
+            Get HR-ready templates — £19
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm text-zinc-300">
-            A printable PDF for approval, venue checks, staff communication, run sheets and feedback.
+            Instant PDF for approval, venue checks, staff communication, run sheets and feedback.
           </p>
           <div className="mt-6 flex justify-center">
             <DigitalCheckoutButton
               productId={product.id}
               analyticsProduct={analyticsProduct}
             >
-              Download the corporate toolkit — £19
+              Get HR-ready templates — £19
             </DigitalCheckoutButton>
           </div>
           <div className="mx-auto max-w-2xl">

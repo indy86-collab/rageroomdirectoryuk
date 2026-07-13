@@ -425,6 +425,43 @@ export default async function RageRoomPricesUKPage() {
           </div>
         </section>
 
+        {/* City price pages */}
+        <section aria-labelledby="city-prices-heading" className="mb-12">
+          <h2 id="city-prices-heading" className="text-2xl sm:text-3xl font-bold text-white mb-6">
+            Rage Room Prices by City
+          </h2>
+          <p className="text-zinc-300 mb-6">
+            Compare starting prices for verified venues in and near major UK cities.
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+            {[
+              "London",
+              "Birmingham",
+              "Manchester",
+              "Leeds",
+              "Glasgow",
+              "Liverpool",
+              "Sheffield",
+              "Bristol",
+              "Nottingham",
+              "Cardiff",
+              "Hull",
+              "Edinburgh",
+              "Newcastle",
+              "Leicester",
+              "Brighton",
+            ].map((city) => (
+              <Link
+                key={city}
+                href={`/rage-room-prices/${city.toLowerCase().replace(/\s+/g, "-")}`}
+                className="rounded-md border border-zinc-800 bg-[#181818] px-3 py-3 text-center text-sm font-semibold text-white transition-all hover:border-orange-500"
+              >
+                {city}
+              </Link>
+            ))}
+          </div>
+        </section>
+
         {/* FAQ Section */}
         <FAQ items={faqItems} title="Frequently Asked Questions About Rage Room Prices" />
 
@@ -449,18 +486,18 @@ export default async function RageRoomPricesUKPage() {
               <p className="text-zinc-400">Compare all venues, prices, and packages in one place</p>
             </Link>
             <Link
-              href="/guides/best-rage-rooms-for-couples"
+              href="/uk-rage-room-report-2026"
               className="bg-[#181818] hover:bg-[#252525] border border-zinc-800 hover:border-orange-500 rounded-lg p-6 transition-all"
             >
-              <h3 className="text-xl font-bold text-white mb-2">Best Rage Rooms for Couples</h3>
-              <p className="text-zinc-400">Find couple-friendly venues and packages</p>
+              <h3 className="text-xl font-bold text-white mb-2">UK Rage Room Report 2026</h3>
+              <p className="text-zinc-400">Original research: venue counts, average prices and regional trends</p>
             </Link>
             <Link
-              href="/rage-room-london"
+              href="/city/london"
               className="bg-[#181818] hover:bg-[#252525] border border-zinc-800 hover:border-orange-500 rounded-lg p-6 transition-all"
             >
-              <h3 className="text-xl font-bold text-white mb-2">Rage Room London</h3>
-              <p className="text-zinc-400">Complete guide to rage rooms in the capital</p>
+              <h3 className="text-xl font-bold text-white mb-2">Rage Rooms in London</h3>
+              <p className="text-zinc-400">Browse verified London venues, prices and booking links</p>
             </Link>
           </div>
         </section>

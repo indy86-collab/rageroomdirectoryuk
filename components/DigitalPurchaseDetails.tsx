@@ -1,11 +1,11 @@
 import Link from "next/link"
-import { Clock, Download, HelpCircle, ShieldCheck, TicketX } from "lucide-react"
+import { Download, HelpCircle, Mail, ShieldCheck, Sparkles } from "lucide-react"
 
 const reassuranceItems = [
   { label: "Secure checkout by Stripe", icon: ShieldCheck },
   { label: "Instant download after payment", icon: Download },
-  { label: "No venue booking included", icon: TicketX },
-  { label: "Download link valid for 72 hours", icon: Clock },
+  { label: "Keep forever after download", icon: Sparkles },
+  { label: "UK-ready templates", icon: Mail },
 ]
 
 type DigitalPurchaseReassuranceProps = {
@@ -48,9 +48,48 @@ export function WhatHappensAfterPayment() {
       </h2>
       <ol className="mt-4 space-y-3 text-sm leading-relaxed text-zinc-300">
         <li>1. Stripe confirms the payment securely.</li>
-        <li>2. Your download link is generated on the success page.</li>
-        <li>3. Save a copy within 72 hours before the secure link expires.</li>
+        <li>2. Your download link appears on the success page.</li>
+        <li>3. We also email the download link to the address you use at checkout.</li>
+        <li>
+          4. Save a copy of the file — the secure link expires after 72 hours, but
+          your downloaded file is yours to keep.
+        </li>
+        <li>
+          5. This is a planning/template pack only — it does not include a venue
+          booking.
+        </li>
       </ol>
+    </div>
+  )
+}
+
+type DigitalValueStackProps = {
+  title: string
+  items: string[]
+  timeCompare?: string
+}
+
+export function DigitalValueStack({
+  title,
+  items,
+  timeCompare,
+}: DigitalValueStackProps) {
+  return (
+    <div className="mt-6 rounded-lg border border-rage-500/25 bg-rage-500/5 p-4 sm:p-5">
+      <h2 className="text-sm font-bold uppercase tracking-widest text-rage-500">
+        {title}
+      </h2>
+      <ul className="mt-3 space-y-2">
+        {items.map((item) => (
+          <li key={item} className="flex items-start gap-2 text-sm text-zinc-200">
+            <Sparkles className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-rage-500" />
+            {item}
+          </li>
+        ))}
+      </ul>
+      {timeCompare && (
+        <p className="mt-3 text-xs font-semibold text-zinc-400">{timeCompare}</p>
+      )}
     </div>
   )
 }
