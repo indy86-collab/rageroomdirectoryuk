@@ -121,7 +121,8 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     downloadFilename: "rage-room-gift-voucher-template-pack.zip",
     contentType: "application/zip",
     marketingImage: "/digital-products/rage-room-gift-voucher-template-pack-mockup.png",
-    previewPdf: "/digital-products/rage-room-gift-voucher-template-pack-preview.pdf",
+    previewPdf:
+      "/digital-products/rage-room-gift-voucher-template-pack-sample.pdf",
     description:
       "A premium printable and digital gift voucher template pack for giving a rage room experience as a birthday, date night, breakup, best friend, holiday or generic experience gift.",
     checkoutBlurb:
