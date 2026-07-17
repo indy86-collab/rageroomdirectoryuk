@@ -5,7 +5,7 @@ import {
   getDigitalProductAnalytics,
 } from "@/lib/digital-products"
 
-type DigitalDownloadCTAVariant = "party" | "corporate" | "gift"
+type DigitalDownloadCTAVariant = "party" | "corporate" | "gift" | "firstVisit"
 
 type DigitalDownloadCTAProps = {
   variant?: DigitalDownloadCTAVariant
@@ -13,6 +13,14 @@ type DigitalDownloadCTAProps = {
 }
 
 const ctaCopy = {
+  firstVisit: {
+    eyebrow: "First time?",
+    title: "New to rage rooms?",
+    copy: "Get the 12-page First Visit Prep Pack: what happens, what to wear, venue questions and arrival checklist.",
+    button: "Get first-visit ready — £5",
+    href: "/digital-downloads/rage-room-first-visit-prep-pack",
+    productId: "rage-room-first-visit-prep",
+  },
   party: {
     eyebrow: null,
     title: "Booking for a group?",

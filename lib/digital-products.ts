@@ -103,6 +103,42 @@ export const digitalProducts: Record<string, DigitalProduct> = {
       "Final booking checklist",
     ],
   },
+  "rage-room-first-visit-prep": {
+    id: "rage-room-first-visit-prep",
+    slug: "rage-room-first-visit-prep-pack",
+    name: "Rage Room First Visit Prep Pack",
+    shortName: "First Visit Prep Pack",
+    analyticsItemId: "rage_first_visit_prep_pack",
+    itemCategory: "Digital Product",
+    priceLabel: "£5",
+    unitAmount: 500,
+    currency: "gbp",
+    stripeLookupKey: "rage_room_first_visit_prep_pack_gbp_500",
+    filePath: path.join(
+      process.cwd(),
+      "private/digital-downloads/rage-room-first-visit-prep-pack.pdf"
+    ),
+    downloadFilename: "rage-room-first-visit-prep-pack.pdf",
+    contentType: "application/pdf",
+    previewPdf: "/digital-products/rage-room-first-visit-prep-pack-sample.pdf?v=1",
+    description:
+      "A printable UK first-timer kit covering what happens, what to wear, can-I-take-part checks, venue questions, waiver tips and a final arrival checklist.",
+    checkoutBlurb:
+      "Instant PDF download: arrive ready for your first smash session with prep checklists and venue questions.",
+    includedSections: [
+      "Quick start",
+      "What happens step-by-step",
+      "What to wear and bring",
+      "Can I take part? self-check",
+      "Venue questions before booking",
+      "Booking snapshot",
+      "Waiver and arrival checklist",
+      "Day-of timeline",
+      "Common first-timer mistakes",
+      "After your session prompts",
+      "Final prep checklist",
+    ],
+  },
   "rage-room-gift-voucher-template-pack": {
     id: "rage-room-gift-voucher-template-pack",
     slug: "rage-room-gift-voucher-template-pack",

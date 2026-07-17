@@ -104,6 +104,10 @@ def main() -> None:
             PUBLIC / "corporate-rage-room-team-building-toolkit-sample.pdf",
         ),
         (
+            fitz.open(PRIVATE / "rage-room-first-visit-prep-pack.pdf"),
+            PUBLIC / "rage-room-first-visit-prep-pack-sample.pdf",
+        ),
+        (
             open_gift_catalogue(),
             PUBLIC / "rage-room-gift-voucher-template-pack-sample.pdf",
         ),

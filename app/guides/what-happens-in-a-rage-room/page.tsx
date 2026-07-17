@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import AdsenseInContent from "@/components/ads/AdsenseInContent"
+import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
 import GuideMeta from "@/components/GuideMeta"
 import Link from "next/link"
 import {
@@ -414,6 +415,10 @@ export default function WhatHappensInARageRoomPage() {
               Both options offer unique benefits. Solo sessions provide privacy and personal focus, while group sessions add social fun and shared memories.
             </p>
           </section>
+
+          <div className="my-8">
+            <DigitalDownloadCTA variant="firstVisit" />
+          </div>
 
           <section>
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">

@@ -78,6 +78,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
+      url: absoluteUrl("/digital-downloads/rage-room-first-visit-prep-pack"),
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: absoluteUrl("/digital-downloads/corporate-rage-room-team-building-toolkit"),
       lastModified: new Date(),
       changeFrequency: "monthly",

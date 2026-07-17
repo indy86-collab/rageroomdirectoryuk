@@ -1,5 +1,12 @@
 import type { Metadata } from "next"
-import { ArrowRight, BriefcaseBusiness, Gift, Package, PartyPopper } from "lucide-react"
+import {
+  ArrowRight,
+  BriefcaseBusiness,
+  Gift,
+  Package,
+  PartyPopper,
+  ShieldCheck,
+} from "lucide-react"
 import TrackedProductLink from "@/components/TrackedProductLink"
 import {
   getDigitalProduct,
@@ -9,11 +16,20 @@ import {
 export const metadata: Metadata = {
   title: "Digital Guides | Rage Room Planning Downloads",
   description:
-    "Browse digital rage room guides, printable planning downloads, corporate toolkits, gift voucher templates and money-saving bundles.",
+    "Browse digital rage room guides, first-visit prep kits, printable planning downloads, corporate toolkits, gift voucher templates and money-saving bundles.",
   alternates: { canonical: "/digital-downloads" },
 }
 
 const downloads = [
+  {
+    title: "Rage Room First Visit Prep Pack",
+    price: "£5",
+    copy: "For first-timers who want to know what happens and how to arrive ready.",
+    cta: "Get first-visit ready — £5",
+    href: "/digital-downloads/rage-room-first-visit-prep-pack",
+    icon: ShieldCheck,
+    productId: "rage-room-first-visit-prep",
+  },
   {
     title: "Rage Room Party Planner Pack",
     price: "£7",
@@ -90,7 +106,7 @@ export default function DigitalDownloadsPage() {
           </div>
         </article>
 
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-2">
           {downloads.map(({ title, price, copy, cta, href, icon: Icon, productId }) => {
             const product = getDigitalProduct(productId)
             const analyticsProduct = product

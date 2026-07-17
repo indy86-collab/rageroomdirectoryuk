@@ -3,6 +3,7 @@ import Link from "next/link"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import GuideMeta from "@/components/GuideMeta"
 import AdsenseInContent from "@/components/ads/AdsenseInContent"
+import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
 import FAQ from "@/components/FAQ"
 import {
   buildArticleSchema,
@@ -328,6 +329,10 @@ export default function WhatToWearToARageRoomPage() {
               <li><strong className="text-white">A bag or locker items</strong> — most venues have lockers or a secure area for phones and valuables during the session. Phones aren&apos;t allowed inside the smash room.</li>
             </ul>
           </section>
+
+          <div className="mb-10">
+            <DigitalDownloadCTA variant="firstVisit" />
+          </div>
 
           <section aria-labelledby="related-wear-heading" className="mb-10">
             <h2 id="related-wear-heading" className="text-2xl sm:text-3xl font-bold text-white mb-4">

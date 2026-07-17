@@ -144,6 +144,22 @@ export default async function OrderSuccessPage({
         </div>
       )}
 
+      {purchasedProduct.id === "rage-room-first-visit-prep" && (
+        <div className="mx-auto mt-6 max-w-2xl rounded-lg border border-zinc-800 bg-[#181818] p-5">
+          <h2 className="text-lg font-bold text-white">Organising a group night too?</h2>
+          <p className="mt-2 text-sm text-zinc-300">
+            Use the Rage Room Party Planner Pack for budgets, RSVPs, invites and the full
+            night-out plan.
+          </p>
+          <Link
+            href="/digital-downloads/rage-room-party-planner-pack"
+            className="mt-4 inline-flex text-sm font-semibold text-rage-500 hover:text-rage-400"
+          >
+            View party planner pack
+          </Link>
+        </div>
+      )}
+
       {isGiftVoucher && (
         <div className="mx-auto mt-6 max-w-2xl rounded-lg border border-zinc-800 bg-[#181818] p-5">
           <h2 className="text-lg font-bold text-white">Planning the actual event too?</h2>
