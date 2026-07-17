@@ -42,6 +42,9 @@ next-env.d.ts
 *.pem
 mcp_git_pass
 
+# local PDF fix backups (originals before scripts/fix-digital-pdfs.py)
+private/digital-downloads/.backup-before-pdf-fix/
+
 
 
 
