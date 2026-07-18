@@ -16,7 +16,7 @@ import SimilarListingCard from "@/components/SimilarListingCard"
 import UGCButtons from "@/components/UGCButtons"
 import AdsenseInContent from "@/components/ads/AdsenseInContent"
 import LazyMapEmbed from "@/components/LazyMapEmbed"
-import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
+import DigitalGuidesChooser from "@/components/DigitalGuidesChooser"
 import { buildOgImageUrl } from "@/lib/seo-schema"
 import { absoluteUrl, getSiteUrl, listingUrl as buildListingUrl } from "@/lib/site-url"
 
@@ -589,17 +589,9 @@ export default async function ListingPage({ params }: ListingPageProps) {
         </div>
 
         <div className="mb-6 sm:mb-8">
-          <DigitalDownloadCTA variant="firstVisit" />
-        </div>
-
-        {showCorporateCTA && (
-          <div className="mb-6 sm:mb-8">
-            <DigitalDownloadCTA variant="corporate" />
-          </div>
-        )}
-
-        <div className="mb-6 sm:mb-8">
-          <DigitalDownloadCTA variant="gift" />
+          <DigitalGuidesChooser
+            highlight={showCorporateCTA ? "corporate" : "firstVisit"}
+          />
         </div>
 
         {/* Pricing Overview */}

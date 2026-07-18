@@ -3,7 +3,7 @@ import { cityToSlug } from "@/lib/location"
 import Hero from "@/components/Hero"
 import FeaturedRooms from "@/components/FeaturedRooms"
 import FAQ from "@/components/FAQ"
-import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
+import DigitalGuidesChooser from "@/components/DigitalGuidesChooser"
 import { globalFAQs } from "@/lib/faqs"
 import Image from "next/image"
 import Link from "next/link"
@@ -186,10 +186,9 @@ export default async function Home() {
     <>
       <Hero featuredListings={featuredListings} />
 
-      <section aria-label="Rage room first visit prep" className="w-full pt-4 sm:pt-6">
-        <div className="w-full px-3 sm:px-5 lg:px-6 space-y-3">
-          <DigitalDownloadCTA variant="firstVisit" />
-          <DigitalDownloadCTA />
+      <section aria-label="Planning checklists" className="w-full pt-4 sm:pt-6">
+        <div className="w-full px-3 sm:px-5 lg:px-6">
+          <DigitalGuidesChooser highlight="firstVisit" />
         </div>
       </section>
 

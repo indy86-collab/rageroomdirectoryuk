@@ -8,7 +8,7 @@ import { getCityFAQs } from "@/lib/faqs"
 import UGCButtons from "@/components/UGCButtons"
 import AdsenseInContent from "@/components/ads/AdsenseInContent"
 import CityRelatedLinks from "@/components/CityRelatedLinks"
-import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
+import DigitalGuidesChooser from "@/components/DigitalGuidesChooser"
 import Link from "next/link"
 import { buildOgImageUrl } from "@/lib/seo-schema"
 import { absoluteUrl, getSiteUrl, listingUrl } from "@/lib/site-url"
@@ -278,26 +278,8 @@ export default async function CityPage({ params }: CityPageProps) {
               </div>
             </div>
 
-            <div className="mt-8 mb-6 space-y-3">
-              <DigitalDownloadCTA variant="firstVisit" compact />
-              <DigitalDownloadCTA variant="corporate" compact />
-              <p className="mt-3 text-sm text-zinc-400">
-                First time in {cityName}?{" "}
-                <Link
-                  href="/digital-downloads/rage-room-first-visit-prep-pack"
-                  className="text-rage-500 hover:text-rage-400 underline underline-offset-2"
-                >
-                  Get the first-visit prep pack
-                </Link>
-                . Planning a work event?{" "}
-                <Link
-                  href="/digital-downloads/corporate-rage-room-team-building-toolkit"
-                  className="text-rage-500 hover:text-rage-400 underline underline-offset-2"
-                >
-                  View the corporate toolkit
-                </Link>
-                .
-              </p>
+            <div className="mt-8 mb-6">
+              <DigitalGuidesChooser highlight="firstVisit" />
             </div>
 
             {/* Cross-links */}

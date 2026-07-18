@@ -1,7 +1,9 @@
 import { Metadata } from "next"
 import ListingsGrid from "@/components/ListingsGrid"
 import HomeSearchBox from "@/components/HomeSearchBox"
-import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
+import DigitalGuidesChooser, {
+  type DigitalGuideIntent,
+} from "@/components/DigitalGuidesChooser"
 
 interface SearchPageProps {
   searchParams: { query?: string }
@@ -59,7 +61,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     "best friend",
   ].some((term) => normalizedQuery.includes(term))
   const showDownloadCTA = listings.length > 0
-  const downloadVariant = showGiftCTA
+  const chooserHighlight: DigitalGuideIntent = showGiftCTA
     ? "gift"
     : showCorporateCTA
       ? "corporate"
@@ -98,7 +100,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           <ListingsGrid listings={firstResults} />
           {showDownloadCTA && listings.length > 0 && (
             <div className="my-8">
-              <DigitalDownloadCTA variant={downloadVariant} />
+              <DigitalGuidesChooser highlight={chooserHighlight} />
             </div>
           )}
           {remainingResults.length > 0 && (
