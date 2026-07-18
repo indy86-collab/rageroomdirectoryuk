@@ -58,7 +58,12 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     "gift idea",
     "best friend",
   ].some((term) => normalizedQuery.includes(term))
-  const showDownloadCTA = showCorporateCTA || showGiftCTA
+  const showDownloadCTA = listings.length > 0
+  const downloadVariant = showGiftCTA
+    ? "gift"
+    : showCorporateCTA
+      ? "corporate"
+      : "firstVisit"
   const firstResults = showDownloadCTA ? listings.slice(0, 3) : listings
   const remainingResults = showDownloadCTA ? listings.slice(3) : []
 
@@ -93,7 +98,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           <ListingsGrid listings={firstResults} />
           {showDownloadCTA && listings.length > 0 && (
             <div className="my-8">
-              <DigitalDownloadCTA variant={showGiftCTA ? "gift" : "corporate"} />
+              <DigitalDownloadCTA variant={downloadVariant} />
             </div>
           )}
           {remainingResults.length > 0 && (
