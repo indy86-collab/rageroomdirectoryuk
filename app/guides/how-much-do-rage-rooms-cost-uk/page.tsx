@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import AdsenseInContent from "@/components/ads/AdsenseInContent"
+import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
 import GuideMeta from "@/components/GuideMeta"
 import Link from "next/link"
 import { buildArticleSchema, buildBreadcrumbSchema, buildOgImageUrl } from "@/lib/seo-schema"
@@ -327,6 +328,10 @@ export default function HowMuchDoRageRoomsCostUKPage() {
               <li>Compare multiple venues in your area before deciding</li>
             </ul>
           </section>
+
+          <div className="my-8">
+            <DigitalDownloadCTA variant="firstVisit" />
+          </div>
 
           <section>
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">

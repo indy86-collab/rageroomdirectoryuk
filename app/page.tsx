@@ -186,8 +186,9 @@ export default async function Home() {
     <>
       <Hero featuredListings={featuredListings} />
 
-      <section aria-label="Rage room party planner" className="w-full pt-4 sm:pt-6">
-        <div className="w-full px-3 sm:px-5 lg:px-6">
+      <section aria-label="Rage room first visit prep" className="w-full pt-4 sm:pt-6">
+        <div className="w-full px-3 sm:px-5 lg:px-6 space-y-3">
+          <DigitalDownloadCTA variant="firstVisit" />
           <DigitalDownloadCTA />
         </div>
       </section>

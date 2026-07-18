@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import AdsenseInContent from "@/components/ads/AdsenseInContent"
+import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
 import GuideMeta from "@/components/GuideMeta"
 import FAQ from "@/components/FAQ"
 import Link from "next/link"
@@ -310,6 +311,10 @@ export default function AreRageRoomsSafeUKPage() {
               <li>Check that the venue has proper insurance and incident reporting procedures</li>
             </ul>
           </section>
+
+          <div className="my-8">
+            <DigitalDownloadCTA variant="firstVisit" />
+          </div>
 
           <section>
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">

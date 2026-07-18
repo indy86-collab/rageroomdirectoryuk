@@ -278,10 +278,18 @@ export default async function CityPage({ params }: CityPageProps) {
               </div>
             </div>
 
-            <div className="mt-8 mb-6">
+            <div className="mt-8 mb-6 space-y-3">
+              <DigitalDownloadCTA variant="firstVisit" compact />
               <DigitalDownloadCTA variant="corporate" compact />
               <p className="mt-3 text-sm text-zinc-400">
-                Planning a work event in {cityName}?{" "}
+                First time in {cityName}?{" "}
+                <Link
+                  href="/digital-downloads/rage-room-first-visit-prep-pack"
+                  className="text-rage-500 hover:text-rage-400 underline underline-offset-2"
+                >
+                  Get the first-visit prep pack
+                </Link>
+                . Planning a work event?{" "}
                 <Link
                   href="/digital-downloads/corporate-rage-room-team-building-toolkit"
                   className="text-rage-500 hover:text-rage-400 underline underline-offset-2"

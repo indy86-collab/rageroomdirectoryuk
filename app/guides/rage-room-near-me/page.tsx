@@ -3,6 +3,7 @@ import Link from "next/link"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import GuideMeta from "@/components/GuideMeta"
 import AdsenseInContent from "@/components/ads/AdsenseInContent"
+import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
 import FAQ from "@/components/FAQ"
 import {
   buildArticleSchema,
@@ -288,6 +289,10 @@ export default function RageRoomNearMePage() {
               </li>
             </ul>
           </section>
+
+          <div className="mb-10">
+            <DigitalDownloadCTA variant="firstVisit" />
+          </div>
 
           <section aria-labelledby="related-guides-heading" className="mb-10">
             <h2 id="related-guides-heading" className="text-2xl sm:text-3xl font-bold text-white mb-4">

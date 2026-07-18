@@ -589,7 +589,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
         </div>
 
         <div className="mb-6 sm:mb-8">
-          <DigitalDownloadCTA />
+          <DigitalDownloadCTA variant="firstVisit" />
         </div>
 
         {showCorporateCTA && (
