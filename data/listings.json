@@ -1,123 +1,123 @@
 [
   {
-    "id": "f6e6cd12-77e2-45ea-b258-e60607b7c11b",
-    "name": "Mission Classified Rage Room",
-    "description": "Grimsby escape-room venue with a dedicated rage room on Cleethorpe Road. Sessions include protective equipment and a controlled smash-room setup for breaking bottles, plates, and other prepared items.",
-    "city": "Grimsby",
-    "region": "Lincolnshire",
-    "postcode": "DN31 3ES",
+    "id": "499e08d6-513b-4f4b-9f79-6063a3bf319f",
+    "name": "Anger Issues Rage Rooms Ltd",
+    "description": "Experience the ultimate stress relief at Anger Issues Rage Rooms. A smash room facility perfect for birthdays, team building, and stress relief. Choose your playlist and enjoy a safe, controlled environment.",
+    "city": "Ellesmere Port",
+    "region": "",
+    "postcode": "CH65 4EL",
     "location": {
-      "lat": 53.575173,
-      "lng": -0.071946
+      "lat": 53.280088,
+      "lng": -2.8785678
     },
-    "website": "https://missionclassified.co.uk/rage-room",
-    "phone": "+44 1472 255255",
-    "price": 25,
-    "image": "/images/mission-classified-rage-room-grimsby.jpg",
+    "website": "http://www.angerissuesragerooms.com/",
+    "phone": "+44 7359 660808",
+    "price": 35,
+    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJm1TH_ZbfekgRxY8gYN91ruc/image-1764201106200-c8e629f0.jpg",
     "verified": true,
-    "googlePlaceId": null,
-    "slug": "mission-classified-rage-room-grimsby",
-    "createdAt": "2026-07-01T12:00:00.000Z"
+    "googlePlaceId": "ChIJm1TH_ZbfekgRxY8gYN91ruc",
+    "slug": "anger-issues-rage-rooms-ltd-ellesmere-port",
+    "createdAt": "2025-11-27T21:28:46.144Z"
   },
   {
-    "id": "14b9824e-b5aa-41c2-9f44-8497a93d89fa",
-    "name": "Rage Room Hull",
-    "description": "Hull city-centre rage room with a live booking presence on Caroline Place. A straightforward smash-room experience for breaking prepared items in a supervised setting.",
-    "city": "Hull",
-    "region": "East Yorkshire",
-    "postcode": "HU2 8DR",
+    "id": "1d35e4d5-4f6a-4c10-b6b3-5c1cd4ef24c3",
+    "name": "Angry Smash Ltd",
+    "description": "Southend-on-Sea's top rage room experience. Perfect for birthdays, stress relief, and fun. Features weapons, music, steam, and a variety of items to smash. Great for letting off steam.",
+    "city": "Southend-on-Sea",
+    "region": "",
+    "postcode": "SS3 9QE",
     "location": {
-      "lat": 53.748801,
-      "lng": -0.338012
+      "lat": 51.5316935,
+      "lng": 0.7859498
     },
-    "website": "https://rageroomhull.simplybook.it/",
+    "website": "https://www.angrysmash.com/",
+    "phone": "+44 7555 114479",
+    "price": 35,
+    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJqUa12rjZ2EcRkS_r2k9xs78/image-1764201100630-511d7706.jpg",
+    "verified": true,
+    "googlePlaceId": "ChIJqUa12rjZ2EcRkS_r2k9xs78",
+    "slug": "angry-smash-ltd-southend-on-sea",
+    "createdAt": "2025-11-27T21:28:46.523Z"
+  },
+  {
+    "id": "c5f3e0a4-1f6d-4c9b-d834-0a7f5e1c3b26",
+    "name": "Arcadia Rage Room",
+    "description": "Darlington's rage room experience with two themed smash rooms at High Row. Fully supervised sessions for ages 10+. Part of the Arcadia gaming and entertainment centre — release stress with hammers, mallets, and breakables.",
+    "city": "Darlington",
+    "region": "County Durham",
+    "postcode": "DL3 7QE",
+    "location": {
+      "lat": 54.524238,
+      "lng": -1.55636
+    },
+    "website": "https://arcadiadarlington.co.uk/",
     "phone": null,
     "price": 30,
-    "image": "/images/rage-room-hull.jpg",
+    "image": "/images/arcadia-rage-room-darlington.jpg",
     "verified": true,
-    "googlePlaceId": null,
-    "slug": "rage-room-hull",
-    "createdAt": "2026-07-01T12:00:00.000Z"
+    "googlePlaceId": "ChIJMwpLbVGbfkgRtnFNTrpfM6g",
+    "slug": "arcadia-rage-room-darlington",
+    "createdAt": "2026-06-02T12:00:00.000Z"
   },
   {
-    "id": "02de72e2-0ff6-45cd-a7a0-15a71cc3e6b0",
-    "name": "Rage Remedies",
-    "description": "Romford rage-room and axe-throwing venue at Brooklands House. Visitors can book a supervised smash session with safety equipment and breakables prepared for stress-release experiences.",
-    "city": "Romford",
-    "region": "London",
-    "postcode": "RM1 1DX",
+    "id": "fb842fd9-c195-48a5-ae21-56bcc6e90bb6",
+    "name": "Axed and Enraged",
+    "description": "Axed and Enraged is a rage room and axe-throwing venue in Dundee, Scotland.",
+    "city": "Dundee",
+    "region": "Dundee City",
+    "postcode": "DD3 7JQ",
     "location": {
-      "lat": 51.583247,
-      "lng": 0.174083
+      "lat": 56.473592,
+      "lng": -2.970964
     },
-    "website": "https://www.rageremedies.co.uk/",
-    "phone": null,
-    "price": 35,
-    "image": "/images/rage-remedies-romford.jpg",
+    "website": "https://www.axedandenraged.co.uk/",
+    "phone": "+44 7863 680529",
+    "price": 75,
+    "image": "/images/axedandenraged.png",
     "verified": true,
-    "googlePlaceId": null,
-    "slug": "rage-remedies-romford",
-    "createdAt": "2026-07-01T12:00:00.000Z"
+    "googlePlaceId": "ChIJm9g98S5dhkgRgiWoQdoK-ZI",
+    "slug": "axed-and-enraged",
+    "createdAt": "2025-12-11T23:38:06.414Z"
   },
   {
-    "id": "992780e4-0137-445f-9c95-8a213fca24bc",
-    "name": "Raging Bath",
-    "description": "Bath rage-room venue at the Old Fullers Earthworks in Odd Down. The venue offers bookable smash-room sessions with helmets, gloves, bats, crowbars, and a range of breakables.",
-    "city": "Bath",
-    "region": "Somerset",
-    "postcode": "BA2 8PD",
+    "id": "3f887440-4920-4d23-9260-de599f094245",
+    "name": "Destroy'd Rage Rooms",
+    "description": "Destroy'd rage rooms at Trapp'd Billing (Northampton). 30-minute supervised smash sessions for two people with protective gear, bats and breakables — book via Trapp'd.",
+    "city": "Northampton",
+    "region": "",
+    "postcode": "NN3 9DA",
     "location": {
-      "lat": 51.349319,
-      "lng": -2.391545
+      "lat": 52.2458281,
+      "lng": -0.8168655
     },
-    "website": "https://www.ragingbath.com/",
-    "phone": null,
-    "price": 35,
-    "image": "/images/raging-bath.jpg",
+    "website": "https://trappd.com/rage-rooms/",
+    "phone": "+44 1604 379812",
+    "price": 55,
+    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJXfnJ29IJd0gRqIRKvqRHTFs/image-1764201094786-d52a9ce9.jpg",
     "verified": true,
-    "googlePlaceId": null,
-    "slug": "raging-bath",
-    "createdAt": "2026-07-01T12:00:00.000Z"
+    "googlePlaceId": "ChIJXfnJ29IJd0gRqIRKvqRHTFs",
+    "slug": "destroyd-rage-rooms-northampton",
+    "createdAt": "2025-11-27T21:28:46.741Z"
   },
   {
-    "id": "176522c9-6b9b-4aad-81f3-ddeaee3ea47f",
-    "name": "The Underground Newport",
-    "description": "Newport activity venue with a dedicated rage room at the Kingsway Centre. Smash bottles, plates, and breakables in a controlled room with safety equipment provided, with sessions bookable alongside axe throwing and other experiences.",
-    "city": "Newport",
-    "region": "Newport",
-    "postcode": "NP20 1EB",
+    "id": "c8e4a1b2-5d6f-4a9c-8e1b-2f3a4b5c6d7e",
+    "name": "Destroy'd Rage Rooms Stockport",
+    "description": "Destroy'd rage room at Trapp'd Stockport (Prince's Street). 30-minute smash sessions for two people with protective gear and breakables — a permanent Greater Manchester option after Temper Tank closed. Book via Trapp'd.",
+    "city": "Stockport",
+    "region": "Greater Manchester",
+    "postcode": "SK1 1SE",
     "location": {
-      "lat": 51.585177,
-      "lng": -2.993131
+      "lat": 53.4122475,
+      "lng": -2.1599516
     },
-    "website": "https://www.theundergroundnewport.com/",
+    "website": "https://trappd.com/rage-rooms/",
     "phone": null,
-    "price": 30,
-    "image": "/images/TheUndergroundNewport.png",
+    "price": 55,
+    "image": null,
     "verified": true,
     "googlePlaceId": null,
-    "slug": "the-underground-newport",
-    "createdAt": "2026-06-14T12:00:00.000Z"
-  },
-  {
-    "id": "83ee5c07-1455-4b7b-9fe0-9d3f97e1c5e7",
-    "name": "Rage Room Ireland",
-    "description": "Dublin rage room in Ballyfermot where groups can smash bottles, plates, printers, and other breakables in a supervised room. Prices are listed in euros, so check the venue website for current packages before booking.",
-    "city": "Dublin",
-    "region": "County Dublin",
-    "postcode": "D10",
-    "location": {
-      "lat": 53.335672,
-      "lng": -6.350644
-    },
-    "website": "https://www.rageroomireland.com/",
-    "phone": null,
-    "price": 40,
-    "image": "/images/rageroomireland.png",
-    "verified": true,
-    "googlePlaceId": null,
-    "slug": "rage-room-ireland",
-    "createdAt": "2026-06-14T12:00:00.000Z"
+    "slug": "destroyd-rage-rooms-stockport",
+    "createdAt": "2026-07-25T21:32:58.714Z"
   },
   {
     "id": "a203c2d9-20ab-4ec2-a744-c022e6bd8341",
@@ -140,104 +140,64 @@
     "createdAt": "2026-06-14T12:00:00.000Z"
   },
   {
-    "id": "f20a646d-6a93-4fca-a94c-4b3c93d629ec",
-    "name": "Unleashed Castleford",
-    "description": "Castleford activity venue offering rage room sessions alongside other entertainment. Book a supervised smash-room slot with safety equipment supplied and breakables prepared for the session.",
-    "city": "Castleford",
-    "region": "West Yorkshire",
-    "postcode": "WF10 5DJ",
+    "id": "e1r2t3y4-u5i6-4o7p-8a9s-0d1f2g3h4j5k",
+    "name": "Edinburgh Rage Room",
+    "description": "Mobile smash-therapy / rage-room experiences serving the Edinburgh area (book via ClassBento and similar platforms). Not a permanent walk-in venue — confirm dates and travel radius when booking.",
+    "city": "Edinburgh",
+    "region": "Midlothian",
+    "postcode": "EH6 4JW",
     "location": {
-      "lat": 53.721794,
-      "lng": -1.363922
+      "lat": 55.98,
+      "lng": -3.19
     },
-    "website": "https://www.sumupbookings.com/unleashed-castleford",
+    "website": "https://classbento.co.uk/",
+    "phone": null,
+    "price": 50,
+    "image": "/images/EdinburghRageRoom.png",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "edinburgh-rage-room-edinburgh",
+    "createdAt": "2025-11-27T21:28:46.000Z"
+  },
+  {
+    "id": "a1s2d3f4-g5h6-4j7k-8l9z-0x1c2v3b4n5m",
+    "name": "Game Vault Ayrshire",
+    "description": "Ayrshire's gaming venue featuring \"The Kill Room\" for unleashing inner rage by destroying objects in a controlled space.",
+    "city": "Kilmarnock",
+    "region": "Ayrshire",
+    "postcode": "KA1 1LR",
+    "location": {
+      "lat": 55.609,
+      "lng": -4.498
+    },
+    "website": "https://gamevaultayrshire.com/rage-room/",
     "phone": null,
     "price": 25,
-    "image": "/images/unleashed-castleford.jpg",
+    "image": "/images/GameVaultAyrshire.png",
     "verified": true,
-    "googlePlaceId": null,
-    "slug": "unleashed-castleford",
-    "createdAt": "2026-06-14T12:00:00.000Z"
+    "googlePlaceId": "ChIJ5ydolLYziEgRs7TcXKQSR98",
+    "slug": "game-vault-ayrshire-kilmarnock",
+    "createdAt": "2025-11-27T21:28:46.000Z"
   },
   {
-    "id": "9c2ad2d7-5603-47a2-b466-35f82e3f12ea",
-    "name": "ShatterHaus",
-    "description": "Cardiff city-centre rage room on Queen Street. Break crockery, glassware, and other smashable items in a supervised room with protective equipment provided.",
-    "city": "Cardiff",
-    "region": "Cardiff",
-    "postcode": "CF10 2BH",
+    "id": "3402ac80-5163-467f-ad88-bc16ec1a8955",
+    "name": "Go Rage - Birmingham Rage Room",
+    "description": "Birmingham's rage room and smash room facility. Features plates, Bluetooth speakers, monitors, 30-minute sessions, paintball guns, spray paint, and glass bottles. Perfect for anger management and stress relief.",
+    "city": "Birmingham",
+    "region": "",
+    "postcode": "B8 2BB",
     "location": {
-      "lat": 51.483047,
-      "lng": -3.172573
+      "lat": 52.494865,
+      "lng": -1.8341767
     },
-    "website": "https://www.shatterhaus.uk/",
-    "phone": null,
+    "website": "https://www.gorageuk.com/",
+    "phone": "+44 7521 482101",
     "price": 35,
-    "image": "/images/shatterhaus-cardiff.jpg",
+    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJ1Szj-wS7cEgRjij1NCeNXIY/image-1764201091929-d81e2889.jpg",
     "verified": true,
-    "googlePlaceId": null,
-    "slug": "shatterhaus-cardiff",
-    "createdAt": "2026-06-14T12:00:00.000Z"
-  },
-  {
-    "id": "a3f1c8e2-9d4b-4a7f-b612-8e5d3c9a1f04",
-    "name": "Rage It Out",
-    "description": "County Durham's dedicated rage room in Consett. Smash bottles, furniture, and electronics in a safe, controlled space. Also offers axe throwing and interactive games. Book Fri–Sun sessions online.",
-    "city": "Consett",
-    "region": "County Durham",
-    "postcode": "DH8 5DA",
-    "location": {
-      "lat": 54.851875,
-      "lng": -1.83233
-    },
-    "website": "https://rageitout.co.uk/",
-    "phone": "01207 789069",
-    "price": 23,
-    "image": "/images/rage-it-out-consett.jpg",
-    "verified": true,
-    "googlePlaceId": "ChIJbaYbRzHTfUgRoSBGOwOi6ig",
-    "slug": "rage-it-out-consett",
-    "createdAt": "2026-06-02T12:00:00.000Z"
-  },
-  {
-    "id": "b4e2d9f3-0e5c-4b8a-c723-9f6e4d0b2a15",
-    "name": "The Rabbit Hole Rage Room",
-    "description": "Swindon's first rage room on Cheney Manor Industrial Estate. Vent stress by smashing bottles, glasses, TVs, and picture frames in a supervised, controlled environment. Open Wed, Sat, and Sun.",
-    "city": "Swindon",
-    "region": "Wiltshire",
-    "postcode": "SN2 2DS",
-    "location": {
-      "lat": 51.570811,
-      "lng": -1.804881
-    },
-    "website": null,
-    "phone": null,
-    "price": 32,
-    "image": "/images/the-rabbit-hole-rage-room-swindon.jpg",
-    "verified": true,
-    "googlePlaceId": "ChIJyQX-MtJFcUgR9Q4m0iRcg5U",
-    "slug": "the-rabbit-hole-rage-room-swindon",
-    "createdAt": "2026-06-02T12:00:00.000Z"
-  },
-  {
-    "id": "c5f3e0a4-1f6d-4c9b-d834-0a7f5e1c3b26",
-    "name": "Arcadia Rage Room",
-    "description": "Darlington's rage room experience with two themed smash rooms at High Row. Fully supervised sessions for ages 10+. Part of the Arcadia gaming and entertainment centre — release stress with hammers, mallets, and breakables.",
-    "city": "Darlington",
-    "region": "County Durham",
-    "postcode": "DL3 7QE",
-    "location": {
-      "lat": 54.524238,
-      "lng": -1.55636
-    },
-    "website": "https://arcadiadarlington.co.uk/",
-    "phone": null,
-    "price": 30,
-    "image": "/images/arcadia-rage-room-darlington.jpg",
-    "verified": true,
-    "googlePlaceId": "ChIJMwpLbVGbfkgRtnFNTrpfM6g",
-    "slug": "arcadia-rage-room-darlington",
-    "createdAt": "2026-06-02T12:00:00.000Z"
+    "googlePlaceId": "ChIJ1Szj-wS7cEgRjij1NCeNXIY",
+    "slug": "go-rage-birmingham-rage-room-birmingham",
+    "createdAt": "2025-11-27T21:28:46.921Z"
   },
   {
     "id": "d6a4f1b5-2a7e-4d0c-e945-1b8a6f2d4c37",
@@ -280,6 +240,66 @@
     "createdAt": "2026-06-02T12:00:00.000Z"
   },
   {
+    "id": "d8d7c02d-51cb-488a-909d-359673d34c67",
+    "name": "House of Rage - Rage Room",
+    "description": "Leicester premier rage room: smash electronics/glass with sledgehammer. Ages 10+, safety gear, 12-22:00 most days.",
+    "city": "Leicester",
+    "region": "Leicestershire",
+    "postcode": "LE1 5AW",
+    "location": {
+      "lat": 52.6376,
+      "lng": -1.1292
+    },
+    "website": "https://visitleicester.info/point-of-interest/house-of-rage-rage-room/",
+    "phone": "0116 410 5013",
+    "price": 32,
+    "image": "/images/houseofrage_leicester.jpeg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "house-of-rage-rage-room-leicester",
+    "createdAt": "2026-05-01T22:16:35.728Z"
+  },
+  {
+    "id": "v9w8x7y6-z5a4-4b3c-d2e1-f0g9h8i7j6k5",
+    "name": "Just Rage Rooms",
+    "description": "Bedfordshire's first rage room located at Perfect Aquatics. Release stress by smashing electronics and glassware with pro tools.",
+    "city": "Henlow",
+    "region": "Bedfordshire",
+    "postcode": "SG16 6BB",
+    "location": {
+      "lat": 52.031,
+      "lng": -0.285
+    },
+    "website": "https://justragerooms.co.uk/",
+    "phone": "+44 1462 526515",
+    "price": 35,
+    "image": "/images/JustRageRoomsHenlow.png",
+    "verified": true,
+    "googlePlaceId": "ChIJP-LgaPDLd0gRjmMTE1UCByo",
+    "slug": "just-rage-rooms-henlow",
+    "createdAt": "2025-11-27T21:28:46.000Z"
+  },
+  {
+    "id": "f6e6cd12-77e2-45ea-b258-e60607b7c11b",
+    "name": "Mission Classified Rage Room",
+    "description": "Grimsby escape-room venue with a dedicated rage room on Cleethorpe Road. Sessions include protective equipment and a controlled smash-room setup for breaking bottles, plates, and other prepared items.",
+    "city": "Grimsby",
+    "region": "Lincolnshire",
+    "postcode": "DN31 3ES",
+    "location": {
+      "lat": 53.575173,
+      "lng": -0.071946
+    },
+    "website": "https://missionclassified.co.uk/rage-room",
+    "phone": "+44 1472 255255",
+    "price": 25,
+    "image": "/images/mission-classified-rage-room-grimsby.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "mission-classified-rage-room-grimsby",
+    "createdAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
     "id": "f8c6b3d7-4c9a-4f2e-a167-3d0c8b4f6e59",
     "name": "Players – The Rage Rooms",
     "description": "Brighton and Hove's first rage room at the seafront Players battle bar. 15-minute smash sessions for 1–2 people with full protective gear. Bring your own breakables by arrangement. Ages 18+ only.",
@@ -298,6 +318,26 @@
     "googlePlaceId": "ChIJC_NQvF6FdUgRiPF2Wj-rjEQ",
     "slug": "players-the-rage-rooms-brighton",
     "createdAt": "2026-06-02T12:00:00.000Z"
+  },
+  {
+    "id": "d7a87e3b-5afc-40fc-b819-a3728cc29ee8",
+    "name": "Rage cage ltd",
+    "description": "Braintree rage room (Rage Cage Ltd) at Springwood Drive / Braintree Enterprise Centre. Company still active; public website currently offline — contact via local listings or Facebook before visiting.",
+    "city": "Braintree",
+    "region": "",
+    "postcode": "CM7 2YN",
+    "location": {
+      "lat": 51.8877239,
+      "lng": 0.5384545
+    },
+    "website": null,
+    "phone": "+44 7598 120662",
+    "price": 32,
+    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJL61rXqvx2EcR1fo8nfbJS8k/image-1764201094976-19fa1c98.jpg",
+    "verified": true,
+    "googlePlaceId": "ChIJL61rXqvx2EcR1fo8nfbJS8k",
+    "slug": "rage-cage-ltd-braintree",
+    "createdAt": "2025-11-27T21:28:46.698Z"
   },
   {
     "id": "a9d7c4e8-5d0b-4a3f-b278-4e1d9c5a7f60",
@@ -320,284 +360,24 @@
     "createdAt": "2026-06-02T12:00:00.000Z"
   },
   {
-    "id": "d8d7c02d-51cb-488a-909d-359673d34c67",
-    "name": "House of Rage - Rage Room",
-    "description": "Leicester premier rage room: smash electronics/glass with sledgehammer. Ages 10+, safety gear, 12-22:00 most days.",
-    "city": "Leicester",
-    "region": "Leicestershire",
-    "postcode": "LE1 5AW",
+    "id": "a3f1c8e2-9d4b-4a7f-b612-8e5d3c9a1f04",
+    "name": "Rage It Out",
+    "description": "County Durham's dedicated rage room in Consett. Smash bottles, furniture, and electronics in a safe, controlled space. Also offers axe throwing and interactive games. Book Fri–Sun sessions online.",
+    "city": "Consett",
+    "region": "County Durham",
+    "postcode": "DH8 5DA",
     "location": {
-      "lat": 52.6376,
-      "lng": -1.1292
+      "lat": 54.851875,
+      "lng": -1.83233
     },
-    "website": "https://visitleicester.info/point-of-interest/house-of-rage-rage-room/",
-    "phone": "0116 410 5013",
-    "price": 32,
-    "image": "/images/houseofrage_leicester.jpeg",
+    "website": "https://rageitout.co.uk/",
+    "phone": "01207 789069",
+    "price": 23,
+    "image": "/images/rage-it-out-consett.jpg",
     "verified": true,
-    "googlePlaceId": null,
-    "slug": "house-of-rage-rage-room-leicester",
-    "createdAt": "2026-05-01T22:16:35.728Z"
-  },
-  {
-    "id": "7a6431df-abcd-4a81-a37d-7344fb8a0871",
-    "name": "Wreck Room London",
-    "description": "London's first rage room: 10+ min sessions smashing electronics/glass with music and weapon choice. Perfect for stress relief.",
-    "city": "London",
-    "region": "London",
-    "postcode": "N/A",
-    "location": {
-      "lat": null,
-      "lng": null
-    },
-    "website": "https://www.wreckroom.co.uk/",
-    "phone": null,
-    "price": 20,
-    "image": "/images/wreckroom.jpg",
-    "verified": true,
-    "googlePlaceId": null,
-    "slug": "wreck-room-london",
-    "createdAt": "2026-05-01T21:32:00.168Z"
-  },
-  {
-    "id": "cmntf1qlr0000ll633z7l2wnt",
-    "name": "Rage X-treme",
-    "description": "Rage X-treme runs one of the largest rage rooms in the UK, with space for up to 10 people in a single session. The venue offers disabled access and wheelchair-friendly access where advertised. Sessions start from £15 per person. Located at Unit C2, Chaucer Business Park, Dittons Road, Polegate (BN26 6QH). Contact the team on 01323 912990 or info@ragex-treme.co.uk for bookings and current packages.",
-    "city": "Polegate",
-    "region": "South East",
-    "postcode": "BN26 6QH",
-    "location": {
-      "lat": 50.818825,
-      "lng": 0.270878
-    },
-    "website": "https://ragex-treme.co.uk",
-    "phone": "01323 912990",
-    "price": 15,
-    "image": "/images/rageroom_Polegate1.jpg",
-    "verified": true,
-    "googlePlaceId": "ChIJL-M5aZ1x30cRJ3_t7Jfq1_0",
-    "slug": "rage-x-treme-polegate",
-    "createdAt": "2026-04-10T21:26:38.319Z"
-  },
-  {
-    "id": "b1b612f7-67a4-4a9d-895a-d4a13aa8b869",
-    "name": "Rage Room Leicester",
-    "description": "Rage Room Leicester offers smash-room experiences in Lunsford Road, Leicester.",
-    "city": "Leicester",
-    "region": "Leicestershire",
-    "postcode": "LE5 0HJ",
-    "location": {
-      "lat": 52.646965,
-      "lng": -1.105647
-    },
-    "website": "http://www.rageroomleicester.co.uk/",
-    "phone": null,
-    "price": 32,
-    "image": "/images/rageroomleicester.png",
-    "verified": true,
-    "googlePlaceId": "ChIJRWMjqyxhd0gRIQYWoOgMn5w",
-    "slug": "rage-room-leicester",
-    "createdAt": "2025-12-13T23:44:24.606Z"
-  },
-  {
-    "id": "fb842fd9-c195-48a5-ae21-56bcc6e90bb6",
-    "name": "Axed and Enraged",
-    "description": "Axed and Enraged is a rage room and axe-throwing venue in Dundee, Scotland.",
-    "city": "Dundee",
-    "region": "Dundee City",
-    "postcode": "DD3 7JQ",
-    "location": {
-      "lat": 56.473592,
-      "lng": -2.970964
-    },
-    "website": "https://www.axedandenraged.co.uk/",
-    "phone": "+44 7863 680529",
-    "price": 75,
-    "image": "/images/axedandenraged.png",
-    "verified": true,
-    "googlePlaceId": "ChIJm9g98S5dhkgRgiWoQdoK-ZI",
-    "slug": "axed-and-enraged",
-    "createdAt": "2025-12-11T23:38:06.414Z"
-  },
-  {
-    "id": "3402ac80-5163-467f-ad88-bc16ec1a8955",
-    "name": "Go Rage - Birmingham Rage Room",
-    "description": "Birmingham's rage room and smash room facility. Features plates, Bluetooth speakers, monitors, 30-minute sessions, paintball guns, spray paint, and glass bottles. Perfect for anger management and stress relief.",
-    "city": "Birmingham",
-    "region": "",
-    "postcode": "B8 2BB",
-    "location": {
-      "lat": 52.494865,
-      "lng": -1.8341767
-    },
-    "website": "https://www.gorageuk.com/",
-    "phone": "+44 7521 482101",
-    "price": 35,
-    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJ1Szj-wS7cEgRjij1NCeNXIY/image-1764201091929-d81e2889.jpg",
-    "verified": true,
-    "googlePlaceId": "ChIJ1Szj-wS7cEgRjij1NCeNXIY",
-    "slug": "go-rage-birmingham-rage-room-birmingham",
-    "createdAt": "2025-11-27T21:28:46.921Z"
-  },
-  {
-    "id": "20d7f17c-defe-405c-97e4-642d556b5860",
-    "name": "Rage Room Birmingham",
-    "description": "Birmingham's rage room and smash room experience. Perfect for anger management, stress relief, birthdays, and fun. Features sound systems, TVs, gloves, glasses, and golf equipment for a complete experience.",
-    "city": "Birmingham",
-    "region": "",
-    "postcode": "B12 0SH",
-    "location": {
-      "lat": 52.4702455,
-      "lng": -1.8882267
-    },
-    "website": "http://www.rageroombirmingham.co.uk/",
-    "phone": "+44 7448 349934",
-    "price": 35,
-    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJ99mUxxK9cEgRwmeXlvBHYZQ/image-1764201092030-e2ee5519.jpg",
-    "verified": true,
-    "googlePlaceId": "ChIJ99mUxxK9cEgRwmeXlvBHYZQ",
-    "slug": "rage-room-birmingham-birmingham",
-    "createdAt": "2025-11-27T21:28:46.879Z"
-  },
-  {
-    "id": "a281abae-cd80-4c2a-996b-2c8aee5825fd",
-    "name": "Smash Space UK",
-    "description": "Newcastle upon Tyne's rage room and smash room facility. Features escape room activities, rage room experiences, TVs, helmets, birthday packages, and fun activities for stress relief and entertainment.",
-    "city": "Newcastle",
-    "region": "",
-    "postcode": "NE4 7JE",
-    "location": {
-      "lat": 54.9665854,
-      "lng": -1.6231805
-    },
-    "website": "https://www.smashspace.co.uk/",
-    "phone": "+44 330 229 4425",
-    "price": 35,
-    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJ2YzKCzx3fkgRpzDhVtmild8/image-1764201094888-d53dc744.jpg",
-    "verified": true,
-    "googlePlaceId": "ChIJ2YzKCzx3fkgRpzDhVtmild8",
-    "slug": "smash-space-uk-newcastle",
-    "createdAt": "2025-11-27T21:28:46.834Z"
-  },
-  {
-    "id": "93667b86-efd4-4378-ac72-3b01838dfe01",
-    "name": "Smash It Rage Room Ltd",
-    "description": "London's premier rage room and smash room experience. Perfect for anger management, stress relief, and fun. Features steam, speakers, silver items, bottles of water, and frustration relief activities.",
-    "city": "London",
-    "region": "",
-    "postcode": "SE9 3BA",
-    "location": {
-      "lat": 51.4295873,
-      "lng": 0.0567488
-    },
-    "website": "http://smashitragerooms.co.uk/",
-    "phone": "+44 7359 207511",
-    "price": 45,
-    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJO4RR4D6r2EcRd-t7UC_2sts/image-1764201094922-5975ea39.jpg",
-    "verified": true,
-    "googlePlaceId": "ChIJO4RR4D6r2EcRd-t7UC_2sts",
-    "slug": "smash-it-rage-room-ltd-london",
-    "createdAt": "2025-11-27T21:28:46.787Z"
-  },
-  {
-    "id": "3f887440-4920-4d23-9260-de599f094245",
-    "name": "Destroy'd Rage Rooms",
-    "description": "Northampton's rage room and smash room experience. Features printers, monitors, glass bottles, birthday packages, games, PPE, music, and boxing bags. Perfect for catharsis and stress relief.",
-    "city": "Northampton",
-    "region": "",
-    "postcode": "NN3 9DA",
-    "location": {
-      "lat": 52.2458281,
-      "lng": -0.8168655
-    },
-    "website": "https://trappd.com/what-is-destroyd/",
-    "phone": "+44 1604 379812",
-    "price": 35,
-    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJXfnJ29IJd0gRqIRKvqRHTFs/image-1764201094786-d52a9ce9.jpg",
-    "verified": true,
-    "googlePlaceId": "ChIJXfnJ29IJd0gRqIRKvqRHTFs",
-    "slug": "destroyd-rage-rooms-northampton",
-    "createdAt": "2025-11-27T21:28:46.741Z"
-  },
-  {
-    "id": "d7a87e3b-5afc-40fc-b819-a3728cc29ee8",
-    "name": "Rage cage ltd",
-    "description": "Braintree's rage room and smash room facility. Features music, birthday packages, choice of items, fun activities, safety equipment, and sessions for both adults and kids.",
-    "city": "Braintree",
-    "region": "",
-    "postcode": "CM7 2YN",
-    "location": {
-      "lat": 51.8877239,
-      "lng": 0.5384545
-    },
-    "website": "http://www.ragecage.uk/",
-    "phone": "+44 7598 120662",
-    "price": 32,
-    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJL61rXqvx2EcR1fo8nfbJS8k/image-1764201094976-19fa1c98.jpg",
-    "verified": true,
-    "googlePlaceId": "ChIJL61rXqvx2EcR1fo8nfbJS8k",
-    "slug": "rage-cage-ltd-braintree",
-    "createdAt": "2025-11-27T21:28:46.698Z"
-  },
-  {
-    "id": "ba70cd2a-780d-4081-ba5b-113a31da0512",
-    "name": "Urban Xtreme Colchester",
-    "description": "Colchester's premier rage room and smash room experience. Features rage room activities, axe throwing, knife throwing, music, retro gaming, stress relief, weapons, and professional instructors with safety equipment.",
-    "city": "Colchester",
-    "region": "",
-    "postcode": "CO1 1UU",
-    "location": {
-      "lat": 51.8971248,
-      "lng": 0.8927616
-    },
-    "website": "http://www.urbanxtreme.co.uk/",
-    "phone": "+44 1206 577974",
-    "price": 35,
-    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJAWc27UkF2UcRDLBMWoV60xk/image-1764201098104-0da7c756.jpg",
-    "verified": true,
-    "googlePlaceId": "ChIJAWc27UkF2UcRDLBMWoV60xk",
-    "slug": "urban-xtreme-colchester-colchester",
-    "createdAt": "2025-11-27T21:28:46.654Z"
-  },
-  {
-    "id": "258cf31a-ba0d-4769-bc70-aa17bed67157",
-    "name": "Rage Remedy",
-    "description": "Margate's rage room experience. Perfect for birthdays, stress relief, and fun. Features choice of items, playlists, footage recording, and water activities for a complete rage room experience.",
-    "city": "Margate",
-    "region": "",
-    "postcode": "CT9 4JG",
-    "location": {
-      "lat": 51.368656,
-      "lng": 1.387788
-    },
-    "website": "https://www.rageremedy.co.uk/",
-    "phone": "+44 7543 407032",
-    "price": 35,
-    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJfzbn6IlT2UcREyPq4NM6nb0/image-1764201098081-c9e5a939.jpg",
-    "verified": true,
-    "googlePlaceId": "ChIJfzbn6IlT2UcREyPq4NM6nb0",
-    "slug": "rage-remedy-margate",
-    "createdAt": "2025-11-27T21:28:46.574Z"
-  },
-  {
-    "id": "1d35e4d5-4f6a-4c10-b6b3-5c1cd4ef24c3",
-    "name": "Angry Smash Ltd",
-    "description": "Southend-on-Sea's top rage room experience. Perfect for birthdays, stress relief, and fun. Features weapons, music, steam, and a variety of items to smash. Great for letting off steam.",
-    "city": "Southend-on-Sea",
-    "region": "",
-    "postcode": "SS3 9QE",
-    "location": {
-      "lat": 51.5316935,
-      "lng": 0.7859498
-    },
-    "website": "https://www.angrysmash.com/",
-    "phone": "+44 7555 114479",
-    "price": 35,
-    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJqUa12rjZ2EcRkS_r2k9xs78/image-1764201100630-511d7706.jpg",
-    "verified": true,
-    "googlePlaceId": "ChIJqUa12rjZ2EcRkS_r2k9xs78",
-    "slug": "angry-smash-ltd-southend-on-sea",
-    "createdAt": "2025-11-27T21:28:46.523Z"
+    "googlePlaceId": "ChIJbaYbRzHTfUgRoSBGOwOi6ig",
+    "slug": "rage-it-out-consett",
+    "createdAt": "2026-06-02T12:00:00.000Z"
   },
   {
     "id": "cf7c8d69-4b25-41fd-bd95-3c2b0ad32690",
@@ -620,164 +400,124 @@
     "createdAt": "2025-11-27T21:28:46.473Z"
   },
   {
-    "id": "9675e2e1-a84a-41c5-9171-13503af3c4d5",
-    "name": "The Activity Dome",
-    "description": "Weston-super-Mare's top rage room experience. Features axe throwing, archery, and rage room activities. Perfect for birthdays, team building, and stress relief with music and fun activities.",
-    "city": "Weston-super-Mare",
-    "region": "",
-    "postcode": "BS23 1QF",
+    "id": "02de72e2-0ff6-45cd-a7a0-15a71cc3e6b0",
+    "name": "Rage Remedies",
+    "description": "Romford rage-room and axe-throwing venue at Brooklands House. Visitors can book a supervised smash session with safety equipment and breakables prepared for stress-release experiences.",
+    "city": "Romford",
+    "region": "London",
+    "postcode": "RM1 1DX",
     "location": {
-      "lat": 51.3492201,
-      "lng": -2.978185
+      "lat": 51.583247,
+      "lng": 0.174083
     },
-    "website": "http://www.theactivitydome.com/",
-    "phone": "+44 1934 707150",
-    "price": 32,
-    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJX6iq6OH5cUgReHLJUqtGY_k/image-1764201103382-c837610a.jpg",
+    "website": "https://www.rageremedies.co.uk/",
+    "phone": null,
+    "price": 35,
+    "image": "/images/rage-remedies-romford.jpg",
     "verified": true,
-    "googlePlaceId": "ChIJX6iq6OH5cUgReHLJUqtGY_k",
-    "slug": "the-activity-dome-weston-super-mare",
-    "createdAt": "2025-11-27T21:28:46.385Z"
+    "googlePlaceId": null,
+    "slug": "rage-remedies-romford",
+    "createdAt": "2026-07-01T12:00:00.000Z"
   },
   {
-    "id": "80e9743b-a900-46cc-9eec-dfae390ca0da",
-    "name": "The Smash Lab Wellingborough",
-    "description": "Wellingborough's premier rage room and smash room. Perfect for stress relief, team building, and fun activities. Features printers, bottles, screens, TVs, and more to smash.",
-    "city": "Wellingborough",
+    "id": "258cf31a-ba0d-4769-bc70-aa17bed67157",
+    "name": "Rage Remedy",
+    "description": "Margate's rage room experience. Perfect for birthdays, stress relief, and fun. Features choice of items, playlists, footage recording, and water activities for a complete rage room experience.",
+    "city": "Margate",
     "region": "",
-    "postcode": "NN8 4LA",
+    "postcode": "CT9 4JG",
     "location": {
-      "lat": 52.301854,
-      "lng": -0.6949674
+      "lat": 51.368656,
+      "lng": 1.387788
     },
-    "website": "https://thesmashlab.co.uk/",
-    "phone": "+44 7563 862095",
-    "price": 32,
-    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJdW4I0wWhd0gRk5_9ilgVaOE/image-1764201103368-0246c11d.jpg",
+    "website": "https://www.rageremedy.co.uk/",
+    "phone": "+44 7543 407032",
+    "price": 35,
+    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJfzbn6IlT2UcREyPq4NM6nb0/image-1764201098081-c9e5a939.jpg",
     "verified": true,
-    "googlePlaceId": "ChIJdW4I0wWhd0gRk5_9ilgVaOE",
-    "slug": "the-smash-lab-wellingborough-wellingborough",
-    "createdAt": "2025-11-27T21:28:46.341Z"
+    "googlePlaceId": "ChIJfzbn6IlT2UcREyPq4NM6nb0",
+    "slug": "rage-remedy-margate",
+    "createdAt": "2025-11-27T21:28:46.574Z"
   },
   {
-    "id": "0ca388aa-95ca-4ec8-b4e1-f11221888369",
-    "name": "The Snake Room Urban Axe Throwing",
-    "description": "Urban axe throwing and rage room experience in Chesterfield. Perfect for birthdays, team events, and stress relief. Professional instructors and safety equipment provided.",
-    "city": "Chesterfield",
+    "id": "20d7f17c-defe-405c-97e4-642d556b5860",
+    "name": "Rage Room Birmingham",
+    "description": "Birmingham's rage room and smash room experience. Perfect for anger management, stress relief, birthdays, and fun. Features sound systems, TVs, gloves, glasses, and golf equipment for a complete experience.",
+    "city": "Birmingham",
     "region": "",
-    "postcode": "S41 9AQ",
+    "postcode": "B12 0SH",
     "location": {
-      "lat": 53.2594909,
-      "lng": -1.4283515
+      "lat": 52.4702455,
+      "lng": -1.8882267
     },
-    "website": "https://snakeroom.co.uk/",
+    "website": "http://www.rageroombirmingham.co.uk/",
+    "phone": "+44 7448 349934",
+    "price": 35,
+    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJ99mUxxK9cEgRwmeXlvBHYZQ/image-1764201092030-e2ee5519.jpg",
+    "verified": true,
+    "googlePlaceId": "ChIJ99mUxxK9cEgRwmeXlvBHYZQ",
+    "slug": "rage-room-birmingham-birmingham",
+    "createdAt": "2025-11-27T21:28:46.879Z"
+  },
+  {
+    "id": "14b9824e-b5aa-41c2-9f44-8497a93d89fa",
+    "name": "Rage Room Hull",
+    "description": "Hull city-centre rage room with a live booking presence on Caroline Place. A straightforward smash-room experience for breaking prepared items in a supervised setting.",
+    "city": "Hull",
+    "region": "East Yorkshire",
+    "postcode": "HU2 8DR",
+    "location": {
+      "lat": 53.748801,
+      "lng": -0.338012
+    },
+    "website": "https://rageroomhull.simplybook.it/",
+    "phone": null,
+    "price": 30,
+    "image": "/images/rage-room-hull.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "rage-room-hull",
+    "createdAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "83ee5c07-1455-4b7b-9fe0-9d3f97e1c5e7",
+    "name": "Rage Room Ireland",
+    "description": "Dublin rage room in Ballyfermot where groups can smash bottles, plates, printers, and other breakables in a supervised room. Prices are listed in euros, so check the venue website for current packages before booking.",
+    "city": "Dublin",
+    "region": "County Dublin",
+    "postcode": "D10",
+    "location": {
+      "lat": 53.335672,
+      "lng": -6.350644
+    },
+    "website": "https://www.rageroomireland.com/",
+    "phone": null,
+    "price": 40,
+    "image": "/images/rageroomireland.png",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "rage-room-ireland",
+    "createdAt": "2026-06-14T12:00:00.000Z"
+  },
+  {
+    "id": "b1b612f7-67a4-4a9d-895a-d4a13aa8b869",
+    "name": "Rage Room Leicester",
+    "description": "Rage Room Leicester offers smash-room experiences in Lunsford Road, Leicester.",
+    "city": "Leicester",
+    "region": "Leicestershire",
+    "postcode": "LE5 0HJ",
+    "location": {
+      "lat": 52.646965,
+      "lng": -1.105647
+    },
+    "website": "http://www.rageroomleicester.co.uk/",
     "phone": null,
     "price": 32,
-    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJp8f9yISFeUgRxtoo5qRwsOc/image-1764201103602-d3464978.png",
+    "image": "/images/rageroomleicester.png",
     "verified": true,
-    "googlePlaceId": "ChIJp8f9yISFeUgRxtoo5qRwsOc",
-    "slug": "the-snake-room-urban-axe-throwing-chesterfield",
-    "createdAt": "2025-11-27T21:28:46.300Z"
-  },
-  {
-    "id": "6eede7dc-117a-4e28-a4b7-57c8e67e7696",
-    "name": "The Rage House",
-    "description": "Newcastle's premier rage room and smash room experience. Features axe throwing, airsoft, and rage room activities. Enjoy drinks, protective gear, and competitive fun.",
-    "city": "Newcastle-under-Lyme",
-    "region": "",
-    "postcode": "ST5 1QQ",
-    "location": {
-      "lat": 53.0104977,
-      "lng": -2.2272964
-    },
-    "website": "https://www.theragehouse.com/",
-    "phone": "+44 1782 204392",
-    "price": 32,
-    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJ2R0ziCVDekgRCv7JBCT8k0w/image-1764201103388-e9545eb1.jpg",
-    "verified": true,
-    "googlePlaceId": "ChIJ2R0ziCVDekgRCv7JBCT8k0w",
-    "slug": "the-rage-house-newcastle-under-lyme",
-    "createdAt": "2025-11-27T21:28:46.261Z"
-  },
-  {
-    "id": "499e08d6-513b-4f4b-9f79-6063a3bf319f",
-    "name": "Anger Issues Rage Rooms Ltd",
-    "description": "Experience the ultimate stress relief at Anger Issues Rage Rooms. A smash room facility perfect for birthdays, team building, and stress relief. Choose your playlist and enjoy a safe, controlled environment.",
-    "city": "Ellesmere Port",
-    "region": "",
-    "postcode": "CH65 4EL",
-    "location": {
-      "lat": 53.280088,
-      "lng": -2.8785678
-    },
-    "website": "http://www.angerissuesragerooms.com/",
-    "phone": "+44 7359 660808",
-    "price": 35,
-    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJm1TH_ZbfekgRxY8gYN91ruc/image-1764201106200-c8e629f0.jpg",
-    "verified": true,
-    "googlePlaceId": "ChIJm1TH_ZbfekgRxY8gYN91ruc",
-    "slug": "anger-issues-rage-rooms-ltd-ellesmere-port",
-    "createdAt": "2025-11-27T21:28:46.144Z"
-  },
-  {
-    "id": "z1x2c3v4-b5n6-4m7l-k8j9-h0g1f2d3s4a5",
-    "name": "Riot Room",
-    "description": "Fife's therapeutic rage room in Dunfermline. Simple, high-impact fun for individuals or groups looking for emotional release.",
-    "city": "Dunfermline",
-    "region": "Fife",
-    "postcode": "KY12 7SL",
-    "location": {
-      "lat": 56.071,
-      "lng": -3.462
-    },
-    "website": "https://www.riotroom.co.uk/",
-    "phone": "+44 7882 123456",
-    "price": 30,
-    "image": "/images/RiotRoomDunfermline.png",
-    "verified": true,
-    "googlePlaceId": null,
-    "slug": "riot-room-dunfermline",
-    "createdAt": "2025-11-27T21:28:46.000Z"
-  },
-  {
-    "id": "a1s2d3f4-g5h6-4j7k-8l9z-0x1c2v3b4n5m",
-    "name": "Game Vault Ayrshire",
-    "description": "Ayrshire's gaming venue featuring \"The Kill Room\" for unleashing inner rage by destroying objects in a controlled space.",
-    "city": "Kilmarnock",
-    "region": "Ayrshire",
-    "postcode": "KA1 1LR",
-    "location": {
-      "lat": 55.609,
-      "lng": -4.498
-    },
-    "website": "https://gamevaultayrshire.com/",
-    "phone": "+44 1563 123456",
-    "price": 25,
-    "image": "/images/GameVaultAyrshire.png",
-    "verified": true,
-    "googlePlaceId": "ChIJ5ydolLYziEgRs7TcXKQSR98",
-    "slug": "game-vault-ayrshire-kilmarnock",
-    "createdAt": "2025-11-27T21:28:46.000Z"
-  },
-  {
-    "id": "b1a2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
-    "name": "The Rage Rooms",
-    "description": "UK's immersive mobile rage room experience based in Dorset. Features \"Smash Therapy on Wheels\" for events and themed stress-relief.",
-    "city": "Bournemouth",
-    "region": "Dorset",
-    "postcode": "BH21 3RL",
-    "location": {
-      "lat": 50.7192,
-      "lng": -1.8808
-    },
-    "website": "https://the-ragerooms.co.uk/",
-    "phone": "+44 1202 911921",
-    "price": 50,
-    "image": "/images/TheRageRoomsBournemouth.png",
-    "verified": true,
-    "googlePlaceId": null,
-    "slug": "the-rage-rooms-bournemouth",
-    "createdAt": "2025-11-27T21:28:46.000Z"
+    "googlePlaceId": "ChIJRWMjqyxhd0gRIQYWoOgMn5w",
+    "slug": "rage-room-leicester",
+    "createdAt": "2025-12-13T23:44:24.606Z"
   },
   {
     "id": "f4g5h6i7-j8k9-4l0m-n1o2-p3q4r5s6t7u8",
@@ -797,46 +537,6 @@
     "verified": true,
     "googlePlaceId": "ChIJQ3CYt-M1d0gRWoG8OH94YCo",
     "slug": "rage-rooms-leamington-spa-royal-leamington-spa",
-    "createdAt": "2025-11-27T21:28:46.000Z"
-  },
-  {
-    "id": "e398d7a1-8d2b-4c5e-8f92-7f3e6a123456",
-    "name": "Smash Palace",
-    "description": "Lincoln's premier rage room for stress relief. Located at Grafton Street, it offers safe sessions to smash electronics and tech.",
-    "city": "Lincoln",
-    "region": "Lincolnshire",
-    "postcode": "LN2 5LT",
-    "location": {
-      "lat": 53.238,
-      "lng": -0.512
-    },
-    "website": "https://smashpalace.co.uk/",
-    "phone": "+44 7931 123456",
-    "price": 25,
-    "image": "/images/SmashPalaceLincoln.png",
-    "verified": true,
-    "googlePlaceId": "ChIJ340U5Z5beEgR9ekK-PPLZcU",
-    "slug": "smash-palace-lincoln",
-    "createdAt": "2025-11-27T21:28:46.000Z"
-  },
-  {
-    "id": "v9w8x7y6-z5a4-4b3c-d2e1-f0g9h8i7j6k5",
-    "name": "Just Rage Rooms",
-    "description": "Bedfordshire's first rage room located at Perfect Aquatics. Release stress by smashing electronics and glassware with pro tools.",
-    "city": "Henlow",
-    "region": "Bedfordshire",
-    "postcode": "SG16 6BB",
-    "location": {
-      "lat": 52.031,
-      "lng": -0.285
-    },
-    "website": "https://justragerooms.co.uk/",
-    "phone": "+44 1462 526515",
-    "price": 35,
-    "image": "/images/JustRageRoomsHenlow.png",
-    "verified": true,
-    "googlePlaceId": "ChIJP-LgaPDLd0gRjmMTE1UCByo",
-    "slug": "just-rage-rooms-henlow",
     "createdAt": "2025-11-27T21:28:46.000Z"
   },
   {
@@ -860,9 +560,89 @@
     "createdAt": "2025-11-27T21:28:46.000Z"
   },
   {
+    "id": "cmntf1qlr0000ll633z7l2wnt",
+    "name": "Rage X-treme",
+    "description": "Rage X-treme runs one of the largest rage rooms in the UK, with space for up to 10 people in a single session. The venue offers disabled access and wheelchair-friendly access where advertised. Sessions start from £15 per person. Located at Unit C2, Chaucer Business Park, Dittons Road, Polegate (BN26 6QH). Contact the team on 01323 912990 or info@ragex-treme.co.uk for bookings and current packages.",
+    "city": "Polegate",
+    "region": "South East",
+    "postcode": "BN26 6QH",
+    "location": {
+      "lat": 50.818825,
+      "lng": 0.270878
+    },
+    "website": "https://ragex-treme.co.uk",
+    "phone": "01323 912990",
+    "price": 15,
+    "image": "/images/rageroom_Polegate1.jpg",
+    "verified": true,
+    "googlePlaceId": "ChIJL-M5aZ1x30cRJ3_t7Jfq1_0",
+    "slug": "rage-x-treme-polegate",
+    "createdAt": "2026-04-10T21:26:38.319Z"
+  },
+  {
+    "id": "992780e4-0137-445f-9c95-8a213fca24bc",
+    "name": "Raging Bath",
+    "description": "Bath rage-room venue at the Old Fullers Earthworks in Odd Down. The venue offers bookable smash-room sessions with helmets, gloves, bats, crowbars, and a range of breakables.",
+    "city": "Bath",
+    "region": "Somerset",
+    "postcode": "BA2 8PD",
+    "location": {
+      "lat": 51.349319,
+      "lng": -2.391545
+    },
+    "website": "https://www.ragingbath.com/",
+    "phone": null,
+    "price": 35,
+    "image": "/images/raging-bath.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "raging-bath",
+    "createdAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "z1x2c3v4-b5n6-4m7l-k8j9-h0g1f2d3s4a5",
+    "name": "Riot Room",
+    "description": "Fife's therapeutic rage room in Dunfermline. Simple, high-impact fun for individuals or groups looking for emotional release.",
+    "city": "Dunfermline",
+    "region": "Fife",
+    "postcode": "KY12 7SL",
+    "location": {
+      "lat": 56.071,
+      "lng": -3.462
+    },
+    "website": "https://www.riotroom.co.uk/",
+    "phone": null,
+    "price": 30,
+    "image": "/images/RiotRoomDunfermline.png",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "riot-room-dunfermline",
+    "createdAt": "2025-11-27T21:28:46.000Z"
+  },
+  {
+    "id": "9c2ad2d7-5603-47a2-b466-35f82e3f12ea",
+    "name": "ShatterHaus",
+    "description": "Cardiff city-centre rage room on Queen Street. Break crockery, glassware, and other smashable items in a supervised room with protective equipment provided.",
+    "city": "Cardiff",
+    "region": "Cardiff",
+    "postcode": "CF10 2BH",
+    "location": {
+      "lat": 51.483047,
+      "lng": -3.172573
+    },
+    "website": "https://www.shatterhaus.uk/",
+    "phone": null,
+    "price": 35,
+    "image": "/images/shatterhaus-cardiff.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "shatterhaus-cardiff",
+    "createdAt": "2026-06-14T12:00:00.000Z"
+  },
+  {
     "id": "b5c6d7e8-f9a0-4b1c-d2e3-f4g5h6i7j8k9",
     "name": "SMASH IT",
-    "description": "Huddersfield's legendary smash room at White Wolf Bushcraft. Wield a sledgehammer or baseball bat to unleash a whirlwind of chaos on tech.",
+    "description": "Huddersfield smash room at White Wolf Activity Centre (Linthwaite). Up to 30 minutes for up to two people with sledgehammers/bats, safety gear and prepared smashables. Book by phone then buy tickets online.",
     "city": "Huddersfield",
     "region": "West Yorkshire",
     "postcode": "HD7 5QG",
@@ -870,14 +650,274 @@
       "lat": 53.62,
       "lng": -1.87
     },
-    "website": "https://whitewolfbushcraftschool.com/smash-room",
-    "phone": "+44 1484 123456",
-    "price": 50,
+    "website": "https://whitewolfs.co.uk/smash-room",
+    "phone": "07763 044927",
+    "price": 60,
     "image": "/images/SMASHITHuddersfield.png",
     "verified": true,
     "googlePlaceId": "ChIJm5G1QYzFe0gRnbN4QddB5iQ",
     "slug": "smash-it-huddersfield",
     "createdAt": "2025-11-27T21:28:46.000Z"
+  },
+  {
+    "id": "93667b86-efd4-4378-ac72-3b01838dfe01",
+    "name": "Smash It Rage Room Ltd",
+    "description": "London's premier rage room and smash room experience. Perfect for anger management, stress relief, and fun. Features steam, speakers, silver items, bottles of water, and frustration relief activities.",
+    "city": "London",
+    "region": "",
+    "postcode": "SE9 3BA",
+    "location": {
+      "lat": 51.4295873,
+      "lng": 0.0567488
+    },
+    "website": "http://smashitragerooms.co.uk/",
+    "phone": "+44 7359 207511",
+    "price": 45,
+    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJO4RR4D6r2EcRd-t7UC_2sts/image-1764201094922-5975ea39.jpg",
+    "verified": true,
+    "googlePlaceId": "ChIJO4RR4D6r2EcRd-t7UC_2sts",
+    "slug": "smash-it-rage-room-ltd-london",
+    "createdAt": "2025-11-27T21:28:46.787Z"
+  },
+  {
+    "id": "e398d7a1-8d2b-4c5e-8f92-7f3e6a123456",
+    "name": "Smash Palace",
+    "description": "Lincoln's premier rage room for stress relief. Located at Grafton Street, it offers safe sessions to smash electronics and tech.",
+    "city": "Lincoln",
+    "region": "Lincolnshire",
+    "postcode": "LN2 5LT",
+    "location": {
+      "lat": 53.238,
+      "lng": -0.512
+    },
+    "website": "https://smashpalace.co.uk/",
+    "phone": null,
+    "price": 25,
+    "image": "/images/SmashPalaceLincoln.png",
+    "verified": true,
+    "googlePlaceId": "ChIJ340U5Z5beEgR9ekK-PPLZcU",
+    "slug": "smash-palace-lincoln",
+    "createdAt": "2025-11-27T21:28:46.000Z"
+  },
+  {
+    "id": "a281abae-cd80-4c2a-996b-2c8aee5825fd",
+    "name": "Smash Space UK",
+    "description": "Newcastle upon Tyne's rage room and smash room facility. Features escape room activities, rage room experiences, TVs, helmets, birthday packages, and fun activities for stress relief and entertainment.",
+    "city": "Newcastle",
+    "region": "",
+    "postcode": "NE4 7JE",
+    "location": {
+      "lat": 54.9665854,
+      "lng": -1.6231805
+    },
+    "website": "https://www.smashspace.co.uk/",
+    "phone": "+44 330 229 4425",
+    "price": 35,
+    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJ2YzKCzx3fkgRpzDhVtmild8/image-1764201094888-d53dc744.jpg",
+    "verified": true,
+    "googlePlaceId": "ChIJ2YzKCzx3fkgRpzDhVtmild8",
+    "slug": "smash-space-uk-newcastle",
+    "createdAt": "2025-11-27T21:28:46.834Z"
+  },
+  {
+    "id": "9675e2e1-a84a-41c5-9171-13503af3c4d5",
+    "name": "The Activity Dome",
+    "description": "Weston-super-Mare's top rage room experience. Features axe throwing, archery, and rage room activities. Perfect for birthdays, team building, and stress relief with music and fun activities.",
+    "city": "Weston-super-Mare",
+    "region": "",
+    "postcode": "BS23 1QF",
+    "location": {
+      "lat": 51.3492201,
+      "lng": -2.978185
+    },
+    "website": "http://www.theactivitydome.com/",
+    "phone": "+44 1934 707150",
+    "price": 32,
+    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJX6iq6OH5cUgReHLJUqtGY_k/image-1764201103382-c837610a.jpg",
+    "verified": true,
+    "googlePlaceId": "ChIJX6iq6OH5cUgReHLJUqtGY_k",
+    "slug": "the-activity-dome-weston-super-mare",
+    "createdAt": "2025-11-27T21:28:46.385Z"
+  },
+  {
+    "id": "a9b8c7d6-e5f4-4321-9a8b-7c6d5e4f3a2b",
+    "name": "The Break Rooms",
+    "description": "Leominster smash room on Station Yard Industrial Estate. Pre-booked sessions (about 20 minutes) for up to two people aged 12+, with safety gear and a box of smashables plus a larger item when available. Book by phone or Facebook.",
+    "city": "Leominster",
+    "region": "Herefordshire",
+    "postcode": "HR6 8TW",
+    "location": {
+      "lat": 52.2273558,
+      "lng": -2.7375333
+    },
+    "website": "https://www.dayoutwiththekids.co.uk/attractions/thebreakrooms-o1u8r400",
+    "phone": "07454 798515",
+    "price": 40,
+    "image": null,
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "the-break-rooms-leominster",
+    "createdAt": "2026-07-25T21:32:58.715Z"
+  },
+  {
+    "id": "b4e2d9f3-0e5c-4b8a-c723-9f6e4d0b2a15",
+    "name": "The Rabbit Hole Rage Room",
+    "description": "Swindon's first rage room on Cheney Manor Industrial Estate. Vent stress by smashing bottles, glasses, TVs, and picture frames in a supervised, controlled environment. Open Wed, Sat, and Sun.",
+    "city": "Swindon",
+    "region": "Wiltshire",
+    "postcode": "SN2 2DS",
+    "location": {
+      "lat": 51.570811,
+      "lng": -1.804881
+    },
+    "website": "https://www.facebook.com/the.rabbit.hole.rage.room/",
+    "phone": null,
+    "price": 32,
+    "image": "/images/the-rabbit-hole-rage-room-swindon.jpg",
+    "verified": true,
+    "googlePlaceId": "ChIJyQX-MtJFcUgR9Q4m0iRcg5U",
+    "slug": "the-rabbit-hole-rage-room-swindon",
+    "createdAt": "2026-06-02T12:00:00.000Z"
+  },
+  {
+    "id": "6eede7dc-117a-4e28-a4b7-57c8e67e7696",
+    "name": "The Rage House",
+    "description": "Newcastle's premier rage room and smash room experience. Features axe throwing, airsoft, and rage room activities. Enjoy drinks, protective gear, and competitive fun.",
+    "city": "Newcastle-under-Lyme",
+    "region": "",
+    "postcode": "ST5 1QQ",
+    "location": {
+      "lat": 53.0104977,
+      "lng": -2.2272964
+    },
+    "website": "https://www.theragehouse.com/",
+    "phone": "+44 1782 204392",
+    "price": 32,
+    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJ2R0ziCVDekgRCv7JBCT8k0w/image-1764201103388-e9545eb1.jpg",
+    "verified": true,
+    "googlePlaceId": "ChIJ2R0ziCVDekgRCv7JBCT8k0w",
+    "slug": "the-rage-house-newcastle-under-lyme",
+    "createdAt": "2025-11-27T21:28:46.261Z"
+  },
+  {
+    "id": "b1a2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
+    "name": "The Rage Rooms",
+    "description": "UK's immersive mobile rage room experience based in Dorset. Features \"Smash Therapy on Wheels\" for events and themed stress-relief.",
+    "city": "Bournemouth",
+    "region": "Dorset",
+    "postcode": "BH21 3RL",
+    "location": {
+      "lat": 50.7192,
+      "lng": -1.8808
+    },
+    "website": "https://the-ragerooms.co.uk/",
+    "phone": "+44 1202 911921",
+    "price": 50,
+    "image": "/images/TheRageRoomsBournemouth.png",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "the-rage-rooms-bournemouth",
+    "createdAt": "2025-11-27T21:28:46.000Z"
+  },
+  {
+    "id": "0ca388aa-95ca-4ec8-b4e1-f11221888369",
+    "name": "The Snake Room Urban Axe Throwing",
+    "description": "Urban axe throwing and rage room experience in Chesterfield. Perfect for birthdays, team events, and stress relief. Professional instructors and safety equipment provided.",
+    "city": "Chesterfield",
+    "region": "",
+    "postcode": "S41 9AQ",
+    "location": {
+      "lat": 53.2594909,
+      "lng": -1.4283515
+    },
+    "website": "https://snakeroom.co.uk/",
+    "phone": null,
+    "price": 32,
+    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJp8f9yISFeUgRxtoo5qRwsOc/image-1764201103602-d3464978.png",
+    "verified": true,
+    "googlePlaceId": "ChIJp8f9yISFeUgRxtoo5qRwsOc",
+    "slug": "the-snake-room-urban-axe-throwing-chesterfield",
+    "createdAt": "2025-11-27T21:28:46.300Z"
+  },
+  {
+    "id": "176522c9-6b9b-4aad-81f3-ddeaee3ea47f",
+    "name": "The Underground Newport",
+    "description": "Newport activity venue with a dedicated rage room at the Kingsway Centre. Smash bottles, plates, and breakables in a controlled room with safety equipment provided, with sessions bookable alongside axe throwing and other experiences.",
+    "city": "Newport",
+    "region": "Newport",
+    "postcode": "NP20 1EB",
+    "location": {
+      "lat": 51.585177,
+      "lng": -2.993131
+    },
+    "website": "https://www.theundergroundnewport.com/",
+    "phone": null,
+    "price": 30,
+    "image": "/images/TheUndergroundNewport.png",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "the-underground-newport",
+    "createdAt": "2026-06-14T12:00:00.000Z"
+  },
+  {
+    "id": "f20a646d-6a93-4fca-a94c-4b3c93d629ec",
+    "name": "Unleashed Castleford",
+    "description": "Castleford activity venue offering rage room sessions alongside other entertainment. Book a supervised smash-room slot with safety equipment supplied and breakables prepared for the session.",
+    "city": "Castleford",
+    "region": "West Yorkshire",
+    "postcode": "WF10 5DJ",
+    "location": {
+      "lat": 53.721794,
+      "lng": -1.363922
+    },
+    "website": "https://www.sumupbookings.com/unleashed-castleford",
+    "phone": null,
+    "price": 25,
+    "image": "/images/unleashed-castleford.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "unleashed-castleford",
+    "createdAt": "2026-06-14T12:00:00.000Z"
+  },
+  {
+    "id": "ba70cd2a-780d-4081-ba5b-113a31da0512",
+    "name": "Urban Xtreme Colchester",
+    "description": "Colchester's premier rage room and smash room experience. Features rage room activities, axe throwing, knife throwing, music, retro gaming, stress relief, weapons, and professional instructors with safety equipment.",
+    "city": "Colchester",
+    "region": "",
+    "postcode": "CO1 1UU",
+    "location": {
+      "lat": 51.8971248,
+      "lng": 0.8927616
+    },
+    "website": "http://www.urbanxtreme.co.uk/",
+    "phone": "+44 1206 577974",
+    "price": 35,
+    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJAWc27UkF2UcRDLBMWoV60xk/image-1764201098104-0da7c756.jpg",
+    "verified": true,
+    "googlePlaceId": "ChIJAWc27UkF2UcRDLBMWoV60xk",
+    "slug": "urban-xtreme-colchester-colchester",
+    "createdAt": "2025-11-27T21:28:46.654Z"
+  },
+  {
+    "id": "7a6431df-abcd-4a81-a37d-7344fb8a0871",
+    "name": "Wreck Room London",
+    "description": "London's first rage room: 10+ min sessions smashing electronics/glass with music and weapon choice. Perfect for stress relief.",
+    "city": "London",
+    "region": "London",
+    "postcode": "N/A",
+    "location": {
+      "lat": null,
+      "lng": null
+    },
+    "website": "https://www.wreckroom.co.uk/",
+    "phone": null,
+    "price": 20,
+    "image": "/images/wreckroom.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "wreck-room-london",
+    "createdAt": "2026-05-01T21:32:00.168Z"
   },
   {
     "id": "q1w2e3r4-t5y6-4u7i-8o9p-0a1s2d3f4g5h",
@@ -897,46 +937,6 @@
     "verified": true,
     "googlePlaceId": "ChIJgWRX6WQPhEgRmJ0HbJ0yhX4",
     "slug": "wreck-it-room-aberdeen",
-    "createdAt": "2025-11-27T21:28:46.000Z"
-  },
-  {
-    "id": "v1b2n3m4-q5w6-4e7r-8t9y-0u1i2o3p4a5s",
-    "name": "Destruction Time",
-    "description": "Swansea's dedicated outlet for releasing frustrations with bats and crowbars in a safe, industrial environment.",
-    "city": "Swansea",
-    "region": "Glamorgan",
-    "postcode": "SA1 1AA",
-    "location": {
-      "lat": 51.621,
-      "lng": -3.943
-    },
-    "website": "https://destructiontime.co.uk/",
-    "phone": "+44 7700 900123",
-    "price": 15,
-    "image": "/images/DestructionTimeSwansea.png",
-    "verified": true,
-    "googlePlaceId": null,
-    "slug": "destruction-time-swansea",
-    "createdAt": "2025-11-27T21:28:46.000Z"
-  },
-  {
-    "id": "e1r2t3y4-u5i6-4o7p-8a9s-0d1f2g3h4j5k",
-    "name": "Edinburgh Rage Room",
-    "description": "Mobile \"Smash Therapy on Wheels\" serving the Edinburgh area. Bringing the rage room experience directly to your party or event.",
-    "city": "Edinburgh",
-    "region": "Midlothian",
-    "postcode": "EH6 4JW",
-    "location": {
-      "lat": 55.98,
-      "lng": -3.19
-    },
-    "website": "https://classbento.co.uk/",
-    "phone": "+44 20 1234 5678",
-    "price": 50,
-    "image": "/images/EdinburghRageRoom.png",
-    "verified": true,
-    "googlePlaceId": null,
-    "slug": "edinburgh-rage-room-edinburgh",
     "createdAt": "2025-11-27T21:28:46.000Z"
   }
 ]
