@@ -31,6 +31,16 @@
 - **Default**: `RageRoom Directory <onboarding@resend.dev>` (Resend test sender)
 - **Required**: Recommended in production with a verified domain
 
+### `RESEND_AUDIENCE_ID`
+- **Description**: Optional Resend Audience ID for free checklist / lead-magnet signups
+- **Format**: `aud_...`
+- **Required**: Optional (lead email still sends; contact is only added when set)
+
+### `NEXT_PUBLIC_GA_MEASUREMENT_ID`
+- **Description**: Google Analytics 4 measurement ID for ecommerce funnel events on digital downloads
+- **Format**: `G-...`
+- **Required**: Optional (tracking skipped when unset)
+
 ### `NEXT_PUBLIC_SITE_URL`
 - **Description**: Your production site URL (used for SEO, sitemap, canonical URLs)
 - **Format**: `https://yourdomain.com`

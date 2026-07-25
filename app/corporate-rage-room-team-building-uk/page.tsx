@@ -1,6 +1,11 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowRight, CheckCircle, Clock, ClipboardCheck } from "lucide-react"
+import TrackedProductLink from "@/components/TrackedProductLink"
+import {
+  getDigitalProduct,
+  getDigitalProductAnalytics,
+} from "@/lib/digital-products"
 
 export const metadata: Metadata = {
   title: "Corporate Rage Room Team Building UK | Planning Guide",
@@ -17,6 +22,9 @@ const checks = [
 ]
 
 export default function CorporateTeamBuildingGuidePage() {
+  const product = getDigitalProduct("corporate-team-building-toolkit")!
+  const analyticsProduct = getDigitalProductAnalytics(product)
+
   return (
     <div className="px-4 py-12 sm:px-6 sm:py-16">
       <article className="mx-auto max-w-4xl">
@@ -108,13 +116,15 @@ export default function CorporateTeamBuildingGuidePage() {
             Get the approval email, budget worksheet, venue scorecard, staff invite,
             safety questions, run sheet and feedback form in one printable PDF.
           </p>
-          <Link
+          <TrackedProductLink
             href="/digital-downloads/corporate-rage-room-team-building-toolkit"
+            product={analyticsProduct}
+            listName="Corporate Landing CTA"
             className="btn-rage mt-5 inline-flex min-h-[44px] items-center justify-center gap-2 text-sm uppercase tracking-wider"
           >
             View corporate toolkit
             <ArrowRight className="h-4 w-4" />
-          </Link>
+          </TrackedProductLink>
         </section>
       </article>
     </div>

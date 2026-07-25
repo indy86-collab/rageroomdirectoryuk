@@ -62,6 +62,23 @@ export function trackSelectItem(
   })
 }
 
+export function trackViewItemList(
+  products: AnalyticsProduct[],
+  listName = "Digital Products"
+) {
+  if (!products.length) {
+    return
+  }
+
+  trackEvent("view_item_list", {
+    item_list_name: listName,
+    items: products.map((product, index) => ({
+      ...productItem(product),
+      index,
+    })),
+  })
+}
+
 export function trackBeginCheckout(product: AnalyticsProduct) {
   trackEvent("begin_checkout", {
     currency: product.currency,

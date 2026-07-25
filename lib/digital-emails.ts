@@ -149,3 +149,64 @@ export function getCheckoutSessionEmail(session: {
 }) {
   return sessionCustomerEmail(session)
 }
+
+const LEAD_MAGNET_PDF_PATH =
+  "/digital-products/rage-room-first-visit-prep-pack-sample.pdf?v=1&source=lead-magnet"
+
+export async function sendLeadMagnetEmail({
+  toEmail,
+}: {
+  toEmail: string
+}) {
+  const resend = getResendClient()
+  if (!resend) {
+    console.warn("RESEND_API_KEY missing — skipping lead magnet email")
+    return { sent: false as const, reason: "missing_api_key" as const }
+  }
+
+  const downloadUrl = absoluteUrl(LEAD_MAGNET_PDF_PATH)
+  const firstVisitUrl = absoluteUrl(
+    "/digital-downloads/rage-room-first-visit-prep-pack"
+  )
+  const partyUrl = absoluteUrl("/digital-downloads/rage-room-party-planner-pack")
+  const hubUrl = absoluteUrl("/digital-downloads")
+
+  const audienceId = process.env.RESEND_AUDIENCE_ID?.trim()
+  if (audienceId) {
+    try {
+      await resend.contacts.create({
+        email: toEmail,
+        audienceId,
+        unsubscribed: false,
+      })
+    } catch (error) {
+      // Contact may already exist — still send the checklist email.
+      console.warn("Lead magnet audience contact create skipped", error)
+    }
+  }
+
+  const { error } = await resend.emails.send({
+    from: getFromAddress(),
+    to: toEmail,
+    subject: "Your free rage room first-visit checklist",
+    html: `
+      <div style="font-family:system-ui,sans-serif;max-width:560px;margin:0 auto;color:#18181b">
+        <h1 style="font-size:22px">Your free checklist is ready</h1>
+        <p>Here’s a free sample from our First Visit Prep Pack — use it to arrive ready for your first smash session.</p>
+        <p style="margin:24px 0"><a href="${downloadUrl}" style="display:inline-block;background:#f97316;color:#fff;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:6px">Download free checklist (PDF)</a></p>
+        <p>Want the full printable pack (what happens, what to wear, venue questions, arrival checklist)?</p>
+        <p style="margin:16px 0"><a href="${firstVisitUrl}">First Visit Prep Pack — £5</a></p>
+        <p style="margin:16px 0"><a href="${partyUrl}">Planning a group night? Party Planner Pack — £7</a></p>
+        <p style="color:#52525b;font-size:14px"><a href="${hubUrl}">Browse all digital guides</a></p>
+        <p style="color:#52525b;font-size:14px">You’re getting this because you asked for the free checklist on RageRoom Directory. Reply anytime to unsubscribe.</p>
+      </div>
+    `,
+  })
+
+  if (error) {
+    console.error("Lead magnet email failed", error)
+    return { sent: false as const, reason: "send_failed" as const }
+  }
+
+  return { sent: true as const, downloadUrl }
+}

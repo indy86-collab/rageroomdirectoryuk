@@ -18,6 +18,8 @@ export type DigitalProduct = {
   /** Child product IDs fulfilled when this bundle is purchased. */
   bundleProductIds?: string[]
   marketingImage?: string
+  /** In-page sample page thumbnails (static PNGs). */
+  previewImages?: string[]
   previewPdf?: string
   description: string
   includedSections: string[]
@@ -41,6 +43,12 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     ),
     downloadFilename: "rage-room-party-planner-pack.pdf",
     contentType: "application/pdf",
+    marketingImage: "/digital-products/rage-room-party-planner-pack-cover.png",
+    previewImages: [
+      "/digital-products/rage-room-party-planner-pack-page-1.png",
+      "/digital-products/rage-room-party-planner-pack-page-2.png",
+      "/digital-products/rage-room-party-planner-pack-page-3.png",
+    ],
     previewPdf: "/digital-products/rage-room-party-planner-pack-sample.pdf?v=3",
     description:
       "A printable UK planning kit for rage room birthdays, date nights, breakup nights, group nights, stag and hen activities, and friends' nights out.",
@@ -80,6 +88,13 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     ),
     downloadFilename: "corporate-rage-room-team-building-toolkit.pdf",
     contentType: "application/pdf",
+    marketingImage:
+      "/digital-products/corporate-rage-room-team-building-toolkit-cover.png",
+    previewImages: [
+      "/digital-products/corporate-rage-room-team-building-toolkit-page-1.png",
+      "/digital-products/corporate-rage-room-team-building-toolkit-page-2.png",
+      "/digital-products/corporate-rage-room-team-building-toolkit-page-3.png",
+    ],
     previewPdf:
       "/digital-products/corporate-rage-room-team-building-toolkit-sample.pdf?v=3",
     description:
@@ -120,6 +135,12 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     ),
     downloadFilename: "rage-room-first-visit-prep-pack.pdf",
     contentType: "application/pdf",
+    marketingImage: "/digital-products/rage-room-first-visit-prep-pack-cover.png",
+    previewImages: [
+      "/digital-products/rage-room-first-visit-prep-pack-page-1.png",
+      "/digital-products/rage-room-first-visit-prep-pack-page-2.png",
+      "/digital-products/rage-room-first-visit-prep-pack-page-3.png",
+    ],
     previewPdf: "/digital-products/rage-room-first-visit-prep-pack-sample.pdf?v=1",
     description:
       "A printable UK first-timer kit covering what happens, what to wear, can-I-take-part checks, venue questions, waiver tips and a final arrival checklist.",
@@ -157,6 +178,11 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     downloadFilename: "rage-room-gift-voucher-template-pack.zip",
     contentType: "application/zip",
     marketingImage: "/digital-products/rage-room-gift-voucher-template-pack-mockup.png",
+    previewImages: [
+      "/digital-products/rage-room-gift-voucher-template-pack-page-1.png",
+      "/digital-products/rage-room-gift-voucher-template-pack-page-2.png",
+      "/digital-products/rage-room-gift-voucher-template-pack-page-3.png",
+    ],
     previewPdf:
       "/digital-products/rage-room-gift-voucher-template-pack-sample.pdf?v=3",
     description:
@@ -198,6 +224,12 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     bundleProductIds: [
       "rage-room-party-planner",
       "rage-room-gift-voucher-template-pack",
+    ],
+    marketingImage: "/digital-products/party-planner-gift-voucher-bundle-cover.png",
+    previewImages: [
+      "/digital-products/rage-room-party-planner-pack-page-1.png",
+      "/digital-products/rage-room-gift-voucher-template-pack-page-1.png",
+      "/digital-products/rage-room-party-planner-pack-page-3.png",
     ],
     description:
       "Bundle the Rage Room Party Planner Pack and Gift Voucher Template Pack — plan the night and present the experience as a polished gift.",

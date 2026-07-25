@@ -1,12 +1,25 @@
 import Link from "next/link"
-import { Download, HelpCircle, Mail, ShieldCheck, Sparkles } from "lucide-react"
+import { Download, HelpCircle, Mail, RotateCcw, ShieldCheck, Sparkles } from "lucide-react"
 
 const reassuranceItems = [
   { label: "Secure checkout by Stripe", icon: ShieldCheck },
   { label: "Instant download after payment", icon: Download },
   { label: "Keep forever after download", icon: Sparkles },
   { label: "UK-ready templates", icon: Mail },
+  { label: "7-day faulty-file refund", icon: RotateCcw },
 ]
+
+export function DigitalRefundNote({ className = "" }: { className?: string }) {
+  return (
+    <p className={`mt-3 text-xs leading-relaxed text-zinc-400 ${className}`}>
+      Faulty or unreadable file? Contact us within 7 days for a replacement or refund.
+      Change-of-mind refunds are not offered after a successful download.{" "}
+      <Link href="/contact" className="font-semibold text-zinc-300 underline-offset-2 hover:text-white hover:underline">
+        Contact us
+      </Link>
+    </p>
+  )
+}
 
 type DigitalPurchaseReassuranceProps = {
   className?: string
@@ -34,6 +47,21 @@ export function DigitalPurchaseReassurance({
         Questions? Contact us
       </Link>
     </div>
+  )
+}
+
+/** Compact single-line trust for PDP heroes (less chip clutter). */
+export function DigitalCompactTrust({ className = "" }: { className?: string }) {
+  return (
+    <p className={`mt-4 text-sm font-semibold text-zinc-400 ${className}`}>
+      <span className="text-zinc-200">Stripe</span>
+      <span className="mx-2 text-zinc-600">·</span>
+      Instant download
+      <span className="mx-2 text-zinc-600">·</span>
+      Keep forever
+      <span className="mx-2 text-zinc-600">·</span>
+      7-day faulty-file refund
+    </p>
   )
 }
 

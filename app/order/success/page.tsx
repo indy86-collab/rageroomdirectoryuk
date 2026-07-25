@@ -72,19 +72,12 @@ export default async function OrderSuccessPage({
     )
   }
 
-  const isCorporate = purchasedProduct.id === "corporate-team-building-toolkit"
   const isGiftVoucher =
     purchasedProduct.id === "rage-room-gift-voucher-template-pack"
   const isBundle = purchasedProduct.id === "party-gift-bundle"
   const productHref = `/digital-downloads/${purchasedProduct.slug}`
   const analyticsProduct = getDigitalProductAnalytics(purchasedProduct)
-  const headline = isBundle
-    ? "Your Party Planner + Gift Voucher Bundle is ready."
-    : isGiftVoucher
-      ? "Your Rage Room Gift Voucher Template Pack is ready."
-      : isCorporate
-        ? "Your Corporate Rage Room Team-Building Toolkit is ready."
-        : "Your Rage Room Party Planner Pack is ready."
+  const headline = `Your ${purchasedProduct.name} is ready.`
 
   return (
     <div className="px-4 py-16 sm:px-6">

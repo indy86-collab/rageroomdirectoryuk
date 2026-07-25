@@ -1,20 +1,24 @@
 import type { Metadata } from "next"
-import Image from "next/image"
-import Link from "next/link"
 import { AlertTriangle, Check, Gift, ListChecks, Sparkles } from "lucide-react"
 import DigitalBundleOffer from "@/components/DigitalBundleOffer"
 import DigitalCheckoutButton from "@/components/DigitalCheckoutButton"
+import DigitalEditorialByline from "@/components/DigitalEditorialByline"
+import DigitalProductCover from "@/components/DigitalProductCover"
 import {
+  DigitalCompactTrust,
   DigitalPurchaseReassurance,
+  DigitalRefundNote,
   DigitalValueStack,
   WhatHappensAfterPayment,
 } from "@/components/DigitalPurchaseDetails"
+import DigitalSampleStrip from "@/components/DigitalSampleStrip"
 import FAQ from "@/components/FAQ"
 import ProductViewTracker from "@/components/ProductViewTracker"
 import {
   getDigitalProduct,
   getDigitalProductAnalytics,
 } from "@/lib/digital-products"
+import { buildDigitalProductSchema } from "@/lib/seo-schema"
 
 const product = getDigitalProduct("rage-room-gift-voucher-template-pack")!
 const analyticsProduct = getDigitalProductAnalytics(product)
@@ -27,13 +31,6 @@ export const metadata: Metadata = {
     canonical: "/digital-downloads/rage-room-gift-voucher-template-pack",
   },
 }
-
-const trustBullets = [
-  "Printable and digital templates",
-  "8 voucher themes",
-  "A4, A5, mobile and square formats",
-  "Preview catalogue available",
-]
 
 const includedGroups = [
   {
@@ -133,8 +130,22 @@ const faqs = [
 ]
 
 export default function GiftVoucherTemplatePackPage() {
+  const productSchema = buildDigitalProductSchema({
+    name: product.name,
+    description: product.description,
+    url: `/digital-downloads/${product.slug}`,
+    price: product.unitAmount / 100,
+    currency: product.currency,
+    image: product.marketingImage || product.previewPdf,
+    sku: product.analyticsItemId,
+  })
+
   return (
     <div className="bg-dark-900">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
       <ProductViewTracker product={analyticsProduct} />
       <section className="px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
         <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
@@ -145,6 +156,7 @@ export default function GiftVoucherTemplatePackPage() {
             <h1 className="mt-4 text-4xl font-black uppercase tracking-wide text-white sm:text-5xl lg:text-6xl">
               Rage Room Gift Voucher Template Pack
             </h1>
+            <DigitalEditorialByline className="mt-3" />
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-zinc-300">
               Give a rage room experience as a polished printable or digital gift voucher.
             </p>
@@ -162,50 +174,30 @@ export default function GiftVoucherTemplatePackPage() {
                 Send a polished voucher today — £5
               </DigitalCheckoutButton>
             </div>
-            <DigitalValueStack
-              title="Updated for UK experience gifts 2026"
-              items={[
-                "8 voucher themes across A4, A5, mobile and square formats",
-                "Bonus gift note, redeem insert, envelope insert and mini gift tag",
-                "Preview catalogue available before you buy",
-              ]}
-              timeCompare="Faster than designing a voucher from scratch — ready to print or send tonight."
-            />
-            <div className="mt-6 flex flex-wrap gap-2">
-              {trustBullets.map((bullet) => (
-                <span
-                  key={bullet}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-zinc-700 bg-[#181818] px-3 py-1.5 text-xs font-semibold text-zinc-200"
-                >
-                  <Check className="h-3.5 w-3.5 text-rage-500" />
-                  {bullet}
-                </span>
-              ))}
-            </div>
-            <DigitalPurchaseReassurance />
-            {product.previewPdf && (
-              <Link
-                href={product.previewPdf}
-                className="mt-5 inline-flex text-sm font-semibold text-rage-500 hover:text-rage-400"
-              >
-                View preview catalogue
-              </Link>
-            )}
+            <DigitalCompactTrust />
+            <DigitalRefundNote />
           </div>
           {product.marketingImage && (
-            <div className="relative mx-auto w-full max-w-md overflow-hidden rounded-lg border border-zinc-800 bg-[#181818] p-3 shadow-2xl shadow-black/40">
-              <Image
-                src={product.marketingImage}
-                alt="Rage Room Gift Voucher Template Pack mockup"
-                width={1200}
-                height={900}
-                className="h-auto w-full rounded-md"
-                priority
-              />
-            </div>
+            <DigitalProductCover
+              src={product.marketingImage}
+              alt={`${product.name} mockup`}
+              priority
+            />
           )}
         </div>
       </section>
+
+      {product.previewImages?.length ? (
+        <section className="px-4 pb-4 sm:px-6">
+          <div className="mx-auto max-w-6xl rounded-lg border border-zinc-800 bg-[#181818] p-5 sm:p-6">
+            <DigitalSampleStrip
+              images={product.previewImages}
+              productName={product.name}
+              previewPdf={product.previewPdf}
+            />
+          </div>
+        </section>
+      ) : null}
 
       <section className="section-textured px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-4xl">
@@ -217,6 +209,15 @@ export default function GiftVoucherTemplatePackPage() {
             link can feel underwhelming. This pack gives you printable and digital voucher
             designs so the gift feels more intentional, polished and shareable.
           </p>
+          <DigitalValueStack
+            title="Updated for UK experience gifts 2026"
+            items={[
+              "8 voucher themes across A4, A5, mobile and square formats",
+              "Bonus gift note, redeem insert, envelope insert and mini gift tag",
+              "Preview catalogue available before you buy",
+            ]}
+            timeCompare="Faster than designing a voucher from scratch — ready to print or send tonight."
+          />
         </div>
       </section>
 
@@ -333,6 +334,7 @@ export default function GiftVoucherTemplatePackPage() {
           </div>
           <div className="mx-auto max-w-2xl">
             <DigitalPurchaseReassurance className="justify-center" />
+            <DigitalRefundNote className="text-center" />
           </div>
         </div>
       </section>

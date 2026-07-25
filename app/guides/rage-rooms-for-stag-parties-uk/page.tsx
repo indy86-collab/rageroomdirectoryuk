@@ -3,6 +3,7 @@ import Link from "next/link"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import GuideMeta from "@/components/GuideMeta"
 import AdsenseInContent from "@/components/ads/AdsenseInContent"
+import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
 import FAQ from "@/components/FAQ"
 import {
   buildArticleSchema,
@@ -496,6 +497,10 @@ export default function RageRoomsForStagPartiesPage() {
               </li>
             </ul>
           </section>
+
+          <div className="my-8">
+            <DigitalDownloadCTA variant="party" />
+          </div>
 
           <FAQ
             items={FAQS.map((f) => ({ question: f.q, answer: f.a }))}

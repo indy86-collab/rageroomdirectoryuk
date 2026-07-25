@@ -38,6 +38,7 @@ export default async function Footer() {
         { label: "UK Map", href: "/uk-map" },
         { label: "UK Rage Room Report 2026", href: "/uk-rage-room-report-2026" },
         { label: "UK Prices Hub", href: "/rage-room-prices-uk" },
+        { label: "Digital Guides", href: "/digital-downloads" },
         { label: "All Guides", href: "/guides" },
         { label: "Blog", href: "/blog" },
       ],

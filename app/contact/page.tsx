@@ -162,7 +162,7 @@ export default function ContactPage() {
                 a venue has permanently closed, we remove it from the directory.
               </p>
             </details>
-            <details className="group pb-4">
+            <details className="group border-b border-zinc-700 pb-4">
               <summary className="flex items-center justify-between cursor-pointer text-white font-medium py-1 hover:text-orange-500 transition-colors">
                 Can I leave a review on a listing?
                 <svg className="w-5 h-5 text-zinc-400 group-open:rotate-180 transition-transform flex-shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -173,6 +173,28 @@ export default function ContactPage() {
                 Yes. Registered users can leave reviews on any listing page. You'll need to create
                 a free account first. We also display Google reviews for venues where we have a
                 verified Google Place ID.
+              </p>
+            </details>
+            <details className="group pb-4">
+              <summary className="flex items-center justify-between cursor-pointer text-white font-medium py-1 hover:text-orange-500 transition-colors">
+                I need help with a digital download purchase
+                <svg className="w-5 h-5 text-zinc-400 group-open:rotate-180 transition-transform flex-shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <p className="text-zinc-400 text-sm mt-2 leading-relaxed">
+                For download links, faulty files or refunds within 7 days, email{" "}
+                <a
+                  href="mailto:ukrageroom@gmail.com?subject=Digital%20download%20help"
+                  className="text-orange-500 hover:text-orange-600 underline"
+                >
+                  ukrageroom@gmail.com
+                </a>{" "}
+                with your order email and product name. Browse packs on our{" "}
+                <Link href="/digital-downloads" className="text-orange-500 hover:text-orange-600 underline">
+                  Digital Guides
+                </Link>{" "}
+                page.
               </p>
             </details>
           </div>
@@ -189,6 +211,9 @@ export default function ContactPage() {
             </Link>
             <Link href="/guides" className="text-orange-500 hover:text-orange-600 underline text-sm">
               Guides & Resources
+            </Link>
+            <Link href="/digital-downloads" className="text-orange-500 hover:text-orange-600 underline text-sm">
+              Digital Guides
             </Link>
             <Link href="/editorial-policy" className="text-orange-500 hover:text-orange-600 underline text-sm">
               Editorial Policy

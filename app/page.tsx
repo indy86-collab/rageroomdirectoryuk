@@ -8,8 +8,13 @@ import { globalFAQs } from "@/lib/faqs"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, MapPin, Ticket, HardHat, Hammer, Heart, ShieldCheck, Users, Sparkles, Star, Gift } from "lucide-react"
+import TrackedProductLink from "@/components/TrackedProductLink"
 import { buildOgImageUrl } from "@/lib/seo-schema"
 import { getSiteUrl } from "@/lib/site-url"
+import {
+  getDigitalProduct,
+  getDigitalProductAnalytics,
+} from "@/lib/digital-products"
 
 export const revalidate = 900
 
@@ -182,6 +187,11 @@ export default async function Home() {
     .sort((a, b) => b.count - a.count)
     .slice(0, 8)
 
+  const corporateProduct = getDigitalProduct("corporate-team-building-toolkit")!
+  const corporateAnalytics = getDigitalProductAnalytics(corporateProduct)
+  const giftProduct = getDigitalProduct("rage-room-gift-voucher-template-pack")!
+  const giftAnalytics = getDigitalProductAnalytics(giftProduct)
+
   return (
     <>
       <Hero featuredListings={featuredListings} />
@@ -329,37 +339,37 @@ export default async function Home() {
                 </div>
 
                 <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
-                  <Link
+                  <TrackedProductLink
                     href="/digital-downloads/corporate-rage-room-team-building-toolkit"
+                    product={corporateAnalytics}
+                    listName="Homepage Corporate CTA"
                     className="btn-rage inline-flex min-h-[46px] items-center justify-center gap-2 text-sm uppercase tracking-wider"
                   >
                     View corporate toolkit
                     <ArrowRight className="h-4 w-4" />
-                  </Link>
+                  </TrackedProductLink>
                   <p className="text-sm font-semibold text-zinc-300">
                     Printable PDF · Instant download · <span className="text-white">£19</span>
                   </p>
                 </div>
               </div>
 
-              <div className="rounded-lg border border-zinc-700 bg-zinc-100 p-4 text-zinc-950 shadow-xl shadow-black/30">
-                <div className="rounded-md bg-[#151515] p-4 text-white">
-                  <p className="text-[11px] font-bold uppercase tracking-widest text-rage-500">
-                    Corporate Toolkit
-                  </p>
-                  <div className="mt-3 font-display text-4xl leading-none">
-                    Team-Building
-                    <span className="block text-rage-500">Planner</span>
-                  </div>
-                </div>
-                <div className="mt-3 grid grid-cols-2 gap-2 text-[11px] font-bold">
-                  {["Approve", "Invite", "Schedule", "Feedback"].map((item) => (
-                    <div key={item} className="rounded border border-zinc-300 bg-white p-2">
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              </div>
+              {corporateProduct.marketingImage && (
+                <TrackedProductLink
+                  href="/digital-downloads/corporate-rage-room-team-building-toolkit"
+                  product={corporateAnalytics}
+                  listName="Homepage Corporate CTA"
+                  className="relative mx-auto block aspect-[16/10] w-full max-w-sm overflow-hidden rounded-lg border border-zinc-700 shadow-xl shadow-black/30"
+                >
+                  <Image
+                    src={corporateProduct.marketingImage}
+                    alt={corporateProduct.name}
+                    fill
+                    className="object-cover"
+                    sizes="320px"
+                  />
+                </TrackedProductLink>
+              )}
             </div>
           </div>
         </div>
@@ -370,9 +380,26 @@ export default async function Home() {
           <div className="rounded-lg border border-zinc-800 bg-[#181818] p-5 sm:p-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-start gap-3">
-                <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-md border border-rage-500/40 bg-rage-500/15">
-                  <Gift className="h-5 w-5 text-rage-500" />
-                </div>
+                {giftProduct.marketingImage ? (
+                  <TrackedProductLink
+                    href="/digital-downloads/rage-room-gift-voucher-template-pack"
+                    product={giftAnalytics}
+                    listName="Homepage Gift CTA"
+                    className="relative h-20 w-28 flex-shrink-0 overflow-hidden rounded-md border border-zinc-700"
+                  >
+                    <Image
+                      src={giftProduct.marketingImage}
+                      alt={giftProduct.name}
+                      fill
+                      className="object-cover"
+                      sizes="112px"
+                    />
+                  </TrackedProductLink>
+                ) : (
+                  <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-md border border-rage-500/40 bg-rage-500/15">
+                    <Gift className="h-5 w-5 text-rage-500" />
+                  </div>
+                )}
                 <div>
                   <p className="text-xs font-bold uppercase tracking-widest text-rage-500">
                     Gift idea
@@ -386,13 +413,15 @@ export default async function Home() {
                   </p>
                 </div>
               </div>
-              <Link
+              <TrackedProductLink
                 href="/digital-downloads/rage-room-gift-voucher-template-pack"
+                product={giftAnalytics}
+                listName="Homepage Gift CTA"
                 className="btn-rage inline-flex min-h-[44px] items-center justify-center gap-2 whitespace-nowrap text-sm uppercase tracking-wider"
               >
                 View voucher pack
                 <ArrowRight className="h-4 w-4" />
-              </Link>
+              </TrackedProductLink>
             </div>
           </div>
         </div>

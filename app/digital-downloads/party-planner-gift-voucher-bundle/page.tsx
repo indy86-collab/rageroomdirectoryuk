@@ -2,10 +2,15 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { Check, Gift, PartyPopper } from "lucide-react"
 import DigitalCheckoutButton from "@/components/DigitalCheckoutButton"
+import DigitalEditorialByline from "@/components/DigitalEditorialByline"
+import DigitalProductCover from "@/components/DigitalProductCover"
 import {
+  DigitalCompactTrust,
   DigitalPurchaseReassurance,
+  DigitalRefundNote,
   WhatHappensAfterPayment,
 } from "@/components/DigitalPurchaseDetails"
+import DigitalSampleStrip from "@/components/DigitalSampleStrip"
 import FAQ from "@/components/FAQ"
 import ProductViewTracker from "@/components/ProductViewTracker"
 import TrackedProductLink from "@/components/TrackedProductLink"
@@ -13,6 +18,7 @@ import {
   getDigitalProduct,
   getDigitalProductAnalytics,
 } from "@/lib/digital-products"
+import { buildDigitalProductSchema } from "@/lib/seo-schema"
 
 const product = getDigitalProduct("party-gift-bundle")!
 const analyticsProduct = getDigitalProductAnalytics(product)
@@ -49,40 +55,76 @@ const faqs = [
 ]
 
 export default function PartyGiftBundlePage() {
+  const productSchema = buildDigitalProductSchema({
+    name: product.name,
+    description: product.description,
+    url: `/digital-downloads/${product.slug}`,
+    price: product.unitAmount / 100,
+    currency: product.currency,
+    image: product.marketingImage || giftProduct.marketingImage,
+    sku: product.analyticsItemId,
+  })
+
   return (
     <div className="bg-dark-900">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
       <ProductViewTracker product={analyticsProduct} />
       <section className="px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-bold uppercase tracking-widest text-rage-500">
-            Bundle & save £3
-          </p>
-          <h1 className="mt-4 text-4xl font-black uppercase tracking-wide text-white sm:text-5xl">
-            Party Planner + Gift Voucher Bundle
-          </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-zinc-300">
-            Plan the smash night and present the experience as a polished gift.
-            Normally £12 separately — get both for {product.priceLabel}.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <div>
-              <div className="text-3xl font-black text-white">
-                {product.priceLabel}
+        <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-widest text-rage-500">
+              Bundle & save £3
+            </p>
+            <h1 className="mt-4 text-4xl font-black uppercase tracking-wide text-white sm:text-5xl">
+              Party Planner + Gift Voucher Bundle
+            </h1>
+            <DigitalEditorialByline className="mt-3" />
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-zinc-300">
+              Plan the smash night and present the experience as a polished gift.
+              Normally £12 separately — get both for {product.priceLabel}.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <div>
+                <div className="text-3xl font-black text-white">
+                  {product.priceLabel}
+                </div>
+                <p className="mt-1 text-xs font-semibold text-zinc-400">
+                  Was £12 · Instant downloads
+                </p>
               </div>
-              <p className="mt-1 text-xs font-semibold text-zinc-400">
-                Was £12 · Instant downloads
-              </p>
+              <DigitalCheckoutButton
+                productId={product.id}
+                analyticsProduct={analyticsProduct}
+              >
+                Get the bundle — {product.priceLabel}
+              </DigitalCheckoutButton>
             </div>
-            <DigitalCheckoutButton
-              productId={product.id}
-              analyticsProduct={analyticsProduct}
-            >
-              Get the bundle — {product.priceLabel}
-            </DigitalCheckoutButton>
+            <DigitalCompactTrust />
+            <DigitalRefundNote />
           </div>
-          <DigitalPurchaseReassurance className="justify-center" />
+          {product.marketingImage && (
+            <DigitalProductCover
+              src={product.marketingImage}
+              alt={`${product.name} cover`}
+              priority
+            />
+          )}
         </div>
       </section>
+
+      {product.previewImages?.length ? (
+        <section className="px-4 pb-4 sm:px-6">
+          <div className="mx-auto max-w-6xl rounded-lg border border-zinc-800 bg-[#181818] p-5 sm:p-6">
+            <DigitalSampleStrip
+              images={product.previewImages}
+              productName={product.name}
+            />
+          </div>
+        </section>
+      ) : null}
 
       <section className="section-textured px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-4xl">
@@ -170,6 +212,10 @@ export default function PartyGiftBundlePage() {
             >
               Get the bundle — {product.priceLabel}
             </DigitalCheckoutButton>
+          </div>
+          <div className="mx-auto max-w-2xl">
+            <DigitalPurchaseReassurance className="justify-center" />
+            <DigitalRefundNote className="text-center" />
           </div>
           <p className="mt-4 text-sm text-zinc-400">
             Prefer singles?{" "}

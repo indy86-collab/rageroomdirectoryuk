@@ -211,3 +211,48 @@ export function buildBreadcrumbSchema(items: { name: string; url: string }[]) {
     })),
   }
 }
+
+/** Product + Offer schema for digital download PDPs. */
+export function buildDigitalProductSchema(opts: {
+  name: string
+  description: string
+  url: string
+  price: number
+  currency?: string
+  image?: string
+  sku?: string
+}) {
+  const url = absoluteUrl(opts.url)
+  const image = opts.image
+    ? opts.image.startsWith("http")
+      ? opts.image
+      : absoluteUrl(opts.image.split("?")[0])
+    : absoluteUrl("/og-image.png")
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": `${url}#product`,
+    name: opts.name,
+    description: opts.description,
+    image,
+    sku: opts.sku,
+    brand: {
+      "@type": "Brand",
+      name: "RageRoom Directory",
+    },
+    offers: {
+      "@type": "Offer",
+      url,
+      priceCurrency: (opts.currency || "GBP").toUpperCase(),
+      price: opts.price.toFixed(2),
+      availability: "https://schema.org/InStock",
+      itemCondition: "https://schema.org/NewCondition",
+      seller: {
+        "@type": "Organization",
+        name: "RageRoom Directory",
+        url: BASE_URL,
+      },
+    },
+  }
+}

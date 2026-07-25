@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import Link from "next/link"
 import AdsenseInContent from "@/components/ads/AdsenseInContent"
+import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
 import FAQ from "@/components/FAQ"
 import GuideMeta from "@/components/GuideMeta"
 import {
@@ -230,6 +231,10 @@ export default async function BestRageRoomsForTeamBuildingPage() {
               <li><strong>Follow Up:</strong> Consider combining with a meal or drinks afterward for extended team bonding</li>
               <li><strong>Safety First:</strong> Ensure all team members are aware of safety requirements and age restrictions</li>
             </ul>
+          </div>
+
+          <div className="my-8">
+            <DigitalDownloadCTA variant="corporate" />
           </div>
 
           <FAQ items={teamBuildingFAQs} title="Frequently Asked Questions About Rage Rooms for Team Building" />

@@ -1,6 +1,11 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowRight, CheckCircle, Gift } from "lucide-react"
+import TrackedProductLink from "@/components/TrackedProductLink"
+import {
+  getDigitalProduct,
+  getDigitalProductAnalytics,
+} from "@/lib/digital-products"
 
 export const metadata: Metadata = {
   title: "Rage Room Gift Ideas UK | Printable Voucher Templates",
@@ -25,6 +30,9 @@ const checks = [
 ]
 
 export default function RageRoomGiftIdeasUKPage() {
+  const product = getDigitalProduct("rage-room-gift-voucher-template-pack")!
+  const analyticsProduct = getDigitalProductAnalytics(product)
+
   return (
     <div className="px-4 py-12 sm:px-6 sm:py-16">
       <article className="mx-auto max-w-4xl">
@@ -97,13 +105,15 @@ export default function RageRoomGiftIdeasUKPage() {
             breakups, best friends, holidays and generic experience gifts. This is a
             presentation pack only, not a venue-issued voucher or booking.
           </p>
-          <Link
+          <TrackedProductLink
             href="/digital-downloads/rage-room-gift-voucher-template-pack"
+            product={analyticsProduct}
+            listName="Gift Ideas Landing CTA"
             className="btn-rage mt-5 inline-flex min-h-[44px] items-center justify-center gap-2 text-sm uppercase tracking-wider"
           >
             View voucher pack
             <ArrowRight className="h-4 w-4" />
-          </Link>
+          </TrackedProductLink>
         </section>
       </article>
     </div>

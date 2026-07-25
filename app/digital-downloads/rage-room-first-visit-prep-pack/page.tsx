@@ -1,12 +1,16 @@
 import type { Metadata } from "next"
-import Link from "next/link"
 import { Check, ClipboardList, Download, Sparkles } from "lucide-react"
 import DigitalCheckoutButton from "@/components/DigitalCheckoutButton"
+import DigitalEditorialByline from "@/components/DigitalEditorialByline"
+import DigitalProductCover from "@/components/DigitalProductCover"
 import {
+  DigitalCompactTrust,
   DigitalPurchaseReassurance,
+  DigitalRefundNote,
   DigitalValueStack,
   WhatHappensAfterPayment,
 } from "@/components/DigitalPurchaseDetails"
+import DigitalSampleStrip from "@/components/DigitalSampleStrip"
 import FAQ from "@/components/FAQ"
 import ProductViewTracker from "@/components/ProductViewTracker"
 import TrackedProductLink from "@/components/TrackedProductLink"
@@ -14,6 +18,7 @@ import {
   getDigitalProduct,
   getDigitalProductAnalytics,
 } from "@/lib/digital-products"
+import { buildDigitalProductSchema } from "@/lib/seo-schema"
 
 const product = getDigitalProduct("rage-room-first-visit-prep")!
 const analyticsProduct = getDigitalProductAnalytics(product)
@@ -30,13 +35,6 @@ export const metadata: Metadata = {
     canonical: "/digital-downloads/rage-room-first-visit-prep-pack",
   },
 }
-
-const trustBullets = [
-  "Printable PDF",
-  "12-page prep kit",
-  "UK edition",
-  "Sample preview available",
-]
 
 const includedGroups = [
   {
@@ -111,39 +109,23 @@ const faqs = [
   },
 ]
 
-function ProductMockup() {
-  return (
-    <div className="relative mx-auto w-full max-w-sm">
-      <div className="absolute left-8 top-8 h-full w-full rounded-lg bg-rage-500/25 blur-sm" />
-      <div className="relative overflow-hidden rounded-lg border border-zinc-700 bg-zinc-100 p-5 text-zinc-950 shadow-2xl shadow-black/40">
-        <div className="rounded-md bg-[#151515] p-5 text-white">
-          <p className="text-xs font-bold uppercase tracking-widest text-rage-500">
-            Printable UK Prep Kit
-          </p>
-          <h2 className="mt-4 font-display text-5xl leading-none text-white">
-            First Visit
-            <span className="block text-rage-500">Prep Pack</span>
-          </h2>
-          <p className="mt-4 text-sm text-zinc-300">
-            What happens, what to wear, venue questions, waiver tips and arrival checklist.
-          </p>
-        </div>
-        <div className="mt-5 grid grid-cols-2 gap-3 text-xs font-semibold">
-          {["What happens", "What to wear", "Venue Qs", "Arrival"].map((item) => (
-            <div key={item} className="rounded border border-zinc-300 bg-white p-3">
-              {item}
-            </div>
-          ))}
-        </div>
-        <div className="mt-5 h-2 rounded-full bg-rage-500" />
-      </div>
-    </div>
-  )
-}
-
 export default function RageRoomFirstVisitPrepPackPage() {
+  const productSchema = buildDigitalProductSchema({
+    name: product.name,
+    description: product.description,
+    url: `/digital-downloads/${product.slug}`,
+    price: product.unitAmount / 100,
+    currency: product.currency,
+    image: product.marketingImage || product.previewPdf,
+    sku: product.analyticsItemId,
+  })
+
   return (
     <div className="bg-dark-900">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
       <ProductViewTracker product={analyticsProduct} />
       <section className="px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
         <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
@@ -154,6 +136,7 @@ export default function RageRoomFirstVisitPrepPackPage() {
             <h1 className="mt-4 text-4xl font-black uppercase tracking-wide text-white sm:text-5xl lg:text-6xl">
               Rage Room First Visit Prep Pack
             </h1>
+            <DigitalEditorialByline className="mt-3" />
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-zinc-300">
               Arrive ready for your first smash session — what happens, what to wear, and
               what to ask before you book.
@@ -172,39 +155,30 @@ export default function RageRoomFirstVisitPrepPackPage() {
                 Get first-visit ready — £5
               </DigitalCheckoutButton>
             </div>
-            <DigitalValueStack
-              title="Built for first-timers 2026"
-              items={[
-                "12 printable pages — expectations, clothing, venue questions and arrival checks",
-                "Practical self-check before you pay a deposit",
-                "Sample preview available before you buy",
-              ]}
-              timeCompare="Worth the calm before booking — less than a coffee."
-            />
-            <div className="mt-6 flex flex-wrap gap-2">
-              {trustBullets.map((bullet) => (
-                <span
-                  key={bullet}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-zinc-700 bg-[#181818] px-3 py-1.5 text-xs font-semibold text-zinc-200"
-                >
-                  <Check className="h-3.5 w-3.5 text-rage-500" />
-                  {bullet}
-                </span>
-              ))}
-            </div>
-            <DigitalPurchaseReassurance />
-            {product.previewPdf && (
-              <Link
-                href={product.previewPdf}
-                className="mt-5 inline-flex text-sm font-semibold text-rage-500 hover:text-rage-400"
-              >
-                View sample pages
-              </Link>
-            )}
+            <DigitalCompactTrust />
+            <DigitalRefundNote />
           </div>
-          <ProductMockup />
+          {product.marketingImage && (
+            <DigitalProductCover
+              src={product.marketingImage}
+              alt={`${product.name} cover`}
+              priority
+            />
+          )}
         </div>
       </section>
+
+      {product.previewImages?.length ? (
+        <section className="px-4 pb-4 sm:px-6">
+          <div className="mx-auto max-w-6xl rounded-lg border border-zinc-800 bg-[#181818] p-5 sm:p-6">
+            <DigitalSampleStrip
+              images={product.previewImages}
+              productName={product.name}
+              previewPdf={product.previewPdf}
+            />
+          </div>
+        </section>
+      ) : null}
 
       <section className="section-textured px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-4xl">
@@ -216,6 +190,15 @@ export default function RageRoomFirstVisitPrepPackPage() {
             ask before paying? This pack answers those questions in one printable place so
             you show up ready.
           </p>
+          <DigitalValueStack
+            title="Built for first-timers 2026"
+            items={[
+              "12 printable pages — expectations, clothing, venue questions and arrival checks",
+              "Practical self-check before you pay a deposit",
+              "Sample preview available before you buy",
+            ]}
+            timeCompare="Worth the calm before booking — less than a coffee."
+          />
         </div>
       </section>
 
@@ -324,6 +307,7 @@ export default function RageRoomFirstVisitPrepPackPage() {
           </div>
           <div className="mx-auto max-w-2xl">
             <DigitalPurchaseReassurance className="justify-center" />
+            <DigitalRefundNote className="text-center" />
           </div>
         </div>
       </section>
