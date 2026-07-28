@@ -78,9 +78,12 @@
 Listings are stored in [`data/listings.json`](data/listings.json) in the repository — no database is required.
 
 To add or edit listings:
-1. Edit `data/listings.json` locally
-2. Run `npm run validate-listings` to check for errors
-3. Commit and push — Vercel redeploys automatically
+1. Check [`data/listings-blacklist.json`](data/listings-blacklist.json) — never re-add blacklisted venues
+2. Edit `data/listings.json` locally
+3. Run `npm run validate-listings` to check for errors (also rejects blacklisted venues)
+4. Commit and push — Vercel redeploys automatically
+
+When removing a closed venue, delete it from `listings.json` **and** add it to `listings-blacklist.json` so automation cannot re-import it.
 
 ## How to Add to Vercel
 

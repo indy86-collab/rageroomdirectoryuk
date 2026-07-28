@@ -7,6 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "typecheck": "tsc --noEmit",
     "validate-listings": "tsx scripts/validate-listings.ts",
     "ping-indexnow": "tsx scripts/ping-indexnow.ts",
     "analyze-gsc": "tsx scripts/analyze-gsc.ts",
@@ -23,6 +27,7 @@
     "stripe": "^22.3.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.49.0",
     "@types/node": "^20.14.12",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
@@ -33,6 +38,7 @@
     "postcss": "^8.4.40",
     "tailwindcss": "^3.4.7",
     "tsx": "^4.7.0",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "vitest": "^2.1.8"
   }
 }

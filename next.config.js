@@ -10,6 +10,23 @@ const nextConfig = {
       ],
     },
   },
+  async headers() {
+    return [
+      {
+        source: "/rage-reset-sw.js",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=0, must-revalidate" },
+          { key: "Service-Worker-Allowed", value: "/rage-reset" },
+        ],
+      },
+      {
+        source: "/rage-reset.webmanifest",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=0, must-revalidate" },
+        ],
+      },
+    ]
+  },
   async redirects() {
     return [
       // Consolidate the non-UK variant to the canonical UK guide to avoid

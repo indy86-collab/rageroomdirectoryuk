@@ -1,0 +1,14 @@
+[
+  {
+    "slug": "unleashed-castleford",
+    "id": "f20a646d-6a93-4fca-a94c-4b3c93d629ec",
+    "name": "Unleashed Castleford",
+    "websiteContains": [
+      "sumupbookings.com/unleashed-castleford"
+    ],
+    "postcode": "WF10 5DJ",
+    "city": "Castleford",
+    "reason": "Reported closed / not operating (online payment may still work). Do not re-add.",
+    "blacklistedAt": "2026-07-28"
+  }
+]

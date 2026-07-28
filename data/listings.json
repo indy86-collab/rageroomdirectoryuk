@@ -860,26 +860,6 @@
     "createdAt": "2026-06-14T12:00:00.000Z"
   },
   {
-    "id": "f20a646d-6a93-4fca-a94c-4b3c93d629ec",
-    "name": "Unleashed Castleford",
-    "description": "Castleford activity venue offering rage room sessions alongside other entertainment. Book a supervised smash-room slot with safety equipment supplied and breakables prepared for the session.",
-    "city": "Castleford",
-    "region": "West Yorkshire",
-    "postcode": "WF10 5DJ",
-    "location": {
-      "lat": 53.721794,
-      "lng": -1.363922
-    },
-    "website": "https://www.sumupbookings.com/unleashed-castleford",
-    "phone": null,
-    "price": 25,
-    "image": "/images/unleashed-castleford.jpg",
-    "verified": true,
-    "googlePlaceId": null,
-    "slug": "unleashed-castleford",
-    "createdAt": "2026-06-14T12:00:00.000Z"
-  },
-  {
     "id": "ba70cd2a-780d-4081-ba5b-113a31da0512",
     "name": "Urban Xtreme Colchester",
     "description": "Colchester's premier rage room and smash room experience. Features rage room activities, axe throwing, knife throwing, music, retro gaming, stress relief, weapons, and professional instructors with safety equipment.",

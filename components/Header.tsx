@@ -12,6 +12,7 @@ const navItems = [
   { label: "Directories", href: "/listings" },
   { label: "City Guides", href: "/guides" },
   { label: "Digital Guides", href: "/digital-downloads" },
+  { label: "Rage Reset", href: "/rage-reset?src=nav&utm_source=nav&utm_medium=organic&utm_campaign=rage_reset_pvr" },
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/#faq" },
   { label: "List Your Venue", href: "/list-your-rage-room" },
@@ -32,7 +33,8 @@ export default function Header() {
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/"
     if (href.startsWith("/#")) return false
-    return pathname === href || pathname.startsWith(`${href}/`)
+    const pathOnly = href.split("?")[0]
+    return pathname === pathOnly || pathname.startsWith(`${pathOnly}/`)
   }
 
   return (

@@ -1,0 +1,21 @@
+---
+description: Never re-add blacklisted rage room venues to listings.json
+globs: data/listings.json,data/listings-blacklist.json,scripts/**/*listing*,lib/listings*.ts
+alwaysApply: false
+---
+
+# Listings blacklist
+
+Before adding or importing any venue into `data/listings.json`:
+
+1. Read `data/listings-blacklist.json`.
+2. Skip any candidate that matches by **slug**, **id**, **websiteContains**, or **name + city/postcode**.
+3. Use `isBlacklistedListing` / `findBlacklistMatch` from `lib/listings-blacklist.ts` when writing automation.
+
+When removing a closed or non-operating venue:
+
+1. Delete it from `data/listings.json`.
+2. Add an entry to `data/listings-blacklist.json` with `slug`, `reason`, and matching identifiers (`id`, `websiteContains`, `postcode`, `name`, `city` as available).
+3. Run `npm run validate-listings`.
+
+Do not re-add **Unleashed Castleford** (`unleashed-castleford`) — reported not operating; booking payment may still appear live.

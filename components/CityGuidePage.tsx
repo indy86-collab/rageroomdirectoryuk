@@ -2,7 +2,6 @@ import Link from "next/link"
 import FAQ from "@/components/FAQ"
 import GuideMeta from "@/components/GuideMeta"
 import Breadcrumbs from "@/components/Breadcrumbs"
-import AdsenseInContent from "@/components/ads/AdsenseInContent"
 import { getCityFAQs } from "@/lib/faqs"
 import { getGuideCityContent } from "@/lib/guide-city-content"
 import { cityToSlug } from "@/lib/location"
@@ -179,7 +178,6 @@ export default async function CityGuidePage({
             <p>{content?.intro}</p>
           </div>
 
-          <AdsenseInContent />
 
           <div className="text-base sm:text-lg text-zinc-300 mb-8 space-y-4">
             <p>{content?.sceneDescription}</p>

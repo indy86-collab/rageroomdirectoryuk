@@ -1,10 +1,18 @@
 /**
  * Validate data/listings.json before commit.
  * Run: npx tsx scripts/validate-listings.ts
+ *
+ * Also fails if any listing matches data/listings-blacklist.json
+ * (closed / do-not-re-add venues).
  */
 import { readFileSync } from "fs"
 import { join } from "path"
 import type { Listing } from "../types/listing"
+import {
+  findBlacklistMatch,
+  getListingsBlacklist,
+  type ListingLike,
+} from "../lib/listings-blacklist"
 
 const REQUIRED = ["id", "name", "description", "city", "postcode", "slug"] as const
 
@@ -18,6 +26,7 @@ function main() {
     process.exit(1)
   }
 
+  const blacklist = getListingsBlacklist()
   const ids = new Set<string>()
   const slugs = new Set<string>()
   let errors = 0
@@ -56,6 +65,14 @@ function main() {
       console.error(`❌ ${prefix}: location.lng must be a number or null`)
       errors++
     }
+
+    const blocked = findBlacklistMatch(l as ListingLike)
+    if (blocked) {
+      console.error(
+        `❌ ${prefix}: blacklisted (${blocked.slug}) — ${blocked.reason}`
+      )
+      errors++
+    }
   }
 
   if (errors > 0) {
@@ -63,7 +80,9 @@ function main() {
     process.exit(1)
   }
 
-  console.log(`✅ ${listings.length} listings validated`)
+  console.log(
+    `✅ ${listings.length} listings validated (${blacklist.length} blacklisted venue(s) excluded)`
+  )
 }
 
 main()
