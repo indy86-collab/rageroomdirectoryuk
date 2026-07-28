@@ -23,9 +23,8 @@ Avoided heavy 3D (Three.js) — unnecessary for a fixed 2.5D room and costly for
 
 **Feature flag:** `getGameRenderer()` → `legacy` \| `next`
 
-- Production default: **legacy** until cutover
-- Local/dev default: **next**
-- Overrides: `NEXT_PUBLIC_RAGE_RESET_GAME_RENDERER`, `?renderer=`, `?e2e=1` → next
+- Default: **next** (rebuild live)
+- Rollback: `NEXT_PUBLIC_RAGE_RESET_GAME_RENDERER=legacy` or `?renderer=legacy` when overrides are allowed
 
 ## 3. Before / after
 

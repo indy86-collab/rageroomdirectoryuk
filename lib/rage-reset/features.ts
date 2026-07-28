@@ -27,9 +27,10 @@ function allowInternalRendererOverride(): boolean {
 
 /**
  * Select active smash/boss/cooldown presentation.
- * Production stays on `legacy` until acceptance criteria pass.
- * Local/preview default to `next` when env is unset; override with
- * NEXT_PUBLIC_RAGE_RESET_GAME_RENDERER or ?renderer=legacy|next.
+ * Default is `next` (2.5D rebuild). Override with
+ * NEXT_PUBLIC_RAGE_RESET_GAME_RENDERER=legacy|next or ?renderer=legacy|next
+ * (query/localStorage overrides allowed outside locked production, or when
+ * diagnostics / an explicit renderer env is set).
  */
 export function getGameRenderer(): GameRendererId {
   const env = process.env.NEXT_PUBLIC_RAGE_RESET_GAME_RENDERER
@@ -40,8 +41,6 @@ export function getGameRenderer(): GameRendererId {
       const params = new URLSearchParams(window.location.search)
       const fromQuery = params.get("renderer")
       if (fromQuery === "legacy" || fromQuery === "next") return fromQuery
-      // Exercise the rebuild during automated e2e unless explicitly pinned legacy.
-      if (params.get("e2e") === "1") return "next"
       const stored = window.localStorage.getItem(RENDERER_STORAGE_KEY)
       if (stored === "legacy" || stored === "next") return stored
     } catch {
@@ -49,9 +48,6 @@ export function getGameRenderer(): GameRendererId {
     }
   }
 
-  // Production default: keep proven prototype until cutover.
-  if (process.env.NODE_ENV === "production") return "legacy"
-  // Local / preview iteration default.
   return "next"
 }
 
