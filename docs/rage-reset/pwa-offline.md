@@ -5,7 +5,7 @@
 - Manifest `scope` / `start_url`: `/rage-reset`
 - SW registration scope: `/rage-reset`
 - Next header `Service-Worker-Allowed: /rage-reset`
-- Cache name: `rage-reset-pvr-1` (Public Validation Release; sync with `lib/rage-reset/build.ts`)
+- Cache name: `rage-reset-pvr-2` on current production (`pvr-1.0.1`); was `rage-reset-pvr-1` for Build A (`pvr-1.0.0`)
 
 The service worker must **not** control directory pages. Automated check: `e2e/rage-reset-pwa.spec.ts`.
 
@@ -62,8 +62,8 @@ On each of: Android browser or installed PWA; iPhone/iOS home-screen where suppo
 
 | Platform | Pass / Fail / Partial | Failed assets/stages | Date | Tester | Build |
 |---|---|---|---|---|---|
-| Android | Outstanding | | | | |
-| iOS | Outstanding | | | | |
-| Desktop | Outstanding | | | | |
+| Android | Outstanding | Physical device still required | | | |
+| iOS | Outstanding | Physical device still required | | | |
+| Desktop | Pass (partial) | Full offline 3-minute completion not required for this evidence set; offline reload of shell + start through free smash succeeded. Cache held 24 entries including shell, manifest, icons, fonts, CSS, and game JS chunks. Offline `fetch('/')` → network error; offline `fetch('/rage-reset')` → 200 from cache. `navigator.onLine === false`. | 2026-07-28 | Cursor agent (Chromium CDP offline) | `pvr-1.0.0` / cache `rage-reset-pvr-1` |
 
 See also `device-test-matrix.md`.

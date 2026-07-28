@@ -1,8 +1,27 @@
 # Rage Reset — GA4 exploration setup
 
 Configure these in GA4 Explorations (or equivalent). Filter out `traffic=e2e` where present.  
-Dimension: `build_version` ≈ `pvr-1.0.0` for this release.  
+Dimension: `build_version` ≈ `pvr-1.0.0` / `pvr-1.0.1` for this release.  
 **Do not report on check-in scores or trigger categories.**
+
+## Production configuration status (2026-07-28)
+
+**Blocked:** Vercel Production/Preview/Development env listing does **not** include `NEXT_PUBLIC_GA_MEASUREMENT_ID`.  
+Production HTML therefore does not emit `gtag/js?id=…` or the inline `google-analytics` config script.  
+`trackEvent` / `trackRageReset` no-op when the measurement ID or `window.gtag` is missing.
+
+### Required before DebugView / Realtime validation
+
+1. Add `NEXT_PUBLIC_GA_MEASUREMENT_ID` (`G-…`) to Vercel Production (and Preview if desired).
+2. Confirm `NEXT_PUBLIC_RAGE_RESET_E2E` and `NEXT_PUBLIC_RAGE_RESET_DIAGNOSTICS` remain unset in Production.
+3. Redeploy production.
+4. Complete one normal session, one abandoned session, one replay, one share, one directory CTA click, one browser session, and one standalone session where available.
+5. Inspect payloads for allowlisted properties only.
+
+### Privacy expectations (code + unit tests)
+
+Allowlist rejects emotional/sensitive keys (`score`, `trigger`, `safety`, gameplay counts not on the allowlist, etc.).  
+Until GA is live, treat privacy verification as **code-complete / production-payload-pending**.
 
 ## Main completion funnel
 

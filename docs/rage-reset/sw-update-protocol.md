@@ -1,6 +1,7 @@
 # Rage Reset — service worker A→B update protocol
 
-Build identifiers: `pvr-1.0.0` / cache `rage-reset-pvr-1` (see `lib/rage-reset/build.ts` and `public/rage-reset-sw.js`).
+Build identifiers: `pvr-1.0.0` / cache `rage-reset-pvr-1` → `pvr-1.0.1` / cache `rage-reset-pvr-2`  
+(see `lib/rage-reset/build.ts` and `public/rage-reset-sw.js`).
 
 ## Designed behaviour
 
@@ -20,6 +21,13 @@ Build identifiers: `pvr-1.0.0` / cache `rage-reset-pvr-1` (see `lib/rage-reset/b
 
 Bump `RAGE_RESET_BUILD_VERSION` / `RAGE_RESET_SW_CACHE` together with the `CACHE` / `BUILD` constants in `rage-reset-sw.js`, **or** change diagnostics-only copy, then deploy.
 
+Build B used for this validation:
+
+* Commit `1739d18`
+* Vercel deployment `dpl_CqXUESUZeuWFpAHMZNGyD4nJ1rM1`
+* Created 2026-07-28T21:35:40Z / 2026-07-28T22:35:40+01:00
+* Privacy panel shows `Build pvr-1.0.1`
+
 ## Verification steps
 
 1. Reopen previously loaded / installed Rage Reset.
@@ -35,10 +43,11 @@ Bump `RAGE_RESET_BUILD_VERSION` / `RAGE_RESET_SW_CACHE` together with the `CACHE
 
 | Step | Pass / Fail / Partial | Notes | Date | Tester | Build |
 |---|---|---|---|---|---|
-| Build A loads | Outstanding | | | | |
-| Build B deploys | Outstanding | | | | |
-| No stale-chunk crash | Outstanding | | | | |
-| Waiting → activate safe | Outstanding | | | | |
-| Soft reload | Outstanding | | | | |
-| Mid-session preserved | Outstanding | | | | |
-| Directory unaffected | Outstanding | | | | |
+| Build A loads | Pass | Production `/rage-reset` with SW controller; cache `rage-reset-pvr-1`; GET_BUILD → `pvr-1.0.0` | 2026-07-28 | Cursor agent (desktop Chromium) | A `pvr-1.0.0` / `53eb148` |
+| Build B deploys | Pass | Production SW file served `CACHE=rage-reset-pvr-2` / `BUILD=pvr-1.0.1`; deploy `dpl_CqXUESUZeuWFpAHMZNGyD4nJ1rM1` | 2026-07-28 | Cursor agent | B `pvr-1.0.1` / `1739d18` |
+| No stale-chunk crash | Pass | After A→B, game welcome + Privacy panel loaded; resume prompt for unfinished A session did not crash | 2026-07-28 | Cursor agent | A→B |
+| Waiting → activate safe | Pass | Observed `waiting: true` while active GET_BUILD still `pvr-1.0.0`; on welcome (safe), waiting cleared and GET_BUILD → `pvr-1.0.1` | 2026-07-28 | Cursor agent | A→B |
+| Soft reload | Pass | New Privacy label `Build pvr-1.0.1` visible after activation | 2026-07-28 | Cursor agent | B |
+| Mid-session preserved | Partial | Confirmed install-without-skipWaiting (`waiting` while old controller active). Full mid-play deferral with live free-smash not re-run in this pass; strategy covered by code + waiting observation | 2026-07-28 | Cursor agent | A→B |
+| Directory unaffected | Pass | Homepage `navigator.serviceWorker.controller === null` after Rage Reset SW use; offline `/` fetch fails while `/rage-reset` cache-hits | 2026-07-28 | Cursor agent | A/B |
+| Old caches removed | Pass | After activation, `caches.keys()` = `["rage-reset-pvr-2"]` only | 2026-07-28 | Cursor agent | B |

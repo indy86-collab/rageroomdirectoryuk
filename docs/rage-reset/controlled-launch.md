@@ -35,9 +35,13 @@ Only campaign-level source information — **never** scores, triggers, or person
 
 | Channel | Activated? | Date | Owner | Notes |
 |---|---|---|---|---|
-| Homepage | Live in code | | | Confirm after deploy |
-| Nav / footer | Live in code | | | |
-| Guides / listings | Live in code | | | |
-| Instagram post | Pending | | | |
-| Facebook post | Pending | | | |
-| Tester group | Pending | | | |
+| Homepage | Yes | 2026-07-28 | Production deploy | Feature + Play free CTA live with UTMs |
+| Nav / footer | Yes | 2026-07-28 | Production deploy | Explore → Rage Reset |
+| Guides / listings | Yes | 2026-07-28 | Production deploy | Guide CTA UTM verified |
+| Instagram post | Pending | | Human | Use `launch-copy.md` + Instagram UTM URL |
+| Facebook post | Pending | | Human | Use `launch-copy.md` + Facebook UTM URL |
+| Tester group | Pending | | Human | Direct tester UTM URL |
+
+## Blocker before trusting behavioural data
+
+Production Vercel project currently has **no** `NEXT_PUBLIC_GA_MEASUREMENT_ID`. Organic launch surfaces can still drive traffic, but GA4 funnel reporting will stay empty until the ID is set and a production redeploy occurs.
