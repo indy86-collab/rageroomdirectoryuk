@@ -11,7 +11,7 @@ describe("build identifiers", () => {
   it("exposes non-sensitive public validation labels", () => {
     expect(RAGE_RESET_RELEASE_NAME).toContain("Public Validation")
     expect(RAGE_RESET_BUILD_VERSION).toMatch(/^pvr-/)
-    expect(RAGE_RESET_SW_CACHE).toBe("rage-reset-pvr-1")
+    expect(RAGE_RESET_SW_CACHE).toMatch(/^rage-reset-pvr-\d+$/)
   })
 })
 

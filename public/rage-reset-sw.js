@@ -6,8 +6,8 @@
  * Update strategy: do NOT skipWaiting on install. The page activates a waiting
  * worker when the player is not mid-session, then soft-reloads once.
  */
-const CACHE = "rage-reset-pvr-1"
-const BUILD = "pvr-1.0.0"
+const CACHE = "rage-reset-pvr-2"
+const BUILD = "pvr-1.0.1"
 const PRECACHE = [
   "/rage-reset",
   "/rage-reset.webmanifest",

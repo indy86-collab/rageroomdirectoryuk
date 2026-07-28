@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Volume2, VolumeX, Vibrate, Info, Shield } from "lucide-react"
+import { RAGE_RESET_BUILD_VERSION } from "@/lib/rage-reset/build"
 
 export function WelcomeScreen({
   soundEnabled,
@@ -163,6 +164,7 @@ export function WelcomeScreen({
                   Anonymous stage events (for example room selected) may be sent if site analytics
                   are active. You can delete all Rage Reset data from Local stats.
                 </p>
+                <p className="text-xs text-zinc-500">Build {RAGE_RESET_BUILD_VERSION}</p>
               </div>
             )}
             <button

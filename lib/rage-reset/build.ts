@@ -7,10 +7,10 @@
 export const RAGE_RESET_RELEASE_NAME = "Rage Reset Public Validation Release"
 
 /** Semver-style product label for this validation phase. */
-export const RAGE_RESET_BUILD_VERSION = "pvr-1.0.0"
+export const RAGE_RESET_BUILD_VERSION = "pvr-1.0.1"
 
 /** Cache bucket used by the scoped service worker (keep in sync with public/rage-reset-sw.js). */
-export const RAGE_RESET_SW_CACHE = "rage-reset-pvr-1"
+export const RAGE_RESET_SW_CACHE = "rage-reset-pvr-2"
 
 /** Compact token for error logs and diagnostics (no personal data). */
 export function getRageResetBuildId(): string {
