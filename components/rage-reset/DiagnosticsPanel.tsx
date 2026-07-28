@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { getRecentAnalyticsEvents } from "@/lib/rage-reset/analytics"
 import { getRageResetBuildId, RAGE_RESET_RELEASE_NAME } from "@/lib/rage-reset/build"
 import { getDisplayMode } from "@/lib/rage-reset/displayMode"
-import { getCooldownChallenge, isDiagnosticsEnabled } from "@/lib/rage-reset/features"
+import { getCooldownChallenge, getGameRenderer, isDiagnosticsEnabled } from "@/lib/rage-reset/features"
 import { STORAGE_KEY } from "@/lib/rage-reset/types"
 import type { SessionRuntime } from "@/lib/rage-reset/types"
 
@@ -74,6 +74,7 @@ export function DiagnosticsPanel({
           <p>unlocks weapons: {unlocks.weapons.join(",")}</p>
           <p>daily: {dailyChallengeId}</p>
           <p>cooldown flag: {getCooldownChallenge()}</p>
+          <p>renderer: {getGameRenderer()}</p>
           <p className="mt-1 text-zinc-500">analytics (names only):</p>
           <ul>
             {events.slice(-12).map((e, i) => (

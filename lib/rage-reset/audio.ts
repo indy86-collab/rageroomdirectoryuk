@@ -104,36 +104,38 @@ function noiseBurst(duration: number, gain = 0.15, filterFreq = 1200) {
 
 export function playSound(kind: SoundKind, intensity = 1): void {
   const i = Math.max(0.2, Math.min(1, intensity))
+  // Mild pitch jitter so repeated impacts feel less identical
+  const jitter = 0.92 + Math.random() * 0.16
   switch (kind) {
     case "impact-bat":
-      noiseBurst(0.08 * i, 0.22 * i, 800)
-      tone(120, 0.12, "square", 0.12 * i, 60)
+      noiseBurst(0.08 * i, 0.22 * i, 800 * jitter)
+      tone(120 * jitter, 0.12, "square", 0.12 * i, 60 * jitter)
       break
     case "impact-chicken":
-      tone(420, 0.08, "sawtooth", 0.1 * i, 180)
-      tone(620, 0.1, "triangle", 0.08 * i, 300)
-      noiseBurst(0.05, 0.1 * i, 2000)
+      tone(420 * jitter, 0.08, "sawtooth", 0.1 * i, 180 * jitter)
+      tone(620 * jitter, 0.1, "triangle", 0.08 * i, 300 * jitter)
+      noiseBurst(0.05, 0.1 * i, 2000 * jitter)
       break
     case "break":
-      noiseBurst(0.25 * i, 0.28 * i, 1500)
-      tone(90, 0.2, "sawtooth", 0.1 * i, 40)
+      noiseBurst(0.25 * i, 0.28 * i, 1500 * jitter)
+      tone(90 * jitter, 0.2, "sawtooth", 0.1 * i, 40)
       break
     case "whoosh":
-      noiseBurst(0.12, 0.08 * i, 400)
+      noiseBurst(0.12, 0.08 * i, 400 * jitter)
       break
     case "ui":
-      tone(520, 0.06, "sine", 0.08 * i)
+      tone(520 * jitter, 0.06, "sine", 0.08 * i)
       break
     case "success":
-      tone(440, 0.08, "sine", 0.1 * i)
-      tone(660, 0.12, "sine", 0.08 * i)
+      tone(440 * jitter, 0.08, "sine", 0.1 * i)
+      tone(660 * jitter, 0.12, "sine", 0.08 * i)
       break
     case "warn":
-      tone(220, 0.15, "square", 0.08 * i, 160)
+      tone(220 * jitter, 0.15, "square", 0.08 * i, 160 * jitter)
       break
     case "cooldown":
-      tone(360, 0.1, "sine", 0.06 * i)
-      tone(480, 0.14, "triangle", 0.05 * i)
+      tone(360 * jitter, 0.1, "sine", 0.06 * i)
+      tone(480 * jitter, 0.14, "triangle", 0.05 * i)
       break
     case "breath":
       tone(180, 0.4, "sine", 0.03 * i, 220)

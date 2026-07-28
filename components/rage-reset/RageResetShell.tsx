@@ -28,7 +28,7 @@ import { unlockAudio, setMasterMuted, setMasterIntensity } from "@/lib/rage-rese
 import { prefersReducedMotion } from "@/lib/rage-reset/haptics"
 import { durationBucket } from "@/lib/rage-reset/durationBuckets"
 import { getDisplayMode, getEntrySource } from "@/lib/rage-reset/displayMode"
-import { getCooldownChallenge } from "@/lib/rage-reset/features"
+import { getCooldownChallenge, getGameRenderer } from "@/lib/rage-reset/features"
 import {
   cohortAnalyticsParams,
   cohortForSessionComplete,
@@ -48,6 +48,9 @@ import { SmashGame } from "./SmashGame"
 import { ControlledSmashGame } from "./ControlledSmashGame"
 import { CooldownSortGame } from "./CooldownSortGame"
 import { CooldownRebuildGame } from "./CooldownRebuildGame"
+import { NextSmashGame } from "./game/NextSmashGame"
+import { NextControlledSmashGame } from "./game/NextControlledSmashGame"
+import { NextCooldownGame } from "./game/NextCooldownGame"
 import { ResultsScreen } from "./ResultsScreen"
 import { RageResetSettings } from "./RageResetSettings"
 import { ProgressScreen } from "./ProgressScreen"
@@ -68,6 +71,7 @@ export function RageResetShell() {
   const [cooldownMode, setCooldownMode] = useState<"fragment-sort" | "rebuild-room">(
     "fragment-sort"
   )
+  const [gameRenderer, setGameRendererState] = useState<"legacy" | "next">("legacy")
   const abandonedTracked = useRef(false)
   const sessionStartedAt = useRef<string | null>(null)
   const sessionsStartedThisVisit = useRef(0)
@@ -127,6 +131,7 @@ export function RageResetShell() {
     setStorage(data)
     saveStorage(data)
     setCooldownMode(getCooldownChallenge())
+    setGameRendererState(getGameRenderer())
 
     if (data.activeSession && data.activeSession.state !== "welcome" && data.activeSession.state !== "results") {
       setRestorePrompt(true)
@@ -585,30 +590,61 @@ export function RageResetShell() {
         )}
 
         {runtime.state === "free-smash" && runtime.roomId && runtime.weaponId && (
-          <SmashGame
-            roomId={runtime.roomId}
-            weaponId={runtime.weaponId}
-            soundEnabled={storage.settings.soundEnabled}
-            hapticsEnabled={storage.settings.hapticsEnabled}
-            reducedEffects={storage.settings.reducedEffects}
-            onComplete={onFreeSmashComplete}
-            onMuteToggle={toggleSound}
-          />
+          gameRenderer === "next" ? (
+            <NextSmashGame
+              roomId={runtime.roomId}
+              weaponId={runtime.weaponId}
+              soundEnabled={storage.settings.soundEnabled}
+              hapticsEnabled={storage.settings.hapticsEnabled}
+              reducedEffects={storage.settings.reducedEffects}
+              onComplete={onFreeSmashComplete}
+              onMuteToggle={toggleSound}
+            />
+          ) : (
+            <SmashGame
+              roomId={runtime.roomId}
+              weaponId={runtime.weaponId}
+              soundEnabled={storage.settings.soundEnabled}
+              hapticsEnabled={storage.settings.hapticsEnabled}
+              reducedEffects={storage.settings.reducedEffects}
+              onComplete={onFreeSmashComplete}
+              onMuteToggle={toggleSound}
+            />
+          )
         )}
 
         {runtime.state === "controlled-smash" && runtime.weaponId && (
-          <ControlledSmashGame
-            weaponId={runtime.weaponId}
-            soundEnabled={storage.settings.soundEnabled}
-            hapticsEnabled={storage.settings.hapticsEnabled}
-            reducedEffects={storage.settings.reducedEffects}
-            onComplete={onControlledComplete}
-            onMuteToggle={toggleSound}
-          />
+          gameRenderer === "next" ? (
+            <NextControlledSmashGame
+              weaponId={runtime.weaponId}
+              soundEnabled={storage.settings.soundEnabled}
+              hapticsEnabled={storage.settings.hapticsEnabled}
+              reducedEffects={storage.settings.reducedEffects}
+              onComplete={onControlledComplete}
+              onMuteToggle={toggleSound}
+            />
+          ) : (
+            <ControlledSmashGame
+              weaponId={runtime.weaponId}
+              soundEnabled={storage.settings.soundEnabled}
+              hapticsEnabled={storage.settings.hapticsEnabled}
+              reducedEffects={storage.settings.reducedEffects}
+              onComplete={onControlledComplete}
+              onMuteToggle={toggleSound}
+            />
+          )
         )}
 
         {runtime.state === "cool-down" &&
-          (cooldownMode === "rebuild-room" ? (
+          (gameRenderer === "next" ? (
+            <NextCooldownGame
+              soundEnabled={storage.settings.soundEnabled}
+              hapticsEnabled={storage.settings.hapticsEnabled}
+              canSkip={storage.progression.cooldownEverCompleted}
+              onComplete={onCooldownComplete}
+              onMuteToggle={toggleSound}
+            />
+          ) : cooldownMode === "rebuild-room" ? (
             <CooldownRebuildGame
               soundEnabled={storage.settings.soundEnabled}
               hapticsEnabled={storage.settings.hapticsEnabled}
