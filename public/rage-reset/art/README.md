@@ -16,3 +16,8 @@ Audio: original or licensed-for-commercial-use only. No copyrighted game audio.
 
 Usage rights: all procedural artwork in this repo is original to Rage Reset.
 
+## Generated key art
+
+- `office/background/office-meltdown-hero.jpg` — AI-assisted homepage key art for Office Meltdown
+  (1280px web export). No third-party trademarks.
+

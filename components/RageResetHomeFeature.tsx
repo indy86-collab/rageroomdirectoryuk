@@ -1,9 +1,9 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { trackRageReset } from "@/lib/rage-reset/analytics"
-import { OfficeMeltdownPreview } from "@/components/rage-reset/OfficeMeltdownPreview"
 
 export default function RageResetHomeFeature() {
   return (
@@ -42,8 +42,23 @@ export default function RageResetHomeFeature() {
               For entertainment only. Not therapy or medical treatment.
             </p>
           </div>
-          <div className="relative mx-auto w-full max-w-md overflow-hidden rounded-xl border border-zinc-800 bg-dark-900">
-            <OfficeMeltdownPreview />
+          <div className="relative mx-auto w-full max-w-lg overflow-hidden rounded-2xl border border-teal-500/25 bg-[#0B1220] shadow-[0_0_40px_rgba(249,115,22,0.12)] ring-1 ring-orange-500/10">
+            <Image
+              src="/rage-reset/art/office/background/office-meltdown-hero.jpg"
+              alt="Office Meltdown — stylised office room with The Unbreakable Printer ready to smash"
+              width={1280}
+              height={853}
+              className="h-auto w-full object-cover"
+              sizes="(max-width: 1024px) 100vw, 512px"
+              priority={false}
+            />
+            <div
+              className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-t from-black/35 via-transparent to-teal-500/5"
+              aria-hidden
+            />
+            <div className="pointer-events-none absolute bottom-3 left-3 rounded-lg border border-teal-500/30 bg-[rgba(11,18,32,0.85)] px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-orange-400 backdrop-blur-sm">
+              Office Meltdown
+            </div>
           </div>
         </div>
       </div>
