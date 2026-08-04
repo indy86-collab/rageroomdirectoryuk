@@ -22,9 +22,11 @@ export async function generateMetadata({
   const cityName = slugToCity(params.slug)
   const { getListingsNearCity } = await import("@/lib/listings")
   const { inCity, nearby, allForSchema } = await getListingsNearCity(cityName)
-  const count = allForSchema.length
+  const inCityCount = inCity.length
+  const nearbyCount = nearby.length
   const hasNearbyOnly = inCity.length === 0 && nearby.length > 0
-  const isEmpty = count === 0
+  const isEmpty = allForSchema.length === 0
+  const primaryCount = hasNearbyOnly ? nearbyCount : inCityCount
   const pricedListings = allForSchema.filter((l) => l.price != null) as Array<
     typeof allForSchema[number] & { price: number }
   >
@@ -36,22 +38,24 @@ export async function generateMetadata({
     title: hasNearbyOnly ? `Rage Rooms Near ${cityName}` : `Rage Rooms in ${cityName}`,
     subtitle: isEmpty
       ? "Browse verified UK venues nearby"
-      : `${count} verified ${count === 1 ? "venue" : "venues"} · Compare prices & book`,
+      : hasNearbyOnly
+        ? `${nearbyCount} nearby ${nearbyCount === 1 ? "venue" : "venues"} · Compare prices & book`
+        : `${inCityCount} in-city${nearbyCount > 0 ? ` + ${nearbyCount} nearby` : ""} · Compare prices & book`,
     badge: "City",
     ...(minPrice ? { price: `From £${minPrice.toFixed(0)}` } : {}),
   })
 
   return {
     title: hasNearbyOnly
-      ? `Rage Rooms Near ${cityName} — ${count} ${count === 1 ? "Venue" : "Venues"} Within Travelling Distance`
+      ? `Rage Rooms Near ${cityName} — ${nearbyCount} ${nearbyCount === 1 ? "Venue" : "Venues"}`
       : isEmpty
         ? `Rage Rooms Near ${cityName} | Find UK Smash Rooms`
-        : `Rage Rooms in ${cityName} — ${count} ${count === 1 ? "Venue" : "Venues"} Listed`,
+        : `Rage Rooms in ${cityName} — ${inCityCount} ${inCityCount === 1 ? "Venue" : "Venues"}${nearbyCount > 0 ? ` + ${nearbyCount} Nearby` : ""}`,
     description: hasNearbyOnly
-      ? `Find rage rooms near ${cityName}. Compare ${count} nearby ${count === 1 ? "venue" : "venues"} within travelling distance, view starting prices, read reviews, and book a smash room session.`
+      ? `Find rage rooms near ${cityName}. Compare ${nearbyCount} nearby ${nearbyCount === 1 ? "venue" : "venues"} within travelling distance, view starting prices, and book a smash room session.`
       : isEmpty
         ? `We do not have a verified rage room in ${cityName} yet. Browse nearby UK rage rooms, compare prices, and suggest a missing venue.`
-        : `Find rage rooms in ${cityName}. Compare ${count} ${count === 1 ? "venue" : "venues"}, view starting prices, read reviews, and book a destruction therapy session near you.`,
+        : `Compare ${inCityCount} verified ${inCityCount === 1 ? "rage room" : "rage rooms"} in ${cityName}${nearbyCount > 0 ? ` plus ${nearbyCount} nearby ${nearbyCount === 1 ? "option" : "options"}` : ""}. View starting prices, age limits and booking details.`,
     alternates: { canonical: `/city/${cityToSlug(cityName)}` },
     ...(isEmpty ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
@@ -59,8 +63,8 @@ export async function generateMetadata({
         ? `Rage Rooms Near ${cityName} | RageRoom Directory`
         : `Rage Rooms in ${cityName} | RageRoom Directory`,
       description: hasNearbyOnly
-        ? `Browse ${count} rage ${count === 1 ? "room" : "rooms"} near ${cityName}. Compare venues, prices, and reviews.`
-        : `Browse ${count} rage ${count === 1 ? "room" : "rooms"} in ${cityName}. Compare venues, prices, and reviews.`,
+        ? `Browse ${nearbyCount} rage ${nearbyCount === 1 ? "room" : "rooms"} near ${cityName}. Compare venues and prices.`
+        : `Browse ${inCityCount} rage ${inCityCount === 1 ? "room" : "rooms"} in ${cityName}${nearbyCount > 0 ? ` and ${nearbyCount} nearby` : ""}. Compare venues and prices.`,
       type: "website",
       images: [{ url: ogImage, width: 1200, height: 630, alt: hasNearbyOnly ? `Rage rooms near ${cityName}` : `Rage rooms in ${cityName}` }],
     },
@@ -68,8 +72,8 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: hasNearbyOnly ? `Rage Rooms Near ${cityName}` : `Rage Rooms in ${cityName}`,
       description: hasNearbyOnly
-        ? `${count} verified rage rooms near ${cityName}. Compare venues and prices.`
-        : `${count} verified rage rooms in ${cityName}. Compare venues and prices.`,
+        ? `${nearbyCount} verified rage rooms near ${cityName}. Compare venues and prices.`
+        : `${primaryCount} verified rage ${primaryCount === 1 ? "room" : "rooms"} in ${cityName}${nearbyCount > 0 ? ` plus ${nearbyCount} nearby` : ""}.`,
       images: [ogImage],
     },
   }
@@ -143,7 +147,9 @@ export default async function CityPage({ params }: CityPageProps) {
   const cityFAQs = getCityFAQs(cityName)
   const cityContent =
     getCityContent(cityName) ||
-    getGenericCityContent(cityName, listings.length, { nearbyOnly: hasNearbyOnly })
+    getGenericCityContent(cityName, hasNearbyOnly ? nearby.length : inCity.length, {
+      nearbyOnly: hasNearbyOnly,
+    })
 
   const priceRange = listings.filter(l => l.price).map(l => l.price!)
   const minPrice = priceRange.length > 0 ? Math.min(...priceRange) : null
@@ -223,10 +229,20 @@ export default async function CityPage({ params }: CityPageProps) {
           <div className="bg-[#181818] rounded-lg border border-zinc-800 p-4 mb-6 flex flex-wrap gap-4 sm:gap-8">
             <div>
               <p className="text-zinc-400 text-xs uppercase tracking-wider">
-                {hasNearbyOnly ? "Nearby Venues" : "Venues Listed"}
+                {hasNearbyOnly ? "Nearby Venues" : "In-City Venues"}
               </p>
-              <p className="text-white text-xl font-bold">{listings.length}</p>
+              <p className="text-white text-xl font-bold">
+                {hasNearbyOnly ? nearby.length : inCity.length}
+              </p>
             </div>
+            {!hasNearbyOnly && nearby.length > 0 && (
+              <div>
+                <p className="text-zinc-400 text-xs uppercase tracking-wider">
+                  Nearby Options
+                </p>
+                <p className="text-white text-xl font-bold">{nearby.length}</p>
+              </div>
+            )}
             {minPrice !== null && (
               <div>
                 <p className="text-zinc-400 text-xs uppercase tracking-wider">Starting From</p>

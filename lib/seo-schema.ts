@@ -55,7 +55,7 @@ interface ArticleInput {
   description: string
   /** ISO date the article was first published. */
   datePublished: string
-  /** ISO date the article was last meaningfully edited. Defaults to now. */
+  /** ISO date the article was last meaningfully edited. Omit when unknown. */
   dateModified?: string
   /** Hero / featured image absolute URL; falls back to site OG image. */
   image?: string
@@ -83,7 +83,7 @@ export function buildArticleSchema(input: ArticleInput) {
     description: input.description,
     image,
     datePublished: input.datePublished,
-    dateModified: input.dateModified ?? new Date().toISOString().slice(0, 10),
+    ...(input.dateModified ? { dateModified: input.dateModified } : {}),
     author: EDITORIAL_AUTHOR,
     publisher: EDITORIAL_PUBLISHER,
     inLanguage: "en-GB",

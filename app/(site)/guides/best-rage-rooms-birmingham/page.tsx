@@ -9,9 +9,9 @@ const OG_IMAGE = buildOgImageUrl({
 })
 
 export const metadata: Metadata = {
-  title: "Best Rage Rooms in Birmingham | Top Venues Ranked (2026)",
+  title: "Birmingham Rage Rooms: Prices & Ages",
   description:
-    "Independent guide to the best rage rooms in Birmingham. Compare verified venues, starting prices, packages and local tips — updated for 2026.",
+    "Compare verified Birmingham rage rooms by current starting price, area and minimum age. See nearby options, package details and booking links for 2026.",
   alternates: { canonical: "/guides/best-rage-rooms-birmingham" },
   openGraph: {
     title: "Best Rage Rooms in Birmingham | Top Venues Ranked",

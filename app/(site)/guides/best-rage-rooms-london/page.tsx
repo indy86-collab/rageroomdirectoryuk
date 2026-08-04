@@ -9,9 +9,9 @@ const OG_IMAGE = buildOgImageUrl({
 })
 
 export const metadata: Metadata = {
-  title: "Best Rage Rooms in London | Top Venues Ranked (2026)",
+  title: "London Rage Rooms: Prices & Ages",
   description:
-    "Independent guide to the best rage rooms in London. Compare verified venues, starting prices, packages and local tips — updated for 2026.",
+    "Compare verified London rage rooms by current starting price, area and minimum age. See nearby options, package details and booking links for 2026.",
   alternates: { canonical: "/guides/best-rage-rooms-london" },
   openGraph: {
     title: "Best Rage Rooms in London | Top Venues Ranked",

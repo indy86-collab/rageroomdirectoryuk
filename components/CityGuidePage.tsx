@@ -21,6 +21,8 @@ interface CityGuidePageProps {
   published?: string
   /** Human-readable last-updated date shown on the page. */
   updated?: string
+  /** ISO date of the last substantive content review. */
+  modified?: string
 }
 
 function ListingCard({
@@ -86,7 +88,8 @@ export default async function CityGuidePage({
   city,
   path,
   published = "2025-01-01",
-  updated = "April 2026",
+  updated = "4 August 2026",
+  modified = "2026-08-04",
 }: CityGuidePageProps) {
   const { getListingsNearCity } = await import("@/lib/listings")
   const { inCity, nearby, allForSchema } = await getListingsNearCity(city)
@@ -102,12 +105,17 @@ export default async function CityGuidePage({
 
   const hasNearbyOnly = inCity.length === 0 && nearby.length > 0
   const totalCount = allListings.length
+  const comparisonListings: Array<Listing & { distanceMiles?: number }> = [
+    ...inCity,
+    ...nearby,
+  ].slice(0, 10)
 
   const articleSchema = buildArticleSchema({
     url: path,
     headline: `Best Rage Rooms in ${city} (2026)`,
     description: `Editorial guide to the top rage rooms and smash rooms in ${city}, with prices, tips and venue comparisons.`,
     datePublished: published,
+    dateModified: modified,
     keywords: [
       `rage rooms ${city}`,
       `smash rooms ${city}`,
@@ -182,6 +190,67 @@ export default async function CityGuidePage({
           <div className="text-base sm:text-lg text-zinc-300 mb-8 space-y-4">
             <p>{content?.sceneDescription}</p>
           </div>
+
+          {comparisonListings.length > 0 && (
+            <section className="mb-10" aria-labelledby={`${citySlug}-comparison`}>
+              <h2
+                id={`${citySlug}-comparison`}
+                className="text-2xl sm:text-3xl font-bold text-white mb-3"
+              >
+                Compare Rage Rooms in and Near {city}
+              </h2>
+              <p className="text-zinc-400 mb-5">
+                Compare the latest directory price, location and minimum-age data before
+                opening a venue page for package details and booking links.
+              </p>
+              <div className="overflow-x-auto rounded-lg border border-zinc-800">
+                <table className="w-full min-w-[680px] text-left text-sm">
+                  <thead className="bg-zinc-900 text-zinc-300">
+                    <tr>
+                      <th scope="col" className="px-4 py-3 font-semibold">Venue</th>
+                      <th scope="col" className="px-4 py-3 font-semibold">Area</th>
+                      <th scope="col" className="px-4 py-3 font-semibold">From</th>
+                      <th scope="col" className="px-4 py-3 font-semibold">Minimum age</th>
+                      <th scope="col" className="px-4 py-3 font-semibold">Details</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-zinc-800 bg-[#181818]">
+                    {comparisonListings.map((listing) => (
+                      <tr key={listing.id}>
+                        <th scope="row" className="px-4 py-3 font-semibold text-white">
+                          {listing.name}
+                        </th>
+                        <td className="px-4 py-3 text-zinc-300">
+                          {listing.city}
+                          {listing.distanceMiles != null
+                            ? ` · ${listing.distanceMiles.toFixed(0)} miles from ${city}`
+                            : ""}
+                        </td>
+                        <td className="px-4 py-3 text-zinc-300">
+                          {listing.price != null ? `£${listing.price.toFixed(0)}` : "Check venue"}
+                        </td>
+                        <td className="px-4 py-3 text-zinc-300">
+                          {listing.ageMin != null ? `${listing.ageMin}+` : "Check venue"}
+                        </td>
+                        <td className="px-4 py-3">
+                          <Link
+                            href={`/listing/${listing.slug || listing.id}`}
+                            className="font-semibold text-orange-500 hover:text-orange-400 underline underline-offset-2"
+                          >
+                            View venue
+                          </Link>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="mt-3 text-xs text-zinc-500">
+                Prices and age rules can change. Confirm the final package and eligibility
+                with the venue before travelling.
+              </p>
+            </section>
+          )}
 
           {inCity.length > 0 && (
             <>

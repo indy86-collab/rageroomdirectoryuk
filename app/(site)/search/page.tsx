@@ -23,9 +23,7 @@ export async function generateMetadata({
       ? `Search results for "${query}" - Find rage rooms and smash rooms matching your search.`
       : "Search for rage rooms and smash rooms across the UK. Find venues by city, postcode, or name.",
     alternates: { canonical: "/search" },
-    ...(query
-      ? { robots: { index: false, follow: true } }
-      : {}),
+    robots: { index: false, follow: true },
   }
 }
 

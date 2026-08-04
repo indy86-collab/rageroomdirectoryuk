@@ -1,5 +1,10 @@
 import { MetadataRoute } from "next"
-import { getAllListingsForAdmin, getDistinctCities, getDistinctRegions } from "@/lib/listings"
+import {
+  getAllListingsForAdmin,
+  getDistinctCities,
+  getDistinctRegions,
+  getListingsNearCity,
+} from "@/lib/listings"
 import { cityToSlug, regionToSlug } from "@/lib/location"
 import { getAllBlogPosts } from "@/lib/blog-posts"
 import { getBlogGuideCanonical } from "@/lib/blog-guide-canonicals"
@@ -8,6 +13,16 @@ import { absoluteUrl, getSiteUrl, listingUrl } from "@/lib/site-url"
 
 // ISR: sitemap reflects listings.json state but doesn't need to be live on every request.
 export const revalidate = 3600
+
+const CITY_GUIDE_LAST_MODIFIED = new Date("2026-08-04T00:00:00.000Z")
+
+function latestListingDate(listings: Array<{ createdAt: string }>) {
+  if (listings.length === 0) return undefined
+
+  return new Date(
+    Math.max(...listings.map((listing) => new Date(listing.createdAt).getTime()))
+  )
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = getSiteUrl()
@@ -20,187 +35,171 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     Promise.resolve(getAllBlogPosts()),
   ])
   const cities = mergeCitiesWithPriority(citiesFromListings)
+  const cityEntries = (
+    await Promise.all(
+      cities.map(async (city) => {
+        const { allForSchema } = await getListingsNearCity(city)
+        if (allForSchema.length === 0) return null
+
+        return {
+          city,
+          lastModified: latestListingDate(allForSchema),
+        }
+      })
+    )
+  ).filter((entry): entry is NonNullable<typeof entry> => entry !== null)
 
   // Homepage and static pages
   const routes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
-      lastModified: new Date(),
       changeFrequency: "daily",
       priority: 1,
     },
     {
       url: absoluteUrl("/listings"),
-      lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.9,
     },
     {
       url: absoluteUrl("/rage-reset"),
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
       url: absoluteUrl("/near-me"),
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: absoluteUrl("/rage-room-prices-uk"),
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: absoluteUrl("/uk-map"),
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
       url: absoluteUrl("/uk-rage-room-report-2026"),
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: absoluteUrl("/rage-room-vs-escape-room"),
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: absoluteUrl("/digital-downloads"),
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: absoluteUrl("/digital-downloads/rage-room-party-planner-pack"),
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: absoluteUrl("/digital-downloads/rage-room-first-visit-prep-pack"),
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: absoluteUrl("/digital-downloads/corporate-rage-room-team-building-toolkit"),
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: absoluteUrl("/digital-downloads/rage-room-gift-voucher-template-pack"),
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: absoluteUrl("/digital-downloads/party-planner-gift-voucher-bundle"),
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: absoluteUrl("/corporate-rage-room-team-building-uk"),
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: absoluteUrl("/rage-room-gift-ideas-uk"),
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: absoluteUrl("/london-map"),
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
       url: absoluteUrl("/smash-room-uk"),
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
       url: absoluteUrl("/break-room-uk"),
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
       url: absoluteUrl("/anger-room-uk"),
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
       url: absoluteUrl("/blog"),
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
       url: absoluteUrl("/guides"),
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
       url: absoluteUrl("/about"),
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
       url: absoluteUrl("/contact"),
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
       url: absoluteUrl("/editorial-policy"),
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
       url: absoluteUrl("/privacy"),
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.5,
     },
     {
       url: absoluteUrl("/terms"),
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.5,
     },
     {
       url: absoluteUrl("/disclaimer"),
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.5,
     },
     {
       url: absoluteUrl("/list-your-rage-room"),
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
     },
   ]
 
   // Guide pages (how-much-do-rage-rooms-cost-uk canonicals to /rage-room-prices-uk)
-  const guidePages = [
+  const cityGuidePages = [
     "best-rage-rooms-london",
     "best-rage-rooms-birmingham",
     "best-rage-rooms-manchester",
@@ -217,6 +216,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "best-rage-rooms-glasgow",
     "best-rage-rooms-cardiff",
     "best-rage-rooms-hull",
+  ]
+  const guidePages = [
+    ...cityGuidePages,
     "best-rage-rooms-for-couples",
     "best-rage-rooms-for-team-building",
     "are-rage-rooms-safe-uk",
@@ -234,7 +236,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   guidePages.forEach((guide) => {
     routes.push({
       url: absoluteUrl(`/guides/${guide}`),
-      lastModified: new Date(),
+      lastModified: cityGuidePages.includes(guide)
+        ? CITY_GUIDE_LAST_MODIFIED
+        : undefined,
       changeFrequency: "monthly",
       priority: 0.8,
     })
@@ -244,17 +248,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   CITY_PRICE_PAGE_CITIES.forEach((city) => {
     routes.push({
       url: absoluteUrl(`/rage-room-prices/${cityToSlug(city)}`),
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     })
   })
 
   // City pages (listing cities + priority SEO cities)
-  cities.forEach((city) => {
+  cityEntries.forEach(({ city, lastModified }) => {
     routes.push({
       url: absoluteUrl(`/city/${cityToSlug(city)}`),
-      lastModified: new Date(),
+      lastModified,
       changeFrequency: "weekly",
       priority: 0.8,
     })
@@ -262,9 +265,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Region pages
   regions.forEach((region) => {
+    const regionListings = listings.filter(
+      (listing) => listing.region.toLowerCase() === region.toLowerCase()
+    )
     routes.push({
       url: absoluteUrl(`/region/${regionToSlug(region)}`),
-      lastModified: new Date(),
+      lastModified: latestListingDate(regionListings),
       changeFrequency: "weekly",
       priority: 0.7,
     })

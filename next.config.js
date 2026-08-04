@@ -29,6 +29,14 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      // Canonicalise the apex host in one permanent hop. Keep the matching
+      // Vercel domain redirect set to 308 as well so the edge and app agree.
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'rageroomdirectory.co.uk' }],
+        destination: 'https://www.rageroomdirectory.co.uk/:path*',
+        permanent: true,
+      },
       // Consolidate the non-UK variant to the canonical UK guide to avoid
       // splitting link equity across two near-duplicate URLs.
       {
