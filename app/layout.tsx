@@ -170,6 +170,12 @@ export default function RootLayout({
       <body
         className={`${montserrat.variable} ${bebasNeue.variable} font-sans min-h-screen bg-dark-950 text-white scrollbar-rage`}
       >
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9868896840591922"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
         {gaMeasurementId && (
           <>
             <Script
