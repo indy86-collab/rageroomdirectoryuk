@@ -5,7 +5,7 @@ import { ArrowRight, CheckCircle, Loader2 } from "lucide-react"
 import { trackEvent } from "@/lib/analytics"
 
 const FREE_CHECKLIST_URL =
-  "/digital-products/rage-room-first-visit-prep-pack-sample.pdf?v=1&source=lead-magnet"
+  "/digital-products/rage-room-first-visit-prep-pack-sample.pdf?v=4&source=lead-magnet"
 
 export default function LeadMagnetForm() {
   const [email, setEmail] = useState("")

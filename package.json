@@ -14,7 +14,8 @@
     "validate-listings": "tsx scripts/validate-listings.ts",
     "ping-indexnow": "tsx scripts/ping-indexnow.ts",
     "analyze-gsc": "tsx scripts/analyze-gsc.ts",
-    "seo:assert": "tsx scripts/seo-assertions.ts"
+    "seo:assert": "tsx scripts/seo-assertions.ts",
+    "generate:digital-previews": "python3 scripts/generate-digital-previews.py"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",

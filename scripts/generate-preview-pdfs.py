@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
-"""Generate watermarked 3-page sample PDFs from the paid digital downloads."""
+"""
+Generate watermarked 3-page sample PDFs from the paid digital downloads.
+
+Run:
+  python3 scripts/generate-preview-pdfs.py
+
+Or regenerate sample PDFs + matching page PNGs together:
+  python3 scripts/generate-digital-previews.py
+"""
 
 from __future__ import annotations
 

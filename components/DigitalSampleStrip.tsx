@@ -35,9 +35,9 @@ export default function DigitalSampleStrip({
             <Image
               src={src}
               alt={`${productName} sample page ${index + 1}`}
-              width={540}
-              height={720}
-              className="h-auto w-full object-cover"
+              width={1080}
+              height={1528}
+              className="h-auto w-full bg-white object-contain"
               sizes="(max-width: 768px) 30vw, 180px"
             />
           </div>
