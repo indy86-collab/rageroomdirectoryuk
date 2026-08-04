@@ -10,6 +10,7 @@ import { getAllBlogPosts } from "@/lib/blog-posts"
 import { getBlogGuideCanonical } from "@/lib/blog-guide-canonicals"
 import { mergeCitiesWithPriority, CITY_PRICE_PAGE_CITIES } from "@/lib/priority-seo-cities"
 import { absoluteUrl, getSiteUrl, listingUrl } from "@/lib/site-url"
+import { isIndexableLocationPage } from "@/lib/location-indexing"
 
 // ISR: sitemap reflects listings.json state but doesn't need to be live on every request.
 export const revalidate = 3600
@@ -38,8 +39,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const cityEntries = (
     await Promise.all(
       cities.map(async (city) => {
-        const { allForSchema } = await getListingsNearCity(city)
-        if (allForSchema.length === 0) return null
+        const { inCity, nearby, allForSchema } = await getListingsNearCity(city)
+        if (!isIndexableLocationPage({ city, inCity, nearby })) return null
 
         return {
           city,
@@ -245,13 +246,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   })
 
   // Programmatic city pricing pages
-  CITY_PRICE_PAGE_CITIES.forEach((city) => {
+  for (const city of CITY_PRICE_PAGE_CITIES) {
+    const { inCity, nearby } = await getListingsNearCity(city)
+    if (!isIndexableLocationPage({ city, inCity, nearby })) continue
     routes.push({
       url: absoluteUrl(`/rage-room-prices/${cityToSlug(city)}`),
       changeFrequency: "weekly",
       priority: 0.8,
     })
-  })
+  }
 
   // City pages (listing cities + priority SEO cities)
   cityEntries.forEach(({ city, lastModified }) => {
@@ -281,7 +284,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const url = listingUrl(listing.slug || listing.id)
     routes.push({
       url,
-      lastModified: listing.createdAt,
+      lastModified: listing.lastVerified || listing.createdAt,
       changeFrequency: "weekly",
       priority: 0.7,
     })

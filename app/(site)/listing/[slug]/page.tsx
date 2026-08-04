@@ -17,8 +17,16 @@ import UGCButtons from "@/components/UGCButtons"
 import LazyMapEmbed from "@/components/LazyMapEmbed"
 import DigitalGuidesChooser from "@/components/DigitalGuidesChooser"
 import RageResetCTA from "@/components/RageResetCTA"
+import ListingMediaGallery from "@/components/ListingMediaGallery"
+import FeaturedVenueBadge from "@/components/FeaturedVenueBadge"
 import { buildOgImageUrl } from "@/lib/seo-schema"
 import { absoluteUrl, getSiteUrl, listingUrl as buildListingUrl } from "@/lib/site-url"
+import {
+  buildListingMediaSchema,
+  formatListingFeature,
+  getAuthorisedMedia,
+} from "@/lib/listing-quality"
+import { CITY_PRICE_PAGE_CITIES } from "@/lib/priority-seo-cities"
 
 interface ListingPageProps {
   params: { slug: string }
@@ -218,6 +226,8 @@ export default async function ListingPage({ params }: ListingPageProps) {
   const baseUrl = getSiteUrl()
   const listingUrl = buildListingUrl(listing.slug || listing.id)
   const primaryBookingUrl = listing.bookingUrl || listing.website
+  const authorisedMedia = getAuthorisedMedia(listing)
+  const mediaSchema = buildListingMediaSchema(listing, listingUrl)
   const corporateSignals = [
     listing.name,
     listing.description,
@@ -336,9 +346,13 @@ export default async function ListingPage({ params }: ListingPageProps) {
     description:
       listing.description?.slice(0, 500) ||
       `${listing.name} is a rage room in ${listing.city}, UK, offering smash room and destruction therapy sessions.`,
-    image: listing.image
-      ? [listing.image]
-      : [absoluteUrl("/og-image.png")],
+    image: authorisedMedia.some((media) => media.type === "image")
+      ? authorisedMedia
+          .filter((media) => media.type === "image")
+          .map((media) => absoluteUrl(media.url))
+      : listing.image
+        ? [absoluteUrl(listing.image)]
+        : [absoluteUrl("/og-image.png")],
     address: {
       "@type": "PostalAddress",
       addressLocality: listing.city,
@@ -412,6 +426,19 @@ export default async function ListingPage({ params }: ListingPageProps) {
     ...(listing.website ? { sameAs: [listing.website] } : {}),
   }
 
+  const listingStructuredData = mediaSchema.length
+    ? {
+        "@context": "https://schema.org",
+        "@graph": [
+          localBusinessSchema,
+          ...mediaSchema.map((media) => ({
+            ...media,
+            about: { "@id": `${listingUrl}#localbusiness` },
+          })),
+        ],
+      }
+    : localBusinessSchema
+
   // FAQ Schema
   const faqSchema = {
     "@context": "https://schema.org",
@@ -431,7 +458,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(listingStructuredData) }}
         />
         <script
           type="application/ld+json"
@@ -584,6 +611,8 @@ export default async function ListingPage({ params }: ListingPageProps) {
           </div>
         </div>
 
+        <ListingMediaGallery media={authorisedMedia} venueName={listing.name} />
+
         <div className="mb-4 sm:mb-5">
           <RageResetCTA surface="listing" variant="secondary" />
         </div>
@@ -682,6 +711,44 @@ export default async function ListingPage({ params }: ListingPageProps) {
                     <li key={hours}>{hours}</li>
                   ))}
                 </ul>
+              </div>
+            )}
+            {(listing.ageMin != null ||
+              (listing.sessionLengths?.length ?? 0) > 0 ||
+              listing.groupSizeMin != null ||
+              listing.groupSizeMax != null ||
+              (listing.features?.length ?? 0) > 0) && (
+              <div className="grid gap-3 pt-2 sm:grid-cols-2 lg:grid-cols-4">
+                {listing.ageMin != null && (
+                  <div className="rounded-md border border-zinc-700 p-3">
+                    <p className="text-xs uppercase tracking-wider text-zinc-500">Minimum age</p>
+                    <p className="mt-1 font-semibold text-white">{listing.ageMin}+</p>
+                  </div>
+                )}
+                {listing.sessionLengths && listing.sessionLengths.length > 0 && (
+                  <div className="rounded-md border border-zinc-700 p-3">
+                    <p className="text-xs uppercase tracking-wider text-zinc-500">Session lengths</p>
+                    <p className="mt-1 font-semibold text-white">{listing.sessionLengths.map((duration) => `${duration} min`).join(", ")}</p>
+                  </div>
+                )}
+                {(listing.groupSizeMin != null || listing.groupSizeMax != null) && (
+                  <div className="rounded-md border border-zinc-700 p-3">
+                    <p className="text-xs uppercase tracking-wider text-zinc-500">Group size</p>
+                    <p className="mt-1 font-semibold text-white">
+                      {listing.groupSizeMin != null && listing.groupSizeMax != null
+                        ? `${listing.groupSizeMin}–${listing.groupSizeMax} people`
+                        : listing.groupSizeMax != null
+                          ? `Up to ${listing.groupSizeMax} people`
+                          : `From ${listing.groupSizeMin} people`}
+                    </p>
+                  </div>
+                )}
+                {listing.features && listing.features.length > 0 && (
+                  <div className="rounded-md border border-zinc-700 p-3 sm:col-span-2 lg:col-span-1">
+                    <p className="text-xs uppercase tracking-wider text-zinc-500">Good for</p>
+                    <p className="mt-1 text-sm font-semibold text-white">{listing.features.map(formatListingFeature).join(", ")}</p>
+                  </div>
+                )}
               </div>
             )}
             <div className="flex flex-col sm:flex-row gap-3 mt-4">
@@ -790,6 +857,24 @@ export default async function ListingPage({ params }: ListingPageProps) {
             >
               Browse All Rage Rooms
             </Link>
+            <span className="text-zinc-500 hidden sm:inline">•</span>
+            <Link
+              href="/near-me"
+              className="text-orange-500 hover:text-orange-600 underline text-sm sm:text-base py-2"
+            >
+              Find venues near a postcode
+            </Link>
+            {(CITY_PRICE_PAGE_CITIES as readonly string[]).includes(listing.city) && (
+              <>
+                <span className="text-zinc-500 hidden sm:inline">•</span>
+                <Link
+                  href={`/rage-room-prices/${cityToSlug(listing.city)}`}
+                  className="text-orange-500 hover:text-orange-600 underline text-sm sm:text-base py-2"
+                >
+                  Compare {listing.city} prices
+                </Link>
+              </>
+            )}
           </div>
         </div>
 
@@ -947,7 +1032,14 @@ export default async function ListingPage({ params }: ListingPageProps) {
         )}
 
         {/* UGC Buttons */}
-        <UGCButtons listingId={listing.id} listingName={listing.name} />
+        {listing.verified && (
+          <FeaturedVenueBadge listingUrl={listingUrl} venueName={listing.name} />
+        )}
+
+        <UGCButtons
+          listingId={listing.slug || listing.id}
+          listingName={listing.name}
+        />
 
         {/* Venue FAQ */}
         {listingFAQs.length > 0 && (

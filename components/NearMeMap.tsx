@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import type { Listing } from "@/types/listing"
 import Link from "next/link"
+import type { NearbyListingResult } from "@/lib/nearby-search"
 
 interface NearMeMapProps {
   listings: Listing[]
@@ -12,6 +13,35 @@ export default function NearMeMap({ listings }: NearMeMapProps) {
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null)
   const [locationError, setLocationError] = useState<string | null>(null)
   const [sortedListings, setSortedListings] = useState<Listing[]>(listings)
+  const [postcode, setPostcode] = useState("")
+  const [postcodeResults, setPostcodeResults] = useState<NearbyListingResult[]>([])
+  const [postcodeLabel, setPostcodeLabel] = useState("")
+  const [postcodeStatus, setPostcodeStatus] = useState<"idle" | "loading" | "error">("idle")
+  const [postcodeError, setPostcodeError] = useState("")
+
+  async function searchPostcode(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setPostcodeStatus("loading")
+    setPostcodeError("")
+    try {
+      const response = await fetch(`/api/nearby?postcode=${encodeURIComponent(postcode)}`, {
+        cache: "no-store",
+      })
+      const result = (await response.json()) as {
+        postcode?: string
+        results?: NearbyListingResult[]
+        error?: string
+      }
+      if (!response.ok) throw new Error(result.error || "Unable to search that postcode")
+      setPostcodeResults(result.results || [])
+      setPostcodeLabel(result.postcode || postcode)
+      setPostcodeStatus("idle")
+    } catch (error) {
+      setPostcodeResults([])
+      setPostcodeStatus("error")
+      setPostcodeError(error instanceof Error ? error.message : "Unable to search that postcode")
+    }
+  }
 
   useEffect(() => {
     if (!navigator.geolocation) {
@@ -93,6 +123,69 @@ export default function NearMeMap({ listings }: NearMeMapProps) {
 
   return (
     <div className="space-y-6">
+      <div className="rounded-lg border border-orange-500/30 bg-orange-500/10 p-4 sm:p-5">
+        <h3 className="text-lg font-semibold text-white">Find the closest venue by postcode</h3>
+        <p className="mt-1 text-sm text-zinc-300">
+          Your postcode is used only for this search and is not stored. Results stay on this page, so no thin postcode URLs are created for search engines.
+        </p>
+        <form onSubmit={searchPostcode} className="mt-4 flex flex-col gap-3 sm:flex-row">
+          <label className="sr-only" htmlFor="nearby-postcode">UK postcode</label>
+          <input
+            id="nearby-postcode"
+            value={postcode}
+            onChange={(event) => setPostcode(event.target.value)}
+            placeholder="e.g. SW1A 1AA"
+            autoComplete="postal-code"
+            required
+            maxLength={12}
+            className="min-h-[44px] flex-1 rounded-md border border-zinc-700 bg-zinc-950 px-4 text-white placeholder:text-zinc-600 focus:border-orange-500 focus:outline-none"
+          />
+          <button
+            type="submit"
+            disabled={postcodeStatus === "loading"}
+            className="min-h-[44px] rounded-md bg-orange-500 px-5 font-semibold text-white hover:bg-orange-600 disabled:opacity-60"
+          >
+            {postcodeStatus === "loading" ? "Searching…" : "Find nearest venues"}
+          </button>
+        </form>
+        {postcodeStatus === "error" && (
+          <p role="alert" className="mt-3 text-sm text-red-300">{postcodeError}</p>
+        )}
+      </div>
+
+      {postcodeResults.length > 0 && (
+        <section aria-live="polite">
+          <h3 className="mb-4 text-lg font-semibold text-white">
+            Closest verified rage rooms to {postcodeLabel}
+          </h3>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {postcodeResults.map((result) => (
+              <article key={result.id} className="rounded-lg border border-zinc-800 bg-[#1a1a1a] p-4">
+                <Link href={`/listing/${result.slug}`} className="font-semibold text-white hover:text-orange-500">
+                  {result.name}
+                </Link>
+                <p className="mt-1 text-sm text-zinc-400">
+                  {result.city}{result.region ? `, ${result.region}` : ""}
+                </p>
+                <p className="mt-2 font-medium text-orange-500">{result.distanceMiles.toFixed(1)} miles away</p>
+                <p className="mt-1 text-sm text-zinc-300">
+                  {result.price != null ? `From £${result.price.toFixed(0)} per person` : "Ask venue for current prices"}
+                </p>
+                <div className="mt-4 flex flex-wrap gap-3 text-sm font-semibold">
+                  <Link href={`/listing/${result.slug}`} className="text-orange-500 hover:text-orange-400">View details</Link>
+                  {result.bookingUrl && (
+                    <a href={result.bookingUrl} target="_blank" rel="noopener noreferrer" className="text-zinc-300 hover:text-white">
+                      Book direct
+                    </a>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+          <p className="mt-3 text-xs text-zinc-500">Postcode geocoding by Postcodes.io.</p>
+        </section>
+      )}
+
       {userLocation && (
         <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
           <p className="text-green-400 text-sm">
@@ -182,4 +275,3 @@ export default function NearMeMap({ listings }: NearMeMapProps) {
     </div>
   )
 }
-

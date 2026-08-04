@@ -1,4 +1,5 @@
 import Link from "next/link"
+import ListingSubmissionForm from "@/components/ListingSubmissionForm"
 
 export const metadata = {
   title: "List Your Rage Room | Rage Room Directory UK",
@@ -26,7 +27,15 @@ const PRIORITY_CITIES = [
   },
 ]
 
-export default function ListYourRageRoomPage() {
+export default function ListYourRageRoomPage({
+  searchParams,
+}: {
+  searchParams?: { listing?: string; type?: string }
+}) {
+  const initialType =
+    searchParams?.type === "claim" || searchParams?.type === "correction"
+      ? searchParams.type
+      : "new"
   return (
     <div className="py-8">
       <div className="mx-auto max-w-4xl px-4">
@@ -62,11 +71,8 @@ export default function ListYourRageRoomPage() {
               </li>
             ))}
           </ul>
-          <a
-            href="mailto:ukrageroom@gmail.com?subject=List%20my%20rage%20room%20(priority%20city)&body=Business%20name%3A%0ACity%3A%0AWebsite%3A%0AStarting%20price%20(approx)%3A%0A"
-            className="btn-rage inline-flex min-h-[44px] items-center justify-center px-5 text-sm uppercase tracking-wider"
-          >
-            Email to get listed
+          <a href="#submission-form" className="btn-rage inline-flex min-h-[44px] items-center justify-center px-5 text-sm uppercase tracking-wider">
+            Submit venue details
           </a>
         </div>
 
@@ -95,24 +101,15 @@ export default function ListYourRageRoomPage() {
           </ul>
         </div>
 
-        <div className="overflow-hidden rounded-lg border border-zinc-800 bg-[#181818] p-6">
-          <h2 className="mb-4 text-2xl font-bold text-white">Contact Us</h2>
-          <p className="mb-4 text-white">
-            Ready to list or update? Email{" "}
-            <a
-              href="mailto:ukrageroom@gmail.com"
-              className="text-orange-500 hover:text-orange-600"
-            >
-              ukrageroom@gmail.com
-            </a>
+        <div id="submission-form" className="overflow-hidden rounded-lg border border-zinc-800 bg-[#181818] p-6">
+          <h2 className="mb-2 text-2xl font-bold text-white">Submit or update a venue</h2>
+          <p className="mb-6 text-sm text-zinc-400">
+            Nothing is published automatically. Our editors verify the details, sources and media permission before updating the directory.
           </p>
-          <ul className="list-disc space-y-1 pl-5 text-sm text-zinc-400">
-            <li>Business name and location</li>
-            <li>Website, phone and booking link</li>
-            <li>Photos of your rage room</li>
-            <li>Starting price / package overview</li>
-            <li>Any special features (BYO, corporate, hen/stag)</li>
-          </ul>
+          <ListingSubmissionForm
+            initialListingSlug={searchParams?.listing || ""}
+            initialRequestType={initialType}
+          />
         </div>
 
         <div className="mt-8 text-center">

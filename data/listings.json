@@ -17,7 +17,13 @@
     "verified": true,
     "googlePlaceId": "ChIJm1TH_ZbfekgRxY8gYN91ruc",
     "slug": "anger-issues-rage-rooms-ltd-ellesmere-port",
-    "createdAt": "2025-11-27T21:28:46.144Z"
+    "createdAt": "2025-11-27T21:28:46.144Z",
+    "lastVerified": "2025-11-27T21:28:46.144Z",
+    "sourceUrl": "http://www.angerissuesragerooms.com/",
+    "features": [
+      "corporate-groups",
+      "birthday-parties"
+    ]
   },
   {
     "id": "1d35e4d5-4f6a-4c10-b6b3-5c1cd4ef24c3",
@@ -37,7 +43,13 @@
     "verified": true,
     "googlePlaceId": "ChIJqUa12rjZ2EcRkS_r2k9xs78",
     "slug": "angry-smash-ltd-southend-on-sea",
-    "createdAt": "2025-11-27T21:28:46.523Z"
+    "createdAt": "2025-11-27T21:28:46.523Z",
+    "lastVerified": "2025-11-27T21:28:46.523Z",
+    "sourceUrl": "https://www.angrysmash.com/",
+    "features": [
+      "birthday-parties",
+      "hen-stag-parties"
+    ]
   },
   {
     "id": "c5f3e0a4-1f6d-4c9b-d834-0a7f5e1c3b26",
@@ -57,7 +69,10 @@
     "verified": true,
     "googlePlaceId": "ChIJMwpLbVGbfkgRtnFNTrpfM6g",
     "slug": "arcadia-rage-room-darlington",
-    "createdAt": "2026-06-02T12:00:00.000Z"
+    "createdAt": "2026-06-02T12:00:00.000Z",
+    "lastVerified": "2026-06-02T12:00:00.000Z",
+    "sourceUrl": "https://arcadiadarlington.co.uk/",
+    "ageMin": 10
   },
   {
     "id": "fb842fd9-c195-48a5-ae21-56bcc6e90bb6",
@@ -77,7 +92,9 @@
     "verified": true,
     "googlePlaceId": "ChIJm9g98S5dhkgRgiWoQdoK-ZI",
     "slug": "axed-and-enraged",
-    "createdAt": "2025-12-11T23:38:06.414Z"
+    "createdAt": "2025-12-11T23:38:06.414Z",
+    "lastVerified": "2025-12-11T23:38:06.414Z",
+    "sourceUrl": "https://www.axedandenraged.co.uk/"
   },
   {
     "id": "3f887440-4920-4d23-9260-de599f094245",
@@ -97,7 +114,12 @@
     "verified": true,
     "googlePlaceId": "ChIJXfnJ29IJd0gRqIRKvqRHTFs",
     "slug": "destroyd-rage-rooms-northampton",
-    "createdAt": "2025-11-27T21:28:46.741Z"
+    "createdAt": "2025-11-27T21:28:46.741Z",
+    "lastVerified": "2025-11-27T21:28:46.741Z",
+    "sourceUrl": "https://trappd.com/rage-rooms/",
+    "sessionLengths": [
+      30
+    ]
   },
   {
     "id": "c8e4a1b2-5d6f-4a9c-8e1b-2f3a4b5c6d7e",
@@ -117,7 +139,12 @@
     "verified": true,
     "googlePlaceId": null,
     "slug": "destroyd-rage-rooms-stockport",
-    "createdAt": "2026-07-25T21:32:58.714Z"
+    "createdAt": "2026-07-25T21:32:58.714Z",
+    "lastVerified": "2026-07-25T21:32:58.714Z",
+    "sourceUrl": "https://trappd.com/rage-rooms/",
+    "sessionLengths": [
+      30
+    ]
   },
   {
     "id": "a203c2d9-20ab-4ec2-a744-c022e6bd8341",
@@ -137,7 +164,9 @@
     "verified": true,
     "googlePlaceId": null,
     "slug": "down-range-rage-room-gosport",
-    "createdAt": "2026-06-14T12:00:00.000Z"
+    "createdAt": "2026-06-14T12:00:00.000Z",
+    "lastVerified": "2026-06-14T12:00:00.000Z",
+    "sourceUrl": "https://downrange-axethrowing.co.uk/rage-room/"
   },
   {
     "id": "e1r2t3y4-u5i6-4o7p-8a9s-0d1f2g3h4j5k",
@@ -157,7 +186,13 @@
     "verified": true,
     "googlePlaceId": null,
     "slug": "edinburgh-rage-room-edinburgh",
-    "createdAt": "2025-11-27T21:28:46.000Z"
+    "createdAt": "2025-11-27T21:28:46.000Z",
+    "lastVerified": "2025-11-27T21:28:46.000Z",
+    "sourceUrl": "https://classbento.co.uk/",
+    "features": [
+      "hen-stag-parties",
+      "mobile-experience"
+    ]
   },
   {
     "id": "a1s2d3f4-g5h6-4j7k-8l9z-0x1c2v3b4n5m",
@@ -177,7 +212,9 @@
     "verified": true,
     "googlePlaceId": "ChIJ5ydolLYziEgRs7TcXKQSR98",
     "slug": "game-vault-ayrshire-kilmarnock",
-    "createdAt": "2025-11-27T21:28:46.000Z"
+    "createdAt": "2025-11-27T21:28:46.000Z",
+    "lastVerified": "2025-11-27T21:28:46.000Z",
+    "sourceUrl": "https://gamevaultayrshire.com/rage-room/"
   },
   {
     "id": "3402ac80-5163-467f-ad88-bc16ec1a8955",
@@ -197,7 +234,12 @@
     "verified": true,
     "googlePlaceId": "ChIJ1Szj-wS7cEgRjij1NCeNXIY",
     "slug": "go-rage-birmingham-rage-room-birmingham",
-    "createdAt": "2025-11-27T21:28:46.921Z"
+    "createdAt": "2025-11-27T21:28:46.921Z",
+    "lastVerified": "2025-11-27T21:28:46.921Z",
+    "sourceUrl": "https://www.gorageuk.com/",
+    "sessionLengths": [
+      30
+    ]
   },
   {
     "id": "d6a4f1b5-2a7e-4d0c-e945-1b8a6f2d4c37",
@@ -217,7 +259,12 @@
     "verified": true,
     "googlePlaceId": "ChIJr8xukyohe0gREcQQFBj437Q",
     "slug": "hatchet-harrys-rage-room-liverpool",
-    "createdAt": "2026-06-02T12:00:00.000Z"
+    "createdAt": "2026-06-02T12:00:00.000Z",
+    "lastVerified": "2026-06-02T12:00:00.000Z",
+    "sourceUrl": "https://hatchetharrys.co.uk/liverpool/",
+    "sessionLengths": [
+      60
+    ]
   },
   {
     "id": "e7b5a2c6-3b8f-4e1d-f056-2c9b7a3e5d48",
@@ -237,7 +284,12 @@
     "verified": true,
     "googlePlaceId": "ChIJK8E4P-nxeUgROXV2trfJVLI",
     "slug": "hatchet-harrys-rage-room-derby",
-    "createdAt": "2026-06-02T12:00:00.000Z"
+    "createdAt": "2026-06-02T12:00:00.000Z",
+    "lastVerified": "2026-06-02T12:00:00.000Z",
+    "sourceUrl": "https://hatchetharrys.co.uk/derby/",
+    "sessionLengths": [
+      60
+    ]
   },
   {
     "id": "d8d7c02d-51cb-488a-909d-359673d34c67",
@@ -257,7 +309,10 @@
     "verified": true,
     "googlePlaceId": null,
     "slug": "house-of-rage-rage-room-leicester",
-    "createdAt": "2026-05-01T22:16:35.728Z"
+    "createdAt": "2026-05-01T22:16:35.728Z",
+    "lastVerified": "2026-05-01T22:16:35.728Z",
+    "sourceUrl": "https://visitleicester.info/point-of-interest/house-of-rage-rage-room/",
+    "ageMin": 10
   },
   {
     "id": "v9w8x7y6-z5a4-4b3c-d2e1-f0g9h8i7j6k5",
@@ -277,7 +332,9 @@
     "verified": true,
     "googlePlaceId": "ChIJP-LgaPDLd0gRjmMTE1UCByo",
     "slug": "just-rage-rooms-henlow",
-    "createdAt": "2025-11-27T21:28:46.000Z"
+    "createdAt": "2025-11-27T21:28:46.000Z",
+    "lastVerified": "2025-11-27T21:28:46.000Z",
+    "sourceUrl": "https://justragerooms.co.uk/"
   },
   {
     "id": "f6e6cd12-77e2-45ea-b258-e60607b7c11b",
@@ -297,7 +354,9 @@
     "verified": true,
     "googlePlaceId": null,
     "slug": "mission-classified-rage-room-grimsby",
-    "createdAt": "2026-07-01T12:00:00.000Z"
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "lastVerified": "2026-07-01T12:00:00.000Z",
+    "sourceUrl": "https://missionclassified.co.uk/rage-room"
   },
   {
     "id": "f8c6b3d7-4c9a-4f2e-a167-3d0c8b4f6e59",
@@ -317,7 +376,16 @@
     "verified": true,
     "googlePlaceId": "ChIJC_NQvF6FdUgRiPF2Wj-rjEQ",
     "slug": "players-the-rage-rooms-brighton",
-    "createdAt": "2026-06-02T12:00:00.000Z"
+    "createdAt": "2026-06-02T12:00:00.000Z",
+    "lastVerified": "2026-06-02T12:00:00.000Z",
+    "sourceUrl": "https://playersbrighton.com/pages/theragerooms",
+    "ageMin": 18,
+    "sessionLengths": [
+      15
+    ],
+    "features": [
+      "byo-smashables"
+    ]
   },
   {
     "id": "d7a87e3b-5afc-40fc-b819-a3728cc29ee8",
@@ -337,7 +405,8 @@
     "verified": true,
     "googlePlaceId": "ChIJL61rXqvx2EcR1fo8nfbJS8k",
     "slug": "rage-cage-ltd-braintree",
-    "createdAt": "2025-11-27T21:28:46.698Z"
+    "createdAt": "2025-11-27T21:28:46.698Z",
+    "lastVerified": "2025-11-27T21:28:46.698Z"
   },
   {
     "id": "a9d7c4e8-5d0b-4a3f-b278-4e1d9c5a7f60",
@@ -357,7 +426,12 @@
     "verified": true,
     "googlePlaceId": "ChIJM0KW2CEHdkgRcYDwVWgngEk",
     "slug": "rage-cage-uk-croydon",
-    "createdAt": "2026-06-02T12:00:00.000Z"
+    "createdAt": "2026-06-02T12:00:00.000Z",
+    "lastVerified": "2026-06-02T12:00:00.000Z",
+    "sourceUrl": "https://www.ragecageuk.com/",
+    "features": [
+      "couples"
+    ]
   },
   {
     "id": "a3f1c8e2-9d4b-4a7f-b612-8e5d3c9a1f04",
@@ -377,7 +451,9 @@
     "verified": true,
     "googlePlaceId": "ChIJbaYbRzHTfUgRoSBGOwOi6ig",
     "slug": "rage-it-out-consett",
-    "createdAt": "2026-06-02T12:00:00.000Z"
+    "createdAt": "2026-06-02T12:00:00.000Z",
+    "lastVerified": "2026-06-02T12:00:00.000Z",
+    "sourceUrl": "https://rageitout.co.uk/"
   },
   {
     "id": "cf7c8d69-4b25-41fd-bd95-3c2b0ad32690",
@@ -397,7 +473,12 @@
     "verified": true,
     "googlePlaceId": "ChIJed-gzPYz30cRp21dAOqbSSU",
     "slug": "rage-out-maidstone-maidstone",
-    "createdAt": "2025-11-27T21:28:46.473Z"
+    "createdAt": "2025-11-27T21:28:46.473Z",
+    "lastVerified": "2025-11-27T21:28:46.473Z",
+    "sourceUrl": "http://rageout.co.uk/",
+    "features": [
+      "corporate-groups"
+    ]
   },
   {
     "id": "02de72e2-0ff6-45cd-a7a0-15a71cc3e6b0",
@@ -417,7 +498,9 @@
     "verified": true,
     "googlePlaceId": null,
     "slug": "rage-remedies-romford",
-    "createdAt": "2026-07-01T12:00:00.000Z"
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "lastVerified": "2026-07-01T12:00:00.000Z",
+    "sourceUrl": "https://www.rageremedies.co.uk/"
   },
   {
     "id": "258cf31a-ba0d-4769-bc70-aa17bed67157",
@@ -437,7 +520,12 @@
     "verified": true,
     "googlePlaceId": "ChIJfzbn6IlT2UcREyPq4NM6nb0",
     "slug": "rage-remedy-margate",
-    "createdAt": "2025-11-27T21:28:46.574Z"
+    "createdAt": "2025-11-27T21:28:46.574Z",
+    "lastVerified": "2025-11-27T21:28:46.574Z",
+    "sourceUrl": "https://www.rageremedy.co.uk/",
+    "features": [
+      "birthday-parties"
+    ]
   },
   {
     "id": "20d7f17c-defe-405c-97e4-642d556b5860",
@@ -457,7 +545,12 @@
     "verified": true,
     "googlePlaceId": "ChIJ99mUxxK9cEgRwmeXlvBHYZQ",
     "slug": "rage-room-birmingham-birmingham",
-    "createdAt": "2025-11-27T21:28:46.879Z"
+    "createdAt": "2025-11-27T21:28:46.879Z",
+    "lastVerified": "2025-11-27T21:28:46.879Z",
+    "sourceUrl": "http://www.rageroombirmingham.co.uk/",
+    "features": [
+      "birthday-parties"
+    ]
   },
   {
     "id": "14b9824e-b5aa-41c2-9f44-8497a93d89fa",
@@ -477,7 +570,9 @@
     "verified": true,
     "googlePlaceId": null,
     "slug": "rage-room-hull",
-    "createdAt": "2026-07-01T12:00:00.000Z"
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "lastVerified": "2026-07-01T12:00:00.000Z",
+    "sourceUrl": "https://rageroomhull.simplybook.it/"
   },
   {
     "id": "83ee5c07-1455-4b7b-9fe0-9d3f97e1c5e7",
@@ -497,7 +592,9 @@
     "verified": true,
     "googlePlaceId": null,
     "slug": "rage-room-ireland",
-    "createdAt": "2026-06-14T12:00:00.000Z"
+    "createdAt": "2026-06-14T12:00:00.000Z",
+    "lastVerified": "2026-06-14T12:00:00.000Z",
+    "sourceUrl": "https://www.rageroomireland.com/"
   },
   {
     "id": "b1b612f7-67a4-4a9d-895a-d4a13aa8b869",
@@ -517,7 +614,9 @@
     "verified": true,
     "googlePlaceId": "ChIJRWMjqyxhd0gRIQYWoOgMn5w",
     "slug": "rage-room-leicester",
-    "createdAt": "2025-12-13T23:44:24.606Z"
+    "createdAt": "2025-12-13T23:44:24.606Z",
+    "lastVerified": "2025-12-13T23:44:24.606Z",
+    "sourceUrl": "http://www.rageroomleicester.co.uk/"
   },
   {
     "id": "f4g5h6i7-j8k9-4l0m-n1o2-p3q4r5s6t7u8",
@@ -537,7 +636,12 @@
     "verified": true,
     "googlePlaceId": "ChIJQ3CYt-M1d0gRWoG8OH94YCo",
     "slug": "rage-rooms-leamington-spa-royal-leamington-spa",
-    "createdAt": "2025-11-27T21:28:46.000Z"
+    "createdAt": "2025-11-27T21:28:46.000Z",
+    "lastVerified": "2025-11-27T21:28:46.000Z",
+    "sourceUrl": "https://ragerooms-leamingtonspa.co.uk/",
+    "features": [
+      "corporate-groups"
+    ]
   },
   {
     "id": "l1m2n3o4-p5q6-4r7s-t8u9-v0w1x2y3z4a5",
@@ -557,7 +661,13 @@
     "verified": true,
     "googlePlaceId": "ChIJA0v9OIbh2UcR31Xwo-7nQfQ",
     "slug": "rage-rooms-norwich-norwich",
-    "createdAt": "2025-11-27T21:28:46.000Z"
+    "createdAt": "2025-11-27T21:28:46.000Z",
+    "lastVerified": "2025-11-27T21:28:46.000Z",
+    "sourceUrl": "https://ragerooms-norwich.co.uk/",
+    "ageMin": 6,
+    "features": [
+      "hen-stag-parties"
+    ]
   },
   {
     "id": "cmntf1qlr0000ll633z7l2wnt",
@@ -577,7 +687,9 @@
     "verified": true,
     "googlePlaceId": "ChIJL-M5aZ1x30cRJ3_t7Jfq1_0",
     "slug": "rage-x-treme-polegate",
-    "createdAt": "2026-04-10T21:26:38.319Z"
+    "createdAt": "2026-04-10T21:26:38.319Z",
+    "lastVerified": "2026-04-10T21:26:38.319Z",
+    "sourceUrl": "https://ragex-treme.co.uk"
   },
   {
     "id": "992780e4-0137-445f-9c95-8a213fca24bc",
@@ -597,7 +709,9 @@
     "verified": true,
     "googlePlaceId": null,
     "slug": "raging-bath",
-    "createdAt": "2026-07-01T12:00:00.000Z"
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "lastVerified": "2026-07-01T12:00:00.000Z",
+    "sourceUrl": "https://www.ragingbath.com/"
   },
   {
     "id": "z1x2c3v4-b5n6-4m7l-k8j9-h0g1f2d3s4a5",
@@ -617,7 +731,9 @@
     "verified": true,
     "googlePlaceId": null,
     "slug": "riot-room-dunfermline",
-    "createdAt": "2025-11-27T21:28:46.000Z"
+    "createdAt": "2025-11-27T21:28:46.000Z",
+    "lastVerified": "2025-11-27T21:28:46.000Z",
+    "sourceUrl": "https://www.riotroom.co.uk/"
   },
   {
     "id": "9c2ad2d7-5603-47a2-b466-35f82e3f12ea",
@@ -637,7 +753,9 @@
     "verified": true,
     "googlePlaceId": null,
     "slug": "shatterhaus-cardiff",
-    "createdAt": "2026-06-14T12:00:00.000Z"
+    "createdAt": "2026-06-14T12:00:00.000Z",
+    "lastVerified": "2026-06-14T12:00:00.000Z",
+    "sourceUrl": "https://www.shatterhaus.uk/"
   },
   {
     "id": "b5c6d7e8-f9a0-4b1c-d2e3-f4g5h6i7j8k9",
@@ -657,7 +775,15 @@
     "verified": true,
     "googlePlaceId": "ChIJm5G1QYzFe0gRnbN4QddB5iQ",
     "slug": "smash-it-huddersfield",
-    "createdAt": "2025-11-27T21:28:46.000Z"
+    "createdAt": "2025-11-27T21:28:46.000Z",
+    "lastVerified": "2025-11-27T21:28:46.000Z",
+    "sourceUrl": "https://whitewolfs.co.uk/smash-room",
+    "sessionLengths": [
+      30
+    ],
+    "features": [
+      "hen-stag-parties"
+    ]
   },
   {
     "id": "93667b86-efd4-4378-ac72-3b01838dfe01",
@@ -677,7 +803,9 @@
     "verified": true,
     "googlePlaceId": "ChIJO4RR4D6r2EcRd-t7UC_2sts",
     "slug": "smash-it-rage-room-ltd-london",
-    "createdAt": "2025-11-27T21:28:46.787Z"
+    "createdAt": "2025-11-27T21:28:46.787Z",
+    "lastVerified": "2025-11-27T21:28:46.787Z",
+    "sourceUrl": "http://smashitragerooms.co.uk/"
   },
   {
     "id": "e398d7a1-8d2b-4c5e-8f92-7f3e6a123456",
@@ -697,7 +825,9 @@
     "verified": true,
     "googlePlaceId": "ChIJ340U5Z5beEgR9ekK-PPLZcU",
     "slug": "smash-palace-lincoln",
-    "createdAt": "2025-11-27T21:28:46.000Z"
+    "createdAt": "2025-11-27T21:28:46.000Z",
+    "lastVerified": "2025-11-27T21:28:46.000Z",
+    "sourceUrl": "https://smashpalace.co.uk/"
   },
   {
     "id": "a281abae-cd80-4c2a-996b-2c8aee5825fd",
@@ -717,7 +847,12 @@
     "verified": true,
     "googlePlaceId": "ChIJ2YzKCzx3fkgRpzDhVtmild8",
     "slug": "smash-space-uk-newcastle",
-    "createdAt": "2025-11-27T21:28:46.834Z"
+    "createdAt": "2025-11-27T21:28:46.834Z",
+    "lastVerified": "2025-11-27T21:28:46.834Z",
+    "sourceUrl": "https://www.smashspace.co.uk/",
+    "features": [
+      "birthday-parties"
+    ]
   },
   {
     "id": "9675e2e1-a84a-41c5-9171-13503af3c4d5",
@@ -737,7 +872,13 @@
     "verified": true,
     "googlePlaceId": "ChIJX6iq6OH5cUgReHLJUqtGY_k",
     "slug": "the-activity-dome-weston-super-mare",
-    "createdAt": "2025-11-27T21:28:46.385Z"
+    "createdAt": "2025-11-27T21:28:46.385Z",
+    "lastVerified": "2025-11-27T21:28:46.385Z",
+    "sourceUrl": "http://www.theactivitydome.com/",
+    "features": [
+      "corporate-groups",
+      "birthday-parties"
+    ]
   },
   {
     "id": "a9b8c7d6-e5f4-4321-9a8b-7c6d5e4f3a2b",
@@ -757,7 +898,15 @@
     "verified": true,
     "googlePlaceId": null,
     "slug": "the-break-rooms-leominster",
-    "createdAt": "2026-07-25T21:32:58.715Z"
+    "createdAt": "2026-07-25T21:32:58.715Z",
+    "lastVerified": "2026-07-25T21:32:58.715Z",
+    "sourceUrl": "https://www.dayoutwiththekids.co.uk/attractions/thebreakrooms-o1u8r400",
+    "sessionLengths": [
+      20
+    ],
+    "features": [
+      "hen-stag-parties"
+    ]
   },
   {
     "id": "b4e2d9f3-0e5c-4b8a-c723-9f6e4d0b2a15",
@@ -777,7 +926,12 @@
     "verified": true,
     "googlePlaceId": "ChIJyQX-MtJFcUgR9Q4m0iRcg5U",
     "slug": "the-rabbit-hole-rage-room-swindon",
-    "createdAt": "2026-06-02T12:00:00.000Z"
+    "createdAt": "2026-06-02T12:00:00.000Z",
+    "lastVerified": "2026-06-02T12:00:00.000Z",
+    "sourceUrl": "https://www.facebook.com/the.rabbit.hole.rage.room/",
+    "features": [
+      "hen-stag-parties"
+    ]
   },
   {
     "id": "6eede7dc-117a-4e28-a4b7-57c8e67e7696",
@@ -797,7 +951,9 @@
     "verified": true,
     "googlePlaceId": "ChIJ2R0ziCVDekgRCv7JBCT8k0w",
     "slug": "the-rage-house-newcastle-under-lyme",
-    "createdAt": "2025-11-27T21:28:46.261Z"
+    "createdAt": "2025-11-27T21:28:46.261Z",
+    "lastVerified": "2025-11-27T21:28:46.261Z",
+    "sourceUrl": "https://www.theragehouse.com/"
   },
   {
     "id": "b1a2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
@@ -817,7 +973,12 @@
     "verified": true,
     "googlePlaceId": null,
     "slug": "the-rage-rooms-bournemouth",
-    "createdAt": "2025-11-27T21:28:46.000Z"
+    "createdAt": "2025-11-27T21:28:46.000Z",
+    "lastVerified": "2025-11-27T21:28:46.000Z",
+    "sourceUrl": "https://the-ragerooms.co.uk/",
+    "features": [
+      "mobile-experience"
+    ]
   },
   {
     "id": "0ca388aa-95ca-4ec8-b4e1-f11221888369",
@@ -837,7 +998,12 @@
     "verified": true,
     "googlePlaceId": "ChIJp8f9yISFeUgRxtoo5qRwsOc",
     "slug": "the-snake-room-urban-axe-throwing-chesterfield",
-    "createdAt": "2025-11-27T21:28:46.300Z"
+    "createdAt": "2025-11-27T21:28:46.300Z",
+    "lastVerified": "2025-11-27T21:28:46.300Z",
+    "sourceUrl": "https://snakeroom.co.uk/",
+    "features": [
+      "birthday-parties"
+    ]
   },
   {
     "id": "176522c9-6b9b-4aad-81f3-ddeaee3ea47f",
@@ -857,7 +1023,9 @@
     "verified": true,
     "googlePlaceId": null,
     "slug": "the-underground-newport",
-    "createdAt": "2026-06-14T12:00:00.000Z"
+    "createdAt": "2026-06-14T12:00:00.000Z",
+    "lastVerified": "2026-06-14T12:00:00.000Z",
+    "sourceUrl": "https://www.theundergroundnewport.com/"
   },
   {
     "id": "ba70cd2a-780d-4081-ba5b-113a31da0512",
@@ -877,7 +1045,9 @@
     "verified": true,
     "googlePlaceId": "ChIJAWc27UkF2UcRDLBMWoV60xk",
     "slug": "urban-xtreme-colchester-colchester",
-    "createdAt": "2025-11-27T21:28:46.654Z"
+    "createdAt": "2025-11-27T21:28:46.654Z",
+    "lastVerified": "2025-11-27T21:28:46.654Z",
+    "sourceUrl": "http://www.urbanxtreme.co.uk/"
   },
   {
     "id": "7a6431df-abcd-4a81-a37d-7344fb8a0871",
@@ -897,7 +1067,9 @@
     "verified": true,
     "googlePlaceId": null,
     "slug": "wreck-room-london",
-    "createdAt": "2026-05-01T21:32:00.168Z"
+    "createdAt": "2026-05-01T21:32:00.168Z",
+    "lastVerified": "2026-05-01T21:32:00.168Z",
+    "sourceUrl": "https://www.wreckroom.co.uk/"
   },
   {
     "id": "q1w2e3r4-t5y6-4u7i-8o9p-0a1s2d3f4g5h",
@@ -917,6 +1089,11 @@
     "verified": true,
     "googlePlaceId": "ChIJgWRX6WQPhEgRmJ0HbJ0yhX4",
     "slug": "wreck-it-room-aberdeen",
-    "createdAt": "2025-11-27T21:28:46.000Z"
+    "createdAt": "2025-11-27T21:28:46.000Z",
+    "lastVerified": "2025-11-27T21:28:46.000Z",
+    "sourceUrl": "https://www.wreckitroom.co.uk/",
+    "sessionLengths": [
+      30
+    ]
   }
 ]

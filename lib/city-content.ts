@@ -109,6 +109,70 @@ const cityContentMap: Record<string, CityContent> = {
     travelTip:
       "Hull Paragon station connects well across Yorkshire. Check parking notes on the venue listing before you travel.",
   },
+  bournemouth: {
+    intro:
+      "Bournemouth has a verified rage room serving Dorset groups looking for an alternative activity beyond the seafront. Compare the current venue's starting price, age policy and booking options below.",
+    localContext:
+      "The Bournemouth, Christchurch and Poole area draws birthday, hen and stag groups throughout the year. Check whether the package price is per person or per room and confirm the number of breakables included before booking.",
+    travelTip:
+      "Bournemouth station is the main rail arrival point. Allow extra travel time on summer weekends and check the venue's parking guidance before setting off.",
+  },
+  leicester: {
+    intro:
+      "Leicester has verified rage room options for East Midlands visitors planning birthdays, group socials and alternative date activities. Compare current starting prices and package details before choosing.",
+    localContext:
+      "Leicester's central position makes it practical for groups meeting from Nottingham, Coventry and Derby. Venue packages can vary by session length, number of people and supplied smashables.",
+    travelTip:
+      "Leicester station is close to the city centre. For weekend sessions, check availability and parking before travelling.",
+  },
+  swansea: {
+    intro:
+      "Looking for a rage room in Swansea? We compare verified South Wales venues within travelling distance, including prices, locations and direct booking information.",
+    localContext:
+      "Swansea groups may find their closest options around Swansea, Cardiff or Newport depending on current inventory. The directory separates in-city venues from nearby alternatives so travel is clear.",
+    travelTip:
+      "Compare driving time with rail connections through Swansea and Cardiff, especially for evening or weekend group bookings.",
+  },
+  oxford: {
+    intro:
+      "Looking for a rage room near Oxford? We list the closest verified smash rooms within travelling distance and show the journey alongside current starting prices.",
+    localContext:
+      "Dedicated central Oxford inventory is limited, so nearby options may be in neighbouring counties. Compare postcode, travel time, minimum age and package inclusions rather than relying on the city label alone.",
+    travelTip:
+      "Oxford traffic and parking can add time to the journey. Check park-and-ride or rail options before booking a venue outside the centre.",
+  },
+  peterborough: {
+    intro:
+      "Looking for a rage room near Peterborough? Browse the nearest verified venues serving Cambridgeshire and the surrounding East of England area.",
+    localContext:
+      "Peterborough's rail and road links make regional venues accessible, but journey times differ considerably. We show the venue's actual city and postcode alongside its price and booking details.",
+    travelTip:
+      "Use the postcode finder for a distance-ranked shortlist, then confirm parking and session availability with the venue.",
+  },
+  portsmouth: {
+    intro:
+      "Portsmouth visitors can compare verified rage rooms around the Solent, including nearby Gosport options, with actual locations and starting prices shown clearly.",
+    localContext:
+      "A venue across Portsmouth Harbour may be geographically close but require a ferry or road journey. Compare the postcode and route as well as the headline distance.",
+    travelTip:
+      "Check ferry times for Gosport venues and allow extra road time during busy weekends or event days.",
+  },
+  coventry: {
+    intro:
+      "Looking for a rage room near Coventry? We compare the nearest verified West Midlands venues, including current locations, prices and booking links.",
+    localContext:
+      "Coventry sits between Birmingham and Leicester, so the most practical venue depends on your side of the city and transport choice. Nearby results retain the venue's real city rather than presenting it as central Coventry.",
+    travelTip:
+      "Compare rail journeys through Birmingham New Street with driving time before choosing a group session.",
+  },
+  southampton: {
+    intro:
+      "Looking for a rage room near Southampton? Browse verified smash rooms across Hampshire and the Solent with transparent locations, distances and starting prices.",
+    localContext:
+      "Southampton groups may find options around Portsmouth, Gosport or elsewhere in Hampshire. Check the venue postcode, session duration and group capacity before booking.",
+    travelTip:
+      "Road traffic around the M27 can affect evening and weekend journeys, so leave time beyond the mileage estimate.",
+  },
 }
 
 export function getCityContent(cityName: string): CityContent | null {

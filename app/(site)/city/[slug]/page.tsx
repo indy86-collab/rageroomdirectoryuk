@@ -11,6 +11,7 @@ import DigitalGuidesChooser from "@/components/DigitalGuidesChooser"
 import Link from "next/link"
 import { buildOgImageUrl } from "@/lib/seo-schema"
 import { absoluteUrl, getSiteUrl, listingUrl } from "@/lib/site-url"
+import { isIndexableLocationPage } from "@/lib/location-indexing"
 
 interface CityPageProps {
   params: { slug: string }
@@ -26,6 +27,11 @@ export async function generateMetadata({
   const nearbyCount = nearby.length
   const hasNearbyOnly = inCity.length === 0 && nearby.length > 0
   const isEmpty = allForSchema.length === 0
+  const isIndexable = isIndexableLocationPage({
+    city: cityName,
+    inCity,
+    nearby,
+  })
   const primaryCount = hasNearbyOnly ? nearbyCount : inCityCount
   const pricedListings = allForSchema.filter((l) => l.price != null) as Array<
     typeof allForSchema[number] & { price: number }
@@ -57,7 +63,7 @@ export async function generateMetadata({
         ? `We do not have a verified rage room in ${cityName} yet. Browse nearby UK rage rooms, compare prices, and suggest a missing venue.`
         : `Compare ${inCityCount} verified ${inCityCount === 1 ? "rage room" : "rage rooms"} in ${cityName}${nearbyCount > 0 ? ` plus ${nearbyCount} nearby ${nearbyCount === 1 ? "option" : "options"}` : ""}. View starting prices, age limits and booking details.`,
     alternates: { canonical: `/city/${cityToSlug(cityName)}` },
-    ...(isEmpty ? { robots: { index: false, follow: true } } : {}),
+    ...(!isIndexable ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
       title: hasNearbyOnly
         ? `Rage Rooms Near ${cityName} | RageRoom Directory`

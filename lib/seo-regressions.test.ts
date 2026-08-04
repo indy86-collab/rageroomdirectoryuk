@@ -5,6 +5,7 @@ import { generateMetadata as generateCityMetadata } from "@/app/(site)/city/[slu
 import { generateMetadata as generateSearchMetadata } from "@/app/(site)/search/page"
 import { getListingsNearCity } from "@/lib/listings"
 import { buildArticleSchema } from "@/lib/seo-schema"
+import robots from "@/app/robots"
 
 const require = createRequire(import.meta.url)
 const nextConfig = require("../next.config.js")
@@ -84,5 +85,12 @@ describe("SEO regressions", () => {
       destination: "https://www.rageroomdirectory.co.uk/:path*",
       permanent: true,
     })
+  })
+
+  it("advertises both the page and image sitemaps", () => {
+    expect(robots().sitemap).toEqual([
+      "https://www.rageroomdirectory.co.uk/sitemap.xml",
+      "https://www.rageroomdirectory.co.uk/image-sitemap.xml",
+    ])
   })
 })

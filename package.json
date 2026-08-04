@@ -12,6 +12,8 @@
     "test:e2e": "playwright test",
     "typecheck": "tsc --noEmit",
     "validate-listings": "tsx scripts/validate-listings.ts",
+    "report-listing-completeness": "tsx scripts/report-listing-completeness.ts",
+    "export-venue-outreach": "tsx scripts/export-venue-outreach.ts",
     "ping-indexnow": "tsx scripts/ping-indexnow.ts",
     "analyze-gsc": "tsx scripts/analyze-gsc.ts",
     "seo:assert": "tsx scripts/seo-assertions.ts",

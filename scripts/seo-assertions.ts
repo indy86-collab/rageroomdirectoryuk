@@ -56,6 +56,19 @@ async function assertRobots() {
   if (!robots.includes(`Sitemap: ${CANONICAL_HOST}/sitemap.xml`)) {
     fail("robots.txt sitemap does not use canonical www URL")
   }
+  if (!robots.includes(`Sitemap: ${CANONICAL_HOST}/image-sitemap.xml`)) {
+    fail("robots.txt does not advertise the image sitemap")
+  }
+}
+
+async function assertImageSitemap() {
+  const xml = await read("/image-sitemap.xml")
+  if (!xml.includes('xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"')) {
+    fail("image-sitemap.xml is missing the Google image namespace")
+  }
+  if (xml.includes("<image:caption>") || xml.includes("<image:title>")) {
+    fail("image-sitemap.xml contains deprecated image tags")
+  }
 }
 
 async function assertPage(path: string) {
@@ -86,6 +99,7 @@ async function assertPage(path: string) {
 async function main() {
   await assertSitemap()
   await assertRobots()
+  await assertImageSitemap()
   for (const path of SAMPLE_PATHS) {
     await assertPage(path)
   }
