@@ -121,6 +121,7 @@ export default function PartyGiftBundlePage() {
             <DigitalSampleStrip
               images={product.previewImages}
               productName={product.name}
+              sampleUnlockHint="Sample preview — bundle unlocks the full Party Planner PDF plus DIY gift voucher templates."
             />
           </div>
         </section>

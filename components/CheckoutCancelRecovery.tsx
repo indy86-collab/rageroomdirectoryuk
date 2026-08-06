@@ -1,13 +1,14 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
-import { Download, ShieldCheck } from "lucide-react"
+import { Download, ShieldCheck, Tag } from "lucide-react"
 import DigitalCheckoutButton from "@/components/DigitalCheckoutButton"
 import {
   type AnalyticsProduct,
   trackCheckoutCancelView,
 } from "@/lib/analytics"
+import { DIGITAL_PROMO_CODE, DIGITAL_PROMO_LABEL } from "@/lib/digital-promo"
 
 type CheckoutCancelRecoveryProps = {
   productId: string
@@ -24,6 +25,8 @@ export default function CheckoutCancelRecovery({
   priceLabel,
   analyticsProduct,
 }: CheckoutCancelRecoveryProps) {
+  const [email, setEmail] = useState("")
+
   useEffect(() => {
     trackCheckoutCancelView(analyticsProduct)
     // Fire once per cancelled product view.
@@ -38,8 +41,20 @@ export default function CheckoutCancelRecovery({
         </h1>
         <p className="mt-4 text-base leading-relaxed text-zinc-300">
           Checkout for <span className="font-semibold text-white">{productName}</span>{" "}
-          wasn’t completed. Finish payment to get instant access.
+          wasn’t completed. This is a planning/template download only — not a venue
+          booking. Finish payment to get instant access.
         </p>
+
+        <div className="mt-5 inline-flex items-start gap-2 rounded-md border border-rage-500/40 bg-rage-500/10 px-4 py-3 text-left text-sm text-zinc-200">
+          <Tag className="mt-0.5 h-4 w-4 flex-shrink-0 text-rage-500" />
+          <p>
+            Still deciding? Use code{" "}
+            <span className="font-bold tracking-wide text-white">{DIGITAL_PROMO_CODE}</span>{" "}
+            at Stripe checkout for{" "}
+            <span className="font-semibold text-white">{DIGITAL_PROMO_LABEL}</span>{" "}
+            (limited-time).
+          </p>
+        </div>
 
         <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-xs font-semibold text-zinc-300">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-700 bg-[#151515] px-3 py-1.5">
@@ -51,15 +66,30 @@ export default function CheckoutCancelRecovery({
             Instant download
           </span>
           <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-700 bg-[#151515] px-3 py-1.5">
-            No venue booking required
+            Not a venue booking
           </span>
         </div>
 
-        <div className="mt-8 flex justify-center">
+        <label className="mx-auto mt-8 block max-w-md text-left">
+          <span className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
+            Email for checkout (optional)
+          </span>
+          <input
+            type="email"
+            autoComplete="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            placeholder="you@example.com"
+            className="mt-2 w-full rounded-md border border-zinc-700 bg-[#151515] px-3 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:border-rage-500 focus:outline-none"
+          />
+        </label>
+
+        <div className="mt-5 flex justify-center">
           <DigitalCheckoutButton
             productId={productId}
             analyticsProduct={analyticsProduct}
             resumeFromCancel
+            customerEmail={email}
           >
             Complete purchase — {priceLabel}
           </DigitalCheckoutButton>

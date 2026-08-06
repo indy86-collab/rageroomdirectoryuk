@@ -5,6 +5,7 @@ type DigitalSampleStripProps = {
   images: string[]
   productName: string
   previewPdf?: string
+  sampleUnlockHint?: string
   className?: string
 }
 
@@ -12,6 +13,7 @@ export default function DigitalSampleStrip({
   images,
   productName,
   previewPdf,
+  sampleUnlockHint,
   className = "",
 }: DigitalSampleStripProps) {
   if (!images.length) {
@@ -24,7 +26,8 @@ export default function DigitalSampleStrip({
         Peek inside
       </h2>
       <p className="mt-1 text-sm text-zinc-400">
-        Sample pages from {productName} — not the full download.
+        {sampleUnlockHint ||
+          `Sample preview from ${productName} — not the full download.`}
       </p>
       <div className="mt-4 grid grid-cols-3 gap-2 sm:gap-3">
         {images.slice(0, 3).map((src, index) => (
@@ -48,7 +51,7 @@ export default function DigitalSampleStrip({
           href={previewPdf}
           className="mt-4 inline-flex text-sm font-semibold text-rage-500 hover:text-rage-400"
         >
-          View full sample PDF
+          View 2-page sample PDF
         </Link>
       )}
     </div>

@@ -175,6 +175,7 @@ export default function RageRoomFirstVisitPrepPackPage() {
               images={product.previewImages}
               productName={product.name}
               previewPdf={product.previewPdf}
+              sampleUnlockHint={product.sampleUnlockHint}
             />
           </div>
         </section>
@@ -274,7 +275,7 @@ export default function RageRoomFirstVisitPrepPackPage() {
           <div className="rounded-lg border border-zinc-800 bg-[#181818] p-6">
             <h2 className="text-xl font-bold text-white">Giving it as a gift?</h2>
             <p className="mt-3 text-sm leading-relaxed text-zinc-300">
-              Pair prep with presentation using the Gift Voucher Template Pack.
+              Pair prep with DIY printable gift voucher templates (not a venue booking).
             </p>
             <TrackedProductLink
               href="/digital-downloads/rage-room-gift-voucher-template-pack"
@@ -282,7 +283,7 @@ export default function RageRoomFirstVisitPrepPackPage() {
               listName="Digital Product Cross-Sell"
               className="mt-4 inline-flex text-sm font-semibold text-rage-500 hover:text-rage-400"
             >
-              View gift voucher pack
+              View voucher templates
             </TrackedProductLink>
           </div>
         </div>

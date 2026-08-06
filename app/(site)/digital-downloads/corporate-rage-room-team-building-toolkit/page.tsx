@@ -187,6 +187,7 @@ export default function CorporateToolkitPage() {
               images={product.previewImages}
               productName={product.name}
               previewPdf={product.previewPdf}
+              sampleUnlockHint={product.sampleUnlockHint}
             />
           </div>
         </section>

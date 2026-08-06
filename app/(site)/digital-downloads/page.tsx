@@ -49,8 +49,8 @@ const downloads = [
   {
     title: "Rage Room Gift Voucher Template Pack",
     price: "£5",
-    copy: "For giving a rage room experience as a gift.",
-    cta: "Send a polished voucher — £5",
+    copy: "DIY printable and digital gift voucher templates — not a venue booking.",
+    cta: "Get printable voucher templates — £5",
     href: "/digital-downloads/rage-room-gift-voucher-template-pack",
     productId: "rage-room-gift-voucher-template-pack",
   },
@@ -228,7 +228,7 @@ export default function DigitalDownloadsPage() {
                         href={product.previewPdf}
                         className="inline-flex min-h-[40px] items-center justify-center text-sm font-semibold text-rage-500 hover:text-rage-400"
                       >
-                        View free sample pages
+                        View 2-page sample PDF
                       </Link>
                     )}
                   </div>

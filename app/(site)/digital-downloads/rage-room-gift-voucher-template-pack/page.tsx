@@ -158,7 +158,8 @@ export default function GiftVoucherTemplatePackPage() {
             </h1>
             <DigitalEditorialByline className="mt-3" />
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-zinc-300">
-              Give a rage room experience as a polished printable or digital gift voucher.
+              DIY printable and digital gift voucher templates — present a rage room
+              experience as a gift. Not a venue booking or venue-issued voucher.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4">
               <div>
@@ -171,7 +172,7 @@ export default function GiftVoucherTemplatePackPage() {
                 productId={product.id}
                 analyticsProduct={analyticsProduct}
               >
-                Send a polished voucher today — £5
+                Get printable voucher templates — £5
               </DigitalCheckoutButton>
             </div>
             <DigitalCompactTrust />
@@ -194,6 +195,7 @@ export default function GiftVoucherTemplatePackPage() {
               images={product.previewImages}
               productName={product.name}
               previewPdf={product.previewPdf}
+              sampleUnlockHint={product.sampleUnlockHint}
             />
           </div>
         </section>
@@ -319,17 +321,18 @@ export default function GiftVoucherTemplatePackPage() {
         <div className="mx-auto max-w-4xl rounded-lg border border-rage-500/30 bg-[#181818] p-6 text-center sm:p-8">
           <ListChecks className="mx-auto h-10 w-10 text-rage-500" />
           <h2 className="mt-4 text-2xl font-black uppercase tracking-wide text-white">
-            Send a polished voucher today — £5
+            Get printable voucher templates — £5
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm text-zinc-300">
-            Instant ZIP with printable PDFs, digital PNG vouchers and bonus gift inserts.
+            Instant ZIP with printable PDFs, digital PNG templates and bonus gift inserts.
+            You still book the session with your chosen venue.
           </p>
           <div className="mt-6 flex justify-center">
             <DigitalCheckoutButton
               productId={product.id}
               analyticsProduct={analyticsProduct}
             >
-              Send a polished voucher today — £5
+              Get printable voucher templates — £5
             </DigitalCheckoutButton>
           </div>
           <div className="mx-auto max-w-2xl">

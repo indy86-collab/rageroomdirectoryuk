@@ -12,11 +12,14 @@ const reassuranceItems = [
 export function DigitalRefundNote({ className = "" }: { className?: string }) {
   return (
     <p className={`mt-3 text-xs leading-relaxed text-zinc-400 ${className}`}>
-      Faulty or unreadable file? Contact us within 7 days for a replacement or refund.
-      Change-of-mind refunds are not offered after a successful download.{" "}
+      Instant download after payment. Faulty or unreadable file? Contact us within 7
+      days for a replacement or refund.{" "}
       <Link href="/contact" className="font-semibold text-zinc-300 underline-offset-2 hover:text-white hover:underline">
         Contact us
       </Link>
+      <span className="mt-1 block text-zinc-500">
+        Change-of-mind refunds are not offered after a successful download.
+      </span>
     </p>
   )
 }
@@ -59,6 +62,8 @@ export function DigitalCompactTrust({ className = "" }: { className?: string }) 
       Instant download
       <span className="mx-2 text-zinc-600">·</span>
       Keep forever
+      <span className="mx-2 text-zinc-600">·</span>
+      Planning pack only — not a booking
       <span className="mx-2 text-zinc-600">·</span>
       7-day faulty-file refund
     </p>

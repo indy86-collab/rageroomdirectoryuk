@@ -21,6 +21,10 @@ export type DigitalProduct = {
   /** In-page sample page thumbnails (static PNGs). */
   previewImages?: string[]
   previewPdf?: string
+  /** Full pack page count (PDF products) — used in sample unlock copy. */
+  pageCount?: number
+  /** What the paid pack unlocks beyond the free sample. */
+  sampleUnlockHint?: string
   description: string
   includedSections: string[]
   checkoutBlurb: string
@@ -49,11 +53,14 @@ export const digitalProducts: Record<string, DigitalProduct> = {
       "/digital-products/rage-room-party-planner-pack-page-2.png?v=4",
       "/digital-products/rage-room-party-planner-pack-page-3.png?v=4",
     ],
-    previewPdf: "/digital-products/rage-room-party-planner-pack-sample.pdf?v=4",
+    previewPdf: "/digital-products/rage-room-party-planner-pack-sample.pdf?v=5",
+    pageCount: 15,
+    sampleUnlockHint:
+      "Sample preview (2 pages) — full pack unlocks all 15 planning pages.",
     description:
       "A printable UK planning kit for rage room birthdays, date nights, breakup nights, group nights, stag and hen activities, and friends' nights out.",
     checkoutBlurb:
-      "Instant PDF download: plan the whole smash night with venue scorecard, budget, invites and checklists.",
+      "Instant PDF planning pack only — not a venue booking. Venue scorecard, budget, invites and checklists.",
     includedSections: [
       "Event snapshot",
       "Planning timeline",
@@ -96,11 +103,14 @@ export const digitalProducts: Record<string, DigitalProduct> = {
       "/digital-products/corporate-rage-room-team-building-toolkit-page-3.png?v=4",
     ],
     previewPdf:
-      "/digital-products/corporate-rage-room-team-building-toolkit-sample.pdf?v=4",
+      "/digital-products/corporate-rage-room-team-building-toolkit-sample.pdf?v=5",
+    pageCount: 16,
+    sampleUnlockHint:
+      "Sample preview (2 pages) — full pack unlocks all 16 HR-ready pages.",
     description:
       "A professional planning pack for HR teams, office managers, founders and team leads planning a rage room team-building event.",
     checkoutBlurb:
-      "Instant PDF download: HR-ready approval emails, budget worksheet, venue scorecard and run sheet.",
+      "Instant PDF toolkit only — not a venue booking. Approval emails, budget worksheet, scorecard and run sheet.",
     includedSections: [
       "Why rage rooms work",
       "Internal planning checklist",
@@ -141,11 +151,14 @@ export const digitalProducts: Record<string, DigitalProduct> = {
       "/digital-products/rage-room-first-visit-prep-pack-page-2.png?v=4",
       "/digital-products/rage-room-first-visit-prep-pack-page-3.png?v=4",
     ],
-    previewPdf: "/digital-products/rage-room-first-visit-prep-pack-sample.pdf?v=4",
+    previewPdf: "/digital-products/rage-room-first-visit-prep-pack-sample.pdf?v=5",
+    pageCount: 12,
+    sampleUnlockHint:
+      "Sample preview (2 pages) — full pack unlocks all 12 first-visit pages.",
     description:
       "A printable UK first-timer kit covering what happens, what to wear, can-I-take-part checks, venue questions, waiver tips and a final arrival checklist.",
     checkoutBlurb:
-      "Instant PDF download: arrive ready for your first smash session with prep checklists and venue questions.",
+      "Instant PDF prep pack only — not a venue booking. First-visit checklists and venue questions.",
     includedSections: [
       "Quick start",
       "What happens step-by-step",
@@ -184,11 +197,13 @@ export const digitalProducts: Record<string, DigitalProduct> = {
       "/digital-products/rage-room-gift-voucher-template-pack-page-3.png?v=4",
     ],
     previewPdf:
-      "/digital-products/rage-room-gift-voucher-template-pack-sample.pdf?v=4",
+      "/digital-products/rage-room-gift-voucher-template-pack-sample.pdf?v=5",
+    sampleUnlockHint:
+      "Sample preview — full pack unlocks 8 themes across print + digital formats.",
     description:
       "A premium printable and digital gift voucher template pack for giving a rage room experience as a birthday, date night, breakup, best friend, holiday or generic experience gift.",
     checkoutBlurb:
-      "Instant ZIP download: printable and digital rage room gift voucher templates ready to send today.",
+      "Instant ZIP of DIY gift voucher templates only — not a venue booking or venue-issued voucher.",
     includedSections: [
       "Birthday voucher",
       "Date night voucher",
@@ -234,7 +249,7 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     description:
       "Bundle the Rage Room Party Planner Pack and Gift Voucher Template Pack — plan the night and present the experience as a polished gift.",
     checkoutBlurb:
-      "Instant downloads: Party Planner PDF + Gift Voucher ZIP. Save £3 vs buying separately.",
+      "Instant downloads only — not a venue booking. Party Planner PDF + DIY Gift Voucher ZIP. Save £3.",
     includedSections: [
       "Rage Room Party Planner Pack (PDF)",
       "Rage Room Gift Voucher Template Pack (ZIP)",

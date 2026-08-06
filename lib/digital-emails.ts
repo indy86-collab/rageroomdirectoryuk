@@ -151,7 +151,7 @@ export function getCheckoutSessionEmail(session: {
 }
 
 const LEAD_MAGNET_PDF_PATH =
-  "/digital-products/rage-room-first-visit-prep-pack-sample.pdf?v=4&source=lead-magnet"
+  "/digital-products/rage-room-first-visit-prep-pack-sample.pdf?v=5&source=lead-magnet"
 
 export async function sendLeadMagnetEmail({
   toEmail,

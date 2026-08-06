@@ -167,6 +167,7 @@ export default function RageRoomPartyPlannerPackPage() {
               images={product.previewImages}
               productName={product.name}
               previewPdf={product.previewPdf}
+              sampleUnlockHint={product.sampleUnlockHint}
             />
           </div>
         </section>
@@ -274,7 +275,7 @@ export default function RageRoomPartyPlannerPackPage() {
               listName="Digital Product Cross-Sell"
               className="font-semibold text-rage-500 hover:text-rage-400"
             >
-              gift voucher pack for £5
+              DIY gift voucher templates for £5
             </TrackedProductLink>
             .
           </p>

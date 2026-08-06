@@ -7,6 +7,7 @@ import {
   trackBeginCheckout,
   trackCheckoutResumeClick,
 } from "@/lib/analytics"
+import { readDigitalCheckoutEmail } from "@/lib/digital-checkout-email"
 
 type DigitalCheckoutButtonProps = {
   productId: string
@@ -15,6 +16,14 @@ type DigitalCheckoutButtonProps = {
   className?: string
   /** When true, fires checkout_resume_click instead of begin_checkout. */
   resumeFromCancel?: boolean
+  /** Prefill Stripe Checkout email when known (cancel resume / lead magnet). */
+  customerEmail?: string
+  /** Hide the non-booking disclaimer (rare; default shows it). */
+  hideDisclaimer?: boolean
+}
+
+function isValidEmail(value: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
 }
 
 export default function DigitalCheckoutButton({
@@ -23,6 +32,8 @@ export default function DigitalCheckoutButton({
   children,
   className,
   resumeFromCancel = false,
+  customerEmail,
+  hideDisclaimer = false,
 }: DigitalCheckoutButtonProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -38,10 +49,17 @@ export default function DigitalCheckoutButton({
         trackBeginCheckout(analyticsProduct)
       }
 
+      const trimmedEmail =
+        customerEmail?.trim() || readDigitalCheckoutEmail() || ""
       const response = await fetch("/api/checkout/digital-download", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ productId }),
+        body: JSON.stringify({
+          productId,
+          ...(trimmedEmail && isValidEmail(trimmedEmail)
+            ? { customerEmail: trimmedEmail }
+            : {}),
+        }),
       })
       const data = (await response.json()) as { url?: string; error?: string }
 
@@ -74,6 +92,11 @@ export default function DigitalCheckoutButton({
         )}
         {children}
       </button>
+      {!hideDisclaimer && (
+        <p className="text-xs leading-relaxed text-zinc-400">
+          Planning/template download only — does not include a venue booking.
+        </p>
+      )}
       {error && <p className="text-sm text-red-300">{error}</p>}
     </div>
   )

@@ -3,9 +3,10 @@
 import { useState } from "react"
 import { ArrowRight, CheckCircle, Loader2 } from "lucide-react"
 import { trackEvent } from "@/lib/analytics"
+import { storeDigitalCheckoutEmail } from "@/lib/digital-checkout-email"
 
 const FREE_CHECKLIST_URL =
-  "/digital-products/rage-room-first-visit-prep-pack-sample.pdf?v=4&source=lead-magnet"
+  "/digital-products/rage-room-first-visit-prep-pack-sample.pdf?v=5&source=lead-magnet"
 
 export default function LeadMagnetForm() {
   const [email, setEmail] = useState("")
@@ -39,6 +40,7 @@ export default function LeadMagnetForm() {
         lead_source: "digital-downloads",
         lead_magnet: "first_visit_checklist",
       })
+      storeDigitalCheckoutEmail(email)
 
       setStatus("success")
       setMessage("Check your inbox — we’ve sent the free checklist link.")

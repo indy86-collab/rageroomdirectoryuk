@@ -20,8 +20,8 @@ export default function DigitalBundleOffer() {
         Party Planner + Gift Voucher Pack — {bundle.priceLabel}
       </h2>
       <p className="mt-3 text-sm leading-relaxed text-zinc-300">
-        Plan the night and present the experience as a polished gift. Normally £12
-        separately — get both for {bundle.priceLabel}.
+        Plan the night and present it with DIY gift voucher templates. Downloads only
+        — not a venue booking. Normally £12 separately — get both for {bundle.priceLabel}.
       </p>
       <ul className="mt-4 space-y-2 text-sm text-zinc-200">
         <li className="flex items-center gap-2">

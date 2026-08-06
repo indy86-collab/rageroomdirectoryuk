@@ -411,8 +411,8 @@ export default async function Home() {
                     Buying a rage room session as a gift?
                   </h2>
                   <p className="mt-2 max-w-3xl text-sm text-zinc-300">
-                    Download printable and digital voucher templates so the gift feels
-                    more polished than a plain booking link.
+                    Download DIY printable and digital gift voucher templates — a
+                    presentation pack only, not a venue booking.
                   </p>
                 </div>
               </div>

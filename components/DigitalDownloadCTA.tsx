@@ -40,8 +40,8 @@ const ctaCopy = {
   gift: {
     eyebrow: "Gift idea",
     title: "Giving a rage room experience as a gift?",
-    copy: "Make it feel more polished with printable and digital voucher templates for birthdays, date nights, breakups, best friends and holidays.",
-    button: "Send a polished voucher today — £5",
+    copy: "DIY printable and digital gift voucher templates for birthdays, date nights, breakups, best friends and holidays — not a venue booking.",
+    button: "Get printable voucher templates — £5",
     href: "/digital-downloads/rage-room-gift-voucher-template-pack",
     productId: "rage-room-gift-voucher-template-pack",
   },
