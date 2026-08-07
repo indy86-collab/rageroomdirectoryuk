@@ -4,7 +4,9 @@ import Link from "next/link"
 import { ArrowRight, FileText, Package } from "lucide-react"
 import DigitalEditorialByline from "@/components/DigitalEditorialByline"
 import DigitalGuidesChooser from "@/components/DigitalGuidesChooser"
+import DigitalPriceDisplay from "@/components/DigitalPriceDisplay"
 import { DigitalPurchaseReassurance } from "@/components/DigitalPurchaseDetails"
+import DigitalSaleBanner from "@/components/DigitalSaleBanner"
 import FAQ from "@/components/FAQ"
 import LeadMagnetForm from "@/components/LeadMagnetForm"
 import ProductListViewTracker from "@/components/ProductListViewTracker"
@@ -13,44 +15,41 @@ import {
   getDigitalProduct,
   getDigitalProductAnalytics,
 } from "@/lib/digital-products"
+import { isDigitalSaleActive } from "@/lib/digital-promo"
 
 export const metadata: Metadata = {
   title: "Digital Guides | Rage Room Planning Downloads",
   description:
-    "Browse digital rage room guides, first-visit prep kits, printable planning downloads, corporate toolkits, gift voucher templates and money-saving bundles.",
+    "Browse digital rage room guides, first-visit prep kits, printable planning downloads, corporate toolkits, gift voucher templates and money-saving bundles. Limited-time 20% demand drop on all packs.",
   alternates: { canonical: "/digital-downloads" },
 }
 
 const downloads = [
   {
     title: "Rage Room First Visit Prep Pack",
-    price: "£5",
     copy: "For first-timers who want to know what happens and how to arrive ready.",
-    cta: "Get first-visit ready — £5",
+    ctaPrefix: "Get first-visit ready",
     href: "/digital-downloads/rage-room-first-visit-prep-pack",
     productId: "rage-room-first-visit-prep",
   },
   {
     title: "Rage Room Party Planner Pack",
-    price: "£7",
     copy: "For planning birthdays, date nights and group nights.",
-    cta: "Plan the whole night — £7",
+    ctaPrefix: "Plan the whole night",
     href: "/digital-downloads/rage-room-party-planner-pack",
     productId: "rage-room-party-planner",
   },
   {
     title: "Corporate Rage Room Team-Building Toolkit",
-    price: "£19",
     copy: "For HR, office managers and work socials.",
-    cta: "Get HR-ready templates — £19",
+    ctaPrefix: "Get HR-ready templates",
     href: "/digital-downloads/corporate-rage-room-team-building-toolkit",
     productId: "corporate-team-building-toolkit",
   },
   {
     title: "Rage Room Gift Voucher Template Pack",
-    price: "£5",
     copy: "DIY printable and digital gift voucher templates — not a venue booking.",
-    cta: "Get printable voucher templates — £5",
+    ctaPrefix: "Get printable voucher templates",
     href: "/digital-downloads/rage-room-gift-voucher-template-pack",
     productId: "rage-room-gift-voucher-template-pack",
   },
@@ -81,6 +80,11 @@ const hubFaqs = [
     question: "Are these UK-specific?",
     answer:
       "Yes. Copy, budgeting fields and planning language are written for UK rage room experiences.",
+  },
+  {
+    question: "Why are prices reduced right now?",
+    answer:
+      "We're running a limited-time 20% demand drop while interest in planning packs is high. The lower price is already applied at Stripe checkout — no promo code needed. After the offer ends, prices return to the usual rates.",
   },
 ]
 
@@ -113,6 +117,8 @@ export default function DigitalDownloadsPage() {
         </p>
         <DigitalEditorialByline className="mt-3" />
 
+        <DigitalSaleBanner className="mt-6" />
+
         <DigitalPurchaseReassurance className="mt-6" />
 
         <div className="mt-8">
@@ -140,20 +146,23 @@ export default function DigitalDownloadsPage() {
                 </div>
                 <div>
                   <p className="text-xs font-bold uppercase tracking-widest text-rage-500">
-                    Bundle & save £3
+                    {isDigitalSaleActive() ? "Limited-time bundle" : "Bundle deal"}
                   </p>
                   <h2 className="mt-1 text-xl font-bold text-white">
                     Party Planner + Gift Voucher Pack
                   </h2>
                   <p className="mt-2 text-sm text-zinc-300">
-                    Both downloads for {bundle.priceLabel} (normally £12) —{" "}
-                    {partyProduct.shortName || partyProduct.name} +{" "}
+                    Both downloads for {bundle.priceLabel}
+                    {bundle.compareAtLabel
+                      ? ` (was ${bundle.compareAtLabel})`
+                      : ""}{" "}
+                    — {partyProduct.shortName || partyProduct.name} +{" "}
                     {giftProduct.shortName || giftProduct.name}.
                   </p>
                 </div>
               </div>
-              <div className="flex items-center gap-4">
-                <span className="text-2xl font-black text-white">{bundle.priceLabel}</span>
+              <div className="flex flex-wrap items-center gap-4">
+                <DigitalPriceDisplay product={bundle} size="md" />
                 <TrackedProductLink
                   href="/digital-downloads/party-planner-gift-voucher-bundle"
                   product={bundleAnalytics}
@@ -169,12 +178,15 @@ export default function DigitalDownloadsPage() {
         </article>
 
         <div className="mt-8 grid gap-5 sm:grid-cols-2">
-          {downloads.map(({ title, price, copy, cta, href, productId }) => {
+          {downloads.map(({ title, copy, ctaPrefix, href, productId }) => {
             const product = getDigitalProduct(productId)
             const analyticsProduct = product
               ? getDigitalProductAnalytics(product)
               : null
             const includes = product?.includedSections.slice(0, 3) ?? []
+            const cta = product
+              ? `${ctaPrefix} — ${product.priceLabel}`
+              : ctaPrefix
 
             return (
               <article key={title} className="card-base flex flex-col overflow-hidden p-0">
@@ -211,7 +223,7 @@ export default function DigitalDownloadsPage() {
                     </ul>
                   )}
                   <div className="mt-auto flex flex-col gap-3 pt-5">
-                    <span className="text-2xl font-black text-white">{price}</span>
+                    {product && <DigitalPriceDisplay product={product} size="md" />}
                     {analyticsProduct && (
                       <TrackedProductLink
                         href={href}

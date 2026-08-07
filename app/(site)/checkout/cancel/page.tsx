@@ -61,6 +61,7 @@ export default function CheckoutCancelPage({
       productName={product.name}
       productSlug={product.slug}
       priceLabel={product.priceLabel}
+      compareAtLabel={product.compareAtLabel}
       analyticsProduct={getDigitalProductAnalytics(product)}
     />
   )

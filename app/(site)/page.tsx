@@ -352,7 +352,13 @@ export default async function Home() {
                     <ArrowRight className="h-4 w-4" />
                   </TrackedProductLink>
                   <p className="text-sm font-semibold text-zinc-300">
-                    Printable PDF · Instant download · <span className="text-white">£19</span>
+                    Printable PDF · Instant download ·{" "}
+                    <span className="text-white">{corporateProduct.priceLabel}</span>
+                    {corporateProduct.compareAtLabel ? (
+                      <span className="ml-1 text-zinc-500 line-through">
+                        {corporateProduct.compareAtLabel}
+                      </span>
+                    ) : null}
                   </p>
                 </div>
               </div>

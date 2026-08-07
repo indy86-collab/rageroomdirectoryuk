@@ -4,6 +4,7 @@ import {
   getDigitalProduct,
   getDigitalProductAnalytics,
 } from "@/lib/digital-products"
+import { DIGITAL_SALE, isDigitalSaleActive } from "@/lib/digital-promo"
 
 type DigitalDownloadCTAVariant = "party" | "corporate" | "gift" | "firstVisit"
 
@@ -17,7 +18,7 @@ const ctaCopy = {
     eyebrow: "First time?",
     title: "New to rage rooms?",
     copy: "Get the 12-page First Visit Prep Pack: what happens, what to wear, venue questions and arrival checklist.",
-    button: "Get first-visit ready — £5",
+    buttonPrefix: "Get first-visit ready",
     href: "/digital-downloads/rage-room-first-visit-prep-pack",
     productId: "rage-room-first-visit-prep",
   },
@@ -25,7 +26,7 @@ const ctaCopy = {
     eyebrow: null,
     title: "Booking for a group?",
     copy: "Get the 15-page Rage Room Party Planner Pack before you choose a venue.",
-    button: "Plan the whole night — £7",
+    buttonPrefix: "Plan the whole night",
     href: "/digital-downloads/rage-room-party-planner-pack",
     productId: "rage-room-party-planner",
   },
@@ -33,7 +34,7 @@ const ctaCopy = {
     eyebrow: "For work events",
     title: "Planning a corporate rage room team-building event?",
     copy: "Get the 16-page toolkit with approval email, budget worksheet, venue scorecard, safety questions, run sheet and feedback form.",
-    button: "Get HR-ready templates — £19",
+    buttonPrefix: "Get HR-ready templates",
     href: "/digital-downloads/corporate-rage-room-team-building-toolkit",
     productId: "corporate-team-building-toolkit",
   },
@@ -41,7 +42,7 @@ const ctaCopy = {
     eyebrow: "Gift idea",
     title: "Giving a rage room experience as a gift?",
     copy: "DIY printable and digital gift voucher templates for birthdays, date nights, breakups, best friends and holidays — not a venue booking.",
-    button: "Get printable voucher templates — £5",
+    buttonPrefix: "Get printable voucher templates",
     href: "/digital-downloads/rage-room-gift-voucher-template-pack",
     productId: "rage-room-gift-voucher-template-pack",
   },
@@ -54,6 +55,12 @@ export default function DigitalDownloadCTA({
   const copy = ctaCopy[variant]
   const product = getDigitalProduct(copy.productId)
   const analyticsProduct = product ? getDigitalProductAnalytics(product) : null
+  const saleOn = isDigitalSaleActive()
+  const priceBit = product
+    ? saleOn && product.compareAtLabel
+      ? `${product.priceLabel} (was ${product.compareAtLabel})`
+      : product.priceLabel
+    : ""
 
   return (
     <aside className="rounded-lg border border-rage-500/30 bg-[#181818] p-4 sm:p-5">
@@ -68,6 +75,11 @@ export default function DigitalDownloadCTA({
                 {copy.eyebrow}
               </p>
             )}
+            {saleOn && (
+              <p className="mb-1 text-xs font-bold uppercase tracking-widest text-rage-500">
+                {DIGITAL_SALE.shortHeadline}
+              </p>
+            )}
             <h2 className="text-base font-bold uppercase tracking-wide text-white">
               {copy.title}
             </h2>
@@ -76,14 +88,14 @@ export default function DigitalDownloadCTA({
             </p>
           </div>
         </div>
-        {analyticsProduct && (
+        {analyticsProduct && product && (
           <TrackedProductLink
             href={copy.href}
             product={analyticsProduct}
             listName="Digital Product CTA"
             className="btn-rage inline-flex min-h-[44px] items-center justify-center gap-2 whitespace-nowrap text-sm uppercase tracking-wider"
           >
-            {copy.button}
+            {copy.buttonPrefix} — {priceBit}
             <ArrowRight className="h-4 w-4" />
           </TrackedProductLink>
         )}

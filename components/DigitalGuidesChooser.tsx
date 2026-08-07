@@ -98,11 +98,21 @@ export default function DigitalGuidesChooser({
                       {intent.hint}
                     </span>
                   </span>
-                  {isHighlight && (
-                    <span className="shrink-0 text-[10px] font-bold uppercase tracking-wider text-zinc-400">
-                      Suggested
+                  <span className="shrink-0 text-right">
+                    {isHighlight && (
+                      <span className="mb-1 block text-[10px] font-bold uppercase tracking-wider text-zinc-400">
+                        Suggested
+                      </span>
+                    )}
+                    {product.compareAtLabel && (
+                      <span className="block text-[10px] text-zinc-500 line-through">
+                        {product.compareAtLabel}
+                      </span>
+                    )}
+                    <span className="block text-xs font-bold text-rage-500">
+                      {product.priceLabel}
                     </span>
-                  )}
+                  </span>
                 </span>
               </TrackedProductLink>
             </li>

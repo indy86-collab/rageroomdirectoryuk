@@ -2,8 +2,10 @@ import "server-only"
 import { Resend } from "resend"
 import {
   type DigitalProduct,
+  getDigitalProduct,
   getFulfilmentProducts,
 } from "@/lib/digital-products"
+import { DIGITAL_SALE, isDigitalSaleActive } from "@/lib/digital-promo"
 import { createDownloadToken } from "@/lib/download-token"
 import { absoluteUrl } from "@/lib/site-url"
 
@@ -194,9 +196,13 @@ export async function sendLeadMagnetEmail({
         <h1 style="font-size:22px">Your free checklist is ready</h1>
         <p>Here’s a free sample from our First Visit Prep Pack — use it to arrive ready for your first smash session.</p>
         <p style="margin:24px 0"><a href="${downloadUrl}" style="display:inline-block;background:#f97316;color:#fff;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:6px">Download free checklist (PDF)</a></p>
-        <p>Want the full printable pack (what happens, what to wear, venue questions, arrival checklist)?</p>
-        <p style="margin:16px 0"><a href="${firstVisitUrl}">First Visit Prep Pack — £5</a></p>
-        <p style="margin:16px 0"><a href="${partyUrl}">Planning a group night? Party Planner Pack — £7</a></p>
+        <p>Want the full printable pack (what happens, what to wear, venue questions, arrival checklist)?${
+          isDigitalSaleActive()
+            ? ` <strong>${DIGITAL_SALE.shortHeadline}</strong> — sale price already at checkout.`
+            : ""
+        }</p>
+        <p style="margin:16px 0"><a href="${firstVisitUrl}">First Visit Prep Pack — ${getDigitalProduct("rage-room-first-visit-prep")?.priceLabel ?? "£4"}</a></p>
+        <p style="margin:16px 0"><a href="${partyUrl}">Planning a group night? Party Planner Pack — ${getDigitalProduct("rage-room-party-planner")?.priceLabel ?? "£5.60"}</a></p>
         <p style="color:#52525b;font-size:14px"><a href="${hubUrl}">Browse all digital guides</a></p>
         <p style="color:#52525b;font-size:14px">You’re getting this because you asked for the free checklist on RageRoom Directory. Reply anytime to unsubscribe.</p>
       </div>

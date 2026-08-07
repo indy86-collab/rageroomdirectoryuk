@@ -98,7 +98,7 @@ export default function RageRoomGiftIdeasUKPage() {
         <section className="mt-10 rounded-lg border border-rage-500/30 bg-[#181818] p-6">
           <Gift className="h-9 w-9 text-rage-500" />
           <h2 className="mt-4 text-2xl font-bold text-white">
-            Download the voucher pack — £5
+            Download the voucher pack — {product.priceLabel}
           </h2>
           <p className="mt-3 text-zinc-300">
             Get printable and digital voucher templates for birthdays, date nights,

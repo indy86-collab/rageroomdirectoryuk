@@ -9,6 +9,9 @@ export type DigitalProduct = {
   itemCategory: "Digital Product"
   priceLabel: string
   unitAmount: number
+  /** Pre-sale / compare-at price for strikethrough marketing. */
+  compareAtLabel?: string
+  compareAtAmount?: number
   currency: "gbp"
   stripeLookupKey: string
   /** Present for single-file products; omitted for bundles. */
@@ -30,6 +33,12 @@ export type DigitalProduct = {
   checkoutBlurb: string
 }
 
+export function formatGbpFromPence(unitAmount: number) {
+  const pounds = unitAmount / 100
+  if (Number.isInteger(pounds)) return `£${pounds}`
+  return `£${pounds.toFixed(2)}`
+}
+
 export const digitalProducts: Record<string, DigitalProduct> = {
   "rage-room-party-planner": {
     id: "rage-room-party-planner",
@@ -37,10 +46,12 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     name: "Rage Room Party Planner Pack",
     analyticsItemId: "rage_party_planner_pack",
     itemCategory: "Digital Product",
-    priceLabel: "£7",
-    unitAmount: 700,
+    priceLabel: "£5.60",
+    unitAmount: 560,
+    compareAtLabel: "£7",
+    compareAtAmount: 700,
     currency: "gbp",
-    stripeLookupKey: "rage_room_party_planner_pack_gbp_700",
+    stripeLookupKey: "rage_room_party_planner_pack_gbp_560",
     filePath: path.join(
       process.cwd(),
       "private/digital-downloads/rage-room-party-planner-pack.pdf"
@@ -60,7 +71,7 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     description:
       "A printable UK planning kit for rage room birthdays, date nights, breakup nights, group nights, stag and hen activities, and friends' nights out.",
     checkoutBlurb:
-      "Instant PDF planning pack only — not a venue booking. Venue scorecard, budget, invites and checklists.",
+      "Limited-time 20% demand drop already applied. Instant PDF planning pack only — not a venue booking.",
     includedSections: [
       "Event snapshot",
       "Planning timeline",
@@ -85,10 +96,12 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     shortName: "Corporate Team-Building Toolkit",
     analyticsItemId: "corporate_team_building_pack",
     itemCategory: "Digital Product",
-    priceLabel: "£19",
-    unitAmount: 1900,
+    priceLabel: "£15.20",
+    unitAmount: 1520,
+    compareAtLabel: "£19",
+    compareAtAmount: 1900,
     currency: "gbp",
-    stripeLookupKey: "corporate_rage_room_team_building_toolkit_gbp_1900",
+    stripeLookupKey: "corporate_rage_room_team_building_toolkit_gbp_1520",
     filePath: path.join(
       process.cwd(),
       "private/digital-downloads/corporate-rage-room-team-building-toolkit.pdf"
@@ -110,7 +123,7 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     description:
       "A professional planning pack for HR teams, office managers, founders and team leads planning a rage room team-building event.",
     checkoutBlurb:
-      "Instant PDF toolkit only — not a venue booking. Approval emails, budget worksheet, scorecard and run sheet.",
+      "Limited-time 20% demand drop already applied. Instant PDF toolkit only — not a venue booking.",
     includedSections: [
       "Why rage rooms work",
       "Internal planning checklist",
@@ -135,10 +148,12 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     shortName: "First Visit Prep Pack",
     analyticsItemId: "rage_first_visit_prep_pack",
     itemCategory: "Digital Product",
-    priceLabel: "£5",
-    unitAmount: 500,
+    priceLabel: "£4",
+    unitAmount: 400,
+    compareAtLabel: "£5",
+    compareAtAmount: 500,
     currency: "gbp",
-    stripeLookupKey: "rage_room_first_visit_prep_pack_gbp_500",
+    stripeLookupKey: "rage_room_first_visit_prep_pack_gbp_400",
     filePath: path.join(
       process.cwd(),
       "private/digital-downloads/rage-room-first-visit-prep-pack.pdf"
@@ -158,7 +173,7 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     description:
       "A printable UK first-timer kit covering what happens, what to wear, can-I-take-part checks, venue questions, waiver tips and a final arrival checklist.",
     checkoutBlurb:
-      "Instant PDF prep pack only — not a venue booking. First-visit checklists and venue questions.",
+      "Limited-time 20% demand drop already applied. Instant PDF prep pack only — not a venue booking.",
     includedSections: [
       "Quick start",
       "What happens step-by-step",
@@ -180,10 +195,12 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     shortName: "Gift Voucher Template Pack",
     analyticsItemId: "rage_gift_voucher_pack",
     itemCategory: "Digital Product",
-    priceLabel: "£5",
-    unitAmount: 500,
+    priceLabel: "£4",
+    unitAmount: 400,
+    compareAtLabel: "£5",
+    compareAtAmount: 500,
     currency: "gbp",
-    stripeLookupKey: "rage_room_gift_voucher_template_pack_gbp_500",
+    stripeLookupKey: "rage_room_gift_voucher_template_pack_gbp_400",
     filePath: path.join(
       process.cwd(),
       "private/digital-downloads/rage-room-gift-voucher-template-pack.zip"
@@ -203,7 +220,7 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     description:
       "A premium printable and digital gift voucher template pack for giving a rage room experience as a birthday, date night, breakup, best friend, holiday or generic experience gift.",
     checkoutBlurb:
-      "Instant ZIP of DIY gift voucher templates only — not a venue booking or venue-issued voucher.",
+      "Limited-time 20% demand drop already applied. Instant ZIP of DIY gift voucher templates only — not a venue booking.",
     includedSections: [
       "Birthday voucher",
       "Date night voucher",
@@ -232,10 +249,12 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     shortName: "Party + Gift Bundle",
     analyticsItemId: "party_gift_bundle",
     itemCategory: "Digital Product",
-    priceLabel: "£9",
-    unitAmount: 900,
+    priceLabel: "£7.20",
+    unitAmount: 720,
+    compareAtLabel: "£9",
+    compareAtAmount: 900,
     currency: "gbp",
-    stripeLookupKey: "party_gift_bundle_gbp_900",
+    stripeLookupKey: "party_gift_bundle_gbp_720",
     bundleProductIds: [
       "rage-room-party-planner",
       "rage-room-gift-voucher-template-pack",
@@ -249,7 +268,7 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     description:
       "Bundle the Rage Room Party Planner Pack and Gift Voucher Template Pack — plan the night and present the experience as a polished gift.",
     checkoutBlurb:
-      "Instant downloads only — not a venue booking. Party Planner PDF + DIY Gift Voucher ZIP. Save £3.",
+      "Limited-time 20% demand drop already applied. Instant downloads only — not a venue booking. Party Planner PDF + DIY Gift Voucher ZIP.",
     includedSections: [
       "Rage Room Party Planner Pack (PDF)",
       "Rage Room Gift Voucher Template Pack (ZIP)",

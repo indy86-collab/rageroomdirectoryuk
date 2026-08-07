@@ -1,6 +1,8 @@
 import type { Metadata } from "next"
 import { AlertTriangle, BriefcaseBusiness, Check, ClipboardList, Download, Sparkles } from "lucide-react"
 import DigitalCheckoutButton from "@/components/DigitalCheckoutButton"
+import DigitalPriceDisplay from "@/components/DigitalPriceDisplay"
+import DigitalSaleBanner from "@/components/DigitalSaleBanner"
 import DigitalEditorialByline from "@/components/DigitalEditorialByline"
 import DigitalProductCover from "@/components/DigitalProductCover"
 import {
@@ -155,7 +157,7 @@ export default function CorporateToolkitPage() {
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4">
               <div>
-                <div className="text-3xl font-black text-white">{product.priceLabel}</div>
+                <DigitalPriceDisplay product={product} />
                 <p className="mt-1 text-xs font-semibold text-zinc-400">
                   Instant PDF download
                 </p>
@@ -164,9 +166,10 @@ export default function CorporateToolkitPage() {
                 productId={product.id}
                 analyticsProduct={analyticsProduct}
               >
-                Get HR-ready templates — £19
+                Get HR-ready templates — {product.priceLabel}
               </DigitalCheckoutButton>
             </div>
+            <DigitalSaleBanner compact className="mt-3" />
             <DigitalCompactTrust />
             <DigitalRefundNote />
           </div>
@@ -210,7 +213,7 @@ export default function CorporateToolkitPage() {
               "Email templates your manager can approve without another meeting",
               "Updated for UK venues and GBP budgeting — 2026",
             ]}
-            timeCompare="A poorly planned team event costs far more than £19 in time, rework and awkward follow-ups."
+            timeCompare={`A poorly planned team event costs far more than ${product.compareAtLabel || product.priceLabel} in time, rework and awkward follow-ups.`}
           />
         </div>
       </section>
@@ -312,7 +315,7 @@ export default function CorporateToolkitPage() {
         <div className="mx-auto max-w-4xl rounded-lg border border-rage-500/30 bg-[#181818] p-6 text-center sm:p-8">
           <Download className="mx-auto h-10 w-10 text-rage-500" />
           <h2 className="mt-4 text-2xl font-black uppercase tracking-wide text-white">
-            Get HR-ready templates — £19
+            Get HR-ready templates — {product.priceLabel}
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm text-zinc-300">
             Instant PDF for approval, venue checks, staff communication, run sheets and feedback.
@@ -322,7 +325,7 @@ export default function CorporateToolkitPage() {
               productId={product.id}
               analyticsProduct={analyticsProduct}
             >
-              Get HR-ready templates — £19
+              Get HR-ready templates — {product.priceLabel}
             </DigitalCheckoutButton>
           </div>
           <div className="mx-auto max-w-2xl">

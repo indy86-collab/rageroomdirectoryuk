@@ -3,6 +3,7 @@ import Link from "next/link"
 import { Check, Gift, PartyPopper } from "lucide-react"
 import DigitalCheckoutButton from "@/components/DigitalCheckoutButton"
 import DigitalEditorialByline from "@/components/DigitalEditorialByline"
+import DigitalPriceDisplay from "@/components/DigitalPriceDisplay"
 import DigitalProductCover from "@/components/DigitalProductCover"
 import {
   DigitalCompactTrust,
@@ -10,6 +11,7 @@ import {
   DigitalRefundNote,
   WhatHappensAfterPayment,
 } from "@/components/DigitalPurchaseDetails"
+import DigitalSaleBanner from "@/components/DigitalSaleBanner"
 import DigitalSampleStrip from "@/components/DigitalSampleStrip"
 import FAQ from "@/components/FAQ"
 import ProductViewTracker from "@/components/ProductViewTracker"
@@ -28,9 +30,9 @@ const giftProduct = getDigitalProduct("rage-room-gift-voucher-template-pack")!
 const giftAnalytics = getDigitalProductAnalytics(giftProduct)
 
 export const metadata: Metadata = {
-  title: "Party Planner + Gift Voucher Bundle | Save £3",
+  title: "Party Planner + Gift Voucher Bundle | Limited-time 20% off",
   description:
-    "Get the Rage Room Party Planner Pack and Gift Voucher Template Pack together for £9 — save £3 vs buying separately. Instant digital downloads.",
+    "Get the Rage Room Party Planner Pack and Gift Voucher Template Pack together for £7.20 — limited-time 20% demand drop (was £9). Instant digital downloads.",
   alternates: {
     canonical: "/digital-downloads/party-planner-gift-voucher-bundle",
   },
@@ -76,23 +78,22 @@ export default function PartyGiftBundlePage() {
         <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <p className="text-sm font-bold uppercase tracking-widest text-rage-500">
-              Bundle & save £3
+              Limited-time bundle · 20% off
             </p>
             <h1 className="mt-4 text-4xl font-black uppercase tracking-wide text-white sm:text-5xl">
               Party Planner + Gift Voucher Bundle
             </h1>
             <DigitalEditorialByline className="mt-3" />
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-zinc-300">
-              Plan the smash night and present the experience as a polished gift.
-              Normally £12 separately — get both for {product.priceLabel}.
+              Plan the smash night and present the experience with DIY gift voucher
+              templates. Was {product.compareAtLabel} — now {product.priceLabel} while
+              demand is high.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <div>
-                <div className="text-3xl font-black text-white">
-                  {product.priceLabel}
-                </div>
+                <DigitalPriceDisplay product={product} />
                 <p className="mt-1 text-xs font-semibold text-zinc-400">
-                  Was £12 · Instant downloads
+                  Instant downloads · not a venue booking
                 </p>
               </div>
               <DigitalCheckoutButton
@@ -102,6 +103,7 @@ export default function PartyGiftBundlePage() {
                 Get the bundle — {product.priceLabel}
               </DigitalCheckoutButton>
             </div>
+            <DigitalSaleBanner compact className="mt-3" />
             <DigitalCompactTrust />
             <DigitalRefundNote />
           </div>
@@ -136,7 +138,7 @@ export default function PartyGiftBundlePage() {
             <div className="card-base p-5">
               <PartyPopper className="h-6 w-6 text-rage-500" />
               <h3 className="mt-3 text-lg font-bold text-white">
-                Party Planner Pack (£7 value)
+                Party Planner Pack ({partyProduct.priceLabel})
               </h3>
               <ul className="mt-4 space-y-2 text-sm text-zinc-300">
                 {[
@@ -162,7 +164,7 @@ export default function PartyGiftBundlePage() {
             <div className="card-base p-5">
               <Gift className="h-6 w-6 text-rage-500" />
               <h3 className="mt-3 text-lg font-bold text-white">
-                Gift Voucher Pack (£5 value)
+                Gift Voucher Pack ({giftProduct.priceLabel})
               </h3>
               <ul className="mt-4 space-y-2 text-sm text-zinc-300">
                 {[
@@ -224,14 +226,14 @@ export default function PartyGiftBundlePage() {
               href="/digital-downloads/rage-room-party-planner-pack"
               className="font-semibold text-rage-500 hover:text-rage-400"
             >
-              Party £7
+              Party {partyProduct.priceLabel}
             </Link>{" "}
             ·{" "}
             <Link
               href="/digital-downloads/rage-room-gift-voucher-template-pack"
               className="font-semibold text-rage-500 hover:text-rage-400"
             >
-              Gift £5
+              Gift {giftProduct.priceLabel}
             </Link>
           </p>
         </div>

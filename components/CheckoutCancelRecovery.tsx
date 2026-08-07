@@ -2,19 +2,24 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { Download, ShieldCheck, Tag } from "lucide-react"
+import { Download, Flame, ShieldCheck } from "lucide-react"
 import DigitalCheckoutButton from "@/components/DigitalCheckoutButton"
 import {
   type AnalyticsProduct,
   trackCheckoutCancelView,
 } from "@/lib/analytics"
-import { DIGITAL_PROMO_CODE, DIGITAL_PROMO_LABEL } from "@/lib/digital-promo"
+import {
+  DIGITAL_SALE,
+  digitalSaleEndLabel,
+  isDigitalSaleActive,
+} from "@/lib/digital-promo"
 
 type CheckoutCancelRecoveryProps = {
   productId: string
   productName: string
   productSlug: string
   priceLabel: string
+  compareAtLabel?: string
   analyticsProduct: AnalyticsProduct
 }
 
@@ -23,9 +28,11 @@ export default function CheckoutCancelRecovery({
   productName,
   productSlug,
   priceLabel,
+  compareAtLabel,
   analyticsProduct,
 }: CheckoutCancelRecoveryProps) {
   const [email, setEmail] = useState("")
+  const saleOn = isDigitalSaleActive()
 
   useEffect(() => {
     trackCheckoutCancelView(analyticsProduct)
@@ -45,16 +52,24 @@ export default function CheckoutCancelRecovery({
           booking. Finish payment to get instant access.
         </p>
 
-        <div className="mt-5 inline-flex items-start gap-2 rounded-md border border-rage-500/40 bg-rage-500/10 px-4 py-3 text-left text-sm text-zinc-200">
-          <Tag className="mt-0.5 h-4 w-4 flex-shrink-0 text-rage-500" />
-          <p>
-            Still deciding? Use code{" "}
-            <span className="font-bold tracking-wide text-white">{DIGITAL_PROMO_CODE}</span>{" "}
-            at Stripe checkout for{" "}
-            <span className="font-semibold text-white">{DIGITAL_PROMO_LABEL}</span>{" "}
-            (limited-time).
-          </p>
-        </div>
+        {saleOn && (
+          <div className="mt-5 inline-flex items-start gap-2 rounded-md border border-rage-500/40 bg-rage-500/10 px-4 py-3 text-left text-sm text-zinc-200">
+            <Flame className="mt-0.5 h-4 w-4 flex-shrink-0 text-rage-500" />
+            <p>
+              <span className="font-bold text-white">{DIGITAL_SALE.shortHeadline}</span>
+              {" — "}
+              {compareAtLabel ? (
+                <>
+                  now <span className="font-semibold text-white">{priceLabel}</span>{" "}
+                  <span className="text-zinc-400 line-through">{compareAtLabel}</span>
+                </>
+              ) : (
+                <>sale price already at checkout</>
+              )}
+              . Ends {digitalSaleEndLabel()}. No code needed.
+            </p>
+          </div>
+        )}
 
         <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-xs font-semibold text-zinc-300">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-700 bg-[#151515] px-3 py-1.5">

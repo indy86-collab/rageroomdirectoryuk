@@ -110,7 +110,7 @@ export default function CorporateTeamBuildingGuidePage() {
         <section className="mt-10 rounded-lg border border-rage-500/30 bg-[#181818] p-6">
           <ClipboardCheck className="h-9 w-9 text-rage-500" />
           <h2 className="mt-4 text-2xl font-bold text-white">
-            Download the 16-page corporate toolkit — £19
+            Download the 16-page corporate toolkit — {product.priceLabel}
           </h2>
           <p className="mt-3 text-zinc-300">
             Get the approval email, budget worksheet, venue scorecard, staff invite,

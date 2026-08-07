@@ -40,7 +40,7 @@ export async function POST(request: Request) {
       mode: "payment",
       client_reference_id: clientReferenceId,
       line_items: [{ price: priceId, quantity: 1 }],
-      // "auto" only asks for address when needed (e.g. tax) — keep friction low for £5–£19 digital.
+      // "auto" only asks for address when needed (e.g. tax) — keep friction low for micro digital.
       billing_address_collection: "auto",
       phone_number_collection: { enabled: false },
       allow_promotion_codes: true,

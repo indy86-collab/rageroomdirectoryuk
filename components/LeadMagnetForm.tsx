@@ -72,7 +72,7 @@ export default function LeadMagnetForm() {
                 href="/digital-downloads/rage-room-first-visit-prep-pack"
                 className="font-semibold text-zinc-200 underline-offset-2 hover:underline"
               >
-                First Visit Prep Pack — £5
+                First Visit Prep Pack — £4
               </a>
             </p>
           </div>
