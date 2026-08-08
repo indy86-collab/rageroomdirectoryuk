@@ -75,7 +75,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   const siteUrl = getSiteUrl()
-  const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
+  const gaMeasurementId =
+    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-ZZCN6PNKYW"
 
   const organizationSchema = {
     "@context": "https://schema.org",

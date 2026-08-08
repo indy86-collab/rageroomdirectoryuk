@@ -39,7 +39,8 @@
 ### `NEXT_PUBLIC_GA_MEASUREMENT_ID`
 - **Description**: Google Analytics 4 measurement ID for ecommerce funnel events on digital downloads
 - **Format**: `G-...`
-- **Required**: Optional (tracking skipped when unset)
+- **Example / default in app**: `G-ZZCN6PNKYW`
+- **Required**: Recommended (layout falls back to `G-ZZCN6PNKYW` when unset)
 
 ### `NEXT_PUBLIC_SITE_URL`
 - **Description**: Your production site URL (used for SEO, sitemap, canonical URLs)
