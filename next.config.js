@@ -50,6 +50,17 @@ const nextConfig = {
         destination: '/city/london',
         permanent: true,
       },
+      // Listings use city "Newcastle"; collapse the long-form slug duplicate.
+      {
+        source: '/city/newcastle-upon-tyne',
+        destination: '/city/newcastle',
+        permanent: true,
+      },
+      {
+        source: '/rage-room-prices/newcastle-upon-tyne',
+        destination: '/rage-room-prices/newcastle',
+        permanent: true,
+      },
     ]
   },
   images: {

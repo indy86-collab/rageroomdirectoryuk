@@ -13,34 +13,34 @@ import {
 const PATH = "/guides/rage-room-near-me"
 
 const OG_IMAGE = buildOgImageUrl({
-  title: "Find a Rage Room Near Me",
-  subtitle: "UK city guide · Compare venues & book online",
-  badge: "Near Me",
+  title: "Rage Rooms by UK City",
+  subtitle: "Browse venues · Then find the closest on the map",
+  badge: "City Guide",
 })
 
 export const metadata: Metadata = {
-  title: "Rage Room Near Me | Find UK Venues by City (2026)",
+  title: "Rage Rooms by UK City | Browse Venues Near You (2026)",
   description:
-    "Looking for a rage room near you? Browse verified UK rage rooms by city — London, Manchester, Birmingham, Leeds and more. Compare prices, read reviews and book online.",
+    "Browse verified UK rage rooms by city — London, Manchester, Birmingham, Leeds and more. Compare prices, then use the near-me map to pick the closest venue.",
   alternates: { canonical: PATH },
   openGraph: {
-    title: "Rage Room Near Me | Find UK Venues by City",
+    title: "Rage Rooms by UK City | Browse Venues Near You (2026)",
     description:
-      "Find verified rage rooms near you across the UK. Compare prices, read reviews and book a smash session online.",
+      "Browse verified UK rage rooms by city, compare prices, then find the closest venue on the near-me map.",
     type: "article",
     images: [
       {
         url: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: "Rage room near me — UK venue finder",
+        alt: "Rage rooms by UK city — venue finder",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rage Room Near Me | UK Venue Finder",
-    description: "Find a rage room near you in the UK — compare prices and book online.",
+    title: "Rage Rooms by UK City | Browse Venues Near You (2026)",
+    description: "Browse UK rage rooms by city, compare prices and find the closest venue.",
     images: [OG_IMAGE],
   },
 }
@@ -101,24 +101,23 @@ const FAQS = [
 export default function RageRoomNearMePage() {
   const articleSchema = buildArticleSchema({
     url: PATH,
-    headline: "Rage Room Near Me: Find UK Venues by City",
+    headline: "Rage Rooms by UK City: Browse Venues Near You",
     description:
-      "Complete guide to finding a rage room near you in the UK — browse by city, compare prices and book online.",
+      "Browse verified UK rage rooms by city, compare prices, then use the near-me map to find the closest venue.",
     datePublished: "2026-05-01",
     keywords: [
-      "rage room near me",
-      "smash room near me",
-      "rage room UK",
-      "find rage room",
-      "rage room nearby",
-      "break room near me",
+      "rage rooms by city",
+      "rage room UK cities",
+      "find rage room UK",
+      "smash room UK",
+      "rage room directory",
     ],
   })
 
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: "Home", url: "/" },
     { name: "Guides", url: "/guides" },
-    { name: "Rage Room Near Me", url: PATH },
+    { name: "Rage Rooms by UK City", url: PATH },
   ])
 
   const faqSchema = {
@@ -152,13 +151,13 @@ export default function RageRoomNearMePage() {
           items={[
             { label: "Home", href: "/" },
             { label: "Guides", href: "/guides" },
-            { label: "Rage Room Near Me" },
+            { label: "Rage Rooms by UK City" },
           ]}
         />
 
         <article>
           <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-white">
-            Rage Room Near Me: Find a UK Venue
+            Rage Rooms by UK City: Browse Venues Near You
           </h1>
 
           <GuideMeta

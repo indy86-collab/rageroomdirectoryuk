@@ -11,8 +11,8 @@ export const BLOG_TO_GUIDE_CANONICAL: Record<string, string> = {
   "rage-rooms-gift-ideas-perfect-presents": "/guides/rage-room-gift-vouchers-uk",
   "benefits-of-rage-rooms-for-stress-relief": "/guides/rage-rooms-for-stress-relief",
   "what-to-wear-to-a-rage-room": "/guides/what-to-wear-to-a-rage-room",
-  "best-rage-rooms-near-me-complete-guide": "/guides/rage-room-near-me",
-  "rage-room-near-me-how-to-find": "/guides/rage-room-near-me",
+  "best-rage-rooms-near-me-complete-guide": "/near-me",
+  "rage-room-near-me-how-to-find": "/near-me",
 }
 
 export function getBlogGuideCanonical(slug: string): string | undefined {
@@ -31,7 +31,8 @@ export function getBlogGuideLink(slug: string): { href: string; label: string } 
     "/guides/rage-room-gift-vouchers-uk": "Read the full gift vouchers guide",
     "/guides/rage-rooms-for-stress-relief": "Read the full stress relief guide",
     "/guides/what-to-wear-to-a-rage-room": "Read the full what-to-wear guide",
-    "/guides/rage-room-near-me": "Read the full near-me guide",
+    "/near-me": "Find rage rooms near you on the map",
+    "/guides/rage-room-near-me": "Browse rage rooms by UK city",
   }
   return { href, label: labels[href] ?? "Read the full guide" }
 }

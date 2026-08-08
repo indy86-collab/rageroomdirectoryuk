@@ -49,8 +49,8 @@ export const revalidate = 86400
 
 const CITY_PICKS: { city: string; slug: string; why: string }[] = [
   {
-    city: "Newcastle upon Tyne",
-    slug: "newcastle-upon-tyne",
+    city: "Newcastle",
+    slug: "newcastle",
     why: "Legendary stag-weekend city. Rage rooms sit near Bigg Market and Quayside pubs, so you can smash first and crawl afterwards without a long taxi.",
   },
   {

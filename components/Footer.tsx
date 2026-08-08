@@ -23,6 +23,7 @@ export default async function Footer() {
       heading: "Popular Guides",
       links: [
         { label: "Best Rage Rooms London", href: "/guides/best-rage-rooms-london" },
+        { label: "Are Rage Rooms Safe?", href: "/guides/are-rage-rooms-safe-uk" },
         { label: "Rage Room vs Escape Room", href: "/rage-room-vs-escape-room" },
         { label: "Rage Rooms for Hen Parties", href: "/guides/rage-rooms-for-hen-parties-uk" },
         { label: "Rage Rooms for Stag Parties", href: "/guides/rage-rooms-for-stag-parties-uk" },

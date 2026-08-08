@@ -79,11 +79,11 @@ const cityContentMap: Record<string, CityContent> = {
   },
   newcastle: {
     intro:
-      "Newcastle upon Tyne's rage room offerings serve the North East's demand for unique entertainment and are popular for hen and stag dos.",
+      "Looking for a rage room in Newcastle? We list verified smash rooms in the city plus nearby North East options that serve Newcastle groups for hen/stag weekends, birthdays and nights out on the Quayside.",
     localContext:
-      "Venues tend to sit around the city centre and Ouseburn Valley, accessible from Newcastle Central Station and close to Quayside bars.",
+      "Newcastle Central Station puts city-centre and Ouseburn venues within a short Metro, taxi or walk. Compare starting prices, age policies and booking links below — and suggest any missing North East venue we should verify.",
     travelTip:
-      "Easily reached from Sunderland, Durham and Middlesbrough. The East Coast Main Line connects to Edinburgh, York and London.",
+      "Sunderland, Durham and Middlesbrough are easy day trips. The East Coast Main Line connects from Edinburgh, York and London; Saturday slots fill first for stag and hen groups.",
   },
   edinburgh: {
     intro:

@@ -83,6 +83,13 @@ export default function Hero({ featuredListings = [] }: HeroProps) {
               </form>
 
               <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs sm:text-sm text-zinc-400">
+                <Link
+                  href="/near-me"
+                  className="inline-flex items-center gap-1.5 text-rage-400 hover:text-rage-300 transition-colors font-semibold"
+                >
+                  <MapPin className="w-4 h-4" />
+                  Rage room near me — open map
+                </Link>
                 <span className="inline-flex items-center gap-1.5">
                   <Shield className="w-4 h-4 text-rage-500" />
                   Verified Venues

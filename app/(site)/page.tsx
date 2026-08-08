@@ -28,16 +28,16 @@ const HOME_OG = buildOgImageUrl({
 })
 
 export const metadata: Metadata = {
-  title: "RageRoom Directory UK | Compare Rage Rooms, Prices & Locations",
+  title: "Rage Rooms UK | Compare Venues, Prices & Book (2026)",
   description:
-    "Find and compare the best rage rooms across the UK. View prices, packages, photos, reviews and book your next stress-relief smash session.",
+    "Find a rage room near you across the UK. Compare verified smash rooms, starting prices, age limits and booking links in one directory.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "RageRoom Directory UK",
+    title: "Rage Rooms UK | Compare Venues, Prices & Book (2026)",
     description:
-      "Discover and compare UK rage rooms with prices, locations and booking links.",
+      "Compare verified UK rage rooms with prices, locations and booking links — then book a smash session.",
     url: baseUrl,
     siteName: "RageRoom Directory",
     type: "website",
@@ -52,9 +52,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "RageRoom Directory UK",
+    title: "Rage Rooms UK | Compare Venues, Prices & Book (2026)",
     description:
-      "Find & compare UK rage rooms — prices, locations and reviews in one place.",
+      "Find & compare UK rage rooms — prices, locations and booking links in one place.",
     images: [HOME_OG],
   },
 }
@@ -207,9 +207,27 @@ export default async function Home() {
 
       <section aria-labelledby="explore-cities-heading" className="w-full pt-4 sm:pt-6 pb-10 sm:pb-14">
         <div className="w-full px-3 sm:px-5 lg:px-6">
-          <h2 id="explore-cities-heading" className="section-title mb-5 sm:mb-6">
-            Explore UK Rage Rooms
-          </h2>
+          <div className="mb-5 sm:mb-6 flex flex-wrap items-end justify-between gap-3">
+            <h2 id="explore-cities-heading" className="section-title">
+              Explore UK Rage Rooms
+            </h2>
+            <div className="flex flex-wrap gap-3 text-xs sm:text-sm font-semibold uppercase tracking-widest">
+              <Link
+                href="/near-me"
+                className="inline-flex items-center gap-1 text-rage-500 hover:text-rage-400 transition-colors"
+              >
+                Near me map
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/guides/best-rage-rooms-london"
+                className="inline-flex items-center gap-1 text-zinc-300 hover:text-rage-400 transition-colors"
+              >
+                Best of London
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
 
           {/* City tiles: real skyline photos + dark gradient for legibility (matches reference). */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">

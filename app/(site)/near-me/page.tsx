@@ -9,12 +9,14 @@ import NearMeMap from "@/components/NearMeMap"
 import { absoluteUrl } from "@/lib/site-url"
 
 export const metadata: Metadata = {
-  title: "Rage Room Near Me | Find Local Smash Rooms",
-  description: "Find the best rage rooms and smash rooms near you. Browse local venues, compare prices, and book your stress-relief session. Interactive map and city directory included.",
+  title: "Rage Room Near Me | UK Map, Prices & Booking (2026)",
+  description:
+    "Find a rage room near you with our UK map. Compare verified smash rooms by distance, starting price and age limit, then book online.",
   alternates: { canonical: "/near-me" },
   openGraph: {
-    title: "Rage Room Near Me | Find Local Smash Rooms",
-    description: "Discover rage rooms and smash rooms in your area. Compare venues, prices, and book your session.",
+    title: "Rage Room Near Me | UK Map, Prices & Booking (2026)",
+    description:
+      "Locate the closest verified rage room to your postcode. Compare prices, ages and booking links across the UK.",
     type: "website",
   },
 }
@@ -79,14 +81,22 @@ export default async function NearMePage() {
         
         <div className="text-base sm:text-lg text-zinc-300 mb-6 sm:mb-8 space-y-3 sm:space-y-4">
           <p>
-            Looking for a rage room near you? You've come to the right place. Our directory helps you find the best smash rooms and anger rooms in your local area, whether you're in London, Manchester, Birmingham, or anywhere across the UK.
+            Looking for a rage room near you? Use the map below to find the closest verified UK smash room to your postcode — then compare starting prices, age limits and booking links before you travel.
           </p>
           <p>
-            Use our interactive map below to discover rage rooms near your location, or browse our city directory. Each listing includes{" "}
+            Each listing includes{" "}
             <Link href="/rage-room-prices-uk" className="text-orange-500 hover:text-orange-600 underline">
               pricing and packages
             </Link>
-            , safety notes, and booking options. Prefer a full UK map? See our{" "}
+            ,{" "}
+            <Link href="/guides/are-rage-rooms-safe-uk" className="text-orange-500 hover:text-orange-600 underline">
+              safety notes
+            </Link>
+            , and direct booking options. Prefer browsing by city first? See the{" "}
+            <Link href="/guides/rage-room-near-me" className="text-orange-500 hover:text-orange-600 underline">
+              UK city guide
+            </Link>
+            {" "}or the full{" "}
             <Link href="/uk-map" className="text-orange-500 hover:text-orange-600 underline">
               UK rage room map
             </Link>

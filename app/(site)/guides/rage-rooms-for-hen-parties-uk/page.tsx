@@ -70,8 +70,8 @@ const CITY_PICKS: { city: string; slug: string; why: string }[] = [
     why: "Compact city centre, rage rooms within walking distance of Lace Market bars and the tram network.",
   },
   {
-    city: "Newcastle upon Tyne",
-    slug: "newcastle-upon-tyne",
+    city: "Newcastle",
+    slug: "newcastle",
     why: "Famous hen weekend city. Strong venue clusters near the Bigg Market and Quayside.",
   },
   {

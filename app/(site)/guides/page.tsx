@@ -246,9 +246,9 @@ const TOPIC_GUIDES: Guide[] = [
     category: "First-Time Guide",
   },
   {
-    title: "Rage Room Near Me",
+    title: "Rage Rooms by UK City",
     description:
-      "Find verified rage rooms near you across 40+ UK towns and cities. Browse by city, compare prices and book online.",
+      "Browse verified rage rooms across 40+ UK towns and cities, compare prices, then open the near-me map for the closest venue.",
     href: "/guides/rage-room-near-me",
     category: "Find a Venue",
   },

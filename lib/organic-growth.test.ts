@@ -63,13 +63,36 @@ describe("listing enrichment SEO", () => {
     expect(JSON.stringify(schemas)).not.toContain("unapproved.jpg")
   })
 
-  it("puts authorised venue images and no others in the image sitemap", () => {
+  it("puts authorised venue images and first-party covers in the image sitemap", () => {
     const xml = buildImageSitemapXml([
-      listing({ media: [{ type: "image", url: "/images/authorised.jpg", alt: "Venue interior", caption: "Inside the venue", authorised: true }] }),
-      listing({ id: "2", slug: "no-permission", media: [{ type: "image", url: "/images/private.jpg", alt: "Private", authorised: false }] }),
+      listing({
+        media: [
+          {
+            type: "image",
+            url: "/images/authorised.jpg",
+            alt: "Venue interior",
+            caption: "Inside the venue",
+            authorised: true,
+          },
+        ],
+      }),
+      listing({
+        id: "2",
+        slug: "no-permission",
+        image: "https://storage.googleapis.com/example/private-cover.jpg",
+        media: [{ type: "image", url: "/images/private.jpg", alt: "Private", authorised: false }],
+      }),
+      listing({
+        id: "3",
+        slug: "first-party-cover",
+        image: "/images/venue-cover.jpg",
+        media: [],
+      }),
     ])
     expect(xml).toContain("authorised.jpg")
+    expect(xml).toContain("venue-cover.jpg")
     expect(xml).not.toContain("private.jpg")
+    expect(xml).not.toContain("private-cover.jpg")
     expect(xml).not.toContain("image:caption")
   })
 })

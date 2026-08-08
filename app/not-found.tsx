@@ -20,7 +20,7 @@ const TOP_CITIES = [
   { city: "Leeds", slug: "leeds" },
   { city: "Liverpool", slug: "liverpool" },
   { city: "Bristol", slug: "bristol" },
-  { city: "Newcastle upon Tyne", slug: "newcastle-upon-tyne" },
+  { city: "Newcastle", slug: "newcastle" },
   { city: "Sheffield", slug: "sheffield" },
   { city: "Nottingham", slug: "nottingham" },
   { city: "Glasgow", slug: "glasgow" },

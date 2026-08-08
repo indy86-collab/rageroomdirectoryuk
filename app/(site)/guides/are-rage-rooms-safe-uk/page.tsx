@@ -63,7 +63,7 @@ const FAQS = [
   {
     question: "Can you get seriously hurt at a rage room?",
     answer:
-      "Serious injuries are extremely rare when PPE is worn and staff instructions are followed. The controlled environment, mandatory protective gear, and pre-session safety briefing eliminate most risk. The most common minor incidents are small cuts or bruises, usually linked to improperly worn gloves or goggles.",
+      "Serious injuries are extremely rare when PPE is worn and staff instructions are followed. The controlled environment, mandatory protective gear, and pre-session safety briefing eliminate most risk. The most common minor incidents are small cuts or bruises, usually linked to improperly worn gloves or a loose visor.",
   },
   {
     question: "What medical conditions mean you shouldn't do a rage room?",
@@ -134,8 +134,8 @@ export default function AreRageRoomsSafeUKPage() {
         </h1>
 
         <GuideMeta
-          updated="April 2026"
-          readingTimeMinutes={10}
+          updated="August 2026"
+          readingTimeMinutes={11}
           keyTakeaways={[
             "UK rage rooms are low-risk when PPE (coveralls, full-face visor helmet, gloves, boots) is worn and staff instructions are followed.",
             "Most venues require participants to be 18+; some accept 14–17 with parental consent for dedicated youth sessions.",
@@ -150,6 +150,32 @@ export default function AreRageRoomsSafeUKPage() {
             Yes — UK rage rooms are safe when run by a reputable venue. Full PPE (coveralls, full-face visor helmet, gloves and boots), a mandatory safety briefing, signed waivers and at least £5 million public liability insurance are standard at verified venues. Serious injuries are extremely rare when equipment is worn correctly.
           </p>
 
+          <section>
+            <h2 className="text-2xl font-bold text-white mt-8 mb-4">
+              What We Check When Verifying a Venue
+            </h2>
+            <p>
+              RageRoom Directory only marks a listing as verified after we review the operator&apos;s published safety and booking details. For each verified venue we look for:
+            </p>
+            <ul className="list-disc list-inside space-y-2 ml-4 mt-4">
+              <li>A clear age policy and participant exclusions (pregnancy, intoxication, recent surgery)</li>
+              <li>Mandatory PPE listed before booking — not optional add-ons</li>
+              <li>Evidence of public liability insurance (we treat £5m+ as the expected floor)</li>
+              <li>A waiver or terms page participants must accept before the session</li>
+              <li>A working booking URL, current starting price where published, and a contact channel</li>
+            </ul>
+            <p className="mt-4">
+              If a venue cannot confirm insurance, skips the safety briefing, or treats PPE as optional, we do not treat it as a safe choice — and we will not mark it verified. Browse{" "}
+              <Link href="/listings" className="text-orange-500 hover:text-orange-600 underline">
+                verified UK listings
+              </Link>{" "}
+              or open the{" "}
+              <Link href="/near-me" className="text-orange-500 hover:text-orange-600 underline">
+                near-me map
+              </Link>{" "}
+              to compare options near you.
+            </p>
+          </section>
 
           <section>
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">
@@ -160,13 +186,13 @@ export default function AreRageRoomsSafeUKPage() {
             </p>
             <ul className="list-disc list-inside space-y-2 ml-4 mt-4">
               <li><strong>Full-body coveralls:</strong> Durable protective suits that cover your entire body, preventing glass shards or debris from coming into contact with your skin or clothing.</li>
-              <li><strong>Safety glasses or goggles:</strong> Essential eye protection that shields your eyes from flying glass, ceramic fragments, and other debris. These are impact-resistant and must be worn at all times.</li>
-              <li><strong>Helmets:</strong> Hard hats or protective helmets that protect your head from falling objects or accidental impacts. Some venues provide full-face visors for additional protection.</li>
-              <li><strong>Sturdy gloves:</strong> Heavy-duty gloves that protect your hands from sharp edges, provide grip, and prevent cuts from broken glass or metal.</li>
-              <li><strong>Protective footwear:</strong> Some venues provide steel-toed boots or require participants to wear closed-toe shoes with good grip.</li>
+              <li><strong>Full-face visor helmet:</strong> Impact-resistant head and face protection. Quality venues issue a full-face visor helmet rather than open safety glasses alone — goggles without a face shield leave the face and neck exposed to flying debris.</li>
+              <li><strong>Heavy-duty gloves:</strong> Leather or cut-resistant gloves that protect your hands from sharp edges, provide grip, and prevent cuts from broken glass or metal.</li>
+              <li><strong>Protective footwear:</strong> Steel-toed boots or sturdy closed-toe shoes with good grip. Many venues supply boots; if they do not, closed-toe shoes are still mandatory.</li>
+              <li><strong>Ear protection (optional but common):</strong> Some venues add ear defenders for louder smash packages.</li>
             </ul>
             <p className="mt-4">
-              All safety equipment is mandatory and must be worn throughout your session. Staff will ensure you're properly fitted before entering the rage room.
+              All core safety equipment is mandatory and must be worn throughout your session. Staff should fit PPE before you enter the rage room.
             </p>
           </section>
 
@@ -213,7 +239,7 @@ export default function AreRageRoomsSafeUKPage() {
               <div>
                 <h3 className="text-xl font-semibold text-white mb-2">"Anyone can participate regardless of age or health"</h3>
                 <p>
-                  Most UK rage rooms have age restrictions (typically 16+), and participants should be in good physical health. The activity involves physical exertion, so those with certain medical conditions, injuries, or who are pregnant should consult with the venue and their doctor before participating.
+                  Most UK rage rooms require participants to be 18+. A minority run supervised 14–17 youth sessions with parental consent and lighter tools. Under-14 participation is rare. Venues also exclude pregnancy, intoxication and several medical conditions — always confirm before booking.
                 </p>
               </div>
 
@@ -248,7 +274,7 @@ export default function AreRageRoomsSafeUKPage() {
               Age Requirements and Restrictions
             </h2>
             <p>
-              Most rage rooms in the UK require participants to be at least 16 years old. Some venues may allow younger participants (typically 12-15) with adult supervision, but policies vary. Always check with the specific venue before booking if you're under 18 or booking for a minor.
+              The standard age limit at UK rage rooms is 18+. A small number of venues run dedicated 14–17 youth sessions with lighter tools, extra supervision and mandatory parental consent. Under-14 participation is extremely rare and only offered at select venues with a parent present throughout. Always confirm the venue&apos;s age policy on the listing or booking page before you pay a deposit.
             </p>
             <p className="mt-4">
               Some venues also have maximum group sizes to ensure adequate supervision and safety. Corporate groups or large parties may need to book multiple sessions or split into smaller groups.
@@ -355,6 +381,11 @@ export default function AreRageRoomsSafeUKPage() {
             <li>
               <Link href="/guides/rage-rooms-for-stress-relief" className="text-orange-500 hover:text-orange-400 underline">
                 Do rage rooms actually relieve stress?
+              </Link>
+            </li>
+            <li>
+              <Link href="/near-me" className="text-orange-500 hover:text-orange-400 underline">
+                Find a rage room near me
               </Link>
             </li>
             <li>

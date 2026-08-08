@@ -34,15 +34,27 @@ function sitemapImageUrl(value: string) {
 export function buildImageSitemapXml(listings: Listing[]) {
   const entries = listings
     .map((listing) => {
-      const images = getAuthorisedMedia(listing)
-        .filter((media) => media.type === "image")
-        .map((media) => ({ media, url: sitemapImageUrl(media.url) }))
-        .filter((item): item is { media: typeof item.media; url: string } => Boolean(item.url))
-      if (!listing.verified || images.length === 0) return ""
+      if (!listing.verified) return ""
 
-      const imageEntries = images
+      const urls = new Set<string>()
+      for (const media of getAuthorisedMedia(listing)) {
+        if (media.type !== "image") continue
+        const url = sitemapImageUrl(media.url)
+        if (url) urls.add(url)
+      }
+
+      // First-party listing cover images hosted on the site are safe to
+      // advertise even before a full authorised media gallery exists.
+      if (listing.image) {
+        const coverUrl = sitemapImageUrl(listing.image)
+        if (coverUrl) urls.add(coverUrl)
+      }
+
+      if (urls.size === 0) return ""
+
+      const imageEntries = [...urls]
         .map(
-          ({ url }) => `    <image:image>
+          (url) => `    <image:image>
       <image:loc>${xmlEscape(url)}</image:loc>
     </image:image>`
         )
