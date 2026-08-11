@@ -4,6 +4,8 @@ import {
   checkoutSessionLogFields,
   logCheckoutLifecycle,
 } from "@/lib/checkout-logging"
+import { isCorporateBookingDurableStoreReady } from "@/lib/corporate-booking-system/store"
+import { CORPORATE_BOOKING_SYSTEM_PRODUCT_ID } from "@/lib/corporate-booking-system/types"
 import { getDigitalProduct } from "@/lib/digital-products"
 import { absoluteUrl } from "@/lib/site-url"
 import { getStripe } from "@/lib/stripe"
@@ -25,6 +27,29 @@ export async function POST(request: Request) {
 
     if (!product) {
       return NextResponse.json({ error: "Invalid product" }, { status: 400 })
+    }
+
+    if (product.isFree) {
+      return NextResponse.json(
+        {
+          error:
+            "This checklist is free — use the email form on the product page instead of checkout.",
+        },
+        { status: 400 }
+      )
+    }
+
+    if (
+      product.id === CORPORATE_BOOKING_SYSTEM_PRODUCT_ID &&
+      !isCorporateBookingDurableStoreReady()
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "The Corporate Booking System is temporarily unavailable. Venue-owner workspaces need durable storage before checkout can start.",
+        },
+        { status: 503 }
+      )
     }
 
     const customerEmail =

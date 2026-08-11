@@ -113,6 +113,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
     {
+      url: absoluteUrl("/digital-downloads/rage-room-corporate-booking-system"),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: absoluteUrl("/digital-downloads/rage-room-gift-voucher-template-pack"),
       changeFrequency: "monthly",
       priority: 0.7,

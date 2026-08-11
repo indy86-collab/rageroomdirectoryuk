@@ -126,3 +126,176 @@ export function trackProductDownload(
     value: product.price,
   })
 }
+
+/** First-timer checklist lead-magnet funnel (no PII). */
+export function trackFirstVisitChecklistView(source?: string) {
+  trackEvent("first_visit_checklist_view", {
+    lead_magnet: "first_visit_checklist",
+    ...(source ? { lead_source: source } : {}),
+  })
+}
+
+export function trackFirstVisitChecklistCtaClick(source?: string) {
+  trackEvent("first_visit_checklist_cta_click", {
+    lead_magnet: "first_visit_checklist",
+    ...(source ? { lead_source: source } : {}),
+  })
+}
+
+export function trackFirstVisitChecklistEmailSubmit(source?: string) {
+  trackEvent("first_visit_checklist_email_submit", {
+    lead_magnet: "first_visit_checklist",
+    ...(source ? { lead_source: source } : {}),
+  })
+}
+
+export function trackFirstVisitChecklistSuccess(source?: string) {
+  trackEvent("first_visit_checklist_success", {
+    lead_magnet: "first_visit_checklist",
+    ...(source ? { lead_source: source } : {}),
+  })
+}
+
+export function trackFirstVisitChecklistDownload(source?: string) {
+  trackEvent("first_visit_checklist_download", {
+    lead_magnet: "first_visit_checklist",
+    ...(source ? { lead_source: source } : {}),
+  })
+}
+
+export function trackFirstVisitChecklistFindVenueClick(source?: string) {
+  trackEvent("first_visit_checklist_find_venue_click", {
+    lead_magnet: "first_visit_checklist",
+    ...(source ? { lead_source: source } : {}),
+  })
+}
+
+/** Corporate Event Builder funnel (no PII — never send names, emails, or message bodies). */
+const CORPORATE_BUILDER_PRODUCT = "corporate_event_builder"
+
+export function trackCorporateEventBuilderView(source?: string) {
+  trackEvent("corporate_event_builder_view", {
+    product: CORPORATE_BUILDER_PRODUCT,
+    ...(source ? { source } : {}),
+  })
+}
+
+export function trackCorporateBuilderCheckoutClick(source?: string) {
+  trackEvent("corporate_builder_checkout_click", {
+    product: CORPORATE_BUILDER_PRODUCT,
+    ...(source ? { source } : {}),
+  })
+}
+
+export function trackCorporateBuilderPurchaseSuccess() {
+  trackEvent("corporate_builder_purchase_success", {
+    product: CORPORATE_BUILDER_PRODUCT,
+  })
+}
+
+export function trackCorporateBuilderStarted() {
+  trackEvent("corporate_builder_started", {
+    product: CORPORATE_BUILDER_PRODUCT,
+  })
+}
+
+export function trackCorporateBuilderBudgetCompleted() {
+  trackEvent("corporate_builder_budget_completed", {
+    product: CORPORATE_BUILDER_PRODUCT,
+  })
+}
+
+export function trackCorporateBuilderVenueAdded() {
+  trackEvent("corporate_builder_venue_added", {
+    product: CORPORATE_BUILDER_PRODUCT,
+  })
+}
+
+export function trackCorporateBuilderApprovalGenerated() {
+  trackEvent("corporate_builder_approval_generated", {
+    product: CORPORATE_BUILDER_PRODUCT,
+  })
+}
+
+export function trackCorporateBuilderInvitationGenerated() {
+  trackEvent("corporate_builder_invitation_generated", {
+    product: CORPORATE_BUILDER_PRODUCT,
+  })
+}
+
+export function trackCorporateBuilderPlanCompleted() {
+  trackEvent("corporate_builder_plan_completed", {
+    product: CORPORATE_BUILDER_PRODUCT,
+  })
+}
+
+export function trackCorporateBuilderExport() {
+  trackEvent("corporate_builder_export", {
+    product: CORPORATE_BUILDER_PRODUCT,
+  })
+}
+
+/** Corporate Booking System funnel (venue owners — never send customer PII). */
+const CORPORATE_BOOKING_SYSTEM_PRODUCT = "corporate_booking_system"
+
+export function trackCorporateBookingSystemView(source?: string) {
+  trackEvent("corporate_booking_system_view", {
+    product: CORPORATE_BOOKING_SYSTEM_PRODUCT,
+    ...(source ? { source } : {}),
+  })
+}
+
+export function trackCorporateBookingSystemCheckoutClick(source?: string) {
+  trackEvent("corporate_booking_system_checkout_click", {
+    product: CORPORATE_BOOKING_SYSTEM_PRODUCT,
+    ...(source ? { source } : {}),
+  })
+}
+
+export function trackCorporateBookingSystemPurchaseSuccess() {
+  trackEvent("corporate_booking_system_purchase_success", {
+    product: CORPORATE_BOOKING_SYSTEM_PRODUCT,
+  })
+}
+
+export function trackCorporateBookingSystemSetupStarted() {
+  trackEvent("corporate_booking_system_setup_started", {
+    product: CORPORATE_BOOKING_SYSTEM_PRODUCT,
+  })
+}
+
+export function trackCorporatePackageCreated() {
+  trackEvent("corporate_package_created", {
+    product: CORPORATE_BOOKING_SYSTEM_PRODUCT,
+  })
+}
+
+export function trackCorporateLeadCreated() {
+  trackEvent("corporate_lead_created", {
+    product: CORPORATE_BOOKING_SYSTEM_PRODUCT,
+  })
+}
+
+export function trackCorporateQuoteCreated() {
+  trackEvent("corporate_quote_created", {
+    product: CORPORATE_BOOKING_SYSTEM_PRODUCT,
+  })
+}
+
+export function trackCorporateProposalGenerated() {
+  trackEvent("corporate_proposal_generated", {
+    product: CORPORATE_BOOKING_SYSTEM_PRODUCT,
+  })
+}
+
+export function trackCorporateFollowupCompleted() {
+  trackEvent("corporate_followup_completed", {
+    product: CORPORATE_BOOKING_SYSTEM_PRODUCT,
+  })
+}
+
+export function trackCorporateLeadMarkedBooked() {
+  trackEvent("corporate_lead_marked_booked", {
+    product: CORPORATE_BOOKING_SYSTEM_PRODUCT,
+  })
+}

@@ -1,16 +1,27 @@
 "use client"
 
 import { useEffect } from "react"
-import { type AnalyticsProduct, trackPurchase } from "@/lib/analytics"
+import {
+  type AnalyticsProduct,
+  trackCorporateBookingSystemPurchaseSuccess,
+  trackCorporateBuilderPurchaseSuccess,
+  trackPurchase,
+} from "@/lib/analytics"
 
 type PurchaseTrackerProps = {
   sessionId: string
   product: AnalyticsProduct
+  /** Fires corporate_builder_purchase_success when set. */
+  trackCorporateBuilderSuccess?: boolean
+  /** Fires corporate_booking_system_purchase_success when set. */
+  trackCorporateBookingSystemSuccess?: boolean
 }
 
 export default function PurchaseTracker({
   sessionId,
   product,
+  trackCorporateBuilderSuccess = false,
+  trackCorporateBookingSystemSuccess = false,
 }: PurchaseTrackerProps) {
   useEffect(() => {
     const storageKey = `purchase_tracked_${sessionId}`
@@ -23,8 +34,19 @@ export default function PurchaseTracker({
       transaction_id: sessionId,
       product,
     })
+    if (trackCorporateBuilderSuccess) {
+      trackCorporateBuilderPurchaseSuccess()
+    }
+    if (trackCorporateBookingSystemSuccess) {
+      trackCorporateBookingSystemPurchaseSuccess()
+    }
     window.localStorage.setItem(storageKey, "true")
-  }, [product, sessionId])
+  }, [
+    product,
+    sessionId,
+    trackCorporateBookingSystemSuccess,
+    trackCorporateBuilderSuccess,
+  ])
 
   return null
 }

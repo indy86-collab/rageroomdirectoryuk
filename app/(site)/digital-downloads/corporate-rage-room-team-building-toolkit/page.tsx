@@ -1,18 +1,26 @@
 import type { Metadata } from "next"
-import { AlertTriangle, BriefcaseBusiness, Check, ClipboardList, Download, Sparkles } from "lucide-react"
+import {
+  AlertTriangle,
+  BriefcaseBusiness,
+  Check,
+  ClipboardList,
+  MapPinned,
+  PoundSterling,
+  Send,
+  Sparkles,
+} from "lucide-react"
+import CorporateEventBuilderPreview from "@/components/corporate-event-builder/CorporateEventBuilderPreview"
 import DigitalCheckoutButton from "@/components/DigitalCheckoutButton"
 import DigitalPriceDisplay from "@/components/DigitalPriceDisplay"
 import DigitalSaleBanner from "@/components/DigitalSaleBanner"
 import DigitalEditorialByline from "@/components/DigitalEditorialByline"
 import DigitalProductCover from "@/components/DigitalProductCover"
 import {
-  DigitalCompactTrust,
   DigitalPurchaseReassurance,
   DigitalRefundNote,
   DigitalValueStack,
   WhatHappensAfterPayment,
 } from "@/components/DigitalPurchaseDetails"
-import DigitalSampleStrip from "@/components/DigitalSampleStrip"
 import FAQ from "@/components/FAQ"
 import ProductViewTracker from "@/components/ProductViewTracker"
 import TrackedProductLink from "@/components/TrackedProductLink"
@@ -28,41 +36,49 @@ const giftProduct = getDigitalProduct("rage-room-gift-voucher-template-pack")!
 const giftAnalyticsProduct = getDigitalProductAnalytics(giftProduct)
 
 export const metadata: Metadata = {
-  title: "Corporate Rage Room Team-Building Toolkit | HR Event Planner",
+  title: "Corporate Rage Room Event Builder | Team Event Planner",
   description:
-    "Download a printable corporate rage room team-building toolkit for HR teams, office managers and team leads. Includes budget approval worksheet, venue scorecard, staff invite email, safety questions, run sheet and feedback form.",
+    "Plan your team rage room event without starting from a blank page. Build budget, compare venues, prepare internal approval, organise the day and generate team messages.",
   alternates: {
     canonical: "/digital-downloads/corporate-rage-room-team-building-toolkit",
   },
 }
 
-const includedGroups = [
+const jobGroups = [
   {
-    title: "Plan and approve",
+    title: "Build your budget",
+    icon: PoundSterling,
     items: [
-      "Internal planning checklist",
-      "Budget approval worksheet",
-      "Internal approval email",
-      "ROI and goals worksheet",
+      "Total or per-person budget",
+      "Rage room / food / travel / contingency split",
+      "Quick check: can we run this within budget?",
     ],
   },
   {
-    title: "Choose and check the venue",
+    title: "Compare rage rooms",
+    icon: MapPinned,
     items: [
-      "Venue comparison scorecard",
-      "Safety questions for the venue",
-      "Group size and session plan",
-      "Risk and logistics checklist",
+      "Shortlist using RageRoom Directory data",
+      "Starting price and approx group estimate",
+      "Enquiry questions ready to send venues",
     ],
   },
   {
-    title: "Run the event",
+    title: "Get internal approval",
+    icon: ClipboardList,
     items: [
-      "Staff invite email",
-      "Event schedule / run sheet",
-      "Post-event feedback form",
-      "Team reflection worksheet",
-      "Final booking checklist",
+      "Ready-to-send event proposal",
+      "Shorter email version with copy button",
+      "Generated from your real event details",
+    ],
+  },
+  {
+    title: "Invite & run the day",
+    icon: Send,
+    items: [
+      "Email, Slack/Teams and reminder messages",
+      "Editable run sheet and event checklist",
+      "Simple RSVP tracker and feedback survey",
     ],
   },
 ]
@@ -77,54 +93,49 @@ const audiences = [
   "Department heads planning team socials",
 ]
 
-const benefits = [
-  "Save planning time",
-  "Make budget approval easier",
-  "Ask better venue questions",
-  "Communicate clearly with staff",
-  "Capture useful feedback after the event",
-]
-
 const faqs = [
   {
+    question: "Is this an interactive tool or a PDF?",
+    answer:
+      "It is primarily an interactive Event Builder. After payment you enter your event details and generate budget, venue shortlist, approval and invitation outputs. A legacy printable PDF is still included for purchasers who want worksheets.",
+  },
+  {
     question: "Does this include a rage room booking?",
-    answer: "No. This is a planning toolkit. You still book directly with your chosen venue.",
+    answer:
+      "No. This helps you plan and organise the event. You still book directly with your chosen venue.",
   },
   {
     question: "Is this only for HR teams?",
     answer:
-      "No. It is also useful for office managers, founders, team leads and anyone organising a workplace team event.",
+      "No. It is useful for office managers, founders, team leads and anyone organising a workplace team event.",
   },
   {
     question: "Is it UK-specific?",
-    answer: "Yes. It uses UK-focused language and GBP budgeting fields.",
+    answer: "Yes. It uses UK-focused language, GBP budgeting and RageRoom Directory venue data.",
   },
   {
-    question: "Is it printable?",
-    answer: "Yes. It is designed as a printable PDF.",
-  },
-  {
-    question: "Can I use the email templates directly?",
-    answer: "Yes. Copy, paste and adapt them for your company, venue and team.",
+    question: "Will previous Corporate Toolkit purchasers get access?",
+    answer:
+      "Yes. Access is tied to the same paid product ID. Use the Event Builder link from a new purchase email/success page, or open /corporate-event-builder?token=… with an unexpired download token from your original purchase email.",
   },
   {
     question: "Is this legal or safety advice?",
     answer:
-      "No. It is a planning aid only. Always follow venue rules, waivers, staff instructions and company policy.",
+      "No. It is a planning aid only. Always follow venue rules, waivers, staff instructions and company policy. Confirm PPE, age limits, accessibility and cancellation terms with the venue.",
   },
   {
-    question: "Why does the download link expire?",
+    question: "Does my event plan save?",
     answer:
-      "The secure link expires after 72 hours to keep delivery private. Once you download the PDF, it is yours to keep forever. We also email the link to the address you use at checkout.",
+      "Yes. Your plan is saved in your browser for that purchase so a refresh does not wipe your work. Bookmark the Event Builder link from your order email or success page to return later.",
   },
   {
     question: "Can I get help or a refund?",
     answer:
-      "If the file is faulty or will not open, we will replace it or refund you — contact us within 7 days. Change-of-mind refunds are not offered on instant digital downloads after a successful download.",
+      "If access or the legacy file is faulty, contact us within 7 days for a fix or refund. Change-of-mind refunds are not offered after successful digital delivery.",
   },
 ]
 
-export default function CorporateToolkitPage() {
+export default function CorporateEventBuilderProductPage() {
   const productSchema = buildDigitalProductSchema({
     name: product.name,
     description: product.description,
@@ -134,6 +145,8 @@ export default function CorporateToolkitPage() {
     image: product.marketingImage || product.previewPdf,
     sku: product.analyticsItemId,
   })
+
+  const ctaLabel = `Build My Team Event — ${product.priceLabel}`
 
   return (
     <div className="bg-dark-900">
@@ -146,31 +159,45 @@ export default function CorporateToolkitPage() {
         <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <p className="text-sm font-bold uppercase tracking-widest text-rage-500">
-              Printable corporate toolkit
+              Corporate Event Builder
             </p>
             <h1 className="mt-4 text-4xl font-black uppercase tracking-wide text-white sm:text-5xl lg:text-6xl">
-              Corporate Rage Room Team-Building Toolkit
+              Corporate Rage Room Event Builder
             </h1>
             <DigitalEditorialByline className="mt-3" />
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-zinc-300">
-              Plan, approve and run a rage room team-building event without starting from a blank page.
+              Plan your team rage room event without starting from a blank page.
+            </p>
+            <p className="mt-3 max-w-2xl text-base leading-relaxed text-zinc-400">
+              Build your budget, compare venues, prepare internal approval,
+              organise the day and generate messages for your team.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4">
               <div>
                 <DigitalPriceDisplay product={product} />
                 <p className="mt-1 text-xs font-semibold text-zinc-400">
-                  Instant PDF download
+                  Interactive builder after payment
                 </p>
               </div>
               <DigitalCheckoutButton
                 productId={product.id}
                 analyticsProduct={analyticsProduct}
               >
-                Get HR-ready templates — {product.priceLabel}
+                {ctaLabel}
               </DigitalCheckoutButton>
             </div>
             <DigitalSaleBanner compact className="mt-3" />
-            <DigitalCompactTrust />
+            <p className="mt-4 text-sm font-semibold text-zinc-400">
+              <span className="text-zinc-200">Stripe</span>
+              <span className="mx-2 text-zinc-600">·</span>
+              Interactive builder after payment
+              <span className="mx-2 text-zinc-600">·</span>
+              Plan saves in your browser
+              <span className="mx-2 text-zinc-600">·</span>
+              Not a venue booking
+              <span className="mx-2 text-zinc-600">·</span>
+              7-day faulty-access refund
+            </p>
             <DigitalRefundNote />
           </div>
           {product.marketingImage && (
@@ -183,68 +210,67 @@ export default function CorporateToolkitPage() {
         </div>
       </section>
 
-      {product.previewImages?.length ? (
-        <section className="px-4 pb-4 sm:px-6">
-          <div className="mx-auto max-w-6xl rounded-lg border border-zinc-800 bg-[#181818] p-5 sm:p-6">
-            <DigitalSampleStrip
-              images={product.previewImages}
-              productName={product.name}
-              previewPdf={product.previewPdf}
-              sampleUnlockHint={product.sampleUnlockHint}
-            />
-          </div>
-        </section>
-      ) : null}
+      <section className="px-4 pb-4 sm:px-6">
+        <div className="mx-auto max-w-6xl">
+          <CorporateEventBuilderPreview />
+        </div>
+      </section>
 
       <section className="section-textured px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-4xl">
-          <h2 className="section-title">
-            Team events are easy to suggest. They are harder to get approved and organised.
-          </h2>
+          <h2 className="section-title">Plan the whole event in one place</h2>
           <p className="mt-5 text-base leading-relaxed text-zinc-300 sm:text-lg">
-            Between budget approval, venue questions, staff invites, safety checks, timings
-            and feedback, a simple team social can become messy. This toolkit gives HR teams,
-            office managers and team leads a ready-made structure.
+            Team events are easy to suggest and harder to approve, shortlist and
+            organise. Enter your details once and generate the outputs you need
+            to move the event forward.
           </p>
           <DigitalValueStack
-            title="Worth far more than one messy team day"
+            title="Implementation over information"
             items={[
-              "16 HR-ready pages — approval email, budget worksheet, venue scorecard, run sheet and feedback form",
-              "Email templates your manager can approve without another meeting",
-              "Updated for UK venues and GBP budgeting — 2026",
+              "Budget and per-person calculator you can adjust",
+              "Venue shortlist using RageRoom Directory listings",
+              "Approval, invitation and reminder messages generated from your event",
             ]}
-            timeCompare={`A poorly planned team event costs far more than ${product.compareAtLabel || product.priceLabel} in time, rework and awkward follow-ups.`}
+            timeCompare={`A messy team day costs far more than ${product.compareAtLabel || product.priceLabel} in rework and follow-ups.`}
           />
         </div>
       </section>
 
       <section className="px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-6xl">
-          <h2 id="whats-included" className="section-title mb-6">What’s Included</h2>
-          <div className="grid gap-4 md:grid-cols-3">
-            {includedGroups.map((group) => (
-              <div key={group.title} className="card-base p-5">
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-rage-500/40 bg-rage-500/15">
-                  <ClipboardList className="h-5 w-5 text-rage-500" />
+          <h2 id="whats-included" className="section-title mb-6">
+            What the builder does
+          </h2>
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {jobGroups.map((group) => {
+              const Icon = group.icon
+              return (
+                <div key={group.title} className="card-base p-5">
+                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-rage-500/40 bg-rage-500/15">
+                    <Icon className="h-5 w-5 text-rage-500" />
+                  </div>
+                  <h3 className="text-lg font-bold text-white">{group.title}</h3>
+                  <ul className="mt-4 space-y-2">
+                    {group.items.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-2 text-sm text-zinc-300"
+                      >
+                        <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-rage-500" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <h3 className="text-lg font-bold text-white">{group.title}</h3>
-                <ul className="mt-4 space-y-2">
-                  {group.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-sm text-zinc-300">
-                      <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-rage-500" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </section>
 
       <section className="section-textured px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-6xl">
-          <h2 className="section-title mb-6">Who It Is For</h2>
+          <h2 className="section-title mb-6">Who it is for</h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {audiences.map((audience) => (
               <div
@@ -252,7 +278,9 @@ export default function CorporateToolkitPage() {
                 className="flex items-center gap-3 rounded-lg border border-zinc-800 bg-[#181818] p-4"
               >
                 <BriefcaseBusiness className="h-4 w-4 flex-shrink-0 text-rage-500" />
-                <span className="text-sm font-semibold text-zinc-200">{audience}</span>
+                <span className="text-sm font-semibold text-zinc-200">
+                  {audience}
+                </span>
               </div>
             ))}
           </div>
@@ -260,45 +288,34 @@ export default function CorporateToolkitPage() {
       </section>
 
       <section className="px-4 py-10 sm:px-6 sm:py-14">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="section-title mb-6">Why Buy This</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {benefits.map((benefit) => (
-              <div key={benefit} className="card-base p-4">
-                <Sparkles className="h-5 w-5 text-rage-500" />
-                <h3 className="mt-3 text-sm font-bold text-white">{benefit}</h3>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-textured px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-4xl rounded-lg border border-zinc-800 bg-[#181818] p-5 sm:p-6">
           <div className="flex items-start gap-3">
             <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-rage-500" />
             <div>
               <h2 className="text-lg font-bold text-white">Important disclaimer</h2>
               <p className="mt-2 text-sm leading-relaxed text-zinc-300">
-                This toolkit is an entertainment planning aid. It is not medical, legal,
-                insurance, safety, or HR compliance advice. Always follow the venue’s rules,
-                waiver process, staff instructions and your company policies.
+                This Event Builder is an entertainment / team-social planning aid.
+                It is not medical, legal, insurance, safety, or HR compliance
+                advice. RageRoom Directory is not the venue operator. Always
+                confirm prices, availability, PPE, accessibility and rules
+                directly with your selected venue, and follow your company
+                policies.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="px-4 py-10 sm:px-6 sm:py-14">
+      <section className="section-textured px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[0.8fr_1.2fr]">
-          <WhatHappensAfterPayment />
+          <WhatHappensAfterPayment variant="corporate-builder" />
           <div className="card-base p-5">
-            <FAQ items={faqs} title="Corporate Toolkit FAQs" />
+            <FAQ items={faqs} title="Corporate Event Builder FAQs" />
           </div>
         </div>
       </section>
 
-      <section className="section-textured px-4 py-8 sm:px-6 sm:py-10">
+      <section className="px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-4xl text-center">
           <TrackedProductLink
             href="/digital-downloads/rage-room-gift-voucher-template-pack"
@@ -313,19 +330,20 @@ export default function CorporateToolkitPage() {
 
       <section className="px-4 pb-14 sm:px-6 sm:pb-16">
         <div className="mx-auto max-w-4xl rounded-lg border border-rage-500/30 bg-[#181818] p-6 text-center sm:p-8">
-          <Download className="mx-auto h-10 w-10 text-rage-500" />
+          <Sparkles className="mx-auto h-10 w-10 text-rage-500" />
           <h2 className="mt-4 text-2xl font-black uppercase tracking-wide text-white">
-            Get HR-ready templates — {product.priceLabel}
+            {ctaLabel}
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm text-zinc-300">
-            Instant PDF for approval, venue checks, staff communication, run sheets and feedback.
+            Enter your event details, build the plan, and generate the messages
+            your team needs — without starting from a blank page.
           </p>
           <div className="mt-6 flex justify-center">
             <DigitalCheckoutButton
               productId={product.id}
               analyticsProduct={analyticsProduct}
             >
-              Get HR-ready templates — {product.priceLabel}
+              {ctaLabel}
             </DigitalCheckoutButton>
           </div>
           <div className="mx-auto max-w-2xl">

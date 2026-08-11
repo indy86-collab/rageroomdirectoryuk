@@ -277,6 +277,21 @@ export default async function UkRageRoomReport2026Page() {
             </p>
           </section>
 
+          <section className="mb-10 rounded-lg border border-zinc-800 bg-[#181818] p-6">
+            <h2 className="text-xl font-bold text-white">For venue owners</h2>
+            <p className="mt-2 text-sm text-zinc-300">
+              Use this free market report for context, then turn corporate
+              enquiries into structured packages, quotes and follow-ups with the{" "}
+              <Link
+                href="/digital-downloads/rage-room-corporate-booking-system"
+                className="font-semibold text-orange-500 hover:text-orange-400"
+              >
+                Rage Room Corporate Booking System
+              </Link>{" "}
+              (£79 interactive workspace for operators).
+            </p>
+          </section>
+
           <div className="rounded-lg border border-zinc-800 bg-[#181818] p-6 text-center">
             <p className="text-zinc-300">
               Explore the underlying directory through the{" "}

@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server"
-import { sendLeadMagnetEmail } from "@/lib/digital-emails"
+import {
+  buildFirstTimerChecklistDownloadUrl,
+  sendLeadMagnetEmail,
+} from "@/lib/digital-emails"
 
 export const runtime = "nodejs"
 
@@ -16,9 +19,19 @@ function clientIp(request: Request) {
 }
 
 export async function POST(request: Request) {
-  let body: { email?: string; source?: string }
+  let body: {
+    email?: string
+    firstName?: string
+    source?: string
+    marketingOptIn?: boolean
+  }
   try {
-    body = (await request.json()) as { email?: string; source?: string }
+    body = (await request.json()) as {
+      email?: string
+      firstName?: string
+      source?: string
+      marketingOptIn?: boolean
+    }
   } catch {
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 })
   }
@@ -27,6 +40,13 @@ export async function POST(request: Request) {
   if (!EMAIL_RE.test(email)) {
     return NextResponse.json({ error: "Enter a valid email address" }, { status: 400 })
   }
+
+  const firstName = body.firstName?.trim().slice(0, 80) || undefined
+  const marketingOptIn = Boolean(body.marketingOptIn)
+  const source =
+    typeof body.source === "string" && body.source.trim()
+      ? body.source.trim().slice(0, 80)
+      : "unknown"
 
   const ip = clientIp(request)
   const now = Date.now()
@@ -39,22 +59,34 @@ export async function POST(request: Request) {
   }
   recentByIp.set(ip, now)
 
-  const result = await sendLeadMagnetEmail({ toEmail: email })
-  if (!result.sent) {
-    if (result.reason === "missing_api_key") {
-      return NextResponse.json(
-        { error: "Email is temporarily unavailable. Try the sample PDF on each product page." },
-        { status: 503 }
-      )
-    }
+  let downloadUrl: string
+  try {
+    downloadUrl = buildFirstTimerChecklistDownloadUrl()
+  } catch (error) {
+    console.error("Lead magnet download token failed", error)
     return NextResponse.json(
-      { error: "Unable to send the checklist right now" },
-      { status: 502 }
+      { error: "Unable to prepare the checklist right now" },
+      { status: 500 }
     )
   }
 
+  const emailResult = await sendLeadMagnetEmail({
+    toEmail: email,
+    firstName,
+    marketingOptIn,
+    downloadUrl,
+  })
+
+  // Immediate access always succeeds when the download token is ready.
+  // Email is best-effort when Resend is configured.
   return NextResponse.json({
     ok: true,
-    downloadUrl: result.downloadUrl,
+    downloadUrl,
+    emailSent: emailResult.sent,
+    emailSkipped:
+      !emailResult.sent && emailResult.reason === "missing_api_key"
+        ? true
+        : undefined,
+    source,
   })
 }

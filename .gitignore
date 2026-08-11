@@ -53,3 +53,5 @@ private/digital-downloads/.backup-before-pdf-fix/
 
 
 
+private/corporate-booking-workspaces/*
+!private/corporate-booking-workspaces/.gitkeep

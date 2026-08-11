@@ -1,5 +1,6 @@
 import fs from "fs"
 import { NextResponse } from "next/server"
+import { resolveDigitalDownloadFile } from "@/lib/digital-download-files"
 import {
   getDigitalProduct,
   isProductCoveredBySession,
@@ -16,7 +17,7 @@ type DownloadRouteProps = {
 
 function invalidDownloadResponse() {
   return new NextResponse(
-    `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Download unavailable</title></head><body style="margin:0;background:#111;color:#fff;font-family:system-ui,sans-serif"><main style="min-height:100vh;display:grid;place-items:center;padding:24px"><section style="max-width:560px;border:1px solid #333;background:#181818;border-radius:8px;padding:32px;text-align:center"><h1 style="font-size:24px;margin:0 0 12px">This download link has expired or is no longer valid.</h1><p style="color:#d4d4d8;margin:0 0 20px">If you recently bought a download, check your email for a fresh link, return to your Stripe success page, or contact support.</p><a href="/digital-downloads" style="display:inline-block;background:#f97316;color:white;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:6px">Back to downloads</a></section></main></body></html>`,
+    `<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Download unavailable</title></head><body style="margin:0;background:#111;color:#fff;font-family:system-ui,sans-serif"><main style="min-height:100vh;display:grid;place-items:center;padding:24px"><section style="max-width:560px;border:1px solid #333;background:#181818;border-radius:8px;padding:32px;text-align:center"><h1 style="font-size:24px;margin:0 0 12px">This download link has expired or is no longer valid.</h1><p style="color:#d4d4d8;margin:0 0 20px">If you recently requested or bought a download, check your email for a fresh link, return to the product page, or contact support.</p><a href="/digital-downloads" style="display:inline-block;background:#f97316;color:white;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:6px">Back to downloads</a></section></main></body></html>`,
     {
       status: 410,
       headers: {
@@ -25,6 +26,20 @@ function invalidDownloadResponse() {
       },
     }
   )
+}
+
+function fileResponse(
+  file: Buffer,
+  contentType: string,
+  downloadFilename: string
+) {
+  return new NextResponse(new Uint8Array(file), {
+    headers: {
+      "Content-Type": contentType,
+      "Content-Disposition": `attachment; filename="${downloadFilename}"`,
+      "Cache-Control": "no-store",
+    },
+  })
 }
 
 export async function GET(_request: Request, { params }: DownloadRouteProps) {
@@ -36,7 +51,25 @@ export async function GET(_request: Request, { params }: DownloadRouteProps) {
 
   const product = getDigitalProduct(payload.productId)
 
-  if (!product?.filePath || !fs.existsSync(product.filePath)) {
+  if (!product) {
+    return invalidDownloadResponse()
+  }
+
+  if (payload.kind === "lead") {
+    if (!product.isFree) {
+      return invalidDownloadResponse()
+    }
+
+    const resolved = resolveDigitalDownloadFile(product, "lead")
+    if (!resolved || !fs.existsSync(resolved.filePath)) {
+      return invalidDownloadResponse()
+    }
+
+    const file = await fs.promises.readFile(resolved.filePath)
+    return fileResponse(file, resolved.contentType, resolved.downloadFilename)
+  }
+
+  if (!product.filePath && !product.bundleProductIds?.length) {
     return invalidDownloadResponse()
   }
 
@@ -57,13 +90,11 @@ export async function GET(_request: Request, { params }: DownloadRouteProps) {
     return invalidDownloadResponse()
   }
 
-  const file = await fs.promises.readFile(product.filePath)
+  const resolved = resolveDigitalDownloadFile(product, "purchase")
+  if (!resolved || !fs.existsSync(resolved.filePath)) {
+    return invalidDownloadResponse()
+  }
 
-  return new NextResponse(file, {
-    headers: {
-      "Content-Type": product.contentType || "application/octet-stream",
-      "Content-Disposition": `attachment; filename="${product.downloadFilename || "download"}"`,
-      "Cache-Control": "no-store",
-    },
-  })
+  const file = await fs.promises.readFile(resolved.filePath)
+  return fileResponse(file, resolved.contentType, resolved.downloadFilename)
 }

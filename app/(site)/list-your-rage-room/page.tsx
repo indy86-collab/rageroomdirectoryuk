@@ -86,6 +86,17 @@ export default function ListYourRageRoomPage({
             Accurate prices and photos help you appear in city price pages and rich
             results.
           </p>
+          <p className="mt-4 text-sm text-zinc-300">
+            Running corporate enquiries already? The{" "}
+            <Link
+              href="/digital-downloads/rage-room-corporate-booking-system"
+              className="font-semibold text-orange-500 hover:text-orange-400"
+            >
+              Corporate Booking System
+            </Link>{" "}
+            helps venue owners organise packages, quotes and follow-up — separate from
+            listing your venue here.
+          </p>
         </div>
 
         <div className="mb-8 overflow-hidden rounded-lg border border-zinc-800 bg-[#181818] p-6">

@@ -17,7 +17,8 @@
     "ping-indexnow": "tsx scripts/ping-indexnow.ts",
     "analyze-gsc": "tsx scripts/analyze-gsc.ts",
     "seo:assert": "tsx scripts/seo-assertions.ts",
-    "generate:digital-previews": "python3 scripts/generate-digital-previews.py"
+    "generate:digital-previews": "python3 scripts/generate-digital-previews.py",
+    "generate:first-timer-checklist": "python3 scripts/generate-first-timer-checklist.py"
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",

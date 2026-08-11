@@ -21,7 +21,7 @@ const intents: {
   {
     id: "firstVisit",
     label: "First time",
-    hint: "What happens & what to wear",
+    hint: "Free checklist — what to wear & bring",
     productId: "rage-room-first-visit-prep",
   },
   {
@@ -33,7 +33,7 @@ const intents: {
   {
     id: "corporate",
     label: "Work / team building",
-    hint: "Approval & run sheet",
+    hint: "Event Builder — budget & approval",
     productId: "corporate-team-building-toolkit",
   },
   {
@@ -59,7 +59,7 @@ export default function DigitalGuidesChooser({
             What are you planning?
           </h2>
           <p className="mt-1 text-sm text-zinc-400">
-            Pick the checklist that matches — free sample previews on each page.
+            Pick the checklist that matches — free first-timer tool, paid planners for groups.
           </p>
         </div>
         <Link
@@ -104,7 +104,7 @@ export default function DigitalGuidesChooser({
                         Suggested
                       </span>
                     )}
-                    {product.compareAtLabel && (
+                    {!product.isFree && product.compareAtLabel && (
                       <span className="block text-[10px] text-zinc-500 line-through">
                         {product.compareAtLabel}
                       </span>

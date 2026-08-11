@@ -17,7 +17,9 @@
 ### `DOWNLOAD_TOKEN_SECRET`
 - **Description**: Secret used to sign private digital download links after payment
 - **Format**: Long random string
-- **Required**: Required for digital download fulfilment
+- **Required**: Not for current launch — **intentionally deferred**
+- **Current behaviour**: Falls back to `STRIPE_SECRET_KEY` when unset. Existing customer access/download links may depend on that signing secret; do **not** introduce or rotate `DOWNLOAD_TOKEN_SECRET` until a backward-compatible key migration is in place.
+- **Technical debt**: Separate download-token signing secret should be introduced later using a backward-compatible key migration strategy.
 
 ### `RESEND_API_KEY`
 - **Description**: Resend API key for purchase download emails and abandoned-checkout recovery emails
@@ -74,6 +76,41 @@
 - **Description**: Bearer token protecting the `/api/indexnow` manual ping endpoint
 - **Required**: Optional (only needed if using the API route manually)
 
+## Required for Corporate Booking System (venue-owner £79 product)
+
+The venue-owner Corporate Booking System stores workspace data server-side.
+
+### Local / single-node
+Writes JSON files under `private/corporate-booking-workspaces/` (gitignored).
+
+### Production on Vercel (required before public sale)
+Add Upstash Redis REST credentials. Without both variables on Vercel:
+
+- checkout for `rage-room-corporate-booking-system` returns **503**
+- workspace create/read/write is refused
+
+Do **not** offer this product publicly until both are set in Production (and Preview if you test purchases there).
+
+### `UPSTASH_REDIS_REST_URL`
+- **Description**: Upstash Redis REST URL for Corporate Booking System workspaces
+- **Required**: **Yes in production** before selling the Corporate Booking System
+
+### `UPSTASH_REDIS_REST_TOKEN`
+- **Description**: Upstash Redis REST token
+- **Required**: **Yes in production** with `UPSTASH_REDIS_REST_URL`
+
+### Optional local override
+- `CORPORATE_BOOKING_STORE=memory` — in-memory only (tests / ephemeral local)
+- `CORPORATE_BOOKING_REQUIRE_REDIS=true` — force Redis even outside Vercel
+
+Also ensure these digital-product env vars are present in Production for fulfilment emails:
+
+- `STRIPE_WEBHOOK_SECRET`
+- `RESEND_API_KEY`
+- `EMAIL_FROM` (recommended)
+- `DOWNLOAD_TOKEN_SECRET` (recommended; falls back to `STRIPE_SECRET_KEY` if unset)
+- `NEXT_PUBLIC_SITE_URL` (recommended; defaults to the canonical live domain)
+
 ## Data storage
 
 Listings are stored in [`data/listings.json`](data/listings.json) in the repository — no database is required.
@@ -97,14 +134,16 @@ When removing a closed venue, delete it from `listings.json` **and** add it to `
 
 - [ ] `STRIPE_SECRET_KEY` — Add for Stripe Checkout
 - [ ] `STRIPE_WEBHOOK_SECRET` — Add after creating the Stripe webhook endpoint
-- [ ] `DOWNLOAD_TOKEN_SECRET` — Add for secure download links
 - [ ] `RESEND_API_KEY` — Add for purchase + abandoned-checkout emails
 - [ ] `EMAIL_FROM` — Add verified from address for transactional email
 - [ ] `NEXT_PUBLIC_SITE_URL` — Add your production URL
+- [ ] `UPSTASH_REDIS_REST_URL` — Required before selling Corporate Booking System
+- [ ] `UPSTASH_REDIS_REST_TOKEN` — Required before selling Corporate Booking System
 - [ ] `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` — Add if using maps (optional)
 - [ ] `GOOGLE_PLACES_API_KEY` — Add if using Google reviews (optional)
 - [ ] `INDEXNOW_KEY` — Add for IndexNow pings after deploy (`npm run ping-indexnow`)
 - [ ] Remove `DATABASE_URL` and `NEXTAUTH_SECRET` from Vercel (no longer used)
+- [ ] `DOWNLOAD_TOKEN_SECRET` — **Deferred for this launch** (falls back to `STRIPE_SECRET_KEY`; migrate later with dual-key verification)
 
 ## Notes
 

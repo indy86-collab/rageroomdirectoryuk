@@ -1,4 +1,5 @@
 import { ArrowRight, ClipboardCheck } from "lucide-react"
+import FirstVisitChecklistCTA from "@/components/FirstVisitChecklistCTA"
 import TrackedProductLink from "@/components/TrackedProductLink"
 import {
   getDigitalProduct,
@@ -14,16 +15,8 @@ type DigitalDownloadCTAProps = {
 }
 
 const ctaCopy = {
-  firstVisit: {
-    eyebrow: "First time?",
-    title: "New to rage rooms?",
-    copy: "Get the 12-page First Visit Prep Pack: what happens, what to wear, venue questions and arrival checklist.",
-    buttonPrefix: "Get first-visit ready",
-    href: "/digital-downloads/rage-room-first-visit-prep-pack",
-    productId: "rage-room-first-visit-prep",
-  },
   party: {
-    eyebrow: null,
+    eyebrow: null as string | null,
     title: "Booking for a group?",
     copy: "Get the 15-page Rage Room Party Planner Pack before you choose a venue.",
     buttonPrefix: "Plan the whole night",
@@ -32,9 +25,9 @@ const ctaCopy = {
   },
   corporate: {
     eyebrow: "For work events",
-    title: "Planning a corporate rage room team-building event?",
-    copy: "Get the 16-page toolkit with approval email, budget worksheet, venue scorecard, safety questions, run sheet and feedback form.",
-    buttonPrefix: "Get HR-ready templates",
+    title: "Planning a corporate rage room team event?",
+    copy: "Build your budget, compare venues, prepare internal approval and generate team invitations with the Corporate Event Builder.",
+    buttonPrefix: "Build My Team Event",
     href: "/digital-downloads/corporate-rage-room-team-building-toolkit",
     productId: "corporate-team-building-toolkit",
   },
@@ -52,6 +45,10 @@ export default function DigitalDownloadCTA({
   variant = "party",
   compact = false,
 }: DigitalDownloadCTAProps) {
+  if (variant === "firstVisit") {
+    return <FirstVisitChecklistCTA compact={compact} source="guide-cta" />
+  }
+
   const copy = ctaCopy[variant]
   const product = getDigitalProduct(copy.productId)
   const analyticsProduct = product ? getDigitalProductAnalytics(product) : null

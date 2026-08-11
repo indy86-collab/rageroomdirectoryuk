@@ -252,9 +252,9 @@ export default function RageRoomPartyPlannerPackPage() {
         <div className="mx-auto max-w-4xl rounded-lg border border-zinc-800 bg-[#181818] p-6">
           <h2 className="text-xl font-bold text-white">Planning for work?</h2>
           <p className="mt-3 text-sm leading-relaxed text-zinc-300">
-            For workplace team-building, use the Corporate Rage Room Team-Building Toolkit
-            instead. It includes approval templates, staff invite emails, a venue scorecard
-            and a feedback form.
+            For workplace team events, use the Corporate Rage Room Event Builder
+            instead. Build budget, compare venues, prepare approval and generate
+            team invitations from your event details.
           </p>
           <TrackedProductLink
             href="/digital-downloads/corporate-rage-room-team-building-toolkit"
@@ -262,7 +262,7 @@ export default function RageRoomPartyPlannerPackPage() {
             listName="Digital Product Cross-Sell"
             className="mt-4 inline-flex text-sm font-semibold text-rage-500 hover:text-rage-400"
           >
-            View corporate toolkit
+            View Corporate Event Builder
           </TrackedProductLink>
         </div>
       </section>

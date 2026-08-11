@@ -6,7 +6,11 @@ import {
   type AnalyticsProduct,
   trackBeginCheckout,
   trackCheckoutResumeClick,
+  trackCorporateBookingSystemCheckoutClick,
+  trackCorporateBuilderCheckoutClick,
 } from "@/lib/analytics"
+import { CORPORATE_BOOKING_SYSTEM_PRODUCT_ID } from "@/lib/corporate-booking-system/types"
+import { CORPORATE_EVENT_BUILDER_PRODUCT_ID } from "@/lib/corporate-event-builder/types"
 import { readDigitalCheckoutEmail } from "@/lib/digital-checkout-email"
 
 type DigitalCheckoutButtonProps = {
@@ -47,6 +51,16 @@ export default function DigitalCheckoutButton({
         trackCheckoutResumeClick(analyticsProduct)
       } else {
         trackBeginCheckout(analyticsProduct)
+      }
+      if (productId === CORPORATE_EVENT_BUILDER_PRODUCT_ID) {
+        trackCorporateBuilderCheckoutClick(
+          resumeFromCancel ? "checkout_cancel" : "product_page"
+        )
+      }
+      if (productId === CORPORATE_BOOKING_SYSTEM_PRODUCT_ID) {
+        trackCorporateBookingSystemCheckoutClick(
+          resumeFromCancel ? "checkout_cancel" : "product_page"
+        )
       }
 
       const trimmedEmail =
@@ -94,7 +108,11 @@ export default function DigitalCheckoutButton({
       </button>
       {!hideDisclaimer && (
         <p className="text-xs leading-relaxed text-zinc-400">
-          Planning/template download only — does not include a venue booking.
+          {productId === CORPORATE_BOOKING_SYSTEM_PRODUCT_ID
+            ? "Interactive Corporate Booking System for venue owners — does not include consumer event planning or a booking."
+            : productId === CORPORATE_EVENT_BUILDER_PRODUCT_ID
+              ? "Interactive Event Builder access after payment — does not include a venue booking."
+              : "Planning/template download only — does not include a venue booking."}
         </p>
       )}
       {error && <p className="text-sm text-red-300">{error}</p>}

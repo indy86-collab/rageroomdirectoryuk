@@ -10,7 +10,10 @@ import {
   sendAbandonedCheckoutEmail,
   sendPurchaseDownloadEmail,
 } from "@/lib/digital-emails"
-import { getDigitalProduct } from "@/lib/digital-products"
+import {
+  getDigitalProduct,
+  sessionAmountMatchesProduct,
+} from "@/lib/digital-products"
 import { getStripe } from "@/lib/stripe"
 
 export const runtime = "nodejs"
@@ -33,8 +36,11 @@ async function handlePaidSession(session: Stripe.Checkout.Session) {
 
   if (
     !product ||
-    session.amount_total !== product.unitAmount ||
-    session.currency !== product.currency
+    !sessionAmountMatchesProduct(
+      product,
+      session.amount_total,
+      session.currency
+    )
   ) {
     console.warn("Paid session product mismatch — skipping email", {
       sessionId: session.id,
@@ -66,7 +72,7 @@ async function handleExpiredSession(session: Stripe.Checkout.Session) {
   const product = productId ? getDigitalProduct(productId) : null
   const email = getCheckoutSessionEmail(session)
 
-  if (!product || !email) {
+  if (!product || !email || product.isFree) {
     return
   }
 

@@ -1,25 +1,19 @@
 import type { Metadata } from "next"
-import { Check, ClipboardList, Download, Sparkles } from "lucide-react"
-import DigitalCheckoutButton from "@/components/DigitalCheckoutButton"
-import DigitalPriceDisplay from "@/components/DigitalPriceDisplay"
-import DigitalSaleBanner from "@/components/DigitalSaleBanner"
+import { Check, ClipboardList, Sparkles } from "lucide-react"
 import DigitalEditorialByline from "@/components/DigitalEditorialByline"
+import DigitalPriceDisplay from "@/components/DigitalPriceDisplay"
 import DigitalProductCover from "@/components/DigitalProductCover"
-import {
-  DigitalCompactTrust,
-  DigitalPurchaseReassurance,
-  DigitalRefundNote,
-  DigitalValueStack,
-  WhatHappensAfterPayment,
-} from "@/components/DigitalPurchaseDetails"
-import DigitalSampleStrip from "@/components/DigitalSampleStrip"
 import FAQ from "@/components/FAQ"
+import FirstTimerChecklistPreview from "@/components/FirstTimerChecklistPreview"
+import FirstVisitChecklistCTA from "@/components/FirstVisitChecklistCTA"
+import LeadMagnetForm from "@/components/LeadMagnetForm"
 import ProductViewTracker from "@/components/ProductViewTracker"
 import TrackedProductLink from "@/components/TrackedProductLink"
 import {
   getDigitalProduct,
   getDigitalProductAnalytics,
 } from "@/lib/digital-products"
+import { FIRST_TIMER_CHECKLIST_TAGLINE } from "@/lib/first-timer-checklist"
 import { buildDigitalProductSchema } from "@/lib/seo-schema"
 
 const product = getDigitalProduct("rage-room-first-visit-prep")!
@@ -30,38 +24,26 @@ const giftProduct = getDigitalProduct("rage-room-gift-voucher-template-pack")!
 const giftAnalyticsProduct = getDigitalProductAnalytics(giftProduct)
 
 export const metadata: Metadata = {
-  title: "Rage Room First Visit Prep Pack | Printable UK First-Timer Kit",
+  title: "FREE Rage Room First-Timer Checklist | What to Wear & Bring",
   description:
-    "Download a printable rage room first visit prep pack. Includes what happens, what to wear, can-I-take-part checks, venue questions, waiver tips and a final arrival checklist.",
+    "Free rage room first-timer checklist. Know what to wear, what to bring, what to check with the venue and what to expect before your first smash session. Free download — no account required.",
   alternates: {
     canonical: "/digital-downloads/rage-room-first-visit-prep-pack",
   },
 }
 
-const includedGroups = [
+const previewHighlights = [
   {
-    title: "Know what to expect",
-    items: [
-      "What happens step-by-step",
-      "Day-of timeline",
-      "Common first-timer mistakes",
-    ],
+    title: "Before you book",
+    items: ["Age limits", "Session length", "What’s included", "Cancellation policy"],
   },
   {
-    title: "Arrive prepared",
-    items: [
-      "What to wear and bring",
-      "Can I take part? self-check",
-      "Waiver and arrival checklist",
-    ],
+    title: "What to wear & bring",
+    items: ["Closed-toe shoes", "Comfortable clothes", "PPE expectations", "ID if needed"],
   },
   {
-    title: "Book with confidence",
-    items: [
-      "Venue questions before paying",
-      "Booking snapshot",
-      "Final prep checklist",
-    ],
+    title: "On the day",
+    items: ["Arrival timing", "Typical journey", "Venue questions", "Phone-ready checks"],
   },
 ]
 
@@ -76,49 +58,54 @@ const audiences = [
 
 const faqs = [
   {
+    question: "Is this really free?",
+    answer:
+      "Yes. Enter your email and you get the checklist immediately. No payment, no account, no Stripe checkout.",
+  },
+  {
     question: "Does this include a rage room booking?",
     answer:
-      "No. This is a preparation pack. You still book directly with your chosen venue.",
+      "No. This is a preparation checklist. You still book directly with your chosen venue.",
+  },
+  {
+    question: "Will you email me marketing?",
+    answer:
+      "Only if you opt in on the form. Requesting the checklist alone sends the download email — it is not treated as consent for unrelated marketing.",
   },
   {
     question: "Is it UK-specific?",
     answer:
-      "Yes. It uses UK-focused planning language and typical UK venue processes (waivers, PPE, arrival timing).",
-  },
-  {
-    question: "Is it printable?",
-    answer: "Yes. It is designed as an A4 printable PDF.",
+      "Yes. It uses UK-focused planning language and typical UK venue processes. Always confirm details with your venue — rules differ.",
   },
   {
     question: "Is this medical or safety advice?",
     answer:
-      "No. It is a planning aid only. Always follow the venue's rules, waiver requirements and staff instructions.",
+      "No. It is a planning aid only. Always follow the venue’s rules, waiver requirements and staff instructions.",
   },
   {
     question: "How is this different from the Party Planner Pack?",
     answer:
-      "This pack is for first-timers getting ready for a session. The Party Planner Pack is for organising a full group event with budgets, RSVPs and invites.",
-  },
-  {
-    question: "Why does the download link expire?",
-    answer:
-      "The secure link expires after 72 hours to keep delivery private. Once you download the PDF, it is yours to keep forever. We also email the link to the address you use at checkout.",
-  },
-  {
-    question: "Can I get help or a refund?",
-    answer:
-      "If the file is faulty or will not open, we will replace it or refund you — contact us within 7 days. Change-of-mind refunds are not offered on instant digital downloads after a successful download.",
+      "This free checklist is for first-timers getting ready for a session. The Party Planner Pack is a paid kit for organising a full group event with budgets, RSVPs and invites.",
   },
 ]
 
-export default function RageRoomFirstVisitPrepPackPage() {
+type PageProps = {
+  searchParams?: { source?: string }
+}
+
+export default function RageRoomFirstVisitPrepPackPage({ searchParams }: PageProps) {
+  const source =
+    typeof searchParams?.source === "string" && searchParams.source.trim()
+      ? searchParams.source.trim().slice(0, 80)
+      : "first-visit-product"
+
   const productSchema = buildDigitalProductSchema({
     name: product.name,
     description: product.description,
     url: `/digital-downloads/${product.slug}`,
-    price: product.unitAmount / 100,
+    price: 0,
     currency: product.currency,
-    image: product.marketingImage || product.previewPdf,
+    image: product.marketingImage,
     sku: product.analyticsItemId,
   })
 
@@ -133,33 +120,22 @@ export default function RageRoomFirstVisitPrepPackPage() {
         <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <p className="text-sm font-bold uppercase tracking-widest text-rage-500">
-              One-time digital download
+              Free digital tool
             </p>
             <h1 className="mt-4 text-4xl font-black uppercase tracking-wide text-white sm:text-5xl lg:text-6xl">
-              Rage Room First Visit Prep Pack
+              FREE Rage Room First-Timer Checklist
             </h1>
             <DigitalEditorialByline className="mt-3" />
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-zinc-300">
-              Arrive ready for your first smash session — what happens, what to wear, and
-              what to ask before you book.
+              {FIRST_TIMER_CHECKLIST_TAGLINE}
             </p>
-            <div className="mt-6 flex flex-wrap items-center gap-4">
-              <div>
-                <DigitalPriceDisplay product={product} />
-                <p className="mt-1 text-xs font-semibold text-zinc-400">
-                  Instant PDF download
-                </p>
-              </div>
-              <DigitalCheckoutButton
-                productId={product.id}
-                analyticsProduct={analyticsProduct}
-              >
-                Get first-visit ready — {product.priceLabel}
-              </DigitalCheckoutButton>
+            <p className="mt-3 max-w-2xl text-sm text-zinc-400">
+              Know what to wear, what to bring, what to check with the venue and what to
+              expect before you arrive. Free. Takes 2 minutes to read.
+            </p>
+            <div className="mt-6">
+              <DigitalPriceDisplay product={product} />
             </div>
-            <DigitalSaleBanner compact className="mt-3" />
-            <DigitalCompactTrust />
-            <DigitalRefundNote />
           </div>
           {product.marketingImage && (
             <DigitalProductCover
@@ -171,48 +147,36 @@ export default function RageRoomFirstVisitPrepPackPage() {
         </div>
       </section>
 
-      {product.previewImages?.length ? (
-        <section className="px-4 pb-4 sm:px-6">
-          <div className="mx-auto max-w-6xl rounded-lg border border-zinc-800 bg-[#181818] p-5 sm:p-6">
-            <DigitalSampleStrip
-              images={product.previewImages}
-              productName={product.name}
-              previewPdf={product.previewPdf}
-              sampleUnlockHint={product.sampleUnlockHint}
-            />
+      <section
+        id="get-checklist"
+        className="scroll-mt-24 px-4 pb-6 sm:px-6"
+      >
+        <div className="mx-auto max-w-3xl rounded-lg border border-rage-500/35 bg-[#181818] p-5 sm:p-7">
+          <div className="mb-5 flex items-start gap-3">
+            <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-md border border-rage-500/40 bg-rage-500/15">
+              <ClipboardList className="h-5 w-5 text-rage-500" />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold text-white sm:text-2xl">
+                Get the Free Checklist
+              </h2>
+              <p className="mt-1 text-sm text-zinc-400">
+                Enter your email for instant access. No account required.
+              </p>
+            </div>
           </div>
-        </section>
-      ) : null}
-
-      <section className="section-textured px-4 py-10 sm:px-6 sm:py-14">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="section-title">
-            First visits feel exciting — until the admin questions pile up.
-          </h2>
-          <p className="mt-5 text-base leading-relaxed text-zinc-300 sm:text-lg">
-            What should you wear? When do you arrive? Can everyone take part? What do you
-            ask before paying? This pack answers those questions in one printable place so
-            you show up ready.
-          </p>
-          <DigitalValueStack
-            title="Built for first-timers 2026"
-            items={[
-              "12 printable pages — expectations, clothing, venue questions and arrival checks",
-              "Practical self-check before you pay a deposit",
-              "Sample preview available before you buy",
-            ]}
-            timeCompare="Worth the calm before booking — less than a coffee."
-          />
+          <LeadMagnetForm source={source} idPrefix="first-visit-product" />
         </div>
       </section>
 
       <section className="px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-6xl">
-          <h2 id="whats-included" className="section-title mb-6">
-            What’s Included
-          </h2>
+          <h2 className="section-title mb-2">What’s inside</h2>
+          <p className="mb-6 max-w-2xl text-sm text-zinc-400">
+            A practical checklist you can keep open on your phone before you visit.
+          </p>
           <div className="grid gap-4 md:grid-cols-3">
-            {includedGroups.map((group) => (
+            {previewHighlights.map((group) => (
               <div key={group.title} className="card-base p-5">
                 <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-rage-500/40 bg-rage-500/15">
                   <ClipboardList className="h-5 w-5 text-rage-500" />
@@ -233,8 +197,15 @@ export default function RageRoomFirstVisitPrepPackPage() {
       </section>
 
       <section className="section-textured px-4 py-10 sm:px-6 sm:py-14">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="section-title mb-4">Checklist preview</h2>
+          <FirstTimerChecklistPreview variant="preview" />
+        </div>
+      </section>
+
+      <section className="px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-6xl">
-          <h2 className="section-title mb-6">Who It Is For</h2>
+          <h2 className="section-title mb-6">Who it helps</h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {audiences.map((audience) => (
               <div
@@ -249,16 +220,13 @@ export default function RageRoomFirstVisitPrepPackPage() {
         </div>
       </section>
 
-      <section className="px-4 py-10 sm:px-6 sm:py-14">
-        <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[0.8fr_1.2fr]">
-          <WhatHappensAfterPayment />
-          <div className="card-base p-5">
-            <FAQ items={faqs} title="First Visit Prep FAQs" />
-          </div>
+      <section className="section-textured px-4 py-10 sm:px-6 sm:py-14">
+        <div className="mx-auto max-w-4xl">
+          <FAQ items={faqs} title="First-Timer Checklist FAQs" />
         </div>
       </section>
 
-      <section className="section-textured px-4 py-10 sm:px-6 sm:py-14">
+      <section className="px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-4xl space-y-4">
           <div className="rounded-lg border border-zinc-800 bg-[#181818] p-6">
             <h2 className="text-xl font-bold text-white">Organising a group night?</h2>
@@ -270,9 +238,9 @@ export default function RageRoomFirstVisitPrepPackPage() {
               href="/digital-downloads/rage-room-party-planner-pack"
               product={partyAnalyticsProduct}
               listName="Digital Product Cross-Sell"
-              className="mt-4 inline-flex text-sm font-semibold text-rage-500 hover:text-rage-400"
+              className="mt-4 inline-flex min-h-[44px] items-center text-sm font-semibold text-rage-500 hover:text-rage-400"
             >
-              View party planner pack
+              View party planner pack — {partyProduct.priceLabel}
             </TrackedProductLink>
           </div>
           <div className="rounded-lg border border-zinc-800 bg-[#181818] p-6">
@@ -284,35 +252,17 @@ export default function RageRoomFirstVisitPrepPackPage() {
               href="/digital-downloads/rage-room-gift-voucher-template-pack"
               product={giftAnalyticsProduct}
               listName="Digital Product Cross-Sell"
-              className="mt-4 inline-flex text-sm font-semibold text-rage-500 hover:text-rage-400"
+              className="mt-4 inline-flex min-h-[44px] items-center text-sm font-semibold text-rage-500 hover:text-rage-400"
             >
-              View voucher templates
+              View voucher templates — {giftProduct.priceLabel}
             </TrackedProductLink>
           </div>
         </div>
       </section>
 
       <section className="px-4 pb-14 sm:px-6 sm:pb-16">
-        <div className="mx-auto max-w-4xl rounded-lg border border-rage-500/30 bg-[#181818] p-6 text-center sm:p-8">
-          <Download className="mx-auto h-10 w-10 text-rage-500" />
-          <h2 className="mt-4 text-2xl font-black uppercase tracking-wide text-white">
-            Get first-visit ready — {product.priceLabel}
-          </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-sm text-zinc-300">
-            Instant PDF download for what happens, what to wear and how to arrive prepared.
-          </p>
-          <div className="mt-6 flex justify-center">
-            <DigitalCheckoutButton
-              productId={product.id}
-              analyticsProduct={analyticsProduct}
-            >
-              Get first-visit ready — {product.priceLabel}
-            </DigitalCheckoutButton>
-          </div>
-          <div className="mx-auto max-w-2xl">
-            <DigitalPurchaseReassurance className="justify-center" />
-            <DigitalRefundNote className="text-center" />
-          </div>
+        <div className="mx-auto max-w-4xl">
+          <FirstVisitChecklistCTA source="first-visit-footer" />
         </div>
       </section>
     </div>

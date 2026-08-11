@@ -342,13 +342,13 @@ export default async function Home() {
                   Planning a work social or team-building day?
                 </h2>
                 <p className="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-300 sm:text-base">
-                  Get the Corporate Rage Room Team-Building Toolkit to handle budget
-                  approval, venue questions, staff invites, run sheets and feedback without
-                  building everything from scratch.
+                  Use the Corporate Rage Room Event Builder to build your budget, compare
+                  venues, prepare internal approval and generate team invitations — without
+                  starting from a blank page.
                 </p>
 
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {["Approval email", "Budget worksheet", "Venue scorecard", "Staff invite"].map((item) => (
+                  {["Budget builder", "Venue shortlist", "Approval proposal", "Team invites"].map((item) => (
                     <span
                       key={item}
                       className="inline-flex items-center gap-1.5 rounded-md border border-zinc-700 bg-dark-800 px-2.5 py-1.5 text-xs font-semibold text-zinc-200"
@@ -366,11 +366,11 @@ export default async function Home() {
                     listName="Homepage Corporate CTA"
                     className="btn-rage inline-flex min-h-[46px] items-center justify-center gap-2 text-sm uppercase tracking-wider"
                   >
-                    View corporate toolkit
+                    Build My Team Event
                     <ArrowRight className="h-4 w-4" />
                   </TrackedProductLink>
                   <p className="text-sm font-semibold text-zinc-300">
-                    Printable PDF · Instant download ·{" "}
+                    Interactive builder ·{" "}
                     <span className="text-white">{corporateProduct.priceLabel}</span>
                     {corporateProduct.compareAtLabel ? (
                       <span className="ml-1 text-zinc-500 line-through">

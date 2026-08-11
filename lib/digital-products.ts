@@ -9,6 +9,12 @@ export type DigitalProduct = {
   itemCategory: "Digital Product"
   priceLabel: string
   unitAmount: number
+  /**
+   * Free lead-magnet products bypass Stripe checkout.
+   * Keep `unitAmount` / `stripeLookupKey` unchanged so historical paid
+   * sessions still validate against the original purchase amount.
+   */
+  isFree?: boolean
   /** Pre-sale / compare-at price for strikethrough marketing. */
   compareAtLabel?: string
   compareAtAmount?: number
@@ -31,7 +37,15 @@ export type DigitalProduct = {
   description: string
   includedSections: string[]
   checkoutBlurb: string
+  /**
+   * Interactive tool unlocked after payment (may have no downloadable file).
+   * Corporate Event Builder is interactive + PDF; Corporate Booking System is
+   * interactive-only.
+   */
+  isInteractive?: boolean
 }
+
+export const FIRST_VISIT_CHECKLIST_PRODUCT_ID = "rage-room-first-visit-prep"
 
 export function formatGbpFromPence(unitAmount: number) {
   const pounds = unitAmount / 100
@@ -92,8 +106,8 @@ export const digitalProducts: Record<string, DigitalProduct> = {
   "corporate-team-building-toolkit": {
     id: "corporate-team-building-toolkit",
     slug: "corporate-rage-room-team-building-toolkit",
-    name: "Corporate Rage Room Team-Building Toolkit",
-    shortName: "Corporate Team-Building Toolkit",
+    name: "Corporate Rage Room Event Builder",
+    shortName: "Corporate Event Builder",
     analyticsItemId: "corporate_team_building_pack",
     itemCategory: "Digital Product",
     priceLabel: "£15.20",
@@ -102,6 +116,7 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     compareAtAmount: 1900,
     currency: "gbp",
     stripeLookupKey: "corporate_rage_room_team_building_toolkit_gbp_1520",
+    isInteractive: true,
     filePath: path.join(
       process.cwd(),
       "private/digital-downloads/corporate-rage-room-team-building-toolkit.pdf"
@@ -119,46 +134,46 @@ export const digitalProducts: Record<string, DigitalProduct> = {
       "/digital-products/corporate-rage-room-team-building-toolkit-sample.pdf?v=5",
     pageCount: 16,
     sampleUnlockHint:
-      "Sample preview (2 pages) — full pack unlocks all 16 HR-ready pages.",
+      "Preview the builder jobs below — purchase unlocks the full interactive Event Builder (legacy PDF still included).",
     description:
-      "A professional planning pack for HR teams, office managers, founders and team leads planning a rage room team-building event.",
+      "An interactive event builder for HR teams, office managers, founders and team leads organising a rage room team event — budget, venue shortlist, approval and invitations.",
     checkoutBlurb:
-      "Limited-time 20% demand drop already applied. Instant PDF toolkit only — not a venue booking.",
+      "Limited-time 20% demand drop already applied. Interactive Event Builder access after payment — not a venue booking.",
     includedSections: [
-      "Why rage rooms work",
-      "Internal planning checklist",
-      "Venue comparison scorecard",
-      "Budget approval worksheet",
-      "Internal approval email",
-      "Staff invite email",
-      "Event schedule / run sheet",
-      "Safety questions for the venue",
-      "Group size and session plan",
-      "Risk and logistics checklist",
-      "Post-event feedback form",
-      "Team reflection worksheet",
-      "ROI and goals worksheet",
-      "Final booking checklist",
+      "Event details builder",
+      "Budget calculator",
+      "Venue shortlist & comparison",
+      "Venue enquiry questions",
+      "Internal approval proposal",
+      "Approval email generator",
+      "Team invitation generator",
+      "Slack / Teams invite",
+      "Event run sheet",
+      "RSVP tracker",
+      "Event checklist",
+      "Final reminder generator",
+      "Post-event feedback survey",
+      "Legacy printable toolkit PDF",
     ],
   },
   "rage-room-first-visit-prep": {
     id: "rage-room-first-visit-prep",
     slug: "rage-room-first-visit-prep-pack",
-    name: "Rage Room First Visit Prep Pack",
-    shortName: "First Visit Prep Pack",
+    name: "Rage Room First-Timer Checklist",
+    shortName: "First-Timer Checklist",
     analyticsItemId: "rage_first_visit_prep_pack",
     itemCategory: "Digital Product",
-    priceLabel: "£4",
+    priceLabel: "FREE",
+    // Historical paid checkouts used 400p — keep for download validation.
     unitAmount: 400,
-    compareAtLabel: "£5",
-    compareAtAmount: 500,
+    isFree: true,
     currency: "gbp",
     stripeLookupKey: "rage_room_first_visit_prep_pack_gbp_400",
     filePath: path.join(
       process.cwd(),
-      "private/digital-downloads/rage-room-first-visit-prep-pack.pdf"
+      "private/digital-downloads/rage-room-first-timer-checklist.pdf"
     ),
-    downloadFilename: "rage-room-first-visit-prep-pack.pdf",
+    downloadFilename: "rage-room-first-timer-checklist.pdf",
     contentType: "application/pdf",
     marketingImage: "/digital-products/rage-room-first-visit-prep-pack-cover.png",
     previewImages: [
@@ -166,26 +181,17 @@ export const digitalProducts: Record<string, DigitalProduct> = {
       "/digital-products/rage-room-first-visit-prep-pack-page-2.png?v=4",
       "/digital-products/rage-room-first-visit-prep-pack-page-3.png?v=4",
     ],
-    previewPdf: "/digital-products/rage-room-first-visit-prep-pack-sample.pdf?v=5",
-    pageCount: 12,
-    sampleUnlockHint:
-      "Sample preview (2 pages) — full pack unlocks all 12 first-visit pages.",
+    pageCount: 3,
     description:
-      "A printable UK first-timer kit covering what happens, what to wear, can-I-take-part checks, venue questions, waiver tips and a final arrival checklist.",
+      "Everything you need before your first smash session — what to wear, what to bring, what to check with the venue and what to expect.",
     checkoutBlurb:
-      "Limited-time 20% demand drop already applied. Instant PDF prep pack only — not a venue booking.",
+      "Free first-timer checklist — email delivery only, not a venue booking.",
     includedSections: [
-      "Quick start",
-      "What happens step-by-step",
-      "What to wear and bring",
-      "Can I take part? self-check",
-      "Venue questions before booking",
-      "Booking snapshot",
-      "Waiver and arrival checklist",
-      "Day-of timeline",
-      "Common first-timer mistakes",
-      "After your session prompts",
-      "Final prep checklist",
+      "Before you book",
+      "What to wear",
+      "Before you leave home",
+      "What to expect",
+      "Quick questions to ask your venue",
     ],
   },
   "rage-room-gift-voucher-template-pack": {
@@ -242,6 +248,39 @@ export const digitalProducts: Record<string, DigitalProduct> = {
       "Preview catalogue",
     ],
   },
+  "rage-room-corporate-booking-system": {
+    id: "rage-room-corporate-booking-system",
+    slug: "rage-room-corporate-booking-system",
+    name: "Rage Room Corporate Booking System",
+    shortName: "Corporate Booking System",
+    analyticsItemId: "corporate_booking_system",
+    itemCategory: "Digital Product",
+    priceLabel: "£79",
+    unitAmount: 7900,
+    currency: "gbp",
+    stripeLookupKey: "rage_room_corporate_booking_system_gbp_7900",
+    isInteractive: true,
+    description:
+      "Turn corporate enquiries into structured booking proposals — packages, pricing estimates, enquiry replies, quotes, proposals and a lightweight lead pipeline for rage room venues.",
+    checkoutBlurb:
+      "Interactive Corporate Booking System for venue owners after payment — not a consumer event planner and not a venue booking.",
+    includedSections: [
+      "Venue profile setup",
+      "Corporate package builder",
+      "Package economics calculator",
+      "Minimum booking calculator",
+      "Enquiry response generator",
+      "Booking quote / estimate builder",
+      "Corporate proposal builder",
+      "Outreach message templates",
+      "Corporate lead tracker",
+      "Follow-up dashboard",
+      "Qualification checklist & discovery script",
+      "Objection / FAQ response library",
+      "Booking confirmation & reminder generators",
+      "Post-event follow-up messages",
+    ],
+  },
   "party-gift-bundle": {
     id: "party-gift-bundle",
     slug: "party-planner-gift-voucher-bundle",
@@ -294,9 +333,40 @@ export function getDigitalProductAnalytics(product: DigitalProduct) {
     item_id: product.analyticsItemId,
     item_name: product.name,
     item_category: product.itemCategory,
-    price: product.unitAmount / 100,
+    price: product.isFree ? 0 : product.unitAmount / 100,
     currency: product.currency.toUpperCase() as "GBP",
   }
+}
+
+export function isFreeDigitalProduct(product: DigitalProduct | null | undefined) {
+  return Boolean(product?.isFree)
+}
+
+/**
+ * Amounts that still entitle access for a product.
+ * Includes the current sale price and, when present, the compare-at / legacy
+ * list price so earlier legitimate purchasers are not locked out after a
+ * demand-drop price change.
+ */
+export function acceptedPurchaseAmounts(product: DigitalProduct): number[] {
+  const amounts = new Set<number>([product.unitAmount])
+  if (
+    typeof product.compareAtAmount === "number" &&
+    product.compareAtAmount > 0
+  ) {
+    amounts.add(product.compareAtAmount)
+  }
+  return [...amounts]
+}
+
+export function sessionAmountMatchesProduct(
+  product: DigitalProduct,
+  amountTotal: number | null | undefined,
+  currency: string | null | undefined
+) {
+  if (!currency || currency !== product.currency) return false
+  if (typeof amountTotal !== "number") return false
+  return acceptedPurchaseAmounts(product).includes(amountTotal)
 }
 
 /** Single-file products fulfilled for a purchase (bundle expands to children). */
@@ -308,6 +378,19 @@ export function getFulfilmentProducts(product: DigitalProduct): DigitalProduct[]
   return product.bundleProductIds
     .map((id) => getDigitalProduct(id))
     .filter((child): child is DigitalProduct => Boolean(child?.filePath))
+}
+
+export function isInteractiveDigitalProduct(
+  product: DigitalProduct | null | undefined
+) {
+  return Boolean(product?.isInteractive)
+}
+
+/** True when purchase unlocks an interactive tool and/or downloadable files. */
+export function productHasFulfilment(product: DigitalProduct | null | undefined) {
+  if (!product) return false
+  if (product.isInteractive) return true
+  return getFulfilmentProducts(product).length > 0
 }
 
 export function isProductCoveredBySession(

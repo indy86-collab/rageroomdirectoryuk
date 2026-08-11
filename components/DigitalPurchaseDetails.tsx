@@ -70,7 +70,37 @@ export function DigitalCompactTrust({ className = "" }: { className?: string }) 
   )
 }
 
-export function WhatHappensAfterPayment() {
+export function WhatHappensAfterPayment({
+  variant = "download",
+}: {
+  variant?: "download" | "corporate-builder" | "booking-system"
+}) {
+  const steps =
+    variant === "booking-system"
+      ? [
+          "Stripe confirms the payment securely.",
+          "Your Corporate Booking System workspace opens from the success page.",
+          "We also email your access link to the address you use at checkout.",
+          "Complete a short venue setup, then build packages, quotes and your lead pipeline.",
+          "Workspace data saves server-side for this purchase so you can return later.",
+          "This is a venue-owner booking toolkit — it does not include a consumer event planner or a booking.",
+        ]
+      : variant === "corporate-builder"
+        ? [
+            "Stripe confirms the payment securely.",
+            "Your Event Builder opens from the success page.",
+            "We also email the builder link (plus optional legacy PDF download).",
+            "Your event plan saves in your browser so you can continue later from that purchase link.",
+            "This is a planning tool only — it does not include a venue booking.",
+          ]
+        : [
+            "Stripe confirms the payment securely.",
+            "Your download link appears on the success page.",
+            "We also email the download link to the address you use at checkout.",
+            "Save a copy of the file — the secure link expires after 72 hours, but your downloaded file is yours to keep.",
+            "This is a planning/template pack only — it does not include a venue booking.",
+          ]
+
   return (
     <div className="card-base p-5">
       <div className="flex h-11 w-11 items-center justify-center rounded-md border border-rage-500/40 bg-rage-500/15">
@@ -80,17 +110,11 @@ export function WhatHappensAfterPayment() {
         What happens after payment
       </h2>
       <ol className="mt-4 space-y-3 text-sm leading-relaxed text-zinc-300">
-        <li>1. Stripe confirms the payment securely.</li>
-        <li>2. Your download link appears on the success page.</li>
-        <li>3. We also email the download link to the address you use at checkout.</li>
-        <li>
-          4. Save a copy of the file — the secure link expires after 72 hours, but
-          your downloaded file is yours to keep.
-        </li>
-        <li>
-          5. This is a planning/template pack only — it does not include a venue
-          booking.
-        </li>
+        {steps.map((step, index) => (
+          <li key={step}>
+            {index + 1}. {step}
+          </li>
+        ))}
       </ol>
     </div>
   )

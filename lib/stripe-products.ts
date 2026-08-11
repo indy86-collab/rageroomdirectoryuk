@@ -9,6 +9,10 @@ export async function getOrCreateStripePriceForProduct(productId: string) {
     throw new Error(`Unknown digital product: ${productId}`)
   }
 
+  if (product.isFree) {
+    throw new Error(`Free digital product cannot create a Stripe price: ${productId}`)
+  }
+
   const stripe = getStripe()
   const existingPrices = await stripe.prices.list({
     lookup_keys: [product.stripeLookupKey],

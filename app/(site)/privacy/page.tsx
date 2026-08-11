@@ -18,7 +18,7 @@ export default function PrivacyPage() {
     { label: "Privacy", href: "/privacy" },
   ]
 
-  const lastUpdated = "18 March 2026"
+  const lastUpdated = "11 August 2026"
 
   return (
     <div className="py-6 sm:py-8">
@@ -71,6 +71,47 @@ export default function PrivacyPage() {
             </ul>
 
             <h3 className="text-lg sm:text-xl font-semibold text-white mt-4 sm:mt-6 mb-2 sm:mb-3">
+              B2. Free Checklist / Lead Magnet
+            </h3>
+            <ul className="list-disc list-inside space-y-2 ml-4">
+              <li>Email address (required to deliver the free First-Timer Checklist)</li>
+              <li>First name (optional)</li>
+              <li>Marketing opt-in preference (optional — requesting the checklist alone is not marketing consent)</li>
+            </ul>
+
+            <h3 className="text-lg sm:text-xl font-semibold text-white mt-4 sm:mt-6 mb-2 sm:mb-3">
+              B3. Digital Product Purchases
+            </h3>
+            <ul className="list-disc list-inside space-y-2 ml-4">
+              <li>Email address and payment confirmation details processed by Stripe for paid digital products</li>
+              <li>Order metadata needed to unlock downloads or interactive tools after payment</li>
+              <li>Transactional access emails (purchase confirmation / download or tool links)</li>
+            </ul>
+            <p className="mt-3 text-sm text-zinc-400">
+              Payment card details are handled by Stripe and are not stored on our servers.
+            </p>
+
+            <h3 className="text-lg sm:text-xl font-semibold text-white mt-4 sm:mt-6 mb-2 sm:mb-3">
+              B4. Corporate Event Builder (organiser tool)
+            </h3>
+            <ul className="list-disc list-inside space-y-2 ml-4">
+              <li>Event planning details you enter in the builder (for example team size, budget, venue shortlist notes, and generated message drafts)</li>
+              <li>These plan details are stored in your browser (local storage) for that purchase access link — not used as a public listing</li>
+            </ul>
+
+            <h3 className="text-lg sm:text-xl font-semibold text-white mt-4 sm:mt-6 mb-2 sm:mb-3">
+              B5. Corporate Booking System (venue-owner workspace)
+            </h3>
+            <ul className="list-disc list-inside space-y-2 ml-4">
+              <li>Venue/business profile details you enter in your workspace</li>
+              <li>Corporate package, quote and proposal content you create</li>
+              <li>Corporate lead/contact details and message drafts you choose to store for follow-up</li>
+            </ul>
+            <p className="mt-3 text-sm text-zinc-400">
+              This is operational customer data you provide as a venue operator. It is stored so you can return to your paid workspace. It is separate from optional marketing consent.
+            </p>
+
+            <h3 className="text-lg sm:text-xl font-semibold text-white mt-4 sm:mt-6 mb-2 sm:mb-3">
               C. Business Submissions or Listing Updates
             </h3>
             <ul className="list-disc list-inside space-y-2 ml-4">
@@ -88,6 +129,7 @@ export default function PrivacyPage() {
             <p>We use cookies and analytics tools to improve website performance and provide relevant content.</p>
             <ul className="list-disc list-inside space-y-2 ml-4">
               <li>Vercel Analytics for anonymised page-view and performance metrics</li>
+              <li>Google Analytics (GA4) for anonymised product/funnel events — we do not send email addresses, names, phone numbers, or message contents in analytics events</li>
               <li>Cloudflare cookies for security and performance</li>
               <li>Google AdSense cookies (when applicable) for showing relevant advertisements</li>
               <li>Functional cookies for website features</li>
@@ -103,6 +145,8 @@ export default function PrivacyPage() {
               <li>Improving website performance</li>
               <li>Enhancing directory content</li>
               <li>Responding to enquiries</li>
+              <li>Delivering free checklists and paid digital products</li>
+              <li>Providing purchased interactive planning / venue-owner workspaces</li>
               <li>Maintaining accurate business listings</li>
               <li>Analytics and usage insights</li>
               <li>Detecting security issues</li>
@@ -120,8 +164,8 @@ export default function PrivacyPage() {
             <p>We process personal data under:</p>
             <ul className="list-disc list-inside space-y-2 ml-4">
               <li>Legitimate interests (analytics, improvements)</li>
-              <li>Consent (contact forms, cookies)</li>
-              <li>Contractual necessity (when business owners submit listings)</li>
+              <li>Consent (contact forms, cookies, optional marketing opt-in)</li>
+              <li>Contractual necessity (digital product fulfilment, listing submissions, venue-owner workspace operation)</li>
               <li>Compliance with legal obligations</li>
             </ul>
           </section>
@@ -136,7 +180,11 @@ export default function PrivacyPage() {
               <li><strong>Vercel Analytics</strong> - For anonymised website analytics and performance monitoring</li>
               <li><strong>Cloudflare</strong> - For website security, performance optimization, and DDoS protection. Cloudflare may collect IP addresses and request metadata</li>
               <li><strong>Google AdSense</strong> - If we display advertisements, Google AdSense may use cookies to show you relevant ads based on your browsing history</li>
-              <li>Email service providers (if using contact forms)</li>
+              <li><strong>Stripe</strong> - Payment processing for paid digital products</li>
+              <li><strong>Resend</strong> - Transactional email delivery for checklist and purchase access messages (and optional marketing audience updates only when you opt in)</li>
+              <li><strong>Upstash</strong> - Durable storage for Corporate Booking System venue-owner workspaces when configured</li>
+              <li><strong>Google Analytics</strong> - Anonymised product and funnel analytics</li>
+              <li>Email service providers (contact forms and transactional mail)</li>
             </ul>
             <p className="mt-4">
               All providers comply with UK GDPR and data protection regulations. We only share data necessary for these services to function.
@@ -151,6 +199,9 @@ export default function PrivacyPage() {
             <ul className="list-disc list-inside space-y-2 ml-4">
               <li>Analytics: 12–24 months</li>
               <li>Contact submissions: until resolved</li>
+              <li>Free checklist delivery records: as needed to provide access and prevent abuse</li>
+              <li>Paid digital purchase access links: according to the product (download links typically expire; interactive tool access follows the purchase access model)</li>
+              <li>Corporate Booking System workspace data: while needed to provide the paid workspace, or until a deletion request is handled</li>
               <li>Business listings: ongoing until business requests removal</li>
             </ul>
           </section>

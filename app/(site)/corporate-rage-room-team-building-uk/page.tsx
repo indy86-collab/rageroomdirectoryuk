@@ -110,11 +110,11 @@ export default function CorporateTeamBuildingGuidePage() {
         <section className="mt-10 rounded-lg border border-rage-500/30 bg-[#181818] p-6">
           <ClipboardCheck className="h-9 w-9 text-rage-500" />
           <h2 className="mt-4 text-2xl font-bold text-white">
-            Download the 16-page corporate toolkit — {product.priceLabel}
+            Build your team event — {product.priceLabel}
           </h2>
           <p className="mt-3 text-zinc-300">
-            Get the approval email, budget worksheet, venue scorecard, staff invite,
-            safety questions, run sheet and feedback form in one printable PDF.
+            Use the Corporate Event Builder to create your budget, shortlist venues,
+            prepare internal approval and generate invite messages for your team.
           </p>
           <TrackedProductLink
             href="/digital-downloads/corporate-rage-room-team-building-toolkit"
@@ -122,7 +122,7 @@ export default function CorporateTeamBuildingGuidePage() {
             listName="Corporate Landing CTA"
             className="btn-rage mt-5 inline-flex min-h-[44px] items-center justify-center gap-2 text-sm uppercase tracking-wider"
           >
-            View corporate toolkit
+            Build My Team Event
             <ArrowRight className="h-4 w-4" />
           </TrackedProductLink>
         </section>

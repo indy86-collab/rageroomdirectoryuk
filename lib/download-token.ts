@@ -2,13 +2,18 @@ import "server-only"
 import crypto from "crypto"
 import { getDigitalProduct } from "@/lib/digital-products"
 
+export type DownloadTokenKind = "purchase" | "lead"
+
 export type DownloadTokenPayload = {
   sessionId: string
   productId: string
   exp: number
+  kind?: DownloadTokenKind
 }
 
 const TOKEN_TTL_SECONDS = 72 * 60 * 60
+const LEAD_TOKEN_TTL_SECONDS = 7 * 24 * 60 * 60
+export const LEAD_DOWNLOAD_SESSION_PREFIX = "lead:"
 
 function getTokenSecret() {
   const secret = process.env.DOWNLOAD_TOKEN_SECRET || process.env.STRIPE_SECRET_KEY
@@ -31,6 +36,12 @@ function signPayload(encodedPayload: string) {
     .digest("base64url")
 }
 
+function encodeToken(payload: DownloadTokenPayload) {
+  const encodedPayload = base64UrlEncode(JSON.stringify(payload))
+  const signature = signPayload(encodedPayload)
+  return `${encodedPayload}.${signature}`
+}
+
 export function createDownloadToken({
   sessionId,
   productId,
@@ -44,15 +55,33 @@ export function createDownloadToken({
     throw new Error("Unknown digital product or product has no downloadable file")
   }
 
-  const payload: DownloadTokenPayload = {
+  return encodeToken({
     sessionId,
     productId: product.id,
     exp: Math.floor(Date.now() / 1000) + TOKEN_TTL_SECONDS,
-  }
-  const encodedPayload = base64UrlEncode(JSON.stringify(payload))
-  const signature = signPayload(encodedPayload)
+    kind: "purchase",
+  })
+}
 
-  return `${encodedPayload}.${signature}`
+/** Signed download token for free lead-magnet products (no Stripe session). */
+export function createLeadDownloadToken(productId: string) {
+  const product = getDigitalProduct(productId)
+
+  if (!product?.isFree || !product.filePath) {
+    throw new Error("Lead download tokens are only available for free products")
+  }
+
+  const nonce = crypto.randomBytes(8).toString("hex")
+  return encodeToken({
+    sessionId: `${LEAD_DOWNLOAD_SESSION_PREFIX}${nonce}`,
+    productId: product.id,
+    exp: Math.floor(Date.now() / 1000) + LEAD_TOKEN_TTL_SECONDS,
+    kind: "lead",
+  })
+}
+
+export function isLeadDownloadSession(sessionId: string) {
+  return sessionId.startsWith(LEAD_DOWNLOAD_SESSION_PREFIX)
 }
 
 export function verifyDownloadToken(token: string) {
@@ -88,10 +117,16 @@ export function verifyDownloadToken(token: string) {
       return null
     }
 
+    const kind: DownloadTokenKind =
+      payload.kind === "lead" || isLeadDownloadSession(payload.sessionId)
+        ? "lead"
+        : "purchase"
+
     return {
       sessionId: payload.sessionId,
       productId: payload.productId,
       exp: payload.exp,
+      kind,
     } satisfies DownloadTokenPayload
   } catch {
     return null

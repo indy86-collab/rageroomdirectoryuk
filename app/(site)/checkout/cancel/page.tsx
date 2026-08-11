@@ -55,6 +55,29 @@ export default function CheckoutCancelPage({
     )
   }
 
+  // First-timer checklist is now free — never resume Stripe for it.
+  if (product.isFree) {
+    return (
+      <div className="px-4 py-16 sm:px-6">
+        <div className="mx-auto max-w-2xl rounded-lg border border-zinc-800 bg-[#181818] p-6 text-center sm:p-8">
+          <h1 className="text-2xl font-bold text-white">
+            This checklist is now free
+          </h1>
+          <p className="mt-3 text-zinc-300">
+            The First-Timer Checklist no longer needs payment. Enter your email on the
+            product page for instant access.
+          </p>
+          <a
+            href={`/digital-downloads/${product.slug}#get-checklist`}
+            className="btn-rage mt-6 inline-flex min-h-[44px] items-center justify-center"
+          >
+            Get the Free Checklist
+          </a>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <CheckoutCancelRecovery
       productId={product.id}
