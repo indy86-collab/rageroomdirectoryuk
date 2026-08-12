@@ -91,13 +91,15 @@ Add Upstash Redis REST credentials. Without both variables on Vercel:
 
 Do **not** offer this product publicly until both are set in Production (and Preview if you test purchases there).
 
-### `UPSTASH_REDIS_REST_URL`
+### `UPSTASH_REDIS_REST_URL` / `KV_REST_API_URL`
 - **Description**: Upstash Redis REST URL for Corporate Booking System workspaces
 - **Required**: **Yes in production** before selling the Corporate Booking System
+- **Vercel Marketplace**: Installing **Upstash for Redis** injects `KV_REST_API_URL` (accepted as an alias)
 
-### `UPSTASH_REDIS_REST_TOKEN`
+### `UPSTASH_REDIS_REST_TOKEN` / `KV_REST_API_TOKEN`
 - **Description**: Upstash Redis REST token
-- **Required**: **Yes in production** with `UPSTASH_REDIS_REST_URL`
+- **Required**: **Yes in production** with the matching REST URL
+- **Vercel Marketplace**: Installing **Upstash for Redis** injects `KV_REST_API_TOKEN` (accepted as an alias)
 
 ### Optional local override
 - `CORPORATE_BOOKING_STORE=memory` — in-memory only (tests / ephemeral local)

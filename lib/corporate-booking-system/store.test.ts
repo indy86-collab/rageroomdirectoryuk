@@ -14,6 +14,8 @@ describe("corporate booking workspace store", () => {
   const originalRequireRedis = process.env.CORPORATE_BOOKING_REQUIRE_REDIS
   const originalUrl = process.env.UPSTASH_REDIS_REST_URL
   const originalToken = process.env.UPSTASH_REDIS_REST_TOKEN
+  const originalKvUrl = process.env.KV_REST_API_URL
+  const originalKvToken = process.env.KV_REST_API_TOKEN
 
   afterEach(() => {
     _resetCorporateBookingMemoryStoreForTests()
@@ -26,6 +28,10 @@ describe("corporate booking workspace store", () => {
     else process.env.UPSTASH_REDIS_REST_URL = originalUrl
     if (originalToken === undefined) delete process.env.UPSTASH_REDIS_REST_TOKEN
     else process.env.UPSTASH_REDIS_REST_TOKEN = originalToken
+    if (originalKvUrl === undefined) delete process.env.KV_REST_API_URL
+    else process.env.KV_REST_API_URL = originalKvUrl
+    if (originalKvToken === undefined) delete process.env.KV_REST_API_TOKEN
+    else process.env.KV_REST_API_TOKEN = originalKvToken
   })
 
   it("creates and reloads a workspace for a session", async () => {
@@ -72,9 +78,19 @@ describe("corporate booking workspace store", () => {
   it("reports durable store unreadiness when Redis is required but missing", () => {
     delete process.env.UPSTASH_REDIS_REST_URL
     delete process.env.UPSTASH_REDIS_REST_TOKEN
+    delete process.env.KV_REST_API_URL
+    delete process.env.KV_REST_API_TOKEN
     process.env.CORPORATE_BOOKING_REQUIRE_REDIS = "true"
     // Memory mode still wins in Vitest — readiness helper is true for tests.
     expect(isUpstashConfigured()).toBe(false)
     expect(isCorporateBookingDurableStoreReady()).toBe(true)
+  })
+
+  it("treats Vercel Marketplace KV_REST_API_* credentials as Upstash configured", () => {
+    delete process.env.UPSTASH_REDIS_REST_URL
+    delete process.env.UPSTASH_REDIS_REST_TOKEN
+    process.env.KV_REST_API_URL = "https://example.upstash.io"
+    process.env.KV_REST_API_TOKEN = "test-token"
+    expect(isUpstashConfigured()).toBe(true)
   })
 })

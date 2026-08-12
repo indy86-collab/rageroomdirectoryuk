@@ -15,10 +15,22 @@ type MemoryEntry = { workspace: VenueOwnerWorkspace; savedAt: number }
 const memoryStore = new Map<string, MemoryEntry>()
 const sessionIndex = new Map<string, string>()
 
+/** Vercel Marketplace Upstash injects KV_REST_API_*; local/docs use UPSTASH_*. */
+export function getUpstashRestConfig() {
+  const url =
+    process.env.UPSTASH_REDIS_REST_URL?.trim() ||
+    process.env.KV_REST_API_URL?.trim() ||
+    ""
+  const token =
+    process.env.UPSTASH_REDIS_REST_TOKEN?.trim() ||
+    process.env.KV_REST_API_TOKEN?.trim() ||
+    ""
+  if (!url || !token) return null
+  return { url, token }
+}
+
 export function isUpstashConfigured() {
-  return Boolean(
-    process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
-  )
+  return Boolean(getUpstashRestConfig())
 }
 
 function isMemoryOnlyStore() {
@@ -45,7 +57,7 @@ export function isCorporateBookingDurableStoreReady() {
 function assertDurableStoreAvailable(operation: "read" | "write") {
   if (isCorporateBookingDurableStoreReady()) return
   throw new Error(
-    `Corporate Booking System ${operation} requires UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN in this environment.`
+    `Corporate Booking System ${operation} requires Upstash Redis (UPSTASH_REDIS_REST_URL/TOKEN or KV_REST_API_URL/TOKEN) in this environment.`
   )
 }
 
@@ -69,11 +81,14 @@ function filePathFor(workspaceId: string) {
 }
 
 async function redisCommand(parts: string[]) {
-  const base = process.env.UPSTASH_REDIS_REST_URL!.replace(/\/$/, "")
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN!
+  const config = getUpstashRestConfig()
+  if (!config) {
+    throw new Error("Upstash Redis is not configured")
+  }
+  const base = config.url.replace(/\/$/, "")
   const path = parts.map((part) => encodeURIComponent(part)).join("/")
   const response = await fetch(`${base}/${path}`, {
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${config.token}` },
     cache: "no-store",
   })
   if (!response.ok) {
