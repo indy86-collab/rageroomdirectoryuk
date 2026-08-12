@@ -159,8 +159,8 @@ export const digitalProducts: Record<string, DigitalProduct> = {
   "rage-room-first-visit-prep": {
     id: "rage-room-first-visit-prep",
     slug: "rage-room-first-visit-prep-pack",
-    name: "Rage Room First-Timer Checklist",
-    shortName: "First-Timer Checklist",
+    name: "Rage Room First Visit Prep Pack",
+    shortName: "First Visit Prep Pack",
     analyticsItemId: "rage_first_visit_prep_pack",
     itemCategory: "Digital Product",
     priceLabel: "FREE",
@@ -171,9 +171,9 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     stripeLookupKey: "rage_room_first_visit_prep_pack_gbp_400",
     filePath: path.join(
       process.cwd(),
-      "private/digital-downloads/rage-room-first-timer-checklist.pdf"
+      "private/digital-downloads/rage-room-first-visit-prep-pack.pdf"
     ),
-    downloadFilename: "rage-room-first-timer-checklist.pdf",
+    downloadFilename: "rage-room-first-visit-prep-pack.pdf",
     contentType: "application/pdf",
     marketingImage: "/digital-products/rage-room-first-visit-prep-pack-cover.png",
     previewImages: [
@@ -181,17 +181,26 @@ export const digitalProducts: Record<string, DigitalProduct> = {
       "/digital-products/rage-room-first-visit-prep-pack-page-2.png?v=4",
       "/digital-products/rage-room-first-visit-prep-pack-page-3.png?v=4",
     ],
-    pageCount: 3,
+    previewPdf: "/digital-products/rage-room-first-visit-prep-pack-sample.pdf?v=5",
+    pageCount: 12,
+    sampleUnlockHint:
+      "Sample preview (2 pages) — enter your email below for the full 12-page pack.",
     description:
-      "Everything you need before your first smash session — what to wear, what to bring, what to check with the venue and what to expect.",
+      "A printable UK first-timer kit covering what happens, what to wear, can-I-take-part checks, venue questions, waiver tips and a final arrival checklist.",
     checkoutBlurb:
-      "Free first-timer checklist — email delivery only, not a venue booking.",
+      "Free first-visit prep pack — email delivery only, not a venue booking.",
     includedSections: [
-      "Before you book",
-      "What to wear",
-      "Before you leave home",
-      "What to expect",
-      "Quick questions to ask your venue",
+      "Quick start",
+      "What happens step-by-step",
+      "What to wear and bring",
+      "Can I take part? self-check",
+      "Venue questions before booking",
+      "Booking snapshot",
+      "Waiver and arrival checklist",
+      "Day-of timeline",
+      "Common first-timer mistakes",
+      "After your session prompts",
+      "Final prep checklist",
     ],
   },
   "rage-room-gift-voucher-template-pack": {

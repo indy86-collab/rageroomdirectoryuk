@@ -71,12 +71,12 @@ export default function PrivacyPage() {
             </ul>
 
             <h3 className="text-lg sm:text-xl font-semibold text-white mt-4 sm:mt-6 mb-2 sm:mb-3">
-              B2. Free Checklist / Lead Magnet
+              B2. Free Prep Pack / Lead Magnet
             </h3>
             <ul className="list-disc list-inside space-y-2 ml-4">
-              <li>Email address (required to deliver the free First-Timer Checklist)</li>
+              <li>Email address (required to deliver the free First Visit Prep Pack; a fulfilment copy is also sent to the site operator)</li>
               <li>First name (optional)</li>
-              <li>Marketing opt-in preference (optional — requesting the checklist alone is not marketing consent)</li>
+              <li>Marketing opt-in preference (optional — requesting the pack alone is not marketing consent)</li>
             </ul>
 
             <h3 className="text-lg sm:text-xl font-semibold text-white mt-4 sm:mt-6 mb-2 sm:mb-3">

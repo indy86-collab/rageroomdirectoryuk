@@ -12,7 +12,6 @@ import {
   trackFirstVisitChecklistView,
 } from "@/lib/analytics"
 import { storeDigitalCheckoutEmail } from "@/lib/digital-checkout-email"
-import FirstTimerChecklistPreview from "@/components/FirstTimerChecklistPreview"
 
 type LeadMagnetFormProps = {
   source?: string
@@ -69,7 +68,7 @@ export default function LeadMagnetForm({
       }
 
       if (!response.ok || !data.ok || !data.downloadUrl) {
-        throw new Error(data.error || "Unable to unlock checklist")
+        throw new Error(data.error || "Unable to unlock the prep pack")
       }
 
       storeDigitalCheckoutEmail(email)
@@ -79,11 +78,11 @@ export default function LeadMagnetForm({
       setMessage(
         data.emailSent
           ? "We’ve also emailed you a copy of the download link."
-          : "Your checklist is ready to download below."
+          : "Your prep pack is ready to download below."
       )
     } catch (err) {
       setStatus("error")
-      setMessage(err instanceof Error ? err.message : "Unable to unlock checklist")
+      setMessage(err instanceof Error ? err.message : "Unable to unlock the prep pack")
     }
   }
 
@@ -95,7 +94,7 @@ export default function LeadMagnetForm({
             <CheckCircle className="mt-0.5 h-6 w-6 flex-shrink-0 text-rage-500" />
             <div className="min-w-0 flex-1">
               <h3 className="text-xl font-bold text-white sm:text-2xl">
-                Your checklist is ready
+                Your prep pack is ready
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-zinc-300">
                 You’re all set for your first rage room visit.
@@ -110,7 +109,7 @@ export default function LeadMagnetForm({
                   className="btn-rage inline-flex min-h-[48px] items-center justify-center gap-2 px-5 text-sm uppercase tracking-wider"
                 >
                   <Download className="h-4 w-4" />
-                  Download Checklist
+                  Download Prep Pack
                 </a>
                 <Link
                   href="/listings"
@@ -125,7 +124,10 @@ export default function LeadMagnetForm({
           </div>
         </div>
         {showInlinePreviewOnSuccess && (
-          <FirstTimerChecklistPreview variant="full" />
+          <p className="text-sm text-zinc-400">
+            The full 12-page PDF includes what happens, what to wear, venue questions and
+            a final arrival checklist.
+          </p>
         )}
       </div>
     )
@@ -183,7 +185,7 @@ export default function LeadMagnetForm({
         />
         <span>
           Also send occasional planning tips and guide updates. Optional — not required
-          for your free checklist.{" "}
+          for your free prep pack.{" "}
           <Link href="/privacy" className="underline underline-offset-2 hover:text-zinc-200">
             Privacy policy
           </Link>
@@ -201,7 +203,7 @@ export default function LeadMagnetForm({
         ) : (
           <ArrowRight className="h-4 w-4" />
         )}
-        Get the Free Checklist
+        Get the Free Prep Pack
       </button>
       <p className="text-xs text-zinc-500">
         Free download. No account required.

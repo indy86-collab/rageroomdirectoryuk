@@ -33,7 +33,7 @@ export async function POST(request: Request) {
       return NextResponse.json(
         {
           error:
-            "This checklist is free — use the email form on the product page instead of checkout.",
+            "This download is free — use the email form on the product page instead of checkout.",
         },
         { status: 400 }
       )

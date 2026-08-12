@@ -21,7 +21,7 @@ const intents: {
   {
     id: "firstVisit",
     label: "First time",
-    hint: "Free checklist — what to wear & bring",
+    hint: "Free prep pack — what to wear & expect",
     productId: "rage-room-first-visit-prep",
   },
   {

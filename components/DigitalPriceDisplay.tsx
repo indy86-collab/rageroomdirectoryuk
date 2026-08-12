@@ -28,12 +28,9 @@ export default function DigitalPriceDisplay({
       <div className={className}>
         <div className="flex flex-wrap items-baseline gap-2">
           <span className={`${priceClass} text-rage-500`}>{product.priceLabel}</span>
-          <span className="rounded border border-rage-500/50 bg-rage-500/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-rage-500">
-            Lead magnet
-          </span>
         </div>
         <p className="mt-1 text-xs font-semibold text-zinc-400">
-          Free download · email unlock · no payment
+          Free 12-page PDF · email unlock · no payment
         </p>
       </div>
     )

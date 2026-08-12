@@ -61,7 +61,13 @@ export async function POST(request: Request) {
 
   let downloadUrl: string
   try {
-    downloadUrl = buildFirstTimerChecklistDownloadUrl()
+    // Local/dev: keep download on the same origin so localhost serves the local PDF.
+    // Production: use the canonical site URL.
+    const requestOrigin = new URL(request.url).origin
+    const useRequestOrigin = /localhost|127\.0\.0\.1/.test(requestOrigin)
+    downloadUrl = buildFirstTimerChecklistDownloadUrl(
+      useRequestOrigin ? requestOrigin : undefined
+    )
   } catch (error) {
     console.error("Lead magnet download token failed", error)
     return NextResponse.json(
@@ -75,6 +81,7 @@ export async function POST(request: Request) {
     firstName,
     marketingOptIn,
     downloadUrl,
+    source,
   })
 
   // Immediate access always succeeds when the download token is ready.

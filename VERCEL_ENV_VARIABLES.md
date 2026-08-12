@@ -33,6 +33,12 @@
 - **Default**: `RageRoom Directory <onboarding@resend.dev>` (Resend test sender)
 - **Required**: Recommended in production with a verified domain
 
+### `LEAD_SIGNUPS_TO`
+- **Description**: Inbox that receives a copy of every free First Visit Prep Pack signup (email, optional name, source, marketing opt-in)
+- **Format**: email address
+- **Default**: `indyz_86@hotmail.com`
+- **Required**: Recommended so signups are captured outside Resend logs
+
 ### `RESEND_AUDIENCE_ID`
 - **Description**: Optional Resend Audience ID for free checklist / lead-magnet signups
 - **Format**: `aud_...`

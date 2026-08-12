@@ -21,7 +21,7 @@ import { isDigitalSaleActive } from "@/lib/digital-promo"
 export const metadata: Metadata = {
   title: "Digital Guides | Rage Room Planning Downloads",
   description:
-    "Browse digital rage room planning tools — free first-timer checklist, printable party planner, Corporate Event Builder, gift voucher templates and money-saving bundles.",
+    "Browse digital rage room planning tools — free first visit prep pack, printable party planner, Corporate Event Builder, gift voucher templates and money-saving bundles.",
   alternates: { canonical: "/digital-downloads" },
 }
 
@@ -64,19 +64,19 @@ const hubFaqs = [
       "No. These are planning and template packs only. You still book directly with your chosen rage room venue.",
   },
   {
-    question: "Is the First-Timer Checklist free?",
+    question: "Is the First Visit Prep Pack free?",
     answer:
-      "Yes. Enter your email on this page or the checklist page for instant access. No payment or account required.",
+      "Yes. Enter your email on this page or the prep pack page for instant access. No payment or account required.",
   },
   {
     question: "What format do I get?",
     answer:
-      "The free checklist and most paid packs are printable PDF downloads. The Corporate Event Builder is an interactive planning tool for organisers (legacy PDF still included). The Corporate Booking System is an interactive workspace for venue owners. The gift voucher pack is a ZIP with printable and digital templates. Paid products unlock after payment, plus an email with your access link.",
+      "The free First Visit Prep Pack and most paid packs are printable PDF downloads. The Corporate Event Builder is an interactive planning tool for organisers (legacy PDF still included). The Corporate Booking System is an interactive workspace for venue owners. The gift voucher pack is a ZIP with printable and digital templates. Paid products unlock after payment, plus an email with your access link.",
   },
   {
     question: "Can I preview before buying?",
     answer:
-      "Yes. Paid packs show sample pages on this site, plus a free sample PDF on each product page. The first-timer checklist is entirely free.",
+      "Yes. Paid packs show sample pages on this site, plus a free sample PDF on each product page. The First Visit Prep Pack is entirely free.",
   },
   {
     question: "What if a paid file is faulty?",
@@ -91,7 +91,7 @@ const hubFaqs = [
   {
     question: "Why are some prices reduced right now?",
     answer:
-      "We're running a limited-time 20% demand drop on paid planning packs. The lower price is already applied at Stripe checkout — no promo code needed. The first-timer checklist stays free.",
+      "We're running a limited-time 20% demand drop on paid planning packs. The lower price is already applied at Stripe checkout — no promo code needed. The First Visit Prep Pack stays free.",
   },
 ]
 
@@ -201,7 +201,7 @@ export default function DigitalDownloadsPage() {
           Digital Guides
         </h1>
         <p className="mt-4 max-w-3xl text-lg text-zinc-300">
-          Start with the free first-timer checklist, then grab printable planning packs,
+          Start with the free First Visit Prep Pack, then grab printable planning packs,
           the Corporate Event Builder and gift templates when you need them.
         </p>
         <DigitalEditorialByline className="mt-3" />
@@ -239,11 +239,10 @@ export default function DigitalDownloadsPage() {
                   FREE
                 </p>
                 <h2 className="mt-1 text-2xl font-bold text-white">
-                  Rage Room First-Timer Checklist
+                  {freeProduct.name}
                 </h2>
                 <p className="mt-2 text-sm leading-relaxed text-zinc-300">
-                  Everything you need before your first smash session — what to wear, what
-                  to bring and what to check with the venue.
+                  {freeProduct.description}
                 </p>
               </div>
               <DigitalPriceDisplay product={freeProduct} size="md" />
@@ -258,7 +257,7 @@ export default function DigitalDownloadsPage() {
                 listName="Digital Products"
                 className="inline-flex min-h-[40px] items-center text-sm font-semibold text-zinc-400 underline-offset-2 hover:text-rage-500 hover:underline"
               >
-                View full checklist page
+                View full prep pack page
               </TrackedProductLink>
             </div>
           </div>

@@ -3,8 +3,9 @@ import { Check, ClipboardList, Sparkles } from "lucide-react"
 import DigitalEditorialByline from "@/components/DigitalEditorialByline"
 import DigitalPriceDisplay from "@/components/DigitalPriceDisplay"
 import DigitalProductCover from "@/components/DigitalProductCover"
+import { DigitalValueStack } from "@/components/DigitalPurchaseDetails"
+import DigitalSampleStrip from "@/components/DigitalSampleStrip"
 import FAQ from "@/components/FAQ"
-import FirstTimerChecklistPreview from "@/components/FirstTimerChecklistPreview"
 import FirstVisitChecklistCTA from "@/components/FirstVisitChecklistCTA"
 import LeadMagnetForm from "@/components/LeadMagnetForm"
 import ProductViewTracker from "@/components/ProductViewTracker"
@@ -13,7 +14,6 @@ import {
   getDigitalProduct,
   getDigitalProductAnalytics,
 } from "@/lib/digital-products"
-import { FIRST_TIMER_CHECKLIST_TAGLINE } from "@/lib/first-timer-checklist"
 import { buildDigitalProductSchema } from "@/lib/seo-schema"
 
 const product = getDigitalProduct("rage-room-first-visit-prep")!
@@ -24,26 +24,38 @@ const giftProduct = getDigitalProduct("rage-room-gift-voucher-template-pack")!
 const giftAnalyticsProduct = getDigitalProductAnalytics(giftProduct)
 
 export const metadata: Metadata = {
-  title: "FREE Rage Room First-Timer Checklist | What to Wear & Bring",
+  title: "FREE Rage Room First Visit Prep Pack | Printable UK First-Timer Kit",
   description:
-    "Free rage room first-timer checklist. Know what to wear, what to bring, what to check with the venue and what to expect before your first smash session. Free download — no account required.",
+    "Free printable rage room first visit prep pack. Includes what happens, what to wear, can-I-take-part checks, venue questions, waiver tips and a final arrival checklist. Free download — no account required.",
   alternates: {
     canonical: "/digital-downloads/rage-room-first-visit-prep-pack",
   },
 }
 
-const previewHighlights = [
+const includedGroups = [
   {
-    title: "Before you book",
-    items: ["Age limits", "Session length", "What’s included", "Cancellation policy"],
+    title: "Know what to expect",
+    items: [
+      "What happens step-by-step",
+      "Day-of timeline",
+      "Common first-timer mistakes",
+    ],
   },
   {
-    title: "What to wear & bring",
-    items: ["Closed-toe shoes", "Comfortable clothes", "PPE expectations", "ID if needed"],
+    title: "Arrive prepared",
+    items: [
+      "What to wear and bring",
+      "Can I take part? self-check",
+      "Waiver and arrival checklist",
+    ],
   },
   {
-    title: "On the day",
-    items: ["Arrival timing", "Typical journey", "Venue questions", "Phone-ready checks"],
+    title: "Book with confidence",
+    items: [
+      "Venue questions before paying",
+      "Booking snapshot",
+      "Final prep checklist",
+    ],
   },
 ]
 
@@ -60,22 +72,26 @@ const faqs = [
   {
     question: "Is this really free?",
     answer:
-      "Yes. Enter your email and you get the checklist immediately. No payment, no account, no Stripe checkout.",
+      "Yes. Enter your email and you get the full 12-page prep pack immediately. No payment, no account, no Stripe checkout.",
   },
   {
     question: "Does this include a rage room booking?",
     answer:
-      "No. This is a preparation checklist. You still book directly with your chosen venue.",
+      "No. This is a preparation pack. You still book directly with your chosen venue.",
   },
   {
     question: "Will you email me marketing?",
     answer:
-      "Only if you opt in on the form. Requesting the checklist alone sends the download email — it is not treated as consent for unrelated marketing.",
+      "Only if you opt in on the form. Requesting the pack alone sends the download email — it is not treated as consent for unrelated marketing.",
   },
   {
     question: "Is it UK-specific?",
     answer:
-      "Yes. It uses UK-focused planning language and typical UK venue processes. Always confirm details with your venue — rules differ.",
+      "Yes. It uses UK-focused planning language and typical UK venue processes (waivers, PPE, arrival timing). Always confirm details with your venue — rules differ.",
+  },
+  {
+    question: "Is it printable?",
+    answer: "Yes. It is designed as an A4 printable PDF.",
   },
   {
     question: "Is this medical or safety advice?",
@@ -85,7 +101,7 @@ const faqs = [
   {
     question: "How is this different from the Party Planner Pack?",
     answer:
-      "This free checklist is for first-timers getting ready for a session. The Party Planner Pack is a paid kit for organising a full group event with budgets, RSVPs and invites.",
+      "This free pack is for first-timers getting ready for a session. The Party Planner Pack is a paid kit for organising a full group event with budgets, RSVPs and invites.",
   },
 ]
 
@@ -120,18 +136,15 @@ export default function RageRoomFirstVisitPrepPackPage({ searchParams }: PagePro
         <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <p className="text-sm font-bold uppercase tracking-widest text-rage-500">
-              Free digital tool
+              Free digital download
             </p>
             <h1 className="mt-4 text-4xl font-black uppercase tracking-wide text-white sm:text-5xl lg:text-6xl">
-              FREE Rage Room First-Timer Checklist
+              FREE Rage Room First Visit Prep Pack
             </h1>
             <DigitalEditorialByline className="mt-3" />
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-zinc-300">
-              {FIRST_TIMER_CHECKLIST_TAGLINE}
-            </p>
-            <p className="mt-3 max-w-2xl text-sm text-zinc-400">
-              Know what to wear, what to bring, what to check with the venue and what to
-              expect before you arrive. Free. Takes 2 minutes to read.
+              Arrive ready for your first smash session — what happens, what to wear, and
+              what to ask before you book.
             </p>
             <div className="mt-6">
               <DigitalPriceDisplay product={product} />
@@ -158,10 +171,10 @@ export default function RageRoomFirstVisitPrepPackPage({ searchParams }: PagePro
             </div>
             <div>
               <h2 className="text-xl font-bold text-white sm:text-2xl">
-                Get the Free Checklist
+                Get the Free Prep Pack
               </h2>
               <p className="mt-1 text-sm text-zinc-400">
-                Enter your email for instant access. No account required.
+                Enter your email for the full 12-page PDF. No account required.
               </p>
             </div>
           </div>
@@ -169,14 +182,48 @@ export default function RageRoomFirstVisitPrepPackPage({ searchParams }: PagePro
         </div>
       </section>
 
+      {product.previewImages?.length ? (
+        <section className="px-4 pb-4 sm:px-6">
+          <div className="mx-auto max-w-6xl rounded-lg border border-zinc-800 bg-[#181818] p-5 sm:p-6">
+            <DigitalSampleStrip
+              images={product.previewImages}
+              productName={product.name}
+              previewPdf={product.previewPdf}
+              sampleUnlockHint={product.sampleUnlockHint}
+            />
+          </div>
+        </section>
+      ) : null}
+
+      <section className="section-textured px-4 py-10 sm:px-6 sm:py-14">
+        <div className="mx-auto max-w-4xl">
+          <h2 className="section-title">
+            First visits feel exciting — until the admin questions pile up.
+          </h2>
+          <p className="mt-5 text-base leading-relaxed text-zinc-300 sm:text-lg">
+            What should you wear? When do you arrive? Can everyone take part? What do you
+            ask before paying? This pack answers those questions in one printable place so
+            you show up ready.
+          </p>
+          <DigitalValueStack
+            title="Built for first-timers"
+            items={[
+              "12 printable pages — expectations, clothing, venue questions and arrival checks",
+              "Practical self-check before you pay a deposit",
+              "Sample pages available before you unlock the full PDF",
+            ]}
+            timeCompare="Free with email — instant PDF download."
+          />
+        </div>
+      </section>
+
       <section className="px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-6xl">
-          <h2 className="section-title mb-2">What’s inside</h2>
-          <p className="mb-6 max-w-2xl text-sm text-zinc-400">
-            A practical checklist you can keep open on your phone before you visit.
-          </p>
+          <h2 id="whats-included" className="section-title mb-6">
+            What’s Included
+          </h2>
           <div className="grid gap-4 md:grid-cols-3">
-            {previewHighlights.map((group) => (
+            {includedGroups.map((group) => (
               <div key={group.title} className="card-base p-5">
                 <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-md border border-rage-500/40 bg-rage-500/15">
                   <ClipboardList className="h-5 w-5 text-rage-500" />
@@ -197,15 +244,8 @@ export default function RageRoomFirstVisitPrepPackPage({ searchParams }: PagePro
       </section>
 
       <section className="section-textured px-4 py-10 sm:px-6 sm:py-14">
-        <div className="mx-auto max-w-3xl">
-          <h2 className="section-title mb-4">Checklist preview</h2>
-          <FirstTimerChecklistPreview variant="preview" />
-        </div>
-      </section>
-
-      <section className="px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-6xl">
-          <h2 className="section-title mb-6">Who it helps</h2>
+          <h2 className="section-title mb-6">Who It Is For</h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {audiences.map((audience) => (
               <div
@@ -220,9 +260,9 @@ export default function RageRoomFirstVisitPrepPackPage({ searchParams }: PagePro
         </div>
       </section>
 
-      <section className="section-textured px-4 py-10 sm:px-6 sm:py-14">
+      <section className="px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-4xl">
-          <FAQ items={faqs} title="First-Timer Checklist FAQs" />
+          <FAQ items={faqs} title="First Visit Prep Pack FAQs" />
         </div>
       </section>
 

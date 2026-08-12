@@ -108,7 +108,7 @@ export default function AboutPage() {
             <Link href="/digital-downloads" className="text-orange-500 hover:text-orange-600 underline">
               printable UK rage room planning packs
             </Link>{" "}
-            — free first-timer checklist, party planners, Corporate Event Builder and gift
+            — free First Visit Prep Pack, party planners, Corporate Event Builder and gift
             voucher templates. They are planning aids only (not venue bookings), written for
             UK experiences, and delivered with secure Stripe checkout.
           </p>

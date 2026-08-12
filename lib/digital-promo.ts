@@ -11,7 +11,7 @@ export const DIGITAL_SALE = {
   headline: "Prices reduced 20% while demand is high",
   shortHeadline: "20% off — limited time",
   copy:
-    "We've temporarily cut paid planning packs by 20% so more planners can grab them while interest is peaking. The free First-Timer Checklist stays free. This isn't a voucher code — the lower price is already applied at checkout. Offer ends 31 August, then prices return to normal.",
+    "We've temporarily cut paid planning packs by 20% so more planners can grab them while interest is peaking. The free First Visit Prep Pack stays free. This isn't a voucher code — the lower price is already applied at checkout. Offer ends 31 August, then prices return to normal.",
   checkoutNote:
     "Limited-time 20% demand drop already applied — not a venue booking.",
   badge: "20% off",

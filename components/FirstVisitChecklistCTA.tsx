@@ -12,8 +12,7 @@ type FirstVisitChecklistCTAProps = {
 }
 
 /**
- * Reusable high-intent CTA pointing at the free First-Timer Checklist.
- * Safe to place later on venue pages; currently used on downloads / guides.
+ * Reusable high-intent CTA pointing at the free First Visit Prep Pack.
  */
 export default function FirstVisitChecklistCTA({
   className = "",
@@ -25,7 +24,7 @@ export default function FirstVisitChecklistCTA({
   return (
     <aside
       className={`rounded-lg border border-rage-500/30 bg-[#181818] p-4 sm:p-5 ${className}`}
-      aria-label="Free first-timer checklist"
+      aria-label="Free first visit prep pack"
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-start gap-3">
@@ -34,7 +33,7 @@ export default function FirstVisitChecklistCTA({
           </div>
           <div>
             <p className="mb-1 text-xs font-bold uppercase tracking-widest text-rage-500">
-              Free checklist
+              Free prep pack
             </p>
             <h2 className="text-base font-bold uppercase tracking-wide text-white">
               First rage room?
@@ -42,8 +41,8 @@ export default function FirstVisitChecklistCTA({
             <p
               className={`mt-1 text-sm text-zinc-300 ${compact ? "max-w-2xl" : "max-w-xl"}`}
             >
-              Get our free 2-minute checklist covering what to wear, what to bring and
-              what to check before you go.
+              Get our free 12-page prep pack covering what happens, what to wear and what
+              to check before you go.
             </p>
           </div>
         </div>
@@ -52,7 +51,7 @@ export default function FirstVisitChecklistCTA({
           onClick={() => trackFirstVisitChecklistCtaClick(source)}
           className="btn-rage inline-flex min-h-[48px] items-center justify-center gap-2 whitespace-nowrap px-4 text-sm uppercase tracking-wider"
         >
-          Get the Free Checklist
+          Get the Free Prep Pack
           <ArrowRight className="h-4 w-4" />
         </Link>
       </div>

@@ -9,6 +9,7 @@ import {
 } from "@/lib/digital-products"
 import { createDownloadToken, createLeadDownloadToken } from "@/lib/download-token"
 import { absoluteUrl } from "@/lib/site-url"
+import { escapeEmailHtml } from "@/lib/listing-submissions"
 
 function getResendClient() {
   const apiKey = process.env.RESEND_API_KEY
@@ -189,9 +190,59 @@ export function getCheckoutSessionEmail(session: {
   return sessionCustomerEmail(session)
 }
 
-export function buildFirstTimerChecklistDownloadUrl() {
+export function buildFirstTimerChecklistDownloadUrl(baseUrl?: string) {
   const token = createLeadDownloadToken(FIRST_VISIT_CHECKLIST_PRODUCT_ID)
-  return absoluteUrl(`/download/${token}`)
+  const path = `/download/${token}`
+  if (baseUrl) {
+    return `${baseUrl.replace(/\/+$/, "")}${path}`
+  }
+  return absoluteUrl(path)
+}
+
+function getLeadSignupNotifyTo() {
+  return (
+    process.env.LEAD_SIGNUPS_TO?.trim() || "indyz_86@hotmail.com"
+  )
+}
+
+async function notifyLeadMagnetSignup({
+  resend,
+  toEmail,
+  firstName,
+  source,
+  marketingOptIn,
+}: {
+  resend: Resend
+  toEmail: string
+  firstName?: string
+  source?: string
+  marketingOptIn: boolean
+}) {
+  const notifyTo = getLeadSignupNotifyTo()
+  const safeEmail = escapeEmailHtml(toEmail)
+  const safeName = escapeEmailHtml(firstName?.trim() || "—")
+  const safeSource = escapeEmailHtml(source?.trim() || "unknown")
+  const { error } = await resend.emails.send({
+    from: getFromAddress(),
+    to: notifyTo,
+    replyTo: toEmail,
+    subject: `New prep pack signup: ${toEmail}`,
+    html: `
+      <div style="font-family:system-ui,sans-serif;max-width:560px;margin:0 auto;color:#18181b">
+        <h1 style="font-size:20px">New First Visit Prep Pack signup</h1>
+        <table style="border-collapse:collapse">
+          <tr><th style="text-align:left;padding:6px 12px 6px 0">Email</th><td style="padding:6px 0"><a href="mailto:${safeEmail}">${safeEmail}</a></td></tr>
+          <tr><th style="text-align:left;padding:6px 12px 6px 0">First name</th><td style="padding:6px 0">${safeName}</td></tr>
+          <tr><th style="text-align:left;padding:6px 12px 6px 0">Source</th><td style="padding:6px 0">${safeSource}</td></tr>
+          <tr><th style="text-align:left;padding:6px 12px 6px 0">Marketing opt-in</th><td style="padding:6px 0">${marketingOptIn ? "Yes" : "No"}</td></tr>
+        </table>
+        <p style="color:#52525b;font-size:14px">Reply to this email to contact the person who requested the pack.</p>
+      </div>
+    `,
+  })
+  if (error) {
+    console.warn("Lead magnet signup notification failed", error)
+  }
 }
 
 export async function sendLeadMagnetEmail({
@@ -199,12 +250,14 @@ export async function sendLeadMagnetEmail({
   firstName,
   marketingOptIn = false,
   downloadUrl,
+  source,
 }: {
   toEmail: string
   firstName?: string
   /** Only add to Resend Audience when the user opts in separately. */
   marketingOptIn?: boolean
   downloadUrl: string
+  source?: string
 }) {
   const resend = getResendClient()
   if (!resend) {
@@ -233,25 +286,39 @@ export async function sendLeadMagnetEmail({
     }
   }
 
-  const { error } = await resend.emails.send({
-    from: getFromAddress(),
-    to: toEmail,
-    subject: "Your Rage Room First-Timer Checklist",
-    html: `
+  const [userResult] = await Promise.allSettled([
+    resend.emails.send({
+      from: getFromAddress(),
+      to: toEmail,
+      subject: "Your Rage Room First Visit Prep Pack",
+      html: `
       <div style="font-family:system-ui,sans-serif;max-width:560px;margin:0 auto;color:#18181b">
-        <h1 style="font-size:22px">Your checklist is ready</h1>
+        <h1 style="font-size:22px">Your prep pack is ready</h1>
         <p>${greeting}</p>
-        <p>Here’s your free Rage Room First-Timer Checklist — what to wear, what to bring, what to check with the venue, and what to expect.</p>
-        <p style="margin:24px 0"><a href="${downloadUrl}" style="display:inline-block;background:#f97316;color:#fff;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:6px">Download Checklist (PDF)</a></p>
+        <p>Here’s your free Rage Room First Visit Prep Pack — what happens, what to wear, what to ask before you book, and a final arrival checklist.</p>
+        <p style="margin:24px 0"><a href="${downloadUrl}" style="display:inline-block;background:#f97316;color:#fff;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:6px">Download Prep Pack (PDF)</a></p>
         <p style="margin:16px 0"><a href="${directoryUrl}">Find a rage room near you</a></p>
         <p style="color:#52525b;font-size:14px"><a href="${hubUrl}">Browse other digital guides</a> on RageRoom Directory.</p>
-        <p style="color:#52525b;font-size:14px">You’re getting this because you asked for the free checklist. This email is transactional. Reply anytime if you need help.</p>
+        <p style="color:#52525b;font-size:14px">You’re getting this because you asked for the free prep pack. This email is transactional. Reply anytime if you need help.</p>
       </div>
     `,
-  })
+    }),
+    notifyLeadMagnetSignup({
+      resend,
+      toEmail,
+      firstName,
+      source,
+      marketingOptIn,
+    }),
+  ])
 
-  if (error) {
-    console.error("Lead magnet email failed", error)
+  if (userResult.status === "rejected") {
+    console.error("Lead magnet email failed", userResult.reason)
+    return { sent: false as const, reason: "send_failed" as const }
+  }
+
+  if (userResult.value.error) {
+    console.error("Lead magnet email failed", userResult.value.error)
     return { sent: false as const, reason: "send_failed" as const }
   }
 

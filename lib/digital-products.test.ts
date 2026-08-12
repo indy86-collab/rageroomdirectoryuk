@@ -15,11 +15,13 @@ describe("first-timer checklist lead magnet", () => {
     expect(product?.isFree).toBe(true)
     expect(product?.priceLabel).toBe("FREE")
     expect(product?.unitAmount).toBe(400)
-    expect(product?.name).toMatch(/First-Timer Checklist/i)
+    expect(product?.name).toMatch(/First Visit Prep Pack/i)
+    expect(product?.downloadFilename).toBe("rage-room-first-visit-prep-pack.pdf")
+    expect(product?.pageCount).toBe(12)
     expect(isFreeDigitalProduct(product)).toBe(true)
   })
 
-  it("reports zero analytics price for the free checklist", () => {
+  it("reports zero analytics price for the free prep pack", () => {
     const product = getDigitalProduct(FIRST_VISIT_CHECKLIST_PRODUCT_ID)!
     const analytics = getDigitalProductAnalytics(product)
     expect(analytics.price).toBe(0)
