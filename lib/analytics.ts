@@ -19,11 +19,7 @@ type GtagEventParams = Record<
 >
 
 function isGaConfigured() {
-  return Boolean(
-    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID &&
-      typeof window !== "undefined" &&
-      typeof window.gtag === "function"
-  )
+  return typeof window !== "undefined" && typeof window.gtag === "function"
 }
 
 function productItem(product: AnalyticsProduct) {
@@ -111,6 +107,25 @@ export function trackPurchase(order: AnalyticsOrder) {
     tax: 0,
     shipping: 0,
     items: [productItem(order.product)],
+  })
+}
+
+/** Outbound venue booking click — no PII. Mark as a GA4 key event. */
+export function trackGenerateLead({
+  source,
+  listingSlug,
+  city,
+}: {
+  source: string
+  listingSlug?: string
+  city?: string
+}) {
+  trackEvent("generate_lead", {
+    currency: "GBP",
+    value: 0,
+    lead_source: source.slice(0, 80),
+    ...(listingSlug ? { listing_slug: listingSlug.slice(0, 80) } : {}),
+    ...(city ? { city: city.slice(0, 80) } : {}),
   })
 }
 

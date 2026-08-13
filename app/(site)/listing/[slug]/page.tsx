@@ -19,6 +19,9 @@ import DigitalGuidesChooser from "@/components/DigitalGuidesChooser"
 import RageResetCTA from "@/components/RageResetCTA"
 import ListingMediaGallery from "@/components/ListingMediaGallery"
 import FeaturedVenueBadge from "@/components/FeaturedVenueBadge"
+import ListingLeadCapture from "@/components/ListingLeadCapture"
+import PageLevelAds from "@/components/PageLevelAds"
+import TrackedBookingLink from "@/components/TrackedBookingLink"
 import { buildOgImageUrl } from "@/lib/seo-schema"
 import { absoluteUrl, getSiteUrl, listingUrl as buildListingUrl } from "@/lib/site-url"
 import {
@@ -597,19 +600,29 @@ export default async function ListingPage({ params }: ListingPageProps) {
               {/* Booking Link */}
               {primaryBookingUrl && (
                 <div className="mb-4">
-                  <a
+                  <TrackedBookingLink
                     href={primaryBookingUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    source="listing_hero"
+                    listingSlug={listing.slug || listing.id}
+                    city={listing.city}
                     className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors text-base font-semibold min-h-[44px]"
                   >
                     Book Your Session →
-                  </a>
+                  </TrackedBookingLink>
                 </div>
               )}
             </div>
           </div>
         </div>
+
+        <div className="mb-6 sm:mb-8">
+          <ListingLeadCapture
+            source={`listing:${listing.slug || listing.id}`}
+            idPrefix={`listing-${listing.slug || listing.id}`}
+          />
+        </div>
+
+        <PageLevelAds />
 
         <ListingMediaGallery media={authorisedMedia} venueName={listing.name} />
 
@@ -681,14 +694,15 @@ export default async function ListingPage({ params }: ListingPageProps) {
           )}
           {primaryBookingUrl && (
             <div className="mt-4">
-              <a
+              <TrackedBookingLink
                 href={primaryBookingUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                source="listing_pricing"
+                listingSlug={listing.slug || listing.id}
+                city={listing.city}
                 className="inline-flex items-center px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors"
               >
                 View Full Pricing on Their Website →
-              </a>
+              </TrackedBookingLink>
             </div>
           )}
         </div>
@@ -753,14 +767,15 @@ export default async function ListingPage({ params }: ListingPageProps) {
             )}
             <div className="flex flex-col sm:flex-row gap-3 mt-4">
               {primaryBookingUrl && (
-                <a
+                <TrackedBookingLink
                   href={primaryBookingUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  source="listing_hours"
+                  listingSlug={listing.slug || listing.id}
+                  city={listing.city}
                   className="inline-flex items-center justify-center px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors text-sm font-semibold"
                 >
                   Visit Website for Hours & Booking
-                </a>
+                </TrackedBookingLink>
               )}
               {listing.phone && (
                 <a
@@ -1035,6 +1050,20 @@ export default async function ListingPage({ params }: ListingPageProps) {
         {listing.verified && (
           <FeaturedVenueBadge listingUrl={listingUrl} venueName={listing.name} />
         )}
+
+        <div className="mb-6 rounded-lg border border-zinc-800 bg-[#181818] p-4 sm:mb-8 sm:p-6">
+          <h2 className="text-lg font-bold text-white">Venue owners</h2>
+          <p className="mt-2 text-sm text-zinc-400">
+            Want this listing featured on the {listing.city} city page and near-me results?
+            Featured placement is optional and does not affect whether you stay listed.
+          </p>
+          <a
+            href={`mailto:ukrageroom@gmail.com?subject=${encodeURIComponent(`Featured listing: ${listing.name}`)}`}
+            className="mt-3 inline-flex text-sm font-semibold text-orange-500 hover:text-orange-400"
+          >
+            Ask about featured placement →
+          </a>
+        </div>
 
         <UGCButtons
           listingId={listing.slug || listing.id}

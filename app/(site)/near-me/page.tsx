@@ -5,7 +5,10 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 import FAQ from "@/components/FAQ"
 import { globalFAQs } from "@/lib/faqs"
 import ListingsGrid from "@/components/ListingsGrid"
+import ListingLeadCapture from "@/components/ListingLeadCapture"
 import NearMeMap from "@/components/NearMeMap"
+import PageLevelAds from "@/components/PageLevelAds"
+import RageResetCTA from "@/components/RageResetCTA"
 import { absoluteUrl } from "@/lib/site-url"
 
 export const metadata: Metadata = {
@@ -106,6 +109,13 @@ export default async function NearMePage() {
             Rage rooms (also known as smash rooms, break rooms, or anger rooms) provide a safe, controlled environment to release stress by breaking items like plates, electronics, and glass bottles. Perfect for date nights, team building, or simply letting off steam.
           </p>
         </div>
+
+        <div className="mb-8 grid gap-4 lg:grid-cols-2">
+          <ListingLeadCapture source="near-me" idPrefix="near-me-lead" />
+          <RageResetCTA surface="near-me" compact />
+        </div>
+
+        <PageLevelAds />
 
         {/* Interactive Map Section */}
         <section aria-labelledby="map-heading" className="mb-12">

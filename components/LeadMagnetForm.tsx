@@ -19,6 +19,8 @@ type LeadMagnetFormProps = {
   showInlinePreviewOnSuccess?: boolean
   className?: string
   idPrefix?: string
+  /** Email-first, full-width submit — for listing / near-me embeds. */
+  compact?: boolean
 }
 
 export default function LeadMagnetForm({
@@ -26,6 +28,7 @@ export default function LeadMagnetForm({
   showInlinePreviewOnSuccess = true,
   className = "",
   idPrefix = "lead-magnet",
+  compact = false,
 }: LeadMagnetFormProps) {
   const [email, setEmail] = useState("")
   const [firstName, setFirstName] = useState("")
@@ -135,25 +138,7 @@ export default function LeadMagnetForm({
 
   return (
     <form onSubmit={handleSubmit} className={`space-y-3 ${className}`}>
-      <div className="grid gap-3 sm:grid-cols-2">
-        <div>
-          <label
-            className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-zinc-400"
-            htmlFor={`${idPrefix}-first-name`}
-          >
-            First name <span className="normal-case text-zinc-600">(optional)</span>
-          </label>
-          <input
-            id={`${idPrefix}-first-name`}
-            type="text"
-            name="firstName"
-            autoComplete="given-name"
-            value={firstName}
-            onChange={(event) => setFirstName(event.target.value)}
-            placeholder="Alex"
-            className="min-h-[48px] w-full rounded-md border border-zinc-700 bg-[#121212] px-3 text-base text-white placeholder:text-zinc-500 focus:border-rage-500 focus:outline-none focus:ring-1 focus:ring-rage-500"
-          />
-        </div>
+      <div className={compact ? "space-y-3" : "grid gap-3 sm:grid-cols-2"}>
         <div>
           <label
             className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-zinc-400"
@@ -174,6 +159,26 @@ export default function LeadMagnetForm({
             className="min-h-[48px] w-full rounded-md border border-zinc-700 bg-[#121212] px-3 text-base text-white placeholder:text-zinc-500 focus:border-rage-500 focus:outline-none focus:ring-1 focus:ring-rage-500"
           />
         </div>
+        {!compact && (
+        <div>
+          <label
+            className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-zinc-400"
+            htmlFor={`${idPrefix}-first-name`}
+          >
+            First name <span className="normal-case text-zinc-600">(optional)</span>
+          </label>
+          <input
+            id={`${idPrefix}-first-name`}
+            type="text"
+            name="firstName"
+            autoComplete="given-name"
+            value={firstName}
+            onChange={(event) => setFirstName(event.target.value)}
+            placeholder="Alex"
+            className="min-h-[48px] w-full rounded-md border border-zinc-700 bg-[#121212] px-3 text-base text-white placeholder:text-zinc-500 focus:border-rage-500 focus:outline-none focus:ring-1 focus:ring-rage-500"
+          />
+        </div>
+        )}
       </div>
 
       <label className="flex items-start gap-3 text-sm leading-snug text-zinc-400">
@@ -196,7 +201,7 @@ export default function LeadMagnetForm({
         type="submit"
         disabled={status === "loading"}
         onClick={() => trackFirstVisitChecklistCtaClick(source)}
-        className="btn-rage inline-flex w-full min-h-[48px] items-center justify-center gap-2 px-4 text-sm uppercase tracking-wider disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+        className={`btn-rage inline-flex w-full min-h-[48px] items-center justify-center gap-2 px-4 text-sm uppercase tracking-wider disabled:cursor-not-allowed disabled:opacity-70 ${compact ? "" : "sm:w-auto"}`}
       >
         {status === "loading" ? (
           <Loader2 className="h-4 w-4 animate-spin" />

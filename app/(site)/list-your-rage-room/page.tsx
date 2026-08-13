@@ -47,6 +47,28 @@ export default function ListYourRageRoomPage({
 
         <div className="mb-8 rounded-lg border border-rage-500/40 bg-rage-500/10 p-6">
           <h2 className="mb-3 text-2xl font-bold text-white">
+            Featured listing placement
+          </h2>
+          <p className="mb-4 text-sm leading-relaxed text-zinc-300">
+            Standard listings are free. Featured placement puts your venue higher on
+            the matching city page and near-me results, with a badge on your listing.
+            It is optional and does not affect whether you stay in the directory.
+          </p>
+          <ul className="mb-5 list-disc space-y-2 pl-5 text-sm text-zinc-400">
+            <li>Priority slot on your city page</li>
+            <li>Highlighted on near-me and search results</li>
+            <li>Featured badge visitors can see on your listing</li>
+          </ul>
+          <a
+            href="mailto:ukrageroom@gmail.com?subject=Featured%20listing%20placement"
+            className="btn-rage inline-flex min-h-[44px] items-center justify-center px-5 text-sm uppercase tracking-wider"
+          >
+            Ask about featured placement
+          </a>
+        </div>
+
+        <div className="mb-8 rounded-lg border border-rage-500/40 bg-rage-500/10 p-6">
+          <h2 className="mb-3 text-2xl font-bold text-white">
             Priority cities we want to list next
           </h2>
           <p className="mb-5 text-sm leading-relaxed text-zinc-300">

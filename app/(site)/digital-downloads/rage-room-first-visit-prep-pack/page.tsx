@@ -149,6 +149,13 @@ export default function RageRoomFirstVisitPrepPackPage({ searchParams }: PagePro
             <div className="mt-6">
               <DigitalPriceDisplay product={product} />
             </div>
+            <div id="get-checklist" className="mt-8 scroll-mt-24 rounded-lg border border-rage-500/35 bg-[#181818] p-5">
+              <h2 className="text-lg font-bold text-white">Get the Free Prep Pack</h2>
+              <p className="mt-1 mb-4 text-sm text-zinc-400">
+                Enter your email for the full 12-page PDF. No account required.
+              </p>
+              <LeadMagnetForm source={source} idPrefix="first-visit-product" />
+            </div>
           </div>
           {product.marketingImage && (
             <DigitalProductCover
@@ -157,28 +164,6 @@ export default function RageRoomFirstVisitPrepPackPage({ searchParams }: PagePro
               priority
             />
           )}
-        </div>
-      </section>
-
-      <section
-        id="get-checklist"
-        className="scroll-mt-24 px-4 pb-6 sm:px-6"
-      >
-        <div className="mx-auto max-w-3xl rounded-lg border border-rage-500/35 bg-[#181818] p-5 sm:p-7">
-          <div className="mb-5 flex items-start gap-3">
-            <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-md border border-rage-500/40 bg-rage-500/15">
-              <ClipboardList className="h-5 w-5 text-rage-500" />
-            </div>
-            <div>
-              <h2 className="text-xl font-bold text-white sm:text-2xl">
-                Get the Free Prep Pack
-              </h2>
-              <p className="mt-1 text-sm text-zinc-400">
-                Enter your email for the full 12-page PDF. No account required.
-              </p>
-            </div>
-          </div>
-          <LeadMagnetForm source={source} idPrefix="first-visit-product" />
         </div>
       </section>
 

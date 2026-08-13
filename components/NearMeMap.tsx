@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import type { Listing } from "@/types/listing"
 import Link from "next/link"
+import TrackedBookingLink from "@/components/TrackedBookingLink"
 import type { NearbyListingResult } from "@/lib/nearby-search"
 
 interface NearMeMapProps {
@@ -174,9 +175,15 @@ export default function NearMeMap({ listings }: NearMeMapProps) {
                 <div className="mt-4 flex flex-wrap gap-3 text-sm font-semibold">
                   <Link href={`/listing/${result.slug}`} className="text-orange-500 hover:text-orange-400">View details</Link>
                   {result.bookingUrl && (
-                    <a href={result.bookingUrl} target="_blank" rel="noopener noreferrer" className="text-zinc-300 hover:text-white">
+                    <TrackedBookingLink
+                      href={result.bookingUrl}
+                      source="near_me_results"
+                      listingSlug={result.slug}
+                      city={result.city}
+                      className="text-zinc-300 hover:text-white"
+                    >
                       Book direct
-                    </a>
+                    </TrackedBookingLink>
                   )}
                 </div>
               </article>

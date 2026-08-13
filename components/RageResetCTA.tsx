@@ -4,7 +4,7 @@ import Link from "next/link"
 import { ArrowRight, Zap } from "lucide-react"
 import { trackRageReset } from "@/lib/rage-reset/analytics"
 
-type Surface = "guide" | "listing" | "homepage" | "nav" | "other"
+type Surface = "guide" | "listing" | "homepage" | "nav" | "near-me" | "city" | "other"
 
 export default function RageResetCTA({
   surface = "guide",
