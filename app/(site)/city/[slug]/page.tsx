@@ -15,6 +15,7 @@ import Link from "next/link"
 import { buildOgImageUrl } from "@/lib/seo-schema"
 import { absoluteUrl, getSiteUrl, listingUrl } from "@/lib/site-url"
 import { isIndexableLocationPage } from "@/lib/location-indexing"
+import NearbyActivitiesAffiliate from "@/components/NearbyActivitiesAffiliate"
 
 interface CityPageProps {
   params: { slug: string }
@@ -288,6 +289,10 @@ export default async function CityPage({ params }: CityPageProps) {
                 <ListingsGrid listings={nearby} />
               </section>
             )}
+
+            <div className="mt-8 mb-6">
+              <NearbyActivitiesAffiliate city={cityName} placement="city" />
+            </div>
             
             {/* Travel tip */}
             <div className="mt-8 mb-6">

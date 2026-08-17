@@ -368,14 +368,18 @@ export function acceptedPurchaseAmounts(product: DigitalProduct): number[] {
   return [...amounts]
 }
 
+/**
+ * Verify the undiscounted Stripe Checkout subtotal for entitlement.
+ * Callers must pass `session.amount_subtotal`, not the post-promotion total.
+ */
 export function sessionAmountMatchesProduct(
   product: DigitalProduct,
-  amountTotal: number | null | undefined,
+  amountSubtotal: number | null | undefined,
   currency: string | null | undefined
 ) {
   if (!currency || currency !== product.currency) return false
-  if (typeof amountTotal !== "number") return false
-  return acceptedPurchaseAmounts(product).includes(amountTotal)
+  if (typeof amountSubtotal !== "number") return false
+  return acceptedPurchaseAmounts(product).includes(amountSubtotal)
 }
 
 /** Single-file products fulfilled for a purchase (bundle expands to children). */

@@ -18,7 +18,7 @@ export default function DisclaimerPage() {
     { label: "Disclaimer", href: "/disclaimer" },
   ]
 
-  const lastUpdated = "18 March 2026"
+  const lastUpdated = "17 August 2026"
 
   return (
     <div className="py-6 sm:py-8">
@@ -98,7 +98,20 @@ export default function DisclaimerPage() {
 
           <section>
             <h2 className="text-xl sm:text-2xl font-bold text-white mt-6 sm:mt-8 mb-3 sm:mb-4">
-              5. Use at Your Own Risk
+              5. Affiliate Links
+            </h2>
+            <p>
+              Some external links are affiliate links. If you make a booking or
+              purchase after following one of these links, we may receive a
+              commission at no additional cost to you. Affiliate relationships
+              do not guarantee or endorse a third party&apos;s service, pricing,
+              availability, or suitability.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-xl sm:text-2xl font-bold text-white mt-6 sm:mt-8 mb-3 sm:mb-4">
+              6. Use at Your Own Risk
             </h2>
             <p>By using our site, you acknowledge:</p>
             <ul className="list-disc list-inside space-y-2 ml-4">
@@ -109,7 +122,7 @@ export default function DisclaimerPage() {
 
           <section>
             <h2 className="text-xl sm:text-2xl font-bold text-white mt-6 sm:mt-8 mb-3 sm:mb-4">
-              6. Contact
+              7. Contact
             </h2>
             <p>If you have concerns about content accuracy:</p>
             <p>
@@ -121,4 +134,3 @@ export default function DisclaimerPage() {
     </div>
   )
 }
-

@@ -55,7 +55,7 @@ export async function verifyCorporateBookingPurchase(
       purchasedId !== CORPORATE_BOOKING_SYSTEM_PRODUCT_ID ||
       !sessionAmountMatchesProduct(
         product,
-        session.amount_total,
+        session.amount_subtotal,
         session.currency
       )
     ) {

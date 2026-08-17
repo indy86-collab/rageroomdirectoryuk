@@ -65,6 +65,15 @@ describe("first-timer checklist lead magnet", () => {
     expect(sessionAmountMatchesProduct(corporate, 1520, "usd")).toBe(false)
   })
 
+  it("validates the pre-discount subtotal used by promoted Stripe sessions", () => {
+    const party = getDigitalProduct("rage-room-party-planner")!
+
+    // Stripe amount_subtotal remains £5.60 when an authorised promotion
+    // reduces amount_total, so the paid order must still unlock fulfilment.
+    expect(sessionAmountMatchesProduct(party, 560, "gbp")).toBe(true)
+    expect(sessionAmountMatchesProduct(party, 448, "gbp")).toBe(false)
+  })
+
   it("keeps booking system entitlement pinned to £79 GBP", () => {
     const bookingSystem = getDigitalProduct(
       "rage-room-corporate-booking-system"

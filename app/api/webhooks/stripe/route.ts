@@ -38,7 +38,7 @@ async function handlePaidSession(session: Stripe.Checkout.Session) {
     !product ||
     !sessionAmountMatchesProduct(
       product,
-      session.amount_total,
+      session.amount_subtotal,
       session.currency
     )
   ) {

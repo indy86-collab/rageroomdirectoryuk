@@ -10,6 +10,7 @@ import {
   getDigitalProductAnalytics,
   getFulfilmentProducts,
   productHasFulfilment,
+  sessionAmountMatchesProduct,
 } from "@/lib/digital-products"
 import { getStripe } from "@/lib/stripe"
 
@@ -37,8 +38,11 @@ export default async function OrderSuccessPage({
       if (
         product &&
         session.payment_status === "paid" &&
-        session.amount_total === product.unitAmount &&
-        session.currency === product.currency
+        sessionAmountMatchesProduct(
+          product,
+          session.amount_subtotal,
+          session.currency
+        )
       ) {
         purchasedProduct = product
         fulfilmentProducts = getFulfilmentProducts(product)

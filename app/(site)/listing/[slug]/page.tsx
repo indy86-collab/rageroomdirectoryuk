@@ -22,6 +22,7 @@ import FeaturedVenueBadge from "@/components/FeaturedVenueBadge"
 import ListingLeadCapture from "@/components/ListingLeadCapture"
 import PageLevelAds from "@/components/PageLevelAds"
 import TrackedBookingLink from "@/components/TrackedBookingLink"
+import NearbyActivitiesAffiliate from "@/components/NearbyActivitiesAffiliate"
 import { buildOgImageUrl } from "@/lib/seo-schema"
 import { absoluteUrl, getSiteUrl, listingUrl as buildListingUrl } from "@/lib/site-url"
 import {
@@ -705,6 +706,15 @@ export default async function ListingPage({ params }: ListingPageProps) {
               </TrackedBookingLink>
             </div>
           )}
+        </div>
+
+        <div className="mb-6 sm:mb-8">
+          <NearbyActivitiesAffiliate
+            city={listing.city}
+            placement="listing"
+            listingSlug={listing.slug || listing.id}
+            venueName={listing.name}
+          />
         </div>
 
         {/* Venue Details & Booking Info */}

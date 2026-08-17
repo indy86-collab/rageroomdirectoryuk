@@ -129,6 +129,68 @@ export function trackGenerateLead({
   })
 }
 
+type AffiliateEventParams = {
+  provider: string
+  placement: string
+  city: string
+  listingSlug?: string
+  recommendationId?: string
+  plannerGroup?: string
+  plannerVibe?: string
+  plannerTiming?: string
+}
+
+function affiliateEventParams({
+  provider,
+  placement,
+  city,
+  listingSlug,
+  recommendationId,
+  plannerGroup,
+  plannerVibe,
+  plannerTiming,
+}: AffiliateEventParams) {
+  return {
+    affiliate_provider: provider.slice(0, 80),
+    affiliate_placement: placement.slice(0, 80),
+    city: city.slice(0, 80),
+    ...(listingSlug ? { listing_slug: listingSlug.slice(0, 80) } : {}),
+    ...(recommendationId
+      ? { recommendation_id: recommendationId.slice(0, 80) }
+      : {}),
+    ...(plannerGroup ? { planner_group: plannerGroup.slice(0, 80) } : {}),
+    ...(plannerVibe ? { planner_vibe: plannerVibe.slice(0, 80) } : {}),
+    ...(plannerTiming ? { planner_timing: plannerTiming.slice(0, 80) } : {}),
+  }
+}
+
+/** Affiliate offer visibility and outbound click events — no PII. */
+export function trackAffiliateOfferView(params: AffiliateEventParams) {
+  trackEvent("affiliate_offer_view", affiliateEventParams(params))
+}
+
+export function trackAffiliateClick(params: AffiliateEventParams) {
+  trackEvent("affiliate_click", affiliateEventParams(params))
+}
+
+export function trackAffiliatePlannerStart(params: AffiliateEventParams) {
+  trackEvent("affiliate_planner_start", affiliateEventParams(params))
+}
+
+export function trackAffiliatePlannerAnswer(
+  params: AffiliateEventParams & { step: string; choice: string }
+) {
+  trackEvent("affiliate_planner_answer", {
+    ...affiliateEventParams(params),
+    planner_step: params.step.slice(0, 80),
+    planner_choice: params.choice.slice(0, 80),
+  })
+}
+
+export function trackAffiliatePlannerComplete(params: AffiliateEventParams) {
+  trackEvent("affiliate_planner_complete", affiliateEventParams(params))
+}
+
 export function trackProductDownload(
   product: AnalyticsProduct,
   fileName: string

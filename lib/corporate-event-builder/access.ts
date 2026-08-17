@@ -51,7 +51,7 @@ export async function verifyCorporateBuilderAccess(
       purchasedId !== CORPORATE_EVENT_BUILDER_PRODUCT_ID ||
       !sessionAmountMatchesProduct(
         product,
-        session.amount_total,
+        session.amount_subtotal,
         session.currency
       )
     ) {

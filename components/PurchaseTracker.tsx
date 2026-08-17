@@ -25,8 +25,16 @@ export default function PurchaseTracker({
 }: PurchaseTrackerProps) {
   useEffect(() => {
     const storageKey = `purchase_tracked_${sessionId}`
+    let alreadyTracked = false
 
-    if (window.localStorage.getItem(storageKey)) {
+    try {
+      alreadyTracked = Boolean(window.localStorage.getItem(storageKey))
+    } catch {
+      // Safari privacy settings can block storage. Tracking the confirmed
+      // purchase is more important than client-side deduplication in that case.
+    }
+
+    if (alreadyTracked) {
       return
     }
 
@@ -40,7 +48,11 @@ export default function PurchaseTracker({
     if (trackCorporateBookingSystemSuccess) {
       trackCorporateBookingSystemPurchaseSuccess()
     }
-    window.localStorage.setItem(storageKey, "true")
+    try {
+      window.localStorage.setItem(storageKey, "true")
+    } catch {
+      // The purchase event has already been queued; storage is best-effort.
+    }
   }, [
     product,
     sessionId,

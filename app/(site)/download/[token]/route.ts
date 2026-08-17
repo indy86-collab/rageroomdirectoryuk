@@ -4,6 +4,7 @@ import { resolveDigitalDownloadFile } from "@/lib/digital-download-files"
 import {
   getDigitalProduct,
   isProductCoveredBySession,
+  sessionAmountMatchesProduct,
 } from "@/lib/digital-products"
 import { verifyDownloadToken } from "@/lib/download-token"
 import { getStripe } from "@/lib/stripe"
@@ -84,8 +85,11 @@ export async function GET(_request: Request, { params }: DownloadRouteProps) {
     !purchasedProduct ||
     session.payment_status !== "paid" ||
     !isProductCoveredBySession(purchasedProduct, product.id) ||
-    session.amount_total !== purchasedProduct.unitAmount ||
-    session.currency !== purchasedProduct.currency
+    !sessionAmountMatchesProduct(
+      purchasedProduct,
+      session.amount_subtotal,
+      session.currency
+    )
   ) {
     return invalidDownloadResponse()
   }
