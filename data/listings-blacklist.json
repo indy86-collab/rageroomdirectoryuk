@@ -10,5 +10,90 @@
     "city": "Castleford",
     "reason": "Reported closed / not operating (online payment may still work). Do not re-add.",
     "blacklistedAt": "2026-07-28"
+  },
+  {
+    "slug": "destroyd-rage-rooms-stockport",
+    "name": "Destroy'd Rage Rooms Stockport",
+    "postcode": "SK1 1SE",
+    "city": "Stockport",
+    "reason": "Trapp'd Stockport is reported permanently closed and the former rage-room page now returns 404. Do not re-add without a new live booking page.",
+    "blacklistedAt": "2026-08-17"
+  },
+  {
+    "slug": "edinburgh-rage-room-edinburgh",
+    "name": "Edinburgh Rage Room",
+    "websiteContains": [
+      "classbento.co.uk"
+    ],
+    "postcode": "EH6 4JW",
+    "city": "Edinburgh",
+    "reason": "No identifiable operating venue or bookable Edinburgh rage-room service was found; the record linked only to a marketplace homepage.",
+    "blacklistedAt": "2026-08-17"
+  },
+  {
+    "slug": "rage-cage-ltd-braintree",
+    "name": "Rage Cage Ltd",
+    "websiteContains": [
+      "ragecage.uk"
+    ],
+    "postcode": "CM7 2YN",
+    "city": "Braintree",
+    "reason": "The venue is reported permanently closed and has no current booking availability. Do not re-add without direct evidence of reopening.",
+    "blacklistedAt": "2026-08-17"
+  },
+  {
+    "slug": "rage-room-ireland",
+    "name": "Rage Room Ireland",
+    "websiteContains": [
+      "rageroomireland.com"
+    ],
+    "postcode": "D10",
+    "city": "Dublin",
+    "reason": "Outside the United Kingdom scope of this directory.",
+    "blacklistedAt": "2026-08-17"
+  },
+  {
+    "slug": "riot-room-dunfermline",
+    "name": "Riot Room",
+    "websiteContains": [
+      "riotroom.co.uk"
+    ],
+    "postcode": "KY12 7SL",
+    "city": "Dunfermline",
+    "reason": "The website contains untouched template content, a Los Angeles placeholder address and no verifiable UK booking flow.",
+    "blacklistedAt": "2026-08-17"
+  },
+  {
+    "slug": "shatterhaus-cardiff",
+    "name": "ShatterHaus",
+    "websiteContains": [
+      "shatterhaus.uk"
+    ],
+    "postcode": "CF10 2BH",
+    "city": "Cardiff",
+    "reason": "The site uses placeholder contact details and a non-booking enquiry form; no independently verifiable operating Cardiff venue was found.",
+    "blacklistedAt": "2026-08-17"
+  },
+  {
+    "slug": "the-rage-rooms-bournemouth",
+    "name": "The Rage Rooms",
+    "websiteContains": [
+      "the-ragerooms.co.uk"
+    ],
+    "postcode": "BH21 3RL",
+    "city": "Bournemouth",
+    "reason": "The official site still describes an early-2025 launch and offers only a guest-list form, with no live venue or booking availability.",
+    "blacklistedAt": "2026-08-17"
+  },
+  {
+    "slug": "wreck-room-london",
+    "name": "Wreck Room London",
+    "websiteContains": [
+      "wreckroom.co.uk"
+    ],
+    "postcode": "N/A",
+    "city": "London",
+    "reason": "The official site says the venue is awaiting reopening and provides no current location or booking availability. Re-add only after reopening is announced.",
+    "blacklistedAt": "2026-08-17"
   }
 ]

@@ -1,5 +1,159 @@
 [
   {
+    "id": "08b14133-3cd2-4ae8-93eb-a9de0dc19c68",
+    "name": "Act Your Rage Therapies",
+    "description": "Cornwall rage room in Par with two private smash rooms. Current bookings offer 30-minute sessions for two or three people with safety briefing and PPE.",
+    "city": "Par",
+    "region": "Cornwall",
+    "postcode": "PL24 2SQ",
+    "location": {
+      "lat": 50.343463,
+      "lng": -4.722907
+    },
+    "website": "https://actyourragetherapies.simplybook.it/v2/",
+    "bookingUrl": "https://actyourragetherapies.simplybook.it/v2/",
+    "phone": "+44 7831 917966",
+    "price": 20,
+    "priceNote": "£50 for two people or £60 for three people.",
+    "ageMin": null,
+    "openingHours": [
+      "Monday: 12:00-21:00",
+      "Tuesday: 12:00-16:00",
+      "Wednesday: 13:00-21:30",
+      "Thursday: closed",
+      "Friday: 12:00-21:00",
+      "Saturday-Sunday: 10:00-17:00"
+    ],
+    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "sessionLengths": [
+      30
+    ],
+    "groupSizeMin": 2,
+    "groupSizeMax": 3,
+    "features": [
+      "birthday-parties",
+      "couples"
+    ],
+    "media": null,
+    "packages": [
+      {
+        "name": "Rage room for two",
+        "price": 50,
+        "priceNote": "£50 for two people",
+        "description": "30-minute session."
+      },
+      {
+        "name": "Rage room for three",
+        "price": 60,
+        "priceNote": "£60 for three people",
+        "description": "30-minute session."
+      }
+    ],
+    "sourceUrl": "https://booking.page/en/company/page/actyourragetherapies",
+    "image": null,
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "act-your-rage-therapies-par",
+    "createdAt": "2026-08-17T20:45:00.000Z"
+  },
+  {
+    "id": "d0056264-14dd-4ad8-87e5-742c3038070c",
+    "name": "All The Rage",
+    "description": "Birmingham rage-room and paint-splatter venue at The Mill Walk. The private rage room accepts up to four people and offers optional video recording and bring-your-own smashables.",
+    "city": "Birmingham",
+    "region": "West Midlands",
+    "postcode": "B31 4HL",
+    "location": {
+      "lat": 52.402831,
+      "lng": -1.973521
+    },
+    "website": "https://all-the-rage.co.uk/",
+    "bookingUrl": "https://wannabook.online/booking/alltherage",
+    "phone": "+44 7719 208907",
+    "price": null,
+    "priceNote": "Check the live booking calendar for current prices.",
+    "ageMin": 10,
+    "openingHours": null,
+    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "sessionLengths": [
+      30
+    ],
+    "groupSizeMin": 1,
+    "groupSizeMax": 4,
+    "features": [
+      "byo-smashables",
+      "corporate-groups",
+      "birthday-parties",
+      "hen-stag-parties",
+      "couples",
+      "accessible-venue",
+      "video-recording"
+    ],
+    "media": null,
+    "packages": null,
+    "sourceUrl": "https://all-the-rage.co.uk/",
+    "image": null,
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "all-the-rage-birmingham",
+    "createdAt": "2026-08-17T20:45:00.000Z"
+  },
+  {
+    "id": "b0f08b87-4af8-43eb-9f46-765bb129419c",
+    "name": "All The Rage Scarborough",
+    "description": "Scarborough rage-room and paint-splatter venue on Manor Road. Two private rage rooms offer solo, duo and trio packages with current online booking.",
+    "city": "Scarborough",
+    "region": "North Yorkshire",
+    "postcode": "YO12 7BE",
+    "location": {
+      "lat": 54.279774,
+      "lng": -0.418081
+    },
+    "website": "https://alltheragescarborough.simplybook.it/v2/",
+    "bookingUrl": "https://alltheragescarborough.simplybook.it/v2/",
+    "phone": null,
+    "price": 20,
+    "priceNote": "Solo £35, duo £50 or trio £60 per session.",
+    "ageMin": 18,
+    "openingHours": [
+      "Wednesday-Friday: 17:00-20:20",
+      "Saturday: 11:00-20:20",
+      "Sunday: 11:00-17:00"
+    ],
+    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "sessionLengths": null,
+    "groupSizeMin": 1,
+    "groupSizeMax": 3,
+    "features": [
+      "birthday-parties",
+      "couples"
+    ],
+    "media": null,
+    "packages": [
+      {
+        "name": "Solo smash",
+        "price": 35,
+        "priceNote": "£35 for one person"
+      },
+      {
+        "name": "Duo smash",
+        "price": 50,
+        "priceNote": "£50 for two people"
+      },
+      {
+        "name": "Trio smash",
+        "price": 60,
+        "priceNote": "£60 for three people"
+      }
+    ],
+    "sourceUrl": "https://booking.page/en/company/page/alltheragescarborough",
+    "image": null,
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "all-the-rage-scarborough",
+    "createdAt": "2026-08-17T20:45:00.000Z"
+  },
+  {
     "id": "499e08d6-513b-4f4b-9f79-6063a3bf319f",
     "name": "Anger Issues Rage Rooms Ltd",
     "description": "Experience the ultimate stress relief at Anger Issues Rage Rooms. A smash room facility perfect for birthdays, team building, and stress relief. Choose your playlist and enjoy a safe, controlled environment.",
@@ -18,7 +172,7 @@
     "googlePlaceId": "ChIJm1TH_ZbfekgRxY8gYN91ruc",
     "slug": "anger-issues-rage-rooms-ltd-ellesmere-port",
     "createdAt": "2025-11-27T21:28:46.144Z",
-    "lastVerified": "2025-11-27T21:28:46.144Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "http://www.angerissuesragerooms.com/",
     "features": [
       "corporate-groups",
@@ -44,7 +198,7 @@
     "googlePlaceId": "ChIJqUa12rjZ2EcRkS_r2k9xs78",
     "slug": "angry-smash-ltd-southend-on-sea",
     "createdAt": "2025-11-27T21:28:46.523Z",
-    "lastVerified": "2025-11-27T21:28:46.523Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "https://www.angrysmash.com/",
     "features": [
       "birthday-parties",
@@ -70,14 +224,14 @@
     "googlePlaceId": "ChIJMwpLbVGbfkgRtnFNTrpfM6g",
     "slug": "arcadia-rage-room-darlington",
     "createdAt": "2026-06-02T12:00:00.000Z",
-    "lastVerified": "2026-06-02T12:00:00.000Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "https://arcadiadarlington.co.uk/",
     "ageMin": 10
   },
   {
     "id": "fb842fd9-c195-48a5-ae21-56bcc6e90bb6",
     "name": "Axed and Enraged",
-    "description": "Axed and Enraged is a rage room and axe-throwing venue in Dundee, Scotland.",
+    "description": "Dundee rage room with 30-minute Bronze, Silver, Gold and Diamond packages for groups of up to six. PPE, safety briefing and smashables are included.",
     "city": "Dundee",
     "region": "Dundee City",
     "postcode": "DD3 7JQ",
@@ -87,14 +241,44 @@
     },
     "website": "https://www.axedandenraged.co.uk/",
     "phone": "+44 7863 680529",
-    "price": 75,
+    "price": 20.83,
     "image": "/images/axedandenraged.png",
     "verified": true,
     "googlePlaceId": "ChIJm9g98S5dhkgRgiWoQdoK-ZI",
     "slug": "axed-and-enraged",
     "createdAt": "2025-12-11T23:38:06.414Z",
-    "lastVerified": "2025-12-11T23:38:06.414Z",
-    "sourceUrl": "https://www.axedandenraged.co.uk/"
+    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "sourceUrl": "https://www.axedandenraged.co.uk/rage-room",
+    "bookingUrl": "https://www.axedandenraged.co.uk/rage-room",
+    "priceNote": "Packages start at £75 for up to two; the £125 Gold package accommodates up to six.",
+    "ageMin": 16,
+    "sessionLengths": [
+      30
+    ],
+    "groupSizeMin": 1,
+    "groupSizeMax": 6,
+    "packages": [
+      {
+        "name": "Bronze",
+        "price": 75,
+        "priceNote": "£75 for up to two people"
+      },
+      {
+        "name": "Silver",
+        "price": 100,
+        "priceNote": "£100 for up to four people"
+      },
+      {
+        "name": "Gold",
+        "price": 125,
+        "priceNote": "£125 for up to six people"
+      },
+      {
+        "name": "Diamond",
+        "price": 200,
+        "priceNote": "£200 for up to six people"
+      }
+    ]
   },
   {
     "id": "3f887440-4920-4d23-9260-de599f094245",
@@ -115,32 +299,7 @@
     "googlePlaceId": "ChIJXfnJ29IJd0gRqIRKvqRHTFs",
     "slug": "destroyd-rage-rooms-northampton",
     "createdAt": "2025-11-27T21:28:46.741Z",
-    "lastVerified": "2025-11-27T21:28:46.741Z",
-    "sourceUrl": "https://trappd.com/rage-rooms/",
-    "sessionLengths": [
-      30
-    ]
-  },
-  {
-    "id": "c8e4a1b2-5d6f-4a9c-8e1b-2f3a4b5c6d7e",
-    "name": "Destroy'd Rage Rooms Stockport",
-    "description": "Destroy'd rage room at Trapp'd Stockport (Prince's Street). 30-minute smash sessions for two people with protective gear and breakables — a permanent Greater Manchester option after Temper Tank closed. Book via Trapp'd.",
-    "city": "Stockport",
-    "region": "Greater Manchester",
-    "postcode": "SK1 1SE",
-    "location": {
-      "lat": 53.4122475,
-      "lng": -2.1599516
-    },
-    "website": "https://trappd.com/rage-rooms/",
-    "phone": null,
-    "price": 55,
-    "image": "/images/destroyd-rage-rooms-stockport.jpg",
-    "verified": true,
-    "googlePlaceId": null,
-    "slug": "destroyd-rage-rooms-stockport",
-    "createdAt": "2026-07-25T21:32:58.714Z",
-    "lastVerified": "2026-07-25T21:32:58.714Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "https://trappd.com/rage-rooms/",
     "sessionLengths": [
       30
@@ -165,56 +324,71 @@
     "googlePlaceId": null,
     "slug": "down-range-rage-room-gosport",
     "createdAt": "2026-06-14T12:00:00.000Z",
-    "lastVerified": "2026-06-14T12:00:00.000Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "https://downrange-axethrowing.co.uk/rage-room/"
-  },
-  {
-    "id": "e1r2t3y4-u5i6-4o7p-8a9s-0d1f2g3h4j5k",
-    "name": "Edinburgh Rage Room",
-    "description": "Mobile smash-therapy / rage-room experiences serving the Edinburgh area (book via ClassBento and similar platforms). Not a permanent walk-in venue — confirm dates and travel radius when booking.",
-    "city": "Edinburgh",
-    "region": "Midlothian",
-    "postcode": "EH6 4JW",
-    "location": {
-      "lat": 55.98,
-      "lng": -3.19
-    },
-    "website": "https://classbento.co.uk/",
-    "phone": null,
-    "price": 50,
-    "image": "/images/EdinburghRageRoom.png",
-    "verified": true,
-    "googlePlaceId": null,
-    "slug": "edinburgh-rage-room-edinburgh",
-    "createdAt": "2025-11-27T21:28:46.000Z",
-    "lastVerified": "2025-11-27T21:28:46.000Z",
-    "sourceUrl": "https://classbento.co.uk/",
-    "features": [
-      "hen-stag-parties",
-      "mobile-experience"
-    ]
   },
   {
     "id": "a1s2d3f4-g5h6-4j7k-8l9z-0x1c2v3b4n5m",
     "name": "Game Vault Ayrshire",
-    "description": "Ayrshire's gaming venue featuring \"The Kill Room\" for unleashing inner rage by destroying objects in a controlled space.",
+    "description": "Game Vault Ayrshire’s supervised rage room in central Kilmarnock, with solo and group packages for smashing glassware, electronics and larger items.",
     "city": "Kilmarnock",
     "region": "Ayrshire",
-    "postcode": "KA1 1LR",
+    "postcode": "KA1 3HT",
     "location": {
-      "lat": 55.609,
-      "lng": -4.498
+      "lat": 55.605113,
+      "lng": -4.49606
     },
     "website": "https://gamevaultayrshire.com/rage-room/",
-    "phone": null,
-    "price": 25,
+    "phone": "+44 1563 593314",
+    "price": 20,
     "image": "/images/GameVaultAyrshire.png",
     "verified": true,
     "googlePlaceId": "ChIJ5ydolLYziEgRs7TcXKQSR98",
     "slug": "game-vault-ayrshire-kilmarnock",
     "createdAt": "2025-11-27T21:28:46.000Z",
-    "lastVerified": "2025-11-27T21:28:46.000Z",
-    "sourceUrl": "https://gamevaultayrshire.com/rage-room/"
+    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "sourceUrl": "https://gamevaultayrshire.com/rage-room/",
+    "bookingUrl": "https://gamevaultayrshire.com/rage-room/",
+    "priceNote": "From £20 per person when six people share the £100 group package; solo sessions are £25.",
+    "ageMin": 13,
+    "sessionLengths": [
+      15,
+      30,
+      60
+    ],
+    "groupSizeMin": 1,
+    "groupSizeMax": 10,
+    "features": [
+      "corporate-groups",
+      "birthday-parties",
+      "hen-stag-parties"
+    ],
+    "packages": [
+      {
+        "name": "Solo smash",
+        "price": 25,
+        "priceNote": "£25 for one person",
+        "description": "15-minute solo session."
+      },
+      {
+        "name": "Group of four",
+        "price": 80,
+        "priceNote": "£80 for up to four people",
+        "description": "30-minute group session."
+      },
+      {
+        "name": "Group of six",
+        "price": 100,
+        "priceNote": "£100 for up to six people",
+        "description": "30-minute group session."
+      },
+      {
+        "name": "Group of ten",
+        "price": 200,
+        "priceNote": "£200 for up to ten people",
+        "description": "60-minute group session."
+      }
+    ]
   },
   {
     "id": "3402ac80-5163-467f-ad88-bc16ec1a8955",
@@ -235,35 +409,10 @@
     "googlePlaceId": "ChIJ1Szj-wS7cEgRjij1NCeNXIY",
     "slug": "go-rage-birmingham-rage-room-birmingham",
     "createdAt": "2025-11-27T21:28:46.921Z",
-    "lastVerified": "2025-11-27T21:28:46.921Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "https://www.gorageuk.com/",
     "sessionLengths": [
       30
-    ]
-  },
-  {
-    "id": "d6a4f1b5-2a7e-4d0c-e945-1b8a6f2d4c37",
-    "name": "Hatchet Harry's",
-    "description": "Liverpool's top-rated axe throwing venue with a dedicated 60-minute rage room. Release pent-up energy smashing printers, glassware, and more. Protective gear provided. 8 Gibraltear Row, near Liverpool city centre.",
-    "city": "Liverpool",
-    "region": "Merseyside",
-    "postcode": "L3 7HJ",
-    "location": {
-      "lat": 53.411349,
-      "lng": -2.997526
-    },
-    "website": "https://hatchetharrys.co.uk/liverpool/",
-    "phone": null,
-    "price": 36,
-    "image": "/images/hatchet-harrys-rage-room-liverpool.jpg",
-    "verified": true,
-    "googlePlaceId": "ChIJr8xukyohe0gREcQQFBj437Q",
-    "slug": "hatchet-harrys-rage-room-liverpool",
-    "createdAt": "2026-06-02T12:00:00.000Z",
-    "lastVerified": "2026-06-02T12:00:00.000Z",
-    "sourceUrl": "https://hatchetharrys.co.uk/liverpool/",
-    "sessionLengths": [
-      60
     ]
   },
   {
@@ -285,8 +434,33 @@
     "googlePlaceId": "ChIJK8E4P-nxeUgROXV2trfJVLI",
     "slug": "hatchet-harrys-rage-room-derby",
     "createdAt": "2026-06-02T12:00:00.000Z",
-    "lastVerified": "2026-06-02T12:00:00.000Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "https://hatchetharrys.co.uk/derby/",
+    "sessionLengths": [
+      60
+    ]
+  },
+  {
+    "id": "d6a4f1b5-2a7e-4d0c-e945-1b8a6f2d4c37",
+    "name": "Hatchet Harry's",
+    "description": "Liverpool's top-rated axe throwing venue with a dedicated 60-minute rage room. Release pent-up energy smashing printers, glassware, and more. Protective gear provided. 8 Gibraltear Row, near Liverpool city centre.",
+    "city": "Liverpool",
+    "region": "Merseyside",
+    "postcode": "L3 7HJ",
+    "location": {
+      "lat": 53.411349,
+      "lng": -2.997526
+    },
+    "website": "https://hatchetharrys.co.uk/liverpool/",
+    "phone": null,
+    "price": 36,
+    "image": "/images/hatchet-harrys-rage-room-liverpool.jpg",
+    "verified": true,
+    "googlePlaceId": "ChIJr8xukyohe0gREcQQFBj437Q",
+    "slug": "hatchet-harrys-rage-room-liverpool",
+    "createdAt": "2026-06-02T12:00:00.000Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "sourceUrl": "https://hatchetharrys.co.uk/liverpool/",
     "sessionLengths": [
       60
     ]
@@ -294,7 +468,7 @@
   {
     "id": "d8d7c02d-51cb-488a-909d-359673d34c67",
     "name": "House of Rage - Rage Room",
-    "description": "Leicester premier rage room: smash electronics/glass with sledgehammer. Ages 10+, safety gear, 12-22:00 most days.",
+    "description": "House of Rage at Game of Throwing in Leicester city centre. Private supervised smash sessions include protective equipment and a choice of bats or crowbars.",
     "city": "Leicester",
     "region": "Leicestershire",
     "postcode": "LE1 5AW",
@@ -303,16 +477,25 @@
       "lng": -1.1292
     },
     "website": "https://visitleicester.info/point-of-interest/house-of-rage-rage-room/",
-    "phone": "0116 410 5013",
+    "phone": "+44 116 410 5013",
     "price": 32,
     "image": "/images/houseofrage_leicester.jpeg",
     "verified": true,
     "googlePlaceId": null,
     "slug": "house-of-rage-rage-room-leicester",
     "createdAt": "2026-05-01T22:16:35.728Z",
-    "lastVerified": "2026-05-01T22:16:35.728Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "https://visitleicester.info/point-of-interest/house-of-rage-rage-room/",
-    "ageMin": 10
+    "ageMin": 10,
+    "openingHours": [
+      "Monday-Friday: 12:00-22:00",
+      "Saturday-Sunday: 10:30-22:00"
+    ],
+    "features": [
+      "corporate-groups",
+      "birthday-parties",
+      "hen-stag-parties"
+    ]
   },
   {
     "id": "v9w8x7y6-z5a4-4b3c-d2e1-f0g9h8i7j6k5",
@@ -333,7 +516,7 @@
     "googlePlaceId": "ChIJP-LgaPDLd0gRjmMTE1UCByo",
     "slug": "just-rage-rooms-henlow",
     "createdAt": "2025-11-27T21:28:46.000Z",
-    "lastVerified": "2025-11-27T21:28:46.000Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "https://justragerooms.co.uk/"
   },
   {
@@ -355,7 +538,7 @@
     "googlePlaceId": null,
     "slug": "mission-classified-rage-room-grimsby",
     "createdAt": "2026-07-01T12:00:00.000Z",
-    "lastVerified": "2026-07-01T12:00:00.000Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "https://missionclassified.co.uk/rage-room"
   },
   {
@@ -377,7 +560,7 @@
     "googlePlaceId": "ChIJC_NQvF6FdUgRiPF2Wj-rjEQ",
     "slug": "players-the-rage-rooms-brighton",
     "createdAt": "2026-06-02T12:00:00.000Z",
-    "lastVerified": "2026-06-02T12:00:00.000Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "https://playersbrighton.com/pages/theragerooms",
     "ageMin": 18,
     "sessionLengths": [
@@ -386,27 +569,6 @@
     "features": [
       "byo-smashables"
     ]
-  },
-  {
-    "id": "d7a87e3b-5afc-40fc-b819-a3728cc29ee8",
-    "name": "Rage cage ltd",
-    "description": "Braintree rage room (Rage Cage Ltd) at Springwood Drive / Braintree Enterprise Centre. Company still active; public website currently offline — contact via local listings or Facebook before visiting.",
-    "city": "Braintree",
-    "region": "",
-    "postcode": "CM7 2YN",
-    "location": {
-      "lat": 51.8877239,
-      "lng": 0.5384545
-    },
-    "website": null,
-    "phone": "+44 7598 120662",
-    "price": 32,
-    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJL61rXqvx2EcR1fo8nfbJS8k/image-1764201094976-19fa1c98.jpg",
-    "verified": true,
-    "googlePlaceId": "ChIJL61rXqvx2EcR1fo8nfbJS8k",
-    "slug": "rage-cage-ltd-braintree",
-    "createdAt": "2025-11-27T21:28:46.698Z",
-    "lastVerified": "2025-11-27T21:28:46.698Z"
   },
   {
     "id": "a9d7c4e8-5d0b-4a3f-b278-4e1d9c5a7f60",
@@ -427,7 +589,7 @@
     "googlePlaceId": "ChIJM0KW2CEHdkgRcYDwVWgngEk",
     "slug": "rage-cage-uk-croydon",
     "createdAt": "2026-06-02T12:00:00.000Z",
-    "lastVerified": "2026-06-02T12:00:00.000Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "https://www.ragecageuk.com/",
     "features": [
       "couples"
@@ -452,7 +614,7 @@
     "googlePlaceId": "ChIJbaYbRzHTfUgRoSBGOwOi6ig",
     "slug": "rage-it-out-consett",
     "createdAt": "2026-06-02T12:00:00.000Z",
-    "lastVerified": "2026-06-02T12:00:00.000Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "https://rageitout.co.uk/"
   },
   {
@@ -474,7 +636,7 @@
     "googlePlaceId": "ChIJed-gzPYz30cRp21dAOqbSSU",
     "slug": "rage-out-maidstone-maidstone",
     "createdAt": "2025-11-27T21:28:46.473Z",
-    "lastVerified": "2025-11-27T21:28:46.473Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "http://rageout.co.uk/",
     "features": [
       "corporate-groups"
@@ -483,7 +645,7 @@
   {
     "id": "02de72e2-0ff6-45cd-a7a0-15a71cc3e6b0",
     "name": "Rage Remedies",
-    "description": "Romford rage-room and axe-throwing venue at Brooklands House. Visitors can book a supervised smash session with safety equipment and breakables prepared for stress-release experiences.",
+    "description": "Romford rage room at Brooklands House. Supervised sessions for up to two people include safety gear and prepared breakables.",
     "city": "Romford",
     "region": "London",
     "postcode": "RM1 1DX",
@@ -493,14 +655,37 @@
     },
     "website": "https://www.rageremedies.co.uk/",
     "phone": null,
-    "price": 35,
+    "price": 30,
     "image": "/images/rage-remedies-romford.jpg",
     "verified": true,
     "googlePlaceId": null,
     "slug": "rage-remedies-romford",
     "createdAt": "2026-07-01T12:00:00.000Z",
-    "lastVerified": "2026-07-01T12:00:00.000Z",
-    "sourceUrl": "https://www.rageremedies.co.uk/"
+    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "sourceUrl": "https://www.rageremedies.co.uk/",
+    "priceNote": "£30 for 30 minutes, £45 for 45 minutes or £60 for 60 minutes.",
+    "ageMin": 10,
+    "sessionLengths": [
+      30,
+      45,
+      60
+    ],
+    "groupSizeMin": 1,
+    "groupSizeMax": 2,
+    "packages": [
+      {
+        "name": "30-minute rage room",
+        "price": 30
+      },
+      {
+        "name": "45-minute rage room",
+        "price": 45
+      },
+      {
+        "name": "60-minute rage room",
+        "price": 60
+      }
+    ]
   },
   {
     "id": "258cf31a-ba0d-4769-bc70-aa17bed67157",
@@ -521,7 +706,7 @@
     "googlePlaceId": "ChIJfzbn6IlT2UcREyPq4NM6nb0",
     "slug": "rage-remedy-margate",
     "createdAt": "2025-11-27T21:28:46.574Z",
-    "lastVerified": "2025-11-27T21:28:46.574Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "https://www.rageremedy.co.uk/",
     "features": [
       "birthday-parties"
@@ -546,7 +731,7 @@
     "googlePlaceId": "ChIJ99mUxxK9cEgRwmeXlvBHYZQ",
     "slug": "rage-room-birmingham-birmingham",
     "createdAt": "2025-11-27T21:28:46.879Z",
-    "lastVerified": "2025-11-27T21:28:46.879Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "http://www.rageroombirmingham.co.uk/",
     "features": [
       "birthday-parties"
@@ -571,30 +756,8 @@
     "googlePlaceId": null,
     "slug": "rage-room-hull",
     "createdAt": "2026-07-01T12:00:00.000Z",
-    "lastVerified": "2026-07-01T12:00:00.000Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "https://rageroomhull.simplybook.it/"
-  },
-  {
-    "id": "83ee5c07-1455-4b7b-9fe0-9d3f97e1c5e7",
-    "name": "Rage Room Ireland",
-    "description": "Dublin rage room in Ballyfermot where groups can smash bottles, plates, printers, and other breakables in a supervised room. Prices are listed in euros, so check the venue website for current packages before booking.",
-    "city": "Dublin",
-    "region": "County Dublin",
-    "postcode": "D10",
-    "location": {
-      "lat": 53.335672,
-      "lng": -6.350644
-    },
-    "website": "https://www.rageroomireland.com/",
-    "phone": null,
-    "price": 40,
-    "image": "/images/rageroomireland.png",
-    "verified": true,
-    "googlePlaceId": null,
-    "slug": "rage-room-ireland",
-    "createdAt": "2026-06-14T12:00:00.000Z",
-    "lastVerified": "2026-06-14T12:00:00.000Z",
-    "sourceUrl": "https://www.rageroomireland.com/"
   },
   {
     "id": "b1b612f7-67a4-4a9d-895a-d4a13aa8b869",
@@ -615,7 +778,7 @@
     "googlePlaceId": "ChIJRWMjqyxhd0gRIQYWoOgMn5w",
     "slug": "rage-room-leicester",
     "createdAt": "2025-12-13T23:44:24.606Z",
-    "lastVerified": "2025-12-13T23:44:24.606Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "http://www.rageroomleicester.co.uk/"
   },
   {
@@ -637,7 +800,7 @@
     "googlePlaceId": "ChIJQ3CYt-M1d0gRWoG8OH94YCo",
     "slug": "rage-rooms-leamington-spa-royal-leamington-spa",
     "createdAt": "2025-11-27T21:28:46.000Z",
-    "lastVerified": "2025-11-27T21:28:46.000Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "https://ragerooms-leamingtonspa.co.uk/",
     "features": [
       "corporate-groups"
@@ -646,27 +809,50 @@
   {
     "id": "l1m2n3o4-p5q6-4r7s-t8u9-v0w1x2y3z4a5",
     "name": "Rage Rooms Norwich",
-    "description": "Full entertainment centre featuring rage rooms and paint splatter. Family-friendly (ages 6+) and perfect for stag/hen groups.",
+    "description": "Norwich rage-room and paint-splatter venue at Lothian Street. One-hour booking slots include briefing, PPE and shared smash time; adult and child sessions are available.",
     "city": "Norwich",
     "region": "Norfolk",
-    "postcode": "NR7 8SH",
+    "postcode": "NR2 4PH",
     "location": {
-      "lat": 52.635,
-      "lng": 1.32
+      "lat": 52.63289,
+      "lng": 1.284465
     },
     "website": "https://ragerooms-norwich.co.uk/",
     "phone": "+44 1603 626873",
-    "price": 30,
+    "price": 27,
     "image": "/images/RageRoomsNorwich.png",
     "verified": true,
-    "googlePlaceId": "ChIJA0v9OIbh2UcR31Xwo-7nQfQ",
+    "googlePlaceId": null,
     "slug": "rage-rooms-norwich-norwich",
     "createdAt": "2025-11-27T21:28:46.000Z",
-    "lastVerified": "2025-11-27T21:28:46.000Z",
-    "sourceUrl": "https://ragerooms-norwich.co.uk/",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "sourceUrl": "https://ragerooms-norwich.co.uk/rooms/rage-rooms/",
     "ageMin": 6,
     "features": [
       "hen-stag-parties"
+    ],
+    "bookingUrl": "https://ragerooms-norwich.co.uk/rooms/rage-rooms/",
+    "priceNote": "Promotional rates checked August 2026: children £27 and adults £36.",
+    "openingHours": [
+      "Thursday-Saturday: 11:00-19:00",
+      "Sunday: 11:00-17:00"
+    ],
+    "sessionLengths": [
+      60
+    ],
+    "groupSizeMin": 1,
+    "groupSizeMax": 4,
+    "packages": [
+      {
+        "name": "Child smash",
+        "price": 27,
+        "description": "Ages 6-10 with easier smashables and lighter bats."
+      },
+      {
+        "name": "Adult smash",
+        "price": 36,
+        "description": "Ages 10+ with up to 60 smashables and a drink."
+      }
     ]
   },
   {
@@ -688,7 +874,7 @@
     "googlePlaceId": "ChIJL-M5aZ1x30cRJ3_t7Jfq1_0",
     "slug": "rage-x-treme-polegate",
     "createdAt": "2026-04-10T21:26:38.319Z",
-    "lastVerified": "2026-04-10T21:26:38.319Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "https://ragex-treme.co.uk"
   },
   {
@@ -710,52 +896,8 @@
     "googlePlaceId": null,
     "slug": "raging-bath",
     "createdAt": "2026-07-01T12:00:00.000Z",
-    "lastVerified": "2026-07-01T12:00:00.000Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "https://www.ragingbath.com/"
-  },
-  {
-    "id": "z1x2c3v4-b5n6-4m7l-k8j9-h0g1f2d3s4a5",
-    "name": "Riot Room",
-    "description": "Fife's therapeutic rage room in Dunfermline. Simple, high-impact fun for individuals or groups looking for emotional release.",
-    "city": "Dunfermline",
-    "region": "Fife",
-    "postcode": "KY12 7SL",
-    "location": {
-      "lat": 56.071,
-      "lng": -3.462
-    },
-    "website": "https://www.riotroom.co.uk/",
-    "phone": null,
-    "price": 30,
-    "image": "/images/RiotRoomDunfermline.png",
-    "verified": true,
-    "googlePlaceId": null,
-    "slug": "riot-room-dunfermline",
-    "createdAt": "2025-11-27T21:28:46.000Z",
-    "lastVerified": "2025-11-27T21:28:46.000Z",
-    "sourceUrl": "https://www.riotroom.co.uk/"
-  },
-  {
-    "id": "9c2ad2d7-5603-47a2-b466-35f82e3f12ea",
-    "name": "ShatterHaus",
-    "description": "Cardiff city-centre rage room on Queen Street. Break crockery, glassware, and other smashable items in a supervised room with protective equipment provided.",
-    "city": "Cardiff",
-    "region": "Cardiff",
-    "postcode": "CF10 2BH",
-    "location": {
-      "lat": 51.483047,
-      "lng": -3.172573
-    },
-    "website": "https://www.shatterhaus.uk/",
-    "phone": null,
-    "price": 35,
-    "image": "/images/shatterhaus-cardiff.jpg",
-    "verified": true,
-    "googlePlaceId": null,
-    "slug": "shatterhaus-cardiff",
-    "createdAt": "2026-06-14T12:00:00.000Z",
-    "lastVerified": "2026-06-14T12:00:00.000Z",
-    "sourceUrl": "https://www.shatterhaus.uk/"
   },
   {
     "id": "b5c6d7e8-f9a0-4b1c-d2e3-f4g5h6i7j8k9",
@@ -776,7 +918,7 @@
     "googlePlaceId": "ChIJm5G1QYzFe0gRnbN4QddB5iQ",
     "slug": "smash-it-huddersfield",
     "createdAt": "2025-11-27T21:28:46.000Z",
-    "lastVerified": "2025-11-27T21:28:46.000Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "https://whitewolfs.co.uk/smash-room",
     "sessionLengths": [
       30
@@ -804,35 +946,42 @@
     "googlePlaceId": "ChIJO4RR4D6r2EcRd-t7UC_2sts",
     "slug": "smash-it-rage-room-ltd-london",
     "createdAt": "2025-11-27T21:28:46.787Z",
-    "lastVerified": "2025-11-27T21:28:46.787Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "http://smashitragerooms.co.uk/"
   },
   {
     "id": "e398d7a1-8d2b-4c5e-8f92-7f3e6a123456",
     "name": "Smash Palace",
-    "description": "Lincoln's premier rage room for stress relief. Located at Grafton Street, it offers safe sessions to smash electronics and tech.",
+    "description": "Lincoln rage room at Greetwell Hollow. Booking-only sessions accommodate one to four people, with safety gear, briefing and smashables included.",
     "city": "Lincoln",
     "region": "Lincolnshire",
-    "postcode": "LN2 5LT",
+    "postcode": "LN3 4NR",
     "location": {
-      "lat": 53.238,
-      "lng": -0.512
+      "lat": 53.244205,
+      "lng": -0.504554
     },
     "website": "https://smashpalace.co.uk/",
-    "phone": null,
-    "price": 25,
+    "phone": "+44 1522 701639",
+    "price": 30,
     "image": "/images/SmashPalaceLincoln.png",
     "verified": true,
     "googlePlaceId": "ChIJ340U5Z5beEgR9ekK-PPLZcU",
     "slug": "smash-palace-lincoln",
     "createdAt": "2025-11-27T21:28:46.000Z",
-    "lastVerified": "2025-11-27T21:28:46.000Z",
-    "sourceUrl": "https://smashpalace.co.uk/"
+    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "sourceUrl": "https://smashpalace.co.uk/about",
+    "priceNote": "Sessions start from £30 per person.",
+    "openingHours": [
+      "Wednesday-Friday: 16:00-21:00",
+      "Saturday-Sunday: 12:00-21:00"
+    ],
+    "groupSizeMin": 1,
+    "groupSizeMax": 4
   },
   {
     "id": "a281abae-cd80-4c2a-996b-2c8aee5825fd",
     "name": "Smash Space UK",
-    "description": "Newcastle upon Tyne's rage room and smash room facility. Features escape room activities, rage room experiences, TVs, helmets, birthday packages, and fun activities for stress relief and entertainment.",
+    "description": "Newcastle city-centre rage room at Smash Space UK. Private smash sessions include safety equipment, breakables and your choice of soundtrack.",
     "city": "Newcastle",
     "region": "",
     "postcode": "NE4 7JE",
@@ -842,48 +991,33 @@
     },
     "website": "https://www.smashspace.co.uk/",
     "phone": "+44 330 229 4425",
-    "price": 35,
+    "price": 20,
     "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJ2YzKCzx3fkgRpzDhVtmild8/image-1764201094888-d53dc744.jpg",
     "verified": true,
     "googlePlaceId": "ChIJ2YzKCzx3fkgRpzDhVtmild8",
     "slug": "smash-space-uk-newcastle",
     "createdAt": "2025-11-27T21:28:46.834Z",
-    "lastVerified": "2025-11-27T21:28:46.834Z",
-    "sourceUrl": "https://www.smashspace.co.uk/",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "sourceUrl": "https://www.smashspace.co.uk/home",
     "features": [
       "birthday-parties"
-    ]
-  },
-  {
-    "id": "9675e2e1-a84a-41c5-9171-13503af3c4d5",
-    "name": "The Activity Dome",
-    "description": "Weston-super-Mare's top rage room experience. Features axe throwing, archery, and rage room activities. Perfect for birthdays, team building, and stress relief with music and fun activities.",
-    "city": "Weston-super-Mare",
-    "region": "",
-    "postcode": "BS23 1QF",
-    "location": {
-      "lat": 51.3492201,
-      "lng": -2.978185
-    },
-    "website": "http://www.theactivitydome.com/",
-    "phone": "+44 1934 707150",
-    "price": 32,
-    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJX6iq6OH5cUgReHLJUqtGY_k/image-1764201103382-c837610a.jpg",
-    "verified": true,
-    "googlePlaceId": "ChIJX6iq6OH5cUgReHLJUqtGY_k",
-    "slug": "the-activity-dome-weston-super-mare",
-    "createdAt": "2025-11-27T21:28:46.385Z",
-    "lastVerified": "2025-11-27T21:28:46.385Z",
-    "sourceUrl": "http://www.theactivitydome.com/",
-    "features": [
-      "corporate-groups",
-      "birthday-parties"
+    ],
+    "priceNote": "Packages start from £39.99 for up to two guests.",
+    "ageMin": 4,
+    "groupSizeMin": 1,
+    "groupSizeMax": 4,
+    "openingHours": [
+      "Monday-Wednesday: 12:30-17:30",
+      "Thursday: 17:00-20:30",
+      "Friday: 12:30-20:30",
+      "Saturday: 10:30-19:30",
+      "Sunday: 11:30-17:30"
     ]
   },
   {
     "id": "a9b8c7d6-e5f4-4321-9a8b-7c6d5e4f3a2b",
     "name": "The Break Rooms",
-    "description": "Leominster smash room on Station Yard Industrial Estate. Pre-booked sessions (about 20 minutes) for up to two people aged 12+, with safety gear and a box of smashables plus a larger item when available. Book by phone or Facebook.",
+    "description": "Leominster smash room at Station Yard Industrial Estate. Pre-booked 20-minute sessions include PPE, 40+ breakables and a larger furniture item.",
     "city": "Leominster",
     "region": "Herefordshire",
     "postcode": "HR6 8TW",
@@ -892,21 +1026,28 @@
       "lng": -2.7375333
     },
     "website": "https://www.dayoutwiththekids.co.uk/attractions/thebreakrooms-o1u8r400",
-    "phone": "07454 798515",
-    "price": 40,
+    "phone": "+44 7454 798515",
+    "price": 20,
     "image": "/images/the-break-rooms-leominster.jpg",
     "verified": true,
     "googlePlaceId": null,
     "slug": "the-break-rooms-leominster",
     "createdAt": "2026-07-25T21:32:58.715Z",
-    "lastVerified": "2026-07-25T21:32:58.715Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "https://www.dayoutwiththekids.co.uk/attractions/thebreakrooms-o1u8r400",
     "sessionLengths": [
       20
     ],
     "features": [
-      "hen-stag-parties"
-    ]
+      "birthday-parties"
+    ],
+    "priceNote": "£40 for up to two people; a third participant is £10 extra.",
+    "ageMin": 12,
+    "openingHours": [
+      "Monday-Sunday: 10:00-20:00 (pre-booking required)"
+    ],
+    "groupSizeMin": 1,
+    "groupSizeMax": 3
   },
   {
     "id": "b4e2d9f3-0e5c-4b8a-c723-9f6e4d0b2a15",
@@ -927,7 +1068,7 @@
     "googlePlaceId": "ChIJyQX-MtJFcUgR9Q4m0iRcg5U",
     "slug": "the-rabbit-hole-rage-room-swindon",
     "createdAt": "2026-06-02T12:00:00.000Z",
-    "lastVerified": "2026-06-02T12:00:00.000Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "https://www.facebook.com/the.rabbit.hole.rage.room/",
     "features": [
       "hen-stag-parties"
@@ -952,38 +1093,62 @@
     "googlePlaceId": "ChIJ2R0ziCVDekgRCv7JBCT8k0w",
     "slug": "the-rage-house-newcastle-under-lyme",
     "createdAt": "2025-11-27T21:28:46.261Z",
-    "lastVerified": "2025-11-27T21:28:46.261Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "https://www.theragehouse.com/"
   },
   {
-    "id": "b1a2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
-    "name": "The Rage Rooms",
-    "description": "UK's immersive mobile rage room experience based in Dorset. Features \"Smash Therapy on Wheels\" for events and themed stress-relief.",
-    "city": "Bournemouth",
-    "region": "Dorset",
-    "postcode": "BH21 3RL",
+    "id": "dfe5a71b-073e-4595-954e-93ed5f687f30",
+    "name": "The Smash Lab Wellingborough",
+    "description": "Wellingborough’s permanent Smash Lab rage-room venue, with five smash rooms and 30-minute private sessions for up to two people per room.",
+    "city": "Wellingborough",
+    "region": "Northamptonshire",
+    "postcode": "NN8 4LA",
     "location": {
-      "lat": 50.7192,
-      "lng": -1.8808
+      "lat": 52.301895,
+      "lng": -0.694935
     },
-    "website": "https://the-ragerooms.co.uk/",
-    "phone": "+44 1202 911921",
-    "price": 50,
-    "image": "/images/TheRageRoomsBournemouth.png",
+    "website": "https://www.thesmashlab.co.uk/",
+    "bookingUrl": "https://www.thesmashlab.co.uk/",
+    "phone": null,
+    "price": 32.5,
+    "priceNote": "£65 per room for up to two people.",
+    "ageMin": 12,
+    "openingHours": [
+      "Wednesday-Sunday: 09:00-21:00"
+    ],
+    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "sessionLengths": [
+      30
+    ],
+    "groupSizeMin": 1,
+    "groupSizeMax": 2,
+    "features": [
+      "byo-smashables",
+      "corporate-groups",
+      "birthday-parties",
+      "couples",
+      "video-recording"
+    ],
+    "media": null,
+    "packages": [
+      {
+        "name": "Standard smash room",
+        "price": 65,
+        "priceNote": "£65 per room",
+        "description": "30-minute private room for up to two people."
+      }
+    ],
+    "sourceUrl": "https://www.thesmashlab.co.uk/faq",
+    "image": null,
     "verified": true,
     "googlePlaceId": null,
-    "slug": "the-rage-rooms-bournemouth",
-    "createdAt": "2025-11-27T21:28:46.000Z",
-    "lastVerified": "2025-11-27T21:28:46.000Z",
-    "sourceUrl": "https://the-ragerooms.co.uk/",
-    "features": [
-      "mobile-experience"
-    ]
+    "slug": "the-smash-lab-wellingborough",
+    "createdAt": "2026-08-17T20:45:00.000Z"
   },
   {
     "id": "0ca388aa-95ca-4ec8-b4e1-f11221888369",
     "name": "The Snake Room Urban Axe Throwing",
-    "description": "Urban axe throwing and rage room experience in Chesterfield. Perfect for birthdays, team events, and stress relief. Professional instructors and safety equipment provided.",
+    "description": "Chesterfield rage room operated by The Snake Room. A £50 private session accommodates up to two people and includes 30 minutes of supervised smash time.",
     "city": "Chesterfield",
     "region": "",
     "postcode": "S41 9AQ",
@@ -993,22 +1158,39 @@
     },
     "website": "https://snakeroom.co.uk/",
     "phone": null,
-    "price": 32,
+    "price": 25,
     "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJp8f9yISFeUgRxtoo5qRwsOc/image-1764201103602-d3464978.png",
     "verified": true,
     "googlePlaceId": "ChIJp8f9yISFeUgRxtoo5qRwsOc",
     "slug": "the-snake-room-urban-axe-throwing-chesterfield",
     "createdAt": "2025-11-27T21:28:46.300Z",
-    "lastVerified": "2025-11-27T21:28:46.300Z",
-    "sourceUrl": "https://snakeroom.co.uk/",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "sourceUrl": "https://snakeroom.co.uk/booking/rageroom/",
     "features": [
-      "birthday-parties"
+      "birthday-parties",
+      "couples"
+    ],
+    "bookingUrl": "https://snakeroom.co.uk/booking/rageroom/",
+    "priceNote": "£50 per 30-minute session for up to two people.",
+    "sessionLengths": [
+      30
+    ],
+    "groupSizeMin": 1,
+    "groupSizeMax": 2,
+    "packages": [
+      {
+        "name": "Rage room session",
+        "price": 50,
+        "priceNote": "£50 per session",
+        "description": "30 minutes for up to two people.",
+        "url": "https://snakeroom.co.uk/booking/rageroom/"
+      }
     ]
   },
   {
     "id": "176522c9-6b9b-4aad-81f3-ddeaee3ea47f",
     "name": "The Underground Newport",
-    "description": "Newport activity venue with a dedicated rage room at the Kingsway Centre. Smash bottles, plates, and breakables in a controlled room with safety equipment provided, with sessions bookable alongside axe throwing and other experiences.",
+    "description": "Newport rage room inside The Underground at Kingsway Centre. One- and two-person packages include supervised smash time and safety equipment.",
     "city": "Newport",
     "region": "Newport",
     "postcode": "NP20 1EB",
@@ -1017,83 +1199,229 @@
       "lng": -2.993131
     },
     "website": "https://www.theundergroundnewport.com/",
-    "phone": null,
-    "price": 30,
+    "phone": "+44 1633 495350",
+    "price": 25,
     "image": "/images/TheUndergroundNewport.png",
     "verified": true,
     "googlePlaceId": null,
     "slug": "the-underground-newport",
     "createdAt": "2026-06-14T12:00:00.000Z",
-    "lastVerified": "2026-06-14T12:00:00.000Z",
-    "sourceUrl": "https://www.theundergroundnewport.com/"
+    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "sourceUrl": "https://www.theundergroundnewport.com/",
+    "priceNote": "£30 for one person or £50 for two people.",
+    "openingHours": [
+      "Monday-Friday: 16:00-20:00",
+      "Saturday: 10:00-20:00",
+      "Sunday: 08:30-20:00"
+    ],
+    "groupSizeMin": 1,
+    "groupSizeMax": 2,
+    "packages": [
+      {
+        "name": "Solo rage room",
+        "price": 30,
+        "priceNote": "£30 for one person"
+      },
+      {
+        "name": "Duo rage room",
+        "price": 50,
+        "priceNote": "£50 for two people"
+      }
+    ]
   },
   {
     "id": "ba70cd2a-780d-4081-ba5b-113a31da0512",
     "name": "Urban Xtreme Colchester",
-    "description": "Colchester's premier rage room and smash room experience. Features rage room activities, axe throwing, knife throwing, music, retro gaming, stress relief, weapons, and professional instructors with safety equipment.",
+    "description": "Colchester rage room with Bronze, Silver and Gold 30-minute packages. Sessions include protective equipment, breakables and a choice of smashing tools.",
     "city": "Colchester",
-    "region": "",
+    "region": "Essex",
     "postcode": "CO1 1UU",
     "location": {
       "lat": 51.8971248,
       "lng": 0.8927616
     },
-    "website": "http://www.urbanxtreme.co.uk/",
+    "website": "https://www.urbanxtreme.co.uk/rage-room-colchester/",
     "phone": "+44 1206 577974",
-    "price": 35,
+    "price": 34.99,
     "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJAWc27UkF2UcRDLBMWoV60xk/image-1764201098104-0da7c756.jpg",
     "verified": true,
     "googlePlaceId": "ChIJAWc27UkF2UcRDLBMWoV60xk",
     "slug": "urban-xtreme-colchester-colchester",
     "createdAt": "2025-11-27T21:28:46.654Z",
-    "lastVerified": "2025-11-27T21:28:46.654Z",
-    "sourceUrl": "http://www.urbanxtreme.co.uk/"
+    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "sourceUrl": "https://www.urbanxtreme.co.uk/rage-room-colchester/",
+    "bookingUrl": "https://www.urbanxtreme.co.uk/rage-room-colchester/",
+    "priceNote": "Bronze from £34.99 per person; Silver £54.99 and Gold £74.99.",
+    "ageMin": 8,
+    "sessionLengths": [
+      30
+    ],
+    "groupSizeMin": 2,
+    "groupSizeMax": 8,
+    "features": [
+      "corporate-groups",
+      "birthday-parties",
+      "hen-stag-parties"
+    ],
+    "packages": [
+      {
+        "name": "Bronze",
+        "price": 34.99,
+        "priceNote": "£34.99 per person",
+        "url": "https://www.urbanxtreme.co.uk/rage-room-colchester/"
+      },
+      {
+        "name": "Silver",
+        "price": 54.99,
+        "priceNote": "£54.99 per person",
+        "url": "https://www.urbanxtreme.co.uk/rage-room-colchester/"
+      },
+      {
+        "name": "Gold",
+        "price": 74.99,
+        "priceNote": "£74.99 per person",
+        "url": "https://www.urbanxtreme.co.uk/rage-room-colchester/"
+      }
+    ]
   },
   {
-    "id": "7a6431df-abcd-4a81-a37d-7344fb8a0871",
-    "name": "Wreck Room London",
-    "description": "London's first rage room: 10+ min sessions smashing electronics/glass with music and weapon choice. Perfect for stress relief.",
-    "city": "London",
-    "region": "London",
-    "postcode": "N/A",
+    "id": "8180bcc9-d696-4fe5-85b2-186bd4a6526b",
+    "name": "Venture Games Bedford",
+    "description": "Bedford town-centre rage room with packages for one to fourteen players. Sessions include PPE, glassware, electrical items, a choice of weapons and optional room themes.",
+    "city": "Bedford",
+    "region": "Bedfordshire",
+    "postcode": "MK40 1LQ",
     "location": {
-      "lat": null,
-      "lng": null
+      "lat": 52.137604,
+      "lng": -0.469247
     },
-    "website": "https://www.wreckroom.co.uk/",
-    "phone": null,
-    "price": 20,
-    "image": "/images/wreckroom.jpg",
+    "website": "https://www.venturegamesbedford.co.uk/rage-room/",
+    "bookingUrl": "https://www.venturegamesbedford.co.uk/rage-room/",
+    "phone": "+44 1234 815181",
+    "price": 17.86,
+    "priceNote": "From £17.86 per person when 14 share Rage X; Rage Room 30 is £60 for one or two.",
+    "ageMin": 12,
+    "openingHours": null,
+    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "sessionLengths": [
+      30,
+      45,
+      60,
+      90
+    ],
+    "groupSizeMin": 1,
+    "groupSizeMax": 14,
+    "features": [
+      "corporate-groups",
+      "birthday-parties",
+      "hen-stag-parties",
+      "couples"
+    ],
+    "media": null,
+    "packages": [
+      {
+        "name": "Rage Room 30",
+        "price": 60,
+        "priceNote": "£60 per room for 1-2 players",
+        "description": "30 minutes with at least 20 glass and two electrical items."
+      },
+      {
+        "name": "Rage Room 45",
+        "price": 90,
+        "priceNote": "£90 per room for 3-4 players",
+        "description": "45 minutes with at least 30 glass and four electrical items."
+      },
+      {
+        "name": "Rage Room 60",
+        "price": 120,
+        "priceNote": "£120 per room for 5-6 players",
+        "description": "60 minutes with at least 40 glass and six electrical items."
+      },
+      {
+        "name": "Rage X",
+        "price": 250,
+        "priceNote": "£250 per room for 7-14 players",
+        "description": "90-minute large-group package."
+      }
+    ],
+    "sourceUrl": "https://www.venturegamesbedford.co.uk/rage-room/",
+    "image": null,
     "verified": true,
     "googlePlaceId": null,
-    "slug": "wreck-room-london",
-    "createdAt": "2026-05-01T21:32:00.168Z",
-    "lastVerified": "2026-05-01T21:32:00.168Z",
-    "sourceUrl": "https://www.wreckroom.co.uk/"
+    "slug": "venture-games-bedford-rage-room",
+    "createdAt": "2026-08-17T20:45:00.000Z"
+  },
+  {
+    "id": "9675e2e1-a84a-41c5-9171-13503af3c4d5",
+    "name": "Weston Rage Rooms at The Activity Dome",
+    "description": "Weston-super-Mare rage rooms at The Activity Dome, with 15- and 30-minute sessions, supplied PPE and breakables, plus a bring-your-own-smashables option subject to safety rules.",
+    "city": "Weston-super-Mare",
+    "region": "North Somerset",
+    "postcode": "BS23 1QF",
+    "location": {
+      "lat": 51.3492201,
+      "lng": -2.978185
+    },
+    "website": "https://theactivitydome.com/activities/weston-rage-rooms/",
+    "phone": "+44 1934 707150",
+    "price": 19.5,
+    "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJX6iq6OH5cUgReHLJUqtGY_k/image-1764201103382-c837610a.jpg",
+    "verified": true,
+    "googlePlaceId": "ChIJX6iq6OH5cUgReHLJUqtGY_k",
+    "slug": "the-activity-dome-weston-super-mare",
+    "createdAt": "2025-11-27T21:28:46.385Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "sourceUrl": "https://theactivitydome.com/activities/weston-rage-rooms/",
+    "features": [
+      "byo-smashables",
+      "corporate-groups",
+      "birthday-parties"
+    ],
+    "bookingUrl": "https://theactivitydome.com/book-now/?url=https%3A%2F%2Fwannabook.online%2Fbooking%2Fwestonrageroom",
+    "priceNote": "From £19.50 per person for 15 minutes; 30-minute sessions from £30 per person.",
+    "ageMin": 8,
+    "openingHours": [
+      "Wednesday-Sunday: 10:00-22:00"
+    ],
+    "sessionLengths": [
+      15,
+      30
+    ]
   },
   {
     "id": "q1w2e3r4-t5y6-4u7i-8o9p-0a1s2d3f4g5h",
     "name": "Wreck-It Room",
-    "description": "Aberdeen's premier rage room. 30-minute sessions for up to 6 people to destroy monitors, printers, and glassware.",
+    "description": "Aberdeen rage room at Murcar Commercial Park. Supervised sessions include safety equipment and smashables, with private-event options for larger groups.",
     "city": "Aberdeen",
     "region": "Aberdeenshire",
     "postcode": "AB23 8JW",
     "location": {
-      "lat": 57.2,
-      "lng": -2.09
+      "lat": 57.196673,
+      "lng": -2.093141
     },
     "website": "https://www.wreckitroom.co.uk/",
     "phone": "+44 1224 506427",
-    "price": 100,
+    "price": null,
     "image": "/images/Wreck-ItRoomAberdeen.png",
     "verified": true,
     "googlePlaceId": "ChIJgWRX6WQPhEgRmJ0HbJ0yhX4",
     "slug": "wreck-it-room-aberdeen",
     "createdAt": "2025-11-27T21:28:46.000Z",
-    "lastVerified": "2025-11-27T21:28:46.000Z",
+    "lastVerified": "2026-08-17T20:45:00.000Z",
     "sourceUrl": "https://www.wreckitroom.co.uk/",
     "sessionLengths": [
       30
+    ],
+    "priceNote": "Check the live booking calendar for current package prices.",
+    "ageMin": 8,
+    "openingHours": [
+      "Friday: 15:00-20:00",
+      "Saturday-Sunday: 10:00-20:00"
+    ],
+    "features": [
+      "corporate-groups",
+      "birthday-parties",
+      "hen-stag-parties"
     ]
   }
 ]
