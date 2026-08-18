@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ArrowRight, Loader2 } from "lucide-react"
 import {
   type AnalyticsProduct,
@@ -11,7 +11,10 @@ import {
 } from "@/lib/analytics"
 import { CORPORATE_BOOKING_SYSTEM_PRODUCT_ID } from "@/lib/corporate-booking-system/types"
 import { CORPORATE_EVENT_BUILDER_PRODUCT_ID } from "@/lib/corporate-event-builder/types"
-import { readDigitalCheckoutEmail } from "@/lib/digital-checkout-email"
+import {
+  readDigitalCheckoutEmail,
+  storeDigitalCheckoutEmail,
+} from "@/lib/digital-checkout-email"
 
 type DigitalCheckoutButtonProps = {
   productId: string
@@ -22,6 +25,8 @@ type DigitalCheckoutButtonProps = {
   resumeFromCancel?: boolean
   /** Prefill Stripe Checkout email when known (cancel resume / lead magnet). */
   customerEmail?: string
+  /** Show an optional email field so Stripe is shorter and abandoned emails can send. */
+  collectEmail?: boolean
   /** Hide the non-booking disclaimer (rare; default shows it). */
   hideDisclaimer?: boolean
 }
@@ -37,10 +42,22 @@ export default function DigitalCheckoutButton({
   className,
   resumeFromCancel = false,
   customerEmail,
+  collectEmail = false,
   hideDisclaimer = false,
 }: DigitalCheckoutButtonProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [email, setEmail] = useState(customerEmail ?? "")
+
+  useEffect(() => {
+    if (!collectEmail) return
+    if (customerEmail?.trim()) {
+      setEmail(customerEmail)
+      return
+    }
+    const stored = readDigitalCheckoutEmail()
+    if (stored) setEmail(stored)
+  }, [collectEmail, customerEmail])
 
   async function handleCheckout() {
     setIsLoading(true)
@@ -64,7 +81,10 @@ export default function DigitalCheckoutButton({
       }
 
       const trimmedEmail =
-        customerEmail?.trim() || readDigitalCheckoutEmail() || ""
+        email.trim() || customerEmail?.trim() || readDigitalCheckoutEmail() || ""
+      if (trimmedEmail && isValidEmail(trimmedEmail)) {
+        storeDigitalCheckoutEmail(trimmedEmail)
+      }
       const response = await fetch("/api/checkout/digital-download", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -90,6 +110,30 @@ export default function DigitalCheckoutButton({
 
   return (
     <div className="space-y-2">
+      {collectEmail && (
+        <label className="block max-w-md text-left">
+          <span className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
+            Email for your download
+          </span>
+          <input
+            type="email"
+            autoComplete="email"
+            value={email}
+            onChange={(event) => {
+              const next = event.target.value
+              setEmail(next)
+              if (isValidEmail(next.trim())) {
+                storeDigitalCheckoutEmail(next)
+              }
+            }}
+            placeholder="you@example.com"
+            className="mt-2 w-full rounded-md border border-zinc-700 bg-[#151515] px-3 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:border-rage-500 focus:outline-none"
+          />
+          <span className="mt-1.5 block text-xs leading-relaxed text-zinc-500">
+            Optional — skips typing it on Stripe, and lets us email the file if you close the tab.
+          </span>
+        </label>
+      )}
       <button
         type="button"
         onClick={handleCheckout}
@@ -109,10 +153,10 @@ export default function DigitalCheckoutButton({
       {!hideDisclaimer && (
         <p className="text-xs leading-relaxed text-zinc-400">
           {productId === CORPORATE_BOOKING_SYSTEM_PRODUCT_ID
-            ? "Interactive Corporate Booking System for venue owners — does not include consumer event planning or a booking."
+            ? "Next: Stripe checkout. Venue-owner workspace after payment — not a consumer planner or a booking."
             : productId === CORPORATE_EVENT_BUILDER_PRODUCT_ID
-              ? "Interactive Event Builder access after payment — does not include a venue booking."
-              : "Planning/template download only — does not include a venue booking."}
+              ? "Next: Stripe checkout. Interactive Event Builder after payment — not a venue booking."
+              : "Next: Stripe checkout to pay for this download. Instant file — not a venue booking."}
         </p>
       )}
       {error && <p className="text-sm text-red-300">{error}</p>}

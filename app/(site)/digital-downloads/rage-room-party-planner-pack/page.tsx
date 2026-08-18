@@ -8,12 +8,15 @@ import DigitalEditorialByline from "@/components/DigitalEditorialByline"
 import DigitalProductCover from "@/components/DigitalProductCover"
 import {
   DigitalCompactTrust,
+  DigitalFitCheck,
+  DigitalProofBar,
   DigitalPurchaseReassurance,
   DigitalRefundNote,
   DigitalValueStack,
   WhatHappensAfterPayment,
 } from "@/components/DigitalPurchaseDetails"
 import DigitalSampleStrip from "@/components/DigitalSampleStrip"
+import DigitalStickyBuyBar from "@/components/DigitalStickyBuyBar"
 import FAQ from "@/components/FAQ"
 import ProductViewTracker from "@/components/ProductViewTracker"
 import TrackedProductLink from "@/components/TrackedProductLink"
@@ -97,6 +100,11 @@ const faqs = [
       "The secure link expires after 72 hours to keep delivery private. Once you download the PDF, it is yours to keep forever. We also email the link to the address you use at checkout.",
   },
   {
+    question: "Do I need a promo code?",
+    answer:
+      "No. The 20% demand drop is already in the price. You pay £5.60 at Stripe — no extra fees and no code to enter.",
+  },
+  {
     question: "Can I get help or a refund?",
     answer:
       "If the file is faulty or will not open, we will replace it or refund you — contact us within 7 days. Change-of-mind refunds are not offered on instant digital downloads after a successful download.",
@@ -125,31 +133,31 @@ export default function RageRoomPartyPlannerPackPage() {
         <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <p className="text-sm font-bold uppercase tracking-widest text-rage-500">
-              One-time digital download
+              15-page printable PDF · not a venue booking
             </p>
             <h1 className="mt-4 text-4xl font-black uppercase tracking-wide text-white sm:text-5xl lg:text-6xl">
-              Rage Room Party Planner Pack
+              Organise the whole smash night in one pack
             </h1>
+            <p className="mt-2 text-sm font-semibold text-zinc-400">
+              Rage Room Party Planner Pack · 15 printable A4 pages
+            </p>
             <DigitalEditorialByline className="mt-3" />
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-zinc-300">
-              Plan a birthday, date night, breakup night or group smash session without
-              the admin chaos.
+              Venue scorecard, budget, RSVPs and invites — without the group-chat
+              chaos. Download in minutes. You still book the venue yourself.
             </p>
-            <div className="mt-6 flex flex-wrap items-center gap-4">
-              <div>
-                <DigitalPriceDisplay product={product} />
-                <p className="mt-1 text-xs font-semibold text-zinc-400">
-                  Instant PDF download
-                </p>
-              </div>
+            <div className="mt-6 max-w-md space-y-4">
+              <DigitalPriceDisplay product={product} />
               <DigitalCheckoutButton
                 productId={product.id}
                 analyticsProduct={analyticsProduct}
+                collectEmail
               >
-                Plan the whole night — {product.priceLabel}
+                Get instant PDF access — {product.priceLabel}
               </DigitalCheckoutButton>
             </div>
             <DigitalSaleBanner compact className="mt-3" />
+            <DigitalProofBar />
             <DigitalCompactTrust />
             <DigitalRefundNote />
           </div>
@@ -187,13 +195,14 @@ export default function RageRoomPartyPlannerPackPage() {
             gives you one simple place to organise it all.
           </p>
           <DigitalValueStack
-            title="Updated for UK venues 2026"
+            title="What you can do this week"
             items={[
-              "15 printable pages — venue scorecard, budget, RSVP, invites and checklists",
-              "Built for birthdays, date nights, hen/stag and group smash nights",
-              "Sample preview available before you buy",
+              "Compare venues on one scorecard instead of six browser tabs",
+              "Split the budget before anyone argues about who owes what",
+              "Send the same invite to the whole group in one go",
+              "Walk in with a checklist — waivers, travel, food and photos",
             ]}
-            timeCompare="Worth hours of DIY planning for less than a coffee round."
+            timeCompare="Less than a coffee round. Built from how UK rage room nights actually get organised."
           />
         </div>
       </section>
@@ -219,13 +228,33 @@ export default function RageRoomPartyPlannerPackPage() {
               </div>
             ))}
           </div>
+          <div className="mt-8 max-w-md">
+            <DigitalCheckoutButton
+              productId={product.id}
+              analyticsProduct={analyticsProduct}
+            >
+              Get instant PDF access — {product.priceLabel}
+            </DigitalCheckoutButton>
+          </div>
         </div>
       </section>
 
       <section className="section-textured px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-6xl">
           <h2 className="section-title mb-6">Who It Is For</h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <DigitalFitCheck
+            forItems={[
+              "You are organising a birthday, hen, stag or friends’ smash night",
+              "You want one printable pack instead of a messy group chat",
+              "You still want to pick and book the venue yourself",
+            ]}
+            notForItems={[
+              "You want us to book a rage room for you — this is not a booking.",
+              "You only need first-timer what-to-wear advice — that prep pack is free.",
+              "This is a work team-building event — use the Corporate Event Builder.",
+            ]}
+          />
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {audiences.map((audience) => (
               <div
                 key={audience}
@@ -289,17 +318,19 @@ export default function RageRoomPartyPlannerPackPage() {
         <div className="mx-auto max-w-4xl rounded-lg border border-rage-500/30 bg-[#181818] p-6 text-center sm:p-8">
           <Download className="mx-auto h-10 w-10 text-rage-500" />
           <h2 className="mt-4 text-2xl font-black uppercase tracking-wide text-white">
-            Plan the whole night — {product.priceLabel}
+            Download the planner PDF — {product.priceLabel}
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm text-zinc-300">
-            Instant PDF download for venue, group, budget and night-out details.
+            Instant 15-page PDF for venue, group, budget and night-out details.
+            You still book the venue yourself.
           </p>
           <div className="mt-6 flex justify-center">
             <DigitalCheckoutButton
               productId={product.id}
               analyticsProduct={analyticsProduct}
+              collectEmail
             >
-              Plan the whole night — {product.priceLabel}
+              Get instant PDF access — {product.priceLabel}
             </DigitalCheckoutButton>
           </div>
           <div className="mx-auto max-w-2xl">
@@ -308,6 +339,12 @@ export default function RageRoomPartyPlannerPackPage() {
           </div>
         </div>
       </section>
+      <DigitalStickyBuyBar
+        productId={product.id}
+        analyticsProduct={analyticsProduct}
+        priceLabel={product.priceLabel}
+        ctaLabel="Get the PDF"
+      />
     </div>
   )
 }

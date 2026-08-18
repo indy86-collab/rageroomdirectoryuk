@@ -27,7 +27,7 @@ const intents: {
   {
     id: "party",
     label: "Group / school / birthday",
-    hint: "Plan the whole night",
+    hint: "15-page PDF planner",
     productId: "rage-room-party-planner",
   },
   {

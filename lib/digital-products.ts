@@ -85,7 +85,7 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     description:
       "A printable UK planning kit for rage room birthdays, date nights, breakup nights, group nights, stag and hen activities, and friends' nights out.",
     checkoutBlurb:
-      "Limited-time 20% demand drop already applied. Instant PDF planning pack only — not a venue booking.",
+      "Paying for a printable PDF planner. 20% off already applied — no code needed. Not a venue booking.",
     includedSections: [
       "Event snapshot",
       "Planning timeline",
@@ -138,7 +138,7 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     description:
       "An interactive event builder for HR teams, office managers, founders and team leads organising a rage room team event — budget, venue shortlist, approval and invitations.",
     checkoutBlurb:
-      "Limited-time 20% demand drop already applied. Interactive Event Builder access after payment — not a venue booking.",
+      "Paying for interactive Event Builder access. 20% off already applied — no code needed. Not a venue booking.",
     includedSections: [
       "Event details builder",
       "Budget calculator",
@@ -235,7 +235,7 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     description:
       "A premium printable and digital gift voucher template pack for giving a rage room experience as a birthday, date night, breakup, best friend, holiday or generic experience gift.",
     checkoutBlurb:
-      "Limited-time 20% demand drop already applied. Instant ZIP of DIY gift voucher templates only — not a venue booking.",
+      "Paying for DIY gift voucher templates (ZIP). 20% off already applied — no code needed. Not a venue booking.",
     includedSections: [
       "Birthday voucher",
       "Date night voucher",
@@ -316,7 +316,7 @@ export const digitalProducts: Record<string, DigitalProduct> = {
     description:
       "Bundle the Rage Room Party Planner Pack and Gift Voucher Template Pack — plan the night and present the experience as a polished gift.",
     checkoutBlurb:
-      "Limited-time 20% demand drop already applied. Instant downloads only — not a venue booking. Party Planner PDF + DIY Gift Voucher ZIP.",
+      "Paying for instant downloads. 20% off already applied — no code needed. Party Planner PDF + DIY Gift Voucher ZIP — not a venue booking.",
     includedSections: [
       "Rage Room Party Planner Pack (PDF)",
       "Rage Room Gift Voucher Template Pack (ZIP)",

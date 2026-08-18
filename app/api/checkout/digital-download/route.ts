@@ -6,6 +6,7 @@ import {
 } from "@/lib/checkout-logging"
 import { isCorporateBookingDurableStoreReady } from "@/lib/corporate-booking-system/store"
 import { CORPORATE_BOOKING_SYSTEM_PRODUCT_ID } from "@/lib/corporate-booking-system/types"
+import { digitalCheckoutSessionOptions } from "@/lib/digital-checkout-session"
 import { getDigitalProduct } from "@/lib/digital-products"
 import { absoluteUrl } from "@/lib/site-url"
 import { getStripe } from "@/lib/stripe"
@@ -62,21 +63,12 @@ export async function POST(request: Request) {
     const priceId = await getOrCreateStripePriceForProduct(product.id)
     const clientReferenceId = randomUUID()
     const session = await stripe.checkout.sessions.create({
-      mode: "payment",
+      ...digitalCheckoutSessionOptions(product),
       client_reference_id: clientReferenceId,
       line_items: [{ price: priceId, quantity: 1 }],
-      // "auto" only asks for address when needed (e.g. tax) — keep friction low for micro digital.
-      billing_address_collection: "auto",
-      phone_number_collection: { enabled: false },
-      allow_promotion_codes: true,
       ...(customerEmail ? { customer_email: customerEmail } : {}),
       success_url: `${absoluteUrl("/order/success")}?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${absoluteUrl("/checkout/cancel")}?product_id=${encodeURIComponent(product.id)}&client_reference_id=${encodeURIComponent(clientReferenceId)}`,
-      custom_text: {
-        submit: {
-          message: product.checkoutBlurb,
-        },
-      },
       metadata: {
         clientReferenceId,
         productId: product.id,

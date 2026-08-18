@@ -65,6 +65,8 @@ export function DigitalCompactTrust({ className = "" }: { className?: string }) 
       <span className="mx-2 text-zinc-600">·</span>
       Planning pack only — not a booking
       <span className="mx-2 text-zinc-600">·</span>
+      Card or Apple Pay
+      <span className="mx-2 text-zinc-600">·</span>
       7-day faulty-file refund
     </p>
   )
@@ -147,6 +149,65 @@ export function DigitalValueStack({
       {timeCompare && (
         <p className="mt-3 text-xs font-semibold text-zinc-400">{timeCompare}</p>
       )}
+    </div>
+  )
+}
+
+/** Honest authority proof — no fake reviews or invented sales counts. */
+export function DigitalProofBar({ className = "" }: { className?: string }) {
+  return (
+    <div
+      className={`mt-5 grid gap-2 sm:grid-cols-3 ${className}`}
+    >
+      {[
+        "Made by RageRoom Directory — the UK venue listing site",
+        "See the sample pages before you pay",
+        "Instant download · keep the file forever",
+      ].map((item) => (
+        <p
+          key={item}
+          className="rounded-md border border-zinc-800 bg-[#151515] px-3 py-2 text-xs font-semibold leading-relaxed text-zinc-300"
+        >
+          {item}
+        </p>
+      ))}
+    </div>
+  )
+}
+
+type DigitalFitCheckProps = {
+  forItems: string[]
+  notForItems: string[]
+}
+
+export function DigitalFitCheck({ forItems, notForItems }: DigitalFitCheckProps) {
+  return (
+    <div className="grid gap-4 md:grid-cols-2">
+      <div className="rounded-lg border border-zinc-800 bg-[#181818] p-5">
+        <h3 className="text-sm font-bold uppercase tracking-widest text-rage-500">
+          This is for you if
+        </h3>
+        <ul className="mt-3 space-y-2">
+          {forItems.map((item) => (
+            <li key={item} className="flex items-start gap-2 text-sm text-zinc-300">
+              <Sparkles className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-rage-500" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="rounded-lg border border-zinc-800 bg-[#181818] p-5">
+        <h3 className="text-sm font-bold uppercase tracking-widest text-zinc-500">
+          Skip this if
+        </h3>
+        <ul className="mt-3 space-y-2">
+          {notForItems.map((item) => (
+            <li key={item} className="text-sm leading-relaxed text-zinc-400">
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   )
 }

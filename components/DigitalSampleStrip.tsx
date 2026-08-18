@@ -27,7 +27,8 @@ export default function DigitalSampleStrip({
       </h2>
       <p className="mt-1 text-sm text-zinc-400">
         {sampleUnlockHint ||
-          `Sample preview from ${productName} — not the full download.`}
+          `Sample preview from ${productName} — not the full download.`}{" "}
+        Read the sample before you buy.
       </p>
       <div className="mt-4 grid grid-cols-3 gap-2 sm:gap-3">
         {images.slice(0, 3).map((src, index) => (
@@ -51,7 +52,7 @@ export default function DigitalSampleStrip({
           href={previewPdf}
           className="mt-4 inline-flex text-sm font-semibold text-rage-500 hover:text-rage-400"
         >
-          View 2-page sample PDF
+          Read 2-page sample PDF
         </Link>
       )}
     </div>

@@ -8,12 +8,15 @@ import DigitalEditorialByline from "@/components/DigitalEditorialByline"
 import DigitalProductCover from "@/components/DigitalProductCover"
 import {
   DigitalCompactTrust,
+  DigitalFitCheck,
+  DigitalProofBar,
   DigitalPurchaseReassurance,
   DigitalRefundNote,
   DigitalValueStack,
   WhatHappensAfterPayment,
 } from "@/components/DigitalPurchaseDetails"
 import DigitalSampleStrip from "@/components/DigitalSampleStrip"
+import DigitalStickyBuyBar from "@/components/DigitalStickyBuyBar"
 import FAQ from "@/components/FAQ"
 import ProductViewTracker from "@/components/ProductViewTracker"
 import {
@@ -125,6 +128,11 @@ const faqs = [
       "The secure link expires after 72 hours to keep delivery private. Once you download the ZIP, it is yours to keep forever. We also email the link to the address you use at checkout.",
   },
   {
+    question: "Do I need a promo code?",
+    answer:
+      "No. The 20% demand drop is already in the price. You pay £4 at Stripe — no extra fees and no code to enter.",
+  },
+  {
     question: "Can I get help or a refund?",
     answer:
       "If the file is faulty or will not open, we will replace it or refund you — contact us within 7 days. Change-of-mind refunds are not offered on instant digital downloads after a successful download.",
@@ -153,31 +161,31 @@ export default function GiftVoucherTemplatePackPage() {
         <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <p className="text-sm font-bold uppercase tracking-widest text-rage-500">
-              Printable and digital gift templates
+              Printable and digital templates · not a booking
             </p>
             <h1 className="mt-4 text-4xl font-black uppercase tracking-wide text-white sm:text-5xl lg:text-6xl">
-              Rage Room Gift Voucher Template Pack
+              Make a rage room gift look like a real voucher
             </h1>
+            <p className="mt-2 text-sm font-semibold text-zinc-400">
+              Rage Room Gift Voucher Template Pack · 8 themes
+            </p>
             <DigitalEditorialByline className="mt-3" />
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-zinc-300">
-              DIY printable and digital gift voucher templates — present a rage room
-              experience as a gift. Not a venue booking or venue-issued voucher.
+              8 themes. Print it or send it from your phone in minutes. You still book
+              the session with your chosen venue.
             </p>
-            <div className="mt-6 flex flex-wrap items-center gap-4">
-              <div>
-                <DigitalPriceDisplay product={product} />
-                <p className="mt-1 text-xs font-semibold text-zinc-400">
-                  Instant ZIP download
-                </p>
-              </div>
+            <div className="mt-6 max-w-md space-y-4">
+              <DigitalPriceDisplay product={product} />
               <DigitalCheckoutButton
                 productId={product.id}
                 analyticsProduct={analyticsProduct}
+                collectEmail
               >
-                Get printable voucher templates — {product.priceLabel}
+                Get instant ZIP access — {product.priceLabel}
               </DigitalCheckoutButton>
             </div>
             <DigitalSaleBanner compact className="mt-3" />
+            <DigitalProofBar />
             <DigitalCompactTrust />
             <DigitalRefundNote />
           </div>
@@ -259,7 +267,18 @@ export default function GiftVoucherTemplatePackPage() {
       <section className="section-textured px-4 py-10 sm:px-6 sm:py-14">
         <div className="mx-auto max-w-6xl">
           <h2 className="section-title mb-6">Who It Is For</h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <DigitalFitCheck
+            forItems={[
+              "You are gifting a rage room session and want it to look finished",
+              "You need something printable tonight, or sendable on WhatsApp",
+              "You still want to book the venue yourself",
+            ]}
+            notForItems={[
+              "You want a venue-issued voucher or a prepaid session — this is a template pack only.",
+              "You need us to book a rage room — we don’t take bookings.",
+            ]}
+          />
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {audiences.map((audience) => (
               <div
                 key={audience}
@@ -334,8 +353,9 @@ export default function GiftVoucherTemplatePackPage() {
             <DigitalCheckoutButton
               productId={product.id}
               analyticsProduct={analyticsProduct}
+              collectEmail
             >
-              Get printable voucher templates — {product.priceLabel}
+              Get instant ZIP access — {product.priceLabel}
             </DigitalCheckoutButton>
           </div>
           <div className="mx-auto max-w-2xl">
@@ -344,6 +364,12 @@ export default function GiftVoucherTemplatePackPage() {
           </div>
         </div>
       </section>
+      <DigitalStickyBuyBar
+        productId={product.id}
+        analyticsProduct={analyticsProduct}
+        priceLabel={product.priceLabel}
+        ctaLabel="Get the ZIP"
+      />
     </div>
   )
 }

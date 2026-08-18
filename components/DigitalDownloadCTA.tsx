@@ -18,8 +18,8 @@ const ctaCopy = {
   party: {
     eyebrow: null as string | null,
     title: "Booking for a group?",
-    copy: "Get the 15-page Rage Room Party Planner Pack before you choose a venue.",
-    buttonPrefix: "Plan the whole night",
+    copy: "Get the 15-page Rage Room Party Planner Pack PDF before you choose a venue.",
+    buttonPrefix: "Get the planner PDF",
     href: "/digital-downloads/rage-room-party-planner-pack",
     productId: "rage-room-party-planner",
   },

@@ -57,7 +57,13 @@ export default function DigitalPriceDisplay({
       </div>
       {saleOn && (
         <p className="mt-1 text-xs font-semibold text-zinc-400">
-          Limited-time demand drop — already applied at checkout
+          Limited-time demand drop — already applied. {product.priceLabel} total at
+          Stripe, no extra fees.
+        </p>
+      )}
+      {!saleOn && (
+        <p className="mt-1 text-xs font-semibold text-zinc-400">
+          {product.priceLabel} total at Stripe — no extra fees at checkout.
         </p>
       )}
     </div>

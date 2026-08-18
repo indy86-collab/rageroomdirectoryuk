@@ -1,4 +1,5 @@
 import "server-only"
+import { stripeCheckoutDisplayName } from "@/lib/digital-checkout-session"
 import { getDigitalProduct } from "@/lib/digital-products"
 import { getStripe } from "@/lib/stripe"
 
@@ -20,7 +21,20 @@ export async function getOrCreateStripePriceForProduct(productId: string) {
     limit: 1,
   })
 
+  const displayName = stripeCheckoutDisplayName(product)
+
   if (existingPrices.data[0]) {
+    const stripeProductId =
+      typeof existingPrices.data[0].product === "string"
+        ? existingPrices.data[0].product
+        : existingPrices.data[0].product.id
+    const stripeProduct = await stripe.products.retrieve(stripeProductId)
+    if (stripeProduct.name !== displayName) {
+      await stripe.products.update(stripeProductId, {
+        name: displayName,
+        description: product.checkoutBlurb,
+      })
+    }
     return existingPrices.data[0].id
   }
 
@@ -38,7 +52,7 @@ export async function getOrCreateStripePriceForProduct(productId: string) {
         : {}),
     },
     product_data: {
-      name: product.name,
+      name: displayName,
       metadata: {
         productId: product.id,
         digitalProduct: "true",

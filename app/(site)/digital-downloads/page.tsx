@@ -29,7 +29,7 @@ const visitorPaidDownloads = [
   {
     title: "Rage Room Party Planner Pack",
     copy: "For planning birthdays, date nights and group nights.",
-    ctaPrefix: "Plan the whole night",
+    ctaPrefix: "Get the planner PDF",
     href: "/digital-downloads/rage-room-party-planner-pack",
     productId: "rage-room-party-planner",
   },
