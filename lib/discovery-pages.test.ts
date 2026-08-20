@@ -60,6 +60,17 @@ describe("discovery inventory", () => {
 
     expect(listings.filter((listing) => listing.activities.includes("axe-throwing"))).toHaveLength(29)
   })
+
+  it("exposes the expanded paint inventory and its strict smash-and-paint subset", () => {
+    const paint = listings.filter((listing) => listing.activities.includes("paint-splatter"))
+    const rageAndPaint = paint.filter((listing) => listing.activities.includes("rage-room"))
+
+    expect(paint).toHaveLength(34)
+    expect(rageAndPaint).toHaveLength(12)
+    expect(getActivityCombinationHref("paint-splatter", "rage-room")).toBe(
+      "/activities/paint-splatter?activities=rage-room#venues"
+    )
+  })
 })
 
 describe("discovery indexability", () => {
@@ -90,6 +101,8 @@ describe("discovery indexability", () => {
     expect(urls.has("https://www.rageroomdirectory.co.uk/activities/axe-throwing")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/activities/car-smash")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/activities/mobile-rage-rooms")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/activities/paint-splatter")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/listing/splatter-art-studio-glasgow")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/listing/just-axing-swansea")).toBe(true)
   })
 })

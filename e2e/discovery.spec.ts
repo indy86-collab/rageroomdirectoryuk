@@ -40,7 +40,7 @@ test.describe("audited discovery routes", () => {
     await expect(page.getByLabel("Location")).toHaveValue("Maidstone")
     await expect(page.getByText("1 venue found")).toBeVisible()
     await page.getByRole("button", { name: "Reset" }).click()
-    await expect(page.getByText("68 venues found")).toBeVisible()
+    await expect(page.getByText("85 venues found")).toBeVisible()
   })
 
   test("activity and occasion pages expose canonical routes and strict inventory", async ({ page }) => {
@@ -86,7 +86,7 @@ test.describe("audited discovery routes", () => {
 
     await page.goto("/activities/paint-splatter/london")
     await expect(page.getByRole("heading", { level: 1, name: /paint & splatter rooms in london/i })).toBeVisible()
-    await expect(page.getByText("3 verified venues found")).toBeVisible()
+    await expect(page.getByText("4 verified venues found")).toBeVisible()
   })
 
   test("parents, cities and matching venues link only to eligible location pages", async ({ page }) => {
@@ -121,7 +121,7 @@ test.describe("audited discovery routes", () => {
     await expect(page).toHaveURL(/activities=rage-room%2Caxe-throwing|activities=axe-throwing/)
 
     await page.getByRole("button", { name: "Reset" }).click()
-    await expect(page.getByText("46 verified venues found")).toBeVisible()
+    await expect(page.getByText("48 verified venues found")).toBeVisible()
   })
 
   test("booking CTA uses verified links and otherwise falls back to venue details", async ({ page }) => {
@@ -163,7 +163,7 @@ test.describe("audited discovery routes", () => {
 
   test("filters combine with AND semantics and reset to the complete inventory", async ({ page }) => {
     await page.goto("/listings")
-    await expect(page.getByText("68 venues found")).toBeVisible()
+    await expect(page.getByText("85 venues found")).toBeVisible()
     await openFilters(page)
 
     await page.getByRole("checkbox", { name: "Axe Throwing", exact: true }).check()
@@ -179,7 +179,41 @@ test.describe("audited discovery routes", () => {
     expect(constrainedCount).toBeLessThanOrEqual(14)
 
     await page.getByRole("button", { name: "Reset" }).click()
-    await expect(page.getByText("68 venues found")).toBeVisible()
+    await expect(page.getByText("85 venues found")).toBeVisible()
+  })
+
+  test("paint discovery covers standalone, combined, city, mobile and comparison journeys", async ({ page }) => {
+    await page.goto("/activities/paint-splatter")
+    await expect(page.getByText("34 verified venues found")).toBeVisible()
+    await expect(page.getByText("34 rage rooms found")).toHaveCount(0)
+    await expect(page.getByRole("heading", { name: "Want to smash and paint?" })).toBeVisible()
+    await expect(page.getByRole("link", { name: /Apply the Rage Room \+ Paint filter \(12\)/ })).toHaveAttribute(
+      "href",
+      "/activities/paint-splatter?activities=rage-room#venues"
+    )
+
+    await openFilters(page)
+    await page.getByLabel("Location").selectOption("Sheffield")
+    await expect(page.getByText("2 verified venues found")).toBeVisible()
+    await expect(page.getByRole("heading", { name: "Off The Canvas Sheffield", exact: true })).toBeVisible()
+    await expect(page.getByRole("heading", { name: "Splatter Central Sheffield", exact: true })).toBeVisible()
+
+    await page.goto("/activities/paint-splatter?activities=rage-room")
+    await expect(page.getByText("12 verified venues found")).toBeVisible()
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/)
+
+    await page.goto("/listing/rage-room-events-mobile-uk")
+    await expect(page.getByRole("link", { name: "Paint Splatter" }).first()).toBeVisible()
+
+    await page.goto("/activities/paint-splatter")
+    for (const name of ["Splatter Art Studio Glasgow", "Escape Time Lichfield"]) {
+      await page.locator("article", { has: page.getByRole("heading", { name, exact: true }) })
+        .getByRole("button", { name: "Compare venue" })
+        .click()
+    }
+    await expect(page.getByText("Clear comparison (2/3)")).toBeVisible()
+    await expect(page.getByRole("columnheader", { name: "Splatter Art Studio Glasgow" })).toBeVisible()
+    await expect(page.getByRole("columnheader", { name: "Escape Time Lichfield" })).toBeVisible()
   })
 
   test("standalone and mobile detail pages use truthful terminology and schema", async ({ page }) => {

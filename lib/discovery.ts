@@ -83,7 +83,7 @@ export const ACTIVITY_DEFINITIONS: ActivityDefinition[] = [
     label: "Paint & Splatter Rooms",
     shortLabel: "Paint Splatter",
     emoji: "🎨",
-    description: "Create colourful chaos in a dedicated paint or splatter room.",
+    description: "Find high-energy splatter rooms, paint throwing, action painting and neon paint experiences where making a colourful mess is the point.",
     heroTitle: "Paint & Splatter Rooms Across the UK",
     editorial: {
       whatItIs: "Paint or splatter rooms let participants throw, spray or flick paint in a protected creative space. Every result is different, and some venues let you take a canvas home.",

@@ -95,5 +95,95 @@
     "city": "London",
     "reason": "The official site says the venue is awaiting reopening and provides no current location or booking availability. Re-add only after reopening is announced.",
     "blacklistedAt": "2026-08-17"
+  },
+  {
+    "slug": "live-action-escapes-worcester-ma",
+    "name": "Live Action Escapes",
+    "websiteContains": [
+      "liveactionescapes.com"
+    ],
+    "city": "Worcester",
+    "reason": "Outside the United Kingdom scope: this search result is in Worcester, Massachusetts, US.",
+    "blacklistedAt": "2026-08-20"
+  },
+  {
+    "slug": "vent-llc-portsmouth-nh",
+    "name": "Vent LLC",
+    "websiteContains": [
+      "ventwithus.com"
+    ],
+    "city": "Portsmouth",
+    "reason": "Outside the United Kingdom scope: this search result is in Portsmouth, New Hampshire, US.",
+    "blacklistedAt": "2026-08-20"
+  },
+  {
+    "slug": "smash-house-westwood-nj",
+    "name": "Smash House Westwood",
+    "websiteContains": [
+      "smashhousewestwood.com"
+    ],
+    "city": "Westwood",
+    "reason": "Outside the United Kingdom scope: this operator is in New Jersey, US.",
+    "blacklistedAt": "2026-08-20"
+  },
+  {
+    "slug": "artist-for-a-day-north-olmsted-oh",
+    "name": "Artist For A Day",
+    "websiteContains": [
+      "artistforaday.com"
+    ],
+    "city": "North Olmsted",
+    "reason": "Outside the United Kingdom scope: this operator is in Ohio, US.",
+    "blacklistedAt": "2026-08-20"
+  },
+  {
+    "slug": "smash-zone-wisconsin",
+    "name": "Smash Zone WI",
+    "websiteContains": [
+      "smashzonewi.com"
+    ],
+    "city": "Wauwatosa",
+    "reason": "Outside the United Kingdom scope: this operator is in Wisconsin, US.",
+    "blacklistedAt": "2026-08-20"
+  },
+  {
+    "slug": "stain-paint-create-newport-pa",
+    "name": "Stain.Paint.Create",
+    "websiteContains": [
+      "stain-paint-create.com"
+    ],
+    "city": "Newport",
+    "reason": "Outside the United Kingdom scope: this Newport search result is in Pennsylvania, US.",
+    "blacklistedAt": "2026-08-20"
+  },
+  {
+    "slug": "therapaint-studio-nashville",
+    "name": "TheraPaint Studio",
+    "websiteContains": [
+      "therapaintstudio.com"
+    ],
+    "city": "Nashville",
+    "reason": "Outside the United Kingdom scope: this operator is in Tennessee, US.",
+    "blacklistedAt": "2026-08-20"
+  },
+  {
+    "slug": "splat-studio-winchester",
+    "name": "Splat Studio",
+    "websiteContains": [
+      "splatstudio.co.uk"
+    ],
+    "city": "Winchester",
+    "reason": "Ordinary art-and-craft studio without a qualifying high-energy paint/splatter-room experience.",
+    "blacklistedAt": "2026-08-20"
+  },
+  {
+    "slug": "splat-n-splodge-shrewsbury",
+    "name": "Splat n Splodge",
+    "websiteContains": [
+      "splatnsplodge.co.uk"
+    ],
+    "city": "Shrewsbury",
+    "reason": "Pottery-painting and conventional craft operator without a qualifying high-energy paint/splatter experience.",
+    "blacklistedAt": "2026-08-20"
   }
 ]

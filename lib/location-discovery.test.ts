@@ -21,13 +21,19 @@ import type { Listing } from "@/types/listing"
 const listings = listingsData as Listing[]
 
 describe("location discovery qualification", () => {
-  it("creates only the five inventory-backed pages that now qualify", () => {
+  it("creates only the inventory-backed pages that now qualify", () => {
     expect(getEligibleLocationDiscoveryPages(listings).map((page) => page.href)).toEqual([
       "/activities/paint-splatter/london",
       "/activities/rage-rooms/birmingham",
       "/activities/rage-rooms/london",
       "/occasions/birthdays/birmingham",
+      "/occasions/birthdays/edinburgh",
+      "/occasions/birthdays/london",
+      "/occasions/corporate-team-building/edinburgh",
       "/occasions/corporate-team-building/london",
+      "/occasions/hen-parties/edinburgh",
+      "/occasions/kids-families/london",
+      "/occasions/stag-parties/edinburgh",
     ])
   })
 
@@ -40,6 +46,7 @@ describe("location discovery qualification", () => {
     })
     expect(page?.qualification).toBe("strong")
     expect(page?.listings.map((listing) => listing.name).sort()).toEqual([
+      "Boom Lab London",
       "Kedi Studio",
       "Rage Cage UK",
       "The Splatter Room Studio",
@@ -163,7 +170,13 @@ describe("location discovery routes and metadata", () => {
     ])
     expect(await generateOccasionLocationParams()).toEqual([
       { slug: "birthdays", location: "birmingham" },
+      { slug: "birthdays", location: "edinburgh" },
+      { slug: "birthdays", location: "london" },
+      { slug: "corporate-team-building", location: "edinburgh" },
       { slug: "corporate-team-building", location: "london" },
+      { slug: "hen-parties", location: "edinburgh" },
+      { slug: "kids-families", location: "london" },
+      { slug: "stag-parties", location: "edinburgh" },
     ])
   })
 
@@ -220,6 +233,8 @@ describe("location discovery routes and metadata", () => {
     expect(urls.has("https://www.rageroomdirectory.co.uk/activities/rage-rooms/london")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/occasions/birthdays/birmingham")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/activities/paint-splatter/london")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/occasions/birthdays/edinburgh")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/occasions/kids-families/london")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/occasions/corporate-team-building/london")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/activities/axe-throwing/birmingham")).toBe(false)
     expect(urls.has("https://www.rageroomdirectory.co.uk/activities/rage-rooms/leicester")).toBe(false)

@@ -10,6 +10,7 @@ import {
   MIN_ACTIVITY_PAGE_LISTINGS,
   getActivityDefinition,
   getActivityCombinationHref,
+  getListingHref,
   pluraliseVenue,
 } from "@/lib/discovery"
 import { getAllListingsForAdmin, getListingsByActivity } from "@/lib/listings"
@@ -55,7 +56,9 @@ export async function generateMetadata({ params, searchParams = {} }: ActivityPa
     title: titles[activity.value] ?? `${activity.label} | Verified UK Venues`,
     description: activity.value === "rage-room"
       ? `Explore ${pluraliseVenue(listings.length)} in our verified UK rage-room directory. Compare locations, published prices, ages and booking options.`
-      : `Explore ${pluraliseVenue(listings.length)} offering verified ${activity.label.toLowerCase()} experiences across the UK, including standalone and multi-activity venues. Compare locations, published prices, ages and booking options.`,
+      : activity.value === "paint-splatter"
+        ? `Explore ${pluraliseVenue(listings.length)} offering verified UK splatter rooms, paint throwing, action painting and neon paint experiences. Compare locations, prices, ages and booking options.`
+        : `Explore ${pluraliseVenue(listings.length)} offering verified ${activity.label.toLowerCase()} experiences across the UK, including standalone and multi-activity venues. Compare locations, published prices, ages and booking options.`,
     alternates: { canonical: `/activities/${activity.slug}` },
     ...(Object.keys(searchParams).length > 0
       ? { robots: { index: false, follow: true } }
@@ -73,7 +76,10 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
     (page) => page.category.slug === activity.slug
   )
   const combinations = ACTIVITY_DEFINITIONS
-    .filter((related) => related.value !== activity.value)
+    .filter((related) =>
+      related.value !== activity.value &&
+      !(activity.value === "paint-splatter" && related.value === "rage-room")
+    )
     .map((related) => ({
       ...related,
       count: listings.filter((listing) => listing.activities.includes(related.value)).length,
@@ -81,6 +87,9 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
     }))
     .filter((related) => related.count > 0)
     .sort((a, b) => b.count - a.count)
+  const smashAndPaintListings = activity.value === "paint-splatter"
+    ? listings.filter((listing) => listing.activities.includes("rage-room"))
+    : []
   const relatedLandingPages = ACTIVITY_DEFINITIONS
     .filter((related) => related.value !== activity.value)
     .map((related) => ({
@@ -151,6 +160,37 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
           showOccasions
           resultsLabel="verified venues"
         />
+
+        {smashAndPaintListings.length > 0 && (
+          <section className="mt-10 rounded-lg border border-rage-500/30 bg-rage-500/10 p-5 sm:p-6" aria-labelledby="smash-and-paint-heading">
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-rage-400">Strict activity match</p>
+            <h2 id="smash-and-paint-heading" className="mt-2 text-2xl font-bold text-white">Want to smash and paint?</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-relaxed text-zinc-300">
+              These {pluraliseVenue(smashAndPaintListings.length)} have both a verified rage room and a verified paint or splatter experience at the same venue or through the same mobile operator.
+            </p>
+            <div className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+              {smashAndPaintListings.map((listing) => (
+                <Link
+                  key={listing.id}
+                  href={getListingHref(listing)}
+                  className="rounded-md border border-zinc-700/80 bg-dark-900/70 px-4 py-3 text-sm font-semibold text-zinc-200 hover:border-rage-500/60 hover:text-rage-300"
+                >
+                  {listing.name}
+                  <span className="mt-1 block text-xs font-normal text-zinc-500">
+                    {listing.locationType === "mobile-service" ? "UK-wide mobile service" : listing.city}
+                  </span>
+                </Link>
+              ))}
+            </div>
+            <Link
+              href={getActivityCombinationHref(activity.slug, "rage-room")}
+              className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-md bg-rage-500 px-4 py-2 text-sm font-bold text-white hover:bg-rage-600"
+            >
+              Apply the Rage Room + Paint filter ({smashAndPaintListings.length})
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </section>
+        )}
 
         {locationPages.length > 0 && (
           <nav className="mt-10 rounded-lg border border-zinc-800 bg-[#181818] p-5 sm:p-6" aria-label={`Inventory-backed city pages for ${activity.shortLabel}`}>
