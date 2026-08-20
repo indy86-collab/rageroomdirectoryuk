@@ -5,29 +5,47 @@ import Link from "next/link"
 interface UGCButtonsProps {
   listingId?: string
   listingName?: string
+  listingCity?: string
 }
 
-export default function UGCButtons({ listingId, listingName }: UGCButtonsProps) {
+export default function UGCButtons({ listingId, listingName, listingCity }: UGCButtonsProps) {
+  const claimContent = (
+    <>
+      <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center group-hover:bg-orange-500/30 transition-colors">
+        <Plus className="w-5 h-5 text-orange-500" />
+      </div>
+      <div className="flex-1 min-w-0">
+        <h3 className="text-white font-semibold mb-1 text-sm sm:text-base">Claim or Update This Listing</h3>
+        <p className="text-zinc-400 text-xs sm:text-sm">Send current prices, packages, photos and booking details.</p>
+      </div>
+    </>
+  )
+
   return (
     <div className="bg-[#181818] rounded-lg border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
       <h2 className="text-lg sm:text-xl font-bold text-white mb-4">
         Help Us Improve
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-        <TrackedClaimLink
-          href={`/list-your-rage-room${listingId ? `?listing=${encodeURIComponent(listingId)}&type=claim` : ""}`}
-          listingSlug={listingId}
-          source="listing_help_improve"
-          className="flex items-start sm:items-center gap-3 p-4 bg-zinc-900 hover:bg-zinc-800 rounded-lg border border-zinc-700 transition-colors group min-h-[80px] sm:min-h-0"
-        >
-          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center group-hover:bg-orange-500/30 transition-colors">
-            <Plus className="w-5 h-5 text-orange-500" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <h3 className="text-white font-semibold mb-1 text-sm sm:text-base">Claim or Update This Listing</h3>
-            <p className="text-zinc-400 text-xs sm:text-sm">Send current prices, packages, photos and booking details.</p>
-          </div>
-        </TrackedClaimLink>
+        {listingId ? (
+          <TrackedClaimLink
+            href={`/list-your-rage-room?listing=${encodeURIComponent(listingId)}&type=claim`}
+            venueSlug={listingId}
+            venueCity={listingCity}
+            pageType="venue"
+            ctaPlacement="listing_owner_panel"
+            className="flex items-start sm:items-center gap-3 p-4 bg-zinc-900 hover:bg-zinc-800 rounded-lg border border-zinc-700 transition-colors group min-h-[80px] sm:min-h-0"
+          >
+            {claimContent}
+          </TrackedClaimLink>
+        ) : (
+          <Link
+            href="/list-your-rage-room"
+            className="flex items-start sm:items-center gap-3 p-4 bg-zinc-900 hover:bg-zinc-800 rounded-lg border border-zinc-700 transition-colors group min-h-[80px] sm:min-h-0"
+          >
+            {claimContent}
+          </Link>
+        )}
 
         <Link
           href={`/list-your-rage-room${listingId ? `?listing=${encodeURIComponent(listingId)}&type=correction` : ""}`}

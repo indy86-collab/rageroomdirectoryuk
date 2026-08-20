@@ -13,6 +13,214 @@ export type AnalyticsOrder = {
   product: AnalyticsProduct
 }
 
+export const DIRECTORY_PAGE_TYPES = [
+  "homepage",
+  "venue",
+  "city",
+  "activity",
+  "occasion",
+  "activity_location",
+  "occasion_location",
+  "comparison",
+  "search_results",
+  "guide",
+] as const
+
+export type DirectoryPageType = (typeof DIRECTORY_PAGE_TYPES)[number]
+
+export const DIRECTORY_CTA_PLACEMENTS = [
+  "venue_card",
+  "venue_hero",
+  "venue_booking_section",
+  "venue_pricing",
+  "venue_contact",
+  "comparison_table",
+  "activity_results",
+  "occasion_results",
+  "location_results",
+  "homepage_featured",
+  "near_me_results",
+  "listing_owner_panel",
+] as const
+
+export type DirectoryCtaPlacement = (typeof DIRECTORY_CTA_PLACEMENTS)[number]
+
+export const DIRECTORY_FILTER_TYPES = [
+  "activity",
+  "occasion",
+  "city",
+  "price",
+  "age",
+  "group_size",
+  "rating",
+  "online_booking",
+  "corporate",
+  "verified",
+  "distance",
+  "sort",
+] as const
+
+export type DirectoryFilterType = (typeof DIRECTORY_FILTER_TYPES)[number]
+
+export type DirectoryDiscoveryContext = {
+  pageType: DirectoryPageType
+  activity?: string
+  occasion?: string
+  discoveryLocation?: string
+}
+
+type VenueActionProperties = {
+  venueSlug: string
+  venueCity?: string
+  pageType: DirectoryPageType
+  sourcePath: string
+  ctaPlacement: DirectoryCtaPlacement
+  activity?: string
+  occasion?: string
+  discoveryLocation?: string
+  comparisonContext?: "active"
+}
+
+export type DirectoryEventMap = {
+  venue_view: {
+    venueSlug: string
+    venueCity: string
+    sourcePath?: string
+  }
+  booking_click: VenueActionProperties
+  website_click: VenueActionProperties
+  phone_click: VenueActionProperties
+  claim_listing_click: VenueActionProperties
+  compare_add: {
+    venueSlug: string
+    sourcePageType: DirectoryPageType
+    sourcePath: string
+  }
+  compare_remove: {
+    venueSlug: string
+    sourcePageType: DirectoryPageType
+    sourcePath: string
+  }
+  compare_open: {
+    venueCount: number
+    sourcePageType: DirectoryPageType
+    sourcePath: string
+  }
+  filter_apply: {
+    filterType: DirectoryFilterType
+    filterValue: string
+    filterAction: "add" | "remove" | "set"
+    pageType: DirectoryPageType
+    sourcePath: string
+    distanceFilterUsed?: boolean
+  }
+  filter_clear: {
+    pageType: DirectoryPageType
+    sourcePath: string
+    filterCount: number
+  }
+  activity_discovery_click: {
+    sourcePageType: DirectoryPageType
+    sourcePath: string
+    destinationIdentifier: string
+    destinationPath: string
+  }
+  occasion_discovery_click: {
+    sourcePageType: DirectoryPageType
+    sourcePath: string
+    destinationIdentifier: string
+    destinationPath: string
+  }
+  location_discovery_click: {
+    sourcePageType: DirectoryPageType
+    sourcePath: string
+    destinationIdentifier: string
+    destinationPath: string
+  }
+}
+
+export type DirectoryEventName = keyof DirectoryEventMap
+
+const DIRECTORY_EVENT_PROPERTIES: {
+  [EventName in DirectoryEventName]: readonly (keyof DirectoryEventMap[EventName])[]
+} = {
+  venue_view: ["venueSlug", "venueCity", "sourcePath"],
+  booking_click: [
+    "venueSlug",
+    "venueCity",
+    "pageType",
+    "sourcePath",
+    "ctaPlacement",
+    "activity",
+    "occasion",
+    "discoveryLocation",
+    "comparisonContext",
+  ],
+  website_click: [
+    "venueSlug",
+    "venueCity",
+    "pageType",
+    "sourcePath",
+    "ctaPlacement",
+    "activity",
+    "occasion",
+    "discoveryLocation",
+    "comparisonContext",
+  ],
+  phone_click: [
+    "venueSlug",
+    "venueCity",
+    "pageType",
+    "sourcePath",
+    "ctaPlacement",
+    "activity",
+    "occasion",
+    "discoveryLocation",
+    "comparisonContext",
+  ],
+  claim_listing_click: [
+    "venueSlug",
+    "venueCity",
+    "pageType",
+    "sourcePath",
+    "ctaPlacement",
+    "activity",
+    "occasion",
+    "discoveryLocation",
+    "comparisonContext",
+  ],
+  compare_add: ["venueSlug", "sourcePageType", "sourcePath"],
+  compare_remove: ["venueSlug", "sourcePageType", "sourcePath"],
+  compare_open: ["venueCount", "sourcePageType", "sourcePath"],
+  filter_apply: [
+    "filterType",
+    "filterValue",
+    "filterAction",
+    "pageType",
+    "sourcePath",
+    "distanceFilterUsed",
+  ],
+  filter_clear: ["pageType", "sourcePath", "filterCount"],
+  activity_discovery_click: [
+    "sourcePageType",
+    "sourcePath",
+    "destinationIdentifier",
+    "destinationPath",
+  ],
+  occasion_discovery_click: [
+    "sourcePageType",
+    "sourcePath",
+    "destinationIdentifier",
+    "destinationPath",
+  ],
+  location_discovery_click: [
+    "sourcePageType",
+    "sourcePath",
+    "destinationIdentifier",
+    "destinationPath",
+  ],
+}
+
 type GtagEventParams = Record<
   string,
   string | number | boolean | null | undefined | Array<Record<string, unknown>>
@@ -38,6 +246,71 @@ export function trackEvent(eventName: string, params: GtagEventParams = {}) {
   }
 
   window.gtag?.("event", eventName, params)
+}
+
+function cleanDirectoryString(value: string, maximumLength = 120) {
+  return value.trim().slice(0, maximumLength)
+}
+
+function cleanDirectoryPath(value: string) {
+  const pathOnly = value.trim().split(/[?#]/, 1)[0]
+  return pathOnly.startsWith("/") ? pathOnly.slice(0, 160) : ""
+}
+
+function cleanDirectoryProperties<EventName extends DirectoryEventName>(
+  eventName: EventName,
+  properties: DirectoryEventMap[EventName]
+) {
+  const clean: Record<string, string | number | boolean> = {}
+
+  for (const propertyName of DIRECTORY_EVENT_PROPERTIES[eventName]) {
+    const value = properties[propertyName]
+    if (typeof value === "string") {
+      const cleaned =
+        propertyName === "sourcePath" || propertyName === "destinationPath"
+          ? cleanDirectoryPath(value)
+          : cleanDirectoryString(value)
+      if (cleaned) clean[propertyName as string] = cleaned
+    } else if (typeof value === "number" && Number.isFinite(value)) {
+      clean[propertyName as string] = value
+    } else if (typeof value === "boolean") {
+      clean[propertyName as string] = value
+    }
+  }
+
+  return clean
+}
+
+/**
+ * The directory's typed GA4 contract. Runtime allow-lists prevent accidental
+ * additions such as coordinates, phone numbers, query strings or form data.
+ */
+export function trackDirectoryEvent<EventName extends DirectoryEventName>(
+  eventName: EventName,
+  properties: DirectoryEventMap[EventName]
+) {
+  trackEvent(eventName, cleanDirectoryProperties(eventName, properties))
+}
+
+/** Current route only: never includes query parameters, hashes or arbitrary search text. */
+export function getDirectorySourcePath() {
+  return typeof window === "undefined" ? "" : window.location.pathname.slice(0, 160)
+}
+
+/** Same-origin referrer route only. External referrers and their query strings are omitted. */
+export function getSafeDirectoryReferrerPath() {
+  if (typeof window === "undefined" || typeof document === "undefined" || !document.referrer) {
+    return undefined
+  }
+
+  try {
+    const referrer = new URL(document.referrer)
+    return referrer.origin === window.location.origin
+      ? referrer.pathname.slice(0, 160)
+      : undefined
+  } catch {
+    return undefined
+  }
 }
 
 export function trackViewItem(product: AnalyticsProduct) {
@@ -107,106 +380,6 @@ export function trackPurchase(order: AnalyticsOrder) {
     tax: 0,
     shipping: 0,
     items: [productItem(order.product)],
-  })
-}
-
-/** Outbound venue booking click — no PII. Mark as a GA4 key event. */
-export function trackGenerateLead({
-  source,
-  listingSlug,
-  city,
-}: {
-  source: string
-  listingSlug?: string
-  city?: string
-}) {
-  trackEvent("generate_lead", {
-    currency: "GBP",
-    value: 0,
-    lead_source: source.slice(0, 80),
-    ...(listingSlug ? { listing_slug: listingSlug.slice(0, 80) } : {}),
-    ...(city ? { city: city.slice(0, 80) } : {}),
-  })
-}
-
-type DiscoverySurface = "activity" | "occasion" | "directory"
-
-function cleanDiscoveryValue(value: string) {
-  return value.slice(0, 80)
-}
-
-export function trackDiscoveryPageViewed(
-  surface: Exclude<DiscoverySurface, "directory">,
-  slug: string,
-  inventoryCount: number
-) {
-  trackEvent(`${surface}_page_viewed`, {
-    discovery_surface: surface,
-    discovery_slug: cleanDiscoveryValue(slug),
-    inventory_count: inventoryCount,
-  })
-}
-
-export function trackDiscoveryFilterApplied(params: {
-  surface: DiscoverySurface
-  slug?: string
-  filterState: string
-  resultCount: number
-}) {
-  trackEvent("discovery_filter_applied", {
-    discovery_surface: params.surface,
-    ...(params.slug ? { discovery_slug: cleanDiscoveryValue(params.slug) } : {}),
-    filter_state: params.filterState.slice(0, 200),
-    result_count: params.resultCount,
-  })
-}
-
-export function trackVenueClicked(params: {
-  surface: DiscoverySurface
-  sourceSlug?: string
-  listingSlug: string
-  city: string
-}) {
-  trackEvent("discovery_venue_clicked", {
-    discovery_surface: params.surface,
-    ...(params.sourceSlug ? { discovery_slug: cleanDiscoveryValue(params.sourceSlug) } : {}),
-    listing_slug: cleanDiscoveryValue(params.listingSlug),
-    city: cleanDiscoveryValue(params.city),
-  })
-}
-
-export function trackCompareSelected(params: {
-  surface: DiscoverySurface
-  sourceSlug?: string
-  listingSlug: string
-  selected: boolean
-  compareCount: number
-}) {
-  trackEvent("discovery_compare_selected", {
-    discovery_surface: params.surface,
-    ...(params.sourceSlug ? { discovery_slug: cleanDiscoveryValue(params.sourceSlug) } : {}),
-    listing_slug: cleanDiscoveryValue(params.listingSlug),
-    selected: params.selected,
-    compare_count: params.compareCount,
-  })
-}
-
-export function trackBookingCtaClicked(params: {
-  source: string
-  listingSlug?: string
-  city?: string
-}) {
-  trackEvent("booking_cta_clicked", {
-    booking_source: cleanDiscoveryValue(params.source),
-    ...(params.listingSlug ? { listing_slug: cleanDiscoveryValue(params.listingSlug) } : {}),
-    ...(params.city ? { city: cleanDiscoveryValue(params.city) } : {}),
-  })
-}
-
-export function trackClaimListingClicked(listingSlug?: string, source = "listing") {
-  trackEvent("claim_listing_clicked", {
-    claim_source: cleanDiscoveryValue(source),
-    ...(listingSlug ? { listing_slug: cleanDiscoveryValue(listingSlug) } : {}),
   })
 }
 

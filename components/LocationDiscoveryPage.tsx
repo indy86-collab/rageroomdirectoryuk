@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { ArrowDown, Banknote, CalendarCheck, Layers3, Users } from "lucide-react"
 import Breadcrumbs from "@/components/Breadcrumbs"
-import DiscoveryPageViewTracker from "@/components/DiscoveryPageViewTracker"
+import TrackedDiscoveryLink from "@/components/TrackedDiscoveryLink"
 import ListingsPageClient from "@/components/ListingsPageClient"
 import {
   ACTIVITY_DEFINITIONS,
@@ -53,11 +53,6 @@ export default function LocationDiscoveryPage({
     <div className="py-8 sm:py-12">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Breadcrumbs items={breadcrumbs} />
-        <DiscoveryPageViewTracker
-          surface={page.type}
-          slug={`${page.category.slug}:${page.location.slug}`}
-          inventoryCount={page.listings.length}
-        />
 
         <header className="mb-8 max-w-4xl">
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-rage-500">
@@ -99,7 +94,10 @@ export default function LocationDiscoveryPage({
           initialListings={page.listings}
           discoveryContext={{
             surface: page.type,
+            pageType: page.type === "activity" ? "activity_location" : "occasion_location",
             slug: `${page.category.slug}:${page.location.slug}`,
+            discoveryLocation: page.location.slug,
+            ...(occasion ? { occasion: occasion.slug } : {}),
             ...(activity ? { activity: activity.value } : {}),
           }}
           showActivities
@@ -142,14 +140,17 @@ export default function LocationDiscoveryPage({
           </h2>
           <div className="mt-4 flex flex-wrap gap-2">
             {activityCounts.map((item) => (
-              <Link
+              <TrackedDiscoveryLink
                 key={item.value}
-                href={`/activities/${item.slug}`}
+                eventName="activity_discovery_click"
+                sourcePageType={page.type === "activity" ? "activity_location" : "occasion_location"}
+                destinationIdentifier={item.slug}
+                destinationPath={`/activities/${item.slug}`}
                 className="inline-flex min-h-10 items-center gap-2 rounded-full border border-rage-500/30 bg-dark-900/70 px-3 py-2 text-sm font-bold text-rage-200 hover:border-rage-400"
               >
                 <span aria-hidden="true">{item.emoji}</span>
                 {item.shortLabel} ({item.count})
-              </Link>
+              </TrackedDiscoveryLink>
             ))}
           </div>
         </section>
@@ -170,13 +171,16 @@ export default function LocationDiscoveryPage({
               Rage rooms in {page.location.name}
             </Link>
             {relatedPages.slice(0, 4).map((related) => (
-              <Link
+              <TrackedDiscoveryLink
                 key={related.href}
-                href={related.href}
+                eventName="location_discovery_click"
+                sourcePageType={page.type === "activity" ? "activity_location" : "occasion_location"}
+                destinationIdentifier={related.location.slug}
+                destinationPath={related.href}
                 className="inline-flex min-h-11 items-center rounded-md border border-zinc-700 px-4 py-2 text-sm font-semibold text-zinc-300 hover:border-rage-500/50 hover:text-rage-300"
               >
                 {related.category.shortLabel} in {related.location.name} ({related.listings.length})
-              </Link>
+              </TrackedDiscoveryLink>
             ))}
           </div>
         </nav>

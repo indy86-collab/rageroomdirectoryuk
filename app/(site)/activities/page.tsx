@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import Breadcrumbs from "@/components/Breadcrumbs"
+import TrackedDiscoveryLink from "@/components/TrackedDiscoveryLink"
 import {
   ACTIVITY_DEFINITIONS,
   MIN_ACTIVITY_PAGE_LISTINGS,
@@ -60,7 +61,14 @@ export default async function ActivitiesPage() {
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {activities.map((activity) => {
             return (
-              <Link key={activity.value} href={`/activities/${activity.slug}`} className="group">
+              <TrackedDiscoveryLink
+                key={activity.value}
+                eventName="activity_discovery_click"
+                sourcePageType="activity"
+                destinationIdentifier={activity.slug}
+                destinationPath={`/activities/${activity.slug}`}
+                className="group"
+              >
               <div className="flex h-full flex-col rounded-lg border border-zinc-800 bg-[#181818] p-5 transition-colors group-hover:border-rage-500/60">
                 <div className="text-3xl" aria-hidden="true">{activity.emoji}</div>
                 <h2 className="mt-4 text-xl font-bold text-white">{activity.label}</h2>
@@ -77,7 +85,7 @@ export default async function ActivitiesPage() {
                   </span>
                 </div>
               </div>
-              </Link>
+              </TrackedDiscoveryLink>
             )
           })}
         </div>

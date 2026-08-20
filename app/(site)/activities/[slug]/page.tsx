@@ -3,7 +3,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowDown, ArrowRight, CalendarCheck, Shirt, Users } from "lucide-react"
 import Breadcrumbs from "@/components/Breadcrumbs"
-import DiscoveryPageViewTracker from "@/components/DiscoveryPageViewTracker"
+import TrackedDiscoveryLink from "@/components/TrackedDiscoveryLink"
 import ListingsPageClient from "@/components/ListingsPageClient"
 import {
   ACTIVITY_DEFINITIONS,
@@ -119,7 +119,6 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
             { label: activity.label },
           ]}
         />
-        <DiscoveryPageViewTracker surface="activity" slug={activity.slug} inventoryCount={listings.length} />
         <div className="mb-8 max-w-4xl">
           <div className="text-4xl" aria-hidden="true">{activity.emoji}</div>
           <h1 className="mt-3 text-3xl font-black uppercase tracking-wide text-white sm:text-5xl">
@@ -138,7 +137,12 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
 
         <ListingsPageClient
           initialListings={listings}
-          discoveryContext={{ surface: "activity", slug: activity.slug, activity: activity.value }}
+          discoveryContext={{
+            surface: "activity",
+            pageType: "activity",
+            slug: activity.slug,
+            activity: activity.value,
+          }}
           showActivities
           showOccasions
           resultsLabel="verified venues"
@@ -151,9 +155,16 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
             <p className="mt-2 text-sm leading-relaxed text-zinc-400">Only locations with enough verified venues for useful comparison are linked here.</p>
             <div className="mt-4 flex flex-wrap gap-3">
               {locationPages.map((page) => (
-                <Link key={page.href} href={page.href} className="inline-flex min-h-11 items-center rounded-md border border-zinc-700 px-4 py-2 text-sm font-bold text-zinc-200 hover:border-rage-500/50 hover:text-rage-300">
+                <TrackedDiscoveryLink
+                  key={page.href}
+                  eventName="location_discovery_click"
+                  sourcePageType="activity"
+                  destinationIdentifier={page.location.slug}
+                  destinationPath={page.href}
+                  className="inline-flex min-h-11 items-center rounded-md border border-zinc-700 px-4 py-2 text-sm font-bold text-zinc-200 hover:border-rage-500/50 hover:text-rage-300"
+                >
                   {page.location.name} ({page.listings.length})
-                </Link>
+                </TrackedDiscoveryLink>
               ))}
             </div>
           </nav>
@@ -212,9 +223,16 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
             <h2 className="text-lg font-bold text-white">Explore related activities</h2>
             <div className="mt-3 flex flex-wrap gap-3">
               {relatedLandingPages.map((related) => (
-                <Link key={related.value} href={`/activities/${related.slug}`} className="inline-flex min-h-11 items-center gap-2 rounded-md border border-zinc-700 px-4 py-2 text-sm font-semibold text-zinc-300 hover:border-rage-500/50 hover:text-rage-300">
+                <TrackedDiscoveryLink
+                  key={related.value}
+                  eventName="activity_discovery_click"
+                  sourcePageType="activity"
+                  destinationIdentifier={related.slug}
+                  destinationPath={`/activities/${related.slug}`}
+                  className="inline-flex min-h-11 items-center gap-2 rounded-md border border-zinc-700 px-4 py-2 text-sm font-semibold text-zinc-300 hover:border-rage-500/50 hover:text-rage-300"
+                >
                   <span aria-hidden="true">{related.emoji}</span>{related.label} ({related.count})
-                </Link>
+                </TrackedDiscoveryLink>
               ))}
             </div>
           </nav>

@@ -11,19 +11,22 @@ import {
   getListingPrimaryAction,
   getOccasionLabel,
 } from "@/lib/discovery"
-import { trackVenueClicked } from "@/lib/analytics"
+import type { DirectoryDiscoveryContext } from "@/lib/analytics"
 import TrackedBookingLink from "./TrackedBookingLink"
+
+export type ListingDiscoveryContext = DirectoryDiscoveryContext & {
+  surface: "activity" | "occasion" | "directory"
+  slug?: string
+  activity?: ListingActivity
+}
 
 interface ListingCardProps {
   listing: Listing
   compareSelected?: boolean
   onCompareToggle?: (listing: Listing) => void
   compareDisabled?: boolean
-  discoveryContext?: {
-    surface: "activity" | "occasion" | "directory"
-    slug?: string
-    activity?: ListingActivity
-  }
+  comparisonActive?: boolean
+  discoveryContext?: ListingDiscoveryContext
 }
 
 export default function ListingCard({
@@ -31,7 +34,8 @@ export default function ListingCard({
   compareSelected = false,
   onCompareToggle,
   compareDisabled = false,
-  discoveryContext = { surface: "directory" },
+  comparisonActive = false,
+  discoveryContext = { surface: "directory", pageType: "search_results" },
 }: ListingCardProps) {
   const href = getListingHref(listing)
   const primaryAction = getListingPrimaryAction(listing)
@@ -51,17 +55,19 @@ export default function ListingCard({
     : null
   const startingPrice = formatListingPrice(listing)
   const listingSlug = listing.slug || listing.id
-  const trackVenue = () =>
-    trackVenueClicked({
-      surface: discoveryContext.surface,
-      sourceSlug: discoveryContext.slug,
-      listingSlug,
-      city: listing.city,
-    })
+  const ctaPlacement =
+    discoveryContext.pageType === "activity"
+      ? "activity_results"
+      : discoveryContext.pageType === "occasion"
+        ? "occasion_results"
+        : discoveryContext.pageType === "activity_location" ||
+            discoveryContext.pageType === "occasion_location"
+          ? "location_results"
+          : "venue_card"
 
   return (
     <article className="card-base card-hover group relative flex h-full flex-col overflow-hidden">
-      <Link href={href} className="block" aria-label={`View ${listing.name}`} onClick={trackVenue}>
+      <Link href={href} className="block" aria-label={`View ${listing.name}`}>
         <div className="relative aspect-video w-full overflow-hidden">
           {listing.image ? (
             <Image
@@ -95,7 +101,7 @@ export default function ListingCard({
           ))}
         </div>
 
-        <Link href={href} onClick={trackVenue}>
+        <Link href={href}>
           <h2 className="mb-2 line-clamp-2 text-lg font-bold text-white transition-colors duration-150 group-hover:text-rage-400">
             {listing.name}
           </h2>
@@ -139,9 +145,11 @@ export default function ListingCard({
           {primaryAction.kind === "booking" ? (
             <TrackedBookingLink
               href={primaryAction.href}
-              source={`${discoveryContext.surface}_card`}
-              listingSlug={listingSlug}
-              city={listing.city}
+              venueSlug={listingSlug}
+              venueCity={listing.city}
+              context={discoveryContext}
+              ctaPlacement={ctaPlacement}
+              comparisonContext={comparisonActive ? "active" : undefined}
               className="flex min-h-11 w-full items-center justify-center gap-2 rounded-md bg-rage-500 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-rage-600"
             >
               <CalendarCheck className="h-4 w-4" />
@@ -149,7 +157,7 @@ export default function ListingCard({
               <ArrowRight className="h-4 w-4" />
             </TrackedBookingLink>
           ) : (
-            <Link href={href} onClick={trackVenue} className="flex min-h-11 w-full items-center justify-center gap-2 rounded-md bg-rage-500 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-rage-600">
+            <Link href={href} className="flex min-h-11 w-full items-center justify-center gap-2 rounded-md bg-rage-500 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-rage-600">
               {primaryAction.label}
               <ArrowRight className="h-4 w-4" />
             </Link>
@@ -158,7 +166,6 @@ export default function ListingCard({
             {listing.bookingUrl && (
               <Link
                 href={href}
-                onClick={trackVenue}
                 className="flex min-h-10 items-center justify-center rounded-md border border-zinc-700 px-3 py-2 text-xs font-bold text-zinc-300 transition-colors hover:border-zinc-500 hover:text-white"
               >
                 View details

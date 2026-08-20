@@ -3,7 +3,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowDown, Banknote, CalendarCheck, Layers3, Users } from "lucide-react"
 import Breadcrumbs from "@/components/Breadcrumbs"
-import DiscoveryPageViewTracker from "@/components/DiscoveryPageViewTracker"
+import TrackedDiscoveryLink from "@/components/TrackedDiscoveryLink"
 import ListingsPageClient from "@/components/ListingsPageClient"
 import {
   MIN_OCCASION_PAGE_LISTINGS,
@@ -82,7 +82,6 @@ export default async function OccasionPage({ params }: OccasionPageProps) {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         {schemas.map((schema, index) => <script key={index} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />)}
         <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Occasions", href: "/occasions" }, { label: occasion.label }]} />
-        <DiscoveryPageViewTracker surface="occasion" slug={occasion.slug} inventoryCount={listings.length} />
         <div className="mb-8 max-w-4xl">
           <div className="text-4xl" aria-hidden="true">{occasion.emoji}</div>
           <h1 className="mt-3 text-3xl font-black uppercase tracking-wide text-white sm:text-5xl">{occasion.heroTitle}</h1>
@@ -97,7 +96,12 @@ export default async function OccasionPage({ params }: OccasionPageProps) {
 
         <ListingsPageClient
           initialListings={listings}
-          discoveryContext={{ surface: "occasion", slug: occasion.slug }}
+          discoveryContext={{
+            surface: "occasion",
+            pageType: "occasion",
+            slug: occasion.slug,
+            occasion: occasion.slug,
+          }}
           showActivities
           showOccasions={false}
           resultsLabel="suitable venues"
@@ -110,9 +114,16 @@ export default async function OccasionPage({ params }: OccasionPageProps) {
             <p className="mt-2 text-sm leading-relaxed text-zinc-400">These locations have enough evidence-backed choice to support a dedicated comparison page.</p>
             <div className="mt-4 flex flex-wrap gap-3">
               {locationPages.map((page) => (
-                <Link key={page.href} href={page.href} className="inline-flex min-h-11 items-center rounded-md border border-zinc-700 px-4 py-2 text-sm font-bold text-zinc-200 hover:border-rage-500/50 hover:text-rage-300">
+                <TrackedDiscoveryLink
+                  key={page.href}
+                  eventName="location_discovery_click"
+                  sourcePageType="occasion"
+                  destinationIdentifier={page.location.slug}
+                  destinationPath={page.href}
+                  className="inline-flex min-h-11 items-center rounded-md border border-zinc-700 px-4 py-2 text-sm font-bold text-zinc-200 hover:border-rage-500/50 hover:text-rage-300"
+                >
                   {page.location.name} ({page.listings.length})
-                </Link>
+                </TrackedDiscoveryLink>
               ))}
             </div>
           </nav>

@@ -178,9 +178,10 @@ export default function NearMeMap({ listings }: NearMeMapProps) {
                   {result.bookingUrl && (
                     <TrackedBookingLink
                       href={result.bookingUrl}
-                      source="near_me_results"
-                      listingSlug={result.slug}
-                      city={result.city}
+                      venueSlug={result.slug}
+                      venueCity={result.city}
+                      context={{ pageType: "search_results", discoveryLocation: "near_me" }}
+                      ctaPlacement="near_me_results"
                       className="text-zinc-300 hover:text-white"
                     >
                       Book direct

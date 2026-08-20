@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import Breadcrumbs from "@/components/Breadcrumbs"
+import TrackedDiscoveryLink from "@/components/TrackedDiscoveryLink"
 import {
   MIN_OCCASION_PAGE_LISTINGS,
   OCCASION_DEFINITIONS,
@@ -58,7 +59,18 @@ export default async function OccasionsPage() {
                 <span className="inline-flex items-center gap-1 font-bold text-rage-500">Find venues <ArrowRight className="h-4 w-4" /></span>
               </div>
             </div>
-            return <Link key={occasion.slug} href={`/occasions/${occasion.slug}`} className="group">{content}</Link>
+            return (
+              <TrackedDiscoveryLink
+                key={occasion.slug}
+                eventName="occasion_discovery_click"
+                sourcePageType="occasion"
+                destinationIdentifier={occasion.slug}
+                destinationPath={`/occasions/${occasion.slug}`}
+                className="group"
+              >
+                {content}
+              </TrackedDiscoveryLink>
+            )
           })}
         </div>
       </div>

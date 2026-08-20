@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { ChevronDown, LocateFixed, SlidersHorizontal } from "lucide-react"
 import type {
   Listing,
@@ -17,14 +17,19 @@ import {
   filterAndSortListings,
   type ListingSortOption,
 } from "@/lib/listing-filters"
-import { trackDiscoveryFilterApplied } from "@/lib/analytics"
+import {
+  getDirectorySourcePath,
+  trackDirectoryEvent,
+  type DirectoryDiscoveryContext,
+  type DirectoryFilterType,
+} from "@/lib/analytics"
 
 interface ListingFiltersProps {
   listings: Listing[]
   onFiltered: (filtered: Listing[]) => void
   showActivities?: boolean
   showOccasions?: boolean
-  discoveryContext?: {
+  discoveryContext?: DirectoryDiscoveryContext & {
     surface: "activity" | "occasion" | "directory"
     slug?: string
   }
@@ -43,7 +48,7 @@ export default function ListingFilters({
   onFiltered,
   showActivities = true,
   showOccasions = true,
-  discoveryContext = { surface: "directory" },
+  discoveryContext = { surface: "directory", pageType: "search_results" },
 }: ListingFiltersProps) {
   const [urlStateReady, setUrlStateReady] = useState(false)
   const [activities, setActivities] = useState<ListingActivity[]>([])
@@ -61,7 +66,25 @@ export default function ListingFilters({
   const [locationStatus, setLocationStatus] = useState<"idle" | "loading" | "ready" | "error">("idle")
   const [sortBy, setSortBy] = useState<ListingSortOption>("newest")
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-  const lastTrackedFilterState = useRef<string | null>(null)
+
+  const trackFilterChange = (
+    filterType: DirectoryFilterType,
+    filterValue: string,
+    filterAction: "add" | "remove" | "set" = "set",
+    distanceFilterUsed?: boolean
+  ) => {
+    trackDirectoryEvent("filter_apply", {
+      filterType,
+      filterValue,
+      filterAction,
+      pageType: discoveryContext.pageType,
+      sourcePath: getDirectorySourcePath(),
+      distanceFilterUsed,
+    })
+  }
+
+  const normalizeFilterValue = (value: string) =>
+    value.trim().toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "")
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
@@ -178,32 +201,6 @@ export default function ListingFilters({
     )
 
     onFiltered(filtered)
-    if (urlStateReady) {
-      const filterState = new URLSearchParams({
-        ...(activities.length ? { activities: activities.join(",") } : {}),
-        ...(occasions.length ? { occasions: occasions.join(",") } : {}),
-        ...(city ? { city } : {}),
-        ...(maxPrice ? { maxPrice } : {}),
-        ...(visitorAge ? { age: visitorAge } : {}),
-        ...(groupSize ? { group: groupSize } : {}),
-        ...(minimumRating ? { rating: minimumRating } : {}),
-        ...(onlineBookingOnly ? { online: "1" } : {}),
-        ...(corporateOnly ? { corporate: "1" } : {}),
-        ...(verifiedOnly ? { verified: "1" } : {}),
-        ...(distanceMiles ? { distance: distanceMiles } : {}),
-        ...(sortBy !== "newest" ? { sort: sortBy } : {}),
-      }).toString()
-
-      if (filterState && filterState !== lastTrackedFilterState.current) {
-        trackDiscoveryFilterApplied({
-          surface: discoveryContext.surface,
-          slug: discoveryContext.slug,
-          filterState,
-          resultCount: filtered.length,
-        })
-      }
-      lastTrackedFilterState.current = filterState
-    }
   }, [
     activities,
     city,
@@ -221,11 +218,11 @@ export default function ListingFilters({
     verifiedOnly,
     visitorAge,
     urlStateReady,
-    discoveryContext.surface,
-    discoveryContext.slug,
   ])
 
   const toggleActivity = (activity: ListingActivity) => {
+    const removing = activities.includes(activity)
+    trackFilterChange("activity", activity.replace(/-/g, "_"), removing ? "remove" : "add")
     setActivities((current) =>
       current.includes(activity)
         ? current.filter((value) => value !== activity)
@@ -234,6 +231,8 @@ export default function ListingFilters({
   }
 
   const toggleOccasion = (occasion: ListingOccasion) => {
+    const removing = occasions.includes(occasion)
+    trackFilterChange("occasion", occasion.replace(/-/g, "_"), removing ? "remove" : "add")
     setOccasions((current) =>
       current.includes(occasion)
         ? current.filter((value) => value !== occasion)
@@ -253,6 +252,7 @@ export default function ListingFilters({
         setDistanceMiles((current) => current || "25")
         setSortBy("distance")
         setLocationStatus("ready")
+        trackFilterChange("distance", "25_miles", "set", true)
       },
       () => setLocationStatus("error"),
       { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 }
@@ -260,6 +260,19 @@ export default function ListingFilters({
   }
 
   const reset = () => {
+    const filterCount =
+      activities.length +
+      occasions.length +
+      [city, maxPrice, visitorAge, groupSize, minimumRating, distanceMiles].filter(Boolean).length +
+      [onlineBookingOnly, corporateOnly, verifiedOnly].filter(Boolean).length +
+      (sortBy !== "newest" ? 1 : 0)
+    if (filterCount > 0) {
+      trackDirectoryEvent("filter_clear", {
+        pageType: discoveryContext.pageType,
+        sourcePath: getDirectorySourcePath(),
+        filterCount,
+      })
+    }
     setActivities([])
     setOccasions([])
     setCity("")
@@ -346,7 +359,16 @@ export default function ListingFilters({
 
         <div>
           <label htmlFor="filter-city" className="mb-2 block text-sm font-bold text-white">Location</label>
-          <select id="filter-city" value={city} onChange={(event) => setCity(event.target.value)} className={controlClass}>
+          <select
+            id="filter-city"
+            value={city}
+            onChange={(event) => {
+              const value = event.target.value
+              trackFilterChange("city", normalizeFilterValue(value || city), value ? "set" : "remove")
+              setCity(value)
+            }}
+            className={controlClass}
+          >
             <option value="">All UK locations</option>
             {cities.map((value) => <option key={value} value={value}>{value}</option>)}
           </select>
@@ -363,7 +385,11 @@ export default function ListingFilters({
           <select
             id="filter-distance"
             value={distanceMiles}
-            onChange={(event) => setDistanceMiles(event.target.value)}
+            onChange={(event) => {
+              const value = event.target.value
+              trackFilterChange("distance", value ? `${value}_miles` : "distance", value ? "set" : "remove", true)
+              setDistanceMiles(value)
+            }}
             disabled={!userLocation}
             className={`${controlClass} disabled:cursor-not-allowed disabled:opacity-50`}
           >
@@ -376,19 +402,23 @@ export default function ListingFilters({
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-1 xl:grid-cols-2">
           <div>
             <label htmlFor="filter-price" className="mb-2 block text-xs font-bold text-white">Max per-person price</label>
-            <input id="filter-price" type="number" min="0" max={highestPrice} placeholder="e.g. 30" value={maxPrice} onChange={(event) => setMaxPrice(event.target.value)} className={controlClass} />
+            <input id="filter-price" type="number" min="0" max={highestPrice} placeholder="e.g. 30" value={maxPrice} onChange={(event) => setMaxPrice(event.target.value)} onBlur={() => maxPrice && trackFilterChange("price", `under_${Number(maxPrice)}`)} className={controlClass} />
           </div>
           <div>
             <label htmlFor="filter-age" className="mb-2 block text-xs font-bold text-white">Participant age</label>
-            <input id="filter-age" type="number" min="4" max="100" placeholder="e.g. 14" value={visitorAge} onChange={(event) => setVisitorAge(event.target.value)} className={controlClass} />
+            <input id="filter-age" type="number" min="4" max="100" placeholder="e.g. 14" value={visitorAge} onChange={(event) => setVisitorAge(event.target.value)} onBlur={() => visitorAge && trackFilterChange("age", String(Number(visitorAge)))} className={controlClass} />
           </div>
           <div>
             <label htmlFor="filter-group" className="mb-2 block text-xs font-bold text-white">Group size</label>
-            <input id="filter-group" type="number" min="1" max="100" placeholder="e.g. 6" value={groupSize} onChange={(event) => setGroupSize(event.target.value)} className={controlClass} />
+            <input id="filter-group" type="number" min="1" max="100" placeholder="e.g. 6" value={groupSize} onChange={(event) => setGroupSize(event.target.value)} onBlur={() => groupSize && trackFilterChange("group_size", String(Number(groupSize)))} className={controlClass} />
           </div>
           <div>
             <label htmlFor="filter-rating" className="mb-2 block text-xs font-bold text-white">Minimum rating</label>
-            <select id="filter-rating" value={minimumRating} onChange={(event) => setMinimumRating(event.target.value)} className={controlClass}>
+            <select id="filter-rating" value={minimumRating} onChange={(event) => {
+              const value = event.target.value
+              trackFilterChange("rating", value ? `${value.replace(".", "_")}_plus` : "rating", value ? "set" : "remove")
+              setMinimumRating(value)
+            }} className={controlClass}>
               <option value="">Any rating</option>
               <option value="3">3.0+</option>
               <option value="4">4.0+</option>
@@ -400,12 +430,15 @@ export default function ListingFilters({
         <fieldset className="space-y-2">
           <legend className="sr-only">Booking options</legend>
           {[
-            { label: "Online booking", checked: onlineBookingOnly, change: setOnlineBookingOnly },
-            { label: "Corporate packages", checked: corporateOnly, change: setCorporateOnly },
-            { label: "Verified venues only", checked: verifiedOnly, change: setVerifiedOnly },
+            { label: "Online booking", checked: onlineBookingOnly, change: setOnlineBookingOnly, filterType: "online_booking" as const },
+            { label: "Corporate packages", checked: corporateOnly, change: setCorporateOnly, filterType: "corporate" as const },
+            { label: "Verified venues only", checked: verifiedOnly, change: setVerifiedOnly, filterType: "verified" as const },
           ].map((option) => (
             <label key={option.label} className="flex cursor-pointer items-center gap-2 text-sm text-zinc-300">
-              <input type="checkbox" checked={option.checked} onChange={(event) => option.change(event.target.checked)} className="h-4 w-4 rounded border-zinc-600 bg-zinc-900 text-rage-500 focus:ring-rage-500" />
+              <input type="checkbox" checked={option.checked} onChange={(event) => {
+                trackFilterChange(option.filterType, "true", event.target.checked ? "add" : "remove")
+                option.change(event.target.checked)
+              }} className="h-4 w-4 rounded border-zinc-600 bg-zinc-900 text-rage-500 focus:ring-rage-500" />
               {option.label}
             </label>
           ))}
@@ -413,7 +446,11 @@ export default function ListingFilters({
 
         <div>
           <label htmlFor="filter-sort" className="mb-2 block text-sm font-bold text-white">Sort by</label>
-          <select id="filter-sort" value={sortBy} onChange={(event) => setSortBy(event.target.value as ListingSortOption)} className={controlClass}>
+          <select id="filter-sort" value={sortBy} onChange={(event) => {
+            const value = event.target.value as ListingSortOption
+            trackFilterChange("sort", value.replace(/-/g, "_"), value === "newest" ? "remove" : "set")
+            setSortBy(value)
+          }} className={controlClass}>
             <option value="newest">Newest first</option>
             <option value="price-asc">Per-person price: low to high</option>
             <option value="price-desc">Per-person price: high to low</option>

@@ -2,18 +2,27 @@
 
 import Link from "next/link"
 import type { ReactNode } from "react"
-import { trackClaimListingClicked } from "@/lib/analytics"
+import {
+  getDirectorySourcePath,
+  trackDirectoryEvent,
+  type DirectoryCtaPlacement,
+  type DirectoryPageType,
+} from "@/lib/analytics"
 
 export default function TrackedClaimLink({
   href,
-  listingSlug,
-  source,
+  venueSlug,
+  venueCity,
+  pageType,
+  ctaPlacement,
   className,
   children,
 }: {
   href: string
-  listingSlug?: string
-  source: string
+  venueSlug: string
+  venueCity?: string
+  pageType: DirectoryPageType
+  ctaPlacement: DirectoryCtaPlacement
   className?: string
   children: ReactNode
 }) {
@@ -21,7 +30,15 @@ export default function TrackedClaimLink({
     <Link
       href={href}
       className={className}
-      onClick={() => trackClaimListingClicked(listingSlug, source)}
+      onClick={() =>
+        trackDirectoryEvent("claim_listing_click", {
+          venueSlug,
+          venueCity,
+          pageType,
+          ctaPlacement,
+          sourcePath: getDirectorySourcePath(),
+        })
+      }
     >
       {children}
     </Link>

@@ -5,6 +5,7 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 import FAQ from "@/components/FAQ"
 import { getCityFAQs } from "@/lib/faqs"
 import ListingCard from "@/components/ListingCard"
+import TrackedWebsiteLink from "@/components/TrackedWebsiteLink"
 import NearMeMap from "@/components/NearMeMap"
 import { buildOgImageUrl } from "@/lib/seo-schema"
 import { absoluteUrl } from "@/lib/site-url"
@@ -139,14 +140,16 @@ export default async function RageRoomLondonPage() {
                           </span>
                         )}
                         {listing.website && (
-                          <a
+                          <TrackedWebsiteLink
                             href={listing.website}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            venueSlug={listing.slug || listing.id}
+                            venueCity={listing.city}
+                            context={{ pageType: "city", discoveryLocation: "london" }}
+                            ctaPlacement="venue_card"
                             className="text-blue-400 hover:text-blue-300 text-sm"
                           >
                             Visit Website →
-                          </a>
+                          </TrackedWebsiteLink>
                         )}
                       </div>
                       <Link
@@ -279,7 +282,15 @@ export default async function RageRoomLondonPage() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {listings.slice(5).map((listing) => (
-                <ListingCard key={listing.id} listing={listing} />
+                <ListingCard
+                  key={listing.id}
+                  listing={listing}
+                  discoveryContext={{
+                    surface: "directory",
+                    pageType: "city",
+                    discoveryLocation: "london",
+                  }}
+                />
               ))}
             </div>
           </section>

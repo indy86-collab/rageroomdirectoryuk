@@ -1,20 +1,20 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
-import type { Listing, ListingActivity } from "@/types/listing"
+import type { Listing } from "@/types/listing"
 import ListingsGrid from "./ListingsGrid"
 import ListingFilters from "./ListingFilters"
 import VenueCompareTable from "./VenueCompareTable"
-import { trackCompareSelected } from "@/lib/analytics"
+import {
+  getDirectorySourcePath,
+  trackDirectoryEvent,
+} from "@/lib/analytics"
+import type { ListingDiscoveryContext } from "./ListingCard"
 
 interface ListingsPageClientProps {
   initialListings: Listing[]
-  discoveryContext?: {
-    surface: "activity" | "occasion" | "directory"
-    slug?: string
-    activity?: ListingActivity
-  }
+  discoveryContext?: ListingDiscoveryContext
   showActivities?: boolean
   showOccasions?: boolean
   resultsLabel?: string
@@ -22,38 +22,55 @@ interface ListingsPageClientProps {
 
 export default function ListingsPageClient({
   initialListings,
-  discoveryContext = { surface: "directory" },
+  discoveryContext = { surface: "directory", pageType: "search_results" },
   showActivities = true,
   showOccasions = true,
   resultsLabel = "venues",
 }: ListingsPageClientProps) {
   const [filteredListings, setFilteredListings] = useState<Listing[]>(initialListings)
   const [compareListings, setCompareListings] = useState<Listing[]>([])
+  const comparisonWasOpen = useRef(false)
+
+  useEffect(() => {
+    const isOpen = compareListings.length >= 2
+    if (isOpen && !comparisonWasOpen.current) {
+      trackDirectoryEvent("compare_open", {
+        venueCount: compareListings.length,
+        sourcePageType: discoveryContext.pageType,
+        sourcePath: getDirectorySourcePath(),
+      })
+    }
+    comparisonWasOpen.current = isOpen
+  }, [compareListings.length, discoveryContext.pageType])
 
   const toggleCompare = (listing: Listing) => {
-    setCompareListings((current) => {
-      if (current.some((item) => item.id === listing.id)) {
-        const next = current.filter((item) => item.id !== listing.id)
-        trackCompareSelected({
-          surface: discoveryContext.surface,
-          sourceSlug: discoveryContext.slug,
-          listingSlug: listing.slug || listing.id,
-          selected: false,
-          compareCount: next.length,
-        })
-        return next
-      }
-      if (current.length >= 3) return current
-      const next = [...current, listing]
-      trackCompareSelected({
-        surface: discoveryContext.surface,
-        sourceSlug: discoveryContext.slug,
-        listingSlug: listing.slug || listing.id,
-        selected: true,
-        compareCount: next.length,
+    if (compareListings.some((item) => item.id === listing.id)) {
+      trackDirectoryEvent("compare_remove", {
+        venueSlug: listing.slug || listing.id,
+        sourcePageType: discoveryContext.pageType,
+        sourcePath: getDirectorySourcePath(),
       })
-      return next
+      setCompareListings((current) => current.filter((item) => item.id !== listing.id))
+      return
+    }
+    if (compareListings.length >= 3) return
+    trackDirectoryEvent("compare_add", {
+      venueSlug: listing.slug || listing.id,
+      sourcePageType: discoveryContext.pageType,
+      sourcePath: getDirectorySourcePath(),
     })
+    setCompareListings((current) => [...current, listing])
+  }
+
+  const clearComparison = () => {
+    for (const listing of compareListings) {
+      trackDirectoryEvent("compare_remove", {
+        venueSlug: listing.slug || listing.id,
+        sourcePageType: discoveryContext.pageType,
+        sourcePath: getDirectorySourcePath(),
+      })
+    }
+    setCompareListings([])
   }
 
   return (
@@ -76,7 +93,7 @@ export default function ListingsPageClient({
             {compareListings.length > 0 && (
               <button
                 type="button"
-                onClick={() => setCompareListings([])}
+                onClick={clearComparison}
                 className="text-xs font-bold uppercase tracking-wider text-zinc-400 hover:text-white"
               >
                 Clear comparison ({compareListings.length}/3)
@@ -90,6 +107,7 @@ export default function ListingsPageClient({
               compareIds={new Set(compareListings.map((listing) => listing.id))}
               onCompareToggle={toggleCompare}
               discoveryContext={discoveryContext}
+              comparisonActive={compareListings.length >= 2}
               emptyState={
                 <div className="rounded-lg border border-zinc-800 bg-[#181818] p-6 text-center sm:p-8">
                   <h3 className="text-xl font-bold text-white">No verified match for these filters</h3>
@@ -113,4 +131,3 @@ export default function ListingsPageClient({
     </>
   )
 }
-

@@ -1,19 +1,17 @@
-import type { Listing, ListingActivity } from "@/types/listing"
+import type { Listing } from "@/types/listing"
 import ListingCard from "./ListingCard"
+import type { ListingDiscoveryContext } from "./ListingCard"
 
 interface ListingsGridProps {
   listings: Listing[]
   compareIds?: Set<string>
   onCompareToggle?: (listing: Listing) => void
-  discoveryContext?: {
-    surface: "activity" | "occasion" | "directory"
-    slug?: string
-    activity?: ListingActivity
-  }
+  discoveryContext?: ListingDiscoveryContext
+  comparisonActive?: boolean
   emptyState?: React.ReactNode
 }
 
-export default function ListingsGrid({ listings, compareIds, onCompareToggle, discoveryContext, emptyState }: ListingsGridProps) {
+export default function ListingsGrid({ listings, compareIds, onCompareToggle, discoveryContext, comparisonActive, emptyState }: ListingsGridProps) {
   if (listings.length === 0) {
     if (emptyState) return <>{emptyState}</>
     return (
@@ -33,6 +31,7 @@ export default function ListingsGrid({ listings, compareIds, onCompareToggle, di
           listing={listing}
           compareSelected={compareIds?.has(listing.id)}
           compareDisabled={Boolean(compareIds && compareIds.size >= 3)}
+          comparisonActive={comparisonActive}
           onCompareToggle={onCompareToggle}
           discoveryContext={discoveryContext}
         />
@@ -40,5 +39,3 @@ export default function ListingsGrid({ listings, compareIds, onCompareToggle, di
     </div>
   )
 }
-
-

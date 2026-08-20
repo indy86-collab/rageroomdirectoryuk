@@ -10,6 +10,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, MapPin, Ticket, HardHat, Hammer, Heart, ShieldCheck, Users, Sparkles, Star, Gift } from "lucide-react"
 import TrackedProductLink from "@/components/TrackedProductLink"
+import TrackedDiscoveryLink from "@/components/TrackedDiscoveryLink"
 import { buildOgImageUrl } from "@/lib/seo-schema"
 import { getSiteUrl } from "@/lib/site-url"
 import {
@@ -231,11 +232,18 @@ export default async function Home() {
             {homeActivities.map((activity) => {
               const hasPage = activity.count >= MIN_ACTIVITY_PAGE_LISTINGS
               return (
-                <Link key={activity.value} href={hasPage ? `/activities/${activity.slug}` : "/activities"} className="group rounded-lg border border-zinc-800 bg-[#181818] p-4 transition-colors hover:border-rage-500/60 sm:p-5">
+                <TrackedDiscoveryLink
+                  key={activity.value}
+                  eventName="activity_discovery_click"
+                  sourcePageType="homepage"
+                  destinationIdentifier={hasPage ? activity.slug : "activities"}
+                  destinationPath={hasPage ? `/activities/${activity.slug}` : "/activities"}
+                  className="group rounded-lg border border-zinc-800 bg-[#181818] p-4 transition-colors hover:border-rage-500/60 sm:p-5"
+                >
                   <span className="text-3xl" aria-hidden="true">{activity.emoji}</span>
                   <h3 className="mt-3 text-base font-black uppercase tracking-wide text-white group-hover:text-rage-400 sm:text-lg">{activity.label}</h3>
                   <p className="mt-2 text-xs text-zinc-400">{activity.count} confirmed {activity.count === 1 ? "venue" : "venues"}</p>
-                </Link>
+                </TrackedDiscoveryLink>
               )
             })}
           </div>
@@ -251,11 +259,18 @@ export default async function Home() {
           </div>
           <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
             {homeOccasions.map((occasion) => (
-              <Link key={occasion.slug} href={`/occasions/${occasion.slug}`} className="rounded-lg border border-zinc-800 bg-dark-900 p-4 text-center transition-colors hover:border-rage-500/60">
+              <TrackedDiscoveryLink
+                key={occasion.slug}
+                eventName="occasion_discovery_click"
+                sourcePageType="homepage"
+                destinationIdentifier={occasion.slug}
+                destinationPath={`/occasions/${occasion.slug}`}
+                className="rounded-lg border border-zinc-800 bg-dark-900 p-4 text-center transition-colors hover:border-rage-500/60"
+              >
                 <span className="text-2xl" aria-hidden="true">{occasion.emoji}</span>
                 <h3 className="mt-2 text-sm font-bold text-white">{occasion.shortLabel}</h3>
                 <p className="mt-1 text-[11px] text-zinc-500">{occasion.count} venues</p>
-              </Link>
+              </TrackedDiscoveryLink>
             ))}
           </div>
 
@@ -267,9 +282,21 @@ export default async function Home() {
                 ["💥 Smash + Paint", "/activities/paint-splatter"],
                 ["💼 Corporate Rage Rooms", "/occasions/corporate-team-building"],
                 ["🎂 Birthday Rage Rooms", "/occasions/birthdays"],
-              ].map(([label, href]) => (
-                <Link key={label} href={href} className="rounded-full border border-zinc-700 bg-dark-900 px-3 py-2 text-sm font-semibold text-zinc-200 hover:border-rage-500/60 hover:text-rage-300">{label}</Link>
-              ))}
+              ].map(([label, href]) => {
+                const isActivity = href.startsWith("/activities/")
+                return (
+                  <TrackedDiscoveryLink
+                    key={label}
+                    eventName={isActivity ? "activity_discovery_click" : "occasion_discovery_click"}
+                    sourcePageType="homepage"
+                    destinationIdentifier={href.split("/").pop() || "discovery"}
+                    destinationPath={href}
+                    className="rounded-full border border-zinc-700 bg-dark-900 px-3 py-2 text-sm font-semibold text-zinc-200 hover:border-rage-500/60 hover:text-rage-300"
+                  >
+                    {label}
+                  </TrackedDiscoveryLink>
+                )
+              })}
             </div>
           </div>
         </div>

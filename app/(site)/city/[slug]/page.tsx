@@ -12,6 +12,7 @@ import ListingLeadCapture from "@/components/ListingLeadCapture"
 import PageLevelAds from "@/components/PageLevelAds"
 import RageResetCTA from "@/components/RageResetCTA"
 import Link from "next/link"
+import TrackedDiscoveryLink from "@/components/TrackedDiscoveryLink"
 import { buildOgImageUrl } from "@/lib/seo-schema"
 import { absoluteUrl, listingUrl } from "@/lib/site-url"
 import { isIndexableLocationPage } from "@/lib/location-indexing"
@@ -273,7 +274,14 @@ export default async function CityPage({ params }: CityPageProps) {
           <>
             {inCity.length > 0 && (
               <section aria-label={`Rage rooms in ${cityName}`}>
-                <ListingsGrid listings={inCity} />
+                <ListingsGrid
+                  listings={inCity}
+                  discoveryContext={{
+                    surface: "directory",
+                    pageType: "city",
+                    discoveryLocation: params.slug,
+                  }}
+                />
               </section>
             )}
 
@@ -287,7 +295,14 @@ export default async function CityPage({ params }: CityPageProps) {
                     ? `Rage Rooms Near ${cityName}`
                     : `Nearest Rage Rooms to ${cityName}`}
                 </h2>
-                <ListingsGrid listings={nearby} />
+                <ListingsGrid
+                  listings={nearby}
+                  discoveryContext={{
+                    surface: "directory",
+                    pageType: "city",
+                    discoveryLocation: params.slug,
+                  }}
+                />
               </section>
             )}
 
@@ -301,9 +316,16 @@ export default async function CityPage({ params }: CityPageProps) {
                 <p className="mt-2 text-sm text-zinc-400">Explore focused pages only where the verified local inventory supports useful comparison.</p>
                 <div className="mt-4 flex flex-wrap gap-3">
                   {locationDiscoveryPages.map((page) => (
-                    <Link key={page.href} href={page.href} className="inline-flex min-h-11 items-center rounded-md border border-zinc-700 px-4 py-2 text-sm font-bold text-zinc-200 hover:border-rage-500/50 hover:text-rage-300">
+                    <TrackedDiscoveryLink
+                      key={page.href}
+                      eventName="location_discovery_click"
+                      sourcePageType="city"
+                      destinationIdentifier={`${page.category.slug}:${page.location.slug}`}
+                      destinationPath={page.href}
+                      className="inline-flex min-h-11 items-center rounded-md border border-zinc-700 px-4 py-2 text-sm font-bold text-zinc-200 hover:border-rage-500/50 hover:text-rage-300"
+                    >
                       {page.category.shortLabel} ({page.listings.length})
-                    </Link>
+                    </TrackedDiscoveryLink>
                   ))}
                 </div>
               </nav>

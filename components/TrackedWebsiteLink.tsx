@@ -8,27 +8,23 @@ import {
   type DirectoryDiscoveryContext,
 } from "@/lib/analytics"
 
-type TrackedBookingLinkProps = {
-  href: string
-  venueSlug: string
-  venueCity?: string
-  context: DirectoryDiscoveryContext
-  ctaPlacement: DirectoryCtaPlacement
-  comparisonContext?: "active"
-  className?: string
-  children: ReactNode
-}
-
-export default function TrackedBookingLink({
+export default function TrackedWebsiteLink({
   href,
   venueSlug,
   venueCity,
   context,
   ctaPlacement,
-  comparisonContext,
   className,
   children,
-}: TrackedBookingLinkProps) {
+}: {
+  href: string
+  venueSlug: string
+  venueCity?: string
+  context: DirectoryDiscoveryContext
+  ctaPlacement: DirectoryCtaPlacement
+  className?: string
+  children: ReactNode
+}) {
   return (
     <a
       href={href}
@@ -36,13 +32,12 @@ export default function TrackedBookingLink({
       rel="noopener noreferrer"
       className={className}
       onClick={() =>
-        trackDirectoryEvent("booking_click", {
+        trackDirectoryEvent("website_click", {
           venueSlug,
           venueCity,
           ...context,
           sourcePath: getDirectorySourcePath(),
           ctaPlacement,
-          comparisonContext,
         })
       }
     >

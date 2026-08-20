@@ -24,6 +24,9 @@ import PageLevelAds from "@/components/PageLevelAds"
 import TrackedBookingLink from "@/components/TrackedBookingLink"
 import NearbyActivitiesAffiliate from "@/components/NearbyActivitiesAffiliate"
 import TrackedClaimLink from "@/components/TrackedClaimLink"
+import TrackedPhoneLink from "@/components/TrackedPhoneLink"
+import TrackedWebsiteLink from "@/components/TrackedWebsiteLink"
+import VenueViewTracker from "@/components/VenueViewTracker"
 import { buildBreadcrumbSchema, buildOgImageUrl } from "@/lib/seo-schema"
 import { absoluteUrl, getSiteUrl, listingUrl as buildListingUrl } from "@/lib/site-url"
 import {
@@ -256,6 +259,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
 
   const baseUrl = getSiteUrl()
   const listingUrl = buildListingUrl(listing.slug || listing.id)
+  const venueSlug = listing.slug || listing.id
   const primaryBookingUrl = listing.bookingUrl || null
   const authorisedMedia = getAuthorisedMedia(listing)
   const mediaSchema = buildListingMediaSchema(listing, listingUrl)
@@ -487,6 +491,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
             { label: listing.name },
           ]}
         />
+        <VenueViewTracker venueSlug={venueSlug} venueCity={listing.city} />
 
         {/* Main Listing Card */}
         <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 mb-8">
@@ -592,14 +597,16 @@ export default async function ListingPage({ params }: ListingPageProps) {
                 )}
                 {listing.website && (
                   <div>
-                    <a
+                    <TrackedWebsiteLink
                       href={listing.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      venueSlug={venueSlug}
+                      venueCity={listing.city}
+                      context={{ pageType: "venue" }}
+                      ctaPlacement="venue_contact"
                       className="text-white hover:text-orange-500 transition-colors"
                     >
                       {listing.website.replace(/^https?:\/\//, "")}
-                    </a>
+                    </TrackedWebsiteLink>
                   </div>
                 )}
                 {listing.ageMin != null && (
@@ -614,9 +621,10 @@ export default async function ListingPage({ params }: ListingPageProps) {
                 <div className="mb-4">
                   <TrackedBookingLink
                     href={primaryBookingUrl}
-                    source="listing_hero"
-                    listingSlug={listing.slug || listing.id}
-                    city={listing.city}
+                    venueSlug={venueSlug}
+                    venueCity={listing.city}
+                    context={{ pageType: "venue" }}
+                    ctaPlacement="venue_hero"
                     className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors text-base font-semibold min-h-[44px]"
                   >
                     Book Your Session →
@@ -738,9 +746,10 @@ export default async function ListingPage({ params }: ListingPageProps) {
             <div className="mt-4">
               <TrackedBookingLink
                 href={primaryBookingUrl}
-                source="listing_pricing"
-                listingSlug={listing.slug || listing.id}
-                city={listing.city}
+                venueSlug={venueSlug}
+                venueCity={listing.city}
+                context={{ pageType: "venue" }}
+                ctaPlacement="venue_pricing"
                 className="inline-flex items-center px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors"
               >
                 View Full Pricing on Their Website →
@@ -823,21 +832,26 @@ export default async function ListingPage({ params }: ListingPageProps) {
               {primaryBookingUrl && (
                 <TrackedBookingLink
                   href={primaryBookingUrl}
-                  source="listing_hours"
-                  listingSlug={listing.slug || listing.id}
-                  city={listing.city}
+                  venueSlug={venueSlug}
+                  venueCity={listing.city}
+                  context={{ pageType: "venue" }}
+                  ctaPlacement="venue_booking_section"
                   className="inline-flex items-center justify-center px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors text-sm font-semibold"
                 >
                   Visit Website for Hours & Booking
                 </TrackedBookingLink>
               )}
               {listing.phone && (
-                <a
+                <TrackedPhoneLink
                   href={`tel:${listing.phone}`}
+                  venueSlug={venueSlug}
+                  venueCity={listing.city}
+                  context={{ pageType: "venue" }}
+                  ctaPlacement="venue_contact"
                   className="inline-flex items-center justify-center px-4 py-2 bg-zinc-700 text-white rounded-md hover:bg-zinc-600 transition-colors text-sm font-semibold"
                 >
                   Call {listing.phone}
-                </a>
+                </TrackedPhoneLink>
               )}
             </div>
             {listing.sourceUrl && (
@@ -1142,8 +1156,10 @@ export default async function ListingPage({ params }: ListingPageProps) {
           <div className="mt-4 flex flex-wrap gap-3">
             <TrackedClaimLink
               href={`/list-your-rage-room?type=claim&listing=${encodeURIComponent(listing.slug || listing.id)}#submission-form`}
-              listingSlug={listing.slug || listing.id}
-              source="listing_owner_panel"
+              venueSlug={venueSlug}
+              venueCity={listing.city}
+              pageType="venue"
+              ctaPlacement="listing_owner_panel"
               className="inline-flex min-h-11 items-center justify-center rounded-md bg-rage-500 px-4 py-2 text-sm font-bold text-white hover:bg-rage-600"
             >
               Claim this listing
@@ -1160,6 +1176,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
         <UGCButtons
           listingId={listing.slug || listing.id}
           listingName={listing.name}
+          listingCity={listing.city}
         />
 
         {/* Venue FAQ */}
