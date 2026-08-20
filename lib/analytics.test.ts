@@ -11,8 +11,18 @@ describe("directory conversion analytics", () => {
 
   beforeEach(() => {
     gtag.mockClear()
+    const consent = JSON.stringify({
+      version: 1,
+      analytics: true,
+      decidedAt: Date.now(),
+    })
     vi.stubGlobal("window", {
       gtag,
+      localStorage: {
+        getItem: vi.fn((key: string) =>
+          key === "rageroom:privacy-consent" ? consent : null
+        ),
+      },
       location: {
         origin: "https://rageroomdirectory.co.uk",
         pathname: "/activities/axe-throwing",
@@ -212,5 +222,20 @@ describe("directory conversion analytics", () => {
       "purchase",
       expect.objectContaining({ transaction_id: "cs_test_123", value: 5.6 })
     )
+  })
+
+  it("does not send events without analytics consent", () => {
+    vi.stubGlobal("window", {
+      gtag,
+      localStorage: { getItem: vi.fn(() => null) },
+      location: { origin: "https://rageroomdirectory.co.uk", pathname: "/listings" },
+    })
+
+    trackDirectoryEvent("venue_view", {
+      venueSlug: "venue",
+      venueCity: "London",
+    })
+
+    expect(gtag).not.toHaveBeenCalled()
   })
 })

@@ -2,6 +2,7 @@ import Link from "next/link"
 import Logo from "./Logo"
 import { getDistinctRegions, getListingsByRegion } from "@/lib/listings"
 import { regionToSlug } from "@/lib/location"
+import PrivacySettingsButton from "./PrivacySettingsButton"
 
 export default async function Footer() {
   const currentYear = new Date().getFullYear()
@@ -123,6 +124,8 @@ export default async function Footer() {
             <Link href="/privacy" className="hover:text-rage-500 transition-colors">
               Privacy
             </Link>
+            <span className="text-zinc-700">·</span>
+            <PrivacySettingsButton className="hover:text-rage-500 transition-colors" />
             <span className="text-zinc-700">·</span>
             <Link href="/terms" className="hover:text-rage-500 transition-colors">
               Terms

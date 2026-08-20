@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useState } from "react"
 import { MapPin } from "lucide-react"
 
 interface LazyMapEmbedProps {
@@ -13,14 +13,13 @@ interface LazyMapEmbedProps {
 }
 
 /**
- * Lazily mounts a Google Maps embed iframe.
+ * Mounts a Google Maps embed only after an explicit request.
  *
  * The Maps JS bundle behind `maps/embed/v1/place` is ~200KB + a cascade of
  * sub-requests and layout shifts. On listing pages the map is below the
  * fold, so we:
  *   1. Render a lightweight placeholder immediately (no third-party JS).
- *   2. Swap in the real iframe only when the placeholder is within ~400px
- *      of the viewport, OR when the user interacts.
+ *   2. Contact Google only when the user presses the load button.
  *
  * This typically saves 150–300ms of blocking time on mobile and removes
  * Maps from the LCP critical path entirely.
@@ -31,40 +30,13 @@ export default function LazyMapEmbed({
   title,
   previewImage,
 }: LazyMapEmbedProps) {
-  const wrapRef = useRef<HTMLDivElement>(null)
   const [load, setLoad] = useState(false)
-
-  useEffect(() => {
-    if (load || typeof window === "undefined" || !wrapRef.current) return
-    if (typeof IntersectionObserver === "undefined") {
-      setLoad(true)
-      return
-    }
-
-    const el = wrapRef.current
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setLoad(true)
-            io.disconnect()
-            break
-          }
-        }
-      },
-      { rootMargin: "400px 0px" }
-    )
-
-    io.observe(el)
-    return () => io.disconnect()
-  }, [load])
 
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""
   const src = `https://www.google.com/maps/embed/v1/place?key=${apiKey}&q=${lat},${lng}`
 
   return (
     <div
-      ref={wrapRef}
       className="aspect-video w-full bg-zinc-900 rounded-lg overflow-hidden relative"
     >
       {load ? (
@@ -96,9 +68,11 @@ export default function LazyMapEmbed({
         >
           <MapPin className="w-8 h-8 text-orange-500" />
           <span className="text-sm font-semibold">
-            Tap or scroll to load map
+            Load interactive map
           </span>
-          <span className="text-xs text-zinc-500">Google Maps · interactive</span>
+          <span className="max-w-xs text-xs text-zinc-400">
+            This contacts Google Maps, which may receive device and request information.
+          </span>
         </button>
       )}
     </div>

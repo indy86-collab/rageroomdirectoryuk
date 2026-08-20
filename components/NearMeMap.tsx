@@ -20,6 +20,7 @@ export default function NearMeMap({ listings }: NearMeMapProps) {
   const [postcodeLabel, setPostcodeLabel] = useState("")
   const [postcodeStatus, setPostcodeStatus] = useState<"idle" | "loading" | "error">("idle")
   const [postcodeError, setPostcodeError] = useState("")
+  const [mapLoaded, setMapLoaded] = useState(false)
 
   async function searchPostcode(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -211,7 +212,7 @@ export default function NearMeMap({ listings }: NearMeMapProps) {
 
       {/* Google Maps Embed */}
       <div className="w-full h-96 rounded-lg overflow-hidden border border-zinc-700">
-        {mapUrl ? (
+        {mapUrl && mapLoaded ? (
           <iframe
             width="100%"
             height="100%"
@@ -222,6 +223,17 @@ export default function NearMeMap({ listings }: NearMeMapProps) {
             src={mapUrl}
             title="Rage Rooms Map"
           />
+        ) : mapUrl ? (
+          <button
+            type="button"
+            onClick={() => setMapLoaded(true)}
+            className="flex h-full w-full flex-col items-center justify-center bg-zinc-800 p-6 text-center text-zinc-300 hover:bg-zinc-700 hover:text-white"
+          >
+            <span className="font-semibold">Load interactive Google Map</span>
+            <span className="mt-2 max-w-md text-sm text-zinc-400">
+              The map loads only when requested and will contact Google, which may receive device and request information.
+            </span>
+          </button>
         ) : (
           <div className="w-full h-full bg-zinc-800 flex items-center justify-center">
             <div className="text-center p-6">

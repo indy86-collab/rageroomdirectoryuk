@@ -7,6 +7,11 @@ import {
   trackCorporateBuilderPurchaseSuccess,
   trackPurchase,
 } from "@/lib/analytics"
+import {
+  ANALYTICS_READY_EVENT,
+  CONSENT_CHANGE_EVENT,
+  isAnalyticsConsentGranted,
+} from "@/lib/consent"
 
 type PurchaseTrackerProps = {
   sessionId: string
@@ -25,33 +30,43 @@ export default function PurchaseTracker({
 }: PurchaseTrackerProps) {
   useEffect(() => {
     const storageKey = `purchase_tracked_${sessionId}`
-    let alreadyTracked = false
+    function attemptTracking() {
+      if (!isAnalyticsConsentGranted()) return
 
-    try {
-      alreadyTracked = Boolean(window.localStorage.getItem(storageKey))
-    } catch {
-      // Safari privacy settings can block storage. Tracking the confirmed
-      // purchase is more important than client-side deduplication in that case.
+      let alreadyTracked = false
+      try {
+        alreadyTracked = Boolean(window.localStorage.getItem(storageKey))
+      } catch {
+        // Analytics deduplication storage is best-effort.
+      }
+
+      if (alreadyTracked) return
+
+      const sent = trackPurchase({
+        transaction_id: sessionId,
+        product,
+      })
+      if (!sent) return
+
+      if (trackCorporateBuilderSuccess) {
+        trackCorporateBuilderPurchaseSuccess()
+      }
+      if (trackCorporateBookingSystemSuccess) {
+        trackCorporateBookingSystemPurchaseSuccess()
+      }
+      try {
+        window.localStorage.setItem(storageKey, "true")
+      } catch {
+        // The event was sent; storage remains best-effort.
+      }
     }
 
-    if (alreadyTracked) {
-      return
-    }
-
-    trackPurchase({
-      transaction_id: sessionId,
-      product,
-    })
-    if (trackCorporateBuilderSuccess) {
-      trackCorporateBuilderPurchaseSuccess()
-    }
-    if (trackCorporateBookingSystemSuccess) {
-      trackCorporateBookingSystemPurchaseSuccess()
-    }
-    try {
-      window.localStorage.setItem(storageKey, "true")
-    } catch {
-      // The purchase event has already been queued; storage is best-effort.
+    attemptTracking()
+    window.addEventListener(CONSENT_CHANGE_EVENT, attemptTracking)
+    window.addEventListener(ANALYTICS_READY_EVENT, attemptTracking)
+    return () => {
+      window.removeEventListener(CONSENT_CHANGE_EVENT, attemptTracking)
+      window.removeEventListener(ANALYTICS_READY_EVENT, attemptTracking)
     }
   }, [
     product,

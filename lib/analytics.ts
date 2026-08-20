@@ -1,5 +1,7 @@
 "use client"
 
+import { isAnalyticsConsentGranted } from "@/lib/consent"
+
 export type AnalyticsProduct = {
   item_id: string
   item_name: string
@@ -241,11 +243,12 @@ function productItem(product: AnalyticsProduct) {
 }
 
 export function trackEvent(eventName: string, params: GtagEventParams = {}) {
-  if (!isGaConfigured()) {
-    return
+  if (!isAnalyticsConsentGranted() || !isGaConfigured()) {
+    return false
   }
 
   window.gtag?.("event", eventName, params)
+  return true
 }
 
 function cleanDirectoryString(value: string, maximumLength = 120) {
@@ -373,7 +376,7 @@ export function trackCheckoutResumeClick(product: AnalyticsProduct) {
 }
 
 export function trackPurchase(order: AnalyticsOrder) {
-  trackEvent("purchase", {
+  return trackEvent("purchase", {
     transaction_id: order.transaction_id,
     currency: order.product.currency,
     value: order.product.price,

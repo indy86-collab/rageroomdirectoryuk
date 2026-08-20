@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import Breadcrumbs from "@/components/Breadcrumbs"
+import PrivacySettingsButton from "@/components/PrivacySettingsButton"
 
 export const metadata: Metadata = {
   title: "Privacy Policy | RageRoom Directory - UK GDPR Compliant",
@@ -18,7 +19,7 @@ export default function PrivacyPage() {
     { label: "Privacy", href: "/privacy" },
   ]
 
-  const lastUpdated = "11 August 2026"
+  const lastUpdated = "20 August 2026"
 
   return (
     <div className="py-6 sm:py-8">
@@ -126,14 +127,60 @@ export default function PrivacyPage() {
             <h3 className="text-lg sm:text-xl font-semibold text-white mt-4 sm:mt-6 mb-2 sm:mb-3">
               D. Cookies and Tracking
             </h3>
-            <p>We use cookies and analytics tools to improve website performance and provide relevant content.</p>
-            <ul className="list-disc list-inside space-y-2 ml-4">
-              <li>Vercel Analytics for anonymised page-view and performance metrics</li>
-              <li>Google Analytics (GA4) for anonymised product/funnel events — we do not send email addresses, names, phone numbers, or message contents in analytics events</li>
-              <li>Cloudflare cookies for security and performance</li>
-              <li>Google AdSense cookies (when applicable) for showing relevant advertisements</li>
-              <li>Functional cookies for website features</li>
-            </ul>
+            <p>
+              Essential browser storage supports features you request and records your privacy
+              choice. Optional analytics is off until you accept it. The table below describes
+              the technologies controlled by that choice.
+            </p>
+            <div className="mt-4 overflow-x-auto">
+              <table className="w-full min-w-[640px] border-collapse text-left text-sm">
+                <thead>
+                  <tr className="border-b border-zinc-700 text-white">
+                    <th className="p-3">Provider / technology</th>
+                    <th className="p-3">Purpose and device access</th>
+                    <th className="p-3">Optional?</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-zinc-800">
+                  <tr>
+                    <th className="p-3 align-top text-white">RageRoom consent preference</th>
+                    <td className="p-3">First-party local storage records version, analytics choice and decision time for up to 180 days. It contains no visitor ID.</td>
+                    <td className="p-3 align-top">No — needed to remember your choice</td>
+                  </tr>
+                  <tr>
+                    <th className="p-3 align-top text-white">Google Analytics 4 (GA4)</th>
+                    <td className="p-3">Measures page use, directory discovery and conversion events. GA4 may set first-party identifiers such as <code>_ga</code>. Our event contract excludes form text, contact details, query strings and precise coordinates.</td>
+                    <td className="p-3 align-top">Yes — opt-in</td>
+                  </tr>
+                  <tr>
+                    <th className="p-3 align-top text-white">Vercel Web Analytics</th>
+                    <td className="p-3">Measures page views and basic usage. Vercel states that this product does not use cookies and derives a daily-changing hash rather than storing an IP address.</td>
+                    <td className="p-3 align-top">Yes — opt-in on this site</td>
+                  </tr>
+                  <tr>
+                    <th className="p-3 align-top text-white">Cloudflare Web Analytics</th>
+                    <td className="p-3">Measures page-load and performance information. Cloudflare states that its Web Analytics beacon uses no cookies or local storage and does not fingerprint visitors.</td>
+                    <td className="p-3 align-top">Yes — opt-in on this site</td>
+                  </tr>
+                  <tr>
+                    <th className="p-3 align-top text-white">Feature storage</th>
+                    <td className="p-3">First-party local or session storage saves user-entered planner/workspace state, purchase access email on the device, game progress and technical app state where those features are used.</td>
+                    <td className="p-3 align-top">No — feature-led</td>
+                  </tr>
+                  <tr>
+                    <th className="p-3 align-top text-white">Google Maps embed</th>
+                    <td className="p-3">No map request is made until you press a load-map button. Google may then receive request, device and network information under its own policy.</td>
+                    <td className="p-3 align-top">Separate user-requested feature</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-4">
+              Google AdSense advertising is currently disabled. Analytics consent does not enable
+              advertising. Use the control below, or the footer control on any page, to review or
+              change your decision.
+            </p>
+            <PrivacySettingsButton className="mt-3 min-h-[44px] rounded-md border border-zinc-600 px-4 text-sm font-semibold text-white hover:border-orange-500" />
           </section>
 
           <section>
@@ -163,8 +210,8 @@ export default function PrivacyPage() {
             </h2>
             <p>We process personal data under:</p>
             <ul className="list-disc list-inside space-y-2 ml-4">
-              <li>Legitimate interests (analytics, improvements)</li>
-              <li>Consent (contact forms, cookies, optional marketing opt-in)</li>
+              <li>Consent (optional analytics and optional marketing opt-in)</li>
+              <li>Legitimate interests where appropriate for service security and improvement that does not rely on optional browser storage</li>
               <li>Contractual necessity (digital product fulfilment, listing submissions, venue-owner workspace operation)</li>
               <li>Compliance with legal obligations</li>
             </ul>
@@ -177,17 +224,16 @@ export default function PrivacyPage() {
             <p>We may share data with:</p>
             <ul className="list-disc list-inside space-y-2 ml-4">
               <li><strong>Vercel</strong> - Our hosting provider, which processes your IP address and request data</li>
-              <li><strong>Vercel Analytics</strong> - For anonymised website analytics and performance monitoring</li>
-              <li><strong>Cloudflare</strong> - For website security, performance optimization, and DDoS protection. Cloudflare may collect IP addresses and request metadata</li>
-              <li><strong>Google AdSense</strong> - If we display advertisements, Google AdSense may use cookies to show you relevant ads based on your browsing history</li>
+              <li><strong>Vercel Web Analytics</strong> - Optional page-view measurement after analytics opt-in</li>
+              <li><strong>Cloudflare</strong> - Hosting-edge security and delivery may process request metadata independently of the optional Cloudflare Web Analytics beacon; the Web Analytics beacon runs only after analytics opt-in</li>
               <li><strong>Stripe</strong> - Payment processing for paid digital products</li>
               <li><strong>Resend</strong> - Transactional email delivery for checklist and purchase access messages (and optional marketing audience updates only when you opt in)</li>
               <li><strong>Upstash</strong> - Durable storage for Corporate Booking System venue-owner workspaces when configured</li>
-              <li><strong>Google Analytics</strong> - Anonymised product and funnel analytics</li>
+              <li><strong>Google Analytics</strong> - Optional page, product, funnel and directory-event analytics after opt-in</li>
               <li>Email service providers (contact forms and transactional mail)</li>
             </ul>
             <p className="mt-4">
-              All providers comply with UK GDPR and data protection regulations. We only share data necessary for these services to function.
+              We limit disclosures to those needed for each service and review provider terms and safeguards. Provider use is also governed by its own terms and privacy information.
             </p>
           </section>
 
@@ -197,7 +243,8 @@ export default function PrivacyPage() {
             </h2>
             <p>We retain data only as long as needed:</p>
             <ul className="list-disc list-inside space-y-2 ml-4">
-              <li>Analytics: 12–24 months</li>
+              <li>Consent preference: up to 180 days, then we request a fresh choice</li>
+              <li>Analytics: according to the retention configured in each provider; contact us for the current configuration</li>
               <li>Contact submissions: until resolved</li>
               <li>Free checklist delivery records: as needed to provide access and prevent abuse</li>
               <li>Paid digital purchase access links: according to the product (download links typically expire; interactive tool access follows the purchase access model)</li>
@@ -248,10 +295,12 @@ export default function PrivacyPage() {
               8. Google Services
             </h2>
             <p>
-              We may use Google services on our website:
+              We use Google services only in the circumstances described here:
             </p>
             <ul className="list-disc list-inside space-y-2 ml-4">
-              <li><strong>Google AdSense</strong> - If we display advertisements, Google AdSense uses cookies to serve ads based on your prior visits to our website or other websites. You can opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-600 underline">Google&apos;s Ad Settings</a>.</li>
+              <li><strong>Google Analytics 4</strong> - loaded only after analytics opt-in; advertising storage, user-data and personalisation signals remain denied</li>
+              <li><strong>Google Maps</strong> - loaded only when you explicitly press a load-map button; this choice is separate from analytics</li>
+              <li><strong>Google AdSense</strong> - currently disabled and not enabled by our analytics setting</li>
             </ul>
             <p className="mt-4">
               Google&apos;s use of information is governed by their <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-600 underline">Privacy Policy</a>.
@@ -263,7 +312,7 @@ export default function PrivacyPage() {
               9. Cloudflare
             </h2>
             <p>
-              We use Cloudflare to protect our website and improve performance. Cloudflare may collect:
+              Cloudflare may process requests at the hosting/network edge to protect the website and improve delivery. This is separate from the optional Cloudflare Web Analytics beacon. Edge services may process:
             </p>
             <ul className="list-disc list-inside space-y-2 ml-4">
               <li>IP addresses</li>
@@ -271,6 +320,9 @@ export default function PrivacyPage() {
               <li>Browser information</li>
               <li>Security logs</li>
             </ul>
+            <p className="mt-4">
+              The Web Analytics beacon is not requested until analytics opt-in. Cloudflare states that the beacon does not use cookies, local storage or fingerprinting.
+            </p>
             <p className="mt-4">
               Cloudflare's privacy practices are detailed in their <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-600 underline">Privacy Policy</a>.
             </p>
@@ -310,4 +362,3 @@ export default function PrivacyPage() {
     </div>
   )
 }
-

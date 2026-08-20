@@ -7,6 +7,10 @@ type CapturedEvent = {
 
 async function installAnalyticsRecorder(page: Page) {
   await page.addInitScript(() => {
+    localStorage.setItem(
+      "rageroom:privacy-consent",
+      JSON.stringify({ version: 1, analytics: true, decidedAt: Date.now() })
+    )
     const events: Array<{ name: string; properties: Record<string, unknown> }> = []
     Object.defineProperty(window, "__directoryAnalyticsEvents", {
       value: events,
@@ -43,6 +47,10 @@ async function clickWithoutNavigation(locator: Locator) {
 
 test.describe("directory conversion attribution", () => {
   test.beforeEach(async ({ page }) => {
+    await page.route(
+      /googletagmanager\.com|google-analytics\.com|cloudflareinsights\.com|va\.vercel-scripts\.com|\/_vercel\/insights/,
+      (route) => route.abort()
+    )
     await installAnalyticsRecorder(page)
   })
 
@@ -118,7 +126,12 @@ test.describe("directory conversion attribution", () => {
     expect(await capturedEvents(page, "compare_remove")).toHaveLength(1)
 
     const filters = page.getByRole("button", { name: /filter venues/i })
-    if ((await filters.getAttribute("aria-expanded")) === "false") await filters.click()
+    const filtersAreInteractive = await filters.evaluate(
+      (element) => window.getComputedStyle(element).pointerEvents !== "none"
+    )
+    if (filtersAreInteractive && (await filters.getAttribute("aria-expanded")) === "false") {
+      await filters.click()
+    }
     await page.getByLabel("Location").selectOption("Maidstone")
     expect((await capturedEvents(page, "filter_apply")).at(-1)?.properties).toMatchObject({
       filterType: "city",

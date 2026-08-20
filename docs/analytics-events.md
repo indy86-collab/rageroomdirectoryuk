@@ -1,5 +1,7 @@
 # Directory analytics event contract
 
+All events in this contract obey the central Analytics consent preference. On a fresh or rejected visit, `trackDirectoryEvent()` and the underlying `trackEvent()` no-op; components must not add their own consent checks. See `docs/privacy-tracking-audit.md` for provider loading, withdrawal and network verification.
+
 This document defines the anonymous conversion-attribution events for RageRoom Directory. It is the contract for future reporting and venue attribution work; it is not a venue dashboard or billing system.
 
 ## Provider and delivery
@@ -96,7 +98,7 @@ Geolocation filtering records `distanceFilterUsed: true` and a normalized distan
 
 ## Consent status
 
-The existing application loads GA4, Vercel Analytics and Cloudflare Web Analytics globally and does not currently expose an analytics consent banner or application-level opt-out gate. The directory event layer follows that existing architecture and does not bypass a consent hook because none exists. This is a privacy/compliance concern to review separately; this phase deliberately does not create a new cookie-consent platform.
+GA4, Vercel Web Analytics and Cloudflare Web Analytics are initialized only after a valid, current Analytics opt-in. `trackEvent()` is the central enforcement point, so the typed directory API safely no-ops for fresh and rejected visitors. Components must never bypass this layer or infer consent from scrolling, navigation, geolocation permission or map interaction. Withdrawal stops subsequent events, updates Google consent state, clears removable first-party analytics state and reloads to unload active providers.
 
 ## Reporting readiness
 

@@ -2,7 +2,10 @@ import { expect, test } from "@playwright/test"
 
 async function openFilters(page: import("@playwright/test").Page) {
   const toggle = page.getByRole("button", { name: /filter venues/i })
-  if ((await toggle.getAttribute("aria-expanded")) === "false") {
+  const isInteractive = await toggle.evaluate(
+    (element) => window.getComputedStyle(element).pointerEvents !== "none"
+  )
+  if (isInteractive && (await toggle.getAttribute("aria-expanded")) === "false") {
     await toggle.click()
   }
 }
