@@ -1,7 +1,12 @@
 "use client"
 
 import { FormEvent, useState } from "react"
-import { LISTING_FEATURES } from "@/types/listing"
+import {
+  LISTING_ACTIVITIES,
+  LISTING_FEATURES,
+  LISTING_OCCASIONS,
+  LISTING_PRICE_UNITS,
+} from "@/types/listing"
 
 const FEATURE_LABELS: Record<(typeof LISTING_FEATURES)[number], string> = {
   "byo-smashables": "Bring your own smashables",
@@ -12,6 +17,28 @@ const FEATURE_LABELS: Record<(typeof LISTING_FEATURES)[number], string> = {
   "mobile-experience": "Mobile experience",
   "accessible-venue": "Accessible venue",
   "video-recording": "Session video available",
+}
+
+const ACTIVITY_LABELS: Record<(typeof LISTING_ACTIVITIES)[number], string> = {
+  "rage-room": "Rage room",
+  "axe-throwing": "Axe throwing",
+  "paint-splatter": "Paint / splatter room",
+  "car-smash": "Car smash",
+  "escape-room": "Escape room",
+  archery: "Archery",
+  vr: "Virtual reality",
+  "airsoft-target": "Airsoft / target activities",
+  "mobile-rage-room": "Mobile rage room",
+}
+
+const OCCASION_LABELS: Record<(typeof LISTING_OCCASIONS)[number], string> = {
+  birthdays: "Birthdays",
+  "stag-parties": "Stag parties",
+  "hen-parties": "Hen parties",
+  "corporate-team-building": "Corporate / team building",
+  "date-nights": "Date nights",
+  families: "Families",
+  kids: "Kids",
 }
 
 export default function ListingSubmissionForm({
@@ -31,6 +58,8 @@ export default function ListingSubmissionForm({
     const formData = new FormData(form)
     const payload = Object.fromEntries(formData.entries()) as Record<string, unknown>
     payload.features = formData.getAll("features")
+    payload.activities = formData.getAll("activities")
+    payload.occasions = formData.getAll("occasions")
     payload.consent = formData.get("consent") === "on"
     setStatus({ type: "loading" })
 
@@ -108,10 +137,21 @@ export default function ListingSubmissionForm({
           Direct booking link
           <input name="bookingUrl" type="url" placeholder="https://" className={inputClass} />
         </label>
-        <label className={labelClass}>
-          Starting price per person (£)
-          <input name="priceFrom" type="number" min="0" max="1000" step="0.01" className={inputClass} />
-        </label>
+        <div className="grid grid-cols-2 gap-3">
+          <label className={labelClass}>
+            Starting rage-room price (£)
+            <input name="priceFrom" type="number" min="0" max="1000" step="0.01" className={inputClass} />
+          </label>
+          <label className={labelClass}>
+            Price unit
+            <select name="priceUnit" defaultValue="" className={inputClass}>
+              <option value="">Not specified</option>
+              {LISTING_PRICE_UNITS.map((unit) => (
+                <option key={unit} value={unit}>{unit.replace("-", " ")}</option>
+              ))}
+            </select>
+          </label>
+        </div>
         <label className={labelClass}>
           Minimum age
           <input name="ageMin" type="number" min="1" max="100" className={inputClass} />
@@ -142,12 +182,60 @@ export default function ListingSubmissionForm({
       </label>
 
       <fieldset>
+        <legend className={labelClass}>Activities available</legend>
+        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          {LISTING_ACTIVITIES.map((activity) => (
+            <label key={activity} className="flex items-center gap-2 text-sm text-zinc-300">
+              <input name="activities" type="checkbox" value={activity} className="accent-orange-500" />
+              {ACTIVITY_LABELS[activity]}
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend className={labelClass}>Suitable occasions</legend>
+        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          {LISTING_OCCASIONS.map((occasion) => (
+            <label key={occasion} className="flex items-center gap-2 text-sm text-zinc-300">
+              <input name="occasions" type="checkbox" value={occasion} className="accent-orange-500" />
+              {OCCASION_LABELS[occasion]}
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <fieldset>
         <legend className={labelClass}>Suitable for / available features</legend>
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
           {LISTING_FEATURES.map((feature) => (
             <label key={feature} className="flex items-center gap-2 text-sm text-zinc-300">
               <input name="features" type="checkbox" value={feature} className="accent-orange-500" />
               {FEATURE_LABELS[feature]}
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend className={labelClass}>Booking and venue options</legend>
+        <p className="mt-1 text-xs text-zinc-500">Leave as “Not specified” if you cannot confirm an option.</p>
+        <div className="mt-3 grid gap-4 sm:grid-cols-2">
+          {[
+            ["walkInsAccepted", "Walk-ins accepted"],
+            ["onlineBooking", "Online booking"],
+            ["giftVouchers", "Gift vouchers"],
+            ["corporatePackages", "Corporate packages"],
+            ["privateHire", "Private hire"],
+            ["accessibility", "Accessible venue / sessions"],
+          ].map(([name, label]) => (
+            <label key={name} className={labelClass}>
+              {label}
+              <select name={name} defaultValue="" className={inputClass}>
+                <option value="">Not specified</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
             </label>
           ))}
         </div>

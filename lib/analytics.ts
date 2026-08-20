@@ -129,6 +129,87 @@ export function trackGenerateLead({
   })
 }
 
+type DiscoverySurface = "activity" | "occasion" | "directory"
+
+function cleanDiscoveryValue(value: string) {
+  return value.slice(0, 80)
+}
+
+export function trackDiscoveryPageViewed(
+  surface: Exclude<DiscoverySurface, "directory">,
+  slug: string,
+  inventoryCount: number
+) {
+  trackEvent(`${surface}_page_viewed`, {
+    discovery_surface: surface,
+    discovery_slug: cleanDiscoveryValue(slug),
+    inventory_count: inventoryCount,
+  })
+}
+
+export function trackDiscoveryFilterApplied(params: {
+  surface: DiscoverySurface
+  slug?: string
+  filterState: string
+  resultCount: number
+}) {
+  trackEvent("discovery_filter_applied", {
+    discovery_surface: params.surface,
+    ...(params.slug ? { discovery_slug: cleanDiscoveryValue(params.slug) } : {}),
+    filter_state: params.filterState.slice(0, 200),
+    result_count: params.resultCount,
+  })
+}
+
+export function trackVenueClicked(params: {
+  surface: DiscoverySurface
+  sourceSlug?: string
+  listingSlug: string
+  city: string
+}) {
+  trackEvent("discovery_venue_clicked", {
+    discovery_surface: params.surface,
+    ...(params.sourceSlug ? { discovery_slug: cleanDiscoveryValue(params.sourceSlug) } : {}),
+    listing_slug: cleanDiscoveryValue(params.listingSlug),
+    city: cleanDiscoveryValue(params.city),
+  })
+}
+
+export function trackCompareSelected(params: {
+  surface: DiscoverySurface
+  sourceSlug?: string
+  listingSlug: string
+  selected: boolean
+  compareCount: number
+}) {
+  trackEvent("discovery_compare_selected", {
+    discovery_surface: params.surface,
+    ...(params.sourceSlug ? { discovery_slug: cleanDiscoveryValue(params.sourceSlug) } : {}),
+    listing_slug: cleanDiscoveryValue(params.listingSlug),
+    selected: params.selected,
+    compare_count: params.compareCount,
+  })
+}
+
+export function trackBookingCtaClicked(params: {
+  source: string
+  listingSlug?: string
+  city?: string
+}) {
+  trackEvent("booking_cta_clicked", {
+    booking_source: cleanDiscoveryValue(params.source),
+    ...(params.listingSlug ? { listing_slug: cleanDiscoveryValue(params.listingSlug) } : {}),
+    ...(params.city ? { city: cleanDiscoveryValue(params.city) } : {}),
+  })
+}
+
+export function trackClaimListingClicked(listingSlug?: string, source = "listing") {
+  trackEvent("claim_listing_clicked", {
+    claim_source: cleanDiscoveryValue(source),
+    ...(listingSlug ? { listing_slug: cleanDiscoveryValue(listingSlug) } : {}),
+  })
+}
+
 type AffiliateEventParams = {
   provider: string
   placement: string

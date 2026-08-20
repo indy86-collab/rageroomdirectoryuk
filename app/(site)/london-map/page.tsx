@@ -4,6 +4,7 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 import NearMeMap from "@/components/NearMeMap"
 import { buildOgImageUrl } from "@/lib/seo-schema"
 import { absoluteUrl, listingUrl } from "@/lib/site-url"
+import { formatListingPrice } from "@/lib/discovery"
 
 const OG_IMAGE = buildOgImageUrl({
   title: "London Rage Room Map",
@@ -67,7 +68,9 @@ export default async function LondonMapPage() {
           addressRegion: listing.region,
         },
         url: listingUrl(listing.slug || listing.id),
-        ...(listing.price && { priceRange: `£${listing.price.toFixed(0)}` }),
+        ...(formatListingPrice(listing, { includeFrom: false })
+          ? { priceRange: formatListingPrice(listing, { includeFrom: false }) }
+          : {}),
       },
     })),
   }
@@ -142,9 +145,9 @@ export default async function LondonMapPage() {
                       </p>
                     )}
                     <div className="flex items-center justify-between">
-                      {listing.price && (
+                      {formatListingPrice(listing) && (
                         <span className="text-orange-500 font-semibold">
-                          From £{listing.price.toFixed(0)}
+                          {formatListingPrice(listing)}
                         </span>
                       )}
                       {location && (

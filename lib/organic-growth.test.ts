@@ -21,6 +21,8 @@ function listing(overrides: Partial<Listing> = {}): Listing {
     website: "https://example.com",
     phone: null,
     price: 35,
+    activities: ["rage-room"],
+    occasions: [],
     image: "/images/example.jpg",
     verified: true,
     googlePlaceId: null,
@@ -120,13 +122,13 @@ describe("nearby and index-quality rules", () => {
 describe("report data", () => {
   it("builds aggregate statistics and a private-data-free CSV", () => {
     const report = buildRageRoomReportData([
-      listing({ id: "1", city: "London", price: 30, lastVerified: "2026-08-01" }),
-      listing({ id: "2", city: "Leeds", region: "Yorkshire", price: 50, lastVerified: "2026-08-02" }),
+      listing({ id: "1", city: "London", price: 30, priceUnit: "per-person", lastVerified: "2026-08-01" }),
+      listing({ id: "2", city: "Leeds", region: "Yorkshire", price: 50, priceUnit: "per-person", lastVerified: "2026-08-02" }),
     ])
     expect(report.averageStartingPrice).toBe(40)
     expect(report.citiesCovered).toBe(2)
     const csv = buildAggregateReportCsv(report)
-    expect(csv).toContain("average_starting_price_gbp,40")
+    expect(csv).toContain("average_per_person_starting_price_gbp,40")
     expect(csv).not.toContain("example.com")
   })
 })

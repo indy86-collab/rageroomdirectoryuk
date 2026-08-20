@@ -9,6 +9,7 @@ import {
   buildItemListSchema,
   buildOgImageUrl,
 } from "@/lib/seo-schema"
+import { formatListingPrice } from "@/lib/discovery"
 
 const GUIDE_PATH = "/guides/best-rage-rooms-for-couples"
 const OG_IMAGE = buildOgImageUrl({
@@ -41,7 +42,9 @@ export const revalidate = 86400
 
 export default async function BestRageRoomsForCouplesPage() {
   const { searchListings } = await import("@/lib/listings")
-  const allListings = await searchListings(undefined)
+  const allListings = (await searchListings(undefined)).filter((listing) =>
+    listing.occasions?.includes("date-nights")
+  )
 
   const articleSchema = buildArticleSchema({
     url: GUIDE_PATH,
@@ -144,6 +147,13 @@ export default async function BestRageRoomsForCouplesPage() {
             Looking for a unique date night activity? Rage rooms offer couples an exciting, stress-relieving experience that's far from the typical dinner and movie. Our guide helps you find the best rage rooms perfect for couples, with tips on what to look for and how to make the most of your romantic smashing session.
           </p>
 
+          <p className="mb-8 rounded-lg border border-rage-500/25 bg-rage-500/10 p-4 text-sm text-zinc-300">
+            Want to compare current options? See the verified venues on our{" "}
+            <Link href="/occasions/date-night" className="font-bold text-rage-400 hover:text-rage-300">
+              rage-room date-night discovery page
+            </Link>.
+          </p>
+
 
           <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-6 mb-8">
             <h2 className="text-2xl font-bold text-white mb-4">
@@ -177,7 +187,7 @@ export default async function BestRageRoomsForCouplesPage() {
                 Recommended Rage Rooms for Couples
               </h2>
               <p className="text-zinc-300 mb-4">
-                While most rage rooms welcome couples, here are some venues across the UK that are particularly well-suited for date nights:
+                These venues explicitly promote their rage-room experience for dates or couples:
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 {allListings.slice(0, 6).map((listing) => (
@@ -188,8 +198,8 @@ export default async function BestRageRoomsForCouplesPage() {
                   >
                     <h3 className="text-white font-semibold mb-1">{listing.name}</h3>
                     <p className="text-zinc-400 text-sm">{listing.city}</p>
-                    {listing.price && (
-                      <p className="text-orange-500 text-sm mt-2">From £{listing.price.toFixed(0)}</p>
+                    {formatListingPrice(listing) && (
+                      <p className="text-orange-500 text-sm mt-2">{formatListingPrice(listing)}</p>
                     )}
                   </Link>
                 ))}
@@ -241,5 +251,3 @@ export default async function BestRageRoomsForCouplesPage() {
     </div>
   )
 }
-
-

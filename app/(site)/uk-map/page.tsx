@@ -4,6 +4,7 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 import NearMeMap from "@/components/NearMeMap"
 import { buildOgImageUrl } from "@/lib/seo-schema"
 import { absoluteUrl, listingUrl } from "@/lib/site-url"
+import { formatListingPrice } from "@/lib/discovery"
 
 const OG_IMAGE = buildOgImageUrl({
   title: "UK Rage Room Map",
@@ -65,8 +66,8 @@ export default async function UkMapPage() {
           addressCountry: "GB",
         },
         url: listingUrl(listing.slug || listing.id),
-        ...(listing.price
-          ? { priceRange: `£${listing.price.toFixed(0)}` }
+        ...(formatListingPrice(listing, { includeFrom: false })
+          ? { priceRange: formatListingPrice(listing, { includeFrom: false }) }
           : {}),
       },
     })),

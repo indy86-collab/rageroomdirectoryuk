@@ -16,6 +16,12 @@ import {
   getDigitalProduct,
   getDigitalProductAnalytics,
 } from "@/lib/digital-products"
+import {
+  ACTIVITY_DEFINITIONS,
+  MIN_ACTIVITY_PAGE_LISTINGS,
+  OCCASION_DEFINITIONS,
+  matchesOccasionDefinition,
+} from "@/lib/discovery"
 
 export const revalidate = 900
 
@@ -162,12 +168,24 @@ const otherCities: {
 ]
 
 export default async function Home() {
-  const { getFeaturedListings, getListingsNearCity, getDistinctRegions, getListingsByRegion } =
+  const { getFeaturedListings, getListingsNearCity, getDistinctRegions, getListingsByRegion, getAllListingsForAdmin } =
     await import("@/lib/listings")
   const { regionToSlug } = await import("@/lib/location")
   const featuredListings = await getFeaturedListings(8, {
     excludeSlugs: ["rage-x-treme-polegate"],
   })
+  const discoveryListings = await getAllListingsForAdmin()
+  const featuredActivityValues = new Set(["rage-room", "axe-throwing", "paint-splatter", "car-smash"])
+  const homeActivities = ACTIVITY_DEFINITIONS
+    .filter((activity) => featuredActivityValues.has(activity.value))
+    .map((activity) => ({
+      ...activity,
+      count: discoveryListings.filter((listing) => listing.activities.includes(activity.value)).length,
+    }))
+  const homeOccasions = OCCASION_DEFINITIONS.map((occasion) => ({
+    ...occasion,
+    count: discoveryListings.filter((listing) => matchesOccasionDefinition(listing, occasion)).length,
+  }))
 
   const cityCounts = await Promise.all(
     featuredCities.map(async (c) => {
@@ -196,6 +214,66 @@ export default async function Home() {
   return (
     <>
       <Hero featuredListings={featuredListings} />
+
+      <section aria-labelledby="choose-experience-heading" className="w-full py-10 sm:py-14 section-textured">
+        <div className="w-full px-3 sm:px-5 lg:px-6">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-rage-500">Rage rooms first</p>
+              <h2 id="choose-experience-heading" className="section-title mt-2">Choose Your Experience</h2>
+            </div>
+            <Link href="/activities" className="inline-flex items-center gap-1 text-sm font-bold text-rage-400 hover:text-rage-300">
+              All activities <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="mt-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
+            {homeActivities.map((activity) => {
+              const hasPage = activity.count >= MIN_ACTIVITY_PAGE_LISTINGS
+              return (
+                <Link key={activity.value} href={hasPage ? `/activities/${activity.slug}` : "/activities"} className="group rounded-lg border border-zinc-800 bg-[#181818] p-4 transition-colors hover:border-rage-500/60 sm:p-5">
+                  <span className="text-3xl" aria-hidden="true">{activity.emoji}</span>
+                  <h3 className="mt-3 text-base font-black uppercase tracking-wide text-white group-hover:text-rage-400 sm:text-lg">{activity.label}</h3>
+                  <p className="mt-2 text-xs text-zinc-400">{activity.count} confirmed {activity.count === 1 ? "venue" : "venues"}</p>
+                </Link>
+              )
+            })}
+          </div>
+
+          <div className="mt-10 flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-rage-500">Plan the visit</p>
+              <h2 className="mt-2 text-2xl font-black uppercase tracking-wide text-white sm:text-3xl">What Are You Planning?</h2>
+            </div>
+            <Link href="/occasions" className="inline-flex items-center gap-1 text-sm font-bold text-rage-400 hover:text-rage-300">
+              All occasions <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+            {homeOccasions.map((occasion) => (
+              <Link key={occasion.slug} href={`/occasions/${occasion.slug}`} className="rounded-lg border border-zinc-800 bg-dark-900 p-4 text-center transition-colors hover:border-rage-500/60">
+                <span className="text-2xl" aria-hidden="true">{occasion.emoji}</span>
+                <h3 className="mt-2 text-sm font-bold text-white">{occasion.shortLabel}</h3>
+                <p className="mt-1 text-[11px] text-zinc-500">{occasion.count} venues</p>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-7 rounded-lg border border-zinc-800 bg-[#181818] p-4 sm:p-5">
+            <h3 className="text-sm font-black uppercase tracking-widest text-white">Popular combinations</h3>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {[
+                ["💥 Smash + Axe Throwing", "/activities/axe-throwing"],
+                ["💥 Smash + Paint", "/activities/paint-splatter"],
+                ["💼 Corporate Rage Rooms", "/occasions/corporate-team-building"],
+                ["🎂 Birthday Rage Rooms", "/occasions/birthdays"],
+              ].map(([label, href]) => (
+                <Link key={label} href={href} className="rounded-full border border-zinc-700 bg-dark-900 px-3 py-2 text-sm font-semibold text-zinc-200 hover:border-rage-500/60 hover:text-rage-300">{label}</Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section aria-label="Planning checklists" className="w-full pt-4 sm:pt-6">
         <div className="w-full px-3 sm:px-5 lg:px-6">

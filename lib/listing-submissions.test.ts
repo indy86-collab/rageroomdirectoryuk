@@ -10,12 +10,18 @@ const validSubmission = {
   workEmail: "alex@example.com",
   website: "https://example.com",
   bookingUrl: "https://example.com/book",
+  priceFrom: "60",
+  priceUnit: "per-room",
   city: "London",
   postcode: "SW1A 1AA",
   sessionLengths: "15, 30",
   groupSizeMin: "1",
   groupSizeMax: "6",
   features: ["couples", "corporate-groups"],
+  activities: ["rage-room", "axe-throwing"],
+  occasions: ["birthdays", "corporate-team-building"],
+  onlineBooking: "true",
+  walkInsAccepted: "false",
   mediaUrls: "https://example.com/photo.jpg",
   sourceUrls: "https://example.com/prices",
   consent: true,
@@ -29,7 +35,23 @@ describe("listing submission validation", () => {
     if (!result.success) return
     expect(result.data.sessionLengths).toEqual([15, 30])
     expect(result.data.features).toEqual(["couples", "corporate-groups"])
+    expect(result.data.activities).toEqual(["rage-room", "axe-throwing"])
+    expect(result.data.occasions).toEqual(["birthdays", "corporate-team-building"])
+    expect(result.data.onlineBooking).toBe(true)
+    expect(result.data.priceFrom).toBe(60)
+    expect(result.data.priceUnit).toBe("per-room")
+    expect(result.data.walkInsAccepted).toBe(false)
     expect(result.data.mediaUrls).toEqual(["https://example.com/photo.jpg"])
+  })
+
+  it("requires a unit for every submitted starting price", () => {
+    const result = parseListingSubmission({ ...validSubmission, priceUnit: "" })
+    expect(result.success).toBe(false)
+    if (!result.success) {
+      expect(result.errors).toContain(
+        "Choose whether the starting price is per person, room or group"
+      )
+    }
   })
 
   it("rejects missing consent, invalid URLs and honeypot traffic", () => {

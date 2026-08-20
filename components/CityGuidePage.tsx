@@ -5,6 +5,7 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 import { getCityFAQs } from "@/lib/faqs"
 import { getGuideCityContent } from "@/lib/guide-city-content"
 import { cityToSlug } from "@/lib/location"
+import { formatListingPrice } from "@/lib/discovery"
 import type { Listing } from "@/types/listing"
 import type { ListingWithDistance } from "@/lib/listings"
 import {
@@ -63,9 +64,9 @@ function ListingCard({
             </p>
           )}
           <div className="flex flex-wrap items-center gap-3">
-            {listing.price && (
+            {formatListingPrice(listing) && (
               <span className="text-orange-500 font-semibold text-sm">
-                From £{listing.price.toFixed(0)} per person
+                {formatListingPrice(listing)}
               </span>
             )}
             <Link
@@ -97,7 +98,7 @@ export default async function CityGuidePage({
   const faqs = getCityFAQs(city)
 
   const allListings = allForSchema
-  const priced = allListings.filter((l) => l.price != null) as Array<
+  const priced = allListings.filter((l) => l.price != null && l.priceUnit === "per-person") as Array<
     (typeof allListings)[number] & { price: number }
   >
   const minPrice = priced.length ? Math.min(...priced.map((l) => l.price)) : null
@@ -175,10 +176,9 @@ export default async function CityGuidePage({
                 ? `${nearby.length} additional venue${nearby.length === 1 ? "" : "s"} within 40 miles of ${city}.`
                 : null,
               minPrice && maxPrice
-                ? `${city} sessions typically start from £${minPrice.toFixed(0)}–£${maxPrice.toFixed(0)} per person.`
-                : `Expect £25–£65 per person for a standard ${city} rage room session.`,
-              `All reputable ${city} venues include safety PPE (coveralls, helmet with visor, gloves) in the booking fee.`,
-              `Solo, couple, and group (3–8 people) packages are widely available; corporate team-building packages are offered by most larger venues.`,
+                ? `Published per-person starting prices near ${city} range from £${minPrice.toFixed(0)}–£${maxPrice.toFixed(0)} in our current data.`
+                : `No comparable per-person price range is currently published in our ${city} data.`,
+              `Check each venue's current PPE, package, age and group rules before booking.`,
             ].filter((t): t is string => t != null)}
           />
 
@@ -227,7 +227,7 @@ export default async function CityGuidePage({
                             : ""}
                         </td>
                         <td className="px-4 py-3 text-zinc-300">
-                          {listing.price != null ? `£${listing.price.toFixed(0)}` : "Check venue"}
+                          {formatListingPrice(listing, { includeFrom: false }) ?? "Not provided"}
                         </td>
                         <td className="px-4 py-3 text-zinc-300">
                           {listing.ageMin != null ? `${listing.ageMin}+` : "Check venue"}

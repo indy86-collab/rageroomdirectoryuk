@@ -1,4 +1,5 @@
 import type { Listing } from "@/types/listing"
+import { formatListingPrice, getActivityLabel } from "@/lib/discovery"
 
 interface ListingContent {
   summary: string
@@ -13,7 +14,7 @@ export async function generateListingContent(
 ): Promise<ListingContent> {
   const city = listing.city
   const name = listing.name
-  const price = listing.price ? `£${listing.price.toFixed(0)}` : null
+  const price = formatListingPrice(listing, { includeFrom: false })
   const hasPhone = !!listing.phone
   const hasWebsite = !!listing.website
   const verified = listing.verified
@@ -53,7 +54,7 @@ function generateSummary(
   region: string
 ): string {
   const hasDescription = description.length > 50
-  const priceInfo = price ? ` with sessions starting from ${price} per person` : ""
+  const priceInfo = price ? ` with a published starting price of ${price}` : ""
   const regionInfo = region ? ` in the ${region} region` : ""
 
   if (hasDescription) {
@@ -64,8 +65,8 @@ function generateSummary(
 
   const variant = hashCode(name) % 4
   const summaries = [
-    `${name} is a rage room experience based in ${city}${regionInfo}${priceInfo}. The venue provides supervised destruction therapy sessions where visitors can break items in a controlled environment, making it suitable for stress relief, celebrations, corporate outings, and anyone looking for an unconventional activity.`,
-    `Located in ${city}${regionInfo}, ${name} offers rage room sessions${priceInfo}. Visitors book a time slot, receive safety equipment, and are given a selection of items to smash in a purpose-built room. The experience is designed as a physical outlet for stress and is popular for birthdays, team events, and date nights.`,
+    `${name} is a rage room experience based in ${city}${regionInfo}${priceInfo}. The venue provides destruction sessions where visitors can break items in a controlled environment.`,
+    `Located in ${city}${regionInfo}, ${name} offers rage room sessions${priceInfo}. Check the venue's published rules and package details before booking.`,
     `${name} brings the rage room concept to ${city}${regionInfo}. During a session${priceInfo}, participants suit up in protective gear and use tools to destroy everyday objects like crockery, glass, and electronics. Staff supervise throughout to ensure the experience is both safe and satisfying.`,
     `Based in ${city}${regionInfo}, ${name} runs destruction therapy sessions${priceInfo} in a purpose-built rage room. Visitors choose from smashing tools, are kitted out with full safety gear, and spend their session breaking items as a form of stress relief and entertainment.`,
   ]
@@ -94,39 +95,35 @@ function generateHighlights(
   }
 
   if (price) {
-    highlights.push(`Sessions start from ${price} per person — check the venue's website for their full range of packages`)
+    highlights.push(`Published starting price: ${price} — check the venue's website for current package details`)
   }
 
   if (verified) {
     highlights.push(`This venue has been verified by the RageRoom Directory team as an active, operating rage room`)
   }
 
-  if (descLower.includes("team") || descLower.includes("corporate") || descLower.includes("group")) {
-    highlights.push(`Offers group and team-building options — a popular choice for corporate away days and celebrations`)
+  if (listing.corporatePackages === true) {
+    highlights.push("The venue publishes corporate or team-building options")
   }
 
-  if (descLower.includes("couple") || descLower.includes("date")) {
-    highlights.push(`Couples sessions available, making it a unique date night option in ${city}`)
+  if (listing.occasions.includes("date-nights")) {
+    highlights.push(`The venue explicitly markets a date-night option in ${city}`)
   }
 
-  if (descLower.includes("birthday") || descLower.includes("party") || descLower.includes("hen") || descLower.includes("stag")) {
-    highlights.push(`Hosts birthday parties and special celebrations with tailored packages`)
+  if (listing.occasions.includes("birthdays")) {
+    highlights.push("The venue explicitly advertises birthday bookings")
   }
 
-  if (descLower.includes("axe") || descLower.includes("archery") || descLower.includes("escape")) {
-    highlights.push(`Offers additional activities beyond rage room sessions for a fuller experience`)
+  if (listing.activities.length > 1) {
+    highlights.push(`Also publishes: ${listing.activities.slice(1).map(getActivityLabel).join(", ")}`)
   }
 
-  if (hasWebsite) {
+  if (listing.onlineBooking === true) {
     highlights.push(`Online booking available through their website for easy session planning`)
   }
 
   if (hasPhone && !hasWebsite) {
     highlights.push(`Direct phone booking available for arranging sessions and asking questions`)
-  }
-
-  if (highlights.length < 4) {
-    highlights.push(`All necessary safety equipment and breakable items provided — just turn up and smash`)
   }
 
   return highlights.slice(0, 6)
@@ -151,27 +148,13 @@ function generateUniquePoints(
     }
   }
 
-  if (price && numSimilar > 0) {
-    const avgPrice = similarListings
-      .filter(l => l.price)
-      .reduce((sum, l) => sum + (l.price || 0), 0) / Math.max(similarListings.filter(l => l.price).length, 1)
-    
-    if (listing.price && avgPrice > 0) {
-      if (listing.price < avgPrice * 0.9) {
-        points.push(`Competitively priced compared to other rage rooms in the ${city} area`)
-      } else if (listing.price > avgPrice * 1.1) {
-        points.push(`Positioned as a premium experience among ${city}'s rage room options`)
-      }
-    }
-  }
-
   if (numSimilar === 0) {
     points.push(`One of the few rage room options in the ${city} area, serving local demand for destruction therapy`)
   } else if (numSimilar <= 2) {
     points.push(`One of a small number of rage rooms operating in ${city}, giving visitors limited but focused options to choose from`)
   }
 
-  if (descLower.includes("vr") || descLower.includes("virtual")) {
+  if (listing.activities.includes("vr")) {
     points.push(`Incorporates technology like VR into the experience for a modern twist`)
   }
   if (descLower.includes("music") || descLower.includes("playlist") || descLower.includes("speaker")) {
@@ -180,10 +163,10 @@ function generateUniquePoints(
   if (descLower.includes("photo") || descLower.includes("video") || descLower.includes("record")) {
     points.push(`Offers photo or video options so visitors can capture the experience`)
   }
-  if (descLower.includes("paint") || descLower.includes("splatter")) {
+  if (listing.activities.includes("paint-splatter")) {
     points.push(`Features paint splatter or creative destruction options alongside traditional smashing`)
   }
-  if (descLower.includes("car") || descLower.includes("vehicle")) {
+  if (listing.activities.includes("car-smash")) {
     points.push(`Offers large-item destruction like cars or appliances for an amplified experience`)
   }
   if (descLower.includes("custom") || descLower.includes("bring your own")) {
@@ -213,33 +196,18 @@ export function generateListingFAQs(
   const faqs: ListingFAQItem[] = []
   const city = listing.city
   const name = listing.name
-  const price = listing.price
-  const descLower = (listing.description || "").toLowerCase()
   const numSimilar = similarListings.length
 
   faqs.push({
     question: `What is ${name}?`,
-    answer: `${name} is a rage room venue located in ${city}${listing.region ? `, ${listing.region}` : ""}. It offers destruction therapy sessions where visitors are given safety equipment and a selection of items to smash in a controlled, supervised environment. Sessions are suitable for stress relief, celebrations, group events, and anyone looking for an unconventional activity.`,
+    answer: `${name} is a rage room venue located in ${city}${listing.region ? `, ${listing.region}` : ""}. ${listing.description}`,
   })
 
-  if (price) {
-    const similarWithPrice = similarListings.filter(l => l.price)
-    const avgPrice = similarWithPrice.length > 0
-      ? similarWithPrice.reduce((sum, l) => sum + (l.price || 0), 0) / similarWithPrice.length
-      : null
-
-    let comparison = ""
-    if (avgPrice && price < avgPrice * 0.9) {
-      comparison = ` This is below the average starting price of around £${Math.round(avgPrice)} for rage rooms in the ${city} area, making it a competitively priced option.`
-    } else if (avgPrice && price > avgPrice * 1.1) {
-      comparison = ` This is above the average starting price of around £${Math.round(avgPrice)} in the ${city} area, suggesting a more premium experience.`
-    } else if (avgPrice) {
-      comparison = ` This is in line with the average starting price of around £${Math.round(avgPrice)} for rage rooms in the ${city} area.`
-    }
-
+  const formattedPrice = formatListingPrice(listing)
+  if (formattedPrice) {
     faqs.push({
       question: `How much does ${name} cost?`,
-      answer: `Sessions at ${name} start from £${price.toFixed(0)} per person.${comparison} Most rage rooms offer several package tiers, so visit the venue's website to see their full and current pricing.`,
+      answer: `${name} has a published rage-room starting price of ${formattedPrice.replace(/^From /, "")}.${listing.priceNote ? ` ${listing.priceNote}` : ""} Check the venue's website before booking because prices can change.`,
     })
   } else {
     faqs.push({
@@ -250,26 +218,32 @@ export function generateListingFAQs(
 
   faqs.push({
     question: `Do I need to book ${name} in advance?`,
-    answer: `We recommend booking in advance, especially for weekend sessions. ${name} ${listing.website ? "accepts bookings through their website" : "can be contacted directly to arrange a session"}. Walk-in availability is not guaranteed, and popular time slots can fill up quickly.`,
+    answer:
+      listing.onlineBooking === true
+        ? `${name} publishes an online booking option. ${listing.walkInsAccepted === true ? "The venue also says walk-ins may be accepted when space is available." : listing.walkInsAccepted === false ? "The venue states that advance booking is required." : "Walk-in availability has not been confirmed in our data."}`
+        : `Online booking has not been confirmed in our data. Contact ${name} directly to confirm how to reserve a session.`,
   })
 
-  if (descLower.includes("group") || descLower.includes("team") || descLower.includes("corporate")) {
+  if (listing.corporatePackages === true || listing.occasions.includes("corporate-team-building")) {
     faqs.push({
       question: `Does ${name} offer group or corporate bookings?`,
-      answer: `Yes, based on the venue's description, ${name} caters to groups and corporate events. Group rage room sessions are popular for team building, stag and hen parties, and birthday celebrations. Contact the venue directly for group rates and to discuss specific requirements for larger bookings.`,
+      answer: `${name} publishes corporate or team-building options. Contact the venue directly for current capacity, pricing and package details.`,
     })
   } else {
     faqs.push({
       question: `Can I bring a group to ${name}?`,
-      answer: `Most rage rooms, including ${name}, accommodate groups of varying sizes. Whether it's a birthday party, a team outing, or a group of friends, it's best to contact the venue to check their maximum capacity and any group packages they may offer.`,
+      answer: listing.groupSizeMax != null
+        ? `The largest confirmed booking size in our data is ${listing.groupSizeMax}. ${listing.groupSizeNote ?? "Contact the venue to confirm how many people participate at once."}`
+        : `A maximum group size has not been confirmed in our data. Contact ${name} before planning a group visit.`,
     })
   }
 
   if (numSimilar > 0) {
     const nearest = similarListings[0]
+    const nearestPrice = formatListingPrice(nearest)
     const nearestInfo = nearest.city === city
-      ? `Other rage rooms in ${city} include ${nearest.name}${nearest.price ? ` (from £${nearest.price.toFixed(0)})` : ""}.`
-      : `A nearby alternative is ${nearest.name} in ${nearest.city}${nearest.price ? ` (from £${nearest.price.toFixed(0)})` : ""}.`
+      ? `Other rage rooms in ${city} include ${nearest.name}${nearestPrice ? ` (${nearestPrice.toLowerCase()})` : ""}.`
+      : `A nearby alternative is ${nearest.name} in ${nearest.city}${nearestPrice ? ` (${nearestPrice.toLowerCase()})` : ""}.`
 
     faqs.push({
       question: `Are there other rage rooms near ${name}?`,
@@ -282,17 +256,17 @@ export function generateListingFAQs(
     })
   }
 
-  if (descLower.includes("couple") || descLower.includes("date")) {
+  if (listing.occasions.includes("date-nights")) {
     faqs.push({
       question: `Is ${name} good for couples?`,
-      answer: `Yes, ${name} mentions couples-friendly options in their description. Rage rooms are increasingly popular as a unique date night activity — they're fun, memorable, and offer a shared experience that's very different from a typical night out.`,
+      answer: `Yes. ${name} explicitly advertises a date-night option. Check the venue's current package and participant rules before booking.`,
     })
   }
 
-  if (descLower.includes("axe") || descLower.includes("archery") || descLower.includes("escape") || descLower.includes("paint")) {
+  if (listing.activities.length > 1) {
     faqs.push({
       question: `Does ${name} offer activities other than rage rooms?`,
-      answer: `Based on the venue's description, ${name} appears to offer additional activities alongside their rage room sessions. These may include axe throwing, archery, escape rooms, or paint splatter experiences. Check their website for the full list of available activities and combo packages.`,
+      answer: `${name} also lists ${listing.activities.slice(1).map(getActivityLabel).join(", ")}. Check the venue's branch-specific booking page for current availability and age rules.`,
     })
   }
 
@@ -313,7 +287,9 @@ function generateNearbyRecommendations(
   const recommendations: string[] = []
 
   for (const similar of similarListings.slice(0, 3)) {
-    const priceInfo = similar.price ? ` (from £${similar.price.toFixed(0)})` : ""
+    const priceInfo = formatListingPrice(similar)
+      ? ` (${formatListingPrice(similar)?.toLowerCase()})`
+      : ""
     const sameCity = similar.city === city
     if (sameCity) {
       recommendations.push(

@@ -1,6 +1,12 @@
 import {
+  LISTING_ACTIVITIES,
   LISTING_FEATURES,
+  LISTING_OCCASIONS,
+  LISTING_PRICE_UNITS,
+  type ListingActivity,
   type ListingFeature,
+  type ListingOccasion,
+  type ListingPriceUnit,
 } from "@/types/listing"
 
 export const LISTING_REQUEST_TYPES = ["new", "claim", "correction"] as const
@@ -18,6 +24,7 @@ export interface ListingSubmission {
   city: string
   postcode: string
   priceFrom: number | null
+  priceUnit: ListingPriceUnit | null
   ageMin: number | null
   openingHours: string
   packages: string
@@ -25,6 +32,14 @@ export interface ListingSubmission {
   groupSizeMin: number | null
   groupSizeMax: number | null
   features: ListingFeature[]
+  activities: ListingActivity[]
+  occasions: ListingOccasion[]
+  walkInsAccepted: boolean | null
+  onlineBooking: boolean | null
+  giftVouchers: boolean | null
+  corporatePackages: boolean | null
+  privateHire: boolean | null
+  accessibility: boolean | null
   mediaUrls: string[]
   sourceUrls: string[]
   notes: string
@@ -48,6 +63,12 @@ function optionalNumber(value: unknown, min: number, max: number) {
   return Number.isFinite(number) && number >= min && number <= max
     ? number
     : null
+}
+
+function optionalBoolean(value: unknown) {
+  if (value === true || value === "true") return true
+  if (value === false || value === "false") return false
+  return null
 }
 
 function url(value: unknown) {
@@ -112,6 +133,16 @@ export function parseListingSubmission(input: unknown): ListingSubmissionResult 
         LISTING_FEATURES.includes(feature as ListingFeature)
       )
     : []
+  const activities = Array.isArray(body.activities)
+    ? body.activities.filter((activity): activity is ListingActivity =>
+        LISTING_ACTIVITIES.includes(activity as ListingActivity)
+      )
+    : []
+  const occasions = Array.isArray(body.occasions)
+    ? body.occasions.filter((occasion): occasion is ListingOccasion =>
+        LISTING_OCCASIONS.includes(occasion as ListingOccasion)
+      )
+    : []
 
   const data: ListingSubmission = {
     requestType,
@@ -125,6 +156,9 @@ export function parseListingSubmission(input: unknown): ListingSubmissionResult 
     city: text(body.city, 100),
     postcode,
     priceFrom: optionalNumber(body.priceFrom, 0, 1000),
+    priceUnit: LISTING_PRICE_UNITS.includes(body.priceUnit as ListingPriceUnit)
+      ? (body.priceUnit as ListingPriceUnit)
+      : null,
     ageMin: optionalNumber(body.ageMin, 1, 100),
     openingHours: text(body.openingHours, 2000),
     packages: text(body.packages, 4000),
@@ -132,6 +166,14 @@ export function parseListingSubmission(input: unknown): ListingSubmissionResult 
     groupSizeMin: optionalNumber(body.groupSizeMin, 1, 500),
     groupSizeMax: optionalNumber(body.groupSizeMax, 1, 500),
     features,
+    activities,
+    occasions,
+    walkInsAccepted: optionalBoolean(body.walkInsAccepted),
+    onlineBooking: optionalBoolean(body.onlineBooking),
+    giftVouchers: optionalBoolean(body.giftVouchers),
+    corporatePackages: optionalBoolean(body.corporatePackages),
+    privateHire: optionalBoolean(body.privateHire),
+    accessibility: optionalBoolean(body.accessibility),
     mediaUrls: urlList(body.mediaUrls),
     sourceUrls: urlList(body.sourceUrls),
     notes: text(body.notes, 4000),
@@ -146,6 +188,9 @@ export function parseListingSubmission(input: unknown): ListingSubmissionResult 
   if (!POSTCODE_RE.test(data.postcode)) errors.push("A valid UK postcode is required")
   if (websiteInput && !data.website) errors.push("Website must be a valid http(s) URL")
   if (bookingInput && !data.bookingUrl) errors.push("Booking link must be a valid http(s) URL")
+  if (data.priceFrom != null && data.priceUnit == null) {
+    errors.push("Choose whether the starting price is per person, room or group")
+  }
   if (requestType !== "new" && !data.listingSlug) {
     errors.push("Choose the listing you want to update")
   }

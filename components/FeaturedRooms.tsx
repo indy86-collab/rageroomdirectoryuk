@@ -2,6 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { MapPin, CheckCircle2 } from "lucide-react"
 import type { Listing } from "@/types/listing"
+import { formatListingPrice } from "@/lib/discovery"
 
 interface FeaturedRoomsProps {
   listings: Listing[]
@@ -38,6 +39,7 @@ export default function FeaturedRooms({ listings, variant = "grid" }: FeaturedRo
 
 function FeaturedCard({ listing }: { listing: Listing }) {
   const href = `/listing/${listing.slug || listing.id}`
+  const startingPrice = formatListingPrice(listing)
   return (
     <div className="card-base card-hover overflow-hidden flex flex-col group">
       <Link href={href} className="relative block w-full h-40 sm:h-44 overflow-hidden bg-dark-800">
@@ -69,9 +71,9 @@ function FeaturedCard({ listing }: { listing: Listing }) {
           </h3>
         </Link>
 
-        {listing.price != null && (
+        {startingPrice && (
           <p className="text-rage-500 text-sm font-bold">
-            From £{listing.price.toFixed(2)}
+            {startingPrice}
           </p>
         )}
 
@@ -93,6 +95,7 @@ function FeaturedCard({ listing }: { listing: Listing }) {
 
 function FeaturedCompactCard({ listing }: { listing: Listing }) {
   const href = `/listing/${listing.slug || listing.id}`
+  const startingPrice = formatListingPrice(listing)
   return (
     <div className="card-base card-hover overflow-hidden flex flex-col group">
       <Link href={href} className="relative block w-full h-24 sm:h-28 overflow-hidden bg-dark-800">
@@ -122,9 +125,9 @@ function FeaturedCompactCard({ listing }: { listing: Listing }) {
           </h3>
         </Link>
 
-        {listing.price != null && (
+        {startingPrice && (
           <p className="text-rage-500 text-[11px] font-bold mt-0.5">
-            From £{listing.price.toFixed(2)}
+            {startingPrice}
           </p>
         )}
 

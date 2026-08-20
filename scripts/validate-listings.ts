@@ -14,7 +14,13 @@ import {
   type ListingLike,
 } from "../lib/listings-blacklist"
 import { getListingCompleteness } from "../lib/listing-quality"
-import { LISTING_FEATURES } from "../types/listing"
+import {
+  LISTING_ACTIVITIES,
+  LISTING_DURATION_TYPES,
+  LISTING_FEATURES,
+  LISTING_OCCASIONS,
+  LISTING_PRICE_UNITS,
+} from "../types/listing"
 
 const REQUIRED = ["id", "name", "description", "city", "postcode", "slug"] as const
 
@@ -73,8 +79,78 @@ function main() {
       console.error(`❌ ${prefix}: groupSizeMin cannot exceed groupSizeMax`)
       errors++
     }
+    for (const [field, value] of [
+      ["price", l.price],
+      ["ageMin", l.ageMin],
+      ["groupSizeMin", l.groupSizeMin],
+      ["groupSizeMax", l.groupSizeMax],
+    ] as const) {
+      if (value != null && (!Number.isFinite(value) || value <= 0)) {
+        console.error(`❌ ${prefix}: ${field} must be a positive finite number or null`)
+        errors++
+      }
+    }
+    if (l.price != null) {
+      if (l.priceCurrency !== "GBP" || !l.priceUnit || !LISTING_PRICE_UNITS.includes(l.priceUnit)) {
+        console.error(`❌ ${prefix}: a price requires GBP currency and a supported price unit`)
+        errors++
+      }
+    } else if (l.priceCurrency != null || l.priceUnit != null) {
+      console.error(`❌ ${prefix}: price currency/unit must be null when price is unknown`)
+      errors++
+    }
+    if (l.sessionLengths != null && (
+      !Array.isArray(l.sessionLengths) ||
+      l.sessionLengths.some((duration) => !Number.isInteger(duration) || duration <= 0)
+    )) {
+      console.error(`❌ ${prefix}: sessionLengths must contain positive whole minutes`)
+      errors++
+    }
+    if (l.sessionDurationType != null && !LISTING_DURATION_TYPES.includes(l.sessionDurationType)) {
+      console.error(`❌ ${prefix}: unsupported sessionDurationType`)
+      errors++
+    }
+    for (const field of [
+      "walkInsAccepted",
+      "onlineBooking",
+      "giftVouchers",
+      "corporatePackages",
+      "privateHire",
+      "accessibility",
+    ] as const) {
+      const value = l[field]
+      if (value !== null && value !== undefined && typeof value !== "boolean") {
+        console.error(`❌ ${prefix}: ${field} must be true, false or null`)
+        errors++
+      }
+    }
+    for (const field of ["website", "bookingUrl", "sourceUrl"] as const) {
+      const value = l[field]
+      if (!value) continue
+      try {
+        const parsed = new URL(value)
+        if (!/^https?:$/.test(parsed.protocol)) throw new Error("invalid protocol")
+      } catch {
+        console.error(`❌ ${prefix}: ${field} must be a valid http(s) URL or null`)
+        errors++
+      }
+    }
     if (l.features?.some((feature) => !LISTING_FEATURES.includes(feature))) {
       console.error(`❌ ${prefix}: contains an unsupported feature value`)
+      errors++
+    }
+    if (!Array.isArray(l.activities) || !l.activities.includes("rage-room")) {
+      console.error(`❌ ${prefix}: activities must include rage-room`)
+      errors++
+    } else if (l.activities.some((activity) => !LISTING_ACTIVITIES.includes(activity))) {
+      console.error(`❌ ${prefix}: contains an unsupported activity value`)
+      errors++
+    }
+    if (!Array.isArray(l.occasions)) {
+      console.error(`❌ ${prefix}: occasions must be an array`)
+      errors++
+    } else if (l.occasions.some((occasion) => !LISTING_OCCASIONS.includes(occasion))) {
+      console.error(`❌ ${prefix}: contains an unsupported occasion value`)
       errors++
     }
     for (const media of l.media ?? []) {

@@ -13,8 +13,8 @@
     "website": "https://actyourragetherapies.simplybook.it/v2/",
     "bookingUrl": "https://actyourragetherapies.simplybook.it/v2/",
     "phone": "+44 7831 917966",
-    "price": 20,
-    "priceNote": "£50 for two people or £60 for three people.",
+    "price": 50,
+    "priceNote": "From £50 per room for two people; a three-person room is £60.",
     "ageMin": null,
     "openingHours": [
       "Monday: 12:00-21:00",
@@ -24,37 +24,55 @@
       "Friday: 12:00-21:00",
       "Saturday-Sunday: 10:00-17:00"
     ],
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sessionLengths": [
       30
     ],
     "groupSizeMin": 2,
     "groupSizeMax": 3,
     "features": [
-      "birthday-parties",
-      "couples"
+      "birthday-parties"
     ],
-    "media": null,
-    "packages": [
+    "media": [
       {
-        "name": "Rage room for two",
-        "price": 50,
-        "priceNote": "£50 for two people",
-        "description": "30-minute session."
-      },
-      {
-        "name": "Rage room for three",
-        "price": 60,
-        "priceNote": "£60 for three people",
-        "description": "30-minute session."
+        "type": "image",
+        "url": "/images/act-your-rage-therapies-par.jpg",
+        "alt": "Act Your Rage Therapies venue profile card for Par, Cornwall",
+        "caption": "Venue-specific profile card used because the official booking page publishes no logo or venue photography.",
+        "width": 1200,
+        "height": 675,
+        "credit": "Rage Room Directory; venue details and colours from the official booking profile",
+        "sourceUrl": "https://actyourragetherapies.simplybook.it/v2/",
+        "authorised": false
       }
     ],
+    "packages": null,
     "sourceUrl": "https://booking.page/en/company/page/actyourragetherapies",
-    "image": null,
+    "image": "/images/act-your-rage-therapies-par.jpg",
     "verified": true,
     "googlePlaceId": null,
     "slug": "act-your-rage-therapies-par",
-    "createdAt": "2026-08-17T20:45:00.000Z"
+    "createdAt": "2026-08-17T20:45:00.000Z",
+    "activities": [
+      "rage-room"
+    ],
+    "occasions": [
+      "birthdays"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-room",
+    "minimumAgeNote": null,
+    "sessionDurationType": "published-session",
+    "sessionDurationNote": null,
+    "groupSizeNote": null
   },
   {
     "id": "d0056264-14dd-4ad8-87e5-742c3038070c",
@@ -71,32 +89,65 @@
     "bookingUrl": "https://wannabook.online/booking/alltherage",
     "phone": "+44 7719 208907",
     "price": null,
-    "priceNote": "Check the live booking calendar for current prices.",
+    "priceNote": null,
     "ageMin": 10,
     "openingHours": null,
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sessionLengths": [
       30
     ],
     "groupSizeMin": 1,
     "groupSizeMax": 4,
     "features": [
-      "byo-smashables",
       "corporate-groups",
       "birthday-parties",
       "hen-stag-parties",
-      "couples",
-      "accessible-venue",
-      "video-recording"
+      "accessible-venue"
     ],
-    "media": null,
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/all-the-rage-birmingham.jpg",
+        "alt": "Guest with a smashed television at All The Rage Birmingham",
+        "caption": "Rage-room session photo published by All The Rage Birmingham.",
+        "width": 1200,
+        "height": 675,
+        "credit": "All The Rage Birmingham",
+        "sourceUrl": "https://all-the-rage.co.uk/",
+        "authorised": false
+      }
+    ],
     "packages": null,
     "sourceUrl": "https://all-the-rage.co.uk/",
-    "image": null,
+    "image": "/images/all-the-rage-birmingham.jpg",
     "verified": true,
     "googlePlaceId": null,
     "slug": "all-the-rage-birmingham",
-    "createdAt": "2026-08-17T20:45:00.000Z"
+    "createdAt": "2026-08-17T20:45:00.000Z",
+    "activities": [
+      "rage-room",
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": "Minimum age 10; under-18s must be accompanied by an adult.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "30 minutes total: 10-minute briefing/PPE, 15-minute smash and 5-minute decompression.",
+    "groupSizeNote": null
   },
   {
     "id": "b0f08b87-4af8-43eb-9f46-765bb129419c",
@@ -112,46 +163,62 @@
     "website": "https://alltheragescarborough.simplybook.it/v2/",
     "bookingUrl": "https://alltheragescarborough.simplybook.it/v2/",
     "phone": null,
-    "price": 20,
-    "priceNote": "Solo £35, duo £50 or trio £60 per session.",
-    "ageMin": 18,
+    "price": 35,
+    "priceNote": "From £35 for a solo room; duo £50 and trio £60.",
+    "ageMin": null,
     "openingHours": [
       "Wednesday-Friday: 17:00-20:20",
       "Saturday: 11:00-20:20",
       "Sunday: 11:00-17:00"
     ],
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sessionLengths": null,
     "groupSizeMin": 1,
     "groupSizeMax": 3,
     "features": [
-      "birthday-parties",
-      "couples"
+      "birthday-parties"
     ],
-    "media": null,
-    "packages": [
+    "media": [
       {
-        "name": "Solo smash",
-        "price": 35,
-        "priceNote": "£35 for one person"
-      },
-      {
-        "name": "Duo smash",
-        "price": 50,
-        "priceNote": "£50 for two people"
-      },
-      {
-        "name": "Trio smash",
-        "price": 60,
-        "priceNote": "£60 for three people"
+        "type": "image",
+        "url": "/images/all-the-rage-scarborough.jpg",
+        "alt": "Guest in protective equipment at All The Rage Scarborough",
+        "caption": "Rage-room service photo published on the venue's official booking page.",
+        "width": 1200,
+        "height": 675,
+        "credit": "All The Rage Scarborough",
+        "sourceUrl": "https://alltheragescarborough.simplybook.it/v2/",
+        "authorised": false
       }
     ],
+    "packages": null,
     "sourceUrl": "https://booking.page/en/company/page/alltheragescarborough",
-    "image": null,
+    "image": "/images/all-the-rage-scarborough.jpg",
     "verified": true,
     "googlePlaceId": null,
     "slug": "all-the-rage-scarborough",
-    "createdAt": "2026-08-17T20:45:00.000Z"
+    "createdAt": "2026-08-17T20:45:00.000Z",
+    "activities": [
+      "rage-room",
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-room",
+    "minimumAgeNote": null,
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null
   },
   {
     "id": "499e08d6-513b-4f4b-9f79-6063a3bf319f",
@@ -172,12 +239,42 @@
     "googlePlaceId": "ChIJm1TH_ZbfekgRxY8gYN91ruc",
     "slug": "anger-issues-rage-rooms-ltd-ellesmere-port",
     "createdAt": "2025-11-27T21:28:46.144Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "http://www.angerissuesragerooms.com/",
     "features": [
       "corporate-groups",
       "birthday-parties"
-    ]
+    ],
+    "activities": [
+      "rage-room"
+    ],
+    "occasions": [
+      "birthdays",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-room",
+    "minimumAgeNote": "Minimum age 10; under-18s must be accompanied by an adult.",
+    "sessionDurationType": "activity-time",
+    "sessionDurationNote": "30 minutes in the rage room, plus 15 minutes for preparation and briefing.",
+    "groupSizeNote": null,
+    "bookingUrl": "https://www.picktime.com/f063be23-77e0-4c6a-84a7-6785114f0c92",
+    "priceNote": "From £35 per room for one person.",
+    "ageMin": 10,
+    "sessionLengths": [
+      30
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null
   },
   {
     "id": "1d35e4d5-4f6a-4c10-b6b3-5c1cd4ef24c3",
@@ -192,18 +289,54 @@
     },
     "website": "https://www.angrysmash.com/",
     "phone": "+44 7555 114479",
-    "price": 35,
+    "price": 45,
     "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJqUa12rjZ2EcRkS_r2k9xs78/image-1764201100630-511d7706.jpg",
     "verified": true,
     "googlePlaceId": "ChIJqUa12rjZ2EcRkS_r2k9xs78",
     "slug": "angry-smash-ltd-southend-on-sea",
     "createdAt": "2025-11-27T21:28:46.523Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://www.angrysmash.com/",
     "features": [
+      "corporate-groups",
       "birthday-parties",
       "hen-stag-parties"
-    ]
+    ],
+    "activities": [
+      "rage-room",
+      "car-smash"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "corporate-team-building",
+      "families",
+      "kids"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Junior sessions are for ages 12–14; adult sessions are 15+ and under-18s require an adult.",
+    "sessionDurationType": "published-session",
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "bookingUrl": "https://angrysmash.simplybook.it/",
+    "priceNote": "Junior smash sessions (ages 12–14) start at £45; adult solo sessions start at £60.",
+    "ageMin": 12,
+    "sessionLengths": [
+      30
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null
   },
   {
     "id": "c5f3e0a4-1f6d-4c9b-d834-0a7f5e1c3b26",
@@ -218,15 +351,42 @@
     },
     "website": "https://arcadiadarlington.co.uk/",
     "phone": null,
-    "price": 30,
+    "price": null,
     "image": "/images/arcadia-rage-room-darlington.jpg",
     "verified": true,
     "googlePlaceId": "ChIJMwpLbVGbfkgRtnFNTrpfM6g",
     "slug": "arcadia-rage-room-darlington",
     "createdAt": "2026-06-02T12:00:00.000Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://arcadiadarlington.co.uk/",
-    "ageMin": 10
+    "ageMin": 10,
+    "activities": [
+      "rage-room",
+      "paint-splatter",
+      "vr"
+    ],
+    "occasions": [],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": "The published rage-room minimum age is 10.",
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "priceNote": null,
+    "bookingUrl": null,
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null,
+    "features": []
   },
   {
     "id": "fb842fd9-c195-48a5-ae21-56bcc6e90bb6",
@@ -241,44 +401,43 @@
     },
     "website": "https://www.axedandenraged.co.uk/",
     "phone": "+44 7863 680529",
-    "price": 20.83,
+    "price": 75,
     "image": "/images/axedandenraged.png",
     "verified": true,
     "googlePlaceId": "ChIJm9g98S5dhkgRgiWoQdoK-ZI",
     "slug": "axed-and-enraged",
     "createdAt": "2025-12-11T23:38:06.414Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://www.axedandenraged.co.uk/rage-room",
     "bookingUrl": "https://www.axedandenraged.co.uk/rage-room",
-    "priceNote": "Packages start at £75 for up to two; the £125 Gold package accommodates up to six.",
-    "ageMin": 16,
+    "priceNote": "Rage-room packages start at £75 for up to two people.",
+    "ageMin": null,
     "sessionLengths": [
       30
     ],
-    "groupSizeMin": 1,
-    "groupSizeMax": 6,
-    "packages": [
-      {
-        "name": "Bronze",
-        "price": 75,
-        "priceNote": "£75 for up to two people"
-      },
-      {
-        "name": "Silver",
-        "price": 100,
-        "priceNote": "£100 for up to four people"
-      },
-      {
-        "name": "Gold",
-        "price": 125,
-        "priceNote": "£125 for up to six people"
-      },
-      {
-        "name": "Diamond",
-        "price": 200,
-        "priceNote": "£200 for up to six people"
-      }
-    ]
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null,
+    "activities": [
+      "rage-room",
+      "axe-throwing"
+    ],
+    "occasions": [],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-room",
+    "minimumAgeNote": null,
+    "sessionDurationType": "published-session",
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "features": []
   },
   {
     "id": "3f887440-4920-4d23-9260-de599f094245",
@@ -299,11 +458,37 @@
     "googlePlaceId": "ChIJXfnJ29IJd0gRqIRKvqRHTFs",
     "slug": "destroyd-rage-rooms-northampton",
     "createdAt": "2025-11-27T21:28:46.741Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://trappd.com/rage-rooms/",
     "sessionLengths": [
       30
-    ]
+    ],
+    "activities": [
+      "rage-room",
+      "escape-room"
+    ],
+    "occasions": [],
+    "walkInsAccepted": null,
+    "onlineBooking": null,
+    "giftVouchers": true,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-room",
+    "minimumAgeNote": null,
+    "sessionDurationType": "published-session",
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "priceNote": "£55 for the published two-person rage-room session.",
+    "bookingUrl": null,
+    "ageMin": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null,
+    "features": []
   },
   {
     "id": "a203c2d9-20ab-4ec2-a744-c022e6bd8341",
@@ -318,14 +503,43 @@
     },
     "website": "https://downrange-axethrowing.co.uk/rage-room/",
     "phone": null,
-    "price": 35,
+    "price": null,
     "image": "/images/down-range-rage-room-gosport.jpg",
     "verified": true,
     "googlePlaceId": null,
     "slug": "down-range-rage-room-gosport",
     "createdAt": "2026-06-14T12:00:00.000Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
-    "sourceUrl": "https://downrange-axethrowing.co.uk/rage-room/"
+    "lastVerified": "2026-08-19",
+    "sourceUrl": "https://downrange-axethrowing.co.uk/rage-room/",
+    "activities": [
+      "rage-room",
+      "axe-throwing"
+    ],
+    "occasions": [],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": "Ages 13–16 require a participating adult; ages 16–17 require an adult to sign waivers.",
+    "sessionDurationType": "activity-time",
+    "sessionDurationNote": "The booking slot is one hour and includes 30 minutes of smash time.",
+    "groupSizeNote": "Up to four may book; only two participate in the rage room at a time.",
+    "priceNote": null,
+    "ageMin": 13,
+    "sessionLengths": [
+      30
+    ],
+    "groupSizeMin": 1,
+    "groupSizeMax": 4,
+    "bookingUrl": null,
+    "packages": null,
+    "features": []
   },
   {
     "id": "a1s2d3f4-g5h6-4j7k-8l9z-0x1c2v3b4n5m",
@@ -340,16 +554,16 @@
     },
     "website": "https://gamevaultayrshire.com/rage-room/",
     "phone": "+44 1563 593314",
-    "price": 20,
+    "price": 17,
     "image": "/images/GameVaultAyrshire.png",
     "verified": true,
     "googlePlaceId": "ChIJ5ydolLYziEgRs7TcXKQSR98",
     "slug": "game-vault-ayrshire-kilmarnock",
     "createdAt": "2025-11-27T21:28:46.000Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://gamevaultayrshire.com/rage-room/",
     "bookingUrl": "https://gamevaultayrshire.com/rage-room/",
-    "priceNote": "From £20 per person when six people share the £100 group package; solo sessions are £25.",
+    "priceNote": "The official six-player package publishes a £17 per-person cost; solo sessions are £25.",
     "ageMin": 13,
     "sessionLengths": [
       15,
@@ -363,32 +577,32 @@
       "birthday-parties",
       "hen-stag-parties"
     ],
-    "packages": [
-      {
-        "name": "Solo smash",
-        "price": 25,
-        "priceNote": "£25 for one person",
-        "description": "15-minute solo session."
-      },
-      {
-        "name": "Group of four",
-        "price": 80,
-        "priceNote": "£80 for up to four people",
-        "description": "30-minute group session."
-      },
-      {
-        "name": "Group of six",
-        "price": 100,
-        "priceNote": "£100 for up to six people",
-        "description": "30-minute group session."
-      },
-      {
-        "name": "Group of ten",
-        "price": 200,
-        "priceNote": "£200 for up to ten people",
-        "description": "60-minute group session."
-      }
-    ]
+    "packages": null,
+    "activities": [
+      "rage-room",
+      "escape-room",
+      "vr"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Minimum age 13 with an accompanying adult; solo entry is 18+.",
+    "sessionDurationType": "activity-time",
+    "sessionDurationNote": null,
+    "groupSizeNote": "Bookings support up to 10 people, but only one person enters the rage room at a time."
   },
   {
     "id": "3402ac80-5163-467f-ad88-bc16ec1a8955",
@@ -403,17 +617,42 @@
     },
     "website": "https://www.gorageuk.com/",
     "phone": "+44 7521 482101",
-    "price": 35,
+    "price": null,
     "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJ1Szj-wS7cEgRjij1NCeNXIY/image-1764201091929-d81e2889.jpg",
     "verified": true,
     "googlePlaceId": "ChIJ1Szj-wS7cEgRjij1NCeNXIY",
     "slug": "go-rage-birmingham-rage-room-birmingham",
     "createdAt": "2025-11-27T21:28:46.921Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://www.gorageuk.com/",
     "sessionLengths": [
       30
-    ]
+    ],
+    "activities": [
+      "rage-room"
+    ],
+    "occasions": [],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": null,
+    "sessionDurationType": "published-session",
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "priceNote": null,
+    "bookingUrl": null,
+    "ageMin": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null,
+    "features": []
   },
   {
     "id": "e7b5a2c6-3b8f-4e1d-f056-2c9b7a3e5d48",
@@ -434,11 +673,37 @@
     "googlePlaceId": "ChIJK8E4P-nxeUgROXV2trfJVLI",
     "slug": "hatchet-harrys-rage-room-derby",
     "createdAt": "2026-06-02T12:00:00.000Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://hatchetharrys.co.uk/derby/",
     "sessionLengths": [
       60
-    ]
+    ],
+    "activities": [
+      "rage-room",
+      "axe-throwing"
+    ],
+    "occasions": [],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": null,
+    "sessionDurationType": "published-session",
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "priceNote": "Rage-room sessions are £36 per person.",
+    "bookingUrl": null,
+    "ageMin": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null,
+    "features": []
   },
   {
     "id": "d6a4f1b5-2a7e-4d0c-e945-1b8a6f2d4c37",
@@ -459,11 +724,37 @@
     "googlePlaceId": "ChIJr8xukyohe0gREcQQFBj437Q",
     "slug": "hatchet-harrys-rage-room-liverpool",
     "createdAt": "2026-06-02T12:00:00.000Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://hatchetharrys.co.uk/liverpool/",
     "sessionLengths": [
       60
-    ]
+    ],
+    "activities": [
+      "rage-room",
+      "axe-throwing"
+    ],
+    "occasions": [],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": null,
+    "sessionDurationType": "published-session",
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "priceNote": "Rage-room sessions are £36 per person.",
+    "bookingUrl": null,
+    "ageMin": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null,
+    "features": []
   },
   {
     "id": "d8d7c02d-51cb-488a-909d-359673d34c67",
@@ -478,15 +769,15 @@
     },
     "website": "https://visitleicester.info/point-of-interest/house-of-rage-rage-room/",
     "phone": "+44 116 410 5013",
-    "price": 32,
+    "price": null,
     "image": "/images/houseofrage_leicester.jpeg",
     "verified": true,
     "googlePlaceId": null,
     "slug": "house-of-rage-rage-room-leicester",
     "createdAt": "2026-05-01T22:16:35.728Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://visitleicester.info/point-of-interest/house-of-rage-rage-room/",
-    "ageMin": 10,
+    "ageMin": null,
     "openingHours": [
       "Monday-Friday: 12:00-22:00",
       "Saturday-Sunday: 10:30-22:00"
@@ -495,7 +786,37 @@
       "corporate-groups",
       "birthday-parties",
       "hen-stag-parties"
-    ]
+    ],
+    "activities": [
+      "rage-room",
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": null,
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "priceNote": null,
+    "bookingUrl": null,
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null
   },
   {
     "id": "v9w8x7y6-z5a4-4b3c-d2e1-f0g9h8i7j6k5",
@@ -510,14 +831,55 @@
     },
     "website": "https://justragerooms.co.uk/",
     "phone": "+44 1462 526515",
-    "price": 35,
+    "price": 25,
     "image": "/images/JustRageRoomsHenlow.png",
     "verified": true,
     "googlePlaceId": "ChIJP-LgaPDLd0gRjmMTE1UCByo",
     "slug": "just-rage-rooms-henlow",
     "createdAt": "2025-11-27T21:28:46.000Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
-    "sourceUrl": "https://justragerooms.co.uk/"
+    "lastVerified": "2026-08-19",
+    "sourceUrl": "https://justragerooms.co.uk/",
+    "activities": [
+      "rage-room"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "corporate-team-building",
+      "families"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Minimum age 10; under-18s must be accompanied by an adult.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published durations include preparation/briefing; smash time varies by group size.",
+    "groupSizeNote": "Standard packages cover one to four people; bespoke group packages are offered for 5+.",
+    "priceNote": "From £25 per person for a four-person booking; solo sessions are £35.",
+    "ageMin": 10,
+    "sessionLengths": [
+      20,
+      30,
+      45,
+      55
+    ],
+    "groupSizeMin": 1,
+    "groupSizeMax": null,
+    "bookingUrl": null,
+    "packages": null,
+    "features": [
+      "corporate-groups",
+      "birthday-parties",
+      "hen-stag-parties"
+    ]
   },
   {
     "id": "f6e6cd12-77e2-45ea-b258-e60607b7c11b",
@@ -532,14 +894,41 @@
     },
     "website": "https://missionclassified.co.uk/rage-room",
     "phone": "+44 1472 255255",
-    "price": 25,
+    "price": null,
     "image": "/images/mission-classified-rage-room-grimsby.jpg",
     "verified": true,
     "googlePlaceId": null,
     "slug": "mission-classified-rage-room-grimsby",
     "createdAt": "2026-07-01T12:00:00.000Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
-    "sourceUrl": "https://missionclassified.co.uk/rage-room"
+    "lastVerified": "2026-08-19",
+    "sourceUrl": "https://missionclassified.co.uk/rage-room",
+    "activities": [
+      "rage-room",
+      "escape-room"
+    ],
+    "occasions": [],
+    "walkInsAccepted": null,
+    "onlineBooking": null,
+    "giftVouchers": true,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": null,
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "priceNote": null,
+    "bookingUrl": null,
+    "ageMin": null,
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null,
+    "features": []
   },
   {
     "id": "f8c6b3d7-4c9a-4f2e-a167-3d0c8b4f6e59",
@@ -554,21 +943,42 @@
     },
     "website": "https://playersbrighton.com/pages/theragerooms",
     "phone": "01273 044572",
-    "price": 40,
+    "price": null,
     "image": "/images/players-the-rage-rooms-brighton.jpg",
     "verified": true,
     "googlePlaceId": "ChIJC_NQvF6FdUgRiPF2Wj-rjEQ",
     "slug": "players-the-rage-rooms-brighton",
     "createdAt": "2026-06-02T12:00:00.000Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://playersbrighton.com/pages/theragerooms",
     "ageMin": 18,
     "sessionLengths": [
       15
     ],
-    "features": [
-      "byo-smashables"
-    ]
+    "features": [],
+    "activities": [
+      "rage-room"
+    ],
+    "occasions": [],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": "Over-18s only; the venue states there are no exceptions.",
+    "sessionDurationType": "activity-time",
+    "sessionDurationNote": "15 minutes of smash time.",
+    "groupSizeNote": null,
+    "priceNote": null,
+    "groupSizeMin": 1,
+    "groupSizeMax": 2,
+    "bookingUrl": null,
+    "packages": null
   },
   {
     "id": "a9d7c4e8-5d0b-4a3f-b278-4e1d9c5a7f60",
@@ -583,17 +993,41 @@
     },
     "website": "https://www.ragecageuk.com/",
     "phone": null,
-    "price": 25,
+    "price": null,
     "image": "/images/rage-cage-uk-croydon.jpg",
     "verified": true,
     "googlePlaceId": "ChIJM0KW2CEHdkgRcYDwVWgngEk",
     "slug": "rage-cage-uk-croydon",
     "createdAt": "2026-06-02T12:00:00.000Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://www.ragecageuk.com/",
-    "features": [
-      "couples"
-    ]
+    "features": [],
+    "activities": [
+      "rage-room",
+      "paint-splatter"
+    ],
+    "occasions": [],
+    "walkInsAccepted": null,
+    "onlineBooking": null,
+    "giftVouchers": true,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": null,
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "priceNote": null,
+    "bookingUrl": null,
+    "ageMin": null,
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null
   },
   {
     "id": "a3f1c8e2-9d4b-4a7f-b612-8e5d3c9a1f04",
@@ -608,14 +1042,41 @@
     },
     "website": "https://rageitout.co.uk/",
     "phone": "01207 789069",
-    "price": 23,
+    "price": null,
     "image": "/images/rage-it-out-consett.jpg",
     "verified": true,
     "googlePlaceId": "ChIJbaYbRzHTfUgRoSBGOwOi6ig",
     "slug": "rage-it-out-consett",
     "createdAt": "2026-06-02T12:00:00.000Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
-    "sourceUrl": "https://rageitout.co.uk/"
+    "lastVerified": "2026-08-19",
+    "sourceUrl": "https://rageitout.co.uk/",
+    "activities": [
+      "rage-room",
+      "axe-throwing"
+    ],
+    "occasions": [],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": null,
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "priceNote": null,
+    "bookingUrl": null,
+    "ageMin": null,
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null,
+    "features": []
   },
   {
     "id": "cf7c8d69-4b25-41fd-bd95-3c2b0ad32690",
@@ -630,17 +1091,55 @@
     },
     "website": "http://rageout.co.uk/",
     "phone": "+44 1622 925107",
-    "price": 35,
+    "price": 40,
     "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJed-gzPYz30cRp21dAOqbSSU/image-1764201100621-911fefe1.jpg",
     "verified": true,
     "googlePlaceId": "ChIJed-gzPYz30cRp21dAOqbSSU",
     "slug": "rage-out-maidstone-maidstone",
     "createdAt": "2025-11-27T21:28:46.473Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "http://rageout.co.uk/",
     "features": [
-      "corporate-groups"
-    ]
+      "byo-smashables",
+      "corporate-groups",
+      "birthday-parties",
+      "hen-stag-parties",
+      "couples"
+    ],
+    "activities": [
+      "rage-room",
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "corporate-team-building",
+      "date-nights",
+      "families",
+      "kids"
+    ],
+    "walkInsAccepted": true,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": true,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-room",
+    "minimumAgeNote": "Rage rooms require age 8+ and minimum height 1.2m.",
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "bookingUrl": "https://rage-out.venuebookr.com/",
+    "priceNote": "Rage-room bookings start at £40 per room for the bring-your-own-items package.",
+    "ageMin": 8,
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null
   },
   {
     "id": "02de72e2-0ff6-45cd-a7a0-15a71cc3e6b0",
@@ -661,30 +1160,44 @@
     "googlePlaceId": null,
     "slug": "rage-remedies-romford",
     "createdAt": "2026-07-01T12:00:00.000Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://www.rageremedies.co.uk/",
-    "priceNote": "£30 for 30 minutes, £45 for 45 minutes or £60 for 60 minutes.",
+    "priceNote": "Rage-room bookings start at £30 for a room of up to two people.",
     "ageMin": 10,
     "sessionLengths": [
       30,
       45,
       60
     ],
-    "groupSizeMin": 1,
-    "groupSizeMax": 2,
-    "packages": [
-      {
-        "name": "30-minute rage room",
-        "price": 30
-      },
-      {
-        "name": "45-minute rage room",
-        "price": 45
-      },
-      {
-        "name": "60-minute rage room",
-        "price": 60
-      }
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null,
+    "activities": [
+      "rage-room",
+      "axe-throwing"
+    ],
+    "occasions": [
+      "corporate-team-building",
+      "date-nights"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-room",
+    "minimumAgeNote": "All rage-room participants must be age 10+.",
+    "sessionDurationType": "published-session",
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "bookingUrl": "https://www.rageremedies.co.uk/book-online",
+    "features": [
+      "corporate-groups",
+      "couples"
     ]
   },
   {
@@ -700,17 +1213,44 @@
     },
     "website": "https://www.rageremedy.co.uk/",
     "phone": "+44 7543 407032",
-    "price": 35,
+    "price": null,
     "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJfzbn6IlT2UcREyPq4NM6nb0/image-1764201098081-c9e5a939.jpg",
     "verified": true,
     "googlePlaceId": "ChIJfzbn6IlT2UcREyPq4NM6nb0",
     "slug": "rage-remedy-margate",
     "createdAt": "2025-11-27T21:28:46.574Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://www.rageremedy.co.uk/",
     "features": [
       "birthday-parties"
-    ]
+    ],
+    "activities": [
+      "rage-room"
+    ],
+    "occasions": [
+      "birthdays"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": null,
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "priceNote": null,
+    "bookingUrl": null,
+    "ageMin": null,
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null
   },
   {
     "id": "20d7f17c-defe-405c-97e4-642d556b5860",
@@ -725,17 +1265,44 @@
     },
     "website": "http://www.rageroombirmingham.co.uk/",
     "phone": "+44 7448 349934",
-    "price": 35,
+    "price": null,
     "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJ99mUxxK9cEgRwmeXlvBHYZQ/image-1764201092030-e2ee5519.jpg",
     "verified": true,
     "googlePlaceId": "ChIJ99mUxxK9cEgRwmeXlvBHYZQ",
     "slug": "rage-room-birmingham-birmingham",
     "createdAt": "2025-11-27T21:28:46.879Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "http://www.rageroombirmingham.co.uk/",
     "features": [
       "birthday-parties"
-    ]
+    ],
+    "activities": [
+      "rage-room"
+    ],
+    "occasions": [
+      "birthdays"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": null,
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "priceNote": null,
+    "bookingUrl": null,
+    "ageMin": null,
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null
   },
   {
     "id": "14b9824e-b5aa-41c2-9f44-8497a93d89fa",
@@ -750,14 +1317,40 @@
     },
     "website": "https://rageroomhull.simplybook.it/",
     "phone": null,
-    "price": 30,
+    "price": null,
     "image": "/images/rage-room-hull.jpg",
     "verified": true,
     "googlePlaceId": null,
     "slug": "rage-room-hull",
     "createdAt": "2026-07-01T12:00:00.000Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
-    "sourceUrl": "https://rageroomhull.simplybook.it/"
+    "lastVerified": "2026-08-19",
+    "sourceUrl": "https://rageroomhull.simplybook.it/",
+    "activities": [
+      "rage-room"
+    ],
+    "occasions": [],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": null,
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "priceNote": null,
+    "bookingUrl": null,
+    "ageMin": null,
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null,
+    "features": []
   },
   {
     "id": "b1b612f7-67a4-4a9d-895a-d4a13aa8b869",
@@ -772,14 +1365,40 @@
     },
     "website": "http://www.rageroomleicester.co.uk/",
     "phone": null,
-    "price": 32,
+    "price": null,
     "image": "/images/rageroomleicester.png",
     "verified": true,
     "googlePlaceId": "ChIJRWMjqyxhd0gRIQYWoOgMn5w",
     "slug": "rage-room-leicester",
     "createdAt": "2025-12-13T23:44:24.606Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
-    "sourceUrl": "http://www.rageroomleicester.co.uk/"
+    "lastVerified": "2026-08-19",
+    "sourceUrl": "http://www.rageroomleicester.co.uk/",
+    "activities": [
+      "rage-room"
+    ],
+    "occasions": [],
+    "walkInsAccepted": null,
+    "onlineBooking": null,
+    "giftVouchers": true,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": null,
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "priceNote": null,
+    "bookingUrl": null,
+    "ageMin": null,
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null,
+    "features": []
   },
   {
     "id": "f4g5h6i7-j8k9-4l0m-n1o2-p3q4r5s6t7u8",
@@ -794,17 +1413,54 @@
     },
     "website": "https://ragerooms-leamingtonspa.co.uk/",
     "phone": "+44 7903 704588",
-    "price": 65,
+    "price": null,
     "image": "/images/RageRoomsLeamingtonSpa.png",
     "verified": true,
     "googlePlaceId": "ChIJQ3CYt-M1d0gRWoG8OH94YCo",
     "slug": "rage-rooms-leamington-spa-royal-leamington-spa",
     "createdAt": "2025-11-27T21:28:46.000Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://ragerooms-leamingtonspa.co.uk/",
     "features": [
-      "corporate-groups"
-    ]
+      "corporate-groups",
+      "birthday-parties",
+      "couples"
+    ],
+    "activities": [
+      "rage-room",
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "corporate-team-building",
+      "date-nights",
+      "families",
+      "kids"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": "Ages 8+ may participate; ages 8–10 do not use weapons and under-18s require an adult on site.",
+    "sessionDurationType": "activity-time",
+    "sessionDurationNote": "Solo rage time is 10 minutes and pair rage time is 20 minutes, plus 10 minutes for briefing/PPE.",
+    "groupSizeNote": null,
+    "priceNote": null,
+    "ageMin": 8,
+    "sessionLengths": [
+      10,
+      20
+    ],
+    "bookingUrl": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null
   },
   {
     "id": "l1m2n3o4-p5q6-4r7s-t8u9-v0w1x2y3z4a5",
@@ -819,20 +1475,21 @@
     },
     "website": "https://ragerooms-norwich.co.uk/",
     "phone": "+44 1603 626873",
-    "price": 27,
+    "price": null,
     "image": "/images/RageRoomsNorwich.png",
     "verified": true,
     "googlePlaceId": null,
     "slug": "rage-rooms-norwich-norwich",
     "createdAt": "2025-11-27T21:28:46.000Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://ragerooms-norwich.co.uk/rooms/rage-rooms/",
     "ageMin": 6,
     "features": [
-      "hen-stag-parties"
+      "hen-stag-parties",
+      "mobile-experience"
     ],
     "bookingUrl": "https://ragerooms-norwich.co.uk/rooms/rage-rooms/",
-    "priceNote": "Promotional rates checked August 2026: children £27 and adults £36.",
+    "priceNote": null,
     "openingHours": [
       "Thursday-Saturday: 11:00-19:00",
       "Sunday: 11:00-17:00"
@@ -842,23 +1499,37 @@
     ],
     "groupSizeMin": 1,
     "groupSizeMax": 4,
-    "packages": [
-      {
-        "name": "Child smash",
-        "price": 27,
-        "description": "Ages 6-10 with easier smashables and lighter bats."
-      },
-      {
-        "name": "Adult smash",
-        "price": 36,
-        "description": "Ages 10+ with up to 60 smashables and a drink."
-      }
-    ]
+    "packages": null,
+    "activities": [
+      "rage-room",
+      "paint-splatter",
+      "mobile-rage-room"
+    ],
+    "occasions": [
+      "hen-parties",
+      "stag-parties",
+      "families",
+      "kids"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": "Child sessions start at age 6 with lighter equipment; adult sessions are age 10+.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "The one-hour booking slot includes briefing, PPE and shared smash time.",
+    "groupSizeNote": null
   },
   {
     "id": "cmntf1qlr0000ll633z7l2wnt",
     "name": "Rage X-treme",
-    "description": "Rage X-treme runs one of the largest rage rooms in the UK, with space for up to 10 people in a single session. The venue offers disabled access and wheelchair-friendly access where advertised. Sessions start from £15 per person. Located at Unit C2, Chaucer Business Park, Dittons Road, Polegate (BN26 6QH). Contact the team on 01323 912990 or info@ragex-treme.co.uk for bookings and current packages.",
+    "description": "Polegate rage-room and axe-throwing venue with 30-minute rage packages for individuals and groups. Supplied-item and bring-your-own options are available, with PPE and supervision provided.",
     "city": "Polegate",
     "region": "South East",
     "postcode": "BN26 6QH",
@@ -868,14 +1539,54 @@
     },
     "website": "https://ragex-treme.co.uk",
     "phone": "01323 912990",
-    "price": 15,
+    "price": 19.5,
     "image": "/images/rageroom_Polegate1.jpg",
     "verified": true,
     "googlePlaceId": "ChIJL-M5aZ1x30cRJ3_t7Jfq1_0",
     "slug": "rage-x-treme-polegate",
     "createdAt": "2026-04-10T21:26:38.319Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
-    "sourceUrl": "https://ragex-treme.co.uk"
+    "lastVerified": "2026-08-19",
+    "sourceUrl": "https://ragex-treme.co.uk",
+    "activities": [
+      "rage-room",
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": true,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Minimum age 8; ages 8–12 must participate with a paying adult.",
+    "sessionDurationType": "activity-time",
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "priceNote": "Bring-your-own rage-room sessions start at £19.50 per person; supplied-item packages start at £29.50.",
+    "ageMin": 8,
+    "sessionLengths": [
+      30
+    ],
+    "bookingUrl": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null,
+    "features": [
+      "byo-smashables",
+      "corporate-groups",
+      "birthday-parties",
+      "hen-stag-parties",
+      "accessible-venue"
+    ]
   },
   {
     "id": "992780e4-0137-445f-9c95-8a213fca24bc",
@@ -890,14 +1601,40 @@
     },
     "website": "https://www.ragingbath.com/",
     "phone": null,
-    "price": 35,
+    "price": null,
     "image": "/images/raging-bath.jpg",
     "verified": true,
     "googlePlaceId": null,
     "slug": "raging-bath",
     "createdAt": "2026-07-01T12:00:00.000Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
-    "sourceUrl": "https://www.ragingbath.com/"
+    "lastVerified": "2026-08-19",
+    "sourceUrl": "https://www.ragingbath.com/",
+    "activities": [
+      "rage-room"
+    ],
+    "occasions": [],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": null,
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "priceNote": null,
+    "bookingUrl": null,
+    "ageMin": null,
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null,
+    "features": []
   },
   {
     "id": "b5c6d7e8-f9a0-4b1c-d2e3-f4g5h6i7j8k9",
@@ -918,14 +1655,41 @@
     "googlePlaceId": "ChIJm5G1QYzFe0gRnbN4QddB5iQ",
     "slug": "smash-it-huddersfield",
     "createdAt": "2025-11-27T21:28:46.000Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://whitewolfs.co.uk/smash-room",
     "sessionLengths": [
       30
     ],
     "features": [
       "hen-stag-parties"
-    ]
+    ],
+    "activities": [
+      "rage-room"
+    ],
+    "occasions": [
+      "hen-parties",
+      "stag-parties"
+    ],
+    "walkInsAccepted": false,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-room",
+    "minimumAgeNote": "The smash-room minimum age is 8.",
+    "sessionDurationType": "activity-time",
+    "sessionDurationNote": "Up to 30 minutes of smash time.",
+    "groupSizeNote": null,
+    "priceNote": "£60 per room for up to two people.",
+    "ageMin": 8,
+    "bookingUrl": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null
   },
   {
     "id": "93667b86-efd4-4378-ac72-3b01838dfe01",
@@ -940,14 +1704,40 @@
     },
     "website": "http://smashitragerooms.co.uk/",
     "phone": "+44 7359 207511",
-    "price": 45,
+    "price": null,
     "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJO4RR4D6r2EcRd-t7UC_2sts/image-1764201094922-5975ea39.jpg",
     "verified": true,
     "googlePlaceId": "ChIJO4RR4D6r2EcRd-t7UC_2sts",
     "slug": "smash-it-rage-room-ltd-london",
     "createdAt": "2025-11-27T21:28:46.787Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
-    "sourceUrl": "http://smashitragerooms.co.uk/"
+    "lastVerified": "2026-08-19",
+    "sourceUrl": "http://smashitragerooms.co.uk/",
+    "activities": [
+      "rage-room"
+    ],
+    "occasions": [],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": null,
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "priceNote": null,
+    "bookingUrl": null,
+    "ageMin": null,
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null,
+    "features": []
   },
   {
     "id": "e398d7a1-8d2b-4c5e-8f92-7f3e6a123456",
@@ -968,15 +1758,53 @@
     "googlePlaceId": "ChIJ340U5Z5beEgR9ekK-PPLZcU",
     "slug": "smash-palace-lincoln",
     "createdAt": "2025-11-27T21:28:46.000Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://smashpalace.co.uk/about",
-    "priceNote": "Sessions start from £30 per person.",
+    "priceNote": "Quick Smash sessions start at £30 per person.",
     "openingHours": [
       "Wednesday-Friday: 16:00-21:00",
       "Saturday-Sunday: 12:00-21:00"
     ],
     "groupSizeMin": 1,
-    "groupSizeMax": 4
+    "groupSizeMax": 4,
+    "activities": [
+      "rage-room"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "corporate-team-building",
+      "date-nights"
+    ],
+    "walkInsAccepted": false,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": null,
+    "sessionDurationType": "activity-time",
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "sessionLengths": [
+      15,
+      20,
+      25
+    ],
+    "bookingUrl": null,
+    "ageMin": null,
+    "packages": null,
+    "features": [
+      "corporate-groups",
+      "birthday-parties",
+      "hen-stag-parties",
+      "couples"
+    ]
   },
   {
     "id": "a281abae-cd80-4c2a-996b-2c8aee5825fd",
@@ -991,18 +1819,18 @@
     },
     "website": "https://www.smashspace.co.uk/",
     "phone": "+44 330 229 4425",
-    "price": 20,
+    "price": 49.99,
     "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJ2YzKCzx3fkgRpzDhVtmild8/image-1764201094888-d53dc744.jpg",
     "verified": true,
     "googlePlaceId": "ChIJ2YzKCzx3fkgRpzDhVtmild8",
     "slug": "smash-space-uk-newcastle",
     "createdAt": "2025-11-27T21:28:46.834Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://www.smashspace.co.uk/home",
     "features": [
       "birthday-parties"
     ],
-    "priceNote": "Packages start from £39.99 for up to two guests.",
+    "priceNote": "Rage-room bookings start at £49.99 per group for one or two participants.",
     "ageMin": 4,
     "groupSizeMin": 1,
     "groupSizeMax": 4,
@@ -1012,7 +1840,31 @@
       "Friday: 12:30-20:30",
       "Saturday: 10:30-19:30",
       "Sunday: 11:30-17:30"
-    ]
+    ],
+    "activities": [
+      "rage-room",
+      "escape-room"
+    ],
+    "occasions": [
+      "birthdays"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-group",
+    "minimumAgeNote": "The venue publishes rage-room sessions from age 4; check the selected package before booking.",
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "bookingUrl": "https://smashspaceuk.resova.co.uk/",
+    "sessionLengths": null,
+    "packages": null
   },
   {
     "id": "a9b8c7d6-e5f4-4321-9a8b-7c6d5e4f3a2b",
@@ -1027,13 +1879,13 @@
     },
     "website": "https://www.dayoutwiththekids.co.uk/attractions/thebreakrooms-o1u8r400",
     "phone": "+44 7454 798515",
-    "price": 20,
+    "price": 40,
     "image": "/images/the-break-rooms-leominster.jpg",
     "verified": true,
     "googlePlaceId": null,
     "slug": "the-break-rooms-leominster",
     "createdAt": "2026-07-25T21:32:58.715Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://www.dayoutwiththekids.co.uk/attractions/thebreakrooms-o1u8r400",
     "sessionLengths": [
       20
@@ -1041,13 +1893,37 @@
     "features": [
       "birthday-parties"
     ],
-    "priceNote": "£40 for up to two people; a third participant is £10 extra.",
+    "priceNote": "£40 per room for up to two people; a third participant costs £10 extra.",
     "ageMin": 12,
     "openingHours": [
       "Monday-Sunday: 10:00-20:00 (pre-booking required)"
     ],
     "groupSizeMin": 1,
-    "groupSizeMax": 3
+    "groupSizeMax": 3,
+    "activities": [
+      "rage-room"
+    ],
+    "occasions": [
+      "birthdays",
+      "families",
+      "kids"
+    ],
+    "walkInsAccepted": false,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-room",
+    "minimumAgeNote": null,
+    "sessionDurationType": "published-session",
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "bookingUrl": null,
+    "packages": null
   },
   {
     "id": "b4e2d9f3-0e5c-4b8a-c723-9f6e4d0b2a15",
@@ -1062,17 +1938,45 @@
     },
     "website": "https://www.facebook.com/the.rabbit.hole.rage.room/",
     "phone": null,
-    "price": 32,
+    "price": null,
     "image": "/images/the-rabbit-hole-rage-room-swindon.jpg",
     "verified": true,
     "googlePlaceId": "ChIJyQX-MtJFcUgR9Q4m0iRcg5U",
     "slug": "the-rabbit-hole-rage-room-swindon",
     "createdAt": "2026-06-02T12:00:00.000Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://www.facebook.com/the.rabbit.hole.rage.room/",
     "features": [
       "hen-stag-parties"
-    ]
+    ],
+    "activities": [
+      "rage-room"
+    ],
+    "occasions": [
+      "hen-parties",
+      "stag-parties"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": null,
+    "giftVouchers": null,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": null,
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "priceNote": null,
+    "bookingUrl": null,
+    "ageMin": null,
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null
   },
   {
     "id": "6eede7dc-117a-4e28-a4b7-57c8e67e7696",
@@ -1087,14 +1991,42 @@
     },
     "website": "https://www.theragehouse.com/",
     "phone": "+44 1782 204392",
-    "price": 32,
+    "price": null,
     "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJ2R0ziCVDekgRCv7JBCT8k0w/image-1764201103388-e9545eb1.jpg",
     "verified": true,
     "googlePlaceId": "ChIJ2R0ziCVDekgRCv7JBCT8k0w",
     "slug": "the-rage-house-newcastle-under-lyme",
     "createdAt": "2025-11-27T21:28:46.261Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
-    "sourceUrl": "https://www.theragehouse.com/"
+    "lastVerified": "2026-08-19",
+    "sourceUrl": "https://www.theragehouse.com/",
+    "activities": [
+      "rage-room",
+      "axe-throwing",
+      "airsoft-target"
+    ],
+    "occasions": [],
+    "walkInsAccepted": null,
+    "onlineBooking": null,
+    "giftVouchers": null,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": null,
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "priceNote": null,
+    "bookingUrl": null,
+    "ageMin": null,
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null,
+    "features": []
   },
   {
     "id": "dfe5a71b-073e-4595-954e-93ed5f687f30",
@@ -1108,42 +2040,65 @@
       "lng": -0.694935
     },
     "website": "https://www.thesmashlab.co.uk/",
-    "bookingUrl": "https://www.thesmashlab.co.uk/",
+    "bookingUrl": null,
     "phone": null,
-    "price": 32.5,
+    "price": 65,
     "priceNote": "£65 per room for up to two people.",
     "ageMin": 12,
     "openingHours": [
       "Wednesday-Sunday: 09:00-21:00"
     ],
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sessionLengths": [
       30
     ],
     "groupSizeMin": 1,
     "groupSizeMax": 2,
     "features": [
-      "byo-smashables",
       "corporate-groups",
-      "birthday-parties",
-      "couples",
-      "video-recording"
+      "birthday-parties"
     ],
-    "media": null,
-    "packages": [
+    "media": [
       {
-        "name": "Standard smash room",
-        "price": 65,
-        "priceNote": "£65 per room",
-        "description": "30-minute private room for up to two people."
+        "type": "image",
+        "url": "/images/the-smash-lab-wellingborough.jpg",
+        "alt": "Guests smashing equipment at The Smash Lab",
+        "caption": "Rage-room photo published by The Smash Lab on its official website.",
+        "width": 1200,
+        "height": 675,
+        "credit": "The Smash Lab",
+        "sourceUrl": "https://www.thesmashlab.co.uk/blog",
+        "authorised": false
       }
     ],
+    "packages": null,
     "sourceUrl": "https://www.thesmashlab.co.uk/faq",
-    "image": null,
+    "image": "/images/the-smash-lab-wellingborough.jpg",
     "verified": true,
     "googlePlaceId": null,
     "slug": "the-smash-lab-wellingborough",
-    "createdAt": "2026-08-17T20:45:00.000Z"
+    "createdAt": "2026-08-17T20:45:00.000Z",
+    "activities": [
+      "rage-room"
+    ],
+    "occasions": [
+      "birthdays",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": null,
+    "giftVouchers": null,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-room",
+    "minimumAgeNote": null,
+    "sessionDurationType": "published-session",
+    "sessionDurationNote": null,
+    "groupSizeNote": null
   },
   {
     "id": "0ca388aa-95ca-4ec8-b4e1-f11221888369",
@@ -1158,34 +2113,47 @@
     },
     "website": "https://snakeroom.co.uk/",
     "phone": null,
-    "price": 25,
+    "price": 50,
     "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJp8f9yISFeUgRxtoo5qRwsOc/image-1764201103602-d3464978.png",
     "verified": true,
     "googlePlaceId": "ChIJp8f9yISFeUgRxtoo5qRwsOc",
     "slug": "the-snake-room-urban-axe-throwing-chesterfield",
     "createdAt": "2025-11-27T21:28:46.300Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://snakeroom.co.uk/booking/rageroom/",
     "features": [
-      "birthday-parties",
-      "couples"
+      "birthday-parties"
     ],
     "bookingUrl": "https://snakeroom.co.uk/booking/rageroom/",
-    "priceNote": "£50 per 30-minute session for up to two people.",
+    "priceNote": "£50 per room for up to two people.",
     "sessionLengths": [
       30
     ],
     "groupSizeMin": 1,
     "groupSizeMax": 2,
-    "packages": [
-      {
-        "name": "Rage room session",
-        "price": 50,
-        "priceNote": "£50 per session",
-        "description": "30 minutes for up to two people.",
-        "url": "https://snakeroom.co.uk/booking/rageroom/"
-      }
-    ]
+    "packages": null,
+    "activities": [
+      "rage-room",
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-room",
+    "minimumAgeNote": null,
+    "sessionDurationType": "activity-time",
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "ageMin": null
   },
   {
     "id": "176522c9-6b9b-4aad-81f3-ddeaee3ea47f",
@@ -1200,15 +2168,15 @@
     },
     "website": "https://www.theundergroundnewport.com/",
     "phone": "+44 1633 495350",
-    "price": 25,
+    "price": 30,
     "image": "/images/TheUndergroundNewport.png",
     "verified": true,
     "googlePlaceId": null,
     "slug": "the-underground-newport",
     "createdAt": "2026-06-14T12:00:00.000Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://www.theundergroundnewport.com/",
-    "priceNote": "£30 for one person or £50 for two people.",
+    "priceNote": "Rage-room bookings start at £30 for one person; two people cost £50.",
     "openingHours": [
       "Monday-Friday: 16:00-20:00",
       "Saturday: 10:00-20:00",
@@ -1216,18 +2184,33 @@
     ],
     "groupSizeMin": 1,
     "groupSizeMax": 2,
-    "packages": [
-      {
-        "name": "Solo rage room",
-        "price": 30,
-        "priceNote": "£30 for one person"
-      },
-      {
-        "name": "Duo rage room",
-        "price": 50,
-        "priceNote": "£50 for two people"
-      }
-    ]
+    "packages": null,
+    "activities": [
+      "rage-room",
+      "axe-throwing",
+      "airsoft-target"
+    ],
+    "occasions": [],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-room",
+    "minimumAgeNote": "The rage-room booking page states ages 12+.",
+    "sessionDurationType": "activity-time",
+    "sessionDurationNote": "The booking occupies a 30-minute slot and includes 15 minutes of smash time.",
+    "groupSizeNote": null,
+    "ageMin": 12,
+    "sessionLengths": [
+      15
+    ],
+    "bookingUrl": null,
+    "features": []
   },
   {
     "id": "ba70cd2a-780d-4081-ba5b-113a31da0512",
@@ -1248,10 +2231,10 @@
     "googlePlaceId": "ChIJAWc27UkF2UcRDLBMWoV60xk",
     "slug": "urban-xtreme-colchester-colchester",
     "createdAt": "2025-11-27T21:28:46.654Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://www.urbanxtreme.co.uk/rage-room-colchester/",
     "bookingUrl": "https://www.urbanxtreme.co.uk/rage-room-colchester/",
-    "priceNote": "Bronze from £34.99 per person; Silver £54.99 and Gold £74.99.",
+    "priceNote": "Bronze rage-room packages start at £34.99 per person.",
     "ageMin": 8,
     "sessionLengths": [
       30
@@ -1261,28 +2244,39 @@
     "features": [
       "corporate-groups",
       "birthday-parties",
-      "hen-stag-parties"
+      "hen-stag-parties",
+      "couples",
+      "accessible-venue"
     ],
-    "packages": [
-      {
-        "name": "Bronze",
-        "price": 34.99,
-        "priceNote": "£34.99 per person",
-        "url": "https://www.urbanxtreme.co.uk/rage-room-colchester/"
-      },
-      {
-        "name": "Silver",
-        "price": 54.99,
-        "priceNote": "£54.99 per person",
-        "url": "https://www.urbanxtreme.co.uk/rage-room-colchester/"
-      },
-      {
-        "name": "Gold",
-        "price": 74.99,
-        "priceNote": "£74.99 per person",
-        "url": "https://www.urbanxtreme.co.uk/rage-room-colchester/"
-      }
-    ]
+    "packages": null,
+    "activities": [
+      "rage-room",
+      "axe-throwing",
+      "airsoft-target"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "corporate-team-building",
+      "date-nights",
+      "families",
+      "kids"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": true,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Rage room minimum age is 8; under-18s require adult supervision. Airsoft is 12+.",
+    "sessionDurationType": "activity-time",
+    "sessionDurationNote": "30 minutes of smash time; the venue advises allowing about one hour overall.",
+    "groupSizeNote": null
   },
   {
     "id": "8180bcc9-d696-4fe5-85b2-186bd4a6526b",
@@ -1298,11 +2292,11 @@
     "website": "https://www.venturegamesbedford.co.uk/rage-room/",
     "bookingUrl": "https://www.venturegamesbedford.co.uk/rage-room/",
     "phone": "+44 1234 815181",
-    "price": 17.86,
-    "priceNote": "From £17.86 per person when 14 share Rage X; Rage Room 30 is £60 for one or two.",
+    "price": 60,
+    "priceNote": "Rage Room 30 starts at £60 per room for one or two players.",
     "ageMin": 12,
     "openingHours": null,
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sessionLengths": [
       30,
       45,
@@ -1314,42 +2308,52 @@
     "features": [
       "corporate-groups",
       "birthday-parties",
-      "hen-stag-parties",
-      "couples"
+      "hen-stag-parties"
     ],
-    "media": null,
-    "packages": [
+    "media": [
       {
-        "name": "Rage Room 30",
-        "price": 60,
-        "priceNote": "£60 per room for 1-2 players",
-        "description": "30 minutes with at least 20 glass and two electrical items."
-      },
-      {
-        "name": "Rage Room 45",
-        "price": 90,
-        "priceNote": "£90 per room for 3-4 players",
-        "description": "45 minutes with at least 30 glass and four electrical items."
-      },
-      {
-        "name": "Rage Room 60",
-        "price": 120,
-        "priceNote": "£120 per room for 5-6 players",
-        "description": "60 minutes with at least 40 glass and six electrical items."
-      },
-      {
-        "name": "Rage X",
-        "price": 250,
-        "priceNote": "£250 per room for 7-14 players",
-        "description": "90-minute large-group package."
+        "type": "image",
+        "url": "/images/venture-games-bedford-rage-room.jpg",
+        "alt": "Venture Games Bedford wordmark and rage-room mark",
+        "caption": "Official Venture Games Bedford brand assets published on the venue's rage-room page.",
+        "width": 1200,
+        "height": 675,
+        "credit": "Venture Games Bedford",
+        "sourceUrl": "https://www.venturegamesbedford.co.uk/rage-room/",
+        "authorised": false
       }
     ],
+    "packages": null,
     "sourceUrl": "https://www.venturegamesbedford.co.uk/rage-room/",
-    "image": null,
+    "image": "/images/venture-games-bedford-rage-room.jpg",
     "verified": true,
     "googlePlaceId": null,
     "slug": "venture-games-bedford-rage-room",
-    "createdAt": "2026-08-17T20:45:00.000Z"
+    "createdAt": "2026-08-17T20:45:00.000Z",
+    "activities": [
+      "rage-room",
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-room",
+    "minimumAgeNote": "Minimum age 12; under-18s require an adult on site.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published durations include the safety briefing.",
+    "groupSizeNote": null
   },
   {
     "id": "9675e2e1-a84a-41c5-9171-13503af3c4d5",
@@ -1364,21 +2368,20 @@
     },
     "website": "https://theactivitydome.com/activities/weston-rage-rooms/",
     "phone": "+44 1934 707150",
-    "price": 19.5,
+    "price": 24.5,
     "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJX6iq6OH5cUgReHLJUqtGY_k/image-1764201103382-c837610a.jpg",
     "verified": true,
     "googlePlaceId": "ChIJX6iq6OH5cUgReHLJUqtGY_k",
     "slug": "the-activity-dome-weston-super-mare",
     "createdAt": "2025-11-27T21:28:46.385Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://theactivitydome.com/activities/weston-rage-rooms/",
     "features": [
-      "byo-smashables",
-      "corporate-groups",
-      "birthday-parties"
+      "birthday-parties",
+      "accessible-venue"
     ],
     "bookingUrl": "https://theactivitydome.com/book-now/?url=https%3A%2F%2Fwannabook.online%2Fbooking%2Fwestonrageroom",
-    "priceNote": "From £19.50 per person for 15 minutes; 30-minute sessions from £30 per person.",
+    "priceNote": "15-minute rage-room sessions start at £24.50 per person.",
     "ageMin": 8,
     "openingHours": [
       "Wednesday-Sunday: 10:00-22:00"
@@ -1386,7 +2389,33 @@
     "sessionLengths": [
       15,
       30
-    ]
+    ],
+    "activities": [
+      "rage-room",
+      "axe-throwing",
+      "archery",
+      "airsoft-target"
+    ],
+    "occasions": [
+      "birthdays"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "The standard rage-room minimum age is 8; combined Throw Your Rage sessions are 12+.",
+    "sessionDurationType": "activity-time",
+    "sessionDurationNote": "Published rage-room durations are shared among all participants; arrive 10 minutes early for waiver/PPE.",
+    "groupSizeNote": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null
   },
   {
     "id": "q1w2e3r4-t5y6-4u7i-8o9p-0a1s2d3f4g5h",
@@ -1407,12 +2436,10 @@
     "googlePlaceId": "ChIJgWRX6WQPhEgRmJ0HbJ0yhX4",
     "slug": "wreck-it-room-aberdeen",
     "createdAt": "2025-11-27T21:28:46.000Z",
-    "lastVerified": "2026-08-17T20:45:00.000Z",
+    "lastVerified": "2026-08-19",
     "sourceUrl": "https://www.wreckitroom.co.uk/",
-    "sessionLengths": [
-      30
-    ],
-    "priceNote": "Check the live booking calendar for current package prices.",
+    "sessionLengths": null,
+    "priceNote": null,
     "ageMin": 8,
     "openingHours": [
       "Friday: 15:00-20:00",
@@ -1422,6 +2449,33 @@
       "corporate-groups",
       "birthday-parties",
       "hen-stag-parties"
-    ]
+    ],
+    "activities": [
+      "rage-room"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": "Under-18 sessions are available from age 8 with adult supervision.",
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "bookingUrl": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "packages": null
   }
 ]

@@ -3,19 +3,42 @@
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react"
-import { Menu, X, Search } from "lucide-react"
+import { ChevronDown, Menu, Search, X } from "lucide-react"
 import Logo from "./Logo"
 
-const navItems = [
-  { label: "Home", href: "/" },
-  { label: "Find Near Me", href: "/near-me" },
-  { label: "Directories", href: "/listings" },
-  { label: "City Guides", href: "/guides" },
-  { label: "Digital Guides", href: "/digital-downloads" },
-  { label: "Rage Reset", href: "/rage-reset?src=nav&utm_source=nav&utm_medium=organic&utm_campaign=rage_reset_pvr" },
-  { label: "Blog", href: "/blog" },
-  { label: "FAQ", href: "/#faq" },
-  { label: "List Your Venue", href: "/list-your-rage-room" },
+interface NavItem {
+  label: string
+  href: string
+  children?: Array<{ label: string; href: string }>
+}
+
+const navItems: NavItem[] = [
+  { label: "Find a Rage Room", href: "/listings" },
+  {
+    label: "Activities",
+    href: "/activities",
+    children: [
+      { label: "Rage Rooms", href: "/activities/rage-rooms" },
+      { label: "Axe Throwing", href: "/activities/axe-throwing" },
+      { label: "Paint Rooms", href: "/activities/paint-splatter" },
+      { label: "Escape Rooms", href: "/activities/escape-rooms" },
+    ],
+  },
+  {
+    label: "Occasions",
+    href: "/occasions",
+    children: [
+      { label: "Birthdays", href: "/occasions/birthdays" },
+      { label: "Stag Parties", href: "/occasions/stag-parties" },
+      { label: "Hen Parties", href: "/occasions/hen-parties" },
+      { label: "Corporate", href: "/occasions/corporate-team-building" },
+      { label: "Date Night", href: "/occasions/date-night" },
+      { label: "Families", href: "/occasions/kids-families" },
+    ],
+  },
+  { label: "Cities", href: "/uk-map" },
+  { label: "Guides", href: "/guides" },
+  { label: "For Venue Owners", href: "/list-your-rage-room" },
 ]
 
 export default function Header() {
@@ -24,135 +47,85 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [headerQuery, setHeaderQuery] = useState("")
 
-  const handleHeaderSearch = (e: React.FormEvent) => {
-    e.preventDefault()
-    const q = headerQuery.trim()
-    router.push(q ? `/search?query=${encodeURIComponent(q)}` : "/search")
+  const handleHeaderSearch = (event: React.FormEvent) => {
+    event.preventDefault()
+    const query = headerQuery.trim()
+    router.push(query ? `/search?query=${encodeURIComponent(query)}` : "/search")
   }
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/"
-    if (href.startsWith("/#")) return false
     const pathOnly = href.split("?")[0]
     return pathname === pathOnly || pathname.startsWith(`${pathOnly}/`)
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-dark-900/95 border-b border-zinc-800/70">
+    <header className="sticky top-0 z-50 w-full border-b border-zinc-800/70 bg-dark-900/95">
       <div className="w-full px-3 sm:px-5 lg:px-6">
-        <div className="flex items-center justify-between gap-4 h-16 lg:h-20">
-          <div className="flex-shrink-0">
-            <Logo />
-          </div>
+        <div className="flex h-16 items-center justify-between gap-4 lg:h-20">
+          <div className="shrink-0"><Logo /></div>
 
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+          <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Main navigation">
             {navItems.map((item) => {
               const active = isActive(item.href)
               return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`relative px-2.5 xl:px-3 py-2 text-[11px] xl:text-xs font-semibold uppercase tracking-[0.14em] transition-colors ${
-                    active
-                      ? "text-white nav-active-underline"
-                      : "text-zinc-300 hover:text-white"
-                  }`}
-                >
-                  {item.label}
-                </Link>
+                <div key={item.href} className="group relative">
+                  <Link
+                    href={item.href}
+                    className={`relative flex items-center gap-1 px-2 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] transition-colors xl:px-2.5 xl:text-[11px] ${active ? "nav-active-underline text-white" : "text-zinc-300 hover:text-white"}`}
+                  >
+                    {item.label}
+                    {item.children && <ChevronDown className="h-3 w-3" aria-hidden="true" />}
+                  </Link>
+                  {item.children && (
+                    <div className="invisible absolute left-0 top-full min-w-52 translate-y-1 rounded-md border border-zinc-700 bg-dark-900 p-2 opacity-0 shadow-2xl transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                      {item.children.map((child) => (
+                        <Link key={child.href + child.label} href={child.href} className="block rounded px-3 py-2 text-sm font-semibold text-zinc-300 hover:bg-dark-800 hover:text-rage-400">
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
               )
             })}
           </nav>
 
-          <div className="hidden md:flex items-center gap-3">
-            <form
-              onSubmit={handleHeaderSearch}
-              className="flex items-center bg-dark-800 border border-zinc-800 rounded-md overflow-hidden h-10 w-[220px] lg:w-[260px] xl:w-[300px] focus-within:border-rage-500/60 transition-colors"
-            >
-              <label htmlFor="header-search" className="sr-only">
-                Find a Rage Room near you
-              </label>
-              <input
-                id="header-search"
-                type="text"
-                value={headerQuery}
-                onChange={(e) => setHeaderQuery(e.target.value)}
-                placeholder="Find a Rage Room near you..."
-                className="flex-1 min-w-0 bg-transparent px-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none"
-              />
-              <button
-                type="button"
-                aria-label="Use my location"
-                onClick={() => router.push("/near-me")}
-                className="px-2 text-zinc-400 hover:text-rage-400 transition-colors"
-              >
-                <Search className="w-4 h-4" />
-              </button>
-              <button
-                type="submit"
-                className="h-full px-3 lg:px-4 bg-rage-500 hover:bg-rage-600 text-white text-xs font-bold uppercase tracking-wider transition-colors"
-              >
-                Search
-              </button>
-            </form>
-          </div>
+          <form onSubmit={handleHeaderSearch} className="hidden h-10 w-[210px] items-center overflow-hidden rounded-md border border-zinc-800 bg-dark-800 transition-colors focus-within:border-rage-500/60 md:flex xl:w-[280px]">
+            <label htmlFor="header-search" className="sr-only">Find a Rage Room near you</label>
+            <input id="header-search" type="text" value={headerQuery} onChange={(event) => setHeaderQuery(event.target.value)} placeholder="Town or postcode…" className="min-w-0 flex-1 bg-transparent px-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none" />
+            <button type="submit" aria-label="Search" className="h-full bg-rage-500 px-3 text-white transition-colors hover:bg-rage-600"><Search className="h-4 w-4" /></button>
+          </form>
 
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-zinc-300 hover:text-white hover:bg-rage-500/10 rounded-md transition-all"
-            aria-label="Toggle menu"
-            aria-expanded={mobileMenuOpen}
-          >
-            {mobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
+          <button onClick={() => setMobileMenuOpen((open) => !open)} className="rounded-md p-2 text-zinc-300 transition-all hover:bg-rage-500/10 hover:text-white lg:hidden" aria-label="Toggle menu" aria-expanded={mobileMenuOpen}>
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
 
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-zinc-800/70 py-4 space-y-4">
-            <form
-              onSubmit={(e) => {
-                handleHeaderSearch(e)
-                setMobileMenuOpen(false)
-              }}
-              className="flex items-center bg-dark-800 border border-zinc-800 rounded-md overflow-hidden h-11"
-            >
-              <input
-                type="text"
-                value={headerQuery}
-                onChange={(e) => setHeaderQuery(e.target.value)}
-                placeholder="Find a Rage Room near you..."
-                className="flex-1 min-w-0 bg-transparent px-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none"
-              />
-              <button
-                type="submit"
-                className="h-full px-4 bg-rage-500 hover:bg-rage-600 text-white text-xs font-bold uppercase tracking-wider"
-              >
-                Search
-              </button>
+          <div className="space-y-4 border-t border-zinc-800/70 py-4 lg:hidden">
+            <form onSubmit={(event) => { handleHeaderSearch(event); setMobileMenuOpen(false) }} className="flex h-11 items-center overflow-hidden rounded-md border border-zinc-800 bg-dark-800">
+              <input type="text" value={headerQuery} onChange={(event) => setHeaderQuery(event.target.value)} placeholder="Town, city or postcode…" aria-label="Find a Rage Room" className="min-w-0 flex-1 bg-transparent px-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none" />
+              <button type="submit" className="h-full bg-rage-500 px-4 text-xs font-bold uppercase tracking-wider text-white">Search</button>
             </form>
 
-            <nav className="flex flex-col space-y-1">
-              {navItems.map((item) => {
-                const active = isActive(item.href)
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`px-3 py-3 rounded-md text-sm font-semibold uppercase tracking-[0.12em] transition-colors ${
-                      active
-                        ? "bg-rage-500 text-white"
-                        : "text-zinc-300 hover:bg-dark-800 hover:text-white"
-                    }`}
-                  >
+            <nav className="flex flex-col space-y-1" aria-label="Mobile navigation">
+              {navItems.map((item) => (
+                <div key={item.href}>
+                  <Link href={item.href} onClick={() => setMobileMenuOpen(false)} className={`block rounded-md px-3 py-3 text-sm font-semibold uppercase tracking-[0.12em] transition-colors ${isActive(item.href) ? "bg-rage-500 text-white" : "text-zinc-300 hover:bg-dark-800 hover:text-white"}`}>
                     {item.label}
                   </Link>
-                )
-              })}
+                  {item.children && (
+                    <div className="ml-4 border-l border-zinc-800 py-1 pl-3">
+                      {item.children.map((child) => (
+                        <Link key={child.href + child.label} href={child.href} onClick={() => setMobileMenuOpen(false)} className="block py-2 text-sm text-zinc-400 hover:text-rage-400">
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
             </nav>
           </div>
         )}

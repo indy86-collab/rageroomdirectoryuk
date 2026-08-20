@@ -101,6 +101,8 @@ interface ItemListListing {
   city?: string | null
   description?: string | null
   price?: number | null
+  priceCurrency?: "GBP" | null
+  priceUnit?: "per-person" | "per-room" | "per-group" | null
 }
 
 /** ItemList schema for editorial "Best rage rooms in X" ranking pages. */
@@ -132,13 +134,13 @@ export function buildItemListSchema(opts: {
         name: l.name,
         ...(l.city ? { address: { "@type": "PostalAddress", addressLocality: l.city, addressCountry: "GB" } } : {}),
         ...(l.description ? { description: l.description.slice(0, 280) } : {}),
-        ...(l.price
+        ...(l.price != null && l.priceCurrency === "GBP" && l.priceUnit
           ? {
               offers: {
                 "@type": "Offer",
                 price: l.price.toFixed(2),
-                priceCurrency: "GBP",
-                availability: "https://schema.org/InStock",
+                priceCurrency: l.priceCurrency,
+                description: `Starting price ${l.priceUnit.replace("-", " ")}`,
               },
             }
           : {}),

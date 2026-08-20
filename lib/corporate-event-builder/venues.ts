@@ -7,13 +7,15 @@ export function listingToVenueSearchResult(listing: Listing): VenueSearchResult 
     name: listing.name,
     city: listing.city,
     region: listing.region,
-    price: listing.price,
+    price: listing.priceUnit === "per-person" ? listing.price : null,
     priceNote: listing.priceNote ?? null,
     website: listing.website,
     listingPath: `/listing/${listing.slug || listing.id}`,
     groupSizeMin: listing.groupSizeMin ?? null,
     groupSizeMax: listing.groupSizeMax ?? null,
-    hasCorporateGroups: Boolean(listing.features?.includes("corporate-groups")),
+    hasCorporateGroups:
+      listing.corporatePackages === true ||
+      listing.occasions?.includes("corporate-team-building") === true,
     sessionLengths: listing.sessionLengths ?? null,
   }
 }

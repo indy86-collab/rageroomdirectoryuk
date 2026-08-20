@@ -1,5 +1,5 @@
 import { calculateDistance } from "@/lib/distance"
-import type { Listing } from "@/types/listing"
+import type { Listing, ListingPriceUnit } from "@/types/listing"
 
 export interface NearbyListingResult {
   id: string
@@ -10,6 +10,7 @@ export interface NearbyListingResult {
   postcode: string
   distanceMiles: number
   price: number | null
+  priceUnit: ListingPriceUnit | null
   bookingUrl: string | null
   verified: boolean
 }
@@ -40,6 +41,7 @@ export function findNearestListings(
         listing.location.lng as number
       ),
       price: listing.price,
+      priceUnit: listing.priceUnit ?? null,
       bookingUrl: listing.bookingUrl || listing.website,
       verified: listing.verified,
     }))

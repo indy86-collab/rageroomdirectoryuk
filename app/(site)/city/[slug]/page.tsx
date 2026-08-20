@@ -13,9 +13,10 @@ import PageLevelAds from "@/components/PageLevelAds"
 import RageResetCTA from "@/components/RageResetCTA"
 import Link from "next/link"
 import { buildOgImageUrl } from "@/lib/seo-schema"
-import { absoluteUrl, getSiteUrl, listingUrl } from "@/lib/site-url"
+import { absoluteUrl, listingUrl } from "@/lib/site-url"
 import { isIndexableLocationPage } from "@/lib/location-indexing"
 import NearbyActivitiesAffiliate from "@/components/NearbyActivitiesAffiliate"
+import { getEligibleLocationDiscoveryPages } from "@/lib/location-discovery"
 
 interface CityPageProps {
   params: { slug: string }
@@ -101,13 +102,16 @@ export async function generateStaticParams() {
 
 export default async function CityPage({ params }: CityPageProps) {
   const cityName = slugToCity(params.slug)
-  const { getListingsNearCity } = await import("@/lib/listings")
+  const { getAllListingsForAdmin, getListingsNearCity } = await import("@/lib/listings")
   const { inCity, nearby, allForSchema } = await getListingsNearCity(cityName)
+  const directoryListings = await getAllListingsForAdmin()
+  const locationDiscoveryPages = getEligibleLocationDiscoveryPages(directoryListings).filter(
+    (page) => page.location.slug === cityToSlug(cityName)
+  )
   const listings = allForSchema
   const hasNearbyOnly = inCity.length === 0 && nearby.length > 0
   const isEmpty = listings.length === 0
 
-  const baseUrl = getSiteUrl()
   const cityUrl = absoluteUrl(`/city/${cityToSlug(cityName)}`)
 
   const itemListSchema = {
@@ -138,13 +142,13 @@ export default async function CityPage({ params }: CityPageProps) {
             ...(listing.region ? { addressRegion: listing.region } : {}),
             addressCountry: "GB",
           },
-          ...(listing.price
+          ...(listing.price != null && listing.priceCurrency === "GBP" && listing.priceUnit
             ? {
                 offers: {
                   "@type": "Offer",
-                  priceCurrency: "GBP",
+                  priceCurrency: listing.priceCurrency,
                   price: listing.price.toFixed(2),
-                  availability: "https://schema.org/InStock",
+                  description: `Starting price ${listing.priceUnit.replace("-", " ")}`,
                   url,
                 },
               }
@@ -161,7 +165,9 @@ export default async function CityPage({ params }: CityPageProps) {
       nearbyOnly: hasNearbyOnly,
     })
 
-  const priceRange = listings.filter(l => l.price).map(l => l.price!)
+  const priceRange = listings
+    .filter((listing) => listing.price != null && listing.priceUnit === "per-person")
+    .map((listing) => listing.price as number)
   const minPrice = priceRange.length > 0 ? Math.min(...priceRange) : null
   const maxPrice = priceRange.length > 0 ? Math.max(...priceRange) : null
 
@@ -178,13 +184,8 @@ export default async function CityPage({ params }: CityPageProps) {
           lowPrice: minPrice.toFixed(2),
           highPrice: maxPrice.toFixed(2),
           offerCount: priceRange.length,
-          availability: "https://schema.org/InStock",
           url: cityUrl,
-          offeredBy: {
-            "@type": "Organization",
-            name: "RageRoom Directory",
-            url: baseUrl,
-          },
+          description: "Published per-person starting prices only; room and group prices are excluded.",
           itemOffered: {
             "@type": "Service",
             name: hasNearbyOnly
@@ -293,6 +294,20 @@ export default async function CityPage({ params }: CityPageProps) {
             <div className="mt-8 mb-6">
               <NearbyActivitiesAffiliate city={cityName} placement="city" />
             </div>
+
+            {locationDiscoveryPages.length > 0 && (
+              <nav className="mt-8 mb-6 rounded-lg border border-zinc-800 bg-[#181818] p-4 sm:p-6" aria-label={`Experiences available in ${cityName}`}>
+                <h2 className="text-xl font-bold text-white">Experiences available in {cityName}</h2>
+                <p className="mt-2 text-sm text-zinc-400">Explore focused pages only where the verified local inventory supports useful comparison.</p>
+                <div className="mt-4 flex flex-wrap gap-3">
+                  {locationDiscoveryPages.map((page) => (
+                    <Link key={page.href} href={page.href} className="inline-flex min-h-11 items-center rounded-md border border-zinc-700 px-4 py-2 text-sm font-bold text-zinc-200 hover:border-rage-500/50 hover:text-rage-300">
+                      {page.category.shortLabel} ({page.listings.length})
+                    </Link>
+                  ))}
+                </div>
+              </nav>
+            )}
             
             {/* Travel tip */}
             <div className="mt-8 mb-6">

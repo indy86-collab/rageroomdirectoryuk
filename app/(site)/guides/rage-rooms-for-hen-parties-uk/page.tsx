@@ -5,6 +5,8 @@ import GuideMeta from "@/components/GuideMeta"
 import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
 import RageResetCTA from "@/components/RageResetCTA"
 import FAQ from "@/components/FAQ"
+import ListingsGrid from "@/components/ListingsGrid"
+import { getListingsByOccasions } from "@/lib/listings"
 import {
   buildArticleSchema,
   buildBreadcrumbSchema,
@@ -131,7 +133,8 @@ const FAQS = [
   },
 ]
 
-export default function RageRoomsForHenPartiesPage() {
+export default async function RageRoomsForHenPartiesPage() {
+  const matchingVenues = await getListingsByOccasions(["hen-parties"])
   const articleSchema = buildArticleSchema({
     url: PATH,
     headline: "Rage Rooms for Hen Parties UK: Booking, Packages & Cost",
@@ -221,6 +224,17 @@ export default function RageRoomsForHenPartiesPage() {
             package actually costs, which cities are easiest for out-of-
             towners, booking lead time, alcohol rules, and what to wear.
           </p>
+
+          <section aria-labelledby="hen-venues-heading" className="mb-10 rounded-lg border border-rage-500/30 bg-dark-900 p-4 sm:p-6">
+            <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <h2 id="hen-venues-heading" className="text-2xl font-bold text-white">Hen-party venues</h2>
+                <p className="mt-2 text-sm text-zinc-400">Compare venues with confirmed hen-party suitability and direct booking details.</p>
+              </div>
+              <Link href="/occasions/hen-parties" className="text-sm font-bold text-rage-400 hover:text-rage-300">View all {matchingVenues.length} →</Link>
+            </div>
+            <ListingsGrid listings={matchingVenues.slice(0, 3)} />
+          </section>
 
 
           <section aria-labelledby="cities-heading" className="mb-10">

@@ -334,6 +334,12 @@ export default function RageRoomVsAxeThrowingPage() {
             <p className="text-zinc-300 mt-4 leading-relaxed">
               This format works particularly well for groups of 8–16 where you want two distinct activity peaks and maximum variety within a half-day.
             </p>
+            <Link
+              href="/activities/axe-throwing"
+              className="mt-5 inline-flex min-h-11 items-center rounded-md bg-rage-500 px-4 py-2 text-sm font-bold text-white hover:bg-rage-600"
+            >
+              Find venues offering both activities
+            </Link>
           </section>
 
           <section aria-labelledby="related-comparison-heading" className="mb-10">

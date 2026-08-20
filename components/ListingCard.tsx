@@ -1,97 +1,182 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
-import type { Listing } from "@/types/listing"
-import { MapPin, ArrowRight } from "lucide-react"
+import type { Listing, ListingActivity } from "@/types/listing"
+import { ArrowRight, CalendarCheck, Clock, MapPin, Star, Users } from "lucide-react"
+import {
+  ACTIVITY_DEFINITIONS,
+  formatListingPrice,
+  getListingHref,
+  getListingPrimaryAction,
+  getOccasionLabel,
+} from "@/lib/discovery"
+import { trackVenueClicked } from "@/lib/analytics"
+import TrackedBookingLink from "./TrackedBookingLink"
 
 interface ListingCardProps {
   listing: Listing
+  compareSelected?: boolean
+  onCompareToggle?: (listing: Listing) => void
+  compareDisabled?: boolean
+  discoveryContext?: {
+    surface: "activity" | "occasion" | "directory"
+    slug?: string
+    activity?: ListingActivity
+  }
 }
 
-export default function ListingCard({ listing }: ListingCardProps) {
-  // Use slug if available, fallback to id for backwards compatibility
-  const href = listing.slug ? `/listing/${listing.slug}` : `/listing/${listing.id}`
-  
+export default function ListingCard({
+  listing,
+  compareSelected = false,
+  onCompareToggle,
+  compareDisabled = false,
+  discoveryContext = { surface: "directory" },
+}: ListingCardProps) {
+  const href = getListingHref(listing)
+  const primaryAction = getListingPrimaryAction(listing)
+  const orderedActivities = discoveryContext.activity
+    ? [
+        discoveryContext.activity,
+        ...listing.activities.filter((activity) => activity !== discoveryContext.activity),
+      ]
+    : listing.activities
+  const activityBadges = orderedActivities
+    .map((value) => ACTIVITY_DEFINITIONS.find((activity) => activity.value === value))
+    .filter((activity): activity is NonNullable<typeof activity> => Boolean(activity))
+    .slice(0, 3)
+  const occasionBadges = listing.occasions.slice(0, 2)
+  const duration = listing.sessionLengths?.length
+    ? `${Math.min(...listing.sessionLengths)} min${listing.sessionLengths.length > 1 ? "+" : ""}`
+    : null
+  const startingPrice = formatListingPrice(listing)
+  const listingSlug = listing.slug || listing.id
+  const trackVenue = () =>
+    trackVenueClicked({
+      surface: discoveryContext.surface,
+      sourceSlug: discoveryContext.slug,
+      listingSlug,
+      city: listing.city,
+    })
+
   return (
-    <Link href={href} className="group">
-      <div className="card-base card-hover overflow-hidden h-full flex flex-col relative">
-        {/* Image or placeholder */}
+    <article className="card-base card-hover group relative flex h-full flex-col overflow-hidden">
+      <Link href={href} className="block" aria-label={`View ${listing.name}`} onClick={trackVenue}>
         <div className="relative aspect-video w-full overflow-hidden">
           {listing.image ? (
-            <>
-              <Image
-                src={listing.image}
-                alt={`${listing.name} rage room in ${listing.city} - smash room experience`}
-                fill
-                    className="object-cover transition-transform duration-200 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                loading="lazy"
-              />
-              {/* Gradient overlay - Removed for performance */}
-            </>
+            <Image
+              src={listing.image}
+              alt={`${listing.name} in ${listing.city}`}
+              fill
+              className="object-cover transition-transform duration-200 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              loading="lazy"
+            />
           ) : (
-            <div className="aspect-video w-full bg-gradient-to-br from-dark-800 to-dark-900 flex items-center justify-center">
-              <span className="text-zinc-600 text-sm font-medium">No image</span>
+            <div className="flex aspect-video w-full items-center justify-center bg-gradient-to-br from-dark-800 to-dark-900">
+              <span className="text-sm font-medium text-zinc-600">No image</span>
             </div>
           )}
-          
-          {/* Impact corner - Simplified for performance */}
-          <div className="absolute bottom-0 right-0 w-12 h-12 bg-rage-600 opacity-70" style={{ clipPath: 'polygon(100% 0, 100% 100%, 0 100%)' }}></div>
-          
-          {/* Verified badge - Removed backdrop-blur */}
+          <div className="absolute bottom-0 right-0 h-12 w-12 bg-rage-600 opacity-70" style={{ clipPath: "polygon(100% 0, 100% 100%, 0 100%)" }} />
           {listing.verified && (
-            <div className="absolute top-3 left-3 px-3 py-1 bg-rage-500 rounded-full text-xs font-bold text-white border border-rage-400/50 shadow-lg">
+            <div className="absolute left-3 top-3 rounded-full border border-rage-400/50 bg-rage-500 px-3 py-1 text-xs font-bold text-white shadow-lg">
               VERIFIED
             </div>
           )}
         </div>
+      </Link>
 
-        {/* Content */}
-        <div className="p-5 flex flex-col flex-grow">
-          <h3 className="text-lg font-bold text-white mb-2 line-clamp-2 group-hover:text-rage-400 transition-colors duration-150">
-            {listing.name}
-          </h3>
-          
-          <div className="flex items-center gap-2 text-sm text-zinc-400 mb-3">
-            <MapPin className="w-4 h-4 text-rage-500" />
-            <span>
-              {listing.city}
-              {listing.region && `, ${listing.region}`}
+      <div className="flex flex-grow flex-col p-5">
+        <div className="mb-3 flex flex-wrap gap-1.5">
+          {activityBadges.map((activity) => (
+            <span key={activity.value} className="inline-flex items-center gap-1 rounded-full border border-rage-500/30 bg-rage-500/10 px-2 py-1 text-[11px] font-bold text-rage-300">
+              <span aria-hidden="true">{activity.emoji}</span> {activity.shortLabel}
             </span>
+          ))}
+        </div>
+
+        <Link href={href} onClick={trackVenue}>
+          <h2 className="mb-2 line-clamp-2 text-lg font-bold text-white transition-colors duration-150 group-hover:text-rage-400">
+            {listing.name}
+          </h2>
+        </Link>
+
+        <div className="mb-3 flex items-center gap-2 text-sm text-zinc-400">
+          <MapPin className="h-4 w-4 shrink-0 text-rage-500" />
+          <span>{listing.city}{listing.region && `, ${listing.region}`}</span>
+        </div>
+
+        <div className="mb-4 grid grid-cols-2 gap-2 text-xs text-zinc-300">
+          <div className="rounded-md border border-zinc-800 bg-dark-900/60 p-2">
+            <span className="block text-[10px] uppercase tracking-wider text-zinc-500">Rage-room price</span>
+            <span className="font-bold text-white">{startingPrice ?? "Not provided"}</span>
           </div>
-          
-          {listing.description && (
-            <p className="text-sm text-zinc-500 mb-4 line-clamp-2 flex-grow">
-              {listing.description.substring(0, 100)}
-              {listing.description.length > 100 ? "..." : ""}
-            </p>
-          )}
-          
-          {/* Bottom section */}
-          <div className="flex items-center justify-between mt-auto pt-3 border-t border-zinc-800">
-            {listing.price ? (
-              <div className="flex flex-col">
-                <span className="text-xs text-zinc-500 uppercase">From</span>
-                <span className="text-xl font-bold text-gradient">
-                  £{listing.price.toFixed(0)}
-                </span>
-              </div>
-            ) : (
-              <span className="text-sm text-zinc-500">Price varies</span>
-            )}
-            
-            <div className="flex items-center gap-2 text-rage-500 font-semibold text-sm group-hover:gap-3 transition-all duration-150">
-              View Details
-              <ArrowRight className="w-4 h-4" />
-            </div>
+          <div className="rounded-md border border-zinc-800 bg-dark-900/60 p-2">
+            <span className="block text-[10px] uppercase tracking-wider text-zinc-500">Rage-room age</span>
+            <span className="font-bold text-white">{listing.ageMin != null ? `${listing.ageMin}+` : "Not provided"}</span>
+          </div>
+          <div className="flex items-center gap-1.5 rounded-md border border-zinc-800 bg-dark-900/60 p-2">
+            <Clock className="h-3.5 w-3.5 text-rage-500" />
+            <span>{duration ?? "Not provided"}</span>
+          </div>
+          <div className="flex items-center gap-1.5 rounded-md border border-zinc-800 bg-dark-900/60 p-2">
+            {listing.rating != null ? <Star className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" /> : <Users className="h-3.5 w-3.5 text-rage-500" />}
+            <span>{listing.rating != null ? `${listing.rating.toFixed(1)} rating` : "Group options"}</span>
           </div>
         </div>
 
-        {/* Hover glow effect - Removed for performance */}
+        {occasionBadges.length > 0 && (
+          <div className="mb-4 flex flex-wrap gap-1.5">
+            {occasionBadges.map((occasion) => (
+              <span key={occasion} className="rounded-full bg-zinc-800 px-2 py-1 text-[11px] font-semibold text-zinc-300">
+                {getOccasionLabel(occasion)}
+              </span>
+            ))}
+          </div>
+        )}
+
+        <div className="mt-auto border-t border-zinc-800 pt-3">
+          {primaryAction.kind === "booking" ? (
+            <TrackedBookingLink
+              href={primaryAction.href}
+              source={`${discoveryContext.surface}_card`}
+              listingSlug={listingSlug}
+              city={listing.city}
+              className="flex min-h-11 w-full items-center justify-center gap-2 rounded-md bg-rage-500 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-rage-600"
+            >
+              <CalendarCheck className="h-4 w-4" />
+              {primaryAction.label}
+              <ArrowRight className="h-4 w-4" />
+            </TrackedBookingLink>
+          ) : (
+            <Link href={href} onClick={trackVenue} className="flex min-h-11 w-full items-center justify-center gap-2 rounded-md bg-rage-500 px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-rage-600">
+              {primaryAction.label}
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          )}
+          <div className="mt-2 grid grid-cols-2 gap-2">
+            {listing.bookingUrl && (
+              <Link
+                href={href}
+                onClick={trackVenue}
+                className="flex min-h-10 items-center justify-center rounded-md border border-zinc-700 px-3 py-2 text-xs font-bold text-zinc-300 transition-colors hover:border-zinc-500 hover:text-white"
+              >
+                View details
+              </Link>
+            )}
+            {onCompareToggle && (
+            <button
+              type="button"
+              onClick={() => onCompareToggle(listing)}
+              disabled={compareDisabled && !compareSelected}
+              className={`min-h-10 rounded-md border px-3 py-2 text-xs font-bold transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${compareSelected ? "border-rage-500 bg-rage-500/15 text-rage-300" : "border-zinc-700 text-zinc-400 hover:border-zinc-500 hover:text-white"} ${listing.bookingUrl ? "" : "col-span-2"}`}
+            >
+              {compareSelected ? "✓ Added to comparison" : "Compare venue"}
+            </button>
+            )}
+          </div>
+        </div>
       </div>
-    </Link>
+    </article>
   )
 }
-
-
-
-

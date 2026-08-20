@@ -1,5 +1,6 @@
-import Link from "next/link"
 import { Plus, AlertTriangle } from "lucide-react"
+import TrackedClaimLink from "./TrackedClaimLink"
+import Link from "next/link"
 
 interface UGCButtonsProps {
   listingId?: string
@@ -13,8 +14,10 @@ export default function UGCButtons({ listingId, listingName }: UGCButtonsProps) 
         Help Us Improve
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-        <Link
+        <TrackedClaimLink
           href={`/list-your-rage-room${listingId ? `?listing=${encodeURIComponent(listingId)}&type=claim` : ""}`}
+          listingSlug={listingId}
+          source="listing_help_improve"
           className="flex items-start sm:items-center gap-3 p-4 bg-zinc-900 hover:bg-zinc-800 rounded-lg border border-zinc-700 transition-colors group min-h-[80px] sm:min-h-0"
         >
           <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center group-hover:bg-orange-500/30 transition-colors">
@@ -24,7 +27,7 @@ export default function UGCButtons({ listingId, listingName }: UGCButtonsProps) 
             <h3 className="text-white font-semibold mb-1 text-sm sm:text-base">Claim or Update This Listing</h3>
             <p className="text-zinc-400 text-xs sm:text-sm">Send current prices, packages, photos and booking details.</p>
           </div>
-        </Link>
+        </TrackedClaimLink>
 
         <Link
           href={`/list-your-rage-room${listingId ? `?listing=${encodeURIComponent(listingId)}&type=correction` : ""}`}

@@ -21,7 +21,7 @@ export function listingToDirectoryOption(listing: Listing): DirectoryVenueOption
     city: listing.city,
     website: listing.website,
     phone: listing.phone,
-    price: listing.price,
+    price: listing.priceUnit === "per-person" ? listing.price : null,
     groupSizeMax: listing.groupSizeMax ?? null,
     sessionLengths: listing.sessionLengths ?? null,
   }
@@ -39,7 +39,8 @@ export function prefillVenueFromListing(
     website: current.website || listing.website || "",
     telephone: current.telephone || listing.phone || "",
     publicStartingPrice:
-      current.publicStartingPrice ?? listing.price ?? null,
+      current.publicStartingPrice ??
+      (listing.priceUnit === "per-person" ? listing.price : null),
     maxGroupSize: current.maxGroupSize ?? listing.groupSizeMax ?? null,
     typicalSessionMinutes:
       current.typicalSessionMinutes ??

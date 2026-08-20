@@ -4,6 +4,8 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 import GuideMeta from "@/components/GuideMeta"
 import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
 import FAQ from "@/components/FAQ"
+import ListingsGrid from "@/components/ListingsGrid"
+import { getListingsByOccasions } from "@/lib/listings"
 import {
   buildArticleSchema,
   buildBreadcrumbSchema,
@@ -109,7 +111,8 @@ const PACKAGE_IDEAS: { name: string; description: string; good: string }[] = [
   },
 ]
 
-export default function RageRoomsForBirthdaysPage() {
+export default async function RageRoomsForBirthdaysPage() {
+  const matchingVenues = await getListingsByOccasions(["birthdays"])
   const articleSchema = buildArticleSchema({
     url: PATH,
     headline: "Rage Rooms for Birthday Parties UK: Prices, Ages & Best Venues",
@@ -197,6 +200,17 @@ export default function RageRoomsForBirthdaysPage() {
             to structure the wider party around a rage room, and the
             lead time you&apos;ll need to lock a Saturday slot.
           </p>
+
+          <section aria-labelledby="birthday-venues-heading" className="mb-10 rounded-lg border border-rage-500/30 bg-dark-900 p-4 sm:p-6">
+            <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <h2 id="birthday-venues-heading" className="text-2xl font-bold text-white">Birthday-friendly venues</h2>
+                <p className="mt-2 text-sm text-zinc-400">Compare confirmed birthday suitability, prices, age limits and booking options.</p>
+              </div>
+              <Link href="/occasions/birthdays" className="text-sm font-bold text-rage-400 hover:text-rage-300">View all {matchingVenues.length} →</Link>
+            </div>
+            <ListingsGrid listings={matchingVenues.slice(0, 3)} />
+          </section>
 
 
           <section aria-labelledby="package-heading" className="mb-10">

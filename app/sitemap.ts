@@ -11,6 +11,14 @@ import { getBlogGuideCanonical } from "@/lib/blog-guide-canonicals"
 import { mergeCitiesWithPriority, CITY_PRICE_PAGE_CITIES } from "@/lib/priority-seo-cities"
 import { absoluteUrl, getSiteUrl, listingUrl } from "@/lib/site-url"
 import { isIndexableLocationPage } from "@/lib/location-indexing"
+import {
+  ACTIVITY_DEFINITIONS,
+  MIN_ACTIVITY_PAGE_LISTINGS,
+  MIN_OCCASION_PAGE_LISTINGS,
+  OCCASION_DEFINITIONS,
+  matchesOccasionDefinition,
+} from "@/lib/discovery"
+import { getEligibleLocationDiscoveryPages } from "@/lib/location-discovery"
 
 // ISR: sitemap reflects listings.json state but doesn't need to be live on every request.
 export const revalidate = 3600
@@ -203,6 +211,54 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     },
   ]
+
+  routes.push(
+    {
+      url: absoluteUrl("/activities"),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: absoluteUrl("/occasions"),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    }
+  )
+
+  for (const activity of ACTIVITY_DEFINITIONS) {
+    const activityListings = listings.filter((listing) =>
+      listing.activities.includes(activity.value)
+    )
+    if (activityListings.length < MIN_ACTIVITY_PAGE_LISTINGS) continue
+    routes.push({
+      url: absoluteUrl(`/activities/${activity.slug}`),
+      lastModified: latestListingDate(activityListings),
+      changeFrequency: "weekly",
+      priority: activity.value === "rage-room" ? 0.9 : 0.8,
+    })
+  }
+
+  for (const occasion of OCCASION_DEFINITIONS) {
+    const occasionListings = listings.filter((listing) =>
+      matchesOccasionDefinition(listing, occasion)
+    )
+    if (occasionListings.length < MIN_OCCASION_PAGE_LISTINGS) continue
+    routes.push({
+      url: absoluteUrl(`/occasions/${occasion.slug}`),
+      lastModified: latestListingDate(occasionListings),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    })
+  }
+
+  for (const page of getEligibleLocationDiscoveryPages(listings)) {
+    routes.push({
+      url: absoluteUrl(page.href),
+      lastModified: latestListingDate(page.listings),
+      changeFrequency: "weekly",
+      priority: page.qualification === "strong" ? 0.8 : 0.7,
+    })
+  }
 
   // Guide pages (how-much-do-rage-rooms-cost-uk canonicals to /rage-room-prices-uk)
   const cityGuidePages = [

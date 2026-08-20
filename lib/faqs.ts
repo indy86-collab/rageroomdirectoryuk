@@ -6,35 +6,35 @@ export interface FAQItem {
 export const globalFAQs: FAQItem[] = [
   {
     question: "Are rage rooms safe?",
-    answer: "Yes, rage rooms are designed with safety as the top priority. All venues provide comprehensive protective gear including coveralls, helmets, safety glasses, and gloves. The rooms are specifically designed to contain flying debris, and trained staff supervise all sessions. Participants receive safety briefings before entering, and all equipment is regularly inspected and maintained.",
+    answer: "Rage rooms use venue-specific safety rules, protective equipment and briefings. Check the selected venue's published requirements and follow staff instructions; equipment and supervision arrangements are not identical everywhere.",
   },
   {
     question: "What should I wear to a rage room?",
-    answer: "Wear comfortable, old clothes that you don't mind getting dirty. Closed-toe shoes are required for safety - avoid open-toed sandals or flip-flops. Most rage rooms provide protective coveralls that go over your clothes, but wearing something you can move freely in is recommended. Avoid loose jewelry or accessories that could get caught.",
+    answer: "Wear comfortable clothes and check the venue's footwear and clothing rules before travelling. Protective-equipment requirements differ, so use the venue's own booking guidance as the final source.",
   },
   {
     question: "Are rage rooms good for stress relief?",
-    answer: "Yes, rage rooms are an effective and fun way to relieve stress. The physical act of smashing items releases endorphins and provides a healthy outlet for pent-up frustration and anger. Many people find it more engaging than traditional stress-relief methods, and it's been shown to help with anxiety, anger management, and overall mental well-being.",
+    answer: "People often book rage rooms as entertainment or an outlet, but a commercial rage-room session is not medical treatment. If you need help with anxiety, anger or mental health, seek advice from a qualified professional.",
   },
   {
     question: "Can kids join rage rooms?",
-    answer: "Age restrictions vary by venue, but most rage rooms require participants to be at least 16-18 years old. Some venues allow younger participants (12-15 years) when accompanied by a parent or guardian. It's always best to check with the specific venue when booking, as age policies can differ. Safety is the primary concern, so venues set age limits based on their equipment and supervision capabilities.",
+    answer: "Age restrictions vary materially by venue and sometimes by package. Use the rage-room-specific minimum age and supervision note on the listing, then confirm it on the venue's own booking page.",
   },
   {
     question: "How much does a rage room cost?",
-    answer: "Rage room prices in the UK typically range from £25 to £50 per person. Most venues offer 30-minute sessions starting around £30, with premium packages including additional items and extended time available for £40-50. Group bookings often receive discounts, and some venues offer special packages for couples or corporate events.",
+    answer: "Some venues charge per person, while others charge per room or group. Our price table preserves that published unit so unlike rates are not presented as directly comparable; confirm the live package before paying.",
   },
   {
     question: "Do I need to bring anything to a rage room?",
-    answer: "No, you don't need to bring anything. All rage rooms provide protective gear (coveralls, helmets, gloves, safety glasses), smashing tools (hammers, bats, crowbars), and breakable items. Just bring yourself and wear appropriate clothing. Some venues allow you to bring your own items to smash (check with the venue first), but it's not required.",
+    answer: "Package contents and bring-your-own policies differ. Check what the selected package includes and never bring an item unless the venue explicitly permits it.",
   },
   {
     question: "How long is a typical rage room session?",
-    answer: "Most rage room sessions last 30 minutes, which is usually enough time to break all provided items. Some venues offer extended 45-60 minute sessions for larger groups or premium packages. The actual smashing time is typically 20-25 minutes, with the remaining time allocated for safety briefing, gear setup, and cleanup.",
+    answer: "Published durations may mean smash time, total booking time or a shared session. Listings label the duration type where the venue makes it clear; otherwise, ask the venue how much active time is included.",
   },
   {
     question: "Is there a maximum group size for rage rooms?",
-    answer: "Group sizes vary by venue, but most rage rooms can accommodate 2-6 people per session. Some larger venues can handle groups of 8-12 people, making them ideal for corporate team building events. It's best to book in advance for larger groups, as venues may need to prepare additional items and ensure adequate supervision.",
+    answer: "Group limits vary, and a booking capacity does not always mean everyone enters the smash room together. Check the listing's group note and confirm the operating format with the venue.",
   },
 ]
 
@@ -124,28 +124,26 @@ function getCityFAQData(cityName: string): CityFAQData {
 }
 
 export function getCityFAQs(cityName: string): FAQItem[] {
-  const data = getCityFAQData(cityName)
-
   return [
     {
       question: `How much does a rage room cost in ${cityName}?`,
-      answer: `Rage room prices in ${cityName} typically range from ${data.priceRange}. Most venues offer a range of packages at different price points, so it's worth visiting the venue's website for their current pricing. Prices can change, and some venues run seasonal promotions.`,
+      answer: `Published prices near ${cityName} may be per person, room or group. Compare the labelled unit on each listing and visit the venue's own page for its live package price.`,
     },
     {
       question: `What are rage rooms in ${cityName} most popular for?`,
-      answer: `In ${cityName}, rage rooms are especially popular for ${data.popularUse}. However, anyone can book a session — whether you're visiting solo for stress relief or organising a group activity. Each venue in ${cityName} has its own character and strengths.`,
+      answer: `Use the occasion labels to find ${cityName} venues that explicitly advertise birthdays, corporate groups, date nights or other uses. An absent label means we do not currently have direct evidence for that claim.`,
     },
     {
       question: `Do I need to book a rage room in ${cityName} in advance?`,
-      answer: `It's recommended to ${data.bookingTip}. Most venues in ${cityName} accept online bookings through their websites, and some also take phone bookings. Walk-in availability varies — it's always safer to book ahead.`,
+      answer: `Booking methods near ${cityName} vary. Use a direct booking link only when one is published, and treat walk-ins as available only where the venue explicitly confirms them.`,
     },
     {
       question: `What age do you need to be for a rage room in ${cityName}?`,
-      answer: `Age requirements vary by venue in ${cityName}, but most require participants to be at least 16 years old. Some venues allow younger visitors (typically 12+) with a parent or guardian present. Always check the specific venue's age policy before booking, as insurance requirements can affect their rules.`,
+      answer: `Age requirements near ${cityName} vary by venue and package. Check the rage-room-specific minimum age and supervision note, then reconfirm it before booking.`,
     },
     {
       question: `What should I wear to a rage room in ${cityName}?`,
-      answer: `Wear comfortable clothes you can move freely in, and closed-toe shoes (this is mandatory at all venues). Avoid loose jewellery. All rage rooms in ${cityName} provide protective equipment — typically coveralls, gloves, helmets, and safety glasses — so you'll be covered up during the session.`,
+      answer: `Check the selected ${cityName} venue's clothing, footwear and protective-equipment instructions before travelling, because requirements differ by operator.`,
     },
   ]
 }

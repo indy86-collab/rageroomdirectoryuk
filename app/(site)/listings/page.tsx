@@ -1,13 +1,22 @@
 import { Metadata } from "next"
-import ListingsGrid from "@/components/ListingsGrid"
+import ListingsPageClient from "@/components/ListingsPageClient"
 import UGCButtons from "@/components/UGCButtons"
 import Link from "next/link"
 import { listingUrl } from "@/lib/site-url"
 
-export const metadata: Metadata = {
-  title: "All Rage Rooms in the UK — Complete Directory",
-  description: "Browse every rage room and smash room listed in the UK. Compare venues by city, view starting prices, read reviews, and find the right destruction therapy experience for you.",
-  alternates: { canonical: "/listings" },
+export function generateMetadata({
+  searchParams = {},
+}: {
+  searchParams?: Record<string, string | string[] | undefined>
+}): Metadata {
+  return {
+    title: "All Rage Rooms in the UK — Complete Directory",
+    description: "Browse every rage room and smash room listed in the UK. Compare venues by city, view starting prices, read reviews, and find the right destruction therapy experience for you.",
+    alternates: { canonical: "/listings" },
+    ...(Object.keys(searchParams).length > 0
+      ? { robots: { index: false, follow: true } }
+      : {}),
+  }
 }
 
 export const revalidate = 3600
@@ -137,9 +146,7 @@ export default async function AllListingsPage() {
           </div>
         )}
 
-        <section aria-label="All rage rooms in the UK">
-          <ListingsGrid listings={listings} />
-        </section>
+        <ListingsPageClient initialListings={listings} />
 
         {/* Useful guides */}
         <div className="mt-10 bg-[#181818] rounded-lg border border-zinc-800 p-4 sm:p-6">

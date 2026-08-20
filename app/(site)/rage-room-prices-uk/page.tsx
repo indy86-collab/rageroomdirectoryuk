@@ -7,6 +7,7 @@ import { absoluteUrl } from "@/lib/site-url"
 import { cityToSlug } from "@/lib/location"
 import { buildRageRoomReportData } from "@/lib/report-data"
 import { CITY_PRICE_PAGE_CITIES } from "@/lib/priority-seo-cities"
+import { formatListingPrice } from "@/lib/discovery"
 
 const OG_IMAGE = buildOgImageUrl({
   title: "UK Rage Room Prices",
@@ -40,13 +41,16 @@ export default async function RageRoomPricesUKPage() {
   const listings = (await getAllListingsForAdmin()).filter((listing) => listing.verified)
   const report = buildRageRoomReportData(listings)
   const pricedListings = listings
-    .filter((listing): listing is typeof listing & { price: number } => typeof listing.price === "number")
+    .filter((listing): listing is typeof listing & { price: number } =>
+      typeof listing.price === "number" && listing.priceUnit != null
+    )
     .sort((a, b) => a.price - b.price)
   const cityPrices = (
     await Promise.all(
       CITY_PRICE_PAGE_CITIES.map(async (city) => {
         const { allForSchema } = await getListingsNearCity(city)
         const prices = allForSchema
+          .filter((listing) => listing.priceUnit === "per-person")
           .map((listing) => listing.price)
           .filter((price): price is number => typeof price === "number")
         return prices.length
@@ -63,7 +67,7 @@ export default async function RageRoomPricesUKPage() {
   const faqItems = [
     {
       question: "How much does a rage room cost in the UK?",
-      answer: `Across ${report.verifiedListings} verified listings, recorded starting prices currently range from ${priceSummary}, with an average starting price of ${report.averageStartingPrice != null ? `about £${report.averageStartingPrice}` : "not yet available"}. The final cost depends on session length, group size and included smashables.`,
+      answer: `Across ${report.verifiedListings} verified listings, comparable published per-person starting prices currently range from ${priceSummary}, with an average of ${report.averageStartingPrice != null ? `about £${report.averageStartingPrice}` : "not yet available"}. Room and group prices are shown separately in the venue table.`,
     },
     {
       question: "What is included in a rage room price?",
@@ -113,7 +117,7 @@ export default async function RageRoomPricesUKPage() {
         </h1>
         <div className="mb-8 max-w-4xl space-y-3 text-base text-zinc-300 sm:text-lg">
           <p>
-            Current directory data puts UK rage room starting prices at {priceSummary}. The average is {report.averageStartingPrice != null ? `about £${report.averageStartingPrice}` : "still being calculated"}, but the cheapest headline price is not always the best value.
+            Current comparable per-person directory prices range from {priceSummary}. The average is {report.averageStartingPrice != null ? `about £${report.averageStartingPrice}` : "still being calculated"}; room and group rates are excluded from that comparison.
           </p>
           <p>
             Compare duration, group requirements and what is included, then follow the venue&apos;s booking link for the live price. Recorded figures were last updated {new Date(report.lastUpdated).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}.
@@ -135,7 +139,7 @@ export default async function RageRoomPricesUKPage() {
 
         <section className="mb-12" aria-labelledby="venue-comparison-heading">
           <h2 id="venue-comparison-heading" className="mb-3 text-2xl font-bold text-white sm:text-3xl">Verified venue price comparison</h2>
-          <p className="mb-6 text-zinc-300">Starting prices only; packages and live availability may differ.</p>
+          <p className="mb-6 text-zinc-300">Published starting prices with their stated unit; packages and live availability may differ.</p>
           <div className="overflow-x-auto rounded-lg border border-zinc-800">
             <table className="w-full min-w-[680px] text-left text-sm">
               <thead className="bg-[#151515] text-zinc-400">
@@ -148,7 +152,7 @@ export default async function RageRoomPricesUKPage() {
                   <tr key={listing.id} className="border-t border-zinc-800 text-zinc-300">
                     <td className="px-4 py-3"><Link href={`/listing/${listing.slug || listing.id}`} className="font-semibold text-orange-500 hover:text-orange-400">{listing.name}</Link></td>
                     <td className="px-4 py-3">{listing.city}</td>
-                    <td className="px-4 py-3 font-semibold text-white">£{listing.price.toFixed(0)}</td>
+                    <td className="px-4 py-3 font-semibold text-white">{formatListingPrice(listing, { includeFrom: false })}</td>
                     <td className="px-4 py-3">{listing.sessionLengths?.length ? listing.sessionLengths.map((duration) => `${duration} min`).join(", ") : "Ask venue"}</td>
                     <td className="px-4 py-3 text-xs text-zinc-500">{listing.lastVerified ? new Date(listing.lastVerified).toLocaleDateString("en-GB", { month: "short", year: "numeric" }) : "Not recorded"}</td>
                   </tr>
@@ -165,7 +169,7 @@ export default async function RageRoomPricesUKPage() {
             {cityPrices.map((row) => (
               <Link key={row.city} href={`/rage-room-prices/${cityToSlug(row.city)}`} className="rounded-lg border border-zinc-800 bg-[#181818] p-5 hover:border-orange-500">
                 <h3 className="font-bold text-white">{row.city}</h3>
-                <p className="mt-2 text-2xl font-black text-orange-500">£{row.min}{row.max !== row.min ? `–£${row.max}` : ""}</p>
+                <p className="mt-2 text-2xl font-black text-orange-500">£{row.min}{row.max !== row.min ? `–£${row.max}` : ""} per person</p>
                 <p className="mt-1 text-sm text-zinc-400">{row.count} {row.count === 1 ? "venue" : "venues"} compared</p>
               </Link>
             ))}

@@ -9,6 +9,7 @@ import {
   buildItemListSchema,
   buildOgImageUrl,
 } from "@/lib/seo-schema"
+import { formatListingPrice } from "@/lib/discovery"
 
 const GUIDE_PATH = "/guides/best-rage-rooms-for-team-building"
 const OG_IMAGE = buildOgImageUrl({
@@ -41,7 +42,11 @@ export const revalidate = 86400
 
 export default async function BestRageRoomsForTeamBuildingPage() {
   const { searchListings } = await import("@/lib/listings")
-  const allListings = await searchListings(undefined)
+  const allListings = (await searchListings(undefined)).filter(
+    (listing) =>
+      listing.corporatePackages === true ||
+      listing.occasions?.includes("corporate-team-building") === true
+  )
 
   const articleSchema = buildArticleSchema({
     url: GUIDE_PATH,
@@ -149,6 +154,13 @@ export default async function BestRageRoomsForTeamBuildingPage() {
             Rage rooms are becoming increasingly popular for corporate team building events. They offer a unique, engaging activity that helps teams bond, relieve stress, and improve workplace relationships. Our guide helps you find the best rage rooms for team building, with tips on group sizes, corporate packages, and what to expect.
           </p>
 
+          <p className="mb-8 rounded-lg border border-rage-500/25 bg-rage-500/10 p-4 text-sm text-zinc-300">
+            Ready to shortlist? Compare the verified inventory on our{" "}
+            <Link href="/occasions/corporate-team-building" className="font-bold text-rage-400 hover:text-rage-300">
+              corporate rage-room discovery page
+            </Link>.
+          </p>
+
 
           <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-6 mb-8">
             <h2 className="text-2xl font-bold text-white mb-4">
@@ -191,7 +203,7 @@ export default async function BestRageRoomsForTeamBuildingPage() {
                 Rage Rooms Suitable for Team Building
               </h2>
               <p className="text-zinc-300 mb-4">
-                Most rage rooms welcome corporate groups. Here are venues across the UK that accommodate team building events:
+                These venues explicitly publish corporate or team-building availability:
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 {allListings.slice(0, 8).map((listing) => (
@@ -202,8 +214,8 @@ export default async function BestRageRoomsForTeamBuildingPage() {
                   >
                     <h3 className="text-white font-semibold mb-1">{listing.name}</h3>
                     <p className="text-zinc-400 text-sm">{listing.city}</p>
-                    {listing.price && (
-                      <p className="text-orange-500 text-sm mt-2">From £{listing.price.toFixed(0)} per person</p>
+                    {formatListingPrice(listing) && (
+                      <p className="text-orange-500 text-sm mt-2">{formatListingPrice(listing)}</p>
                     )}
                   </Link>
                 ))}
@@ -258,5 +270,3 @@ export default async function BestRageRoomsForTeamBuildingPage() {
     </div>
     )
 }
-
-

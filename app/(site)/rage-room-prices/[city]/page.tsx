@@ -10,6 +10,7 @@ import { cityToSlug, slugToCity } from "@/lib/location"
 import { buildOgImageUrl } from "@/lib/seo-schema"
 import { absoluteUrl } from "@/lib/site-url"
 import { isIndexableLocationPage } from "@/lib/location-indexing"
+import { formatListingPrice } from "@/lib/discovery"
 
 type PageProps = {
   params: { city: string }
@@ -85,7 +86,8 @@ export default async function CityRageRoomPricesPage({ params }: PageProps) {
   const { getListingsNearCity } = await import("@/lib/listings")
   const { inCity, nearby, allForSchema } = await getListingsNearCity(cityName)
   const priced = allForSchema.filter(
-    (l): l is typeof l & { price: number } => typeof l.price === "number"
+    (l): l is typeof l & { price: number } =>
+      typeof l.price === "number" && l.priceUnit === "per-person"
   )
   const minPrice = priced.length
     ? Math.min(...priced.map((l) => l.price))
@@ -112,7 +114,7 @@ export default async function CityRageRoomPricesPage({ params }: PageProps) {
           lowPrice: minPrice.toFixed(2),
           highPrice: maxPrice.toFixed(2),
           offerCount: priced.length,
-          availability: "https://schema.org/InStock",
+          description: "Published per-person starting prices only; room and group prices are excluded.",
           url: absoluteUrl(`/rage-room-prices/${params.city}`),
         }
       : null
@@ -147,7 +149,7 @@ export default async function CityRageRoomPricesPage({ params }: PageProps) {
         <p className="mb-6 max-w-3xl text-base leading-relaxed text-zinc-300 sm:text-lg">
           {hasNearbyOnly
             ? `We do not currently list a dedicated venue in central ${cityName}. Below are starting prices for the nearest verified smash rooms within travelling distance.`
-            : `Compare starting prices for verified rage rooms ${inCity.length ? `in` : `near`} ${cityName}. Prices shown are typical per-person starting rates — always confirm packages directly with the venue.`}
+            : `Compare published starting prices for verified rage rooms ${inCity.length ? `in` : `near`} ${cityName}. Price units vary by venue, so always confirm packages directly with the venue.`}
         </p>
 
         {!allForSchema.length ? (
@@ -184,7 +186,7 @@ export default async function CityRageRoomPricesPage({ params }: PageProps) {
               {minPrice !== null && (
                 <div>
                   <p className="text-xs uppercase tracking-wider text-zinc-400">
-                    From
+                    Per-person from
                   </p>
                   <p className="text-xl font-bold text-orange-500">
                     £{minPrice.toFixed(0)}
@@ -194,7 +196,7 @@ export default async function CityRageRoomPricesPage({ params }: PageProps) {
               {maxPrice !== null && maxPrice !== minPrice && (
                 <div>
                   <p className="text-xs uppercase tracking-wider text-zinc-400">
-                    Up to
+                    Per-person up to
                   </p>
                   <p className="text-xl font-bold text-orange-500">
                     £{maxPrice.toFixed(0)}
@@ -228,9 +230,7 @@ export default async function CityRageRoomPricesPage({ params }: PageProps) {
                       </td>
                       <td className="px-4 py-3 text-zinc-400">{listing.city}</td>
                       <td className="px-4 py-3 font-semibold text-white">
-                        {typeof listing.price === "number"
-                          ? `£${listing.price.toFixed(0)}`
-                          : "Ask venue"}
+                        {formatListingPrice(listing, { includeFrom: false }) ?? "Not provided"}
                       </td>
                     </tr>
                   ))}

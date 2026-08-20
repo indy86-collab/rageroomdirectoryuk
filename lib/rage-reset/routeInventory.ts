@@ -15,6 +15,24 @@ export const ROUTE_INVENTORY: ExpectedRoute[] = [
   { path: "/", expectStatus: 200, group: "home", requireHeaderFooter: true },
   { path: "/listings", expectStatus: 200, group: "directory", requireHeaderFooter: true },
   { path: "/near-me", expectStatus: 200, group: "directory", requireHeaderFooter: true },
+  {
+    path: "/activities/rage-rooms/birmingham",
+    expectStatus: 200,
+    group: "discovery",
+    requireHeaderFooter: true,
+  },
+  {
+    path: "/activities/rage-rooms/london",
+    expectStatus: 200,
+    group: "discovery",
+    requireHeaderFooter: true,
+  },
+  {
+    path: "/occasions/birthdays/birmingham",
+    expectStatus: 200,
+    group: "discovery",
+    requireHeaderFooter: true,
+  },
   { path: "/guides", expectStatus: 200, group: "guides", requireHeaderFooter: true },
   {
     path: "/guides/what-happens-in-a-rage-room",

@@ -23,14 +23,24 @@ import ListingLeadCapture from "@/components/ListingLeadCapture"
 import PageLevelAds from "@/components/PageLevelAds"
 import TrackedBookingLink from "@/components/TrackedBookingLink"
 import NearbyActivitiesAffiliate from "@/components/NearbyActivitiesAffiliate"
-import { buildOgImageUrl } from "@/lib/seo-schema"
+import TrackedClaimLink from "@/components/TrackedClaimLink"
+import { buildBreadcrumbSchema, buildOgImageUrl } from "@/lib/seo-schema"
 import { absoluteUrl, getSiteUrl, listingUrl as buildListingUrl } from "@/lib/site-url"
 import {
   buildListingMediaSchema,
-  formatListingFeature,
   getAuthorisedMedia,
 } from "@/lib/listing-quality"
 import { CITY_PRICE_PAGE_CITIES } from "@/lib/priority-seo-cities"
+import {
+  ACTIVITY_DEFINITIONS,
+  formatListingPrice,
+  getOccasionLabel,
+  MIN_ACTIVITY_PAGE_LISTINGS,
+  MIN_OCCASION_PAGE_LISTINGS,
+  OCCASION_DEFINITIONS,
+  matchesOccasionDefinition,
+} from "@/lib/discovery"
+import { getEligibleLocationDiscoveryPages } from "@/lib/location-discovery"
 
 interface ListingPageProps {
   params: { slug: string }
@@ -77,7 +87,7 @@ export async function generateMetadata({
       title: listing.name,
       subtitle: `Rage room in ${listing.city}, UK`,
       badge: "Venue",
-      ...(listing.price ? { price: `From £${listing.price.toFixed(0)}` } : {}),
+      ...(formatListingPrice(listing) ? { price: formatListingPrice(listing)! } : {}),
     })
 
     return {
@@ -115,7 +125,7 @@ export async function generateMetadata({
     title: listing.name,
     subtitle: `Rage room in ${listing.city}, UK`,
     badge: "Venue",
-    ...(listing.price ? { price: `From £${listing.price.toFixed(0)}` } : {}),
+    ...(formatListingPrice(listing) ? { price: formatListingPrice(listing)! } : {}),
   })
 
   return {
@@ -216,51 +226,42 @@ export default async function ListingPage({ params }: ListingPageProps) {
     4,
     location || undefined
   )
+  const directoryListings = await getAllListingsForAdmin()
+  const locationDiscoveryLinks = getEligibleLocationDiscoveryPages(directoryListings).filter(
+    (page) => page.listings.some((item) => item.id === listing.id)
+  )
+  const activityDetails = listing.activities
+    .map((value) => ACTIVITY_DEFINITIONS.find((activity) => activity.value === value))
+    .filter((activity): activity is NonNullable<typeof activity> => Boolean(activity))
+    .map((activity) => ({
+      ...activity,
+      hasLandingPage:
+        directoryListings.filter((item) => item.activities.includes(activity.value)).length >=
+        MIN_ACTIVITY_PAGE_LISTINGS,
+    }))
+  const occasionDetails = OCCASION_DEFINITIONS
+    .filter((occasion) => occasion.values.some((value) => listing.occasions.includes(value)))
+    .map((occasion) => ({
+      ...occasion,
+      hasLandingPage:
+        directoryListings.filter((item) => matchesOccasionDefinition(item, occasion)).length >=
+        MIN_OCCASION_PAGE_LISTINGS,
+    }))
 
   // Generate AI-optimized content
   const aiContent = await generateListingContent(listing, similarListings)
   const listingFAQs = generateListingFAQs(listing, similarListings)
 
-  // Price comparison data
-  const similarWithPrice = similarListings.filter(l => l.price)
-  const avgCityPrice = similarWithPrice.length > 0
-    ? similarWithPrice.reduce((sum, l) => sum + (l.price || 0), 0) / similarWithPrice.length
-    : null
+  const formattedStartingPrice = formatListingPrice(listing)
 
   const baseUrl = getSiteUrl()
   const listingUrl = buildListingUrl(listing.slug || listing.id)
-  const primaryBookingUrl = listing.bookingUrl || listing.website
+  const primaryBookingUrl = listing.bookingUrl || null
   const authorisedMedia = getAuthorisedMedia(listing)
   const mediaSchema = buildListingMediaSchema(listing, listingUrl)
-  const corporateSignals = [
-    listing.name,
-    listing.description,
-    listing.priceNote,
-    ...(listing.packages?.flatMap((pkg) => [pkg.name, pkg.description ?? ""]) ?? []),
-  ]
-    .join(" ")
-    .toLowerCase()
-  const showCorporateCTA = [
-    "corporate",
-    "team building",
-    "team-building",
-    "group",
-    "groups",
-    "party",
-    "parties",
-    "large group",
-    "events",
-  ].some((signal) => corporateSignals.includes(signal))
-
-  // Google Rich Results expect `priceRange` as a band ($/$$/$$$/$$$$) rather
-  // than a raw number. Map our numeric starting price into £ bands.
-  function priceBand(p: number | null): string | undefined {
-    if (p == null) return undefined
-    if (p < 30) return "£"
-    if (p < 60) return "££"
-    if (p < 100) return "£££"
-    return "££££"
-  }
+  const showCorporateCTA =
+    listing.corporatePackages === true ||
+    listing.occasions.includes("corporate-team-building")
 
   const hasOfferCatalog = listing.packages?.length
     ? {
@@ -276,7 +277,6 @@ export default async function ListingPage({ params }: ListingPageProps) {
               }
             : {}),
           ...(pkg.description ? { description: pkg.description } : {}),
-          availability: "https://schema.org/InStock",
           url: pkg.url || primaryBookingUrl || listingUrl,
           itemOffered: {
             "@type": "Service",
@@ -379,17 +379,18 @@ export default async function ListingPage({ params }: ListingPageProps) {
           },
         }
       : {}),
-    ...(priceBand(listing.price ?? null) ? { priceRange: priceBand(listing.price ?? null) } : {}),
+    ...(formatListingPrice(listing, { includeFrom: false })
+      ? { priceRange: formatListingPrice(listing, { includeFrom: false }) }
+      : {}),
     currenciesAccepted: "GBP",
-    paymentAccepted: "Credit Card, Debit Card, Cash",
-    ...(listing.price
+    ...(listing.price != null && listing.priceCurrency === "GBP" && listing.priceUnit
       ? {
           offers: {
             "@type": "Offer",
             name: `Rage room session at ${listing.name}`,
-            priceCurrency: "GBP",
+            priceCurrency: listing.priceCurrency,
             price: listing.price.toFixed(2),
-            availability: "https://schema.org/InStock",
+            description: `Starting price ${listing.priceUnit.replace("-", " ")}`,
             url: primaryBookingUrl || listingUrl,
           },
         }
@@ -443,6 +444,12 @@ export default async function ListingPage({ params }: ListingPageProps) {
       }
     : localBusinessSchema
 
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: listing.city, url: `/city/${cityToSlug(listing.city)}` },
+    { name: listing.name, url: `/listing/${listing.slug || listing.id}` },
+  ])
+
   // FAQ Schema
   const faqSchema = {
     "@context": "https://schema.org",
@@ -463,6 +470,10 @@ export default async function ListingPage({ params }: ListingPageProps) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(listingStructuredData) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
         <script
           type="application/ld+json"
@@ -616,6 +627,49 @@ export default async function ListingPage({ params }: ListingPageProps) {
           </div>
         </div>
 
+        <div className="mb-6 grid gap-4 sm:mb-8 lg:grid-cols-2">
+          <section className="rounded-lg border border-zinc-800 bg-[#181818] p-4 sm:p-6" aria-labelledby="activities-available-heading">
+            <h2 id="activities-available-heading" className="text-xl font-bold text-white">Activities Available</h2>
+            <p className="mt-2 text-sm text-zinc-400">Confirmed experiences offered by this venue.</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {activityDetails.map((activity) => {
+                const badge = (
+                  <span className="inline-flex items-center gap-2 rounded-full border border-rage-500/30 bg-rage-500/10 px-3 py-2 text-sm font-bold text-rage-300">
+                    <span aria-hidden="true">{activity.emoji}</span>{activity.shortLabel}
+                  </span>
+                )
+                return activity.hasLandingPage ? (
+                  <Link key={activity.value} href={`/activities/${activity.slug}`} className="transition-opacity hover:opacity-80">{badge}</Link>
+                ) : (
+                  <span key={activity.value}>{badge}</span>
+                )
+              })}
+            </div>
+          </section>
+
+          <section className="rounded-lg border border-zinc-800 bg-[#181818] p-4 sm:p-6" aria-labelledby="perfect-for-heading">
+            <h2 id="perfect-for-heading" className="text-xl font-bold text-white">Perfect For</h2>
+            {occasionDetails.length > 0 ? (
+              <>
+                <p className="mt-2 text-sm text-zinc-400">Occasions this venue advertises or supports.</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {occasionDetails.map((occasion) => occasion.hasLandingPage ? (
+                    <Link key={occasion.slug} href={`/occasions/${occasion.slug}`} className="inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-dark-900 px-3 py-2 text-sm font-bold text-zinc-200 transition-colors hover:border-rage-500/50 hover:text-rage-300">
+                      <span aria-hidden="true">{occasion.emoji}</span>{occasion.shortLabel}
+                    </Link>
+                  ) : (
+                    <span key={occasion.slug} className="inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-dark-900 px-3 py-2 text-sm font-bold text-zinc-300">
+                      <span aria-hidden="true">{occasion.emoji}</span>{occasion.shortLabel}
+                    </span>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <p className="mt-2 text-sm text-zinc-400">Occasion suitability has not yet been confirmed. Check directly with the venue for group or celebration bookings.</p>
+            )}
+          </section>
+        </div>
+
         <div className="mb-6 sm:mb-8">
           <ListingLeadCapture
             source={`listing:${listing.slug || listing.id}`}
@@ -642,28 +696,15 @@ export default async function ListingPage({ params }: ListingPageProps) {
           <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
             Pricing
           </h2>
-          {listing.price ? (
+          {formattedStartingPrice ? (
             <div className="space-y-3">
               <div className="flex justify-between items-center py-2 border-b border-zinc-700">
-                <span className="text-white">Starting price per person</span>
-                <span className="text-orange-500 font-semibold text-lg">From £{listing.price.toFixed(0)}</span>
+                <span className="text-white">Published rage-room starting price</span>
+                <span className="text-orange-500 font-semibold text-lg">{formattedStartingPrice}</span>
               </div>
-              {avgCityPrice && similarWithPrice.length >= 2 && (
-                <div className="flex items-center gap-2 py-2 border-b border-zinc-700">
-                  <span className="text-zinc-400 text-sm">
-                    {listing.price < avgCityPrice * 0.9
-                      ? `Below average for ${listing.city} (avg ~£${Math.round(avgCityPrice)})`
-                      : listing.price > avgCityPrice * 1.1
-                      ? `Above average for ${listing.city} (avg ~£${Math.round(avgCityPrice)})`
-                      : `In line with ${listing.city} average (~£${Math.round(avgCityPrice)})`
-                    }
-                  </span>
-                </div>
-              )}
               <p className="text-zinc-400 text-sm">
-                This is the starting price listed by {listing.name}. Most rage rooms offer a range of packages
-                at different price points, including options for couples, groups, and premium experiences.
-                Visit the venue's website for their full and up-to-date pricing.
+                This is the lowest supported rage-room price in our current source data. Visit the venue's
+                website for current availability and exact package inclusions.
               </p>
               {listing.priceNote && (
                 <p className="text-zinc-300 text-sm">{listing.priceNote}</p>
@@ -741,18 +782,20 @@ export default async function ListingPage({ params }: ListingPageProps) {
               (listing.sessionLengths?.length ?? 0) > 0 ||
               listing.groupSizeMin != null ||
               listing.groupSizeMax != null ||
-              (listing.features?.length ?? 0) > 0) && (
+              listing.occasions.length > 0) && (
               <div className="grid gap-3 pt-2 sm:grid-cols-2 lg:grid-cols-4">
                 {listing.ageMin != null && (
                   <div className="rounded-md border border-zinc-700 p-3">
-                    <p className="text-xs uppercase tracking-wider text-zinc-500">Minimum age</p>
+                    <p className="text-xs uppercase tracking-wider text-zinc-500">Rage-room minimum age</p>
                     <p className="mt-1 font-semibold text-white">{listing.ageMin}+</p>
+                    {listing.minimumAgeNote && <p className="mt-1 text-xs text-zinc-400">{listing.minimumAgeNote}</p>}
                   </div>
                 )}
                 {listing.sessionLengths && listing.sessionLengths.length > 0 && (
                   <div className="rounded-md border border-zinc-700 p-3">
-                    <p className="text-xs uppercase tracking-wider text-zinc-500">Session lengths</p>
+                    <p className="text-xs uppercase tracking-wider text-zinc-500">Published duration</p>
                     <p className="mt-1 font-semibold text-white">{listing.sessionLengths.map((duration) => `${duration} min`).join(", ")}</p>
+                    {listing.sessionDurationNote && <p className="mt-1 text-xs text-zinc-400">{listing.sessionDurationNote}</p>}
                   </div>
                 )}
                 {(listing.groupSizeMin != null || listing.groupSizeMax != null) && (
@@ -765,12 +808,13 @@ export default async function ListingPage({ params }: ListingPageProps) {
                           ? `Up to ${listing.groupSizeMax} people`
                           : `From ${listing.groupSizeMin} people`}
                     </p>
+                    {listing.groupSizeNote && <p className="mt-1 text-xs text-zinc-400">{listing.groupSizeNote}</p>}
                   </div>
                 )}
-                {listing.features && listing.features.length > 0 && (
+                {listing.occasions.length > 0 && (
                   <div className="rounded-md border border-zinc-700 p-3 sm:col-span-2 lg:col-span-1">
-                    <p className="text-xs uppercase tracking-wider text-zinc-500">Good for</p>
-                    <p className="mt-1 text-sm font-semibold text-white">{listing.features.map(formatListingFeature).join(", ")}</p>
+                    <p className="text-xs uppercase tracking-wider text-zinc-500">Confirmed occasions</p>
+                    <p className="mt-1 text-sm font-semibold text-white">{listing.occasions.map(getOccasionLabel).join(", ")}</p>
                   </div>
                 )}
               </div>
@@ -809,6 +853,23 @@ export default async function ListingPage({ params }: ListingPageProps) {
                 </a>
               </p>
             )}
+            <div className="grid gap-3 pt-3 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                ["Walk-ins", listing.walkInsAccepted],
+                ["Online booking", listing.onlineBooking],
+                ["Gift vouchers", listing.giftVouchers],
+                ["Corporate packages", listing.corporatePackages],
+                ["Private hire", listing.privateHire],
+                ["Accessibility information", listing.accessibility],
+              ].map(([label, available]) => (
+                <div key={String(label)} className="rounded-md border border-zinc-700 p-3">
+                  <p className="text-xs uppercase tracking-wider text-zinc-500">{label}</p>
+                  <p className={`mt-1 font-semibold ${available === true ? "text-green-400" : available === false ? "text-zinc-300" : "text-zinc-500"}`}>
+                    {available === true ? "Available" : available === false ? "Not available" : "Not confirmed"}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -900,6 +961,17 @@ export default async function ListingPage({ params }: ListingPageProps) {
                 </Link>
               </>
             )}
+            {locationDiscoveryLinks.map((page) => (
+              <span key={page.href} className="contents">
+                <span className="text-zinc-500 hidden sm:inline">•</span>
+                <Link
+                  href={page.href}
+                  className="text-orange-500 hover:text-orange-600 underline text-sm sm:text-base py-2"
+                >
+                  {page.category.shortLabel} in {page.location.name}
+                </Link>
+              </span>
+            ))}
           </div>
         </div>
 
@@ -1064,15 +1136,25 @@ export default async function ListingPage({ params }: ListingPageProps) {
         <div className="mb-6 rounded-lg border border-zinc-800 bg-[#181818] p-4 sm:mb-8 sm:p-6">
           <h2 className="text-lg font-bold text-white">Venue owners</h2>
           <p className="mt-2 text-sm text-zinc-400">
-            Want this listing featured on the {listing.city} city page and near-me results?
-            Featured placement is optional and does not affect whether you stay listed.
+            Own or manage {listing.name}? Claim the listing to submit corrections to activities,
+            pricing, photos, offers and booking details.
           </p>
-          <a
-            href={`mailto:ukrageroom@gmail.com?subject=${encodeURIComponent(`Featured listing: ${listing.name}`)}`}
-            className="mt-3 inline-flex text-sm font-semibold text-orange-500 hover:text-orange-400"
-          >
-            Ask about featured placement →
-          </a>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <TrackedClaimLink
+              href={`/list-your-rage-room?type=claim&listing=${encodeURIComponent(listing.slug || listing.id)}#submission-form`}
+              listingSlug={listing.slug || listing.id}
+              source="listing_owner_panel"
+              className="inline-flex min-h-11 items-center justify-center rounded-md bg-rage-500 px-4 py-2 text-sm font-bold text-white hover:bg-rage-600"
+            >
+              Claim this listing
+            </TrackedClaimLink>
+            <a
+              href={`mailto:ukrageroom@gmail.com?subject=${encodeURIComponent(`Featured listing: ${listing.name}`)}`}
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-orange-500 hover:text-orange-400"
+            >
+              Ask about featured placement →
+            </a>
+          </div>
         </div>
 
         <UGCButtons

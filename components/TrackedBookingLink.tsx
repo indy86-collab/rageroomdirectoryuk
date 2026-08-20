@@ -1,7 +1,7 @@
 "use client"
 
 import type { ReactNode } from "react"
-import { trackGenerateLead } from "@/lib/analytics"
+import { trackBookingCtaClicked, trackGenerateLead } from "@/lib/analytics"
 
 type TrackedBookingLinkProps = {
   href: string
@@ -26,13 +26,14 @@ export default function TrackedBookingLink({
       target="_blank"
       rel="noopener noreferrer"
       className={className}
-      onClick={() =>
+      onClick={() => {
+        trackBookingCtaClicked({ source, listingSlug, city })
         trackGenerateLead({
           source,
           listingSlug,
           city,
         })
-      }
+      }}
     >
       {children}
     </a>

@@ -33,6 +33,7 @@ function countBy(listings: Listing[], value: (listing: Listing) => string) {
 export function buildRageRoomReportData(listings: Listing[]): RageRoomReportData {
   const verified = listings.filter((listing) => listing.verified)
   const prices = verified
+    .filter((listing) => listing.priceUnit === "per-person")
     .map((listing) => listing.price)
     .filter((price): price is number => typeof price === "number")
   const latestTimestamp = Math.max(
@@ -82,9 +83,9 @@ export function buildAggregateReportCsv(data: RageRoomReportData) {
   const rows: Array<[string, string, string | number]> = [
     ["summary", "verified_listings", data.verifiedListings],
     ["summary", "cities_covered", data.citiesCovered],
-    ["summary", "average_starting_price_gbp", data.averageStartingPrice ?? ""],
-    ["summary", "minimum_starting_price_gbp", data.minimumStartingPrice ?? ""],
-    ["summary", "maximum_starting_price_gbp", data.maximumStartingPrice ?? ""],
+    ["summary", "average_per_person_starting_price_gbp", data.averageStartingPrice ?? ""],
+    ["summary", "minimum_per_person_starting_price_gbp", data.minimumStartingPrice ?? ""],
+    ["summary", "maximum_per_person_starting_price_gbp", data.maximumStartingPrice ?? ""],
     ["summary", "last_updated", data.lastUpdated],
     ...data.regions.map((row): [string, string, number] => ["region", row.label, row.count]),
     ...data.cities.map((row): [string, string, number] => ["city", row.label, row.count]),

@@ -1,5 +1,11 @@
 import listingsData from "@/data/listings.json"
-import type { Listing, ListingWithReviews } from "@/types/listing"
+import type {
+  Listing,
+  ListingActivity,
+  ListingOccasion,
+  ListingWithReviews,
+} from "@/types/listing"
+import { getCanonicalCityLocation, listingMatchesCanonicalCity } from "@/lib/location"
 
 let cachedListings: Listing[] | null = null
 
@@ -198,6 +204,24 @@ export async function getDistinctRegions(): Promise<string[]> {
   return [...regions].sort()
 }
 
+export async function getListingsByActivity(
+  activity: ListingActivity
+): Promise<Listing[]> {
+  return sortByCreatedAtDesc(
+    loadListings().filter((listing) => listing.activities.includes(activity))
+  )
+}
+
+export async function getListingsByOccasions(
+  occasions: ListingOccasion[]
+): Promise<Listing[]> {
+  return sortByCreatedAtDesc(
+    loadListings().filter((listing) =>
+      occasions.some((occasion) => listing.occasions.includes(occasion))
+    )
+  )
+}
+
 export interface ListingWithDistance extends Listing {
   distanceMiles: number
 }
@@ -210,7 +234,8 @@ export interface ListingsNearCityResult {
 
 /**
  * Listings in a city plus nearby venues within a radius (for guide pages).
- * London also includes listings where region === "London" (e.g. Croydon).
+ * Canonical city matching comes from lib/location. London explicitly includes
+ * structured region === "London" listings; other cities require an exact city.
  */
 export async function getListingsNearCity(
   city: string,
@@ -218,22 +243,12 @@ export async function getListingsNearCity(
 ): Promise<ListingsNearCityResult> {
   const radiusMiles = options?.radiusMiles ?? 40
   const nearbyLimit = options?.nearbyLimit ?? 5
-  const normalizedCity = city.toLowerCase()
-  const isLondon = normalizedCity === "london"
-
-  let inCity = await getListingsByCity(city)
-
-  if (isLondon) {
-    const inCityIds = new Set(inCity.map((l) => l.id))
-    const regionListings = sortByCreatedAtDesc(
-      loadListings().filter(
-        (l) =>
-          !inCityIds.has(l.id) &&
-          l.region.toLowerCase() === "london"
-      )
+  const canonicalLocation = getCanonicalCityLocation(city)
+  const inCity = sortByCreatedAtDesc(
+    loadListings().filter((listing) =>
+      listingMatchesCanonicalCity(listing, canonicalLocation)
     )
-    inCity = [...inCity, ...regionListings]
-  }
+  )
 
   const inCityIds = new Set(inCity.map((l) => l.id))
   const { getCityCentroid } = await import("./city-centroids")

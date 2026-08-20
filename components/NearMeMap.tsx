@@ -5,6 +5,7 @@ import type { Listing } from "@/types/listing"
 import Link from "next/link"
 import TrackedBookingLink from "@/components/TrackedBookingLink"
 import type { NearbyListingResult } from "@/lib/nearby-search"
+import { formatListingPrice } from "@/lib/discovery"
 
 interface NearMeMapProps {
   listings: Listing[]
@@ -170,7 +171,7 @@ export default function NearMeMap({ listings }: NearMeMapProps) {
                 </p>
                 <p className="mt-2 font-medium text-orange-500">{result.distanceMiles.toFixed(1)} miles away</p>
                 <p className="mt-1 text-sm text-zinc-300">
-                  {result.price != null ? `From £${result.price.toFixed(0)} per person` : "Ask venue for current prices"}
+                  {formatListingPrice(result) ?? "Price not provided"}
                 </p>
                 <div className="mt-4 flex flex-wrap gap-3 text-sm font-semibold">
                   <Link href={`/listing/${result.slug}`} className="text-orange-500 hover:text-orange-400">View details</Link>
@@ -268,9 +269,9 @@ export default function NearMeMap({ listings }: NearMeMapProps) {
                         : `${distance.toFixed(1)} km away`}
                     </p>
                   )}
-                  {listing.price && (
+                  {formatListingPrice(listing) && (
                     <p className="text-sm text-zinc-300 mt-2">
-                      From £{listing.price.toFixed(0)} per person
+                      {formatListingPrice(listing)}
                     </p>
                   )}
                 </Link>
