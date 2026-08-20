@@ -55,6 +55,7 @@ export function getCanonicalDiscoveryLocations(
 ): CanonicalCityLocation[] {
   const locations = new Map<string, CanonicalCityLocation>()
   for (const listing of listings) {
+    if (listing.locationType === "mobile-service") continue
     const location = getCanonicalCityLocation(listing.city)
     if (!location.slug || locations.has(location.slug)) continue
     locations.set(location.slug, location)
@@ -77,7 +78,9 @@ export function getListingsForDiscoveryLocation(
 ) {
   return listings.filter(
     (listing) =>
-      listing.verified && listingMatchesCanonicalCity(listing, location)
+      listing.locationType !== "mobile-service" &&
+      listing.verified &&
+      listingMatchesCanonicalCity(listing, location)
   )
 }
 
@@ -208,7 +211,7 @@ export function getLocationDiscoveryTitle(page: LocationDiscoveryPageData) {
     const activity = page.category as ActivityDefinition
     return activity.value === "rage-room"
       ? `Rage Rooms in ${page.location.name}`
-      : `Rage Room Venues Offering ${activity.shortLabel} in ${page.location.name}`
+      : `${activity.label} in ${page.location.name}`
   }
   const occasion = page.category as OccasionDefinition
   return `${occasion.heroTitle} in ${page.location.name}`
@@ -223,7 +226,7 @@ export function getLocationDiscoveryDescription(
     const activity = page.category as ActivityDefinition
     return activity.value === "rage-room"
       ? `Compare ${venues} in ${page.location.name}. Check published rage-room prices, age guidance, activities and booking options.`
-      : `Compare ${venues} offering ${activity.shortLabel.toLowerCase()} alongside rage rooms in ${page.location.name}, with prices, age guidance and booking options.`
+      : `Compare ${venues} offering ${activity.shortLabel.toLowerCase()} in ${page.location.name}, with published prices, age guidance and booking options.`
   }
   const occasion = page.category as OccasionDefinition
   return `Compare ${venues} in ${page.location.name} with confirmed suitability for ${occasion.shortLabel.toLowerCase()}. Check rage-room prices, group details and booking options.`

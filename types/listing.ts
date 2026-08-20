@@ -3,6 +3,10 @@ export interface ListingLocation {
   lng: number | null
 }
 
+export const LISTING_LOCATION_TYPES = ["fixed-venue", "mobile-service"] as const
+
+export type ListingLocationType = (typeof LISTING_LOCATION_TYPES)[number]
+
 export const LISTING_FEATURES = [
   "byo-smashables",
   "corporate-groups",
@@ -76,14 +80,18 @@ export interface Listing {
   id: string
   name: string
   description: string
+  /** Defaults to fixed-venue for legacy records. Mobile services must publish serviceAreas. */
+  locationType?: ListingLocationType
+  streetAddress?: string | null
   city: string
   region: string
   postcode: string
+  serviceAreas?: string[] | null
   location: ListingLocation
   website: string | null
   bookingUrl?: string | null
   phone: string | null
-  /** Lowest supported rage-room price. Never a calculated package division. */
+  /** Lowest supported price for the listing's primary published activity. Never a calculated package division. */
   price: number | null
   priceCurrency?: "GBP" | null
   priceUnit?: ListingPriceUnit | null
@@ -99,7 +107,7 @@ export interface Listing {
   groupSizeMax?: number | null
   groupSizeNote?: string | null
   features?: ListingFeature[] | null
-  /** Structured discovery categories. Every venue must include rage-room. */
+  /** Structured discovery categories. At least one supported activity is required. */
   activities: ListingActivity[]
   /** Evidence-backed occasion suitability; an empty array means not yet confirmed. */
   occasions: ListingOccasion[]

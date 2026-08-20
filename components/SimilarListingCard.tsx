@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import type { Listing } from "@/types/listing"
-import { formatListingPrice } from "@/lib/discovery"
+import { formatListingPrice, getListingExperienceLabel } from "@/lib/discovery"
 
 interface SimilarListingCardProps {
   listing: Listing
@@ -10,6 +10,7 @@ interface SimilarListingCardProps {
 
 export default function SimilarListingCard({ listing, distance }: SimilarListingCardProps) {
   const startingPrice = formatListingPrice(listing)
+  const experienceLabel = getListingExperienceLabel(listing)
   return (
     <Link href={listing.slug ? `/listing/${listing.slug}` : `/listing/${listing.id}`}>
       <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 hover:border-orange-500 transition-colors h-full flex flex-col">
@@ -18,7 +19,7 @@ export default function SimilarListingCard({ listing, distance }: SimilarListing
           <div className="aspect-video w-full overflow-hidden relative">
             <Image
               src={listing.image}
-              alt={`${listing.name} rage room in ${listing.city}`}
+              alt={`${listing.name} ${experienceLabel.toLowerCase()} in ${listing.city}`}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"

@@ -7,6 +7,7 @@ import { ArrowRight, CalendarCheck, Clock, MapPin, Star, Users } from "lucide-re
 import {
   ACTIVITY_DEFINITIONS,
   formatListingPrice,
+  getListingExperienceLabel,
   getListingHref,
   getListingPrimaryAction,
   getOccasionLabel,
@@ -54,6 +55,7 @@ export default function ListingCard({
     ? `${Math.min(...listing.sessionLengths)} min${listing.sessionLengths.length > 1 ? "+" : ""}`
     : null
   const startingPrice = formatListingPrice(listing)
+  const experienceLabel = getListingExperienceLabel(listing)
   const listingSlug = listing.slug || listing.id
   const ctaPlacement =
     discoveryContext.pageType === "activity"
@@ -114,11 +116,11 @@ export default function ListingCard({
 
         <div className="mb-4 grid grid-cols-2 gap-2 text-xs text-zinc-300">
           <div className="rounded-md border border-zinc-800 bg-dark-900/60 p-2">
-            <span className="block text-[10px] uppercase tracking-wider text-zinc-500">Rage-room price</span>
+            <span className="block text-[10px] uppercase tracking-wider text-zinc-500">{experienceLabel} price</span>
             <span className="font-bold text-white">{startingPrice ?? "Not provided"}</span>
           </div>
           <div className="rounded-md border border-zinc-800 bg-dark-900/60 p-2">
-            <span className="block text-[10px] uppercase tracking-wider text-zinc-500">Rage-room age</span>
+            <span className="block text-[10px] uppercase tracking-wider text-zinc-500">Minimum age</span>
             <span className="font-bold text-white">{listing.ageMin != null ? `${listing.ageMin}+` : "Not provided"}</span>
           </div>
           <div className="flex items-center gap-1.5 rounded-md border border-zinc-800 bg-dark-900/60 p-2">

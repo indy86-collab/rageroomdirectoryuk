@@ -65,16 +65,16 @@ export const ACTIVITY_DEFINITIONS: ActivityDefinition[] = [
     label: "Axe Throwing",
     shortLabel: "Axe Throwing",
     emoji: "🪓",
-    description: "Pair a smash session with coached axe throwing at multi-activity venues.",
-    heroTitle: "Rage Rooms with Axe Throwing Across the UK",
+    description: "Find coached axe throwing at verified standalone and multi-activity venues.",
+    heroTitle: "Axe Throwing Across the UK",
     editorial: {
-      whatItIs: "Axe throwing is a coached target activity where participants throw axes at wooden targets from a marked lane. The venues listed here also offer a verified rage-room experience.",
-      sessionFormat: "Sessions usually begin with technique and safety coaching before practice throws and optional games. Combination bookings may run the two activities back to back.",
-      whoItSuits: "It works well for friends, competitive groups and team socials that want a skill-based activity alongside the less structured release of a rage room.",
-      age: "Age policies are activity-specific and may be stricter for axe throwing than for the rage room. Confirm the rule for every participant, even when a card shows a rage-room minimum age.",
+      whatItIs: "Axe throwing is a coached target activity where participants throw axes at wooden targets from a marked lane.",
+      sessionFormat: "Sessions usually begin with technique and safety coaching before practice throws and optional games. Multi-activity venues may offer combination bookings.",
+      whoItSuits: "It works well for friends, competitive groups and team socials looking for a physical, skill-based activity.",
+      age: "Age policies are venue and session specific. Confirm the rule for every participant before booking.",
       whatToWear: "Wear closed-toe shoes and clothes that allow free shoulder movement. Avoid loose accessories that could interfere with throwing or protective equipment.",
-      booking: "Book ahead, especially for a combination session, because axe lanes and smash rooms may have separate availability. Card prices describe the rage-room offer unless stated otherwise.",
-      pairing: "Axe throwing provides coaching and competition; the rage room adds a high-energy, no-score finish. It is one of the directory's strongest verified combinations.",
+      booking: "Book ahead, especially for groups or combination sessions, because lane capacity and other activities may have separate availability.",
+      pairing: "Where both are genuinely available, axe throwing provides coaching and competition while a rage room adds a high-energy, no-score finish.",
     },
   },
   {
@@ -84,14 +84,14 @@ export const ACTIVITY_DEFINITIONS: ActivityDefinition[] = [
     shortLabel: "Paint Splatter",
     emoji: "🎨",
     description: "Create colourful chaos in a dedicated paint or splatter room.",
-    heroTitle: "Paint Splatter Rooms with Rage Rooms",
+    heroTitle: "Paint & Splatter Rooms Across the UK",
     editorial: {
       whatItIs: "Paint or splatter rooms let participants throw, spray or flick paint in a protected creative space. Every result is different, and some venues let you take a canvas home.",
-      sessionFormat: "A typical visit covers protective clothing, a short setup and a timed paint session. At multi-activity venues, paint and rage-room slots may be booked separately or as a package.",
+      sessionFormat: "A typical visit covers protective clothing, a short setup and a timed paint session. At multi-activity venues, separate activities may be booked individually or as a package.",
       whoItSuits: "Paint rooms suit creative groups, birthdays, dates and families who want colourful mess without the impact and noise of a full smash session.",
-      age: "Paint experiences may have different age rules from rage rooms and can be more accessible to younger groups. Confirm supervision, paint type and minimum age directly.",
+      age: "Paint experiences set their own age and supervision rules. Confirm paint type, adult supervision and minimum age directly.",
       whatToWear: "Use old clothes and closed-toe shoes even when coveralls are supplied. Ask whether paint can stain hair, footwear or personal items.",
-      booking: "Reserve in advance so the venue can prepare paint, canvases and protective kit. Check whether artwork, extra colours or a rage-room add-on costs more.",
+      booking: "Reserve in advance so the venue can prepare paint, canvases and protective kit. Check whether artwork, extra colours or other activity add-ons cost more.",
       pairing: "A splatter session offers a creative contrast to smashing: one activity makes a mess through colour, the other through controlled destruction.",
     },
   },
@@ -110,7 +110,7 @@ export const ACTIVITY_DEFINITIONS: ActivityDefinition[] = [
       age: "Expect stricter age and safety rules than a standard rage room; verify them directly.",
       whatToWear: "Follow the venue's footwear, clothing and protective-equipment instructions exactly.",
       booking: "Availability may be occasional, so confirm the specific car-smash session rather than assuming it is included.",
-      pairing: "A standard rage-room booking can provide a more widely available alternative at the same venue.",
+      pairing: "Where a venue offers both, a standard rage-room booking can provide a more widely available destructive activity at the same location.",
     },
   },
   {
@@ -119,10 +119,10 @@ export const ACTIVITY_DEFINITIONS: ActivityDefinition[] = [
     label: "Escape Rooms",
     shortLabel: "Escape Room",
     emoji: "🔐",
-    description: "Venues where a rage room can be combined with an escape-room challenge.",
-    heroTitle: "Rage Rooms with Escape Rooms",
+    description: "Verified escape-room experiences with a strong connection to destructive or multi-activity venues.",
+    heroTitle: "Escape Rooms at High-Energy Activity Venues",
     editorial: {
-      whatItIs: "Escape rooms are timed team challenges built around clues, puzzles and a themed objective. These venues also have a verified rage-room experience on site.",
+      whatItIs: "Escape rooms are timed team challenges built around clues, puzzles and a themed objective.",
       sessionFormat: "Escape games commonly run as a separate timed booking with a briefing and debrief. Leave enough time between activities if the venue does not sell a combined package.",
       whoItSuits: "The pairing suits groups that want collaboration and problem-solving as well as a physical activity, particularly birthdays and team socials.",
       age: "Escape-room age guidance can depend on theme and puzzle difficulty, while rage-room rules depend on safety. Check both activities separately.",
@@ -137,8 +137,8 @@ export const ACTIVITY_DEFINITIONS: ActivityDefinition[] = [
     label: "Archery",
     shortLabel: "Archery",
     emoji: "🏹",
-    description: "Multi-activity venues offering archery alongside destructive experiences.",
-    heroTitle: "Rage Rooms with Archery",
+    description: "Archery at selected venues closely aligned with destructive and adrenaline experiences.",
+    heroTitle: "Archery at High-Energy Activity Venues",
     editorial: {
       whatItIs: "Archery is a coached target activity using bows and marked shooting lanes.",
       sessionFormat: "Expect a safety briefing, technique guidance and a practice or scoring format.",
@@ -155,10 +155,10 @@ export const ACTIVITY_DEFINITIONS: ActivityDefinition[] = [
     label: "Virtual Reality",
     shortLabel: "VR",
     emoji: "🥽",
-    description: "Add a virtual-reality experience to a rage-room visit.",
-    heroTitle: "Rage Rooms with Virtual Reality",
+    description: "Virtual-reality experiences at selected high-energy, multi-activity venues.",
+    heroTitle: "Virtual Reality at High-Energy Activity Venues",
     editorial: {
-      whatItIs: "Virtual-reality sessions use headsets and tracked controllers for immersive games or experiences. The listed venues also operate a verified rage room.",
+      whatItIs: "Virtual-reality sessions use headsets and tracked controllers for immersive games or experiences.",
       sessionFormat: "VR may be booked by headset, arena or time slot. Allow time for fitting and instructions, and check whether multiplayer capacity matches your group.",
       whoItSuits: "VR gives mixed-interest groups a lower-impact digital option alongside a physical smash session.",
       age: "Headset manufacturers and venues may set their own age guidance. Confirm that separately from the rage-room minimum age.",
@@ -173,10 +173,10 @@ export const ACTIVITY_DEFINITIONS: ActivityDefinition[] = [
     label: "Airsoft & Target Activities",
     shortLabel: "Target Activities",
     emoji: "🎯",
-    description: "Venues with airsoft or another explicitly published target activity.",
-    heroTitle: "Rage Rooms with Airsoft & Target Activities",
+    description: "Selected venues with airsoft or another explicitly published target activity.",
+    heroTitle: "Airsoft & Target Activities",
     editorial: {
-      whatItIs: "This category covers explicitly published airsoft or target-shooting experiences at venues that also operate a rage room.",
+      whatItIs: "This category covers explicitly published airsoft or target-shooting experiences at selected high-energy venues.",
       sessionFormat: "Sessions usually combine a safety briefing with coached practice, target challenges or scored games. Equipment and lane formats differ by venue.",
       whoItSuits: "It suits competitive friends and groups who want accuracy-based games alongside a smash session.",
       age: "Target activities can have equipment-specific age restrictions. Treat the rage-room age shown on a card as separate information.",
@@ -317,6 +317,34 @@ export function getOccasionDefinition(slug: string) {
 
 export function getActivityLabel(activity: ListingActivity) {
   return ACTIVITY_DEFINITIONS.find((item) => item.value === activity)?.shortLabel ?? activity
+}
+
+export function listingHasRageRoom(
+  listing: Pick<Listing, "activities">
+) {
+  return listing.activities.includes("rage-room")
+}
+
+export function getListingPrimaryActivity(
+  listing: Pick<Listing, "activities">
+) {
+  const value = listingHasRageRoom(listing)
+    ? "rage-room"
+    : listing.activities[0]
+  return ACTIVITY_DEFINITIONS.find((activity) => activity.value === value)
+}
+
+export function getListingExperienceLabel(
+  listing: Pick<Listing, "activities">
+) {
+  const primary = getListingPrimaryActivity(listing)
+  return primary?.shortLabel ?? "Activity"
+}
+
+export function getListingExperienceSummary(
+  listing: Pick<Listing, "activities">
+) {
+  return listing.activities.map(getActivityLabel).join(", ")
 }
 
 export function getOccasionLabel(occasion: ListingOccasion) {

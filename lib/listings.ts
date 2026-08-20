@@ -28,7 +28,10 @@ function matchesSearch(listing: Listing, searchTerm: string): boolean {
     listing.name.toLowerCase().includes(term) ||
     listing.city.toLowerCase().includes(term) ||
     listing.region.toLowerCase().includes(term) ||
-    listing.postcode.toLowerCase().includes(term)
+    listing.postcode.toLowerCase().includes(term) ||
+    (listing.streetAddress?.toLowerCase().includes(term) ?? false) ||
+    (listing.serviceAreas?.some((area) => area.toLowerCase().includes(term)) ?? false) ||
+    listing.activities.some((activity) => activity.replace(/-/g, " ").includes(term))
   )
 }
 
@@ -47,7 +50,15 @@ export async function getFeaturedListings(
   limit: number = 6,
   options?: { excludeSlugs?: string[] }
 ): Promise<Listing[]> {
-  const allListings = sortByCreatedAtDesc(loadListings())
+  // The homepage remains RageRoom-led even though activity pages can include
+  // verified standalone venues.
+  const allListings = sortByCreatedAtDesc(
+    loadListings().filter(
+      (listing) =>
+        listing.locationType !== "mobile-service" &&
+        listing.activities.includes("rage-room")
+    )
+  )
 
   const exclude = new Set(options?.excludeSlugs ?? [])
   const pool =
@@ -126,6 +137,7 @@ export async function getListingsByCity(city: string): Promise<Listing[]> {
 
   return sortByCreatedAtDesc(
     loadListings().filter((l) => {
+      if (l.locationType === "mobile-service") return false
       const c = l.city.toLowerCase()
       return (
         c === normalizedWithHyphens.toLowerCase() ||
@@ -143,6 +155,7 @@ export async function getListingsWithLocation(): Promise<Listing[]> {
 export async function getDistinctCities(): Promise<string[]> {
   const cities = new Set<string>()
   for (const listing of loadListings()) {
+    if (listing.locationType === "mobile-service") continue
     const city = listing.city.trim()
     if (city) cities.add(city)
   }
@@ -152,7 +165,9 @@ export async function getDistinctCities(): Promise<string[]> {
 export async function getListingsByRegion(region: string): Promise<Listing[]> {
   return sortByCreatedAtDesc(
     loadListings().filter(
-      (l) => l.region.toLowerCase() === region.toLowerCase()
+      (l) =>
+        l.locationType !== "mobile-service" &&
+        l.region.toLowerCase() === region.toLowerCase()
     )
   )
 }
@@ -163,11 +178,15 @@ export async function getSimilarListings(
   limit: number = 4,
   currentLocation?: { lat: number; lng: number }
 ): Promise<Listing[]> {
+  const current = loadListings().find((listing) => listing.id === currentListingId)
+  const currentActivities = new Set(current?.activities ?? [])
   const listings = sortByCreatedAtDesc(
     loadListings().filter(
       (l) =>
+        l.locationType !== "mobile-service" &&
         l.city.toLowerCase() === city.toLowerCase() &&
-        l.id !== currentListingId
+        l.id !== currentListingId &&
+        l.activities.some((activity) => currentActivities.has(activity))
     )
   ).slice(0, limit * 2)
 
@@ -198,6 +217,7 @@ export async function getSimilarListings(
 export async function getDistinctRegions(): Promise<string[]> {
   const regions = new Set<string>()
   for (const listing of loadListings()) {
+    if (listing.locationType === "mobile-service") continue
     const region = listing.region.trim()
     if (region) regions.add(region)
   }
@@ -245,8 +265,10 @@ export async function getListingsNearCity(
   const nearbyLimit = options?.nearbyLimit ?? 5
   const canonicalLocation = getCanonicalCityLocation(city)
   const inCity = sortByCreatedAtDesc(
-    loadListings().filter((listing) =>
-      listingMatchesCanonicalCity(listing, canonicalLocation)
+    loadListings().filter(
+      (listing) =>
+        listing.locationType !== "mobile-service" &&
+        listingMatchesCanonicalCity(listing, canonicalLocation)
     )
   )
 

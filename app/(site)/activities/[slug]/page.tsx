@@ -43,15 +43,19 @@ export async function generateMetadata({ params, searchParams = {} }: ActivityPa
 
   const titles: Partial<Record<typeof activity.value, string>> = {
     "rage-room": "Rage Rooms Near You | UK Venue Directory",
-    "axe-throwing": "Axe Throwing & Rage Rooms Near You",
+    "axe-throwing": "Axe Throwing Near You | UK Venue Directory",
     "paint-splatter": "Paint Splatter Rooms UK | Find Nearby Venues",
-    "escape-room": "Escape Rooms with Rage Rooms | UK Venues",
-    vr: "VR & Rage Room Venues Across the UK",
-    "airsoft-target": "Airsoft, Target Activities & Rage Rooms | UK Venues",
+    "car-smash": "Car Smash Experiences UK | Verified Venues",
+    "mobile-rage-room": "Mobile Rage Room Hire UK | Verified Operators",
+    "escape-room": "Selected Escape Rooms | UK Venues",
+    vr: "Selected VR Venues Across the UK",
+    "airsoft-target": "Selected Airsoft & Target Activities | UK Venues",
   }
   return {
-    title: titles[activity.value] ?? `${activity.label} with Rage Rooms | UK Venues`,
-    description: `Explore ${pluraliseVenue(listings.length)} in our verified UK rage-room directory offering ${activity.label.toLowerCase()}. Compare locations, rage-room prices, ages and booking options.`,
+    title: titles[activity.value] ?? `${activity.label} | Verified UK Venues`,
+    description: activity.value === "rage-room"
+      ? `Explore ${pluraliseVenue(listings.length)} in our verified UK rage-room directory. Compare locations, published prices, ages and booking options.`
+      : `Explore ${pluraliseVenue(listings.length)} offering verified ${activity.label.toLowerCase()} experiences across the UK, including standalone and multi-activity venues. Compare locations, published prices, ages and booking options.`,
     alternates: { canonical: `/activities/${activity.slug}` },
     ...(Object.keys(searchParams).length > 0
       ? { robots: { index: false, follow: true } }
@@ -213,7 +217,9 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
             ))}
           </div>
           <div className="mt-4 rounded-lg border border-rage-500/25 bg-rage-500/10 p-5">
-            <h3 className="font-bold text-white">How it pairs with rage rooms</h3>
+            <h3 className="font-bold text-white">
+              {activity.value === "rage-room" ? "Related activity pairings" : "How it can pair with rage rooms"}
+            </h3>
             <p className="mt-2 text-sm leading-relaxed text-zinc-300">{activity.editorial.pairing}</p>
           </div>
         </section>

@@ -11,11 +11,11 @@ const require = createRequire(import.meta.url)
 const nextConfig = require("../next.config.js")
 
 describe("SEO regressions", () => {
-  it("keeps noindex city pages out of the sitemap", async () => {
+  it("keeps mobile service areas out of fixed city routes", async () => {
     const entries = await sitemap()
     const urls = new Set(entries.map((entry) => entry.url))
 
-    expect(urls.has("https://www.rageroomdirectory.co.uk/city/belfast")).toBe(false)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/city/uk-wide")).toBe(false)
     expect(urls.has("https://www.rageroomdirectory.co.uk/city/london")).toBe(true)
   })
 
@@ -68,7 +68,7 @@ describe("SEO regressions", () => {
     const metadata = await generateCityMetadata({ params: { slug: "london" } })
 
     expect(metadata.title).toBe(
-      `Rage Rooms in London — ${inCity.length} Venues + ${nearby.length} Nearby`
+      `Rage Rooms & Destructive Experiences in London — ${inCity.length} Venues + ${nearby.length} Nearby`
     )
   })
 

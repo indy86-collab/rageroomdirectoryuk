@@ -101,7 +101,7 @@ export default function ListingsPageClient({
             )}
           </div>
           <VenueCompareTable listings={compareListings} />
-          <section aria-label="Filtered rage rooms">
+          <section aria-label="Filtered venues">
             <ListingsGrid
               listings={filteredListings}
               compareIds={new Set(compareListings.map((listing) => listing.id))}
@@ -112,11 +112,11 @@ export default function ListingsPageClient({
                 <div className="rounded-lg border border-zinc-800 bg-[#181818] p-6 text-center sm:p-8">
                   <h3 className="text-xl font-bold text-white">No verified match for these filters</h3>
                   <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-zinc-400">
-                    We don&apos;t currently have a verified venue matching every selected filter. Clear or widen the location filters, or explore the full rage-room directory.
+                    We don&apos;t currently have a verified venue matching every selected filter. Clear or widen the filters, or explore the full directory.
                   </p>
                   <div className="mt-5 flex flex-col justify-center gap-3 sm:flex-row">
                     <Link href="/listings" className="inline-flex min-h-11 items-center justify-center rounded-md bg-rage-500 px-4 py-2 text-sm font-bold text-white hover:bg-rage-600">
-                      Find nearby rage rooms
+                      Browse all venues
                     </Link>
                     <Link href="/activities" className="inline-flex min-h-11 items-center justify-center rounded-md border border-zinc-700 px-4 py-2 text-sm font-bold text-zinc-200 hover:border-zinc-500">
                       Explore related activities

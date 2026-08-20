@@ -13,7 +13,7 @@ import { buildBreadcrumbSchema } from "@/lib/seo-schema"
 export const metadata: Metadata = {
   title: "Rage Rooms & Destructive Activities Across the UK",
   description:
-    "Find UK rage rooms and venues that also offer axe throwing, paint splatter, escape rooms, VR and other complementary experiences.",
+    "Find UK rage rooms, axe throwing, paint splatter, car smash and mobile destructive experiences at verified standalone and multi-activity venues.",
   alternates: { canonical: "/activities" },
 }
 
@@ -52,9 +52,9 @@ export default async function ActivitiesPage() {
             Choose Your Experience
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-zinc-300">
-            Start with the UK&apos;s verified rage-room inventory, then narrow it to venues offering
-            axe throwing, paint splatter, escape rooms, VR and target activities alongside the
-            main smash experience.
+            Start with the UK&apos;s verified rage-room inventory, or explore closely related
+            destructive and adrenaline experiences. Activity pages include both standalone
+            specialists and multi-activity venues when each offering has been verified.
           </p>
         </div>
 
@@ -92,7 +92,7 @@ export default async function ActivitiesPage() {
         <div className="mt-8 rounded-lg border border-zinc-800 bg-dark-900/60 p-5 text-sm text-zinc-400">
           <p>
             Activity categories with only one verified venue stay unpublished until there is
-            enough real choice to compare. You can still find every verified rage room in the{" "}
+            enough real choice to compare. You can still find every verified venue in the{" "}
             <Link href="/listings" className="font-semibold text-rage-400 hover:text-rage-300">full directory</Link>.
           </p>
         </div>

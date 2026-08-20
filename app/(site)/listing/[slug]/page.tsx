@@ -1,5 +1,6 @@
 import { notFound, redirect } from "next/navigation"
 import { Metadata } from "next"
+import type { Listing } from "@/types/listing"
 import Image from "next/image"
 import { 
   Shield, Package, Users, 
@@ -37,12 +38,20 @@ import { CITY_PRICE_PAGE_CITIES } from "@/lib/priority-seo-cities"
 import {
   ACTIVITY_DEFINITIONS,
   formatListingPrice,
+  getListingExperienceLabel,
+  getListingExperienceSummary,
   getOccasionLabel,
+  listingHasRageRoom,
   MIN_ACTIVITY_PAGE_LISTINGS,
   MIN_OCCASION_PAGE_LISTINGS,
   OCCASION_DEFINITIONS,
   matchesOccasionDefinition,
 } from "@/lib/discovery"
+import {
+  getListingSchemaAddress,
+  getListingSchemaAreaServed,
+  getListingSchemaBusinessType,
+} from "@/lib/listing-schema"
 import { getEligibleLocationDiscoveryPages } from "@/lib/location-discovery"
 
 interface ListingPageProps {
@@ -67,90 +76,47 @@ function isUUID(str: string): boolean {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(str)
 }
 
-export async function generateMetadata({
-  params,
-}: ListingPageProps): Promise<Metadata> {
-  // Check if param is a UUID (legacy ID) or a slug
-  let listing
-  
-  if (isUUID(params.slug)) {
-    // It's a UUID, try to find by ID
-    listing = await getListingById(params.slug)
-    // If it's a UUID and has a slug, the page component will redirect
-    // For metadata, we'll just return basic info
-    if (!listing) {
-      return {
-        title: "Listing Not Found",
-      }
-    }
-    const canonicalUrl = listing.slug
-      ? buildListingUrl(listing.slug)
-      : buildListingUrl(listing.id)
-    const ogImage = listing.image || buildOgImageUrl({
-      title: listing.name,
-      subtitle: `Rage room in ${listing.city}, UK`,
-      badge: "Venue",
-      ...(formatListingPrice(listing) ? { price: formatListingPrice(listing)! } : {}),
-    })
-
-    return {
-      title: `${listing.name} Rage Room in ${listing.city} | Prices, Packages & Booking`,
-      description: `${listing.name} in ${listing.city} offers rage room and smash room experiences. View prices, packages, opening hours, location, and book your stress-relief session. ${listing.description.substring(0, 120)}...`,
-      alternates: {
-        canonical: canonicalUrl,
-      },
-      openGraph: {
-        title: `${listing.name} Rage Room in ${listing.city}`,
-        description: `Book a rage room session at ${listing.name} in ${listing.city}. View prices, packages, and reviews.`,
-        type: "website",
-        url: canonicalUrl,
-        images: [{ url: ogImage, width: 1200, height: 630, alt: `${listing.name} rage room in ${listing.city}` }],
-      },
-      twitter: {
-        card: "summary_large_image",
-        title: `${listing.name} — Rage Room in ${listing.city}`,
-        description: `Book a rage room session at ${listing.name} in ${listing.city}.`,
-        images: [ogImage],
-      },
-    }
-  } else {
-    listing = await getListingBySlug(params.slug)
-  }
-
-  if (!listing) {
-    return {
-      title: "Listing Not Found",
-    }
-  }
-
+function buildListingMetadata(listing: Listing | null): Metadata {
+  if (!listing) return { title: "Listing Not Found" }
   const canonicalUrl = buildListingUrl(listing.slug || listing.id)
+  const experienceLabel = getListingExperienceLabel(listing)
+  const activitySummary = getListingExperienceSummary(listing)
+  const locationLabel = listing.locationType === "mobile-service" ? "UK-wide" : listing.city
   const ogImage = listing.image || buildOgImageUrl({
     title: listing.name,
-    subtitle: `Rage room in ${listing.city}, UK`,
-    badge: "Venue",
+    subtitle: `${experienceLabel} in ${locationLabel}`,
+    badge: "Verified venue",
     ...(formatListingPrice(listing) ? { price: formatListingPrice(listing)! } : {}),
   })
+  const description = `${listing.name} offers verified ${activitySummary.toLowerCase()} ${listing.locationType === "mobile-service" ? "services across " : "experiences in "}${locationLabel}. View published prices, activity details and booking options.`
 
   return {
-    title: `${listing.name} Rage Room in ${listing.city} | Prices, Packages & Booking`,
-    description: `${listing.name} in ${listing.city} offers rage room and smash room experiences. View prices, packages, opening hours, location, and book your stress-relief session. ${listing.description.substring(0, 120)}...`,
-    alternates: {
-      canonical: canonicalUrl,
-    },
+    title: `${listing.name} | ${experienceLabel} in ${locationLabel}`,
+    description,
+    alternates: { canonical: canonicalUrl },
     openGraph: {
-      title: `${listing.name} Rage Room in ${listing.city}`,
-      description: `Book a rage room session at ${listing.name} in ${listing.city}. View prices, packages, and reviews.`,
+      title: `${listing.name} — ${experienceLabel} in ${locationLabel}`,
+      description,
       type: "website",
       url: canonicalUrl,
-      images: [{ url: ogImage, width: 1200, height: 630, alt: `${listing.name} rage room in ${listing.city}` }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: `${listing.name} ${experienceLabel.toLowerCase()} experience` }],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${listing.name} — Rage Room in ${listing.city}`,
-      description: `Book a rage room session at ${listing.name} in ${listing.city}.`,
+      title: `${listing.name} — ${experienceLabel}`,
+      description,
       images: [ogImage],
     },
   }
+}
+
+export async function generateMetadata({
+  params,
+}: ListingPageProps): Promise<Metadata> {
+  const listing = isUUID(params.slug)
+    ? await getListingById(params.slug)
+    : await getListingBySlug(params.slug)
+  return buildListingMetadata(listing)
 }
 
 export default async function ListingPage({ params }: ListingPageProps) {
@@ -179,7 +145,15 @@ export default async function ListingPage({ params }: ListingPageProps) {
     }
   }
 
-  const location = listing.location as { lat: number; lng: number } | null
+  const location =
+    typeof listing.location?.lat === "number" &&
+    typeof listing.location?.lng === "number"
+      ? { lat: listing.location.lat, lng: listing.location.lng }
+      : null
+  const hasRageRoom = listingHasRageRoom(listing)
+  const experienceLabel = getListingExperienceLabel(listing)
+  const activitySummary = getListingExperienceSummary(listing)
+  const isMobileService = listing.locationType === "mobile-service"
 
   // Google: API returns at most 5 review texts; userRatingsTotal is the real count (e.g. 133)
   const googleReviewData = listing.googlePlaceId
@@ -285,7 +259,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
           itemOffered: {
             "@type": "Service",
             name: pkg.name,
-            serviceType: "Rage room / smash room experience",
+            serviceType: `${experienceLabel} experience`,
           },
         })),
       }
@@ -347,13 +321,13 @@ export default async function ListingPage({ params }: ListingPageProps) {
   // EntertainmentBusiness (for category signals).
   const localBusinessSchema = {
     "@context": "https://schema.org",
-    "@type": ["LocalBusiness", "EntertainmentBusiness"],
+    "@type": getListingSchemaBusinessType(listing),
     "@id": `${listingUrl}#localbusiness`,
     name: listing.name,
     url: listingUrl,
     description:
       listing.description?.slice(0, 500) ||
-      `${listing.name} is a rage room in ${listing.city}, UK, offering smash room and destruction therapy sessions.`,
+      `${listing.name} offers verified ${activitySummary.toLowerCase()} experiences in the UK.`,
     image: authorisedMedia.some((media) => media.type === "image")
       ? authorisedMedia
           .filter((media) => media.type === "image")
@@ -361,17 +335,10 @@ export default async function ListingPage({ params }: ListingPageProps) {
       : listing.image
         ? [absoluteUrl(listing.image)]
         : [absoluteUrl("/og-image.png")],
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: listing.city,
-      ...(listing.region ? { addressRegion: listing.region } : {}),
-      ...(listing.postcode ? { postalCode: listing.postcode } : {}),
-      addressCountry: "GB",
-    },
-    areaServed: [
-      { "@type": "City", name: listing.city },
-      ...(listing.region ? [{ "@type": "AdministrativeArea", name: listing.region }] : []),
-    ],
+    ...(getListingSchemaAddress(listing)
+      ? { address: getListingSchemaAddress(listing) }
+      : {}),
+    areaServed: getListingSchemaAreaServed(listing),
     ...(listing.phone ? { telephone: listing.phone } : {}),
     ...(listing.openingHours?.length ? { openingHours: listing.openingHours } : {}),
     ...(location
@@ -391,7 +358,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
       ? {
           offers: {
             "@type": "Offer",
-            name: `Rage room session at ${listing.name}`,
+            name: `${experienceLabel} session at ${listing.name}`,
             priceCurrency: listing.priceCurrency,
             price: listing.price.toFixed(2),
             description: `Starting price ${listing.priceUnit.replace("-", " ")}`,
@@ -415,7 +382,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
             },
             result: {
               "@type": "Reservation",
-              name: `Rage room booking at ${listing.name}`,
+              name: `${experienceLabel} booking at ${listing.name}`,
             },
           },
         }
@@ -448,11 +415,14 @@ export default async function ListingPage({ params }: ListingPageProps) {
       }
     : localBusinessSchema
 
-  const breadcrumbSchema = buildBreadcrumbSchema([
+  const listingBreadcrumbs = [
     { name: "Home", url: "/" },
-    { name: listing.city, url: `/city/${cityToSlug(listing.city)}` },
+    isMobileService
+      ? { name: "Mobile Rage Rooms", url: "/activities/mobile-rage-rooms" }
+      : { name: listing.city, url: `/city/${cityToSlug(listing.city)}` },
     { name: listing.name, url: `/listing/${listing.slug || listing.id}` },
-  ])
+  ]
+  const breadcrumbSchema = buildBreadcrumbSchema(listingBreadcrumbs)
 
   // FAQ Schema
   const faqSchema = {
@@ -487,7 +457,9 @@ export default async function ListingPage({ params }: ListingPageProps) {
         <Breadcrumbs
           items={[
             { label: "Home", href: "/" },
-            { label: listing.city, href: `/city/${cityToSlug(listing.city)}` },
+            isMobileService
+              ? { label: "Mobile Rage Rooms", href: "/activities/mobile-rage-rooms" }
+              : { label: listing.city, href: `/city/${cityToSlug(listing.city)}` },
             { label: listing.name },
           ]}
         />
@@ -502,7 +474,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
                 <div className="aspect-video w-full relative">
                   <Image
                     src={listing.image}
-                    alt={`${listing.name} rage room in ${listing.city} - smash room experience`}
+                    alt={`${listing.name} ${experienceLabel.toLowerCase()} experience${isMobileService ? "" : ` in ${listing.city}`}`}
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 100vw, 50vw"
@@ -576,8 +548,9 @@ export default async function ListingPage({ params }: ListingPageProps) {
               {/* Location */}
               <div className="mb-4">
                 <p className="text-white">
-                  {listing.city}
-                  {listing.region && `, ${listing.region}`}
+                  {isMobileService
+                    ? `Mobile service: ${(listing.serviceAreas ?? [listing.city]).join(", ")}`
+                    : `${listing.streetAddress ? `${listing.streetAddress}, ` : ""}${listing.city}${listing.region ? `, ${listing.region}` : ""}`}
                 </p>
                 {listing.postcode && (
                   <p className="text-white">
@@ -678,26 +651,31 @@ export default async function ListingPage({ params }: ListingPageProps) {
           </section>
         </div>
 
-        <div className="mb-6 sm:mb-8">
-          <ListingLeadCapture
-            source={`listing:${listing.slug || listing.id}`}
-            idPrefix={`listing-${listing.slug || listing.id}`}
-          />
-        </div>
+        {hasRageRoom && (
+          <div className="mb-6 sm:mb-8">
+            <ListingLeadCapture
+              source={`listing:${listing.slug || listing.id}`}
+              idPrefix={`listing-${listing.slug || listing.id}`}
+            />
+          </div>
+        )}
 
         <PageLevelAds />
 
         <ListingMediaGallery media={authorisedMedia} venueName={listing.name} />
 
-        <div className="mb-4 sm:mb-5">
-          <RageResetCTA surface="listing" variant="secondary" />
-        </div>
-
-        <div className="mb-6 sm:mb-8">
-          <DigitalGuidesChooser
-            highlight={showCorporateCTA ? "corporate" : "firstVisit"}
-          />
-        </div>
+        {hasRageRoom && (
+          <>
+            <div className="mb-4 sm:mb-5">
+              <RageResetCTA surface="listing" variant="secondary" />
+            </div>
+            <div className="mb-6 sm:mb-8">
+              <DigitalGuidesChooser
+                highlight={showCorporateCTA ? "corporate" : "firstVisit"}
+              />
+            </div>
+          </>
+        )}
 
         {/* Pricing Overview */}
         <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
@@ -707,11 +685,11 @@ export default async function ListingPage({ params }: ListingPageProps) {
           {formattedStartingPrice ? (
             <div className="space-y-3">
               <div className="flex justify-between items-center py-2 border-b border-zinc-700">
-                <span className="text-white">Published rage-room starting price</span>
+                <span className="text-white">Published {experienceLabel.toLowerCase()} starting price</span>
                 <span className="text-orange-500 font-semibold text-lg">{formattedStartingPrice}</span>
               </div>
               <p className="text-zinc-400 text-sm">
-                This is the lowest supported rage-room price in our current source data. Visit the venue's
+                This is the lowest supported {experienceLabel.toLowerCase()} price in our current source data. Visit the venue&apos;s
                 website for current availability and exact package inclusions.
               </p>
               {listing.priceNote && (
@@ -758,14 +736,14 @@ export default async function ListingPage({ params }: ListingPageProps) {
           )}
         </div>
 
-        <div className="mb-6 sm:mb-8">
+        {hasRageRoom && !isMobileService && <div className="mb-6 sm:mb-8">
           <NearbyActivitiesAffiliate
             city={listing.city}
             placement="listing"
             listingSlug={listing.slug || listing.id}
             venueName={listing.name}
           />
-        </div>
+        </div>}
 
         {/* Venue Details & Booking Info */}
         <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
@@ -795,7 +773,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
               <div className="grid gap-3 pt-2 sm:grid-cols-2 lg:grid-cols-4">
                 {listing.ageMin != null && (
                   <div className="rounded-md border border-zinc-700 p-3">
-                    <p className="text-xs uppercase tracking-wider text-zinc-500">Rage-room minimum age</p>
+                    <p className="text-xs uppercase tracking-wider text-zinc-500">Minimum age</p>
                     <p className="mt-1 font-semibold text-white">{listing.ageMin}+</p>
                     {listing.minimumAgeNote && <p className="mt-1 text-xs text-zinc-400">{listing.minimumAgeNote}</p>}
                   </div>
@@ -944,18 +922,22 @@ export default async function ListingPage({ params }: ListingPageProps) {
             Explore More
           </h2>
           <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
-            <Link
-              href={`/city/${cityToSlug(listing.city)}`}
-              className="text-orange-500 hover:text-orange-600 underline text-sm sm:text-base py-2"
-            >
-              ← Back to Rage Rooms in {listing.city}
-            </Link>
-            <span className="text-zinc-500 hidden sm:inline">•</span>
+            {!isMobileService && (
+              <>
+                <Link
+                  href={`/city/${cityToSlug(listing.city)}`}
+                  className="text-orange-500 hover:text-orange-600 underline text-sm sm:text-base py-2"
+                >
+                  ← Back to venues in {listing.city}
+                </Link>
+                <span className="text-zinc-500 hidden sm:inline">•</span>
+              </>
+            )}
             <Link
               href="/listings"
               className="text-orange-500 hover:text-orange-600 underline text-sm sm:text-base py-2"
             >
-              Browse All Rage Rooms
+              Browse All Venues
             </Link>
             <span className="text-zinc-500 hidden sm:inline">•</span>
             <Link
@@ -964,7 +946,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
             >
               Find venues near a postcode
             </Link>
-            {(CITY_PRICE_PAGE_CITIES as readonly string[]).includes(listing.city) && (
+            {hasRageRoom && (CITY_PRICE_PAGE_CITIES as readonly string[]).includes(listing.city) && (
               <>
                 <span className="text-zinc-500 hidden sm:inline">•</span>
                 <Link
@@ -989,8 +971,8 @@ export default async function ListingPage({ params }: ListingPageProps) {
           </div>
         </div>
 
-        {/* Helpful Guides */}
-        <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
+        {/* Helpful rage-room guides are relevant only when the venue offers a rage room. */}
+        {hasRageRoom && <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
           <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
             Planning Your Visit
           </h2>
@@ -1047,7 +1029,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
               </div>
             </Link>
           </div>
-        </div>
+        </div>}
 
         {/* About Section with AI Summary */}
         <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
@@ -1079,7 +1061,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
           </ul>
         </div>
 
-        {/* Why This Rage Room is Unique */}
+        {/* Verified venue differentiators */}
         <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
           <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
             Why {listing.name} is Unique
@@ -1116,7 +1098,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
         {similarListings.length > 0 && (
           <div className="mb-6 sm:mb-8">
             <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
-              Similar Rage Rooms Nearby
+              Similar Venues Nearby
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
               {similarListings.map((similarListing) => {

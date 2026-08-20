@@ -14,10 +14,10 @@ export default function VenueCompareTable({ listings }: { listings: Listing[] })
   if (listings.length < 2) return null
 
   const rows: Array<{ label: string; value: (listing: Listing) => string }> = [
-    { label: "Rage-room starting price", value: (listing) => formatListingPrice(listing) ?? "Not provided" },
+    { label: "Published starting price", value: (listing) => formatListingPrice(listing) ?? "Not provided" },
     { label: "Activities", value: (listing) => listing.activities.map(getActivityLabel).join(", ") },
     { label: "Published duration", value: (listing) => listing.sessionLengths?.length ? `${listing.sessionLengths.map((value) => `${value} min`).join(", ")}${listing.sessionDurationType ? ` (${listing.sessionDurationType.replace("-", " ")})` : ""}` : "Not provided" },
-    { label: "Rage-room minimum age", value: (listing) => listing.ageMin != null ? `${listing.ageMin}+${listing.minimumAgeNote ? ` — ${listing.minimumAgeNote}` : ""}` : "Not provided" },
+    { label: "Minimum age", value: (listing) => listing.ageMin != null ? `${listing.ageMin}+${listing.minimumAgeNote ? ` — ${listing.minimumAgeNote}` : ""}` : "Not provided" },
     { label: "Rating", value: (listing) => listing.rating != null ? `${listing.rating.toFixed(1)}${listing.reviewCount ? ` (${listing.reviewCount})` : ""}` : "Not provided" },
     { label: "Booking group size", value: (listing) => formatGroupSize(listing) ?? "Not provided" },
     { label: "Walk-ins accepted", value: (listing) => formatBoolean(listing.walkInsAccepted) },

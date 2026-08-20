@@ -21,11 +21,28 @@ import type { Listing } from "@/types/listing"
 const listings = listingsData as Listing[]
 
 describe("location discovery qualification", () => {
-  it("creates only the three editorially approved inventory-backed pages", () => {
+  it("creates only the five inventory-backed pages that now qualify", () => {
     expect(getEligibleLocationDiscoveryPages(listings).map((page) => page.href)).toEqual([
+      "/activities/paint-splatter/london",
       "/activities/rage-rooms/birmingham",
       "/activities/rage-rooms/london",
       "/occasions/birthdays/birmingham",
+      "/occasions/corporate-team-building/london",
+    ])
+  })
+
+  it("qualifies the new London paint-splatter landing from verified inventory", () => {
+    const page = getLocationDiscoveryPageData({
+      type: "activity",
+      categorySlug: "paint-splatter",
+      locationSlug: "london",
+      listings,
+    })
+    expect(page?.qualification).toBe("strong")
+    expect(page?.listings.map((listing) => listing.name).sort()).toEqual([
+      "Kedi Studio",
+      "Rage Cage UK",
+      "The Splatter Room Studio",
     ])
   })
 
@@ -43,17 +60,18 @@ describe("location discovery qualification", () => {
     )
   })
 
-  it("resolves the approved two-venue birthday page", () => {
+  it("resolves the now-strong Birmingham birthday page", () => {
     const page = getLocationDiscoveryPageData({
       type: "occasion",
       categorySlug: "birthdays",
       locationSlug: "birmingham",
       listings,
     })
-    expect(page?.qualification).toBe("approved-two-venue")
+    expect(page?.qualification).toBe("strong")
     expect(page?.listings.map((listing) => listing.name).sort()).toEqual([
       "All The Rage",
       "Rage Room Birmingham",
+      "Splash House Birmingham",
     ])
   })
 
@@ -139,11 +157,13 @@ describe("location discovery qualification", () => {
 describe("location discovery routes and metadata", () => {
   it("generates only eligible static activity and occasion params", async () => {
     expect(await generateActivityLocationParams()).toEqual([
+      { slug: "paint-splatter", location: "london" },
       { slug: "rage-rooms", location: "birmingham" },
       { slug: "rage-rooms", location: "london" },
     ])
     expect(await generateOccasionLocationParams()).toEqual([
       { slug: "birthdays", location: "birmingham" },
+      { slug: "corporate-team-building", location: "london" },
     ])
   })
 
@@ -163,7 +183,7 @@ describe("location discovery routes and metadata", () => {
     expect(occasion.alternates).toEqual({
       canonical: "/occasions/birthdays/birmingham",
     })
-    expect(occasion.description).toContain("2 verified venues")
+    expect(occasion.description).toContain("3 verified venues")
   })
 
   it("generates the four-level breadcrumb trail", () => {
@@ -199,6 +219,8 @@ describe("location discovery routes and metadata", () => {
     expect(urls.has("https://www.rageroomdirectory.co.uk/activities/rage-rooms/birmingham")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/activities/rage-rooms/london")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/occasions/birthdays/birmingham")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/activities/paint-splatter/london")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/occasions/corporate-team-building/london")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/activities/axe-throwing/birmingham")).toBe(false)
     expect(urls.has("https://www.rageroomdirectory.co.uk/activities/rage-rooms/leicester")).toBe(false)
   })

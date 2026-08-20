@@ -10,8 +10,8 @@ export function generateMetadata({
   searchParams?: Record<string, string | string[] | undefined>
 }): Metadata {
   return {
-    title: "All Rage Rooms in the UK — Complete Directory",
-    description: "Browse every rage room and smash room listed in the UK. Compare venues by city, view starting prices, read reviews, and find the right destruction therapy experience for you.",
+    title: "UK Rage Rooms & Destructive Experiences — Complete Directory",
+    description: "Browse verified UK rage rooms and closely related destructive experiences. Compare activities, cities, published prices and booking options.",
     alternates: { canonical: "/listings" },
     ...(Object.keys(searchParams).length > 0
       ? { robots: { index: false, follow: true } }
@@ -47,14 +47,14 @@ export default async function AllListingsPage() {
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "All Rage Rooms in the UK",
-    description: "Complete directory of rage rooms and smash rooms across the UK",
+    name: "UK Rage Rooms & Destructive Experiences",
+    description: "Complete verified directory of rage rooms and closely related destructive experiences across the UK",
     numberOfItems: listings.length,
     itemListElement: listings.map((listing, index) => ({
       "@type": "ListItem",
       position: index + 1,
       item: {
-        "@type": "LocalBusiness",
+        "@type": listing.locationType === "mobile-service" ? "Organization" : "LocalBusiness",
         name: listing.name,
         url: listingUrl(listing.slug || listing.id),
       },
@@ -70,15 +70,14 @@ export default async function AllListingsPage() {
         />
 
         <h1 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 text-white">
-          All Rage Rooms in the UK
+          UK Rage Rooms & Destructive Experiences
         </h1>
 
         <div className="text-base sm:text-lg text-zinc-300 mb-6 space-y-3">
           <p>
-            This is the complete RageRoom Directory — every rage room, smash room, and destruction
-            therapy venue we've found operating across the UK, all in one place. Each listing
-            includes the venue's location, starting price (where available), and a link to their
-            website for booking and full details.
+            This is the complete RageRoom Directory: rage rooms remain at its core, alongside
+            verified axe throwing, paint splatter, car smash and mobile smash experiences that fit
+            the same high-energy proposition. Each activity shown on a listing is evidence-backed.
           </p>
           <p>
             We manually verify listings and update them regularly. If you spot anything out of

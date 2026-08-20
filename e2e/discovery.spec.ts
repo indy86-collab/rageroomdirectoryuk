@@ -40,7 +40,7 @@ test.describe("audited discovery routes", () => {
     await expect(page.getByLabel("Location")).toHaveValue("Maidstone")
     await expect(page.getByText("1 venue found")).toBeVisible()
     await page.getByRole("button", { name: "Reset" }).click()
-    await expect(page.getByText("43 venues found")).toBeVisible()
+    await expect(page.getByText("68 venues found")).toBeVisible()
   })
 
   test("activity and occasion pages expose canonical routes and strict inventory", async ({ page }) => {
@@ -76,13 +76,17 @@ test.describe("audited discovery routes", () => {
 
     await page.goto("/occasions/birthdays/birmingham")
     await expect(page.getByRole("heading", { level: 1, name: /birthday parties in birmingham/i })).toBeVisible()
-    await expect(page.getByText("2 suitable venues found")).toBeVisible()
+    await expect(page.getByText("3 suitable venues found")).toBeVisible()
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /\/occasions\/birthdays\/birmingham$/)
 
     expect((await request.get("/activities/axe-throwing/birmingham")).status()).toBe(404)
     expect((await request.get("/activities/rage-rooms/leicester")).status()).toBe(404)
     expect((await request.get("/occasions/not-an-occasion/birmingham")).status()).toBe(404)
     expect((await request.get("/activities/rage-rooms/not-a-location")).status()).toBe(404)
+
+    await page.goto("/activities/paint-splatter/london")
+    await expect(page.getByRole("heading", { level: 1, name: /paint & splatter rooms in london/i })).toBeVisible()
+    await expect(page.getByText("3 verified venues found")).toBeVisible()
   })
 
   test("parents, cities and matching venues link only to eligible location pages", async ({ page }) => {
@@ -92,12 +96,12 @@ test.describe("audited discovery routes", () => {
     await expect(page.locator('a[href="/activities/rage-rooms/leicester"]')).toHaveCount(0)
 
     await page.goto("/occasions/birthdays")
-    await expect(page.getByRole("link", { name: "Birmingham (2)" })).toHaveAttribute("href", "/occasions/birthdays/birmingham")
+    await expect(page.getByRole("link", { name: "Birmingham (3)" })).toHaveAttribute("href", "/occasions/birthdays/birmingham")
 
     await page.goto("/city/birmingham")
     const experiences = page.getByRole("navigation", { name: "Experiences available in Birmingham" })
     await expect(experiences.getByRole("link", { name: "Rage Room (3)" })).toHaveAttribute("href", "/activities/rage-rooms/birmingham")
-    await expect(experiences.getByRole("link", { name: "Birthdays (2)" })).toHaveAttribute("href", "/occasions/birthdays/birmingham")
+    await expect(experiences.getByRole("link", { name: "Birthdays (3)" })).toHaveAttribute("href", "/occasions/birthdays/birmingham")
 
     await page.goto("/listing/all-the-rage-birmingham")
     await expect(page.getByRole("link", { name: "Rage Room in Birmingham", exact: true })).toHaveAttribute("href", "/activities/rage-rooms/birmingham")
@@ -117,7 +121,7 @@ test.describe("audited discovery routes", () => {
     await expect(page).toHaveURL(/activities=rage-room%2Caxe-throwing|activities=axe-throwing/)
 
     await page.getByRole("button", { name: "Reset" }).click()
-    await expect(page.getByText("43 verified venues found")).toBeVisible()
+    await expect(page.getByText("46 verified venues found")).toBeVisible()
   })
 
   test("booking CTA uses verified links and otherwise falls back to venue details", async ({ page }) => {
@@ -157,25 +161,45 @@ test.describe("audited discovery routes", () => {
     await expect(page.getByRole("link", { name: /date-night discovery page/i })).toHaveAttribute("href", "/occasions/date-night")
   })
 
-  test("filters combine with AND semantics and reset to all 43 venues", async ({ page }) => {
+  test("filters combine with AND semantics and reset to the complete inventory", async ({ page }) => {
     await page.goto("/listings")
-    await expect(page.getByText("43 venues found")).toBeVisible()
+    await expect(page.getByText("68 venues found")).toBeVisible()
     await openFilters(page)
 
     await page.getByRole("checkbox", { name: "Axe Throwing", exact: true }).check()
     const axeCount = Number((await page.getByText(/venues? found/).textContent())?.match(/\d+/)?.[0])
     expect(axeCount).toBeGreaterThan(0)
-    expect(axeCount).toBeLessThan(43)
+    expect(axeCount).toBe(29)
 
     await page.getByRole("checkbox", { name: "Rage Room", exact: true }).check()
-    await expect(page.getByText(`${axeCount} venues found`)).toBeVisible()
+    await expect(page.getByText("14 venues found")).toBeVisible()
 
     await page.getByLabel("Max per-person price").fill("25")
     const constrainedCount = Number((await page.getByText(/venues? found/).textContent())?.match(/\d+/)?.[0])
-    expect(constrainedCount).toBeLessThanOrEqual(axeCount)
+    expect(constrainedCount).toBeLessThanOrEqual(14)
 
     await page.getByRole("button", { name: "Reset" }).click()
-    await expect(page.getByText("43 venues found")).toBeVisible()
+    await expect(page.getByText("68 venues found")).toBeVisible()
+  })
+
+  test("standalone and mobile detail pages use truthful terminology and schema", async ({ page }) => {
+    await page.goto("/listing/just-axing-swansea")
+    await expect(page.getByRole("heading", { level: 1, name: "Just Axing Swansea" })).toBeVisible()
+    await expect(page.getByRole("region", { name: "Activities Available" }).getByRole("link", { name: "Axe Throwing" })).toBeVisible()
+    await expect(page.getByText(/this rage room offers/i)).toHaveCount(0)
+    await expect(page.getByRole("heading", { name: /first rage room visit/i })).toHaveCount(0)
+    await expect(page.getByRole("heading", { name: /build your smash day/i })).toHaveCount(0)
+    const fixedSchema = await page.locator('script[type="application/ld+json"]').allTextContents()
+    expect(fixedSchema.join(" ")).toContain("LocalBusiness")
+    expect(fixedSchema.join(" ")).toContain("SA7 9AG")
+
+    await page.goto("/listing/rage-room-events-mobile-uk")
+    await expect(page.getByRole("heading", { level: 1, name: "Rage Room Events" })).toBeVisible()
+    const mobileSchema = await page.locator('script[type="application/ld+json"]').allTextContents()
+    const businessSchema = mobileSchema.find((schema) => schema.includes('"@id":"https://www.rageroomdirectory.co.uk/listing/rage-room-events-mobile-uk#localbusiness"')) || ""
+    expect(businessSchema).toContain('"@type":"Organization"')
+    expect(businessSchema).toContain('"areaServed"')
+    expect(businessSchema).not.toContain('"address"')
   })
 
   test("comparison is unique, capped at three, and distinguishes false from unknown", async ({ page }) => {

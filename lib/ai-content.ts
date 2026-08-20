@@ -1,5 +1,11 @@
 import type { Listing } from "@/types/listing"
-import { formatListingPrice, getActivityLabel } from "@/lib/discovery"
+import {
+  formatListingPrice,
+  getActivityLabel,
+  getListingExperienceLabel,
+  getListingExperienceSummary,
+  listingHasRageRoom,
+} from "@/lib/discovery"
 
 interface ListingContent {
   summary: string
@@ -56,19 +62,21 @@ function generateSummary(
   const hasDescription = description.length > 50
   const priceInfo = price ? ` with a published starting price of ${price}` : ""
   const regionInfo = region ? ` in the ${region} region` : ""
+  const experienceLabel = getListingExperienceLabel(listing).toLowerCase()
+  const experiences = getListingExperienceSummary(listing)
 
   if (hasDescription) {
     const cleanDesc = description.substring(0, 250).trim()
     const ellipsis = description.length > 250 ? "..." : ""
-    return `${name} is a rage room venue located in ${city}${regionInfo}. ${cleanDesc}${ellipsis} The venue offers destruction therapy sessions${priceInfo}, providing visitors with an outlet for stress relief in a supervised setting.`
+    return `${name} is a verified ${experienceLabel} venue in ${city}${regionInfo}. ${cleanDesc}${ellipsis} Its confirmed activities are ${experiences}${priceInfo}.`
   }
 
   const variant = hashCode(name) % 4
   const summaries = [
-    `${name} is a rage room experience based in ${city}${regionInfo}${priceInfo}. The venue provides destruction sessions where visitors can break items in a controlled environment.`,
-    `Located in ${city}${regionInfo}, ${name} offers rage room sessions${priceInfo}. Check the venue's published rules and package details before booking.`,
-    `${name} brings the rage room concept to ${city}${regionInfo}. During a session${priceInfo}, participants suit up in protective gear and use tools to destroy everyday objects like crockery, glass, and electronics. Staff supervise throughout to ensure the experience is both safe and satisfying.`,
-    `Based in ${city}${regionInfo}, ${name} runs destruction therapy sessions${priceInfo} in a purpose-built rage room. Visitors choose from smashing tools, are kitted out with full safety gear, and spend their session breaking items as a form of stress relief and entertainment.`,
+    `${name} is a verified ${experienceLabel} experience based in ${city}${regionInfo}${priceInfo}. Confirmed activities include ${experiences}.`,
+    `Located in ${city}${regionInfo}, ${name} offers ${experiences}${priceInfo}. Check the venue's published rules and package details before booking.`,
+    `${name} brings ${experienceLabel} sessions to ${city}${regionInfo}${priceInfo}. The directory only shows activities confirmed in current venue information.`,
+    `Based in ${city}${regionInfo}, ${name} runs bookable ${experienceLabel} sessions${priceInfo}. Check activity-specific safety and age rules before visiting.`,
   ]
   return summaries[variant]
 }
@@ -99,7 +107,7 @@ function generateHighlights(
   }
 
   if (verified) {
-    highlights.push(`This venue has been verified by the RageRoom Directory team as an active, operating rage room`)
+    highlights.push(`This listing has been checked by the RageRoom Directory team against current official venue information`)
   }
 
   if (listing.corporatePackages === true) {
@@ -115,7 +123,7 @@ function generateHighlights(
   }
 
   if (listing.activities.length > 1) {
-    highlights.push(`Also publishes: ${listing.activities.slice(1).map(getActivityLabel).join(", ")}`)
+    highlights.push(`Confirmed activities: ${listing.activities.map(getActivityLabel).join(", ")}`)
   }
 
   if (listing.onlineBooking === true) {
@@ -148,10 +156,11 @@ function generateUniquePoints(
     }
   }
 
+  const experienceLabel = getListingExperienceLabel(listing).toLowerCase()
   if (numSimilar === 0) {
-    points.push(`One of the few rage room options in the ${city} area, serving local demand for destruction therapy`)
+    points.push(`One of the few verified ${experienceLabel} options currently listed in the ${city} area`)
   } else if (numSimilar <= 2) {
-    points.push(`One of a small number of rage rooms operating in ${city}, giving visitors limited but focused options to choose from`)
+    points.push(`One of a small number of comparable ${experienceLabel} venues currently listed in ${city}`)
   }
 
   if (listing.activities.includes("vr")) {
@@ -178,7 +187,7 @@ function generateUniquePoints(
   }
 
   if (points.length < 3) {
-    points.push(`Located in ${city}, providing a local option for destruction therapy without having to travel far`)
+    points.push(`Located in ${city}, providing a verified local option for ${experienceLabel}`)
   }
 
   return points.slice(0, 5)
@@ -197,17 +206,19 @@ export function generateListingFAQs(
   const city = listing.city
   const name = listing.name
   const numSimilar = similarListings.length
+  const experienceLabel = getListingExperienceLabel(listing)
+  const activitySummary = getListingExperienceSummary(listing)
 
   faqs.push({
     question: `What is ${name}?`,
-    answer: `${name} is a rage room venue located in ${city}${listing.region ? `, ${listing.region}` : ""}. ${listing.description}`,
+    answer: `${name} is a verified ${experienceLabel.toLowerCase()} venue${listing.locationType === "mobile-service" ? " serving " : " located in "}${city}${listing.region ? `, ${listing.region}` : ""}. Its confirmed activities are ${activitySummary}. ${listing.description}`,
   })
 
   const formattedPrice = formatListingPrice(listing)
   if (formattedPrice) {
     faqs.push({
       question: `How much does ${name} cost?`,
-      answer: `${name} has a published rage-room starting price of ${formattedPrice.replace(/^From /, "")}.${listing.priceNote ? ` ${listing.priceNote}` : ""} Check the venue's website before booking because prices can change.`,
+      answer: `${name} has a published starting price of ${formattedPrice.replace(/^From /, "")}.${listing.priceNote ? ` ${listing.priceNote}` : ""} Check the venue's website before booking because prices can change.`,
     })
   } else {
     faqs.push({
@@ -242,17 +253,17 @@ export function generateListingFAQs(
     const nearest = similarListings[0]
     const nearestPrice = formatListingPrice(nearest)
     const nearestInfo = nearest.city === city
-      ? `Other rage rooms in ${city} include ${nearest.name}${nearestPrice ? ` (${nearestPrice.toLowerCase()})` : ""}.`
+      ? `Other comparable venues in ${city} include ${nearest.name}${nearestPrice ? ` (${nearestPrice.toLowerCase()})` : ""}.`
       : `A nearby alternative is ${nearest.name} in ${nearest.city}${nearestPrice ? ` (${nearestPrice.toLowerCase()})` : ""}.`
 
     faqs.push({
-      question: `Are there other rage rooms near ${name}?`,
-      answer: `Yes, there are ${numSimilar} other rage room${numSimilar === 1 ? "" : "s"} listed in our directory near ${city}. ${nearestInfo} Browse our ${city} listings to compare venues, prices, and features before booking.`,
+      question: `Are there similar venues near ${name}?`,
+      answer: `Yes, there ${numSimilar === 1 ? "is" : "are"} ${numSimilar} other comparable ${numSimilar === 1 ? "venue" : "venues"} listed near ${city}. ${nearestInfo} Browse the directory to compare activities, prices and booking details.`,
     })
   } else {
     faqs.push({
-      question: `Are there other rage rooms near ${name}?`,
-      answer: `${name} is currently one of the few rage room options in the ${city} area. If you're willing to travel, check our full UK directory to find venues in neighbouring cities.`,
+      question: `Are there similar venues near ${name}?`,
+      answer: `${name} is currently one of the few comparable ${experienceLabel.toLowerCase()} options listed in the ${city} area. Check the full UK directory for venues in neighbouring cities.`,
     })
   }
 
@@ -263,7 +274,7 @@ export function generateListingFAQs(
     })
   }
 
-  if (listing.activities.length > 1) {
+  if (listing.activities.length > 1 && listingHasRageRoom(listing)) {
     faqs.push({
       question: `Does ${name} offer activities other than rage rooms?`,
       answer: `${name} also lists ${listing.activities.slice(1).map(getActivityLabel).join(", ")}. Check the venue's branch-specific booking page for current availability and age rules.`,
@@ -280,7 +291,7 @@ function generateNearbyRecommendations(
 ): string[] {
   if (similarListings.length === 0) {
     return [
-      `${city} currently has limited rage room options. Browse our full UK directory to find venues in neighbouring cities.`,
+      `${city} currently has limited comparable inventory. Browse the full UK directory to find venues in neighbouring cities.`,
     ]
   }
 
@@ -293,7 +304,7 @@ function generateNearbyRecommendations(
     const sameCity = similar.city === city
     if (sameCity) {
       recommendations.push(
-        `${similar.name}${priceInfo} — another rage room in ${city} worth comparing for pricing and packages`
+        `${similar.name}${priceInfo} — another venue in ${city} worth comparing for activities, pricing and packages`
       )
     } else {
       recommendations.push(
@@ -304,7 +315,7 @@ function generateNearbyRecommendations(
 
   if (similarListings.length > 3) {
     recommendations.push(
-      `There are ${similarListings.length} other rage rooms near ${city} — browse our directory to compare all options`
+      `There are ${similarListings.length} other comparable venues near ${city} — browse the directory to compare all options`
     )
   }
 

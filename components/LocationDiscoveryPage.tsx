@@ -65,7 +65,7 @@ export default function LocationDiscoveryPage({
             {page.type === "activity"
               ? activity?.value === "rage-room"
                 ? `Explore ${pluraliseVenue(page.listings.length)} whose structured location places them in ${page.location.name}. Compare rage-room prices, age guidance, other activities and booking options.`
-                : `Explore ${pluraliseVenue(page.listings.length)} offering ${activity?.shortLabel.toLowerCase()} alongside a verified rage-room experience in ${page.location.name}.`
+                : `Explore ${pluraliseVenue(page.listings.length)} offering verified ${activity?.shortLabel.toLowerCase()} experiences in ${page.location.name}.`
               : `Explore ${pluraliseVenue(page.listings.length)} with evidence-backed suitability for ${occasion?.shortLabel.toLowerCase()} in ${page.location.name}.`}
           </p>
           {page.location.matchMode === "city-or-region" && (
@@ -127,7 +127,7 @@ export default function LocationDiscoveryPage({
             <h2 className="mt-3 text-lg font-bold text-white">Published pricing</h2>
             <p className="mt-2 text-sm leading-relaxed text-zinc-400">
               {priceRange
-                ? `${priceRange.count} ${priceRange.count === 1 ? "listing has" : "listings have"} a characterised per-person rage-room price, ranging from ${formatPriceAmount(priceRange.minimum)} to ${formatPriceAmount(priceRange.maximum)}. Card prices retain the venue's published unit.`
+                ? `${priceRange.count} ${priceRange.count === 1 ? "listing has" : "listings have"} a characterised per-person starting price, ranging from ${formatPriceAmount(priceRange.minimum)} to ${formatPriceAmount(priceRange.maximum)}. Card prices retain the venue's published unit.`
                 : "No matching listing currently has a characterised per-person starting price. Check each venue for its current group or room total."}
             </p>
           </div>
@@ -168,7 +168,7 @@ export default function LocationDiscoveryPage({
               href={`/city/${page.location.slug}`}
               className="inline-flex min-h-11 items-center rounded-md border border-zinc-700 px-4 py-2 text-sm font-semibold text-zinc-300 hover:border-rage-500/50 hover:text-rage-300"
             >
-              Rage rooms in {page.location.name}
+              Venues in {page.location.name}
             </Link>
             {relatedPages.slice(0, 4).map((related) => (
               <TrackedDiscoveryLink

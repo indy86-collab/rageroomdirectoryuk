@@ -18,11 +18,12 @@ import {
   LISTING_ACTIVITIES,
   LISTING_DURATION_TYPES,
   LISTING_FEATURES,
+  LISTING_LOCATION_TYPES,
   LISTING_OCCASIONS,
   LISTING_PRICE_UNITS,
 } from "../types/listing"
 
-const REQUIRED = ["id", "name", "description", "city", "postcode", "slug"] as const
+const REQUIRED = ["id", "name", "description", "city", "slug"] as const
 
 function main() {
   const path = join(process.cwd(), "data", "listings.json")
@@ -72,6 +73,23 @@ function main() {
     }
     if (l.location?.lng != null && typeof l.location.lng !== "number") {
       console.error(`❌ ${prefix}: location.lng must be a number or null`)
+      errors++
+    }
+
+    const locationType = l.locationType ?? "fixed-venue"
+    if (!LISTING_LOCATION_TYPES.includes(locationType)) {
+      console.error(`❌ ${prefix}: unsupported locationType`)
+      errors++
+    }
+    if (locationType === "fixed-venue" && !l.postcode?.trim()) {
+      console.error(`❌ ${prefix}: fixed venues require a postcode`)
+      errors++
+    }
+    if (
+      locationType === "mobile-service" &&
+      (!Array.isArray(l.serviceAreas) || l.serviceAreas.length === 0)
+    ) {
+      console.error(`❌ ${prefix}: mobile services require at least one service area`)
       errors++
     }
 
@@ -139,8 +157,8 @@ function main() {
       console.error(`❌ ${prefix}: contains an unsupported feature value`)
       errors++
     }
-    if (!Array.isArray(l.activities) || !l.activities.includes("rage-room")) {
-      console.error(`❌ ${prefix}: activities must include rage-room`)
+    if (!Array.isArray(l.activities) || l.activities.length === 0) {
+      console.error(`❌ ${prefix}: activities must contain at least one supported activity`)
       errors++
     } else if (l.activities.some((activity) => !LISTING_ACTIVITIES.includes(activity))) {
       console.error(`❌ ${prefix}: contains an unsupported activity value`)

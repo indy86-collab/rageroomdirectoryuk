@@ -35,9 +35,9 @@ describe("discovery inventory", () => {
     }
 
     expect(params.has("axe-throwing")).toBe(true)
-    expect(params.has("car-smash")).toBe(false)
-    expect(params.has("archery")).toBe(false)
-    expect(params.has("mobile-rage-rooms")).toBe(false)
+    expect(params.has("car-smash")).toBe(true)
+    expect(params.has("archery")).toBe(true)
+    expect(params.has("mobile-rage-rooms")).toBe(true)
   })
 
   it("keeps occasion pages tied to evidence-backed inventory", async () => {
@@ -57,6 +57,8 @@ describe("discovery inventory", () => {
       ["rage-room", "axe-throwing"].every((activity) => listing.activities.includes(activity as never))
     )
     expect(matches.length).toBe(14)
+
+    expect(listings.filter((listing) => listing.activities.includes("axe-throwing"))).toHaveLength(29)
   })
 })
 
@@ -86,7 +88,9 @@ describe("discovery indexability", () => {
   it("keeps sparse activity pages out of the sitemap", async () => {
     const urls = new Set((await sitemap()).map((entry) => entry.url))
     expect(urls.has("https://www.rageroomdirectory.co.uk/activities/axe-throwing")).toBe(true)
-    expect(urls.has("https://www.rageroomdirectory.co.uk/activities/car-smash")).toBe(false)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/activities/car-smash")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/activities/mobile-rage-rooms")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/listing/just-axing-swansea")).toBe(true)
   })
 })
 

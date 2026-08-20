@@ -19,14 +19,15 @@ export async function generateMetadata({
   const { getListingsByRegion } = await import("@/lib/listings")
   const listings = await getListingsByRegion(regionName)
   const count = listings.length
+  const rageRoomCount = listings.filter((listing) => listing.activities.includes("rage-room")).length
   
   return {
-    title: `Rage Rooms in ${regionName} — ${count} ${count === 1 ? "Venue" : "Venues"} | Rage Room Directory UK`,
-    description: `Find rage rooms in ${regionName}. Browse ${count} ${count === 1 ? "venue" : "venues"}, compare prices and reviews, and book a destruction therapy session in the ${regionName} area.`,
+    title: `Rage Rooms & Destructive Experiences in ${regionName} — ${count} ${count === 1 ? "Venue" : "Venues"}`,
+    description: `Browse ${count} verified ${count === 1 ? "venue" : "venues"} in ${regionName}${rageRoomCount ? `, including ${rageRoomCount} ${rageRoomCount === 1 ? "rage room" : "rage rooms"}` : ""}. Compare activities, prices and booking options.`,
     alternates: { canonical: `/region/${params.slug}` },
     openGraph: {
-      title: `Rage Rooms in ${regionName} | Rage Room Directory UK`,
-      description: `Discover ${count} rage ${count === 1 ? "room" : "rooms"} in ${regionName}. Compare venues, prices, and reviews.`,
+      title: `Rage Rooms & Destructive Experiences in ${regionName}`,
+      description: `Discover ${count} verified ${count === 1 ? "venue" : "venues"} in ${regionName}. Compare activities and prices.`,
       type: "website",
     },
   }
@@ -52,6 +53,8 @@ export default async function RegionPage({ params }: RegionPageProps) {
   }
 
   const regionContent = getRegionContent(regionName) || getGenericRegionContent(regionName, listings.length)
+  const hasStandaloneVenue = listings.some((listing) => !listing.activities.includes("rage-room"))
+  const hasRageRoom = listings.some((listing) => listing.activities.includes("rage-room"))
 
   const citiesInRegion = [...new Set(listings.map(l => l.city))].sort()
 
@@ -62,14 +65,14 @@ export default async function RegionPage({ params }: RegionPageProps) {
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: `Rage Rooms in ${regionName}`,
-    description: `Directory of rage rooms in the ${regionName} region of the UK`,
+    name: `Rage Rooms & Destructive Experiences in ${regionName}`,
+    description: `Verified directory of rage rooms and closely related destructive experiences in ${regionName}`,
     numberOfItems: listings.length,
     itemListElement: listings.map((listing, index) => ({
       "@type": "ListItem",
       position: index + 1,
       item: {
-        "@type": "LocalBusiness",
+        "@type": listing.locationType === "mobile-service" ? "Organization" : "LocalBusiness",
         name: listing.name,
         url: listingUrl(listing.slug || listing.id),
       },
@@ -82,7 +85,7 @@ export default async function RegionPage({ params }: RegionPageProps) {
         <Breadcrumbs
           items={[
             { label: "Home", href: "/" },
-            { label: "All Rage Rooms", href: "/listings" },
+            { label: "All Venues", href: "/listings" },
             { label: regionName },
           ]}
         />
@@ -93,12 +96,15 @@ export default async function RegionPage({ params }: RegionPageProps) {
         />
 
         <h1 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 text-white">
-          Rage Rooms in {regionName}
+          Rage Rooms & Destructive Experiences in {regionName}
         </h1>
 
         <div className="text-base sm:text-lg text-zinc-300 mb-6 space-y-3">
-          <p>{regionContent.description}</p>
-          <p>{regionContent.coverageNote}</p>
+          {hasStandaloneVenue ? (
+            <p>Browse verified rage rooms and closely related destructive or adrenaline experiences across {regionName}. Standalone activity specialists are included only when their published offering matches a supported category.</p>
+          ) : (
+            <><p>{regionContent.description}</p><p>{regionContent.coverageNote}</p></>
+          )}
         </div>
 
         {/* Stats bar */}
@@ -129,7 +135,7 @@ export default async function RegionPage({ params }: RegionPageProps) {
         {citiesInRegion.length > 1 && (
           <div className="mb-6">
             <h2 className="text-lg font-bold text-white mb-3">
-              Cities in {regionName} with Rage Rooms
+              Cities in {regionName} with Verified Venues
             </h2>
             <div className="flex flex-wrap gap-2">
               {citiesInRegion.map(city => (
@@ -145,7 +151,7 @@ export default async function RegionPage({ params }: RegionPageProps) {
           </div>
         )}
 
-        <section aria-label={`Rage rooms in ${regionName}`}>
+        <section aria-label={`Verified venues in ${regionName}`}>
           <ListingsGrid listings={listings} />
         </section>
 
@@ -155,22 +161,26 @@ export default async function RegionPage({ params }: RegionPageProps) {
             href="/listings"
             className="text-sm text-orange-500 hover:text-orange-600 underline"
           >
-            Browse All UK Rage Rooms
+            Browse All UK Venues
           </Link>
-          <span className="text-zinc-600">|</span>
-          <Link
-            href="/guides/how-much-do-rage-rooms-cost-uk"
-            className="text-sm text-orange-500 hover:text-orange-600 underline"
-          >
-            UK Pricing Guide
-          </Link>
-          <span className="text-zinc-600">|</span>
-          <Link
-            href="/guides/are-rage-rooms-safe-uk"
-            className="text-sm text-orange-500 hover:text-orange-600 underline"
-          >
-            Safety Guide
-          </Link>
+          {hasRageRoom && (
+            <>
+              <span className="text-zinc-600">|</span>
+              <Link
+                href="/guides/how-much-do-rage-rooms-cost-uk"
+                className="text-sm text-orange-500 hover:text-orange-600 underline"
+              >
+                Rage Room Pricing Guide
+              </Link>
+              <span className="text-zinc-600">|</span>
+              <Link
+                href="/guides/are-rage-rooms-safe-uk"
+                className="text-sm text-orange-500 hover:text-orange-600 underline"
+              >
+                Rage Room Safety Guide
+              </Link>
+            </>
+          )}
         </div>
 
         <div className="mt-8">
