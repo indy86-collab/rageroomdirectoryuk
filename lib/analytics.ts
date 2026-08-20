@@ -36,6 +36,7 @@ export const DIRECTORY_CTA_PLACEMENTS = [
   "venue_booking_section",
   "venue_pricing",
   "venue_contact",
+  "venue_sticky",
   "comparison_table",
   "activity_results",
   "occasion_results",

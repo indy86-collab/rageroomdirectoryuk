@@ -83,13 +83,13 @@ export default function DigitalGuidesChooser({
                 href={`/digital-downloads/${product.slug}`}
                 product={analyticsProduct}
                 listName="Digital Guides Chooser"
-                className={`block rounded-md border px-3 py-3 transition-colors ${
+                className={`flex min-h-14 items-start justify-between gap-2 rounded-md border px-3 py-3 transition-colors ${
                   isHighlight
                     ? "border-zinc-600 bg-zinc-900/80"
                     : "border-zinc-800 bg-transparent hover:border-zinc-700 hover:bg-zinc-900/40"
                 }`}
               >
-                <span className="flex items-start justify-between gap-2">
+                <span className="flex w-full items-start justify-between gap-2">
                   <span>
                     <span className="block text-sm font-semibold text-zinc-100">
                       {intent.label}

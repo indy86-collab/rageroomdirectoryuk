@@ -19,6 +19,7 @@ import LazyMapEmbed from "@/components/LazyMapEmbed"
 import DigitalGuidesChooser from "@/components/DigitalGuidesChooser"
 import RageResetCTA from "@/components/RageResetCTA"
 import ListingMediaGallery from "@/components/ListingMediaGallery"
+import ListingStickyBookingBar from "@/components/ListingStickyBookingBar"
 import FeaturedVenueBadge from "@/components/FeaturedVenueBadge"
 import ListingLeadCapture from "@/components/ListingLeadCapture"
 import PageLevelAds from "@/components/PageLevelAds"
@@ -497,14 +498,14 @@ export default async function ListingPage({ params }: ListingPageProps) {
                   <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2 break-words">
                     {listing.name}
                   </h1>
-                  <div className="flex items-center gap-3 mb-2">
+                  <div className="mb-2 flex flex-wrap items-center gap-2">
                     {listing.verified && (
                       <span className="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-green-600 text-white">
                         Verified
                       </span>
                     )}
                     {overallRating && (
-                      <div className="flex items-center gap-2">
+                      <div className="flex min-w-0 flex-wrap items-center gap-2">
                         <div className="flex items-center">
                           {[1, 2, 3, 4, 5].map((star) => (
                             <svg
@@ -563,9 +564,16 @@ export default async function ListingPage({ params }: ListingPageProps) {
               <div className="space-y-2 mb-6">
                 {listing.phone && (
                   <div>
-                    <p className="text-white">
+                    <TrackedPhoneLink
+                      href={`tel:${listing.phone}` as `tel:${string}`}
+                      venueSlug={venueSlug}
+                      venueCity={listing.city}
+                      context={{ pageType: "venue" }}
+                      ctaPlacement="venue_contact"
+                      className="inline-flex min-h-11 items-center text-white hover:text-orange-500 transition-colors"
+                    >
                       {listing.phone}
-                    </p>
+                    </TrackedPhoneLink>
                   </div>
                 )}
                 {listing.website && (
@@ -576,7 +584,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
                       venueCity={listing.city}
                       context={{ pageType: "venue" }}
                       ctaPlacement="venue_contact"
-                      className="text-white hover:text-orange-500 transition-colors"
+                      className="inline-flex min-h-11 max-w-full items-center break-all text-white hover:text-orange-500 transition-colors"
                     >
                       {listing.website.replace(/^https?:\/\//, "")}
                     </TrackedWebsiteLink>
@@ -728,7 +736,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
                 venueCity={listing.city}
                 context={{ pageType: "venue" }}
                 ctaPlacement="venue_pricing"
-                className="inline-flex items-center px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors"
+                className="inline-flex items-center px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors min-h-11"
               >
                 View Full Pricing on Their Website →
               </TrackedBookingLink>
@@ -814,19 +822,19 @@ export default async function ListingPage({ params }: ListingPageProps) {
                   venueCity={listing.city}
                   context={{ pageType: "venue" }}
                   ctaPlacement="venue_booking_section"
-                  className="inline-flex items-center justify-center px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors text-sm font-semibold"
+                  className="inline-flex items-center justify-center px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors text-sm font-semibold min-h-11"
                 >
                   Visit Website for Hours & Booking
                 </TrackedBookingLink>
               )}
               {listing.phone && (
                 <TrackedPhoneLink
-                  href={`tel:${listing.phone}`}
+                  href={`tel:${listing.phone}` as `tel:${string}`}
                   venueSlug={venueSlug}
                   venueCity={listing.city}
                   context={{ pageType: "venue" }}
                   ctaPlacement="venue_contact"
-                  className="inline-flex items-center justify-center px-4 py-2 bg-zinc-700 text-white rounded-md hover:bg-zinc-600 transition-colors text-sm font-semibold"
+                  className="inline-flex items-center justify-center px-4 py-2 bg-zinc-700 text-white rounded-md hover:bg-zinc-600 transition-colors text-sm font-semibold min-h-11"
                 >
                   Call {listing.phone}
                 </TrackedPhoneLink>
@@ -1347,6 +1355,14 @@ export default async function ListingPage({ params }: ListingPageProps) {
           )}
         </section>
       </div>
+      <ListingStickyBookingBar
+        venueSlug={venueSlug}
+        venueCity={listing.city}
+        venueName={listing.name}
+        bookingUrl={primaryBookingUrl}
+        phone={listing.phone ?? null}
+        priceLabel={formattedStartingPrice}
+      />
     </div>
   )
 }

@@ -41,7 +41,7 @@ interface Coordinates {
 }
 
 const controlClass =
-  "w-full rounded-md border border-zinc-700 bg-zinc-900 px-3 py-2.5 text-sm text-white focus:border-rage-500 focus:outline-none focus:ring-1 focus:ring-rage-500"
+  "min-h-11 w-full rounded-md border border-zinc-700 bg-zinc-900 px-3 py-2.5 text-base text-white focus:border-rage-500 focus:outline-none focus:ring-1 focus:ring-rage-500"
 
 export default function ListingFilters({
   listings,
@@ -66,6 +66,7 @@ export default function ListingFilters({
   const [locationStatus, setLocationStatus] = useState<"idle" | "loading" | "ready" | "error">("idle")
   const [sortBy, setSortBy] = useState<ListingSortOption>("newest")
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  const [resultCount, setResultCount] = useState(listings.length)
 
   const trackFilterChange = (
     filterType: DirectoryFilterType,
@@ -201,6 +202,7 @@ export default function ListingFilters({
     )
 
     onFiltered(filtered)
+    setResultCount(filtered.length)
   }, [
     activities,
     city,
@@ -289,17 +291,30 @@ export default function ListingFilters({
     setSortBy("newest")
   }
 
+  const activeFilterCount =
+    activities.length +
+    occasions.length +
+    [city, maxPrice, visitorAge, groupSize, minimumRating, distanceMiles].filter(Boolean).length +
+    [onlineBookingOnly, corporateOnly, verifiedOnly].filter(Boolean).length
+
   return (
-    <aside className="mb-8 rounded-lg border border-zinc-800 bg-[#181818] p-4 sm:p-5" aria-label="Venue filters">
+    <aside className="mb-6 rounded-lg border border-zinc-800 bg-[#181818] p-4 sm:p-5 lg:sticky lg:top-24 lg:mb-8 lg:max-h-[calc(100dvh-7rem)] lg:overflow-y-auto" aria-label="Venue filters">
       <div className="flex items-center justify-between gap-3">
         <button
           type="button"
           onClick={() => setMobileFiltersOpen((open) => !open)}
           className="flex min-h-11 flex-1 items-center gap-2 text-left text-lg font-bold text-white lg:pointer-events-none"
+          aria-label="Filter venues"
           aria-expanded={mobileFiltersOpen}
+          aria-controls="venue-filter-panel"
         >
           <SlidersHorizontal className="h-5 w-5 text-rage-500" />
           Filter venues
+          {activeFilterCount > 0 && (
+            <span className="inline-flex min-h-6 min-w-6 items-center justify-center rounded-full bg-rage-500 px-1.5 text-xs font-bold text-white">
+              {activeFilterCount}
+            </span>
+          )}
           <ChevronDown className={`ml-auto h-4 w-4 transition-transform lg:hidden ${mobileFiltersOpen ? "rotate-180" : ""}`} />
         </button>
         <button type="button" onClick={reset} className="min-h-11 text-xs font-bold uppercase tracking-wider text-rage-400 hover:text-rage-300">
@@ -307,7 +322,8 @@ export default function ListingFilters({
         </button>
       </div>
 
-      <div className={`${mobileFiltersOpen ? "block" : "hidden"} mt-5 space-y-6 lg:block`}>
+      <div id="venue-filter-panel" className={`${mobileFiltersOpen ? "block" : "hidden"} mt-5 lg:block`}>
+        <div className="max-h-[65vh] space-y-6 overflow-y-auto pr-1 lg:max-h-none lg:overflow-visible lg:pr-0">
         {showActivities && <fieldset>
           <legend className="mb-2 text-sm font-bold text-white">Activities</legend>
           <p className="mb-3 text-xs text-zinc-500">Select more than one to find venue combinations.</p>
@@ -315,12 +331,12 @@ export default function ListingFilters({
             {ACTIVITY_DEFINITIONS.filter((activity) =>
               listings.some((listing) => listing.activities.includes(activity.value))
             ).map((activity) => (
-              <label key={activity.value} className="flex cursor-pointer items-center gap-2 text-sm text-zinc-300">
+              <label key={activity.value} className="flex min-h-11 cursor-pointer items-center gap-2 text-sm text-zinc-300">
                 <input
                   type="checkbox"
                   checked={activities.includes(activity.value)}
                   onChange={() => toggleActivity(activity.value)}
-                  className="h-4 w-4 rounded border-zinc-600 bg-zinc-900 text-rage-500 focus:ring-rage-500"
+                  className="h-5 w-5 rounded border-zinc-600 bg-zinc-900 text-rage-500 focus:ring-rage-500"
                 />
                 <span aria-hidden="true">{activity.emoji}</span>
                 {activity.shortLabel}
@@ -343,12 +359,12 @@ export default function ListingFilters({
                     emoji: definition.emoji,
                   }))
             ).map((occasion) => (
-              <label key={occasion.value} className="flex cursor-pointer items-center gap-2 text-sm text-zinc-300">
+              <label key={occasion.value} className="flex min-h-11 cursor-pointer items-center gap-2 text-sm text-zinc-300">
                 <input
                   type="checkbox"
                   checked={occasions.includes(occasion.value)}
                   onChange={() => toggleOccasion(occasion.value)}
-                  className="h-4 w-4 rounded border-zinc-600 bg-zinc-900 text-rage-500 focus:ring-rage-500"
+                  className="h-5 w-5 rounded border-zinc-600 bg-zinc-900 text-rage-500 focus:ring-rage-500"
                 />
                 <span aria-hidden="true">{occasion.emoji}</span>
                 {occasion.label}
@@ -377,7 +393,7 @@ export default function ListingFilters({
         <div>
           <div className="mb-2 flex items-center justify-between gap-2">
             <label htmlFor="filter-distance" className="text-sm font-bold text-white">Distance</label>
-            <button type="button" onClick={requestLocation} className="inline-flex items-center gap-1 text-xs font-semibold text-rage-400 hover:text-rage-300">
+            <button type="button" onClick={requestLocation} className="inline-flex min-h-11 items-center gap-1 text-xs font-semibold text-rage-400 hover:text-rage-300">
               <LocateFixed className="h-3.5 w-3.5" />
               {locationStatus === "loading" ? "Locating…" : locationStatus === "ready" ? "Location set" : "Use my location"}
             </button>
@@ -434,11 +450,11 @@ export default function ListingFilters({
             { label: "Corporate packages", checked: corporateOnly, change: setCorporateOnly, filterType: "corporate" as const },
             { label: "Verified venues only", checked: verifiedOnly, change: setVerifiedOnly, filterType: "verified" as const },
           ].map((option) => (
-            <label key={option.label} className="flex cursor-pointer items-center gap-2 text-sm text-zinc-300">
+            <label key={option.label} className="flex min-h-11 cursor-pointer items-center gap-2 text-sm text-zinc-300">
               <input type="checkbox" checked={option.checked} onChange={(event) => {
                 trackFilterChange(option.filterType, "true", event.target.checked ? "add" : "remove")
                 option.change(event.target.checked)
-              }} className="h-4 w-4 rounded border-zinc-600 bg-zinc-900 text-rage-500 focus:ring-rage-500" />
+              }} className="h-5 w-5 rounded border-zinc-600 bg-zinc-900 text-rage-500 focus:ring-rage-500" />
               {option.label}
             </label>
           ))}
@@ -459,6 +475,17 @@ export default function ListingFilters({
             <option value="name">Name: A to Z</option>
           </select>
         </div>
+        </div>
+        <button
+          type="button"
+          onClick={() => {
+            setMobileFiltersOpen(false)
+            document.getElementById("venues")?.scrollIntoView({ behavior: "smooth", block: "start" })
+          }}
+          className="mt-4 inline-flex min-h-12 w-full items-center justify-center rounded-md bg-rage-500 px-4 text-sm font-bold uppercase tracking-wider text-white hover:bg-rage-600 lg:hidden"
+        >
+          See {resultCount} {resultCount === 1 ? "venue" : "venues"}
+        </button>
       </div>
     </aside>
   )

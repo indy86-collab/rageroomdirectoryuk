@@ -119,7 +119,7 @@ export default async function AllListingsPage() {
                 <Link
                   key={city}
                   href={`/city/${cityToSlug(city)}`}
-                  className="px-3 py-1.5 bg-[#181818] border border-zinc-700 rounded-full text-sm text-zinc-300 hover:text-orange-500 hover:border-orange-500/50 transition-colors"
+                  className="inline-flex min-h-11 items-center px-3 py-2 bg-[#181818] border border-zinc-700 rounded-full text-sm text-zinc-300 hover:text-orange-500 hover:border-orange-500/50 transition-colors"
                 >
                   {city}
                 </Link>
@@ -136,7 +136,7 @@ export default async function AllListingsPage() {
                 <Link
                   key={region}
                   href={`/region/${regionToSlug(region)}`}
-                  className="px-3 py-1.5 bg-[#181818] border border-zinc-700 rounded-full text-sm text-zinc-300 hover:text-orange-500 hover:border-orange-500/50 transition-colors"
+                  className="inline-flex min-h-11 items-center px-3 py-2 bg-[#181818] border border-zinc-700 rounded-full text-sm text-zinc-300 hover:text-orange-500 hover:border-orange-500/50 transition-colors"
                 >
                   {region} ({count})
                 </Link>

@@ -3,9 +3,37 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    overflow-x: clip;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
   body {
     font-family: var(--font-montserrat), sans-serif;
+    overflow-x: clip;
     @apply bg-dark-900 text-white antialiased;
+  }
+
+  /* Avoid 300ms tap delay and accidental double-tap zoom on controls. */
+  a,
+  button,
+  summary,
+  [role="button"],
+  input,
+  select,
+  textarea,
+  label {
+    touch-action: manipulation;
+  }
+
+  /* iOS Safari zooms the viewport when focused inputs are under 16px. */
+  @media (max-width: 640px) {
+    input,
+    select,
+    textarea {
+      font-size: 16px;
+    }
   }
 
   .font-display {

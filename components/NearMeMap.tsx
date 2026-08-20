@@ -141,12 +141,12 @@ export default function NearMeMap({ listings }: NearMeMapProps) {
             autoComplete="postal-code"
             required
             maxLength={12}
-            className="min-h-[44px] flex-1 rounded-md border border-zinc-700 bg-zinc-950 px-4 text-white placeholder:text-zinc-600 focus:border-orange-500 focus:outline-none"
+            className="min-h-12 flex-1 rounded-md border border-zinc-700 bg-zinc-950 px-4 text-base text-white placeholder:text-zinc-600 focus:border-orange-500 focus:outline-none"
           />
           <button
             type="submit"
             disabled={postcodeStatus === "loading"}
-            className="min-h-[44px] rounded-md bg-orange-500 px-5 font-semibold text-white hover:bg-orange-600 disabled:opacity-60"
+            className="min-h-12 rounded-md bg-orange-500 px-5 font-semibold text-white hover:bg-orange-600 disabled:opacity-60"
           >
             {postcodeStatus === "loading" ? "Searching…" : "Find nearest venues"}
           </button>

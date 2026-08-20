@@ -75,7 +75,7 @@ export default function ListingsPageClient({
 
   return (
     <>
-      <div id="venues" className="scroll-mt-24 grid grid-cols-1 gap-6 lg:grid-cols-4">
+      <div id="venues" className="scroll-mt-[calc(5rem+env(safe-area-inset-top))] grid grid-cols-1 gap-6 lg:grid-cols-4">
         <div className="lg:col-span-1">
           <ListingFilters
             listings={initialListings}

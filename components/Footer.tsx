@@ -67,7 +67,7 @@ export default async function Footer() {
   ]
 
   return (
-    <footer className="w-full bg-[#0a0a0a] border-t border-zinc-800/80 mt-16">
+    <footer className="mt-16 w-full border-t border-zinc-800/80 bg-[#0a0a0a] pb-[env(safe-area-inset-bottom)]">
       <div className="w-full px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10">
           <div className="lg:col-span-2">
@@ -85,7 +85,7 @@ export default async function Footer() {
                     <Link
                       key={region}
                       href={`/region/${regionToSlug(region)}`}
-                      className="text-xs text-zinc-400 hover:text-rage-500 transition-colors"
+                      className="inline-flex min-h-10 items-center text-xs text-zinc-400 hover:text-rage-500 transition-colors"
                     >
                       {region}
                     </Link>
@@ -105,7 +105,7 @@ export default async function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-zinc-400 hover:text-rage-500 transition-colors"
+                      className="inline-flex min-h-11 items-center text-sm text-zinc-400 hover:text-rage-500 transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -121,21 +121,21 @@ export default async function Footer() {
             © {currentYear} RageRoom Directory. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-zinc-500">
-            <Link href="/privacy" className="hover:text-rage-500 transition-colors">
+            <Link href="/privacy" className="inline-flex min-h-10 items-center hover:text-rage-500 transition-colors">
               Privacy
             </Link>
             <span className="text-zinc-700">·</span>
             <PrivacySettingsButton className="hover:text-rage-500 transition-colors" />
             <span className="text-zinc-700">·</span>
-            <Link href="/terms" className="hover:text-rage-500 transition-colors">
+            <Link href="/terms" className="inline-flex min-h-10 items-center hover:text-rage-500 transition-colors">
               Terms
             </Link>
             <span className="text-zinc-700">·</span>
-            <Link href="/disclaimer" className="hover:text-rage-500 transition-colors">
+            <Link href="/disclaimer" className="inline-flex min-h-10 items-center hover:text-rage-500 transition-colors">
               Disclaimer
             </Link>
             <span className="text-zinc-700">·</span>
-            <Link href="/editorial-policy" className="hover:text-rage-500 transition-colors">
+            <Link href="/editorial-policy" className="inline-flex min-h-10 items-center hover:text-rage-500 transition-colors">
               Editorial
             </Link>
           </div>

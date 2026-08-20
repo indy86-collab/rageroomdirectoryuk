@@ -78,7 +78,7 @@ test.describe("directory conversion attribution", () => {
     expect(await capturedEvents(page, "website_click")).toHaveLength(1)
     expect(await capturedEvents(page, "booking_click")).toHaveLength(1)
 
-    await clickWithoutNavigation(page.locator('a[href^="tel:"]'))
+    await clickWithoutNavigation(page.locator('a[href^="tel:"]').first())
     const phoneEvents = await capturedEvents(page, "phone_click")
     expect(phoneEvents).toHaveLength(1)
     expect(phoneEvents[0].properties).toMatchObject({

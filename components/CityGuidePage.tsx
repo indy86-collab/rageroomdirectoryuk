@@ -203,7 +203,8 @@ export default async function CityGuidePage({
                 Compare the latest directory price, location and minimum-age data before
                 opening a venue page for package details and booking links.
               </p>
-              <div className="overflow-x-auto rounded-lg border border-zinc-800">
+              <div className="overflow-x-auto overscroll-x-contain rounded-lg border border-zinc-800">
+                <p className="px-4 pt-3 text-xs text-zinc-500 lg:hidden">Swipe sideways to compare venues.</p>
                 <table className="w-full min-w-[680px] text-left text-sm">
                   <thead className="bg-zinc-900 text-zinc-300">
                     <tr>

@@ -84,7 +84,7 @@ function FeaturedCard({ listing }: { listing: Listing }) {
 
         <Link
           href={href}
-          className="mt-3 inline-flex items-center justify-center w-full bg-rage-500 hover:bg-rage-600 text-white text-[11px] font-bold uppercase tracking-wider py-2 rounded-md transition-colors"
+          className="mt-3 inline-flex min-h-11 items-center justify-center w-full bg-rage-500 hover:bg-rage-600 text-white text-xs font-bold uppercase tracking-wider py-2 rounded-md transition-colors"
         >
           View Details
         </Link>
@@ -135,7 +135,7 @@ function FeaturedCompactCard({ listing }: { listing: Listing }) {
 
         <Link
           href={href}
-          className="mt-2 inline-flex items-center justify-center w-full bg-rage-500 hover:bg-rage-600 text-white text-[10px] font-bold uppercase tracking-wider py-1.5 rounded transition-colors"
+          className="mt-2 inline-flex min-h-10 items-center justify-center w-full bg-rage-500 hover:bg-rage-600 text-white text-[11px] font-bold uppercase tracking-wider py-2 rounded transition-colors"
         >
           View Details
         </Link>

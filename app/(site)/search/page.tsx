@@ -68,9 +68,9 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   const remainingResults = showDownloadCTA ? listings.slice(3) : []
 
   return (
-    <div className="py-8">
+    <div className="py-6 sm:py-8">
       <div className="max-w-6xl mx-auto px-4">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-white">
+        <h1 className="mb-4 break-words text-3xl font-bold text-white sm:text-4xl">
           {query ? `Search results for "${query}"` : "Search Rage Rooms"}
         </h1>
 

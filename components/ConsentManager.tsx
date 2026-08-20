@@ -128,7 +128,7 @@ export default function ConsentManager({
       {!preferences && !settingsOpen && (
         <section
           aria-label="Privacy choices"
-          className="fixed inset-x-3 bottom-3 z-[120] mx-auto max-w-4xl rounded-xl border border-zinc-700 bg-zinc-950 p-4 shadow-2xl sm:p-5"
+          className="fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-[120] mx-auto max-w-4xl rounded-xl border border-zinc-700 bg-zinc-950 p-4 shadow-2xl sm:p-5"
           data-testid="consent-banner"
         >
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -140,11 +140,11 @@ export default function ConsentManager({
                 features working. <Link href="/privacy" className="underline hover:text-orange-400">Privacy details</Link>.
               </p>
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div className="grid grid-cols-1 gap-2 sm:flex sm:flex-wrap">
               <button
                 type="button"
                 onClick={() => applyDecision(false)}
-                className="min-h-[44px] rounded-md bg-zinc-200 px-4 text-sm font-bold text-zinc-950 hover:bg-white"
+                className="min-h-12 rounded-md bg-zinc-200 px-4 text-sm font-bold text-zinc-950 hover:bg-white"
               >
                 Reject analytics
               </button>
@@ -154,14 +154,14 @@ export default function ConsentManager({
                   previousFocusRef.current = document.activeElement as HTMLElement
                   setSettingsOpen(true)
                 }}
-                className="min-h-[44px] rounded-md border border-zinc-600 px-4 text-sm font-semibold text-white hover:border-zinc-400"
+                className="min-h-12 rounded-md border border-zinc-600 px-4 text-sm font-semibold text-white hover:border-zinc-400"
               >
                 Manage preferences
               </button>
               <button
                 type="button"
                 onClick={() => applyDecision(true)}
-                className="min-h-[44px] rounded-md bg-orange-500 px-4 text-sm font-bold text-white hover:bg-orange-600"
+                className="min-h-12 rounded-md bg-orange-500 px-4 text-sm font-bold text-white hover:bg-orange-600"
               >
                 Accept analytics
               </button>
@@ -171,13 +171,13 @@ export default function ConsentManager({
       )}
 
       {settingsOpen && (
-        <div className="fixed inset-0 z-[130] flex items-end justify-center bg-black/70 p-3 sm:items-center">
+        <div className="fixed inset-0 z-[130] flex items-end justify-center bg-black/70 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:items-center">
           <section
             ref={settingsRef}
             role="dialog"
             aria-modal="true"
             aria-labelledby="privacy-settings-title"
-            className="w-full max-w-xl rounded-xl border border-zinc-700 bg-zinc-950 p-5 shadow-2xl"
+            className="max-h-[min(90dvh,40rem)] w-full max-w-xl overflow-y-auto rounded-xl border border-zinc-700 bg-zinc-950 p-5 shadow-2xl"
             data-testid="privacy-settings"
           >
             <h2

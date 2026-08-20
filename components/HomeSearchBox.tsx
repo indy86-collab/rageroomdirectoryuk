@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation"
 import { useState, useEffect, useRef } from "react"
-import Link from "next/link"
+import { Search } from "lucide-react"
 
 interface Suggestion {
   type: "city" | "listing"
@@ -31,13 +31,13 @@ export default function HomeSearchBox() {
       try {
         const response = await fetch(`/api/search/suggestions?q=${encodeURIComponent(query)}`)
         const data = await response.json()
-        
+
         const allSuggestions: Suggestion[] = [
           ...data.cities,
           ...data.listings,
         ]
-        
-        setSuggestions(allSuggestions.slice(0, 8)) // Limit to 8 total suggestions
+
+        setSuggestions(allSuggestions.slice(0, 8))
         setShowSuggestions(allSuggestions.length > 0)
         setSelectedIndex(-1)
       } catch (error) {
@@ -83,7 +83,7 @@ export default function HomeSearchBox() {
 
     if (e.key === "ArrowDown") {
       e.preventDefault()
-      setSelectedIndex((prev) => 
+      setSelectedIndex((prev) =>
         prev < suggestions.length - 1 ? prev + 1 : prev
       )
     } else if (e.key === "ArrowUp") {
@@ -99,30 +99,35 @@ export default function HomeSearchBox() {
   }
 
   return (
-    <div ref={searchRef} className="max-w-2xl mx-auto relative">
+    <div ref={searchRef} className="relative mx-auto max-w-2xl">
       <form onSubmit={handleSubmit}>
-        <div className="flex gap-3 items-center">
-          <div className="flex-1 relative">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
+          <div className="relative min-w-0 flex-1">
+            <label htmlFor="directory-search" className="sr-only">
+              City or postcode
+            </label>
             <input
+              id="directory-search"
               ref={inputRef}
-              type="text"
+              type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onFocus={() => query.length >= 2 && setShowSuggestions(true)}
               onKeyDown={handleKeyDown}
-              placeholder="City or Postcode"
-              className="w-full px-4 sm:px-6 py-3.5 sm:py-4 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 text-base sm:text-lg min-h-[44px]"
+              placeholder="City or postcode"
+              autoComplete="off"
+              enterKeyHint="search"
+              className="min-h-12 w-full rounded-lg bg-white px-4 py-3.5 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 sm:px-6 sm:text-lg"
             />
-            
-            {/* Autocomplete Dropdown */}
+
             {showSuggestions && suggestions.length > 0 && (
-              <div className="absolute z-50 w-full mt-2 bg-white rounded-lg shadow-xl border border-gray-200 max-h-96 overflow-y-auto">
+              <div className="absolute z-50 mt-2 max-h-64 w-full overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-xl sm:max-h-96">
                 {suggestions.map((suggestion, index) => (
                   <button
                     key={`${suggestion.type}-${index}`}
                     type="button"
                     onClick={() => handleSuggestionClick(suggestion)}
-                    className={`w-full text-left px-4 py-3 hover:bg-orange-50 transition-colors ${
+                    className={`w-full min-h-11 px-4 py-3 text-left transition-colors hover:bg-orange-50 ${
                       index === selectedIndex ? "bg-orange-50" : ""
                     } ${
                       index > 0 ? "border-t border-gray-100" : ""
@@ -131,7 +136,7 @@ export default function HomeSearchBox() {
                     <div className="flex items-center gap-3">
                       {suggestion.type === "city" ? (
                         <svg
-                          className="w-5 h-5 text-orange-500"
+                          className="h-5 w-5 shrink-0 text-orange-500"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -151,7 +156,7 @@ export default function HomeSearchBox() {
                         </svg>
                       ) : (
                         <svg
-                          className="w-5 h-5 text-orange-500"
+                          className="h-5 w-5 shrink-0 text-orange-500"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -164,12 +169,12 @@ export default function HomeSearchBox() {
                           />
                         </svg>
                       )}
-                      <div>
-                        <div className="font-medium text-gray-900">
+                      <div className="min-w-0">
+                        <div className="truncate font-medium text-gray-900">
                           {suggestion.label}
                         </div>
                         {suggestion.type === "listing" && suggestion.city && (
-                          <div className="text-sm text-gray-500">
+                          <div className="truncate text-sm text-gray-500">
                             {suggestion.city}
                           </div>
                         )}
@@ -180,33 +185,17 @@ export default function HomeSearchBox() {
               </div>
             )}
           </div>
-          
+
           <button
             type="submit"
-            className="px-8 py-4 bg-orange-500 text-white font-bold rounded-lg hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-colors text-lg"
+            className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-orange-500 px-6 py-3.5 text-base font-bold uppercase tracking-wider text-white transition-colors hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-900 sm:w-auto sm:px-8 sm:text-lg"
           >
-            FIND YOUR RAGE
+            <Search className="h-5 w-5 sm:hidden" aria-hidden="true" />
+            <span className="sm:hidden">Search</span>
+            <span className="hidden sm:inline">Find your rage</span>
           </button>
-          <svg
-            className="w-6 h-6 text-white cursor-pointer"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            onClick={handleSubmit}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
         </div>
       </form>
     </div>
   )
 }
-
-
-
-

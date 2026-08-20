@@ -15,7 +15,7 @@ export default function Logo() {
       {/* RRD mark. Uses the display (Bebas) font so the letters look condensed + bold. */}
       <span
         aria-hidden="true"
-        className="font-display text-[38px] sm:text-[44px] leading-none tracking-tight text-rage-500 group-hover:text-rage-400 transition-colors"
+        className="font-display text-[32px] sm:text-[44px] leading-none tracking-tight text-rage-500 group-hover:text-rage-400 transition-colors"
         style={{ fontFamily: "var(--font-bebas), 'Bebas Neue', Impact, sans-serif" }}
       >
         RRD

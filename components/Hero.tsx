@@ -29,7 +29,7 @@ export default function Hero({ featuredListings = [] }: HeroProps) {
       <div className="w-full px-3 sm:px-5 lg:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] xl:grid-cols-[1fr_420px] gap-4 lg:gap-5">
           {/* Hero card: real rage-room photograph with dark overlay for copy legibility. */}
-          <div className="relative overflow-hidden rounded-xl border border-zinc-800 min-h-[360px] sm:min-h-[440px] lg:min-h-[520px] flex">
+          <div className="relative overflow-hidden rounded-xl border border-zinc-800 min-h-[300px] sm:min-h-[440px] lg:min-h-[520px] flex">
             <Image
               src="/images/hero/rage.jpg"
               alt="Person in safety gear smashing items inside a UK rage room"
@@ -41,51 +41,53 @@ export default function Hero({ featuredListings = [] }: HeroProps) {
             {/* Left-to-right dark gradient so the headline + search stay readable over the photo. */}
             <div
               aria-hidden="true"
-              className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/10"
+              className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/55 to-black/75 sm:bg-gradient-to-r sm:from-black/85 sm:via-black/55 sm:to-black/10"
             />
             <div
               aria-hidden="true"
-              className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"
+              className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"
             />
 
-            <div className="relative w-full flex flex-col justify-center p-6 sm:p-10 lg:p-14">
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[0.95] text-white uppercase tracking-tight">
+            <div className="relative w-full flex flex-col justify-end sm:justify-center p-4 sm:p-10 lg:p-14">
+              <h1 className="font-display text-[2.35rem] leading-[0.95] text-white uppercase tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl">
                 Find Rage Rooms{" "}
                 <span className="text-rage-500">Across the UK.</span>
               </h1>
-              <p className="mt-4 text-base sm:text-lg lg:text-xl text-zinc-300 max-w-xl font-medium">
+              <p className="mt-3 max-w-xl text-sm font-medium text-zinc-300 sm:mt-4 sm:text-lg lg:text-xl">
                 Compare verified smash rooms, prices and booking links — then release your rage.
               </p>
 
-              <form onSubmit={handleSubmit} className="mt-6 sm:mt-8 max-w-xl">
-                <div className="flex flex-col sm:flex-row items-stretch bg-dark-900/80 border border-zinc-800 rounded-md overflow-hidden">
-                  <div className="relative flex-1">
-                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+              <form onSubmit={handleSubmit} className="mt-5 max-w-xl sm:mt-8">
+                <div className="flex flex-col overflow-hidden rounded-md border border-zinc-800 bg-dark-900/80 sm:flex-row sm:items-stretch">
+                  <div className="relative min-w-0 flex-1">
+                    <MapPin className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-500" />
                     <label htmlFor="hero-search" className="sr-only">
-                      Enter City or Postcode
+                      Enter city or postcode
                     </label>
                     <input
                       id="hero-search"
-                      type="text"
+                      type="search"
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
-                      placeholder="Enter City or Postcode (e.g. London, B1 2)"
-                      className="w-full pl-9 pr-3 py-3 bg-transparent text-white placeholder:text-zinc-500 focus:outline-none text-sm sm:text-base"
+                      placeholder="City or postcode"
+                      autoComplete="off"
+                      enterKeyHint="search"
+                      className="min-h-12 w-full bg-transparent py-3 pl-9 pr-3 text-base text-white placeholder:text-zinc-500 focus:outline-none"
                     />
                   </div>
                   <button
                     type="submit"
-                    className="bg-rage-500 hover:bg-rage-600 text-white font-bold uppercase tracking-wider text-sm px-6 py-3 transition-colors whitespace-nowrap"
+                    className="min-h-12 bg-rage-500 px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-rage-600"
                   >
                     Find Rage Rooms
                   </button>
                 </div>
               </form>
 
-              <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs sm:text-sm text-zinc-400">
+              <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-zinc-400 sm:mt-6 sm:gap-x-5 sm:text-sm">
                 <Link
                   href="/near-me"
-                  className="inline-flex items-center gap-1.5 text-rage-400 hover:text-rage-300 transition-colors font-semibold"
+                  className="inline-flex min-h-11 items-center gap-1.5 font-semibold text-rage-400 transition-colors hover:text-rage-300"
                 >
                   <MapPin className="w-4 h-4" />
                   Rage room near me — open map

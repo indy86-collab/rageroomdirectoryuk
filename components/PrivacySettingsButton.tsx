@@ -11,7 +11,7 @@ export default function PrivacySettingsButton({
     <button
       type="button"
       onClick={() => window.dispatchEvent(new Event(OPEN_PRIVACY_SETTINGS_EVENT))}
-      className={className}
+      className={`inline-flex min-h-10 items-center ${className}`}
     >
       Privacy settings
     </button>

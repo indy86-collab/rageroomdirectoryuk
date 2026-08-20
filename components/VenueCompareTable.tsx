@@ -33,11 +33,12 @@ export default function VenueCompareTable({ listings }: { listings: Listing[] })
         <h2 id="compare-heading" className="text-xl font-bold text-white">Compare selected venues</h2>
         <p className="mt-1 text-sm text-zinc-400">Compare confirmed listing data side by side. Check the venue website before booking.</p>
       </div>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto overscroll-x-contain">
+        <p className="px-4 pt-3 text-xs text-zinc-500 lg:hidden">Swipe sideways to compare venues.</p>
         <table className="min-w-[720px] w-full text-left text-sm">
           <thead>
             <tr className="border-b border-zinc-800">
-              <th className="w-40 p-3 text-xs uppercase tracking-wider text-zinc-500">Compare</th>
+              <th className="sticky left-0 z-10 w-40 bg-[#181818] p-3 text-xs uppercase tracking-wider text-zinc-500">Compare</th>
               {listings.map((listing) => (
                 <th key={listing.id} className="min-w-48 p-3 text-white">
                   <Link href={`/listing/${listing.slug || listing.id}`} className="hover:text-rage-400">{listing.name}</Link>
@@ -49,7 +50,7 @@ export default function VenueCompareTable({ listings }: { listings: Listing[] })
           <tbody>
             {rows.map((row) => (
               <tr key={row.label} className="border-b border-zinc-800/70 last:border-0">
-                <th className="p-3 text-xs font-bold uppercase tracking-wider text-zinc-500">{row.label}</th>
+                <th className="sticky left-0 z-10 bg-[#181818] p-3 text-xs font-bold uppercase tracking-wider text-zinc-500">{row.label}</th>
                 {listings.map((listing) => <td key={listing.id} className="p-3 text-zinc-200">{row.value(listing)}</td>)}
               </tr>
             ))}
