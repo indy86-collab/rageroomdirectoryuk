@@ -7,21 +7,30 @@ type AnalyticsEvent = {
   properties: Record<string, unknown>
 }
 
-function isTrackingRequest(url: string) {
-  return /googletagmanager\.com|google-analytics\.com|cloudflareinsights\.com|va\.vercel-scripts\.com|\/_vercel\/insights|googlesyndication\.com|doubleclick\.net/.test(
+function isAnalyticsTrackingRequest(url: string) {
+  return /googletagmanager\.com|google-analytics\.com|cloudflareinsights\.com|va\.vercel-scripts\.com|\/_vercel\/insights/.test(
     url
   )
+}
+
+function isProviderRequest(url: string) {
+  return isAnalyticsTrackingRequest(url) || /googlesyndication\.com|doubleclick\.net/.test(url)
 }
 
 async function mockTrackingProviders(page: Page) {
   const requests: string[] = []
   page.on("request", (request) => {
-    if (isTrackingRequest(request.url())) requests.push(request.url())
+    if (isProviderRequest(request.url())) requests.push(request.url())
   })
-  await page.route(/googletagmanager\.com|google-analytics\.com|cloudflareinsights\.com|va\.vercel-scripts\.com|\/_vercel\/insights|googlesyndication\.com|doubleclick\.net/, (route) =>
-    route.abort()
+  await page.route(
+    /googletagmanager\.com|google-analytics\.com|cloudflareinsights\.com|va\.vercel-scripts\.com|\/_vercel\/insights|googlesyndication\.com|doubleclick\.net/,
+    (route) => route.abort()
   )
   return requests
+}
+
+function analyticsRequests(requests: string[]) {
+  return requests.filter(isAnalyticsTrackingRequest)
 }
 
 async function setStoredConsent(page: Page, analytics: boolean) {
@@ -90,7 +99,7 @@ test.describe("consent-aware analytics", () => {
     await expect(page.getByRole("button", { name: "Accept analytics" })).toBeVisible()
     await expect(page.getByRole("button", { name: "Reject analytics" })).toBeVisible()
     await page.waitForTimeout(300)
-    expect(requests).toEqual([])
+    expect(analyticsRequests(requests)).toEqual([])
 
     await page.getByRole("button", { name: "Reject analytics" }).click()
     await expect(page.getByTestId("consent-banner")).toBeHidden()
@@ -105,7 +114,7 @@ test.describe("consent-aware analytics", () => {
     const booking = page.getByRole("link", { name: "Book Your Session →" })
     await expect(booking).toHaveAttribute("href", /^https?:\/\//)
     await clickWithoutNavigation(booking)
-    expect(requests).toEqual([])
+    expect(analyticsRequests(requests)).toEqual([])
   })
 
   test("accept enables a representative typed analytics event", async ({ page }) => {
@@ -166,8 +175,8 @@ test.describe("consent-aware analytics", () => {
     const requests = await mockTrackingProviders(page)
     await page.goto("/listings")
     await expect(page.getByTestId("consent-banner")).toHaveCount(0)
-    await expect(page.getByRole("heading", { name: "All Rage Rooms in the UK" })).toBeVisible()
-    expect(requests).toEqual([])
+    await expect(page.getByRole("heading", { name: "UK Rage Rooms & Destructive Experiences" })).toBeVisible()
+    expect(analyticsRequests(requests)).toEqual([])
   })
 
   test("returning accepted visitor restores provider initialization", async ({ page }) => {

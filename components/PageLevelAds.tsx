@@ -1,9 +1,10 @@
 /**
- * Historical placement marker for pages that were eligible for AdSense Auto ads.
+ * Placement marker for pages eligible for AdSense Auto ads.
  *
- * Advertising is disabled while the site uses its lightweight analytics-only
- * consent layer. UK/EEA ad serving must not be re-enabled until a Google-certified
- * TCF CMP and a separate advertising-purpose review are in place.
+ * The global AdSense script in `app/layout.tsx` enables Auto ads. UK/EEA
+ * personalised ads are consented through Google's certified Privacy & messaging
+ * CMP, not through the site's analytics-only banner. Do not re-push
+ * `enable_page_level_ads` here — AdSense rejects that duplicate configuration.
  */
 export default function PageLevelAds() {
   return null

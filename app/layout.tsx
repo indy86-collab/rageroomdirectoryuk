@@ -1,8 +1,12 @@
 import type { Metadata } from "next"
+import Script from "next/script"
 import { Montserrat, Bebas_Neue } from "next/font/google"
 import "./globals.css"
 import { absoluteUrl, getSiteUrl } from "@/lib/site-url"
 import ConsentManager from "@/components/ConsentManager"
+
+const adsenseClient =
+  process.env.NEXT_PUBLIC_ADSENSE_CLIENT || "ca-pub-9868896840591922"
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -148,6 +152,7 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossOrigin="anonymous" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
@@ -167,6 +172,12 @@ export default function RootLayout({
           Skip to main content
         </a>
         {children}
+        <Script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
         <ConsentManager
           gaMeasurementId={gaMeasurementId}
           cloudflareToken="96418e10c1f84246b90bd34546f8ca66"

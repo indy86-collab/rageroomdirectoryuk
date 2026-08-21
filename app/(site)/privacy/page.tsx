@@ -176,9 +176,11 @@ export default function PrivacyPage() {
               </table>
             </div>
             <p className="mt-4">
-              Google AdSense advertising is currently disabled. Analytics consent does not enable
-              advertising. Use the control below, or the footer control on any page, to review or
-              change your decision.
+              Google AdSense Auto ads can appear on directory pages. Advertising consent for UK,
+              EEA and Swiss visitors is collected by Google&apos;s certified Privacy &amp; messaging
+              CMP (IAB TCF), not by the analytics toggle on this page. Accepting analytics does not
+              turn ads on, and rejecting analytics does not turn ads off. Use Google&apos;s privacy
+              message to change ad choices, and the control below for analytics.
             </p>
             <PrivacySettingsButton className="mt-3 min-h-[44px] rounded-md border border-zinc-600 px-4 text-sm font-semibold text-white hover:border-orange-500" />
           </section>
@@ -210,7 +212,7 @@ export default function PrivacyPage() {
             </h2>
             <p>We process personal data under:</p>
             <ul className="list-disc list-inside space-y-2 ml-4">
-              <li>Consent (optional analytics and optional marketing opt-in)</li>
+              <li>Consent (optional analytics, optional marketing opt-in, and advertising via Google&apos;s CMP where required)</li>
               <li>Legitimate interests where appropriate for service security and improvement that does not rely on optional browser storage</li>
               <li>Contractual necessity (digital product fulfilment, listing submissions, venue-owner workspace operation)</li>
               <li>Compliance with legal obligations</li>
@@ -230,6 +232,7 @@ export default function PrivacyPage() {
               <li><strong>Resend</strong> - Transactional email delivery for checklist and purchase access messages (and optional marketing audience updates only when you opt in)</li>
               <li><strong>Upstash</strong> - Durable storage for Corporate Booking System venue-owner workspaces when configured</li>
               <li><strong>Google Analytics</strong> - Optional page, product, funnel and directory-event analytics after opt-in</li>
+              <li><strong>Google AdSense</strong> - Advertising; Google and participating ad partners may receive request, device and consent signals under Google&apos;s CMP and policies</li>
               <li>Email service providers (contact forms and transactional mail)</li>
             </ul>
             <p className="mt-4">
@@ -300,7 +303,7 @@ export default function PrivacyPage() {
             <ul className="list-disc list-inside space-y-2 ml-4">
               <li><strong>Google Analytics 4</strong> - loaded only after analytics opt-in; advertising storage, user-data and personalisation signals remain denied</li>
               <li><strong>Google Maps</strong> - loaded only when you explicitly press a load-map button; this choice is separate from analytics</li>
-              <li><strong>Google AdSense</strong> - currently disabled and not enabled by our analytics setting</li>
+              <li><strong>Google AdSense</strong> - advertising network. UK/EEA/Swiss consent is handled by Google&apos;s certified Privacy &amp; messaging CMP; this is separate from analytics</li>
             </ul>
             <p className="mt-4">
               Google&apos;s use of information is governed by their <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-600 underline">Privacy Policy</a>.

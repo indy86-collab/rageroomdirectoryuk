@@ -136,7 +136,8 @@ export default function ConsentManager({
               <h2 className="text-base font-bold text-white">Your privacy choices</h2>
               <p className="mt-1 text-sm leading-relaxed text-zinc-300">
                 We use optional analytics to understand directory use and improve the site.
-                They stay off unless you accept. Essential browser storage keeps requested
+                They stay off unless you accept. Ads, if shown, are consented separately
+                through Google&apos;s privacy message. Essential browser storage keeps requested
                 features working. <Link href="/privacy" className="underline hover:text-orange-400">Privacy details</Link>.
               </p>
             </div>
@@ -222,7 +223,7 @@ export default function ConsentManager({
             </div>
 
             <p className="mt-4 text-xs leading-relaxed text-zinc-500">
-              Google Maps loads only when you press a map button and is separate from analytics. Advertising is currently disabled. See the <Link href="/privacy" className="underline hover:text-orange-400">privacy policy</Link> for provider details.
+              Google Maps loads only when you press a map button and is separate from analytics. Advertising consent is collected by Google&apos;s certified Privacy &amp; messaging CMP, not this analytics toggle. See the <Link href="/privacy" className="underline hover:text-orange-400">privacy policy</Link> for provider details.
             </p>
 
             <div className="mt-5 flex flex-wrap justify-end gap-2">
