@@ -1,32 +1,7 @@
 import Link from "next/link"
 import { cityToSlug } from "@/lib/location"
 import { getListingsNearCity } from "@/lib/listings"
-
-/**
- * Top-9 cities that have a dedicated "Best rage rooms in X" editorial guide.
- * Order here also informs the fallback related-cities list for any city
- * that doesn't appear in NEIGHBOURS below.
- */
-const GUIDE_CITIES = [
-  "London",
-  "Birmingham",
-  "Manchester",
-  "Leeds",
-  "Liverpool",
-  "Bristol",
-  "Newcastle",
-  "Sheffield",
-  "Nottingham",
-  "Edinburgh",
-  "Leicester",
-  "Derby",
-  "Brighton",
-  "Glasgow",
-  "Cardiff",
-  "Hull",
-] as const
-
-type GuideCity = (typeof GUIDE_CITIES)[number]
+import { EDITORIAL_CITY_GUIDES, getCityGuidePath, hasEditorialCityGuide } from "@/lib/city-guides"
 
 /**
  * Hand-curated "near me" neighbour lists by city. These are the related city
@@ -37,30 +12,33 @@ const NEIGHBOURS: Record<string, readonly string[]> = {
   London: ["Brighton", "Reading", "Milton Keynes", "Oxford", "Cambridge"],
   Birmingham: ["Coventry", "Leicester", "Nottingham", "Manchester", "Derby"],
   Manchester: ["Liverpool", "Leeds", "Sheffield", "Birmingham", "Preston"],
-  Leeds: ["Sheffield", "Manchester", "Bradford", "York", "Liverpool"],
+  Leeds: ["Sheffield", "Manchester", "Huddersfield", "York", "Liverpool"],
   Liverpool: ["Manchester", "Chester", "Leeds", "Preston", "Birmingham"],
-  Bristol: ["Cardiff", "Bath", "Swindon", "Exeter", "London"],
+  Bristol: ["Cardiff", "Bath", "Weston-super-Mare", "Swindon", "London"],
   Newcastle: ["Sunderland", "Durham", "Middlesbrough", "Leeds", "Edinburgh"],
-  Sheffield: ["Leeds", "Manchester", "Nottingham", "Doncaster", "Derby"],
-  Nottingham: ["Leicester", "Derby", "Sheffield", "Birmingham", "Lincoln"],
+  Sheffield: ["Leeds", "Manchester", "Nottingham", "Huddersfield", "Derby"],
+  Nottingham: ["Leicester", "Derby", "Sheffield", "Birmingham", "Northampton"],
   Glasgow: ["Edinburgh", "Aberdeen", "Dundee", "Newcastle"],
   Edinburgh: ["Glasgow", "Newcastle", "Dundee", "Aberdeen"],
   Cardiff: ["Bristol", "Swansea", "Newport", "Bath"],
   Hull: ["Leeds", "Sheffield", "York", "Grimsby", "Doncaster"],
   Belfast: ["Dublin", "Londonderry"],
+  Northampton: ["Leicester", "Birmingham", "Milton Keynes", "Bedford", "Coventry"],
+  Huddersfield: ["Leeds", "Manchester", "Sheffield", "Bradford"],
+  Bath: ["Bristol", "Weston-super-Mare", "Cardiff", "Swindon"],
+  "Weston-super-Mare": ["Bristol", "Bath", "Cardiff"],
+  "Weston Super Mare": ["Bristol", "Bath", "Cardiff"],
 }
+
+const FALLBACK_GUIDE_CITIES = EDITORIAL_CITY_GUIDES.map((guide) => guide.city)
 
 function slugifyCity(city: string) {
   return cityToSlug(city)
 }
 
-function hasDedicatedGuide(city: string): city is GuideCity {
-  return (GUIDE_CITIES as readonly string[]).includes(city)
-}
-
 export default async function CityRelatedLinks({ cityName }: { cityName: string }) {
   const neighbours =
-    NEIGHBOURS[cityName] ?? GUIDE_CITIES.filter((c) => c !== cityName).slice(0, 5)
+    NEIGHBOURS[cityName] ?? FALLBACK_GUIDE_CITIES.filter((c) => cityToSlug(c) !== cityToSlug(cityName)).slice(0, 5)
   const availableNeighbours = (
     await Promise.all(
       neighbours.map(async (city) => {
@@ -80,10 +58,10 @@ export default async function CityRelatedLinks({ cityName }: { cityName: string 
           More about rage rooms in {cityName}
         </h2>
         <ul className="space-y-2 text-zinc-300">
-          {hasDedicatedGuide(cityName) && (
+          {hasEditorialCityGuide(cityName) && (
             <li>
               <Link
-                href={`/guides/best-rage-rooms-${cityToSlug(cityName)}`}
+                href={getCityGuidePath(cityName)}
                 className="text-orange-500 hover:text-orange-400 underline"
               >
                 Best rage rooms in {cityName} — editorial ranking

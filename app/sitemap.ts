@@ -9,6 +9,7 @@ import { cityToSlug, regionToSlug } from "@/lib/location"
 import { getAllBlogPosts } from "@/lib/blog-posts"
 import { getBlogGuideCanonical } from "@/lib/blog-guide-canonicals"
 import { mergeCitiesWithPriority, CITY_PRICE_PAGE_CITIES } from "@/lib/priority-seo-cities"
+import { getCityGuideSlugs } from "@/lib/city-guides"
 import { absoluteUrl, getSiteUrl, listingUrl } from "@/lib/site-url"
 import { isIndexableLocationPage } from "@/lib/location-indexing"
 import {
@@ -261,24 +262,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   // Guide pages (how-much-do-rage-rooms-cost-uk canonicals to /rage-room-prices-uk)
-  const cityGuidePages = [
-    "best-rage-rooms-london",
-    "best-rage-rooms-birmingham",
-    "best-rage-rooms-manchester",
-    "best-rage-rooms-bristol",
-    "best-rage-rooms-newcastle",
-    "best-rage-rooms-nottingham",
-    "best-rage-rooms-leeds",
-    "best-rage-rooms-liverpool",
-    "best-rage-rooms-sheffield",
-    "best-rage-rooms-edinburgh",
-    "best-rage-rooms-leicester",
-    "best-rage-rooms-derby",
-    "best-rage-rooms-brighton",
-    "best-rage-rooms-glasgow",
-    "best-rage-rooms-cardiff",
-    "best-rage-rooms-hull",
-  ]
+  const cityGuidePages = getCityGuideSlugs()
   const guidePages = [
     ...cityGuidePages,
     "best-rage-rooms-for-couples",
@@ -292,7 +276,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "rage-room-gift-vouchers-uk",
     "rage-rooms-for-stress-relief",
     "rage-room-vs-axe-throwing",
+    "rage-room-vs-paint-splatter",
     "what-to-wear-to-a-rage-room",
+    "cheapest-rage-rooms-uk",
+    "rage-room-age-limits-uk",
+    "can-you-smash-your-own-stuff-uk",
   ]
 
   guidePages.forEach((guide) => {

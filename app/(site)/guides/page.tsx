@@ -2,6 +2,7 @@ import { Metadata } from "next"
 import Link from "next/link"
 import { buildOgImageUrl } from "@/lib/seo-schema"
 import { absoluteUrl, getSiteUrl } from "@/lib/site-url"
+import { EDITORIAL_CITY_GUIDES, getCityGuidePath } from "@/lib/city-guides"
 
 const OG_IMAGE = buildOgImageUrl({
   title: "Rage Room Guides",
@@ -38,120 +39,12 @@ interface Guide {
   category: string
 }
 
-const CITY_GUIDES: Guide[] = [
-  {
-    title: "Best Rage Rooms in London",
-    description:
-      "London's verified rage room venues compared, with starting prices, package notes and travel tips for the capital.",
-    href: "/guides/best-rage-rooms-london",
-    category: "London",
-  },
-  {
-    title: "Best Rage Rooms in Birmingham",
-    description:
-      "Midlands rage room venues ranked, covering Jewellery Quarter, Digbeth and Bordesley — with pricing and travel tips.",
-    href: "/guides/best-rage-rooms-birmingham",
-    category: "Birmingham",
-  },
-  {
-    title: "Best Rage Rooms in Manchester",
-    description:
-      "Manchester's best rage rooms, from Northern Quarter to Trafford. Compare packages, prices and group options.",
-    href: "/guides/best-rage-rooms-manchester",
-    category: "Manchester",
-  },
-  {
-    title: "Best Rage Rooms in Leeds",
-    description:
-      "West Yorkshire's growing rage room scene, with venues suited to students, young professionals and corporate groups.",
-    href: "/guides/best-rage-rooms-leeds",
-    category: "Leeds",
-  },
-  {
-    title: "Best Rage Rooms in Liverpool",
-    description:
-      "Liverpool's rage rooms ranked — strong party-friendly venues in the Baltic Triangle and central Merseyside.",
-    href: "/guides/best-rage-rooms-liverpool",
-    category: "Liverpool",
-  },
-  {
-    title: "Best Rage Rooms in Bristol",
-    description:
-      "Independent-spirited rage room venues in Bristol, from St Philips to Bedminster, with DIY character.",
-    href: "/guides/best-rage-rooms-bristol",
-    category: "Bristol",
-  },
-  {
-    title: "Best Rage Rooms in Newcastle",
-    description:
-      "Newcastle and the North East's best rage rooms, ideal for stag/hen parties, birthdays and big groups.",
-    href: "/guides/best-rage-rooms-newcastle",
-    category: "Newcastle",
-  },
-  {
-    title: "Best Rage Rooms in Sheffield",
-    description:
-      "South Yorkshire rage rooms compared, with particular strength in affordable group packages.",
-    href: "/guides/best-rage-rooms-sheffield",
-    category: "Sheffield",
-  },
-  {
-    title: "Best Rage Rooms in Nottingham",
-    description:
-      "East Midlands rage rooms, popular with hen and stag groups visiting Nottingham for weekends away.",
-    href: "/guides/best-rage-rooms-nottingham",
-    category: "Nottingham",
-  },
-  {
-    title: "Best Rage Rooms in Edinburgh",
-    description:
-      "Scottish capital rage rooms compared — ideal for city breaks, festival visitors and corporate groups.",
-    href: "/guides/best-rage-rooms-edinburgh",
-    category: "Edinburgh",
-  },
-  {
-    title: "Best Rage Rooms in Leicester",
-    description:
-      "East Midlands hub with multiple verified venues — strong value compared to London pricing.",
-    href: "/guides/best-rage-rooms-leicester",
-    category: "Leicester",
-  },
-  {
-    title: "Best Rage Rooms in Derby",
-    description:
-      "Derby's established smash rooms, also serving Nottingham and the wider East Midlands.",
-    href: "/guides/best-rage-rooms-derby",
-    category: "Derby",
-  },
-  {
-    title: "Best Rage Rooms in Brighton",
-    description:
-      "South Coast rage rooms — popular with hen parties, birthdays and London day-trippers.",
-    href: "/guides/best-rage-rooms-brighton",
-    category: "Brighton",
-  },
-  {
-    title: "Best Rage Rooms in Glasgow",
-    description:
-      "Nearest smash rooms for Glasgow and the Central Belt — stag parties, birthdays and stress-relief sessions.",
-    href: "/guides/best-rage-rooms-glasgow",
-    category: "Glasgow",
-  },
-  {
-    title: "Best Rage Rooms in Cardiff",
-    description:
-      "Wales' main hub for rage rooms — compare Cardiff venues for rugby weekends, birthdays and groups.",
-    href: "/guides/best-rage-rooms-cardiff",
-    category: "Cardiff",
-  },
-  {
-    title: "Best Rage Rooms in Hull",
-    description:
-      "East Yorkshire smash rooms compared — practical pricing for locals and regional visitors.",
-    href: "/guides/best-rage-rooms-hull",
-    category: "Hull",
-  },
-]
+const CITY_GUIDES: Guide[] = EDITORIAL_CITY_GUIDES.map((guide) => ({
+  title: `Best Rage Rooms in ${guide.city}`,
+  description: guide.blurb,
+  href: getCityGuidePath(guide.city),
+  category: guide.city,
+}))
 
 const TOPIC_GUIDES: Guide[] = [
   {
@@ -225,6 +118,13 @@ const TOPIC_GUIDES: Guide[] = [
     category: "Comparison",
   },
   {
+    title: "Rage Room vs Paint Splatter",
+    description:
+      "Smash or throw paint? Compare UK prices, ages, mess and which to pick for hens, birthdays and families.",
+    href: "/guides/rage-room-vs-paint-splatter",
+    category: "Comparison",
+  },
+  {
     title: "Rage Rooms for Stress Relief",
     description:
       "Do rage rooms actually relieve stress? We examine the psychology and evidence — and explain what to realistically expect.",
@@ -244,6 +144,34 @@ const TOPIC_GUIDES: Guide[] = [
       "UK dress code guide: best clothing, footwear, what not to wear, and how to prepare for your PPE fitting.",
     href: "/guides/what-to-wear-to-a-rage-room",
     category: "First-Time Guide",
+  },
+  {
+    title: "Cheapest Rage Rooms UK",
+    description:
+      "Lowest published starting prices from verified smash rooms, with per-person and per-room rates kept separate.",
+    href: "/guides/cheapest-rage-rooms-uk",
+    category: "Pricing",
+  },
+  {
+    title: "Rage Room Age Limits UK",
+    description:
+      "Published 16+ and 18+ rules by venue — which rooms accept under-18s and which still need a direct check.",
+    href: "/guides/rage-room-age-limits-uk",
+    category: "Safety",
+  },
+  {
+    title: "Can You Smash Your Own Stuff?",
+    description:
+      "BYO smashable rules at UK rage rooms: which venues allow extra items, what is banned, and how to ask.",
+    href: "/guides/can-you-smash-your-own-stuff-uk",
+    category: "First-Time Guide",
+  },
+  {
+    title: "Mobile Rage Rooms",
+    description:
+      "Operators that bring a smash setup to events and temporary locations, with booking notes and inventory.",
+    href: "/activities/mobile-rage-rooms",
+    category: "Find a Venue",
   },
   {
     title: "Rage Rooms by UK City",

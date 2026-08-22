@@ -166,6 +166,30 @@ const otherCities: {
     gradient: "from-[#064e3b] via-[#022c22] to-[#010c08]",
     subtitle: "Nearby venues",
   },
+  {
+    city: "Northampton",
+    href: "/city/northampton",
+    guide: "/guides/best-rage-rooms-northampton",
+    gradient: "from-[#7c2d12] via-[#431407] to-[#1c0a04]",
+  },
+  {
+    city: "Huddersfield",
+    href: "/city/huddersfield",
+    guide: "/guides/best-rage-rooms-huddersfield",
+    gradient: "from-[#1e3a8a] via-[#172554] to-[#020617]",
+  },
+  {
+    city: "Bath",
+    href: "/city/bath",
+    guide: "/guides/best-rage-rooms-bath",
+    gradient: "from-[#854d0e] via-[#422006] to-[#140a02]",
+  },
+  {
+    city: "Weston-super-Mare",
+    href: "/city/weston-super-mare",
+    guide: "/guides/best-rage-rooms-weston-super-mare",
+    gradient: "from-[#0e7490] via-[#164e63] to-[#083344]",
+  },
 ]
 
 export default async function Home() {

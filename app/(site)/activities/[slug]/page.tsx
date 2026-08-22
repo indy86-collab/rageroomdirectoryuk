@@ -3,6 +3,8 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowDown, ArrowRight, CalendarCheck, Shirt, Users } from "lucide-react"
 import Breadcrumbs from "@/components/Breadcrumbs"
+import InArticleAd from "@/components/InArticleAd"
+import PaintHubExtras from "@/components/PaintHubExtras"
 import TrackedDiscoveryLink from "@/components/TrackedDiscoveryLink"
 import ListingsPageClient from "@/components/ListingsPageClient"
 import {
@@ -138,6 +140,26 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
             {activity.heroTitle}
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-zinc-300">{activity.description}</p>
+          {activity.value === "paint-splatter" && (
+            <p className="mt-3 text-sm leading-relaxed text-zinc-400">
+              Comparing smash vs paint? Read the{" "}
+              <Link href="/guides/rage-room-vs-paint-splatter" className="text-orange-500 underline hover:text-orange-400">
+                rage room vs paint splatter guide
+              </Link>
+              {locationPages.some((page) => page.location.slug === "london") ? (
+                <>
+                  {" "}
+                  or jump to{" "}
+                  <Link href="/activities/paint-splatter/london" className="text-orange-500 underline hover:text-orange-400">
+                    paint rooms in London
+                  </Link>
+                  .
+                </>
+              ) : (
+                "."
+              )}
+            </p>
+          )}
           <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
             <a href="#venues" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-rage-500 px-5 py-3 text-sm font-bold text-white hover:bg-rage-600">
               Explore {pluraliseVenue(listings.length)} <ArrowDown className="h-4 w-4" />
@@ -147,6 +169,10 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
             </p>
           </div>
         </div>
+
+        {(activity.value === "paint-splatter" || activity.value === "rage-room") && (
+          <InArticleAd />
+        )}
 
         <ListingsPageClient
           initialListings={listings}
@@ -190,6 +216,10 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </section>
+        )}
+
+        {activity.value === "paint-splatter" && (
+          <PaintHubExtras listings={listings} locationPages={locationPages} />
         )}
 
         {locationPages.length > 0 && (
@@ -261,6 +291,15 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
               {activity.value === "rage-room" ? "Related activity pairings" : "How it can pair with rage rooms"}
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-zinc-300">{activity.editorial.pairing}</p>
+            {(activity.value === "paint-splatter" || activity.value === "rage-room") && (
+              <p className="mt-3 text-sm leading-relaxed text-zinc-300">
+                Full comparison:{" "}
+                <Link href="/guides/rage-room-vs-paint-splatter" className="text-orange-500 underline hover:text-orange-400">
+                  rage room vs paint splatter
+                </Link>
+                .
+              </p>
+            )}
           </div>
         </section>
 

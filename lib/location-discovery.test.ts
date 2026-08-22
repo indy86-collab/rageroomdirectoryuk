@@ -31,9 +31,13 @@ describe("location discovery qualification", () => {
       "/occasions/birthdays/london",
       "/occasions/corporate-team-building/edinburgh",
       "/occasions/corporate-team-building/london",
+      "/occasions/hen-parties/birmingham",
       "/occasions/hen-parties/edinburgh",
+      "/occasions/hen-parties/london",
       "/occasions/kids-families/london",
+      "/occasions/stag-parties/birmingham",
       "/occasions/stag-parties/edinburgh",
+      "/occasions/stag-parties/london",
     ])
   })
 
@@ -174,9 +178,13 @@ describe("location discovery routes and metadata", () => {
       { slug: "birthdays", location: "london" },
       { slug: "corporate-team-building", location: "edinburgh" },
       { slug: "corporate-team-building", location: "london" },
+      { slug: "hen-parties", location: "birmingham" },
       { slug: "hen-parties", location: "edinburgh" },
+      { slug: "hen-parties", location: "london" },
       { slug: "kids-families", location: "london" },
+      { slug: "stag-parties", location: "birmingham" },
       { slug: "stag-parties", location: "edinburgh" },
+      { slug: "stag-parties", location: "london" },
     ])
   })
 
@@ -232,6 +240,8 @@ describe("location discovery routes and metadata", () => {
     expect(urls.has("https://www.rageroomdirectory.co.uk/activities/rage-rooms/birmingham")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/activities/rage-rooms/london")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/occasions/birthdays/birmingham")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/occasions/hen-parties/london")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/occasions/stag-parties/birmingham")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/activities/paint-splatter/london")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/occasions/birthdays/edinburgh")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/occasions/kids-families/london")).toBe(true)

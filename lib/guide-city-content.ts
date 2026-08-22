@@ -104,6 +104,46 @@ const guideCityContentMap: Record<string, GuideCityContent> = {
     localTip:
       "Cardiff Central is well connected across South Wales. Principality Stadium visitors often book a pre-match afternoon slot.",
   },
+  northampton: {
+    intro:
+      "Northampton has a verified in-town smash room and sits within easy reach of other East Midlands venues. This guide keeps Destroy'd Rage Rooms separate from nearby options so travel time is clear before you book.",
+    sceneDescription:
+      "Destroy'd Rage Rooms on the NN3 side of town is the current in-city listing. Packages are typically priced per room rather than per person, so a couples or small-group booking can look expensive until you divide the room rate. Confirm session length, how many breakables are included and whether an escape-room add-on is sold separately.",
+    whatToLookFor:
+      "Check the postcode (NN3 9DA), whether the quoted figure is per room or per person, and the venue's own age rule — our listing does not yet carry a verified minimum age. If you are coming from Milton Keynes, Bedford or Leicester, compare driving time against a Leicester or Birmingham in-city option.",
+    localTip:
+      "Northampton station is on the West Coast line from London Euston. Weekend late-afternoon slots fill first for groups; confirm parking on the venue's own page before you travel.",
+  },
+  huddersfield: {
+    intro:
+      "Huddersfield is one of West Yorkshire's strongest smash-room searches even though it is often treated as a satellite of Leeds. SMASH IT in HD7 is a verified in-town rage room that already attracts organic visitors looking for a Kirklees session.",
+    sceneDescription:
+      "The venue prices a room rather than a per-person ticket and lists a published minimum age of 8+, which is younger than many UK smash rooms. Hen and stag groups are explicitly tagged on the listing, so it is a practical option for celebrations that do not want to travel into Leeds city centre.",
+    whatToLookFor:
+      "Confirm how many people smash at once, whether the £60-class room rate includes the whole group, and the current PPE and footwear rules. If Huddersfield is fully booked, compare nearby Leeds and Sheffield options on travel time rather than headline city labels.",
+    localTip:
+      "Huddersfield station sits on the trans-Pennine route between Manchester and Leeds. Allow extra time for Colne Valley parking on Saturday afternoons.",
+  },
+  bath: {
+    intro:
+      "Bath has a verified smash room at Raging Bath plus a separate paint-splatter studio in the city. Visitors often mix a smash session with a night in town, or travel 20–30 minutes to Weston-super-Mare or Bristol when they want a larger multi-activity venue.",
+    sceneDescription:
+      "Raging Bath is the dedicated destruction-therapy listing; Splasherist Bath is a paint room, not a smash room, and should not be compared on the same price unit. Published smash-room pricing for Bath is still incomplete, so treat nearby Weston-super-Mare's per-person rates as a planning benchmark rather than a Bath quote.",
+    whatToLookFor:
+      "Confirm that you are booking a smash session rather than paint, check age rules (the paint studio publishes 5+; the smash listing does not yet have a verified age), and compare parking in BA2 against a train to Weston or Bristol for larger groups.",
+    localTip:
+      "Bath Spa station is the usual arrival point. Combine a daytime smash with the city centre rather than assuming the venue is walkable from the Roman Baths — check the BA2 8PD postcode first.",
+  },
+  "weston-super-mare": {
+    intro:
+      "Weston-super-Mare has a verified multi-activity smash room at The Activity Dome, with a published per-person starting price that is among the lower figures in our UK data. Bristol groups often treat it as the nearest fully equipped alternative when central Bristol inventory is thin.",
+    sceneDescription:
+      "The Activity Dome combines rage rooms with axe throwing, paint splatter, archery and target activities, which suits hen, birthday and mixed-interest groups who want more than a 20-minute smash. The listed starting price is per person; confirm what the current package includes before comparing it with a per-room venue elsewhere in the South West.",
+    whatToLookFor:
+      "Check group capacity, whether everyone smashes together, and the venue's own age policy — our listing does not yet carry a verified minimum age. If you are travelling from Bristol or Bath, compare rail and driving time into BS23 rather than assuming a seafront walk.",
+    localTip:
+      "Weston-super-Mare station is a short hop from Bristol Temple Meads. Summer weekends and school holidays book out the cheaper afternoon slots first.",
+  },
   hull: {
     intro:
       "Hull has a verified rage room venue serving East Yorkshire — a practical option for locals and visitors who want destruction therapy without travelling to Leeds or Sheffield.",

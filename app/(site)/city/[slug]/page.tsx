@@ -18,6 +18,7 @@ import { absoluteUrl, listingUrl } from "@/lib/site-url"
 import { isIndexableLocationPage } from "@/lib/location-indexing"
 import NearbyActivitiesAffiliate from "@/components/NearbyActivitiesAffiliate"
 import { getEligibleLocationDiscoveryPages } from "@/lib/location-discovery"
+import { getCityGuidePath, hasEditorialCityGuide } from "@/lib/city-guides"
 
 interface CityPageProps {
   params: { slug: string }
@@ -229,6 +230,19 @@ export default async function CityPage({ params }: CityPageProps) {
         <h1 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 text-white">
           {hasNearbyOnly ? `Destructive Experiences Near ${cityName}` : `Rage Rooms & Destructive Experiences in ${cityName}`}
         </h1>
+
+        {hasEditorialCityGuide(cityName) && (
+          <p className="mb-6 rounded-lg border border-orange-500/40 bg-[#181818] px-4 py-3 text-sm text-zinc-300 sm:text-base">
+            Looking for a ranked comparison? Read the{" "}
+            <Link
+              href={getCityGuidePath(cityName)}
+              className="font-semibold text-orange-500 underline hover:text-orange-400"
+            >
+              best rage rooms in {cityName} guide
+            </Link>
+            . This page is the booking list.
+          </p>
+        )}
 
         {/* Unique city-specific intro; ad after first paragraph only. */}
         <div className="text-base sm:text-lg text-zinc-300 mb-6 sm:mb-8 space-y-3 sm:space-y-4">

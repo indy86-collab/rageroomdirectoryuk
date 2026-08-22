@@ -261,20 +261,28 @@ export default async function RageRoomsForHenPartiesPage() {
                   <div className="flex-grow">
                     <h3 className="text-lg font-bold text-white mb-1">
                       <Link
-                        href={`/city/${c.slug}`}
-                        className="hover:text-orange-500 transition-colors"
-                      >
-                        {c.city}
-                      </Link>
+                      href={
+                        ["london", "birmingham", "edinburgh"].includes(c.slug)
+                          ? `/occasions/hen-parties/${c.slug}`
+                          : `/city/${c.slug}`
+                      }
+                      className="hover:text-orange-500 transition-colors"
+                    >
+                      {c.city}
+                    </Link>
                     </h3>
                     <p className="text-zinc-300 text-sm leading-relaxed">
                       {c.why}
                     </p>
                     <Link
-                      href={`/city/${c.slug}`}
+                      href={
+                        ["london", "birmingham", "edinburgh"].includes(c.slug)
+                          ? `/occasions/hen-parties/${c.slug}`
+                          : `/city/${c.slug}`
+                      }
                       className="inline-block mt-2 text-sm text-orange-500 hover:text-orange-400 underline"
                     >
-                      Browse {c.city} rage rooms →
+                      Browse {c.city} hen-party venues →
                     </Link>
                   </div>
                 </div>
@@ -445,6 +453,14 @@ export default async function RageRoomsForHenPartiesPage() {
                   className="text-orange-500 hover:text-orange-400 underline"
                 >
                   Rage room vs escape room
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guides/rage-room-vs-paint-splatter"
+                  className="text-orange-500 hover:text-orange-400 underline"
+                >
+                  Rage room vs paint splatter
                 </Link>
               </li>
             </ul>

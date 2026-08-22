@@ -3,6 +3,7 @@ import Link from "next/link"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import GuideMeta from "@/components/GuideMeta"
 import FAQ from "@/components/FAQ"
+import InArticleAd from "@/components/InArticleAd"
 import {
   buildArticleSchema,
   buildBreadcrumbSchema,
@@ -282,6 +283,8 @@ export default function RageRoomVsAxeThrowingPage() {
             </div>
           </section>
 
+          <InArticleAd />
+
           <section aria-labelledby="scenarios-heading" className="mb-10">
             <h2 id="scenarios-heading" className="text-2xl sm:text-3xl font-bold text-white mb-4">
               Which wins for specific occasions?
@@ -334,6 +337,17 @@ export default function RageRoomVsAxeThrowingPage() {
             <p className="text-zinc-300 mt-4 leading-relaxed">
               This format works particularly well for groups of 8–16 where you want two distinct activity peaks and maximum variety within a half-day.
             </p>
+            <p className="text-zinc-300 mt-4 leading-relaxed">
+              For hen and stag groups comparing a smash session with paintball or go-karting, start from the occasion pages rather than a generic “party ideas” article:{" "}
+              <Link href="/guides/rage-rooms-for-hen-parties-uk" className="text-orange-500 underline hover:text-orange-400">
+                hen-party rage rooms
+              </Link>{" "}
+              and{" "}
+              <Link href="/guides/rage-rooms-for-stag-parties-uk" className="text-orange-500 underline hover:text-orange-400">
+                stag-party rage rooms
+              </Link>
+              . City pages for London and Birmingham now include dedicated hen and stag shortlists where inventory supports them.
+            </p>
             <Link
               href="/activities/axe-throwing"
               className="mt-5 inline-flex min-h-11 items-center rounded-md bg-rage-500 px-4 py-2 text-sm font-bold text-white hover:bg-rage-600"
@@ -353,6 +367,11 @@ export default function RageRoomVsAxeThrowingPage() {
                 </Link>
               </li>
               <li>
+                <Link href="/guides/rage-room-vs-paint-splatter" className="text-orange-500 hover:text-orange-400 underline">
+                  Rage room vs paint splatter
+                </Link>
+              </li>
+              <li>
                 <Link href="/guides/rage-rooms-for-stress-relief" className="text-orange-500 hover:text-orange-400 underline">
                   Do rage rooms relieve stress?
                 </Link>
@@ -363,8 +382,13 @@ export default function RageRoomVsAxeThrowingPage() {
                 </Link>
               </li>
               <li>
-                <Link href="/guides/rage-rooms-for-birthdays-uk" className="text-orange-500 hover:text-orange-400 underline">
-                  Rage rooms for birthday parties
+                <Link href="/guides/rage-rooms-for-hen-parties-uk" className="text-orange-500 hover:text-orange-400 underline">
+                  Rage rooms for hen parties
+                </Link>
+              </li>
+              <li>
+                <Link href="/guides/rage-rooms-for-stag-parties-uk" className="text-orange-500 hover:text-orange-400 underline">
+                  Rage rooms for stag parties
                 </Link>
               </li>
               <li>

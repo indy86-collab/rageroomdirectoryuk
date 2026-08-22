@@ -13,6 +13,10 @@ export const BLOG_TO_GUIDE_CANONICAL: Record<string, string> = {
   "what-to-wear-to-a-rage-room": "/guides/what-to-wear-to-a-rage-room",
   "best-rage-rooms-near-me-complete-guide": "/near-me",
   "rage-room-near-me-how-to-find": "/near-me",
+  "how-to-prepare-for-your-first-rage-room-session": "/guides/what-happens-in-a-rage-room",
+  "why-rage-rooms-are-becoming-popular-in-the-uk": "/uk-rage-room-report-2026",
+  "rage-room-etiquette-dos-and-donts": "/blog/rage-room-etiquette-tips-for-first-timers",
+  "best-activities-like-rage-rooms": "/guides/rage-room-vs-axe-throwing",
 }
 
 export function getBlogGuideCanonical(slug: string): string | undefined {
@@ -33,6 +37,10 @@ export function getBlogGuideLink(slug: string): { href: string; label: string } 
     "/guides/what-to-wear-to-a-rage-room": "Read the full what-to-wear guide",
     "/near-me": "Find rage rooms near you on the map",
     "/guides/rage-room-near-me": "Browse rage rooms by UK city",
+    "/guides/what-happens-in-a-rage-room": "Read the first-visit walkthrough",
+    "/uk-rage-room-report-2026": "See the UK Rage Room Report 2026",
+    "/blog/rage-room-etiquette-tips-for-first-timers": "Read the etiquette guide",
+    "/guides/rage-room-vs-axe-throwing": "Compare rage rooms with axe throwing and other activities",
   }
   return { href, label: labels[href] ?? "Read the full guide" }
 }

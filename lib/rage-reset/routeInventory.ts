@@ -41,6 +41,42 @@ export const ROUTE_INVENTORY: ExpectedRoute[] = [
     requireHeaderFooter: true,
   },
   {
+    path: "/guides/cheapest-rage-rooms-uk",
+    expectStatus: 200,
+    group: "article",
+    requireHeaderFooter: true,
+  },
+  {
+    path: "/guides/rage-room-vs-paint-splatter",
+    expectStatus: 200,
+    group: "article",
+    requireHeaderFooter: true,
+  },
+  {
+    path: "/activities/paint-splatter",
+    expectStatus: 200,
+    group: "discovery",
+    requireHeaderFooter: true,
+  },
+  {
+    path: "/activities/paint-splatter/london",
+    expectStatus: 200,
+    group: "discovery",
+    requireHeaderFooter: true,
+  },
+  {
+    path: "/guides/best-rage-rooms-northampton",
+    expectStatus: 200,
+    group: "article",
+    requireHeaderFooter: true,
+  },
+  {
+    path: "/occasions/hen-parties/london",
+    expectStatus: 200,
+    group: "discovery",
+    requireHeaderFooter: true,
+  },
+  {
     path: "/guides/rage-rooms-for-stress-relief",
     expectStatus: 200,
     group: "article",

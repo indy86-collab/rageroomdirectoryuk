@@ -45,10 +45,16 @@ const nextConfig = {
         destination: '/guides/rage-rooms-for-birthdays-uk',
         permanent: true,
       },
-      // London hub/spoke: /city/london is primary; keyword landing redirects.
+      // "Rage room London" should rank on the editorial best-of guide.
+      // /city/london remains the inventory list; this landing is the duplicate.
       {
         source: '/rage-room-london',
-        destination: '/city/london',
+        destination: '/guides/best-rage-rooms-london',
+        permanent: true,
+      },
+      {
+        source: '/rage-room-manchester',
+        destination: '/guides/best-rage-rooms-manchester',
         permanent: true,
       },
       // Listings use city "Newcastle"; collapse the long-form slug duplicate.

@@ -173,6 +173,38 @@ const cityContentMap: Record<string, CityContent> = {
     travelTip:
       "Road traffic around the M27 can affect evening and weekend journeys, so leave time beyond the mileage estimate.",
   },
+  northampton: {
+    intro:
+      "Northampton has a verified smash room in town. Compare Destroy'd Rage Rooms' published room rate with nearby East Midlands options before you book.",
+    localContext:
+      "The NN3 listing is the in-city option. Nearby results keep their real city names so a Leicester or Birmingham venue is not presented as central Northampton.",
+    travelTip:
+      "Northampton station is on the West Coast line from London Euston. Weekend late-afternoon room bookings fill first.",
+  },
+  huddersfield: {
+    intro:
+      "Huddersfield has a verified smash room in Kirklees. Compare SMASH IT's published room rate, minimum age and hen/stag notes below, then use nearby Leeds options if you need more capacity.",
+    localContext:
+      "The HD7 listing is the in-town option. Nearby results keep their real city names so a Leeds venue is not presented as central Huddersfield.",
+    travelTip:
+      "Huddersfield station sits between Manchester and Leeds. Saturday afternoon room bookings fill first for groups.",
+  },
+  bath: {
+    intro:
+      "Bath has a verified smash room plus a separate paint studio. Compare the smash listing with nearby Bristol and Weston-super-Mare venues when you need a larger group package.",
+    localContext:
+      "Raging Bath is the destruction-therapy listing. Paint-splatter venues in Bath are listed separately and should not be treated as smash rooms.",
+    travelTip:
+      "Check the BA2 postcode before assuming a walk from Bath Spa. Weston-super-Mare is the usual alternative for a published per-person smash price.",
+  },
+  "weston-super-mare": {
+    intro:
+      "Weston-super-Mare has a verified multi-activity smash room at The Activity Dome. Compare the published per-person starting price, add-on activities and booking link below.",
+    localContext:
+      "Bristol and Bath groups often use Weston as their nearest fully equipped smash venue. Nearby results keep their real city names.",
+    travelTip:
+      "Weston-super-Mare station is a short hop from Bristol Temple Meads. Summer weekends book out cheaper afternoon slots first.",
+  },
 }
 
 export function getCityContent(cityName: string): CityContent | null {

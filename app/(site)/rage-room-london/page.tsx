@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   title: "Rage Room London | Best Smash Rooms in the Capital 2026",
   description:
     "Discover the best rage rooms in London. Compare top smash rooms, prices, packages and locations. Book your stress-relief session in the capital today.",
-  alternates: { canonical: "/rage-room-london" },
+  alternates: { canonical: "/guides/best-rage-rooms-london" },
   openGraph: {
     title: "Rage Room London | Best Smash Rooms in the Capital",
     description:

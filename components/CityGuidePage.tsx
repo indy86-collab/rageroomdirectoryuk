@@ -2,6 +2,7 @@ import Link from "next/link"
 import FAQ from "@/components/FAQ"
 import GuideMeta from "@/components/GuideMeta"
 import Breadcrumbs from "@/components/Breadcrumbs"
+import InArticleAd from "@/components/InArticleAd"
 import { getCityFAQs } from "@/lib/faqs"
 import { getGuideCityContent } from "@/lib/guide-city-content"
 import { cityToSlug } from "@/lib/location"
@@ -253,6 +254,8 @@ export default async function CityGuidePage({
             </section>
           )}
 
+          <InArticleAd />
+
           {inCity.length > 0 && (
             <>
               <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">
@@ -348,6 +351,22 @@ export default async function CityGuidePage({
               </li>
               <li>
                 <Link
+                  href="/guides/cheapest-rage-rooms-uk"
+                  className="text-orange-500 hover:text-orange-400 underline"
+                >
+                  Cheapest rage rooms in the UK
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guides/rage-room-age-limits-uk"
+                  className="text-orange-500 hover:text-orange-400 underline"
+                >
+                  UK rage room age limits by venue
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/guides/best-rage-rooms-for-couples"
                   className="text-orange-500 hover:text-orange-400 underline"
                 >
@@ -360,6 +379,14 @@ export default async function CityGuidePage({
                   className="text-orange-500 hover:text-orange-400 underline"
                 >
                   Best rage rooms for corporate team building
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guides/rage-room-vs-paint-splatter"
+                  className="text-orange-500 hover:text-orange-400 underline"
+                >
+                  Rage room vs paint splatter
                 </Link>
               </li>
             </ul>

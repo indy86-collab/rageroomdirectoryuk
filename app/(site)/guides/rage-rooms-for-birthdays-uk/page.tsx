@@ -410,6 +410,14 @@ export default async function RageRoomsForBirthdaysPage() {
                   Rage room vs escape room
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/guides/rage-room-vs-paint-splatter"
+                  className="text-orange-500 hover:text-orange-400 underline"
+                >
+                  Rage room vs paint splatter
+                </Link>
+              </li>
             </ul>
           </section>
 

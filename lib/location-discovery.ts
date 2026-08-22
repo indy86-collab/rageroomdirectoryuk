@@ -26,6 +26,10 @@ export const POSSIBLE_DISCOVERY_LOCATION_MINIMUM = 2
  */
 export const APPROVED_TWO_VENUE_DISCOVERY_PAGES = new Set([
   "occasion:birthdays:birmingham",
+  "occasion:hen-parties:birmingham",
+  "occasion:hen-parties:london",
+  "occasion:stag-parties:birmingham",
+  "occasion:stag-parties:london",
 ])
 
 export interface LocationDiscoveryPageData {

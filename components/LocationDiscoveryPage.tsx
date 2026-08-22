@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ArrowDown, Banknote, CalendarCheck, Layers3, Users } from "lucide-react"
 import Breadcrumbs from "@/components/Breadcrumbs"
+import InArticleAd from "@/components/InArticleAd"
 import TrackedDiscoveryLink from "@/components/TrackedDiscoveryLink"
 import ListingsPageClient from "@/components/ListingsPageClient"
 import {
@@ -65,9 +66,20 @@ export default function LocationDiscoveryPage({
             {page.type === "activity"
               ? activity?.value === "rage-room"
                 ? `Explore ${pluraliseVenue(page.listings.length)} whose structured location places them in ${page.location.name}. Compare rage-room prices, age guidance, other activities and booking options.`
+                : activity?.value === "paint-splatter"
+                  ? `Explore ${pluraliseVenue(page.listings.length)} offering verified paint and splatter rooms in ${page.location.name}. Compare published prices, ages and smash-and-paint combos.`
                 : `Explore ${pluraliseVenue(page.listings.length)} offering verified ${activity?.shortLabel.toLowerCase()} experiences in ${page.location.name}.`
               : `Explore ${pluraliseVenue(page.listings.length)} with evidence-backed suitability for ${occasion?.shortLabel.toLowerCase()} in ${page.location.name}.`}
           </p>
+          {activity?.value === "paint-splatter" && (
+            <p className="mt-3 text-sm leading-relaxed text-zinc-400">
+              Not sure smash or paint? See the{" "}
+              <Link href="/guides/rage-room-vs-paint-splatter" className="text-orange-500 underline hover:text-orange-400">
+                rage room vs paint splatter guide
+              </Link>
+              .
+            </p>
+          )}
           {page.location.matchMode === "city-or-region" && (
             <p className="mt-3 text-sm leading-relaxed text-zinc-400">
               London uses the directory&apos;s explicit city-area rule: a venue must have London as its structured city or region. Nearby venues are not included by distance.
@@ -89,6 +101,8 @@ export default function LocationDiscoveryPage({
             </Link>
           </div>
         </header>
+
+        <InArticleAd />
 
         <ListingsPageClient
           initialListings={page.listings}
@@ -164,6 +178,14 @@ export default function LocationDiscoveryPage({
             >
               All UK {page.category.shortLabel}
             </Link>
+            {activity?.value === "paint-splatter" && (
+              <Link
+                href="/guides/rage-room-vs-paint-splatter"
+                className="inline-flex min-h-11 items-center rounded-md border border-zinc-700 px-4 py-2 text-sm font-semibold text-zinc-300 hover:border-rage-500/50 hover:text-rage-300"
+              >
+                Rage room vs paint
+              </Link>
+            )}
             <Link
               href={`/city/${page.location.slug}`}
               className="inline-flex min-h-11 items-center rounded-md border border-zinc-700 px-4 py-2 text-sm font-semibold text-zinc-300 hover:border-rage-500/50 hover:text-rage-300"

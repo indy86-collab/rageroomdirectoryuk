@@ -87,6 +87,35 @@ describe("SEO regressions", () => {
     })
   })
 
+  it("collapses the London keyword landing onto the editorial city guide", async () => {
+    const redirects = await nextConfig.redirects()
+    const londonRedirect = redirects.find(
+      (redirect: { source?: string }) => redirect.source === "/rage-room-london"
+    )
+
+    expect(londonRedirect).toMatchObject({
+      destination: "/guides/best-rage-rooms-london",
+      permanent: true,
+    })
+  })
+
+  it("includes the new commercial guides in the sitemap", async () => {
+    const urls = new Set((await sitemap()).map((entry) => entry.url))
+    expect(urls.has("https://www.rageroomdirectory.co.uk/guides/best-rage-rooms-northampton")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/guides/best-rage-rooms-huddersfield")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/guides/best-rage-rooms-bath")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/guides/best-rage-rooms-weston-super-mare")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/guides/cheapest-rage-rooms-uk")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/guides/rage-room-age-limits-uk")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/guides/can-you-smash-your-own-stuff-uk")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/guides/rage-room-vs-paint-splatter")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/activities/paint-splatter/london")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/activities/paint-splatter/birmingham")).toBe(false)
+    expect(
+      urls.has("https://www.rageroomdirectory.co.uk/blog/why-rage-rooms-are-becoming-popular-in-the-uk")
+    ).toBe(false)
+  })
+
   it("advertises both the page and image sitemaps", () => {
     expect(robots().sitemap).toEqual([
       "https://www.rageroomdirectory.co.uk/sitemap.xml",

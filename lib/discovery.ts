@@ -92,7 +92,7 @@ export const ACTIVITY_DEFINITIONS: ActivityDefinition[] = [
       age: "Paint experiences set their own age and supervision rules. Confirm paint type, adult supervision and minimum age directly.",
       whatToWear: "Use old clothes and closed-toe shoes even when coveralls are supplied. Ask whether paint can stain hair, footwear or personal items.",
       booking: "Reserve in advance so the venue can prepare paint, canvases and protective kit. Check whether artwork, extra colours or other activity add-ons cost more.",
-      pairing: "A splatter session offers a creative contrast to smashing: one activity makes a mess through colour, the other through controlled destruction.",
+      pairing: "A splatter session offers a creative contrast to smashing: one activity makes a mess through colour, the other through controlled destruction. Several UK venues now offer both in one visit.",
     },
   },
   {

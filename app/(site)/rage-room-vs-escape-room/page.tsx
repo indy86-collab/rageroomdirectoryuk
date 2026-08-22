@@ -409,6 +409,14 @@ export default function RageRoomVsEscapeRoomPage() {
             <ul className="space-y-2 text-zinc-300">
               <li>
                 <Link
+                  href="/guides/rage-room-vs-paint-splatter"
+                  className="text-orange-500 hover:text-orange-400 underline"
+                >
+                  Rage room vs paint splatter
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/guides/what-happens-in-a-rage-room"
                   className="text-orange-500 hover:text-orange-400 underline"
                 >

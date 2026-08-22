@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import Link from "next/link"
 import { getAllBlogPosts } from "@/lib/blog-posts"
+import { getBlogGuideCanonical } from "@/lib/blog-guide-canonicals"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import BlogListing from "@/components/BlogListing"
 
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 }
 
 export default function BlogPage() {
-  const posts = getAllBlogPosts()
+  const posts = getAllBlogPosts().filter((post) => !getBlogGuideCanonical(post.slug))
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },

@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
+import InArticleAd from "@/components/InArticleAd"
 import RageResetCTA from "@/components/RageResetCTA"
 import GuideMeta from "@/components/GuideMeta"
 import Link from "next/link"
@@ -182,6 +183,21 @@ export default function WhatHappensInARageRoomPage() {
             <p className="mt-4">
               Arrive 10-15 minutes early to allow time for check-in, safety briefing, and getting suited up. Most venues have parking available, but check their website or confirmation email for specific directions and parking information.
             </p>
+            <p className="mt-4">
+              Full clothing detail sits in the{" "}
+              <Link href="/guides/what-to-wear-to-a-rage-room" className="text-orange-500 underline hover:text-orange-400">
+                what to wear guide
+              </Link>
+              . If you want to add your own smashables, read{" "}
+              <Link href="/guides/can-you-smash-your-own-stuff-uk" className="text-orange-500 underline hover:text-orange-400">
+                BYO rules
+              </Link>{" "}
+              first — most rooms supply their own items. Age rules are not always 18+; check the{" "}
+              <Link href="/guides/rage-room-age-limits-uk" className="text-orange-500 underline hover:text-orange-400">
+                venue age table
+              </Link>
+              .
+            </p>
           </section>
 
           <section>
@@ -202,6 +218,8 @@ export default function WhatHappensInARageRoomPage() {
               This is a good time to ask about anything you're unsure about, such as what items are included in your package, whether you can bring your own music, or if video recording is available.
             </p>
           </section>
+
+          <InArticleAd />
 
           <section>
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">
