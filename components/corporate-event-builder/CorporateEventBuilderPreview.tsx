@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
+import Link from "next/link"
 import { Check, ClipboardList, Mail, PoundSterling, MapPin } from "lucide-react"
 import { trackCorporateEventBuilderView } from "@/lib/analytics"
 
@@ -38,11 +39,12 @@ export default function CorporateEventBuilderPreview() {
         Product preview
       </p>
       <h2 className="mt-2 text-xl font-bold text-white sm:text-2xl">
-        Interactive Event Builder — not just a PDF
+        This is what you build — try the real tool
       </h2>
       <p className="mt-2 max-w-3xl text-sm leading-relaxed text-zinc-400">
-        After purchase you enter your team details and generate a usable plan.
-        Examples below are illustrative; the full tool unlocks after checkout.
+        Plan your team event for free. Examples below are illustrative; the
+        builder uses your real details. Pay only if you want a clean PDF of the
+        finished plan.
       </p>
       <div className="mt-5 grid gap-3 sm:grid-cols-2">
         {previews.map((preview) => {
@@ -61,12 +63,18 @@ export default function CorporateEventBuilderPreview() {
               </p>
               <p className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-500">
                 <Check className="h-3.5 w-3.5 text-rage-500" />
-                Unlocks after purchase
+                Included in the free builder
               </p>
             </article>
           )
         })}
       </div>
+      <Link
+        href="/corporate-event-builder"
+        className="mt-5 inline-flex min-h-[44px] items-center text-sm font-semibold text-rage-500 hover:text-rage-400"
+      >
+        Open the Event Builder
+      </Link>
     </div>
   )
 }

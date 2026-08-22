@@ -33,6 +33,13 @@ describe("digital checkout session options", () => {
     ).toBe(false)
   })
 
+  it("says Event Builder checkout is for the PDF pack, not builder access", () => {
+    const corporate = getDigitalProduct("corporate-team-building-toolkit")!
+    const options = digitalCheckoutSessionOptions(corporate)
+    expect(options.custom_text.submit.message).toMatch(/event plan PDF/i)
+    expect(options.custom_text.submit.message).toMatch(/builder itself is free/i)
+  })
+
   it("does not offer a promo-code field and uses a Pay button in en-GB", () => {
     const party = getDigitalProduct("rage-room-party-planner")!
     const options = digitalCheckoutSessionOptions(party)

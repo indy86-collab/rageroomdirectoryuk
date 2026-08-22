@@ -496,8 +496,8 @@ export default async function Home() {
                 </h2>
                 <p className="mt-3 max-w-3xl text-sm leading-relaxed text-zinc-300 sm:text-base">
                   Use the Corporate Rage Room Event Builder to build your budget, compare
-                  venues, prepare internal approval and generate team invitations — without
-                  starting from a blank page.
+                  venues, prepare internal approval and generate team invitations for free —
+                  then pay only if you want the full PDF.
                 </p>
 
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -519,11 +519,11 @@ export default async function Home() {
                     listName="Homepage Corporate CTA"
                     className="btn-rage inline-flex min-h-[46px] items-center justify-center gap-2 text-sm uppercase tracking-wider"
                   >
-                    Build My Team Event
+                    Start planning — free
                     <ArrowRight className="h-4 w-4" />
                   </TrackedProductLink>
                   <p className="text-sm font-semibold text-zinc-300">
-                    Interactive builder ·{" "}
+                    Free to plan · PDF pack{" "}
                     <span className="text-white">{corporateProduct.priceLabel}</span>
                     {corporateProduct.compareAtLabel ? (
                       <span className="ml-1 text-zinc-500 line-through">

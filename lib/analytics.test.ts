@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 import {
   getDirectorySourcePath,
   getSafeDirectoryReferrerPath,
+  trackAffiliateWidgetLoad,
   trackDirectoryEvent,
   trackPurchase,
 } from "./analytics"
@@ -237,5 +238,21 @@ describe("directory conversion analytics", () => {
     })
 
     expect(gtag).not.toHaveBeenCalled()
+  })
+
+  it("tracks affiliate widget load without PII", () => {
+    trackAffiliateWidgetLoad({
+      provider: "getyourguide",
+      placement: "city",
+      city: "Manchester",
+      recommendationId: "city_default",
+    })
+
+    expect(gtag).toHaveBeenCalledWith("event", "affiliate_widget_load", {
+      affiliate_provider: "getyourguide",
+      affiliate_placement: "city",
+      city: "Manchester",
+      recommendation_id: "city_default",
+    })
   })
 })

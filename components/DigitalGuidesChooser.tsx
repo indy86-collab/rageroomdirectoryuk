@@ -33,7 +33,7 @@ const intents: {
   {
     id: "corporate",
     label: "Work / team building",
-    hint: "Event Builder — budget & approval",
+    hint: "Free Event Builder — pay for the PDF",
     productId: "corporate-team-building-toolkit",
   },
   {

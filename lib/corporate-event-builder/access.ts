@@ -26,8 +26,8 @@ export type BuilderAccessResult =
     }
 
 /**
- * Verify a Stripe Checkout session grants Corporate Event Builder access.
- * Historical Corporate Toolkit purchasers keep access via the same product ID.
+ * Verify a Stripe Checkout session unlocks the Event Builder PDF pack.
+ * The builder itself is free. Historical purchasers keep PDF access.
  */
 export async function verifyCorporateBuilderAccess(
   sessionId: string | null | undefined
@@ -57,7 +57,7 @@ export async function verifyCorporateBuilderAccess(
     ) {
       return {
         ok: false,
-        error: "This order does not unlock the Corporate Event Builder.",
+        error: "This order does not unlock the Event Builder PDF pack.",
         status: 403,
       }
     }
@@ -98,7 +98,7 @@ export async function verifyCorporateBuilderAccessFromToken(
   ) {
     return {
       ok: false,
-      error: "This download link does not unlock the Corporate Event Builder.",
+      error: "This download link does not unlock the Event Builder PDF pack.",
       status: 403,
     }
   }

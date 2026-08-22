@@ -449,6 +449,10 @@ export function trackAffiliatePlannerComplete(params: AffiliateEventParams) {
   trackEvent("affiliate_planner_complete", affiliateEventParams(params))
 }
 
+export function trackAffiliateWidgetLoad(params: AffiliateEventParams) {
+  trackEvent("affiliate_widget_load", affiliateEventParams(params))
+}
+
 export function trackProductDownload(
   product: AnalyticsProduct,
   fileName: string
@@ -566,6 +570,18 @@ export function trackCorporateBuilderPlanCompleted() {
 
 export function trackCorporateBuilderExport() {
   trackEvent("corporate_builder_export", {
+    product: CORPORATE_BUILDER_PRODUCT,
+  })
+}
+
+export function trackCorporateBuilderPdfPreview() {
+  trackEvent("corporate_builder_pdf_preview", {
+    product: CORPORATE_BUILDER_PRODUCT,
+  })
+}
+
+export function trackCorporateBuilderPdfDownload() {
+  trackEvent("corporate_builder_pdf_download", {
     product: CORPORATE_BUILDER_PRODUCT,
   })
 }

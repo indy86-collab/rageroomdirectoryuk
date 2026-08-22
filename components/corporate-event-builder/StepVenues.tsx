@@ -17,14 +17,12 @@ import { fieldClass, helpClass, labelClass, sectionClass } from "./fieldStyles"
 
 type StepVenuesProps = {
   event: CorporateEvent
-  sessionId: string
   onChange: (patch: Partial<CorporateEvent>) => void
   onVenueAdded?: () => void
 }
 
 export default function StepVenues({
   event,
-  sessionId,
   onChange,
   onVenueAdded,
 }: StepVenuesProps) {
@@ -38,7 +36,6 @@ export default function StepVenues({
     setError(null)
     try {
       const params = new URLSearchParams({
-        session_id: sessionId,
         q: nextQuery.trim(),
         city: event.location.trim(),
       })

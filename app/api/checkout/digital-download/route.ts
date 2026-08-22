@@ -23,6 +23,7 @@ export async function POST(request: Request) {
     const body = (await request.json()) as {
       productId?: string
       customerEmail?: string
+      returnTo?: string
     }
     const product = body.productId ? getDigitalProduct(body.productId) : null
 
@@ -67,7 +68,11 @@ export async function POST(request: Request) {
       client_reference_id: clientReferenceId,
       line_items: [{ price: priceId, quantity: 1 }],
       ...(customerEmail ? { customer_email: customerEmail } : {}),
-      success_url: `${absoluteUrl("/order/success")}?session_id={CHECKOUT_SESSION_ID}`,
+      success_url:
+        body.returnTo === "builder" &&
+        product.id === "corporate-team-building-toolkit"
+          ? `${absoluteUrl("/corporate-event-builder")}?session_id={CHECKOUT_SESSION_ID}`
+          : `${absoluteUrl("/order/success")}?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${absoluteUrl("/checkout/cancel")}?product_id=${encodeURIComponent(product.id)}&client_reference_id=${encodeURIComponent(clientReferenceId)}`,
       metadata: {
         clientReferenceId,

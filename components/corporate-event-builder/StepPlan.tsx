@@ -1,21 +1,37 @@
 "use client"
 
+import { useState } from "react"
 import {
   EVENT_CHECKLIST,
+  buildCorporateEventPlanPdf,
   buildEventSummaryLines,
   buildEventSummaryTitle,
   buildFeedbackSurvey,
   defaultSchedule,
+  downloadPdfBytes,
+  planPdfFilename,
   type AttendeeRow,
   type CorporateEvent,
   type RsvpStatus,
   type ScheduleItem,
 } from "@/lib/corporate-event-builder"
+import { CORPORATE_EVENT_BUILDER_PRODUCT_ID } from "@/lib/corporate-event-builder/types"
+import {
+  type AnalyticsProduct,
+  trackCorporateBuilderPdfDownload,
+  trackCorporateBuilderPdfPreview,
+} from "@/lib/analytics"
+import DigitalCheckoutButton from "@/components/DigitalCheckoutButton"
 import CopyButton from "./CopyButton"
 import { fieldClass, helpClass, labelClass, sectionClass } from "./fieldStyles"
 
 type StepPlanProps = {
   event: CorporateEvent
+  paid: boolean
+  productPriceLabel: string
+  analyticsProduct: AnalyticsProduct
+  toolkitDownloadHref?: string | null
+  entitlementSessionId: string
   onChange: (patch: Partial<CorporateEvent>) => void
   onExport?: () => void
   onPlanCompleted?: () => void
@@ -40,6 +56,11 @@ function newAttendee(): AttendeeRow {
 
 export default function StepPlan({
   event,
+  paid,
+  productPriceLabel,
+  analyticsProduct,
+  toolkitDownloadHref,
+  entitlementSessionId,
   onChange,
   onExport,
   onPlanCompleted,
@@ -48,6 +69,8 @@ export default function StepPlan({
   const summaryLines = buildEventSummaryLines(event)
   const feedback = buildFeedbackSurvey(event)
   const doneCount = event.checklist.filter((c) => c.done).length
+  const [pdfBusy, setPdfBusy] = useState<"preview" | "full" | null>(null)
+  const [pdfError, setPdfError] = useState<string | null>(null)
 
   function updateSchedule(index: number, patch: Partial<ScheduleItem>) {
     const schedule = event.schedule.map((item, i) =>
@@ -75,8 +98,45 @@ export default function StepPlan({
   }
 
   function handlePrint() {
+    if (!paid) return
     onExport?.()
     window.print()
+  }
+
+  async function handlePdf(mode: "preview" | "full") {
+    setPdfError(null)
+    setPdfBusy(mode)
+    try {
+      if (mode === "full") {
+        const params = new URLSearchParams({
+          session_id: entitlementSessionId,
+        })
+        const accessRes = await fetch(
+          `/api/corporate-event-builder/access?${params}`
+        )
+        if (!accessRes.ok) {
+          throw new Error("We could not confirm this purchase yet.")
+        }
+      }
+      const bytes = await buildCorporateEventPlanPdf(event, mode)
+      const name =
+        mode === "preview"
+          ? planPdfFilename(event).replace(".pdf", "-preview.pdf")
+          : planPdfFilename(event)
+      downloadPdfBytes(bytes, name)
+      if (mode === "preview") {
+        trackCorporateBuilderPdfPreview()
+      } else {
+        trackCorporateBuilderPdfDownload()
+        onExport?.()
+      }
+    } catch (error) {
+      setPdfError(
+        error instanceof Error ? error.message : "Unable to create the PDF."
+      )
+    } finally {
+      setPdfBusy(null)
+    }
   }
 
   const printable = [
@@ -100,20 +160,50 @@ export default function StepPlan({
           <div>
             <h2 className="text-lg font-bold text-white">{summaryTitle}</h2>
             <p className={helpClass}>
-              Your interactive plan summary. Print or copy for internal sharing.
+              Preview your plan on screen first. Download a clean PDF when you
+              are happy with it.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
-            <CopyButton text={printable} label="Copy summary" onCopied={onExport} />
             <button
               type="button"
-              onClick={handlePrint}
-              className="inline-flex min-h-[44px] items-center justify-center rounded-md border border-zinc-700 px-3 text-sm font-semibold text-zinc-100"
+              disabled={pdfBusy !== null}
+              onClick={() => handlePdf("preview")}
+              className="inline-flex min-h-[44px] items-center justify-center rounded-md border border-zinc-700 px-3 text-sm font-semibold text-zinc-100 disabled:opacity-50"
             >
-              Print summary
+              {pdfBusy === "preview" ? "Preparing preview…" : "Preview PDF"}
             </button>
+            {paid ? (
+              <>
+                <CopyButton
+                  text={printable}
+                  label="Copy summary"
+                  onCopied={onExport}
+                />
+                <button
+                  type="button"
+                  onClick={handlePrint}
+                  className="inline-flex min-h-[44px] items-center justify-center rounded-md border border-zinc-700 px-3 text-sm font-semibold text-zinc-100"
+                >
+                  Print summary
+                </button>
+                <button
+                  type="button"
+                  disabled={pdfBusy !== null}
+                  onClick={() => handlePdf("full")}
+                  className="btn-rage inline-flex min-h-[44px] items-center justify-center px-3 text-sm disabled:opacity-50"
+                >
+                  {pdfBusy === "full"
+                    ? "Preparing PDF…"
+                    : "Download event plan PDF"}
+                </button>
+              </>
+            ) : null}
           </div>
         </div>
+        {pdfError ? (
+          <p className="mt-3 text-sm text-red-300">{pdfError}</p>
+        ) : null}
         <ul className="mt-4 space-y-1 text-sm text-zinc-200">
           {summaryLines.map((line) => (
             <li key={line}>
@@ -123,6 +213,43 @@ export default function StepPlan({
           ))}
         </ul>
       </div>
+
+      {!paid ? (
+        <div className={`${sectionClass} border-rage-500/30`}>
+          <h2 className="text-lg font-bold text-white">
+            Happy with this plan?
+          </h2>
+          <p className={`${helpClass} mt-1`}>
+            Unlock a clean PDF of this event plan plus the 16-page printable
+            toolkit. The builder stays free.
+          </p>
+          <div className="mt-4 max-w-md">
+            <DigitalCheckoutButton
+              productId={CORPORATE_EVENT_BUILDER_PRODUCT_ID}
+              analyticsProduct={analyticsProduct}
+              checkoutSource="builder_plan"
+              returnTo="builder"
+              collectEmail
+            >
+              Unlock full PDF — {productPriceLabel}
+            </DigitalCheckoutButton>
+          </div>
+        </div>
+      ) : toolkitDownloadHref ? (
+        <div className={sectionClass}>
+          <h2 className="text-lg font-bold text-white">Toolkit PDF</h2>
+          <p className={`${helpClass} mt-1`}>
+            Prefer printable worksheets as well? Download the original 16-page
+            toolkit (link valid for 72 hours after payment).
+          </p>
+          <a
+            href={toolkitDownloadHref}
+            className="mt-3 inline-flex min-h-[44px] items-center text-sm font-semibold text-rage-500 hover:text-rage-400"
+          >
+            Download toolkit PDF
+          </a>
+        </div>
+      ) : null}
 
       <div className={sectionClass}>
         <div className="flex flex-wrap items-end justify-between gap-3">
@@ -344,15 +471,6 @@ export default function StepPlan({
         <pre className="mt-4 whitespace-pre-wrap rounded-md border border-zinc-800 bg-[#121212] p-4 text-sm text-zinc-200">
           {feedback.body}
         </pre>
-      </div>
-
-      <div className={sectionClass}>
-        <h2 className="text-lg font-bold text-white">Legacy toolkit PDF</h2>
-        <p className={`${helpClass} mt-1`}>
-          Prefer the interactive builder above. If you still want the original
-          printable worksheets, use the download link from your purchase email
-          or order success page (valid for 72 hours after payment).
-        </p>
       </div>
     </div>
   )

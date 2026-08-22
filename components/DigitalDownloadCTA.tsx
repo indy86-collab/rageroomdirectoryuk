@@ -26,8 +26,8 @@ const ctaCopy = {
   corporate: {
     eyebrow: "For work events",
     title: "Planning a corporate rage room team event?",
-    copy: "Build your budget, compare venues, prepare internal approval and generate team invitations with the Corporate Event Builder.",
-    buttonPrefix: "Build My Team Event",
+    copy: "Plan your budget, venues, approval and invitations for free. Pay only if you want a clean PDF of the finished plan.",
+    buttonPrefix: "Start planning free",
     href: "/digital-downloads/corporate-rage-room-team-building-toolkit",
     productId: "corporate-team-building-toolkit",
   },

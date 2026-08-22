@@ -29,6 +29,10 @@ type DigitalCheckoutButtonProps = {
   collectEmail?: boolean
   /** Hide the non-booking disclaimer (rare; default shows it). */
   hideDisclaimer?: boolean
+  /** Override analytics source (e.g. builder_plan). */
+  checkoutSource?: string
+  /** After payment, return to the Event Builder instead of /order/success. */
+  returnTo?: "builder"
 }
 
 function isValidEmail(value: string) {
@@ -44,6 +48,8 @@ export default function DigitalCheckoutButton({
   customerEmail,
   collectEmail = false,
   hideDisclaimer = false,
+  checkoutSource,
+  returnTo,
 }: DigitalCheckoutButtonProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -71,7 +77,8 @@ export default function DigitalCheckoutButton({
       }
       if (productId === CORPORATE_EVENT_BUILDER_PRODUCT_ID) {
         trackCorporateBuilderCheckoutClick(
-          resumeFromCancel ? "checkout_cancel" : "product_page"
+          checkoutSource ??
+            (resumeFromCancel ? "checkout_cancel" : "product_page")
         )
       }
       if (productId === CORPORATE_BOOKING_SYSTEM_PRODUCT_ID) {
@@ -93,6 +100,7 @@ export default function DigitalCheckoutButton({
           ...(trimmedEmail && isValidEmail(trimmedEmail)
             ? { customerEmail: trimmedEmail }
             : {}),
+          ...(returnTo === "builder" ? { returnTo: "builder" } : {}),
         }),
       })
       const data = (await response.json()) as { url?: string; error?: string }
@@ -155,7 +163,7 @@ export default function DigitalCheckoutButton({
           {productId === CORPORATE_BOOKING_SYSTEM_PRODUCT_ID
             ? "Next: Stripe checkout. Venue-owner workspace after payment — not a consumer planner or a booking."
             : productId === CORPORATE_EVENT_BUILDER_PRODUCT_ID
-              ? "Next: Stripe checkout. Interactive Event Builder after payment — not a venue booking."
+              ? "Next: Stripe checkout for your event plan PDF and toolkit. The builder itself is free — not a venue booking."
               : "Next: Stripe checkout to pay for this download. Instant file — not a venue booking."}
         </p>
       )}

@@ -21,6 +21,11 @@ import {
 import type { Listing } from "@/types/listing"
 import { getCityHeroImagePath } from "@/lib/city-images"
 import LocationHero from "@/components/LocationHero"
+import NearbyActivitiesAffiliate from "@/components/NearbyActivitiesAffiliate"
+import {
+  getOccasionPlannerGroup,
+  shouldShowAffiliateOnOccasion,
+} from "@/lib/getyourguide"
 
 export default function LocationDiscoveryPage({
   page,
@@ -122,6 +127,19 @@ export default function LocationDiscoveryPage({
           showOccasions={page.type === "activity"}
           resultsLabel={page.type === "activity" ? "verified venues" : "suitable venues"}
         />
+
+        {page.type === "occasion" &&
+          occasion &&
+          shouldShowAffiliateOnOccasion(occasion.slug) && (
+            <div className="mt-8">
+              <NearbyActivitiesAffiliate
+                city={page.location.name}
+                placement="occasion"
+                occasionSlug={occasion.slug}
+                initialGroup={getOccasionPlannerGroup(occasion.slug) ?? undefined}
+              />
+            </div>
+          )}
 
         <section className="mt-10 grid gap-4 lg:grid-cols-3" aria-labelledby="location-booking-heading">
           <div className="rounded-lg border border-zinc-800 bg-[#181818] p-5">

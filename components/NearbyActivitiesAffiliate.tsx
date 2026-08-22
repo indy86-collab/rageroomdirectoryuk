@@ -15,14 +15,18 @@ import {
   trackAffiliatePlannerAnswer,
   trackAffiliatePlannerComplete,
   trackAffiliatePlannerStart,
+  trackAffiliateWidgetLoad,
 } from "@/lib/analytics"
+import GetYourGuideWidget from "@/components/GetYourGuideWidget"
 import {
-  buildGetYourGuideUrl,
-  getActivityRecommendations,
+  buildAffiliateCampaign,
+  buildGetYourGuideBrowseUrl,
+  getWidgetSearchQuery,
   PLANNER_GROUPS,
   PLANNER_LABELS,
   PLANNER_TIMINGS,
   PLANNER_VIBES,
+  type AffiliatePlacement,
   type PlannerGroup,
   type PlannerTiming,
   type PlannerVibe,
@@ -30,12 +34,14 @@ import {
 
 type NearbyActivitiesAffiliateProps = {
   city: string
-  placement: "listing" | "city"
+  placement: AffiliatePlacement
   listingSlug?: string
   venueName?: string
+  occasionSlug?: string
+  initialGroup?: PlannerGroup
 }
 
-type PlannerStep = "intro" | "group" | "vibe" | "timing" | "results"
+type PlannerStep = "idle" | "group" | "vibe" | "timing"
 
 type SavedPlan = {
   group: PlannerGroup
@@ -60,13 +66,16 @@ export default function NearbyActivitiesAffiliate({
   placement,
   listingSlug,
   venueName,
+  occasionSlug,
+  initialGroup,
 }: NearbyActivitiesAffiliateProps) {
   const containerRef = useRef<HTMLElement>(null)
   const hasTrackedView = useRef(false)
-  const [step, setStep] = useState<PlannerStep>("intro")
-  const [group, setGroup] = useState<PlannerGroup | null>(null)
+  const [step, setStep] = useState<PlannerStep>("idle")
+  const [group, setGroup] = useState<PlannerGroup | null>(initialGroup ?? null)
   const [vibe, setVibe] = useState<PlannerVibe | null>(null)
   const [timing, setTiming] = useState<PlannerTiming | null>(null)
+  const [widgetLoaded, setWidgetLoaded] = useState(false)
   const provider = "getyourguide"
 
   const baseAnalytics = {
@@ -113,13 +122,22 @@ export default function NearbyActivitiesAffiliate({
   }, [city, listingSlug, placement])
 
   const planComplete = group !== null && vibe !== null && timing !== null
-  const recommendations = planComplete
-    ? getActivityRecommendations({ group, vibe, timing })
-    : []
+  const plan = planComplete ? { group, vibe, timing } : undefined
+  const widgetQuery = getWidgetSearchQuery(city, plan)
+  const placementCampaign = buildAffiliateCampaign({
+    placement,
+    occasionSlug,
+  })
+  const widgetCampaign = buildAffiliateCampaign({
+    placement,
+    occasionSlug,
+    personalised: planComplete,
+  })
+  const browseUrl = buildGetYourGuideBrowseUrl(city, placementCampaign)
 
   function startPlanner() {
     trackAffiliatePlannerStart(baseAnalytics)
-    setStep(planComplete ? "results" : "group")
+    setStep(group ? "vibe" : "group")
   }
 
   function chooseGroup(choice: PlannerGroup) {
@@ -170,11 +188,11 @@ export default function NearbyActivitiesAffiliate({
       plannerVibe: vibe,
       plannerTiming: choice,
     })
-    setStep("results")
+    setStep("idle")
   }
 
   function resetPlanner() {
-    setGroup(null)
+    setGroup(initialGroup ?? null)
     setVibe(null)
     setTiming(null)
     try {
@@ -182,12 +200,23 @@ export default function NearbyActivitiesAffiliate({
     } catch {
       // Ignore unavailable browser storage.
     }
-    setStep("group")
+    setStep(initialGroup ? "vibe" : "group")
   }
 
   function goBack() {
-    if (step === "vibe") setStep("group")
+    if (step === "vibe") setStep(initialGroup ? "idle" : "group")
     if (step === "timing") setStep("vibe")
+  }
+
+  function requestWidgetLoad() {
+    setWidgetLoaded(true)
+    trackAffiliateWidgetLoad({
+      ...baseAnalytics,
+      recommendationId: planComplete ? "personalised" : "city_default",
+      ...(group ? { plannerGroup: group } : {}),
+      ...(vibe ? { plannerVibe: vibe } : {}),
+      ...(timing ? { plannerTiming: timing } : {}),
+    })
   }
 
   const venueLabel = venueName || "your rage room"
@@ -196,7 +225,9 @@ export default function NearbyActivitiesAffiliate({
       ? `Suggested order: activity → ${venueLabel}`
       : timing === "after"
         ? `Suggested order: ${venueLabel} → activity`
-        : `Suggested order: activity → ${venueLabel} → evening experience`
+        : planComplete
+          ? `Suggested order: activity → ${venueLabel} → evening experience`
+          : null
 
   return (
     <section
@@ -209,47 +240,95 @@ export default function NearbyActivitiesAffiliate({
       <div className="relative">
         <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-orange-400">
           <MapPin className="h-4 w-4" aria-hidden="true" />
-          Personalised day planner
+          Add something around your smash
         </div>
         <h2
           id={`nearby-activities-${placement}`}
           className="text-xl font-bold text-white sm:text-2xl"
         >
-          Build your smash day in {city}
+          Build the rest of your smash day in {city}
         </h2>
+        <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-300 sm:text-base">
+          Rage rooms last about an hour. Load bookable tours, tastings and city
+          walks that fit around your session — photos, prices and ratings come
+          from GetYourGuide.
+        </p>
 
-        {step === "intro" && (
-          <div className="mt-3 max-w-3xl">
-            <p className="text-sm leading-6 text-zinc-300 sm:text-base">
-              Tell us who is coming, the mood you want and when you have time.
-              We&apos;ll create three activity ideas to fit around your rage room
-              visit.
-            </p>
-            <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div className="mt-5">
+          <GetYourGuideWidget
+            key={`${widgetQuery}:${widgetCampaign}`}
+            query={widgetQuery}
+            campaign={widgetCampaign}
+            city={city}
+            loaded={widgetLoaded}
+            onRequestLoad={requestWidgetLoad}
+          />
+        </div>
+
+        <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <a
+            href={browseUrl}
+            target="_blank"
+            rel="sponsored noopener noreferrer"
+            onClick={() =>
+              trackAffiliateClick({
+                ...baseAnalytics,
+                recommendationId: "browse_all",
+                ...(group ? { plannerGroup: group } : {}),
+                ...(vibe ? { plannerVibe: vibe } : {}),
+                ...(timing ? { plannerTiming: timing } : {}),
+              })
+            }
+            className="inline-flex min-h-[44px] items-center justify-center gap-1 px-2 text-sm font-semibold text-zinc-300 underline decoration-zinc-600 underline-offset-4 hover:text-orange-400"
+          >
+            Browse everything in {city}
+            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          </a>
+        </div>
+
+        {step === "idle" && (
+          <div className="mt-5">
+            {planComplete ? (
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      PLANNER_LABELS.groups[group],
+                      PLANNER_LABELS.vibes[vibe],
+                      PLANNER_LABELS.timings[timing],
+                    ].map((label) => (
+                      <span
+                        key={label}
+                        className="inline-flex items-center gap-1 rounded-full border border-orange-500/30 bg-orange-500/10 px-2.5 py-1 text-xs font-semibold text-orange-300"
+                      >
+                        <Check className="h-3 w-3" aria-hidden="true" />
+                        {label}
+                      </span>
+                    ))}
+                  </div>
+                  {suggestedOrder && (
+                    <p className="mt-2 text-sm text-zinc-400">{suggestedOrder}</p>
+                  )}
+                </div>
+                <button
+                  type="button"
+                  onClick={resetPlanner}
+                  className="inline-flex min-h-[44px] items-center gap-1 self-start px-2 text-sm text-zinc-400 hover:text-white"
+                >
+                  <RotateCcw className="h-4 w-4" aria-hidden="true" />
+                  Change answers
+                </button>
+              </div>
+            ) : (
               <button
                 type="button"
                 onClick={startPlanner}
-                className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-md bg-orange-500 px-5 py-3 font-semibold text-white transition-colors hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-offset-2 focus:ring-offset-[#181818]"
+                className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-md border border-orange-500/40 bg-orange-500/10 px-5 py-3 font-semibold text-orange-200 transition-colors hover:bg-orange-500/20 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-offset-2 focus:ring-offset-[#181818]"
               >
                 <Sparkles className="h-4 w-4" aria-hidden="true" />
-                {planComplete ? "Show my saved plan" : "Plan my day"}
+                Personalise these picks
               </button>
-              <a
-                href={buildGetYourGuideUrl(city)}
-                target="_blank"
-                rel="sponsored noopener noreferrer"
-                onClick={() =>
-                  trackAffiliateClick({
-                    ...baseAnalytics,
-                    recommendationId: "browse_all",
-                  })
-                }
-                className="inline-flex min-h-[44px] items-center justify-center gap-1 px-2 text-sm font-semibold text-zinc-300 underline decoration-zinc-600 underline-offset-4 hover:text-orange-400"
-              >
-                Skip and browse everything
-                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-              </a>
-            </div>
+            )}
           </div>
         )}
 
@@ -260,16 +339,14 @@ export default function NearbyActivitiesAffiliate({
                 Step {step === "group" ? "1" : step === "vibe" ? "2" : "3"}
                 {" of 3"}
               </p>
-              {step !== "group" && (
-                <button
-                  type="button"
-                  onClick={goBack}
-                  className="inline-flex min-h-[44px] items-center gap-1 px-2 text-sm text-zinc-400 hover:text-white"
-                >
-                  <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-                  Back
-                </button>
-              )}
+              <button
+                type="button"
+                onClick={goBack}
+                className="inline-flex min-h-[44px] items-center gap-1 px-2 text-sm text-zinc-400 hover:text-white"
+              >
+                <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+                Back
+              </button>
             </div>
 
             {step === "group" && (
@@ -305,79 +382,6 @@ export default function NearbyActivitiesAffiliate({
                 onChoose={(value) => chooseTiming(value as PlannerTiming)}
               />
             )}
-          </div>
-        )}
-
-        {step === "results" && planComplete && (
-          <div className="mt-5">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-              <div>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    PLANNER_LABELS.groups[group],
-                    PLANNER_LABELS.vibes[vibe],
-                    PLANNER_LABELS.timings[timing],
-                  ].map((label) => (
-                    <span
-                      key={label}
-                      className="inline-flex items-center gap-1 rounded-full border border-orange-500/30 bg-orange-500/10 px-2.5 py-1 text-xs font-semibold text-orange-300"
-                    >
-                      <Check className="h-3 w-3" aria-hidden="true" />
-                      {label}
-                    </span>
-                  ))}
-                </div>
-                <h3 className="mt-3 text-lg font-bold text-white sm:text-xl">
-                  Your personalised {city} picks
-                </h3>
-                <p className="mt-1 text-sm text-zinc-400">{suggestedOrder}</p>
-              </div>
-              <button
-                type="button"
-                onClick={resetPlanner}
-                className="inline-flex min-h-[44px] items-center gap-1 self-start px-2 text-sm text-zinc-400 hover:text-white"
-              >
-                <RotateCcw className="h-4 w-4" aria-hidden="true" />
-                Change answers
-              </button>
-            </div>
-
-            <div className="mt-5 grid gap-3 lg:grid-cols-3">
-              {recommendations.map((recommendation) => (
-                <article
-                  key={recommendation.id}
-                  className="flex h-full flex-col rounded-lg border border-zinc-700 bg-black/20 p-4"
-                >
-                  <p className="text-xs font-semibold uppercase tracking-wider text-orange-400">
-                    {recommendation.eyebrow}
-                  </p>
-                  <h4 className="mt-2 font-bold text-white">
-                    {recommendation.title}
-                  </h4>
-                  <p className="mt-2 flex-1 text-sm leading-6 text-zinc-400">
-                    {recommendation.description}
-                  </p>
-                  <a
-                    href={buildGetYourGuideUrl(city, recommendation.query)}
-                    target="_blank"
-                    rel="sponsored noopener noreferrer"
-                    onClick={() =>
-                      trackAffiliateClick({
-                        ...baseAnalytics,
-                        recommendationId: recommendation.id,
-                        plannerGroup: group,
-                        plannerVibe: vibe,
-                        plannerTiming: timing,
-                      })
-                    }
-                    className="mt-4 inline-flex min-h-[44px] items-center justify-center gap-2 rounded-md bg-orange-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-300"
-                  >
-                    See activities
-                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                  </a>
-                </article>
-              ))}
-            </div>
           </div>
         )}
       </div>

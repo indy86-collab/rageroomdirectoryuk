@@ -19,7 +19,7 @@ export default function PrivacyPage() {
     { label: "Privacy", href: "/privacy" },
   ]
 
-  const lastUpdated = "20 August 2026"
+  const lastUpdated = "22 August 2026"
 
   return (
     <div className="py-6 sm:py-8">
@@ -97,7 +97,7 @@ export default function PrivacyPage() {
             </h3>
             <ul className="list-disc list-inside space-y-2 ml-4">
               <li>Event planning details you enter in the builder (for example team size, budget, venue shortlist notes, and generated message drafts)</li>
-              <li>These plan details are stored in your browser (local storage) for that purchase access link — not used as a public listing</li>
+              <li>These plan details are stored in your browser (local storage) while you use the builder — not used as a public listing. Payment is only required to download the full PDF pack.</li>
             </ul>
 
             <h3 className="text-lg sm:text-xl font-semibold text-white mt-4 sm:mt-6 mb-2 sm:mb-3">
@@ -172,6 +172,11 @@ export default function PrivacyPage() {
                     <td className="p-3">No map request is made until you press a load-map button. Google may then receive request, device and network information under its own policy.</td>
                     <td className="p-3 align-top">Separate user-requested feature</td>
                   </tr>
+                  <tr>
+                    <th className="p-3 align-top text-white">GetYourGuide widget</th>
+                    <td className="p-3">No GetYourGuide widget or script is requested until you press the show-activities button. GetYourGuide may then receive request, device and network information and set an affiliate cookie under its own policy.</td>
+                    <td className="p-3 align-top">Separate user-requested feature</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -195,7 +200,7 @@ export default function PrivacyPage() {
               <li>Enhancing directory content</li>
               <li>Responding to enquiries</li>
               <li>Delivering free checklists and paid digital products</li>
-              <li>Providing purchased interactive planning / venue-owner workspaces</li>
+              <li>Providing the Corporate Event Builder, paid PDF downloads, and venue-owner workspaces</li>
               <li>Maintaining accurate business listings</li>
               <li>Analytics and usage insights</li>
               <li>Detecting security issues</li>
@@ -336,7 +341,11 @@ export default function PrivacyPage() {
               10. Third-Party Links
             </h2>
             <p>
-              Our site links to external businesses. We are not responsible for their privacy practices.
+              Our site links to external businesses, including GetYourGuide for
+              complementary tours around a rage-room visit. The GetYourGuide
+              widget and script load only when you press the show-activities
+              button; this choice is separate from analytics. We are not
+              responsible for their privacy practices.
             </p>
           </section>
 

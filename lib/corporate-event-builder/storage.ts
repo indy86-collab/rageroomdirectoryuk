@@ -2,7 +2,7 @@ import { createEmptyCorporateEvent } from "./defaults"
 import { defaultChecklistState } from "./checklist"
 import { defaultCategoriesFromTotal } from "./budget"
 import { defaultSchedule } from "./schedule"
-import type { CorporateEvent, RsvpStatus } from "./types"
+import { GUEST_WORKSPACE_ID, type CorporateEvent, type RsvpStatus } from "./types"
 
 const STORAGE_PREFIX = "rr_corporate_event_v1:"
 
@@ -182,4 +182,35 @@ export function saveCorporateEvent(event: CorporateEvent) {
     storageKeyForSession(event.entitlementSessionId),
     JSON.stringify(payload)
   )
+}
+
+/**
+ * After payment, copy the guest workspace into the purchase-scoped key
+ * when that key is still empty so the plan is not lost.
+ */
+export function migrateGuestPlanToSession(
+  sessionId: string
+): CorporateEvent | null {
+  if (typeof window === "undefined") return null
+  if (!sessionId || sessionId === GUEST_WORKSPACE_ID) return null
+  if (loadCorporateEvent(sessionId)) return loadCorporateEvent(sessionId)
+  const guest = loadCorporateEvent(GUEST_WORKSPACE_ID)
+  if (!guest) return null
+  const migrated: CorporateEvent = {
+    ...guest,
+    entitlementSessionId: sessionId,
+    updatedAt: new Date().toISOString(),
+  }
+  saveCorporateEvent(migrated)
+  return migrated
+}
+
+export function resolveCorporateEvent(sessionId: string): CorporateEvent {
+  const saved = loadCorporateEvent(sessionId)
+  if (saved) return saved
+  if (sessionId !== GUEST_WORKSPACE_ID) {
+    const migrated = migrateGuestPlanToSession(sessionId)
+    if (migrated) return migrated
+  }
+  return createEmptyCorporateEvent(sessionId)
 }

@@ -89,10 +89,11 @@ export function WhatHappensAfterPayment({
         ]
       : variant === "corporate-builder"
         ? [
-            "Stripe confirms the payment securely.",
-            "Your Event Builder opens from the success page.",
-            "We also email the builder link (plus optional legacy PDF download).",
-            "Your event plan saves in your browser so you can continue later from that purchase link.",
+            "You plan your event first in the free Event Builder.",
+            "When you are happy, Stripe confirms payment for the PDF pack.",
+            "You can download a clean PDF of your plan from the builder.",
+            "We also email a link to the optional 16-page toolkit PDF (72 hours).",
+            "Your event plan saves in your browser.",
             "This is a planning tool only — it does not include a venue booking.",
           ]
         : [

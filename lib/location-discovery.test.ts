@@ -16,6 +16,7 @@ import {
   getLocationDiscoveryPageData,
   isDiscoveryLandingPageEligible,
 } from "@/lib/location-discovery"
+import { shouldShowAffiliateOnOccasion } from "@/lib/getyourguide"
 import type { Listing } from "@/types/listing"
 
 const listings = listingsData as Listing[]
@@ -248,5 +249,28 @@ describe("location discovery routes and metadata", () => {
     expect(urls.has("https://www.rageroomdirectory.co.uk/occasions/corporate-team-building/london")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/activities/axe-throwing/birmingham")).toBe(false)
     expect(urls.has("https://www.rageroomdirectory.co.uk/activities/rage-rooms/leicester")).toBe(false)
+  })
+
+  it("attaches GetYourGuide affiliate to day-out occasion pages and skips corporate", () => {
+    const pages = getEligibleLocationDiscoveryPages(listings, "occasion")
+    const withAffiliate = pages.filter((page) =>
+      shouldShowAffiliateOnOccasion(page.category.slug)
+    )
+    const withoutAffiliate = pages.filter(
+      (page) => !shouldShowAffiliateOnOccasion(page.category.slug)
+    )
+
+    expect(withAffiliate.map((page) => page.href)).toEqual(
+      expect.arrayContaining([
+        "/occasions/stag-parties/london",
+        "/occasions/hen-parties/london",
+        "/occasions/birthdays/london",
+        "/occasions/kids-families/london",
+      ])
+    )
+    expect(withoutAffiliate.map((page) => page.href)).toEqual([
+      "/occasions/corporate-team-building/edinburgh",
+      "/occasions/corporate-team-building/london",
+    ])
   })
 })

@@ -91,11 +91,11 @@ export async function sendPurchaseDownloadEmail({
   const linkHtml = isBookingSystem
     ? `<p style="margin:16px 0"><a href="${bookingSystemUrl}" style="display:inline-block;background:#f97316;color:#fff;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:6px">Open Corporate Booking System</a></p>`
     : isCorporateBuilder
-      ? `<p style="margin:16px 0"><a href="${builderUrl}" style="display:inline-block;background:#f97316;color:#fff;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:6px">Open Event Builder</a></p>
+      ? `<p style="margin:16px 0"><a href="${builderUrl}" style="display:inline-block;background:#f97316;color:#fff;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:6px">Download your event plan PDF</a></p>
        ${links
          .map(
            (link) =>
-             `<p style="margin:12px 0"><a href="${link.url}" style="color:#ea580c;font-weight:600">Download legacy toolkit PDF (optional, expires in 72 hours)</a></p>`
+             `<p style="margin:12px 0"><a href="${link.url}" style="color:#ea580c;font-weight:600">Download toolkit PDF (optional, expires in 72 hours)</a></p>`
          )
          .join("")}`
       : links
@@ -108,15 +108,15 @@ export async function sendPurchaseDownloadEmail({
   const subject = isBookingSystem
     ? `Your Corporate Booking System is ready`
     : isCorporateBuilder
-      ? `Your Corporate Event Builder is ready`
+      ? `Your event plan PDF is ready`
       : `Your download: ${purchasedProduct.name}`
 
   const bodyIntro = isBookingSystem
     ? `<p>Your <strong>${purchasedProduct.name}</strong> is ready. Open the workspace to configure your venue, build corporate packages, create quotes and manage your corporate lead pipeline.</p>
        <p style="color:#52525b;font-size:14px">Bookmark the access link below. Your workspace saves on our servers for this purchase so you can return later.</p>`
     : isCorporateBuilder
-      ? `<p>Your <strong>${purchasedProduct.name}</strong> is ready. Open the interactive builder to enter your event details, build the budget, shortlist venues and generate approval and invite messages.</p>
-       <p style="color:#52525b;font-size:14px">Bookmark the Event Builder link below to return to your purchase access. Your plan saves in your browser. The optional PDF download link expires in 72 hours.</p>`
+      ? `<p>Your <strong>${purchasedProduct.name}</strong> PDF pack is ready. Open the Event Builder to download a clean PDF of the plan you built, plus the optional 16-page toolkit.</p>
+       <p style="color:#52525b;font-size:14px">Bookmark the Event Builder link below. Your plan saves in your browser. The toolkit download link expires in 72 hours.</p>`
       : `<p>Your <strong>${purchasedProduct.name}</strong> is ready.</p>
        <p style="color:#52525b;font-size:14px">These secure links expire in 72 hours. Save a copy of each file after downloading — the files themselves are yours to keep.</p>`
 

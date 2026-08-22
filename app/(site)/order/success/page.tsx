@@ -92,7 +92,7 @@ export default async function OrderSuccessPage({
   const headline = isBookingSystem
     ? "Your Corporate Booking System is ready."
     : isCorporateBuilder
-      ? "Your Corporate Event Builder is ready."
+      ? "Your PDFs are ready."
       : `Your ${purchasedProduct.name} is ready.`
 
   return (
@@ -115,10 +115,9 @@ export default async function OrderSuccessPage({
           </p>
         ) : isCorporateBuilder ? (
           <p className="mt-3 text-zinc-300">
-            Open the interactive Event Builder to enter your team details, build
-            the budget, shortlist venues and generate approval and invite
-            messages. We’ve also emailed access links to the address you used at
-            checkout.
+            Download a clean PDF of the event plan you built, plus the printable
+            toolkit. Your plan is still in the Event Builder. We’ve also emailed
+            the links to the address you used at checkout.
           </p>
         ) : (
           <p className="mt-3 text-zinc-300">
@@ -141,7 +140,7 @@ export default async function OrderSuccessPage({
               href={builderHref}
               className="btn-rage inline-flex min-h-[48px] w-full items-center justify-center"
             >
-              Open Event Builder
+              Download your event plan PDF
             </Link>
           )}
           {fulfilmentProducts.map((fileProduct) => {

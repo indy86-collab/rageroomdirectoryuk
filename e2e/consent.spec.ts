@@ -111,6 +111,12 @@ test.describe("consent-aware analytics", () => {
         name: "Load interactive map for Rage Out Maidstone — Maidstone",
       })
     ).toBeVisible()
+    await expect(
+      page.locator('script[src*="widget.getyourguide.com"]')
+    ).toHaveCount(0)
+    await expect(
+      page.getByRole("button", { name: "Show nearby GetYourGuide activities in Maidstone" })
+    ).toBeVisible()
     const booking = page.getByRole("link", { name: "Book Your Session →" })
     await expect(booking).toHaveAttribute("href", /^https?:\/\//)
     await clickWithoutNavigation(booking)

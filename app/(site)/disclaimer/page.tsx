@@ -18,7 +18,7 @@ export default function DisclaimerPage() {
     { label: "Disclaimer", href: "/disclaimer" },
   ]
 
-  const lastUpdated = "17 August 2026"
+  const lastUpdated = "22 August 2026"
 
   return (
     <div className="py-6 sm:py-8">
@@ -103,9 +103,10 @@ export default function DisclaimerPage() {
             <p>
               Some external links are affiliate links. If you make a booking or
               purchase after following one of these links, we may receive a
-              commission at no additional cost to you. Affiliate relationships
-              do not guarantee or endorse a third party&apos;s service, pricing,
-              availability, or suitability.
+              commission at no additional cost to you. This includes GetYourGuide
+              activity links and the optional GetYourGuide tours widget. Affiliate
+              relationships do not guarantee or endorse a third party&apos;s
+              service, pricing, availability, or suitability.
             </p>
           </section>
 

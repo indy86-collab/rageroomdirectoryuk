@@ -46,6 +46,8 @@ describe("first-timer checklist lead magnet", () => {
     expect(party.unitAmount).toBe(560)
     expect(corporate.unitAmount).toBe(1520)
     expect(corporate.name).toMatch(/Event Builder/i)
+    expect(corporate.includedSections[0]).toBe("Downloadable event plan PDF")
+    expect(corporate.checkoutBlurb).toMatch(/builder itself is free/i)
     expect(bookingSystem.unitAmount).toBe(7900)
     expect(bookingSystem.priceLabel).toBe("£79")
     expect(bookingSystem.isInteractive).toBe(true)

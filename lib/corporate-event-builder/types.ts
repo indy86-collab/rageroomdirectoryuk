@@ -3,6 +3,9 @@
 export const CORPORATE_EVENT_BUILDER_PRODUCT_ID =
   "corporate-team-building-toolkit" as const
 
+/** localStorage workspace id before a Stripe purchase. */
+export const GUEST_WORKSPACE_ID = "guest"
+
 export const EVENT_PURPOSES = [
   "Team social",
   "Team building",

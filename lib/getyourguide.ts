@@ -1,6 +1,12 @@
+import { cityToSlug } from "@/lib/location"
+
 export const GETYOURGUIDE_PARTNER_ID = "IZRRCJT"
 
-const GETYOURGUIDE_SEARCH_URL = "https://www.getyourguide.com/s/"
+export const GETYOURGUIDE_SEARCH_URL = "https://www.getyourguide.com/s/"
+export const GETYOURGUIDE_WIDGET_SCRIPT_SRC =
+  "https://widget.getyourguide.com/v2/core.js"
+export const GETYOURGUIDE_WIDGET_FRAME_HREF =
+  "https://widget.getyourguide.com/default/activities.frame"
 
 export const PLANNER_GROUPS = ["couple", "friends", "family", "team"] as const
 export const PLANNER_VIBES = [
@@ -14,14 +20,7 @@ export const PLANNER_TIMINGS = ["before", "after", "full-day"] as const
 export type PlannerGroup = (typeof PLANNER_GROUPS)[number]
 export type PlannerVibe = (typeof PLANNER_VIBES)[number]
 export type PlannerTiming = (typeof PLANNER_TIMINGS)[number]
-
-export type ActivityRecommendation = {
-  id: "vibe" | "group" | "timing"
-  eyebrow: string
-  title: string
-  description: string
-  query: string
-}
+export type AffiliatePlacement = "city" | "listing" | "occasion"
 
 export const PLANNER_LABELS = {
   groups: {
@@ -43,77 +42,111 @@ export const PLANNER_LABELS = {
   } satisfies Record<PlannerTiming, string>,
 }
 
-const VIBE_RECOMMENDATIONS: Record<
-  PlannerVibe,
-  Omit<ActivityRecommendation, "id" | "eyebrow">
-> = {
-  adrenaline: {
-    title: "Keep the adrenaline going",
-    description: "Find another energetic experience to add to your smash session.",
-    query: "adventure and adrenaline activities",
-  },
-  "food-drink": {
-    title: "Add a food or drink experience",
-    description: "Browse tastings, food tours and other bookable local experiences.",
-    query: "food and drink experiences",
-  },
-  relaxed: {
-    title: "Wind down afterwards",
-    description: "Balance the smash with a calmer, easy-going local experience.",
-    query: "relaxing experiences",
-  },
-  sightseeing: {
-    title: "See more of the city",
-    description: "Discover tours and attractions that fit around your rage room visit.",
-    query: "sightseeing tours and attractions",
-  },
+/**
+ * GetYourGuide destination pages convert better than free-text search.
+ * Unmapped cities fall back to a location search URL.
+ */
+const GETYOURGUIDE_DESTINATIONS: Record<string, string> = {
+  birmingham: "birmingham-l2525",
+  bristol: "bristol-l445",
+  cardiff: "cardiff-l449",
+  edinburgh: "edinburgh-l44",
+  glasgow: "glasgow-l438",
+  leeds: "leeds-l1023",
+  liverpool: "liverpool-l210",
+  london: "london-l57",
+  manchester: "manchester-l1128",
+  newcastle: "newcastle-upon-tyne-l444",
+  "newcastle-upon-tyne": "newcastle-upon-tyne-l444",
+  oxford: "oxford-l441",
+  york: "york-l436",
 }
 
-const GROUP_RECOMMENDATIONS: Record<
-  PlannerGroup,
-  Omit<ActivityRecommendation, "id" | "eyebrow">
-> = {
-  couple: {
-    title: "Make it a memorable date",
-    description: "Explore experiences suited to two people spending the day together.",
-    query: "couples activities and date experiences",
-  },
-  friends: {
-    title: "Something the whole group can enjoy",
-    description: "Keep everyone involved with another social group experience.",
-    query: "fun group activities for friends",
-  },
-  family: {
-    title: "Find a family-friendly follow-up",
-    description: "Browse activities designed for different ages and family groups.",
-    query: "family friendly activities",
-  },
-  team: {
-    title: "Extend the team day",
-    description: "Find a shared experience for colleagues before heading home.",
-    query: "team and group activities",
-  },
+const COMPETITOR_INVENTORY_TERMS = [
+  "rage room",
+  "rage-room",
+  "smash room",
+  "smash-room",
+  "axe throwing",
+  "axe-throwing",
+]
+
+const DEFAULT_ACTIVITY_QUERY = "walking tours and attractions"
+
+const VIBE_QUERIES: Record<PlannerVibe, string> = {
+  adrenaline: "adventure tours and outdoor experiences",
+  "food-drink": "food tours and tastings",
+  relaxed: "boat cruises and relaxing experiences",
+  sightseeing: "walking tours and attractions",
 }
 
-const TIMING_RECOMMENDATIONS: Record<
-  PlannerTiming,
-  Omit<ActivityRecommendation, "id" | "eyebrow">
-> = {
-  before: {
-    title: "Start the day nearby",
-    description: "Browse daytime activities that could work before your booked session.",
-    query: "morning and daytime activities",
-  },
-  after: {
-    title: "Carry on into the evening",
-    description: "Explore bookable evening experiences after you finish smashing.",
-    query: "evening activities",
-  },
-  "full-day": {
-    title: "Build a full day out",
-    description: "Discover longer experiences and attractions for a complete itinerary.",
-    query: "day tours and full day activities",
-  },
+export const OCCASION_AFFILIATE_GROUPS = {
+  "stag-parties": "friends",
+  "hen-parties": "friends",
+  birthdays: "friends",
+  "date-night": "couple",
+  "kids-families": "family",
+} as const satisfies Record<string, PlannerGroup>
+
+export type AffiliateOccasionSlug = keyof typeof OCCASION_AFFILIATE_GROUPS
+
+export function formatGetYourGuideLocation(city: string) {
+  return `${city.trim()}, United Kingdom`
+}
+
+export function usesCompetitorInventoryQuery(query: string) {
+  const lower = query.toLowerCase()
+  return COMPETITOR_INVENTORY_TERMS.some((term) => lower.includes(term))
+}
+
+export function getComplementaryActivityQuery(plan?: {
+  group: PlannerGroup
+  vibe: PlannerVibe
+  timing: PlannerTiming
+}) {
+  if (!plan) return DEFAULT_ACTIVITY_QUERY
+
+  const parts = [VIBE_QUERIES[plan.vibe]]
+  if (plan.timing === "after") parts.push("evening experiences")
+  if (plan.timing === "full-day") parts.push("day tours")
+  if (plan.group === "couple") parts.push("couples experiences")
+  if (plan.group === "family") parts.push("family friendly tours")
+  return parts.join(" and ")
+}
+
+export function getWidgetSearchQuery(
+  city: string,
+  plan?: {
+    group: PlannerGroup
+    vibe: PlannerVibe
+    timing: PlannerTiming
+  }
+) {
+  return `${getComplementaryActivityQuery(plan)} in ${formatGetYourGuideLocation(city)}`
+}
+
+export function getGetYourGuideDestinationSlug(city: string) {
+  return GETYOURGUIDE_DESTINATIONS[cityToSlug(city)] ?? null
+}
+
+export function buildAffiliateCampaign({
+  placement,
+  occasionSlug,
+  personalised = false,
+}: {
+  placement: AffiliatePlacement
+  occasionSlug?: string
+  personalised?: boolean
+}) {
+  if (personalised) return "rageroom_planner"
+  if (placement === "occasion") {
+    const slug = (occasionSlug ?? "unknown")
+      .toLowerCase()
+      .replace(/[^a-z0-9-]/g, "")
+    return `rageroom_occasion_${slug}`
+  }
+  if (placement === "listing") return "rageroom_listing"
+  return "rageroom_city"
 }
 
 /**
@@ -122,40 +155,96 @@ const TIMING_RECOMMENDATIONS: Record<
  * The partner ID is intentionally public: GetYourGuide requires it in every
  * outbound URL so referred bookings can be attributed to the publisher.
  */
-export function buildGetYourGuideUrl(city: string, query?: string) {
+export function buildGetYourGuideUrl(
+  city: string,
+  {
+    query,
+    campaign,
+  }: {
+    query?: string
+    campaign: string
+  }
+) {
   const url = new URL(GETYOURGUIDE_SEARCH_URL)
-
-  const location = `${city.trim()}, United Kingdom`
+  const location = formatGetYourGuideLocation(city)
   url.searchParams.set("q", query ? `${query} in ${location}` : location)
   url.searchParams.set("partner_id", GETYOURGUIDE_PARTNER_ID)
-
+  url.searchParams.set("cmp", campaign)
   return url.toString()
 }
 
-export function getActivityRecommendations({
-  group,
-  vibe,
-  timing,
-}: {
-  group: PlannerGroup
-  vibe: PlannerVibe
-  timing: PlannerTiming
-}): ActivityRecommendation[] {
-  return [
-    {
-      id: "vibe",
-      eyebrow: "Best match for your vibe",
-      ...VIBE_RECOMMENDATIONS[vibe],
-    },
-    {
-      id: "group",
-      eyebrow: `Picked for: ${PLANNER_LABELS.groups[group]}`,
-      ...GROUP_RECOMMENDATIONS[group],
-    },
-    {
-      id: "timing",
-      eyebrow: PLANNER_LABELS.timings[timing],
-      ...TIMING_RECOMMENDATIONS[timing],
-    },
-  ]
+export function buildGetYourGuideBrowseUrl(city: string, campaign: string) {
+  const destination = getGetYourGuideDestinationSlug(city)
+  if (!destination) return buildGetYourGuideUrl(city, { campaign })
+
+  const url = new URL(`https://www.getyourguide.com/${destination}/`)
+  url.searchParams.set("partner_id", GETYOURGUIDE_PARTNER_ID)
+  url.searchParams.set("cmp", campaign)
+  return url.toString()
+}
+
+export function getGetYourGuideWidgetDataset(query: string, campaign: string) {
+  return {
+    "data-gyg-widget": "activities",
+    "data-gyg-partner-id": GETYOURGUIDE_PARTNER_ID,
+    "data-gyg-locale-code": "en-GB",
+    "data-gyg-number-of-items": "3",
+    "data-gyg-q": query,
+    "data-gyg-cmp": campaign,
+    "data-gyg-href": GETYOURGUIDE_WIDGET_FRAME_HREF,
+  } as const
+}
+
+export function getOccasionPlannerGroup(occasionSlug: string): PlannerGroup | null {
+  if (isAffiliateOccasionSlug(occasionSlug)) {
+    return OCCASION_AFFILIATE_GROUPS[occasionSlug]
+  }
+  return null
+}
+
+export function shouldShowAffiliateOnOccasion(occasionSlug: string) {
+  return getOccasionPlannerGroup(occasionSlug) !== null
+}
+
+function isAffiliateOccasionSlug(
+  slug: string
+): slug is AffiliateOccasionSlug {
+  return Object.prototype.hasOwnProperty.call(OCCASION_AFFILIATE_GROUPS, slug)
+}
+
+export function isGetYourGuideWidgetScriptPresent() {
+  if (typeof document === "undefined") return false
+  return Boolean(
+    document.querySelector(`script[src="${GETYOURGUIDE_WIDGET_SCRIPT_SRC}"]`)
+  )
+}
+
+let widgetScriptPromise: Promise<void> | null = null
+
+export function ensureGetYourGuideWidgetScript() {
+  if (typeof document === "undefined") return Promise.resolve()
+  if (widgetScriptPromise) return widgetScriptPromise
+  if (isGetYourGuideWidgetScriptPresent()) {
+    widgetScriptPromise = Promise.resolve()
+    return widgetScriptPromise
+  }
+
+  widgetScriptPromise = new Promise((resolve, reject) => {
+    const script = document.createElement("script")
+    script.src = GETYOURGUIDE_WIDGET_SCRIPT_SRC
+    script.async = true
+    script.defer = true
+    script.onload = () => resolve()
+    script.onerror = () => {
+      widgetScriptPromise = null
+      reject(new Error("Failed to load GetYourGuide widget"))
+    }
+    document.body.appendChild(script)
+  })
+
+  return widgetScriptPromise
+}
+
+export function resetGetYourGuideWidgetScriptForTests() {
+  widgetScriptPromise = null
 }

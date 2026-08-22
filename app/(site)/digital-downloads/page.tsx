@@ -35,8 +35,8 @@ const visitorPaidDownloads = [
   },
   {
     title: "Corporate Rage Room Event Builder",
-    copy: "For corporate organisers — build budget, compare venues, prepare approval and invite your team.",
-    ctaPrefix: "Build My Team Event",
+    copy: "For corporate organisers — plan budget, venues, approval and invites for free, then pay for the full PDF.",
+    ctaPrefix: "Start planning free",
     href: "/digital-downloads/corporate-rage-room-team-building-toolkit",
     productId: "corporate-team-building-toolkit",
   },
@@ -71,7 +71,7 @@ const hubFaqs = [
   {
     question: "What format do I get?",
     answer:
-      "The free First Visit Prep Pack and most paid packs are printable PDF downloads. The Corporate Event Builder is an interactive planning tool for organisers (legacy PDF still included). The Corporate Booking System is an interactive workspace for venue owners. The gift voucher pack is a ZIP with printable and digital templates. Paid products unlock after payment, plus an email with your access link.",
+      "The free First Visit Prep Pack and most paid packs are printable PDF downloads. The Corporate Event Builder is a free interactive planner; you pay only for a clean PDF of your plan plus the toolkit. The Corporate Booking System is an interactive workspace for venue owners. The gift voucher pack is a ZIP with printable and digital templates. Paid products unlock after payment, plus an email with your access link.",
   },
   {
     question: "Can I preview before buying?",

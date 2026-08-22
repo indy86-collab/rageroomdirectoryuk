@@ -38,9 +38,9 @@ export type DigitalProduct = {
   includedSections: string[]
   checkoutBlurb: string
   /**
-   * Interactive tool unlocked after payment (may have no downloadable file).
-   * Corporate Event Builder is interactive + PDF; Corporate Booking System is
-   * interactive-only.
+   * Interactive tool (may have no downloadable file).
+   * Corporate Event Builder is free to use; payment unlocks the plan PDF.
+   * Corporate Booking System is interactive-only after payment.
    */
   isInteractive?: boolean
 }
@@ -134,12 +134,13 @@ export const digitalProducts: Record<string, DigitalProduct> = {
       "/digital-products/corporate-rage-room-team-building-toolkit-sample.pdf?v=5",
     pageCount: 16,
     sampleUnlockHint:
-      "Preview the builder jobs below — purchase unlocks the full interactive Event Builder (legacy PDF still included).",
+      "Plan your event free in the builder — pay to download a clean PDF of your plan (legacy toolkit still included).",
     description:
-      "An interactive event builder for HR teams, office managers, founders and team leads organising a rage room team event — budget, venue shortlist, approval and invitations.",
+      "An interactive event builder for HR teams, office managers, founders and team leads organising a rage room team event — budget, venue shortlist, approval and invitations. Pay only when you want the full PDF.",
     checkoutBlurb:
-      "Paying for interactive Event Builder access. 20% off already applied — no code needed. Not a venue booking.",
+      "Paying for your event plan PDF and the printable toolkit. The builder itself is free. 20% off already applied — no code needed. Not a venue booking.",
     includedSections: [
+      "Downloadable event plan PDF",
       "Event details builder",
       "Budget calculator",
       "Venue shortlist & comparison",

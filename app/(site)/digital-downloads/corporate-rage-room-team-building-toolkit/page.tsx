@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import {
   AlertTriangle,
   BriefcaseBusiness,
@@ -97,7 +98,7 @@ const faqs = [
   {
     question: "Is this an interactive tool or a PDF?",
     answer:
-      "It is primarily an interactive Event Builder. After payment you enter your event details and generate budget, venue shortlist, approval and invitation outputs. A legacy printable PDF is still included for purchasers who want worksheets.",
+      "It is primarily an interactive Event Builder. You plan for free — budget, venue shortlist, approval and invitation outputs. When you are happy, you can pay for a clean PDF of your plan. A 16-page printable toolkit is still included with that purchase.",
   },
   {
     question: "Does this include a rage room booking?",
@@ -116,7 +117,7 @@ const faqs = [
   {
     question: "Will previous Corporate Toolkit purchasers get access?",
     answer:
-      "Yes. Access is tied to the same paid product ID. Use the Event Builder link from a new purchase email/success page, or open /corporate-event-builder?token=… with an unexpired download token from your original purchase email.",
+      "Yes. Anyone can use the builder. Previous purchasers can still download the PDF pack from their order email or success page, or open /corporate-event-builder?token=… with an unexpired download token.",
   },
   {
     question: "Is this legal or safety advice?",
@@ -126,12 +127,12 @@ const faqs = [
   {
     question: "Does my event plan save?",
     answer:
-      "Yes. Your plan is saved in your browser for that purchase so a refresh does not wipe your work. Bookmark the Event Builder link from your order email or success page to return later.",
+      "Yes. Your plan is saved in this browser so a refresh does not wipe your work. After you pay, bookmark the Event Builder link from your order email so you can download the PDF again later.",
   },
   {
     question: "Can I get help or a refund?",
     answer:
-      "If access or the legacy file is faulty, contact us within 7 days for a fix or refund. Change-of-mind refunds are not offered after successful digital delivery.",
+      "If the PDF pack is faulty, contact us within 7 days for a fix or refund. Change-of-mind refunds are not offered after a successful download.",
   },
 ]
 
@@ -146,7 +147,8 @@ export default function CorporateEventBuilderProductPage() {
     sku: product.analyticsItemId,
   })
 
-  const ctaLabel = `Build My Team Event — ${product.priceLabel}`
+  const startLabel = "Start planning — free"
+  const unlockLabel = `Unlock full PDF — ${product.priceLabel}`
 
   return (
     <div className="bg-dark-900">
@@ -176,27 +178,27 @@ export default function CorporateEventBuilderProductPage() {
               <div>
                 <DigitalPriceDisplay product={product} />
                 <p className="mt-1 text-xs font-semibold text-zinc-400">
-                  Interactive builder after payment
+                  Free to plan. {product.priceLabel} when you want the full PDF pack.
                 </p>
               </div>
-              <DigitalCheckoutButton
-                productId={product.id}
-                analyticsProduct={analyticsProduct}
+              <Link
+                href="/corporate-event-builder"
+                className="btn-rage inline-flex min-h-[48px] items-center justify-center px-5 text-sm uppercase tracking-wider"
               >
-                {ctaLabel}
-              </DigitalCheckoutButton>
+                {startLabel}
+              </Link>
             </div>
             <DigitalSaleBanner compact className="mt-3" />
             <p className="mt-4 text-sm font-semibold text-zinc-400">
-              <span className="text-zinc-200">Stripe</span>
+              <span className="text-zinc-200">Plan first</span>
               <span className="mx-2 text-zinc-600">·</span>
-              Interactive builder after payment
+              Pay only for the PDF pack
               <span className="mx-2 text-zinc-600">·</span>
               Plan saves in your browser
               <span className="mx-2 text-zinc-600">·</span>
               Not a venue booking
               <span className="mx-2 text-zinc-600">·</span>
-              7-day faulty-access refund
+              7-day faulty-file refund
             </p>
             <DigitalRefundNote />
           </div>
@@ -332,18 +334,28 @@ export default function CorporateEventBuilderProductPage() {
         <div className="mx-auto max-w-4xl rounded-lg border border-rage-500/30 bg-[#181818] p-6 text-center sm:p-8">
           <Sparkles className="mx-auto h-10 w-10 text-rage-500" />
           <h2 className="mt-4 text-2xl font-black uppercase tracking-wide text-white">
-            {ctaLabel}
+            {startLabel}
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm text-zinc-300">
             Enter your event details, build the plan, and generate the messages
-            your team needs — without starting from a blank page.
+            your team needs — then pay only if you want the full PDF.
           </p>
-          <div className="mt-6 flex justify-center">
+          <div className="mt-6 flex flex-col items-center justify-center gap-4">
+            <Link
+              href="/corporate-event-builder"
+              className="btn-rage inline-flex min-h-[48px] items-center justify-center px-5 text-sm uppercase tracking-wider"
+            >
+              {startLabel}
+            </Link>
+            <p className="text-xs font-semibold uppercase tracking-wider text-zinc-500">
+              Already planned?
+            </p>
             <DigitalCheckoutButton
               productId={product.id}
               analyticsProduct={analyticsProduct}
+              returnTo="builder"
             >
-              {ctaLabel}
+              {unlockLabel}
             </DigitalCheckoutButton>
           </div>
           <div className="mx-auto max-w-2xl">

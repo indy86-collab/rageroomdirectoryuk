@@ -5,13 +5,14 @@ import {
   BUILDER_STEPS,
   createEmptyCorporateEvent,
   defaultSchedule,
-  loadCorporateEvent,
+  resolveCorporateEvent,
   saveCorporateEvent,
   touchUpdatedAt,
   type BuilderStepId,
   type CorporateEvent,
 } from "@/lib/corporate-event-builder"
 import {
+  type AnalyticsProduct,
   trackCorporateBuilderApprovalGenerated,
   trackCorporateBuilderBudgetCompleted,
   trackCorporateBuilderExport,
@@ -30,12 +31,20 @@ import StepVenues from "./StepVenues"
 
 type CorporateEventBuilderProps = {
   sessionId: string
+  paid: boolean
   productName: string
+  productPriceLabel: string
+  analyticsProduct: AnalyticsProduct
+  toolkitDownloadHref?: string | null
 }
 
 export default function CorporateEventBuilder({
   sessionId,
+  paid,
   productName,
+  productPriceLabel,
+  analyticsProduct,
+  toolkitDownloadHref,
 }: CorporateEventBuilderProps) {
   const [stepIndex, setStepIndex] = useState(0)
   const [event, setEvent] = useState<CorporateEvent>(() =>
@@ -47,12 +56,7 @@ export default function CorporateEventBuilder({
   const budgetTracked = useRef(false)
 
   useEffect(() => {
-    const saved = loadCorporateEvent(sessionId)
-    if (saved) {
-      setEvent(saved)
-    } else {
-      setEvent(createEmptyCorporateEvent(sessionId))
-    }
+    setEvent(resolveCorporateEvent(sessionId))
     setHydrated(true)
     if (!startedTracked.current) {
       startedTracked.current = true
@@ -105,8 +109,9 @@ export default function CorporateEventBuilder({
           Build your team event
         </h1>
         <p className="mt-2 max-w-2xl text-sm text-zinc-400 sm:text-base">
-          Progress saves in this browser for your purchase. You can move between
-          steps without losing data.
+          {paid
+            ? "Progress saves in this browser. Download a clean PDF of this plan whenever you are ready."
+            : "Plan first — no payment needed. Progress saves in this browser. Unlock a clean PDF when you are happy."}
         </p>
       </header>
 
@@ -160,7 +165,6 @@ export default function CorporateEventBuilder({
               {stepId === "venues" && (
                 <StepVenues
                   event={event}
-                  sessionId={sessionId}
                   onChange={patchEvent}
                   onVenueAdded={() => trackCorporateBuilderVenueAdded()}
                 />
@@ -183,6 +187,11 @@ export default function CorporateEventBuilder({
               {stepId === "plan" && (
                 <StepPlan
                   event={event}
+                  paid={paid}
+                  productPriceLabel={productPriceLabel}
+                  analyticsProduct={analyticsProduct}
+                  toolkitDownloadHref={toolkitDownloadHref}
+                  entitlementSessionId={sessionId}
                   onChange={patchEvent}
                   onExport={() => trackCorporateBuilderExport()}
                   onPlanCompleted={() => trackCorporateBuilderPlanCompleted()}
@@ -210,8 +219,9 @@ export default function CorporateEventBuilder({
               </button>
             ) : (
               <p className="text-sm text-zinc-500">
-                Plan saved in this browser. Bookmark this page with your order
-                link to return later.
+                {paid
+                  ? "Plan saved in this browser. Bookmark this page with your order link to return later."
+                  : "Plan saved in this browser. Unlock the full PDF when you are happy with it."}
               </p>
             )}
           </div>
