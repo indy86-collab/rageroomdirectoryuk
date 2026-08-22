@@ -19,6 +19,8 @@ import { isIndexableLocationPage } from "@/lib/location-indexing"
 import NearbyActivitiesAffiliate from "@/components/NearbyActivitiesAffiliate"
 import { getEligibleLocationDiscoveryPages } from "@/lib/location-discovery"
 import { getCityGuidePath, hasEditorialCityGuide } from "@/lib/city-guides"
+import { getCityHeroImagePath } from "@/lib/city-images"
+import LocationHero from "@/components/LocationHero"
 
 interface CityPageProps {
   params: { slug: string }
@@ -164,6 +166,7 @@ export default async function CityPage({ params }: CityPageProps) {
     }),
   }
 
+  const cityHeroImage = getCityHeroImagePath(cityName)
   const cityFAQs = getCityFAQs(cityName)
   const cityContent =
     getCityContent(cityName) ||
@@ -213,6 +216,8 @@ export default async function CityPage({ params }: CityPageProps) {
             { label: cityName },
           ]}
         />
+
+        {cityHeroImage && <LocationHero city={cityName} image={cityHeroImage} />}
         
         <script
           type="application/ld+json"

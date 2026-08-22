@@ -3,25 +3,14 @@ import path from "node:path"
 import { describe, expect, it } from "vitest"
 import listingsData from "@/data/listings.json"
 
-const intentionallyImageLessSlugs = [
-  "timberjacks-kidderminster",
-  "timberjacks-leeds",
-  "timberjacks-liverpool",
-  "timberjacks-shrewsbury",
-  "whistle-punks-bristol",
-  "whistle-punks-leeds",
-  "whistle-punks-london",
-  "whistle-punks-manchester",
-]
-
 describe("listing cover images", () => {
-  it("keeps only the compromised-domain listings image-less", () => {
+  it("gives every listing a cover image", () => {
     const imageLessSlugs = listingsData
       .filter((listing) => !listing.image)
       .map((listing) => listing.slug)
       .sort()
 
-    expect(imageLessSlugs).toEqual(intentionallyImageLessSlugs)
+    expect(imageLessSlugs).toEqual([])
   })
 
   it("has a public file for every local listing cover", () => {

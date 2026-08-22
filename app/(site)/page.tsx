@@ -8,7 +8,7 @@ import RageResetHomeFeature from "@/components/RageResetHomeFeature"
 import { globalFAQs } from "@/lib/faqs"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, MapPin, Ticket, HardHat, Hammer, Heart, ShieldCheck, Users, Sparkles, Star, Gift } from "lucide-react"
+import { ArrowRight, Ticket, HardHat, Hammer, Heart, ShieldCheck, Users, Sparkles, Star, Gift } from "lucide-react"
 import TrackedProductLink from "@/components/TrackedProductLink"
 import TrackedDiscoveryLink from "@/components/TrackedDiscoveryLink"
 import { buildOgImageUrl } from "@/lib/seo-schema"
@@ -23,6 +23,7 @@ import {
   OCCASION_DEFINITIONS,
   matchesOccasionDefinition,
 } from "@/lib/discovery"
+import { getCityHeroImagePath } from "@/lib/city-images"
 
 export const revalidate = 900
 
@@ -80,28 +81,28 @@ const featuredCities: {
     city: "London",
     href: "/city/london",
     guide: "/guides/best-rage-rooms-london",
-    image: "/images/cities/london.jpg",
+    image: getCityHeroImagePath("London") ?? "/images/cities/london.jpg",
     gradient: "from-[#1e293b] via-[#0f172a] to-[#020617]",
   },
   {
     city: "Birmingham",
     href: "/city/birmingham",
     guide: "/guides/best-rage-rooms-birmingham",
-    image: "/images/cities/birmingham.jpg",
+    image: getCityHeroImagePath("Birmingham") ?? "/images/cities/birmingham.jpg",
     gradient: "from-[#3b0764] via-[#1e1b4b] to-[#0b0a1e]",
   },
   {
     city: "Liverpool",
     href: "/city/liverpool",
     guide: "/guides/best-rage-rooms-liverpool",
-    image: "/images/cities/liverpool.jpg",
+    image: getCityHeroImagePath("Liverpool") ?? "/images/cities/liverpool.jpg",
     gradient: "from-[#831843] via-[#3b0a25] to-[#10040a]",
   },
   {
     city: "Brighton",
     href: "/city/brighton",
     guide: "/guides/best-rage-rooms-brighton",
-    image: "/images/cities/brighton.jpg",
+    image: getCityHeroImagePath("Brighton") ?? "/images/cities/brighton.jpg",
     gradient: "from-[#0c4a6e] via-[#082f49] to-[#020617]",
   },
 ]
@@ -110,6 +111,7 @@ const otherCities: {
   city: string
   href: string
   guide: string
+  image?: string
   gradient: string
   subtitle?: string
 }[] = [
@@ -117,6 +119,7 @@ const otherCities: {
     city: "Manchester",
     href: "/city/manchester",
     guide: "/guides/best-rage-rooms-manchester",
+    image: getCityHeroImagePath("Manchester") ?? undefined,
     gradient: "from-[#7f1d1d] via-[#450a0a] to-[#0f0606]",
     subtitle: "Nearby venues",
   },
@@ -397,20 +400,41 @@ export default async function Home() {
             ))}
           </div>
 
-          <div className="mt-4 flex flex-wrap gap-2">
-            {otherCities.map((c) => (
-              <Link
-                key={c.city}
-                href={c.href}
-                className="inline-flex min-h-11 items-center gap-1.5 px-3 py-2 rounded-full bg-dark-800 border border-zinc-800 text-xs font-semibold text-zinc-200 hover:border-rage-500/60 hover:text-white transition-colors"
-              >
-                <MapPin className="w-3 h-3 text-rage-500" />
-                {c.city}
-                {c.subtitle && (
-                  <span className="text-zinc-500 font-normal">· {c.subtitle}</span>
-                )}
-              </Link>
-            ))}
+          <div className="mt-4 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            {otherCities.map((c) => {
+              const image = c.image ?? getCityHeroImagePath(c.city)
+              return (
+                <Link
+                  key={c.city}
+                  href={c.href}
+                  className="group relative overflow-hidden rounded-lg border border-zinc-800 h-24 sm:h-28 flex items-end bg-dark-900"
+                >
+                  {image ? (
+                    <Image
+                      src={image}
+                      alt={`${c.city} skyline`}
+                      fill
+                      sizes="(max-width: 768px) 50vw, 16vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
+                    />
+                  ) : (
+                    <div
+                      aria-hidden="true"
+                      className={`absolute inset-0 bg-gradient-to-br ${c.gradient}`}
+                    />
+                  )}
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/10"
+                  />
+                  <div className="relative p-2 sm:p-3 w-full">
+                    <div className="text-white font-extrabold uppercase tracking-wide text-xs sm:text-sm leading-tight group-hover:text-rage-400 transition-colors">
+                      {c.city}
+                    </div>
+                  </div>
+                </Link>
+              )
+            })}
           </div>
 
           {topRegions.length > 0 && (

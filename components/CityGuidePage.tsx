@@ -5,6 +5,8 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 import InArticleAd from "@/components/InArticleAd"
 import { getCityFAQs } from "@/lib/faqs"
 import { getGuideCityContent } from "@/lib/guide-city-content"
+import { getCityHeroImagePath } from "@/lib/city-images"
+import LocationHero from "@/components/LocationHero"
 import { cityToSlug } from "@/lib/location"
 import { formatListingPrice } from "@/lib/discovery"
 import type { Listing } from "@/types/listing"
@@ -134,6 +136,7 @@ export default async function CityGuidePage({
   })
 
   const citySlug = cityToSlug(city)
+  const cityHeroImage = getCityHeroImagePath(city)
 
   return (
     <div className="py-8">
@@ -153,6 +156,8 @@ export default async function CityGuidePage({
             { label: `Best Rage Rooms in ${city}` },
           ]}
         />
+
+        {cityHeroImage && <LocationHero city={city} image={cityHeroImage} />}
 
         <article>
           <h1 className="text-3xl sm:text-4xl font-bold mb-2 text-white">

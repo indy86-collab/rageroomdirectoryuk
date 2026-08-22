@@ -19,6 +19,8 @@ import {
   type LocationDiscoveryPageData,
 } from "@/lib/location-discovery"
 import type { Listing } from "@/types/listing"
+import { getCityHeroImagePath } from "@/lib/city-images"
+import LocationHero from "@/components/LocationHero"
 
 export default function LocationDiscoveryPage({
   page,
@@ -49,11 +51,13 @@ export default function LocationDiscoveryPage({
     page.type === "activity" ? (page.category as ActivityDefinition) : null
   const occasion =
     page.type === "occasion" ? (page.category as OccasionDefinition) : null
+  const cityHeroImage = getCityHeroImagePath(page.location.name)
 
   return (
     <div className="py-8 sm:py-12">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Breadcrumbs items={breadcrumbs} />
+        {cityHeroImage && <LocationHero city={page.location.name} image={cityHeroImage} />}
 
         <header className="mb-8 max-w-4xl">
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-rage-500">
