@@ -9,7 +9,6 @@ import UGCButtons from "@/components/UGCButtons"
 import CityRelatedLinks from "@/components/CityRelatedLinks"
 import DigitalGuidesChooser from "@/components/DigitalGuidesChooser"
 import ListingLeadCapture from "@/components/ListingLeadCapture"
-import PageLevelAds from "@/components/PageLevelAds"
 import RageResetCTA from "@/components/RageResetCTA"
 import Link from "next/link"
 import TrackedDiscoveryLink from "@/components/TrackedDiscoveryLink"
@@ -378,7 +377,6 @@ export default async function CityPage({ params }: CityPageProps) {
               {hasRageRoom && <RageResetCTA surface="city" variant="secondary" />}
               {hasRageRoom && <DigitalGuidesChooser highlight="firstVisit" />}
             </div>
-            <PageLevelAds />
 
             {/* Cross-links */}
             <div className="mt-4 mb-6 flex flex-wrap gap-3">

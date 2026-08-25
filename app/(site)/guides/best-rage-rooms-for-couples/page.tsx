@@ -2,6 +2,7 @@ import { Metadata } from "next"
 import Link from "next/link"
 import FAQ from "@/components/FAQ"
 import GuideMeta from "@/components/GuideMeta"
+import InArticleAd from "@/components/InArticleAd"
 import { globalFAQs } from "@/lib/faqs"
 import {
   buildArticleSchema,
@@ -166,6 +167,8 @@ export default async function BestRageRoomsForCouplesPage() {
               The physical activity and adrenaline rush can be invigorating, while the controlled environment ensures safety. Plus, it's a great conversation starter and something you'll both remember long after the date is over.
             </p>
           </div>
+
+          <InArticleAd />
 
           <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-6 mb-8">
             <h2 className="text-2xl font-bold text-white mb-4">

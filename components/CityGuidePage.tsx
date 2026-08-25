@@ -197,6 +197,8 @@ export default async function CityGuidePage({
             <p>{content?.sceneDescription}</p>
           </div>
 
+          <InArticleAd />
+
           {comparisonListings.length > 0 && (
             <section className="mb-10" aria-labelledby={`${citySlug}-comparison`}>
               <h2
@@ -258,8 +260,6 @@ export default async function CityGuidePage({
               </p>
             </section>
           )}
-
-          <InArticleAd />
 
           {inCity.length > 0 && (
             <>

@@ -4,6 +4,7 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 import GuideMeta from "@/components/GuideMeta"
 import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
 import FAQ from "@/components/FAQ"
+import InArticleAd from "@/components/InArticleAd"
 import ListingsGrid from "@/components/ListingsGrid"
 import { getListingsByOccasions } from "@/lib/listings"
 import {
@@ -200,6 +201,8 @@ export default async function RageRoomsForBirthdaysPage() {
             to structure the wider party around a rage room, and the
             lead time you&apos;ll need to lock a Saturday slot.
           </p>
+
+          <InArticleAd />
 
           <section aria-labelledby="birthday-venues-heading" className="mb-10 rounded-lg border border-rage-500/30 bg-dark-900 p-4 sm:p-6">
             <div className="mb-5 flex flex-wrap items-end justify-between gap-3">

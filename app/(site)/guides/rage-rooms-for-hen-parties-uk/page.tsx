@@ -5,6 +5,7 @@ import GuideMeta from "@/components/GuideMeta"
 import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
 import RageResetCTA from "@/components/RageResetCTA"
 import FAQ from "@/components/FAQ"
+import InArticleAd from "@/components/InArticleAd"
 import ListingsGrid from "@/components/ListingsGrid"
 import { getListingsByOccasions } from "@/lib/listings"
 import {
@@ -224,6 +225,8 @@ export default async function RageRoomsForHenPartiesPage() {
             package actually costs, which cities are easiest for out-of-
             towners, booking lead time, alcohol rules, and what to wear.
           </p>
+
+          <InArticleAd />
 
           <section aria-labelledby="hen-venues-heading" className="mb-10 rounded-lg border border-rage-500/30 bg-dark-900 p-4 sm:p-6">
             <div className="mb-5 flex flex-wrap items-end justify-between gap-3">

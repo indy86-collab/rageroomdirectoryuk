@@ -1,7 +1,6 @@
 import Link from "next/link"
 import { ArrowDown, Banknote, CalendarCheck, Layers3, Users } from "lucide-react"
 import Breadcrumbs from "@/components/Breadcrumbs"
-import InArticleAd from "@/components/InArticleAd"
 import TrackedDiscoveryLink from "@/components/TrackedDiscoveryLink"
 import ListingsPageClient from "@/components/ListingsPageClient"
 import {
@@ -110,8 +109,6 @@ export default function LocationDiscoveryPage({
             </Link>
           </div>
         </header>
-
-        <InArticleAd />
 
         <ListingsPageClient
           initialListings={page.listings}

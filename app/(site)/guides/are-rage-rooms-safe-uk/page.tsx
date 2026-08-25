@@ -3,6 +3,7 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
 import GuideMeta from "@/components/GuideMeta"
 import FAQ from "@/components/FAQ"
+import InArticleAd from "@/components/InArticleAd"
 import Link from "next/link"
 import { buildArticleSchema, buildBreadcrumbSchema, buildOgImageUrl } from "@/lib/seo-schema"
 
@@ -176,6 +177,8 @@ export default function AreRageRoomsSafeUKPage() {
               to compare options near you.
             </p>
           </section>
+
+          <InArticleAd />
 
           <section>
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">

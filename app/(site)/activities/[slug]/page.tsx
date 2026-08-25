@@ -3,7 +3,6 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowDown, ArrowRight, CalendarCheck, Shirt, Users } from "lucide-react"
 import Breadcrumbs from "@/components/Breadcrumbs"
-import InArticleAd from "@/components/InArticleAd"
 import PaintHubExtras from "@/components/PaintHubExtras"
 import TrackedDiscoveryLink from "@/components/TrackedDiscoveryLink"
 import ListingsPageClient from "@/components/ListingsPageClient"
@@ -169,10 +168,6 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
             </p>
           </div>
         </div>
-
-        {(activity.value === "paint-splatter" || activity.value === "rage-room") && (
-          <InArticleAd />
-        )}
 
         <ListingsPageClient
           initialListings={listings}

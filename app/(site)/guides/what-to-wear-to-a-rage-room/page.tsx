@@ -4,6 +4,7 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 import GuideMeta from "@/components/GuideMeta"
 import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
 import FAQ from "@/components/FAQ"
+import InArticleAd from "@/components/InArticleAd"
 import {
   buildArticleSchema,
   buildBreadcrumbSchema,
@@ -251,6 +252,8 @@ export default function WhatToWearToARageRoomPage() {
               ))}
             </div>
           </section>
+
+          <InArticleAd />
 
           <section aria-labelledby="ppeoverview-heading" className="mb-10">
             <h2 id="ppeoverview-heading" className="text-2xl sm:text-3xl font-bold text-white mb-4">

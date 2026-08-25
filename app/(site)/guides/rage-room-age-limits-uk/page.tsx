@@ -146,9 +146,9 @@ export default async function RageRoomAgeLimitsUkPage() {
           </p>
         </div>
 
-        <AgeTable heading="Published minimum ages" rows={[...known, ...unknown]} />
-
         <InArticleAd />
+
+        <AgeTable heading="Published minimum ages" rows={[...known, ...unknown]} />
 
         <FAQ items={faqs} title="Rage room age-limit FAQs" />
 

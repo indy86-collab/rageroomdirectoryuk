@@ -2,6 +2,7 @@ import { Metadata } from "next"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
 import GuideMeta from "@/components/GuideMeta"
+import InArticleAd from "@/components/InArticleAd"
 import Link from "next/link"
 import { buildArticleSchema, buildBreadcrumbSchema, buildOgImageUrl } from "@/lib/seo-schema"
 
@@ -128,6 +129,8 @@ export default function HowMuchDoRageRoomsCostUKPage() {
               These prices are approximate and can vary significantly by location. Rage rooms in major cities like <Link href="/city/london" className="text-orange-500 hover:text-orange-600 underline">London</Link> or <Link href="/city/manchester" className="text-orange-500 hover:text-orange-600 underline">Manchester</Link> may charge slightly more than those in smaller towns, reflecting higher operating costs and demand.
             </p>
           </section>
+
+          <InArticleAd />
 
           <section>
             <h2 className="text-2xl font-bold text-white mt-8 mb-4">

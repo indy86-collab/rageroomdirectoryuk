@@ -146,12 +146,13 @@ export default async function CheapestRageRoomsUkPage() {
           </p>
         </div>
 
+        <InArticleAd />
+
         <PriceTable
           heading="Lowest per-person starting prices"
           rows={perPerson}
           empty="No comparable per-person smash-room prices are published yet."
         />
-        <InArticleAd />
         <PriceTable
           heading="Per-room and per-group starting prices"
           rows={perRoomOrGroup}

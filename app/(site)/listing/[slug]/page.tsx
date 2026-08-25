@@ -22,7 +22,6 @@ import ListingMediaGallery from "@/components/ListingMediaGallery"
 import ListingStickyBookingBar from "@/components/ListingStickyBookingBar"
 import FeaturedVenueBadge from "@/components/FeaturedVenueBadge"
 import ListingLeadCapture from "@/components/ListingLeadCapture"
-import PageLevelAds from "@/components/PageLevelAds"
 import TrackedBookingLink from "@/components/TrackedBookingLink"
 import NearbyActivitiesAffiliate from "@/components/NearbyActivitiesAffiliate"
 import TrackedClaimLink from "@/components/TrackedClaimLink"
@@ -667,8 +666,6 @@ export default async function ListingPage({ params }: ListingPageProps) {
             />
           </div>
         )}
-
-        <PageLevelAds />
 
         <ListingMediaGallery media={authorisedMedia} venueName={listing.name} />
 

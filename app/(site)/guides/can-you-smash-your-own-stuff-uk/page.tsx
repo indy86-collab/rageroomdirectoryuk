@@ -3,6 +3,7 @@ import Link from "next/link"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import FAQ from "@/components/FAQ"
 import GuideMeta from "@/components/GuideMeta"
+import InArticleAd from "@/components/InArticleAd"
 import ListingsGrid from "@/components/ListingsGrid"
 import {
   buildArticleSchema,
@@ -135,6 +136,8 @@ export default async function CanYouSmashYourOwnStuffPage() {
             for the rest of the session format.
           </p>
         </div>
+
+        <InArticleAd />
 
         {byo.length > 0 && (
           <section className="mb-10" aria-labelledby="byo-venues">

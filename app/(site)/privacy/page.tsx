@@ -181,7 +181,9 @@ export default function PrivacyPage() {
               </table>
             </div>
             <p className="mt-4">
-              Google AdSense Auto ads can appear on directory pages. Advertising consent for UK,
+              Google AdSense in-article ads can appear on editorial guide and blog
+              pages only. They are not shown on directory listings, search, maps,
+              checkout, downloads or the Rage Reset game. Advertising consent for UK,
               EEA and Swiss visitors is collected by Google&apos;s certified Privacy &amp; messaging
               CMP (IAB TCF), not by the analytics toggle on this page. Accepting analytics does not
               turn ads on, and rejecting analytics does not turn ads off. Use Google&apos;s privacy
@@ -308,7 +310,7 @@ export default function PrivacyPage() {
             <ul className="list-disc list-inside space-y-2 ml-4">
               <li><strong>Google Analytics 4</strong> - loaded only after analytics opt-in; advertising storage, user-data and personalisation signals remain denied</li>
               <li><strong>Google Maps</strong> - loaded only when you explicitly press a load-map button; this choice is separate from analytics</li>
-              <li><strong>Google AdSense</strong> - advertising network. UK/EEA/Swiss consent is handled by Google&apos;s certified Privacy &amp; messaging CMP; this is separate from analytics</li>
+              <li><strong>Google AdSense</strong> - advertising network on editorial guide and blog pages. UK/EEA/Swiss consent is handled by Google&apos;s certified Privacy &amp; messaging CMP; this is separate from analytics</li>
             </ul>
             <p className="mt-4">
               Google&apos;s use of information is governed by their <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:text-orange-600 underline">Privacy Policy</a>.

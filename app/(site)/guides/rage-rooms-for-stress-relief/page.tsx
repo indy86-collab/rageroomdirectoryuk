@@ -3,6 +3,7 @@ import Link from "next/link"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import GuideMeta from "@/components/GuideMeta"
 import FAQ from "@/components/FAQ"
+import InArticleAd from "@/components/InArticleAd"
 import RageResetCTA from "@/components/RageResetCTA"
 import {
   buildArticleSchema,
@@ -205,6 +206,8 @@ export default function RageRoomsForStressReliefPage() {
               ))}
             </div>
           </section>
+
+          <InArticleAd />
 
           <section aria-labelledby="research-heading" className="mb-10">
             <h2 id="research-heading" className="text-2xl sm:text-3xl font-bold text-white mb-4">

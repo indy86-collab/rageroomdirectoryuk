@@ -4,8 +4,10 @@ import Link from "next/link"
 import { getBlogPost, getAllBlogPosts } from "@/lib/blog-posts"
 import { getBlogGuideCanonical, getBlogGuideLink } from "@/lib/blog-guide-canonicals"
 import Breadcrumbs from "@/components/Breadcrumbs"
+import InArticleAd from "@/components/InArticleAd"
 import Script from "next/script"
 import { absoluteUrl, getSiteUrl } from "@/lib/site-url"
+import { splitMarkdownForInArticleAd } from "@/lib/adsense"
 
 interface BlogPostPageProps {
   params: { slug: string }
@@ -129,7 +131,9 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
       .join("")
   }
 
-  const formattedContent = formatContent(post.content)
+  const { before, after } = splitMarkdownForInArticleAd(post.content)
+  const formattedBefore = formatContent(before)
+  const formattedAfter = after ? formatContent(after) : ""
   const guideLink = getBlogGuideLink(params.slug)
 
   return (
@@ -200,8 +204,17 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
           {/* Content */}
           <div
             className="prose prose-invert max-w-none bg-[#181818] rounded-lg border border-zinc-800 p-8"
-            dangerouslySetInnerHTML={{ __html: formattedContent }}
+            dangerouslySetInnerHTML={{ __html: formattedBefore }}
           />
+          {formattedAfter ? (
+            <>
+              <InArticleAd />
+              <div
+                className="prose prose-invert max-w-none bg-[#181818] rounded-lg border border-zinc-800 p-8"
+                dangerouslySetInnerHTML={{ __html: formattedAfter }}
+              />
+            </>
+          ) : null}
 
           {/* CTA */}
           <div className="mt-12 bg-[#181818] rounded-lg border border-zinc-800 p-6 text-center">

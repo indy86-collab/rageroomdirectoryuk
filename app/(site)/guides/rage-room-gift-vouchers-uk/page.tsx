@@ -4,6 +4,7 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 import GuideMeta from "@/components/GuideMeta"
 import FAQ from "@/components/FAQ"
 import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
+import InArticleAd from "@/components/InArticleAd"
 import {
   buildArticleSchema,
   buildBreadcrumbSchema,
@@ -222,6 +223,8 @@ export default function RageRoomGiftVouchersUKPage() {
               ))}
             </div>
           </section>
+
+          <InArticleAd />
 
           <section aria-labelledby="what-to-check-heading" className="mb-10">
             <h2 id="what-to-check-heading" className="text-2xl sm:text-3xl font-bold text-white mb-4">

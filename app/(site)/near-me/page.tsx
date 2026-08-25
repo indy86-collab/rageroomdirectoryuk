@@ -7,7 +7,6 @@ import { globalFAQs } from "@/lib/faqs"
 import ListingsGrid from "@/components/ListingsGrid"
 import ListingLeadCapture from "@/components/ListingLeadCapture"
 import NearMeMap from "@/components/NearMeMap"
-import PageLevelAds from "@/components/PageLevelAds"
 import RageResetCTA from "@/components/RageResetCTA"
 import { absoluteUrl } from "@/lib/site-url"
 
@@ -114,8 +113,6 @@ export default async function NearMePage() {
           <ListingLeadCapture source="near-me" idPrefix="near-me-lead" />
           <RageResetCTA surface="near-me" compact />
         </div>
-
-        <PageLevelAds />
 
         {/* Interactive Map Section */}
         <section aria-labelledby="map-heading" className="mb-12">

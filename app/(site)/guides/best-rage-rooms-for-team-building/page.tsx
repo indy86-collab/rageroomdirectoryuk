@@ -3,6 +3,7 @@ import Link from "next/link"
 import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
 import FAQ from "@/components/FAQ"
 import GuideMeta from "@/components/GuideMeta"
+import InArticleAd from "@/components/InArticleAd"
 import {
   buildArticleSchema,
   buildBreadcrumbSchema,
@@ -181,6 +182,8 @@ export default async function BestRageRoomsForTeamBuildingPage() {
               <li>Unique experience that stands out from typical corporate events</li>
             </ul>
           </div>
+
+          <InArticleAd />
 
           <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-6 mb-8">
             <h2 className="text-2xl font-bold text-white mb-4">
