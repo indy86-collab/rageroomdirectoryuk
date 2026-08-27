@@ -3,6 +3,12 @@ import { describe, expect, it } from "vitest"
 import sitemap from "@/app/sitemap"
 import { generateMetadata as generateCityMetadata } from "@/app/(site)/city/[slug]/page"
 import { generateMetadata as generateSearchMetadata } from "@/app/(site)/search/page"
+import { metadata as insightsMetadata } from "@/app/(site)/insights/page"
+import { generateMetadata as generateInsightMetadata } from "@/app/(site)/insights/[slug]/page"
+import { metadata as badgeMetadata } from "@/app/(site)/for-venues/badge/page"
+import { metadata as publishersMetadata } from "@/app/(site)/for-publishers/page"
+import { metadata as embedMetadata } from "@/app/(embed)/embed/rage-room-finder/page"
+import { INSIGHT_PAGE_META } from "@/lib/insights-pages"
 import { getListingsNearCity } from "@/lib/listings"
 import { buildArticleSchema } from "@/lib/seo-schema"
 import robots from "@/app/robots"
@@ -121,5 +127,80 @@ describe("SEO regressions", () => {
       "https://www.rageroomdirectory.co.uk/sitemap.xml",
       "https://www.rageroomdirectory.co.uk/image-sitemap.xml",
     ])
+  })
+
+  it("adds insights, badge and publisher routes to the sitemap and keeps the embed out", async () => {
+    const urls = new Set((await sitemap()).map((entry) => entry.url))
+    expect(urls.has("https://www.rageroomdirectory.co.uk/insights")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/insights/rage-room-prices")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/insights/rage-rooms-by-city")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/insights/rage-rooms-by-region")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/insights/rage-room-activities")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/for-venues/badge")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/for-publishers")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/embed/rage-room-finder")).toBe(false)
+  })
+
+  it("publishes citation metadata for the insights hub and subpages", async () => {
+    expect(insightsMetadata.alternates).toEqual({ canonical: "/insights" })
+    expect(insightsMetadata.robots).toBeUndefined()
+    expect(String(insightsMetadata.title)).toContain("UK Rage Room Statistics")
+    const prices = await generateInsightMetadata({ params: { slug: "rage-room-prices" } })
+    expect(prices.alternates).toEqual({ canonical: "/insights/rage-room-prices" })
+    expect(prices.robots).toBeUndefined()
+    expect(badgeMetadata.alternates).toEqual({ canonical: "/for-venues/badge" })
+    expect(badgeMetadata.robots).toBeUndefined()
+    expect(publishersMetadata.alternates).toEqual({ canonical: "/for-publishers" })
+    expect(publishersMetadata.robots).toBeUndefined()
+    expect(embedMetadata.robots).toEqual({ index: false, follow: true })
+  })
+
+  it("keeps Insights titles statistical rather than interchangeable with directory pages", () => {
+    expect(INSIGHT_PAGE_META["rage-room-prices"].title).toContain("Statistics")
+    expect(INSIGHT_PAGE_META["rage-room-prices"].title).not.toMatch(/Near You|Live Venue/)
+    expect(INSIGHT_PAGE_META["rage-rooms-by-city"].title).toMatch(/How Many Rage Rooms/)
+    expect(INSIGHT_PAGE_META["rage-rooms-by-city"].heading).toContain("Statistics")
+    expect(INSIGHT_PAGE_META["rage-rooms-by-city"].title).not.toMatch(/Rage Rooms & Destructive Experiences/)
+    expect(INSIGHT_PAGE_META["rage-rooms-by-region"].heading).toContain("Statistics")
+    expect(INSIGHT_PAGE_META["rage-room-activities"].heading).toContain("Statistics")
+  })
+
+  it("allows framing only on the embed widget route", async () => {
+    const headers = await nextConfig.headers()
+    const embed = headers.find((entry: { source: string }) => entry.source === "/embed/:path*")
+    const site = headers.find((entry: { source: string }) => entry.source === "/:path((?!embed/).*)")
+    const badges = headers.find((entry: { source: string }) => entry.source === "/badges/:path*")
+    expect(embed.headers).toEqual([
+      {
+        key: "Content-Security-Policy",
+        value: "frame-ancestors *",
+      },
+    ])
+    expect(embed.headers.some((header: { key: string }) => header.key === "X-Frame-Options")).toBe(
+      false
+    )
+    expect(site.headers).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ key: "X-Frame-Options", value: "SAMEORIGIN" }),
+        expect.objectContaining({
+          key: "Content-Security-Policy",
+          value: "frame-ancestors 'self'",
+        }),
+      ])
+    )
+    expect(badges.headers).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          key: "Cache-Control",
+          value: "public, max-age=86400, stale-while-revalidate=604800",
+        }),
+      ])
+    )
+  })
+
+  it("disallows crawlers from embed routes while leaving Insights indexable", () => {
+    const rules = robots().rules
+    const star = Array.isArray(rules) ? rules[0] : rules
+    expect(star.disallow).toEqual(expect.arrayContaining(["/api/", "/embed/"]))
   })
 })

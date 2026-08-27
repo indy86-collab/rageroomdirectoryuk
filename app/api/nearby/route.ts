@@ -1,15 +1,30 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getListingsWithLocation } from "@/lib/listings"
 import { findNearestListings } from "@/lib/nearby-search"
+import { isCompleteUkPostcode } from "@/lib/uk-postcode"
+import { allowRequest } from "@/lib/rate-limit"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
 
-const POSTCODE_RE = /^[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}$/i
+function clientKey(request: NextRequest) {
+  return (
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    request.headers.get("x-real-ip") ||
+    "unknown"
+  )
+}
 
 export async function GET(request: NextRequest) {
+  if (!allowRequest(`nearby:${clientKey(request)}`, 40, 60_000)) {
+    return NextResponse.json(
+      { error: "Too many postcode searches. Please wait a moment and try again." },
+      { status: 429, headers: { "Cache-Control": "no-store", "Retry-After": "60" } }
+    )
+  }
+
   const rawPostcode = request.nextUrl.searchParams.get("postcode")?.trim() || ""
-  if (!POSTCODE_RE.test(rawPostcode)) {
+  if (!isCompleteUkPostcode(rawPostcode)) {
     return NextResponse.json(
       { error: "Enter a complete UK postcode, for example SW1A 1AA" },
       { status: 400, headers: { "Cache-Control": "no-store" } }

@@ -294,7 +294,11 @@ export default async function UkRageRoomReport2026Page() {
 
           <div className="rounded-lg border border-zinc-800 bg-[#181818] p-6 text-center">
             <p className="text-zinc-300">
-              Explore the underlying directory through the{" "}
+              For citation-ready counts with copyable statements, see{" "}
+            <Link href="/insights" className="font-semibold text-orange-500">
+              UK Rage Room Statistics
+            </Link>
+            . Explore the underlying directory through the{" "}
               <Link href="/rage-room-prices-uk" className="font-semibold text-orange-500">UK prices hub</Link>,{" "}
               <Link href="/uk-map" className="font-semibold text-orange-500">UK map</Link> or{" "}
               <Link href="/listings" className="font-semibold text-orange-500">full listings</Link>.

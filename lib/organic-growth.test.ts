@@ -110,6 +110,11 @@ describe("nearby and index-quality rules", () => {
       { lat: 51.5, lng: -0.12 }
     )
     expect(results.map((result) => result.id)).toEqual(["near", "far"])
+    expect(results[0]).not.toHaveProperty("phone")
+    expect(results[0]).not.toHaveProperty("googlePlaceId")
+    expect(results[0]).not.toHaveProperty("description")
+    expect(results[0]).not.toHaveProperty("sourceUrl")
+    expect(JSON.stringify(results)).not.toContain("hidden")
   })
 
   it("indexes in-city inventory and curated nearby pages, but not generic nearby-only pages", () => {

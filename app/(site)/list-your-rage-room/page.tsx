@@ -98,6 +98,21 @@ export default function ListYourRageRoomPage({
           </a>
         </div>
 
+        <div className="mb-8 rounded-lg border border-zinc-800 bg-[#181818] p-6">
+          <h2 className="mb-3 text-2xl font-bold text-white">Promote your listing</h2>
+          <p className="mb-4 text-sm leading-relaxed text-zinc-300">
+            If your venue is already listed, you can display a free “Listed on
+            RageRoom Directory” badge on your website. It is optional and does not
+            affect rankings.
+          </p>
+          <Link
+            href="/for-venues/badge"
+            className="inline-flex min-h-11 items-center text-sm font-semibold text-orange-500 hover:text-orange-400"
+          >
+            Get the listing badge →
+          </Link>
+        </div>
+
         <div className="mb-8 overflow-hidden rounded-lg border border-zinc-800 bg-[#181818] p-6">
           <h2 className="mb-4 text-2xl font-bold text-white">For Existing Listings</h2>
           <p className="mb-4 text-white">

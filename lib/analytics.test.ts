@@ -3,6 +3,7 @@ import {
   getDirectorySourcePath,
   getSafeDirectoryReferrerPath,
   trackAffiliateWidgetLoad,
+  trackAuthorityEvent,
   trackDirectoryEvent,
   trackPurchase,
 } from "./analytics"
@@ -253,6 +254,66 @@ describe("directory conversion analytics", () => {
       affiliate_placement: "city",
       city: "Manchester",
       recommendation_id: "city_default",
+    })
+  })
+})
+
+describe("authority analytics", () => {
+  const gtag = vi.fn()
+
+  beforeEach(() => {
+    gtag.mockClear()
+    const consent = JSON.stringify({
+      version: 1,
+      analytics: true,
+      decidedAt: Date.now(),
+    })
+    vi.stubGlobal("window", {
+      gtag,
+      localStorage: {
+        getItem: vi.fn((key: string) =>
+          key === "rageroom:privacy-consent" ? consent : null
+        ),
+      },
+      location: {
+        origin: "https://rageroomdirectory.co.uk",
+        pathname: "/for-publishers",
+      },
+    })
+  })
+
+  afterEach(() => {
+    vi.unstubAllGlobals()
+  })
+
+  it("tracks badge and widget events without search text or PII", () => {
+    trackAuthorityEvent("badge_code_copied", {
+      variant: "compact",
+      venueSlug: "boom-lab-london",
+    })
+    trackAuthorityEvent("venue_profile_link_copied", {
+      venueSlug: "boom-lab-london",
+    })
+    trackAuthorityEvent("widget_loaded", { source: "embed" })
+    trackAuthorityEvent("widget_search", {
+      queryKind: "city",
+      resultCount: 2,
+    })
+    trackAuthorityEvent("widget_result_click", { resultType: "city" })
+    trackAuthorityEvent("widget_embed_code_copied", { customisation: "default" })
+
+    expect(gtag.mock.calls.map((call) => call[1])).toEqual([
+      "badge_code_copied",
+      "venue_profile_link_copied",
+      "widget_loaded",
+      "widget_search",
+      "widget_result_click",
+      "widget_embed_code_copied",
+    ])
+    expect(JSON.stringify(gtag.mock.calls)).not.toMatch(/SW1A|email|postcode/i)
+    expect(gtag.mock.calls[3][2]).toEqual({
+      queryKind: "city",
+      resultCount: 2,
     })
   })
 })

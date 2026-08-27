@@ -102,6 +102,15 @@ export const ROUTE_INVENTORY: ExpectedRoute[] = [
   { path: "/uk-map", expectStatus: 200, group: "directory", requireHeaderFooter: true },
   { path: "/search", expectStatus: 200, group: "directory", requireHeaderFooter: true },
   { path: "/list-your-rage-room", expectStatus: 200, group: "directory", requireHeaderFooter: true },
+  { path: "/insights", expectStatus: 200, group: "editorial", requireHeaderFooter: true },
+  { path: "/for-venues/badge", expectStatus: 200, group: "directory", requireHeaderFooter: true },
+  { path: "/for-publishers", expectStatus: 200, group: "directory", requireHeaderFooter: true },
+  {
+    path: "/embed/rage-room-finder",
+    expectStatus: 200,
+    group: "embed",
+    requireNoHeaderFooter: true,
+  },
   {
     path: "/rage-reset",
     expectStatus: 200,

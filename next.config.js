@@ -21,9 +21,35 @@ const nextConfig = {
         ],
       },
       {
-        source: "/rage-reset.webmanifest",
+        source: '/rage-reset.webmanifest',
         headers: [
           { key: "Cache-Control", value: "public, max-age=0, must-revalidate" },
+        ],
+      },
+      {
+        source: "/embed/:path*",
+        headers: [
+          { key: "Content-Security-Policy", value: "frame-ancestors *" },
+        ],
+      },
+      {
+        source: "/badges/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" },
+        ],
+      },
+      {
+        source: "/",
+        headers: [
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Content-Security-Policy", value: "frame-ancestors 'self'" },
+        ],
+      },
+      {
+        source: "/:path((?!embed/).*)",
+        headers: [
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Content-Security-Policy", value: "frame-ancestors 'self'" },
         ],
       },
     ]
@@ -66,6 +92,11 @@ const nextConfig = {
       {
         source: '/rage-room-prices/newcastle-upon-tyne',
         destination: '/rage-room-prices/newcastle',
+        permanent: true,
+      },
+      {
+        source: '/widgets',
+        destination: '/for-publishers',
         permanent: true,
       },
     ]

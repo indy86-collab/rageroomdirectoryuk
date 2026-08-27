@@ -27,3 +27,16 @@ export function absoluteUrl(path = "/") {
 export function listingUrl(slugOrId: string) {
   return absoluteUrl(`/listing/${slugOrId}`)
 }
+
+/** Allow only http(s) origins in generated badge/widget markup. */
+export function resolvePublicAssetOrigin(value: string) {
+  try {
+    const url = new URL(value)
+    if (url.protocol !== "https:" && url.protocol !== "http:") {
+      return CANONICAL_SITE_URL
+    }
+    return url.origin
+  } catch {
+    return CANONICAL_SITE_URL
+  }
+}

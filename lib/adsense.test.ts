@@ -24,6 +24,11 @@ describe("isAdEligiblePath", () => {
     expect(isAdEligiblePath("/digital-downloads/rage-room-party-planner-pack")).toBe(false)
     expect(isAdEligiblePath("/privacy")).toBe(false)
     expect(isAdEligiblePath("/uk-map")).toBe(false)
+    expect(isAdEligiblePath("/insights")).toBe(false)
+    expect(isAdEligiblePath("/insights/rage-room-prices")).toBe(false)
+    expect(isAdEligiblePath("/embed/rage-room-finder")).toBe(false)
+    expect(isAdEligiblePath("/for-publishers")).toBe(false)
+    expect(isAdEligiblePath("/for-venues/badge")).toBe(false)
   })
 })
 

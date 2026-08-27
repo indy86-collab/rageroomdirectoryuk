@@ -20,6 +20,7 @@ import {
   matchesOccasionDefinition,
 } from "@/lib/discovery"
 import { getEligibleLocationDiscoveryPages } from "@/lib/location-discovery"
+import { buildInsightsStats, getPublishedInsightPages } from "@/lib/insights-stats"
 
 // ISR: sitemap reflects listings.json state but doesn't need to be live on every request.
 export const revalidate = 3600
@@ -211,6 +212,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.7,
     },
+    {
+      url: absoluteUrl("/insights"),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: absoluteUrl("/for-venues/badge"),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: absoluteUrl("/for-publishers"),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
   ]
 
   routes.push(
@@ -225,6 +241,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     }
   )
+
+  const insightStats = buildInsightsStats(listings)
+  for (const slug of getPublishedInsightPages(insightStats)) {
+    routes.push({
+      url: absoluteUrl(`/insights/${slug}`),
+      lastModified: insightStats.lastUpdated,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    })
+  }
 
   for (const activity of ACTIVITY_DEFINITIONS) {
     const activityListings = listings.filter((listing) =>

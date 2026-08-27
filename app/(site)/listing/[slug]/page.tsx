@@ -1129,11 +1129,6 @@ export default async function ListingPage({ params }: ListingPageProps) {
           </div>
         )}
 
-        {/* UGC Buttons */}
-        {listing.verified && (
-          <FeaturedVenueBadge listingUrl={listingUrl} venueName={listing.name} />
-        )}
-
         <div className="mb-6 rounded-lg border border-zinc-800 bg-[#181818] p-4 sm:mb-8 sm:p-6">
           <h2 className="text-lg font-bold text-white">Venue owners</h2>
           <p className="mt-2 text-sm text-zinc-400">
@@ -1158,6 +1153,12 @@ export default async function ListingPage({ params }: ListingPageProps) {
               Ask about featured placement →
             </a>
           </div>
+          {listing.verified && (
+            <FeaturedVenueBadge
+              venueSlug={listing.slug || listing.id}
+              venueName={listing.name}
+            />
+          )}
         </div>
 
         <UGCButtons

@@ -27,17 +27,19 @@ export default function robots(): MetadataRoute.Robots {
     "Diffbot",          // Diffbot
   ]
 
+  const crawlerDisallow = ["/api/", "/embed/"]
+
   return {
     rules: [
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/"],
+        disallow: crawlerDisallow,
       },
       ...aiCrawlers.map((ua) => ({
         userAgent: ua,
         allow: "/",
-        disallow: ["/api/"],
+        disallow: crawlerDisallow,
       })),
     ],
     sitemap: [absoluteUrl("/sitemap.xml"), absoluteUrl("/image-sitemap.xml")],

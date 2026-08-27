@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import ConsentControlledProviders from "@/components/ConsentControlledProviders"
 import {
   clearAnalyticsStorage,
@@ -28,6 +29,8 @@ export default function ConsentManager({
   const settingsHeadingRef = useRef<HTMLHeadingElement>(null)
   const settingsRef = useRef<HTMLElement>(null)
   const previousFocusRef = useRef<HTMLElement | null>(null)
+  const pathname = usePathname()
+  const isEmbedRoute = pathname.startsWith("/embed/")
 
   useEffect(() => {
     const stored = readConsentPreferences()
@@ -115,6 +118,7 @@ export default function ConsentManager({
   }
 
   if (!ready) return null
+  if (isEmbedRoute) return null
 
   return (
     <>

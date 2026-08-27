@@ -142,6 +142,31 @@ export type DirectoryEventMap = {
   }
 }
 
+export type AuthorityEventMap = {
+  badge_code_copied: {
+    variant: "compact" | "standard"
+    venueSlug: string
+  }
+  venue_profile_link_copied: {
+    venueSlug: string
+  }
+  widget_loaded: {
+    source: "embed" | "preview"
+  }
+  widget_search: {
+    queryKind: "postcode" | "city" | "invalid"
+    resultCount: number
+  }
+  widget_result_click: {
+    resultType: "city" | "region" | "venue"
+  }
+  widget_embed_code_copied: {
+    customisation: "default" | "custom"
+  }
+}
+
+export type AuthorityEventName = keyof AuthorityEventMap
+
 export type DirectoryEventName = keyof DirectoryEventMap
 
 const DIRECTORY_EVENT_PROPERTIES: {
@@ -224,6 +249,17 @@ const DIRECTORY_EVENT_PROPERTIES: {
   ],
 }
 
+const AUTHORITY_EVENT_PROPERTIES: {
+  [EventName in AuthorityEventName]: readonly (keyof AuthorityEventMap[EventName])[]
+} = {
+  badge_code_copied: ["variant", "venueSlug"],
+  venue_profile_link_copied: ["venueSlug"],
+  widget_loaded: ["source"],
+  widget_search: ["queryKind", "resultCount"],
+  widget_result_click: ["resultType"],
+  widget_embed_code_copied: ["customisation"],
+}
+
 type GtagEventParams = Record<
   string,
   string | number | boolean | null | undefined | Array<Record<string, unknown>>
@@ -294,6 +330,33 @@ export function trackDirectoryEvent<EventName extends DirectoryEventName>(
   properties: DirectoryEventMap[EventName]
 ) {
   trackEvent(eventName, cleanDirectoryProperties(eventName, properties))
+}
+
+function cleanAuthorityProperties<EventName extends AuthorityEventName>(
+  eventName: EventName,
+  properties: AuthorityEventMap[EventName]
+) {
+  const clean: Record<string, string | number | boolean> = {}
+
+  for (const propertyName of AUTHORITY_EVENT_PROPERTIES[eventName]) {
+    const value = properties[propertyName]
+    if (typeof value === "string") {
+      const cleaned = cleanDirectoryString(value)
+      if (cleaned) clean[propertyName as string] = cleaned
+    } else if (typeof value === "number" && Number.isFinite(value)) {
+      clean[propertyName as string] = value
+    }
+  }
+
+  return clean
+}
+
+/** Badge and embed-widget events. Never includes search text, postcodes or PII. */
+export function trackAuthorityEvent<EventName extends AuthorityEventName>(
+  eventName: EventName,
+  properties: AuthorityEventMap[EventName]
+) {
+  trackEvent(eventName, cleanAuthorityProperties(eventName, properties))
 }
 
 /** Current route only: never includes query parameters, hashes or arbitrary search text. */

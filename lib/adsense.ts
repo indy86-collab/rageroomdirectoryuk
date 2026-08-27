@@ -37,6 +37,10 @@ const EXCLUDED_PREFIXES = [
   "/rage-reset",
   "/venue-owner",
   "/download/",
+  "/embed/",
+  "/insights",
+  "/for-venues/",
+  "/for-publishers",
 ]
 
 /**

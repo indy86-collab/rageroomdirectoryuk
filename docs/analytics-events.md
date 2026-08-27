@@ -56,6 +56,19 @@ This document defines the anonymous conversion-attribution events for RageRoom D
 
 `filterAction` is one of `add`, `remove` or `set`. `comparisonContext`, when present, is `active`; venue lists add it to booking events while a comparison table is open.
 
+## Organic authority events
+
+These reuse `trackEvent()` / consent. They are not conversion events and never include search text, postcodes, names or email addresses.
+
+| Event | Meaning | Properties |
+| --- | --- | --- |
+| `badge_code_copied` | Venue-owner copies listing badge HTML | `variant` (`compact` or `standard`), `venueSlug` |
+| `venue_profile_link_copied` | Venue-owner copies the canonical profile URL | `venueSlug` |
+| `widget_loaded` | Finder widget mounted | `source` (`embed` or `preview`) |
+| `widget_search` | Finder search submitted | `queryKind` (`postcode`, `city` or `invalid`), `resultCount` |
+| `widget_result_click` | Finder result opened | `resultType` (`city`, `region` or `venue`) |
+| `widget_embed_code_copied` | Publisher copies iframe snippet | `customisation` (`default` or `custom`) |
+
 ## Central values
 
 ### Page types

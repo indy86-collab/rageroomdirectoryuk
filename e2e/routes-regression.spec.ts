@@ -53,11 +53,18 @@ test.describe("Public route regression after (site)/(rage-reset) migration", () 
         const footerCount = await page.locator("footer").count()
         expect(headerCount).toBe(0)
         expect(footerCount).toBe(0)
-        await expect(page.getByRole("heading", { name: "Rage Reset" })).toBeVisible()
-        await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
-          "href",
-          /\/rage-reset\/?$/
-        )
+        if (route.group === "game") {
+          await expect(page.getByRole("heading", { name: "Rage Reset" })).toBeVisible()
+          await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+            "href",
+            /\/rage-reset\/?$/
+          )
+        }
+        if (route.group === "embed") {
+          await expect(
+            page.getByRole("heading", { name: "Find a Rage Room Near You" })
+          ).toBeVisible()
+        }
       }
     })
   }
