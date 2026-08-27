@@ -12,9 +12,9 @@ export async function GET(
   const data = buildRageRoomReportData(await getAllListingsForAdmin())
   const config =
     params.chart === "regions.svg"
-      ? { title: "Verified rage rooms by UK region", rows: data.regions }
+      ? { title: "Verified fixed-location venues by recorded UK region", rows: data.regions }
       : params.chart === "prices.svg"
-        ? { title: "UK rage room starting-price bands", rows: data.priceBands }
+        ? { title: "Published per-person starting-price bands", rows: data.priceBands }
         : null
   if (!config) notFound()
 

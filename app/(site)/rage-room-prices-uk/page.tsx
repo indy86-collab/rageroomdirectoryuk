@@ -120,6 +120,17 @@ export default async function RageRoomPricesUKPage() {
             Current comparable per-person directory prices range from {priceSummary}. The average is {report.averageStartingPrice != null ? `about £${report.averageStartingPrice}` : "still being calculated"}; room and group rates are excluded from that comparison.
           </p>
           <p>
+            This page is a consumer price guide for comparing venues before you book. For dataset ranges, sample sizes and methodology, see{" "}
+            <Link href="/insights/rage-room-prices" className="font-semibold text-orange-500 hover:text-orange-400">
+              UK rage room price statistics
+            </Link>
+            {" "}and the{" "}
+            <Link href="/uk-rage-room-report-2026" className="font-semibold text-orange-500 hover:text-orange-400">
+              UK Rage Room Report 2026
+            </Link>
+            .
+          </p>
+          <p>
             Compare duration, group requirements and what is included, then follow the venue&apos;s booking link for the live price. Recorded figures were last updated {new Date(report.lastUpdated).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}.
           </p>
         </div>
@@ -193,9 +204,10 @@ export default async function RageRoomPricesUKPage() {
 
         <FAQ items={faqItems} title="Frequently Asked Questions About Rage Room Prices" />
 
-        <section className="mb-12 mt-12 grid gap-4 md:grid-cols-3">
+        <section className="mb-12 mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Link href="/near-me" className="rounded-lg border border-zinc-800 bg-[#181818] p-5 hover:border-orange-500"><h2 className="font-bold text-white">Find the nearest venue</h2><p className="mt-2 text-sm text-zinc-400">Search by UK postcode and compare distances.</p></Link>
-          <Link href="/uk-rage-room-report-2026" className="rounded-lg border border-zinc-800 bg-[#181818] p-5 hover:border-orange-500"><h2 className="font-bold text-white">UK Rage Room Report</h2><p className="mt-2 text-sm text-zinc-400">Download aggregate price and coverage data.</p></Link>
+          <Link href="/insights/rage-room-prices" className="rounded-lg border border-zinc-800 bg-[#181818] p-5 hover:border-orange-500"><h2 className="font-bold text-white">Price statistics</h2><p className="mt-2 text-sm text-zinc-400">Dataset ranges, sample sizes and unavailable pricing.</p></Link>
+          <Link href="/uk-rage-room-report-2026" className="rounded-lg border border-zinc-800 bg-[#181818] p-5 hover:border-orange-500"><h2 className="font-bold text-white">UK Rage Room Report 2026</h2><p className="mt-2 text-sm text-zinc-400">Cite the annual data report and download the aggregate dataset.</p></Link>
           <Link href="/guides/what-happens-in-a-rage-room" className="rounded-lg border border-zinc-800 bg-[#181818] p-5 hover:border-orange-500"><h2 className="font-bold text-white">Plan your first visit</h2><p className="mt-2 text-sm text-zinc-400">Know what happens before you book.</p></Link>
         </section>
       </div>

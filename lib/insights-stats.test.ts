@@ -5,6 +5,7 @@ import {
   MIN_PRICE_SAMPLE_FOR_RANGE,
   buildInsightsStats,
   citationClipboardText,
+  flagshipReportCitation,
   formatInsightCitationMonth,
   getPublishedInsightPages,
   insightArticleDates,
@@ -264,6 +265,18 @@ describe("insights statistics", () => {
     expect(formatInsightCitationMonth("2026-08-20T12:00:00.000Z")).toBe("August 2026")
   })
 
+  it("builds a plain-text flagship report citation", () => {
+    const citation = flagshipReportCitation(
+      "2026-08-20T00:00:00.000Z",
+      "https://www.rageroomdirectory.co.uk/uk-rage-room-report-2026"
+    )
+    expect(citation).toBe(
+      "RageRoom Directory, UK Rage Room Report 2026, updated August 2026. https://www.rageroomdirectory.co.uk/uk-rage-room-report-2026"
+    )
+    expect(citation).not.toContain("<a")
+    expect(citation).not.toContain("rageroom.co.uk")
+  })
+
   it("does not set Article dateModified before the page was published", () => {
     expect(insightArticleDates("2026-08-27", "2026-08-20T00:00:00.000Z")).toEqual({
       datePublished: "2026-08-27",
@@ -401,5 +414,25 @@ describe("insights statistics against the current listings dataset", () => {
     expect(stats.allCities.find((row) => row.key === "london")?.count).toBe(londonCityField)
     expect(stats.allRegions.find((row) => row.key === "london")?.count).toBe(londonRegionField)
     expect(londonCanonical).not.toBe(londonCityField)
+  })
+
+  it("separates fixed venues, mobile operators and mobile rage-room offerings", () => {
+    expect(stats.fixedLocationVenues + stats.mobileServiceVenues).toBe(stats.verifiedListings)
+    expect(stats.mobileRageRooms).toBeGreaterThanOrEqual(stats.mobileServiceVenues)
+    expect(stats.multiActivityVenues).toBeGreaterThan(0)
+  })
+
+  it("publishes occasion percentages from evidence-backed fields only", () => {
+    expect(stats.birthdayPercent).toBe(Math.round((stats.birthdayVenues / stats.verifiedListings) * 100))
+    expect(stats.corporatePercent).toBe(Math.round((stats.corporateVenues / stats.verifiedListings) * 100))
+    expect(stats.stagPercent).toBe(Math.round((stats.stagVenues / stats.verifiedListings) * 100))
+    expect(stats.henPercent).toBe(Math.round((stats.henVenues / stats.verifiedListings) * 100))
+    expect(stats.occasions.find((row) => row.key === "birthdays")?.href).toBe("/occasions/birthdays")
+  })
+
+  it("lists high-demand cities without a verified fixed city-field listing as coverage gaps", () => {
+    expect(stats.coverageGaps.some((row) => row.key === "nottingham")).toBe(true)
+    expect(stats.allCities.some((row) => row.key === "nottingham")).toBe(false)
+    expect(stats.coverageGaps.every((row) => row.href.startsWith("/city/"))).toBe(true)
   })
 })

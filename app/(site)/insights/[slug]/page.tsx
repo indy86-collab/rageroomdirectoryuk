@@ -5,7 +5,9 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 import InsightsMethodology from "@/components/InsightsMethodology"
 import {
   InsightCitationBlock,
+  InsightQuestion,
   InsightsBarList,
+  InsightsCountTable,
   InsightsStatCard,
 } from "@/components/InsightsVisuals"
 import {
@@ -25,8 +27,10 @@ import {
 import {
   INSIGHT_PAGE_META,
   INSIGHTS_PUBLISHED,
+  REPORT_PATH,
   insightPageIntro,
 } from "@/lib/insights-pages"
+import { insightAnswers } from "@/lib/insights-copy"
 import { absoluteUrl } from "@/lib/site-url"
 
 export const revalidate = 3600
@@ -89,6 +93,7 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
   const dateLabel = formatInsightDate(stats.lastUpdated)
   const citationAsOf = formatInsightCitationMonth(stats.lastUpdated)
   const citationSource = absoluteUrl(path)
+  const answers = insightAnswers(stats)
   const articleDates = insightArticleDates(INSIGHTS_PUBLISHED, stats.lastUpdated)
 
   const articleSchema = buildArticleSchema({
@@ -131,6 +136,12 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
 
           {slug === "rage-room-prices" && (
             <>
+              <InsightQuestion question="How much does a rage room cost in the UK?">
+                <p>{answers.howMuch}</p>
+              </InsightQuestion>
+              <InsightQuestion question="How many venues publish prices?">
+                <p>{answers.publishedPrices}</p>
+              </InsightQuestion>
               <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 <InsightsStatCard
                   label="Usable published prices"
@@ -174,17 +185,20 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
                 ))}
               </div>
               <p className="mb-10 text-sm text-zinc-400">
-                Compare current venue-level starting prices on the{" "}
+                This page is dataset research. Compare current venue-level starting prices on the{" "}
                 <Link href="/rage-room-prices-uk" className="font-semibold text-orange-500">
                   UK prices hub
                 </Link>
-                .
+                , which is the consumer booking comparison.
               </p>
             </>
           )}
 
           {slug === "rage-rooms-by-city" && (
             <>
+              <InsightQuestion question="Which city has the most listed venues in the dataset?">
+                <p>{answers.topCity}</p>
+              </InsightQuestion>
               {stats.citations
                 .filter((item) => item.id === "cities")
                 .map((citation) => (
@@ -196,7 +210,19 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
                     />
                   </div>
                 ))}
-              <InsightsBarList rows={stats.allCities} />
+              <InsightsBarList rows={stats.topCities} />
+              <div className="mt-8">
+                <h2 className="mb-4 text-2xl font-bold text-white">All cities in the dataset</h2>
+                <InsightsCountTable
+                  caption="Verified fixed-location listings by recorded city"
+                  labelHeading="City"
+                  rows={stats.allCities.map((row) => ({
+                    label: row.label,
+                    count: row.count,
+                    href: row.href,
+                  }))}
+                />
+              </div>
             </>
           )}
 
@@ -213,12 +239,27 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
                     />
                   </div>
                 ))}
-              <InsightsBarList rows={stats.allRegions} />
+              <InsightsBarList rows={stats.topRegions} />
+              <div className="mt-8">
+                <h2 className="mb-4 text-2xl font-bold text-white">All regions in the dataset</h2>
+                <InsightsCountTable
+                  caption="Verified fixed-location listings by recorded region"
+                  labelHeading="Region"
+                  rows={stats.allRegions.map((row) => ({
+                    label: row.label,
+                    count: row.count,
+                    href: row.href,
+                  }))}
+                />
+              </div>
             </>
           )}
 
           {slug === "rage-room-activities" && (
             <>
+              <InsightQuestion question="How many rage rooms offer axe throwing?">
+                <p>{answers.axeThrowing}</p>
+              </InsightQuestion>
               <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {stats.activities.map((activity) => (
                   <InsightsStatCard
@@ -244,6 +285,13 @@ export default async function InsightDetailPage({ params }: InsightPageProps) {
           <div className="mt-10">
             <InsightsMethodology stats={stats} />
           </div>
+          <p className="text-sm text-zinc-400">
+            For the annual publication, citation format and aggregate dataset, see the{" "}
+            <Link href={REPORT_PATH} className="font-semibold text-orange-500">
+              UK Rage Room Report 2026
+            </Link>
+            .
+          </p>
         </article>
       </div>
     </div>

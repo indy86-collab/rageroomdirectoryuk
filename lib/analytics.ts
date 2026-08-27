@@ -163,6 +163,16 @@ export type AuthorityEventMap = {
   widget_embed_code_copied: {
     customisation: "default" | "custom"
   }
+  report_citation_copied: {
+    surface: "flagship_report"
+  }
+  report_dataset_downloaded: {
+    format: "csv"
+  }
+  insight_directory_click: {
+    destinationKind: "city" | "region" | "activity" | "occasion" | "listings" | "prices"
+    destinationPath: string
+  }
 }
 
 export type AuthorityEventName = keyof AuthorityEventMap
@@ -258,6 +268,9 @@ const AUTHORITY_EVENT_PROPERTIES: {
   widget_search: ["queryKind", "resultCount"],
   widget_result_click: ["resultType"],
   widget_embed_code_copied: ["customisation"],
+  report_citation_copied: ["surface"],
+  report_dataset_downloaded: ["format"],
+  insight_directory_click: ["destinationKind", "destinationPath"],
 }
 
 type GtagEventParams = Record<
@@ -341,7 +354,10 @@ function cleanAuthorityProperties<EventName extends AuthorityEventName>(
   for (const propertyName of AUTHORITY_EVENT_PROPERTIES[eventName]) {
     const value = properties[propertyName]
     if (typeof value === "string") {
-      const cleaned = cleanDirectoryString(value)
+      const cleaned =
+        propertyName === "destinationPath"
+          ? cleanDirectoryPath(value)
+          : cleanDirectoryString(value)
       if (cleaned) clean[propertyName as string] = cleaned
     } else if (typeof value === "number" && Number.isFinite(value)) {
       clean[propertyName as string] = value

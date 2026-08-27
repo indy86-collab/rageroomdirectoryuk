@@ -16,6 +16,9 @@ import {
 import { getAllListingsForAdmin, getListingsByOccasions } from "@/lib/listings"
 import { getEligibleLocationDiscoveryPages } from "@/lib/location-discovery"
 import { buildBreadcrumbSchema, buildItemListSchema } from "@/lib/seo-schema"
+import DirectoryInsightCallout from "@/components/DirectoryInsightCallout"
+import { getOccasionDirectoryInsight } from "@/lib/directory-insights"
+import { buildInsightsStats } from "@/lib/insights-stats"
 
 interface OccasionPageProps {
   params: { slug: string }
@@ -57,6 +60,7 @@ export default async function OccasionPage({ params }: OccasionPageProps) {
   const listings = await getListingsByOccasions(occasion.values)
   if (listings.length < MIN_OCCASION_PAGE_LISTINGS) notFound()
   const allListings = await getAllListingsForAdmin()
+  const insightCallout = getOccasionDirectoryInsight(buildInsightsStats(allListings), occasion.slug)
   const locationPages = getEligibleLocationDiscoveryPages(allListings, "occasion").filter(
     (page) => page.category.slug === occasion.slug
   )
@@ -93,6 +97,8 @@ export default async function OccasionPage({ params }: OccasionPageProps) {
             <p className="text-sm font-semibold text-rage-400">Only evidence-backed occasion matches</p>
           </div>
         </div>
+
+        {insightCallout && <DirectoryInsightCallout {...insightCallout} />}
 
         <ListingsPageClient
           initialListings={listings}

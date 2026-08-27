@@ -316,4 +316,24 @@ describe("authority analytics", () => {
       resultCount: 2,
     })
   })
+
+  it("tracks report citation, dataset download and insights-to-directory clicks without PII", () => {
+    trackAuthorityEvent("report_citation_copied", { surface: "flagship_report" })
+    trackAuthorityEvent("report_dataset_downloaded", { format: "csv" })
+    trackAuthorityEvent("insight_directory_click", {
+      destinationKind: "city",
+      destinationPath: "/city/london?utm=secret",
+    })
+
+    expect(gtag.mock.calls.map((call) => call[1])).toEqual([
+      "report_citation_copied",
+      "report_dataset_downloaded",
+      "insight_directory_click",
+    ])
+    expect(gtag.mock.calls[2][2]).toEqual({
+      destinationKind: "city",
+      destinationPath: "/city/london",
+    })
+    expect(JSON.stringify(gtag.mock.calls)).not.toContain("utm=secret")
+  })
 })

@@ -68,6 +68,9 @@ These reuse `trackEvent()` / consent. They are not conversion events and never i
 | `widget_search` | Finder search submitted | `queryKind` (`postcode`, `city` or `invalid`), `resultCount` |
 | `widget_result_click` | Finder result opened | `resultType` (`city`, `region` or `venue`) |
 | `widget_embed_code_copied` | Publisher copies iframe snippet | `customisation` (`default` or `custom`) |
+| `report_citation_copied` | Visitor copies the flagship report citation | `surface` (`flagship_report`) |
+| `report_dataset_downloaded` | Visitor downloads the aggregate report CSV | `format` (`csv`) |
+| `insight_directory_click` | Visitor follows a research page link into the directory | `destinationKind` (`city`, `region`, `activity`, `occasion`, `listings` or `prices`), `destinationPath` |
 
 ## Central values
 

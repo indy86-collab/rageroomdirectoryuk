@@ -39,6 +39,7 @@ const EXCLUDED_PREFIXES = [
   "/download/",
   "/embed/",
   "/insights",
+  "/uk-rage-room-report-2026",
   "/for-venues/",
   "/for-publishers",
 ]

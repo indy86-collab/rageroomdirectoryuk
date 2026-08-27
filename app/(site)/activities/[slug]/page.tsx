@@ -17,6 +17,9 @@ import {
 import { getAllListingsForAdmin, getListingsByActivity } from "@/lib/listings"
 import { getEligibleLocationDiscoveryPages } from "@/lib/location-discovery"
 import { buildBreadcrumbSchema, buildItemListSchema } from "@/lib/seo-schema"
+import DirectoryInsightCallout from "@/components/DirectoryInsightCallout"
+import { getActivityDirectoryInsight } from "@/lib/directory-insights"
+import { buildInsightsStats } from "@/lib/insights-stats"
 
 interface ActivityPageProps {
   params: { slug: string }
@@ -73,6 +76,7 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
   const listings = await getListingsByActivity(activity.value)
   if (listings.length < MIN_ACTIVITY_PAGE_LISTINGS) notFound()
   const allListings = await getAllListingsForAdmin()
+  const insightCallout = getActivityDirectoryInsight(buildInsightsStats(allListings), activity.value)
   const locationPages = getEligibleLocationDiscoveryPages(allListings, "activity").filter(
     (page) => page.category.slug === activity.slug
   )
@@ -168,6 +172,8 @@ export default async function ActivityPage({ params }: ActivityPageProps) {
             </p>
           </div>
         </div>
+
+        {insightCallout && <DirectoryInsightCallout {...insightCallout} />}
 
         <ListingsPageClient
           initialListings={listings}

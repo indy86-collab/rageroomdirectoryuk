@@ -20,6 +20,9 @@ import { getEligibleLocationDiscoveryPages } from "@/lib/location-discovery"
 import { getCityGuidePath, hasEditorialCityGuide } from "@/lib/city-guides"
 import { getCityHeroImagePath } from "@/lib/city-images"
 import LocationHero from "@/components/LocationHero"
+import DirectoryInsightCallout from "@/components/DirectoryInsightCallout"
+import { getCityDirectoryInsight } from "@/lib/directory-insights"
+import { buildInsightsStats } from "@/lib/insights-stats"
 
 interface CityPageProps {
   params: { slug: string }
@@ -109,6 +112,11 @@ export default async function CityPage({ params }: CityPageProps) {
   const { getAllListingsForAdmin, getListingsNearCity } = await import("@/lib/listings")
   const { inCity, nearby, allForSchema } = await getListingsNearCity(cityName)
   const directoryListings = await getAllListingsForAdmin()
+  const insightCallout = getCityDirectoryInsight(
+    buildInsightsStats(directoryListings),
+    cityToSlug(cityName),
+    cityName
+  )
   const locationDiscoveryPages = getEligibleLocationDiscoveryPages(directoryListings).filter(
     (page) => page.location.slug === cityToSlug(cityName)
   )
@@ -259,6 +267,8 @@ export default async function CityPage({ params }: CityPageProps) {
           </p>
           {hasRageRoom && <p>{cityContent.localContext}</p>}
         </div>
+
+        <DirectoryInsightCallout {...insightCallout} />
 
         {/* Quick stats bar */}
         {!isEmpty && (

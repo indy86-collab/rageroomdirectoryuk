@@ -1,12 +1,15 @@
 import { notFound } from "next/navigation"
 import { Metadata } from "next"
-import { slugToRegion, cityToSlug } from "@/lib/location"
+import { slugToRegion, cityToSlug, regionToSlug } from "@/lib/location"
 import { getRegionContent, getGenericRegionContent } from "@/lib/region-content"
 import ListingsGrid from "@/components/ListingsGrid"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import UGCButtons from "@/components/UGCButtons"
 import Link from "next/link"
 import { listingUrl } from "@/lib/site-url"
+import DirectoryInsightCallout from "@/components/DirectoryInsightCallout"
+import { getRegionDirectoryInsight } from "@/lib/directory-insights"
+import { buildInsightsStats } from "@/lib/insights-stats"
 
 interface RegionPageProps {
   params: { slug: string }
@@ -45,12 +48,18 @@ export async function generateStaticParams() {
 
 export default async function RegionPage({ params }: RegionPageProps) {
   const regionName = slugToRegion(params.slug)
-  const { getListingsByRegion } = await import("@/lib/listings")
+  const { getAllListingsForAdmin, getListingsByRegion } = await import("@/lib/listings")
   const listings = await getListingsByRegion(regionName)
 
   if (listings.length === 0) {
     notFound()
   }
+
+  const insightCallout = getRegionDirectoryInsight(
+    buildInsightsStats(await getAllListingsForAdmin()),
+    regionToSlug(regionName),
+    regionName
+  )
 
   const regionContent = getRegionContent(regionName) || getGenericRegionContent(regionName, listings.length)
   const hasStandaloneVenue = listings.some((listing) => !listing.activities.includes("rage-room"))
@@ -106,6 +115,8 @@ export default async function RegionPage({ params }: RegionPageProps) {
             <><p>{regionContent.description}</p><p>{regionContent.coverageNote}</p></>
           )}
         </div>
+
+        {insightCallout && <DirectoryInsightCallout {...insightCallout} />}
 
         {/* Stats bar */}
         <div className="bg-[#181818] rounded-lg border border-zinc-800 p-4 mb-6 flex flex-wrap gap-4 sm:gap-8">

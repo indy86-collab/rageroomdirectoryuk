@@ -26,6 +26,7 @@ describe("isAdEligiblePath", () => {
     expect(isAdEligiblePath("/uk-map")).toBe(false)
     expect(isAdEligiblePath("/insights")).toBe(false)
     expect(isAdEligiblePath("/insights/rage-room-prices")).toBe(false)
+    expect(isAdEligiblePath("/uk-rage-room-report-2026")).toBe(false)
     expect(isAdEligiblePath("/embed/rage-room-finder")).toBe(false)
     expect(isAdEligiblePath("/for-publishers")).toBe(false)
     expect(isAdEligiblePath("/for-venues/badge")).toBe(false)

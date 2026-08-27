@@ -8,6 +8,7 @@ import {
   pluraliseVenue,
 } from "@/lib/discovery"
 import { cityToSlug, regionToSlug } from "@/lib/location"
+import { PRIORITY_SEO_CITIES } from "@/lib/priority-seo-cities"
 import {
   LISTING_PRICE_UNITS,
   type Listing,
@@ -21,6 +22,9 @@ export const MIN_REGIONS_FOR_INSIGHT_PAGE = 3
 export const MIN_ACTIVITY_TYPES_FOR_INSIGHT_PAGE = 2
 
 export const INSIGHT_HUB_PATH = "/insights"
+export const REPORT_PATH = "/uk-rage-room-report-2026"
+export const REPORT_CSV_PATH = "/uk-rage-room-report-2026/data.csv"
+export const REPORT_PUBLISHED = "2026-07-14"
 export const INSIGHT_PAGE_SLUGS = [
   "rage-room-prices",
   "rage-rooms-by-city",
@@ -52,6 +56,17 @@ export interface InsightCitation {
   href?: string
 }
 
+export interface InsightCoverageGap {
+  key: string
+  label: string
+  href: string
+}
+
+export interface InsightPriceBand {
+  label: string
+  count: number
+}
+
 export interface InsightsStats {
   analysedListings: number
   verifiedListings: number
@@ -61,6 +76,9 @@ export interface InsightsStats {
   paintSplatter: number
   carSmash: number
   mobileRageRooms: number
+  fixedLocationVenues: number
+  mobileServiceVenues: number
+  multiActivityVenues: number
   citiesRepresented: number
   regionsRepresented: number
   topCities: InsightCountRow[]
@@ -69,16 +87,23 @@ export interface InsightsStats {
   allRegions: InsightCountRow[]
   activities: InsightCountRow[]
   activityCombinations: InsightCountRow[]
+  occasions: InsightCountRow[]
   birthdayVenues: number
   corporateVenues: number
   stagVenues: number
   henVenues: number
   stagOrHenVenues: number
+  birthdayPercent: number | null
+  corporatePercent: number | null
+  stagPercent: number | null
+  henPercent: number | null
+  coverageGaps: InsightCoverageGap[]
   pricing: {
     usable: number
     unavailable: number
     unavailablePercent: number | null
     byUnit: InsightPriceUnitStats[]
+    perPersonBands: InsightPriceBand[]
   }
   citations: InsightCitation[]
 }
@@ -196,10 +221,34 @@ export function insightArticleDates(pagePublished: string, datasetUpdatedIso: st
   }
 }
 
+export function percentOf(part: number, whole: number) {
+  if (whole <= 0) return null
+  return Math.round((part / whole) * 100)
+}
+
+export function flagshipReportCitation(datasetUpdatedIso: string, canonicalUrl: string) {
+  return `RageRoom Directory, UK Rage Room Report 2026, updated ${formatInsightCitationMonth(datasetUpdatedIso)}. ${canonicalUrl}`
+}
+
+function perPersonPriceBands(prices: number[]): InsightPriceBand[] {
+  return [
+    { label: "Under £25", count: prices.filter((price) => price < 25).length },
+    { label: "£25–£39", count: prices.filter((price) => price >= 25 && price < 40).length },
+    { label: "£40–£59", count: prices.filter((price) => price >= 40 && price < 60).length },
+    { label: "£60+", count: prices.filter((price) => price >= 60).length },
+  ]
+}
+
 export function buildInsightsStats(listings: Listing[]): InsightsStats {
   const analysedListings = listings.length
   const verified = listings.filter(isVerified)
   const fixedVerified = verified.filter(isFixedVenue)
+  const mobileServiceVenues = verified.filter(
+    (listing) => listing.locationType === "mobile-service"
+  ).length
+  const multiActivityVenues = verified.filter(
+    (listing) => new Set(listing.activities).size >= 2
+  ).length
 
   const latestTimestamp = Math.max(
     0,
@@ -309,6 +358,33 @@ export function buildInsightsStats(listings: Listing[]): InsightsStats {
     listing.occasions.includes("stag-parties") || listing.occasions.includes("hen-parties")
   ).length
 
+  const occasions: InsightCountRow[] = [
+    {
+      key: "birthdays",
+      label: "Birthdays",
+      count: birthdayVenues,
+      href: occasionHref("birthdays", birthdayVenues),
+    },
+    {
+      key: "corporate-team-building",
+      label: "Corporate / team-building",
+      count: corporateVenues,
+      href: occasionHref("corporate-team-building", corporateVenues),
+    },
+    {
+      key: "stag-parties",
+      label: "Stag parties",
+      count: stagVenues,
+      href: occasionHref("stag-parties", stagVenues),
+    },
+    {
+      key: "hen-parties",
+      label: "Hen parties",
+      count: henVenues,
+      href: occasionHref("hen-parties", henVenues),
+    },
+  ].filter((row) => row.count > 0)
+
   const usablePriced = verified.filter(hasUsablePrice)
   const unavailable = verified.length - usablePriced.length
   const byUnit: InsightPriceUnitStats[] = LISTING_PRICE_UNITS.map((unit) => {
@@ -322,6 +398,18 @@ export function buildInsightsStats(listings: Listing[]): InsightsStats {
       ...summarisePrices(prices),
     }
   }).filter((row) => row.count > 0)
+
+  const perPersonPrices = usablePriced
+    .filter((listing) => listing.priceUnit === "per-person")
+    .map((listing) => listing.price)
+  const cityKeys = new Set(cityRows.map((row) => row.key))
+  const coverageGaps: InsightCoverageGap[] = PRIORITY_SEO_CITIES.filter(
+    (city) => !cityKeys.has(cityToSlug(city))
+  ).map((city) => ({
+    key: cityToSlug(city),
+    label: city,
+    href: `/city/${cityToSlug(city)}`,
+  }))
 
   const lastUpdated = latestTimestamp
     ? new Date(latestTimestamp).toISOString()
@@ -339,11 +427,11 @@ export function buildInsightsStats(listings: Listing[]): InsightsStats {
     },
     {
       id: "cities",
-      statement: `Verified RageRoom Directory listings currently cover ${cityRows.length} ${cityRows.length === 1 ? "city" : "cities"} across the UK.`,
+      statement: `Verified fixed-location RageRoom Directory listings currently cover ${cityRows.length} ${cityRows.length === 1 ? "city" : "cities"} by recorded city field.`,
     },
     {
       id: "regions",
-      statement: `Verified RageRoom Directory listings currently cover ${regionRows.length} ${regionRows.length === 1 ? "region" : "regions"} across the UK.`,
+      statement: `Verified fixed-location RageRoom Directory listings currently cover ${regionRows.length} ${regionRows.length === 1 ? "region" : "regions"} by recorded region field.`,
     },
   ]
 
@@ -389,10 +477,18 @@ export function buildInsightsStats(listings: Listing[]): InsightsStats {
       href: occasionHref("corporate-team-building", corporateVenues) ?? undefined,
     })
   }
-  if (stagOrHenVenues > 0) {
+  if (stagVenues > 0) {
     citations.push({
-      id: "stag-hen",
-      statement: `${pluraliseVenue(stagOrHenVenues)} in the RageRoom Directory dataset are listed as suitable for stag or hen groups.`,
+      id: "stag",
+      statement: `${pluraliseVenue(stagVenues)} in the RageRoom Directory dataset are listed as suitable for stag groups.`,
+      href: occasionHref("stag-parties", stagVenues) ?? undefined,
+    })
+  }
+  if (henVenues > 0) {
+    citations.push({
+      id: "hen",
+      statement: `${pluraliseVenue(henVenues)} in the RageRoom Directory dataset are listed as suitable for hen groups.`,
+      href: occasionHref("hen-parties", henVenues) ?? undefined,
     })
   }
   if (verified.length > 0) {
@@ -425,6 +521,9 @@ export function buildInsightsStats(listings: Listing[]): InsightsStats {
     paintSplatter,
     carSmash,
     mobileRageRooms,
+    fixedLocationVenues: fixedVerified.length,
+    mobileServiceVenues,
+    multiActivityVenues,
     citiesRepresented: cityRows.length,
     regionsRepresented: regionRows.length,
     topCities: cityRows.slice(0, 10),
@@ -433,11 +532,17 @@ export function buildInsightsStats(listings: Listing[]): InsightsStats {
     allRegions: regionRows,
     activities,
     activityCombinations,
+    occasions,
     birthdayVenues,
     corporateVenues,
     stagVenues,
     henVenues,
     stagOrHenVenues,
+    birthdayPercent: percentOf(birthdayVenues, verified.length),
+    corporatePercent: percentOf(corporateVenues, verified.length),
+    stagPercent: percentOf(stagVenues, verified.length),
+    henPercent: percentOf(henVenues, verified.length),
+    coverageGaps,
     pricing: {
       usable: usablePriced.length,
       unavailable,
@@ -446,6 +551,7 @@ export function buildInsightsStats(listings: Listing[]): InsightsStats {
           ? Math.round((unavailable / verified.length) * 100)
           : null,
       byUnit,
+      perPersonBands: perPersonPriceBands(perPersonPrices),
     },
     citations,
   }

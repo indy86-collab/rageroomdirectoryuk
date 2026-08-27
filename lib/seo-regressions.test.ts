@@ -8,7 +8,8 @@ import { generateMetadata as generateInsightMetadata } from "@/app/(site)/insigh
 import { metadata as badgeMetadata } from "@/app/(site)/for-venues/badge/page"
 import { metadata as publishersMetadata } from "@/app/(site)/for-publishers/page"
 import { metadata as embedMetadata } from "@/app/(embed)/embed/rage-room-finder/page"
-import { INSIGHT_PAGE_META } from "@/lib/insights-pages"
+import { metadata as reportMetadata } from "@/app/(site)/uk-rage-room-report-2026/page"
+import { INSIGHT_PAGE_META, REPORT_META, REPORT_PATH } from "@/lib/insights-pages"
 import { getListingsNearCity } from "@/lib/listings"
 import { buildArticleSchema } from "@/lib/seo-schema"
 import robots from "@/app/robots"
@@ -136,6 +137,7 @@ describe("SEO regressions", () => {
     expect(urls.has("https://www.rageroomdirectory.co.uk/insights/rage-rooms-by-city")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/insights/rage-rooms-by-region")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/insights/rage-room-activities")).toBe(true)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/uk-rage-room-report-2026")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/for-venues/badge")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/for-publishers")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/embed/rage-room-finder")).toBe(false)
@@ -153,6 +155,14 @@ describe("SEO regressions", () => {
     expect(publishersMetadata.alternates).toEqual({ canonical: "/for-publishers" })
     expect(publishersMetadata.robots).toBeUndefined()
     expect(embedMetadata.robots).toEqual({ index: false, follow: true })
+  })
+
+  it("publishes the flagship 2026 report as a distinct research article", () => {
+    expect(reportMetadata.alternates).toEqual({ canonical: REPORT_PATH })
+    expect(reportMetadata.robots).toBeUndefined()
+    expect(String(reportMetadata.title)).toBe(REPORT_META.title)
+    expect(String(reportMetadata.title)).not.toMatch(/Live Venue|Near You|Live Comparison/)
+    expect(reportMetadata.openGraph?.url).toBe(REPORT_PATH)
   })
 
   it("keeps Insights titles statistical rather than interchangeable with directory pages", () => {

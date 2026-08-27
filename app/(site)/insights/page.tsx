@@ -4,6 +4,7 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 import InsightsMethodology from "@/components/InsightsMethodology"
 import {
   InsightCitationBlock,
+  InsightQuestion,
   InsightsBarList,
   InsightsStatCard,
 } from "@/components/InsightsVisuals"
@@ -12,14 +13,9 @@ import {
   buildBreadcrumbSchema,
   buildOgImageUrl,
 } from "@/lib/seo-schema"
-import {
-  buildInsightsStats,
-  formatInsightCitationMonth,
-  formatInsightDate,
-  getPublishedInsightPages,
-  insightArticleDates,
-} from "@/lib/insights-stats"
-import { INSIGHT_HUB_META, INSIGHT_PAGE_META, INSIGHTS_PUBLISHED } from "@/lib/insights-pages"
+import { buildInsightsStats, formatInsightCitationMonth, formatInsightDate, getPublishedInsightPages, insightArticleDates } from "@/lib/insights-stats"
+import { insightAnswers } from "@/lib/insights-copy"
+import { INSIGHT_HUB_META, INSIGHT_PAGE_META, INSIGHTS_PUBLISHED, REPORT_PATH } from "@/lib/insights-pages"
 import { absoluteUrl } from "@/lib/site-url"
 
 const PATH = "/insights"
@@ -53,6 +49,7 @@ export const revalidate = 3600
 export default async function InsightsPage() {
   const { getAllListingsForAdmin } = await import("@/lib/listings")
   const stats = buildInsightsStats(await getAllListingsForAdmin())
+  const answers = insightAnswers(stats)
   const dateLabel = formatInsightDate(stats.lastUpdated)
   const citationAsOf = formatInsightCitationMonth(stats.lastUpdated)
   const citationSource = absoluteUrl(PATH)
@@ -104,11 +101,20 @@ export default async function InsightsPage() {
             {INSIGHT_HUB_META.title}
           </h1>
           <p className="text-base leading-relaxed text-zinc-300 sm:text-lg">
-            A citation-ready snapshot of the UK smash-room market, calculated only from
+            A research hub for the UK smash-room market, calculated only from
             RageRoom Directory&apos;s verified venue dataset. These figures are not
-            estimates, surveys or invented averages.
+            estimates, surveys or invented averages. The flagship annual publication
+            is the{" "}
+            <Link href={REPORT_PATH} className="font-semibold text-orange-500 hover:text-orange-400">
+              UK Rage Room Report 2026
+            </Link>
+            .
           </p>
-          <p className="mb-8 mt-3 text-sm text-zinc-500">Last updated: {dateLabel}</p>
+          <p className="mb-8 mt-3 text-sm text-zinc-500">Dataset last verified: {dateLabel}</p>
+
+          <InsightQuestion question="How many rage rooms does RageRoom Directory track?">
+            <p>{answers.howManyRageRooms}</p>
+          </InsightQuestion>
 
           <div className="mb-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <InsightsStatCard
@@ -294,11 +300,11 @@ export default async function InsightsPage() {
           )}
 
           <div className="rounded-lg border border-zinc-800 bg-[#181818] p-6 text-sm text-zinc-300">
-            Looking for the downloadable research extract? See the{" "}
-            <Link href="/uk-rage-room-report-2026" className="font-semibold text-orange-500">
+            The flagship annual publication is the{" "}
+            <Link href={REPORT_PATH} className="font-semibold text-orange-500">
               UK Rage Room Report 2026
-            </Link>{" "}
-            or compare live prices on the{" "}
+            </Link>
+            , including a suggested citation and the aggregate dataset. Compare live venue prices on the{" "}
             <Link href="/rage-room-prices-uk" className="font-semibold text-orange-500">
               UK prices hub
             </Link>

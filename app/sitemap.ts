@@ -46,6 +46,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     Promise.resolve(getAllBlogPosts()),
   ])
   const cities = mergeCitiesWithPriority(citiesFromListings)
+  const insightStats = buildInsightsStats(listings)
   const cityEntries = (
     await Promise.all(
       cities.map(async (city) => {
@@ -94,6 +95,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: absoluteUrl("/uk-rage-room-report-2026"),
+      lastModified: insightStats.lastUpdated,
       changeFrequency: "monthly",
       priority: 0.8,
     },
@@ -214,6 +216,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: absoluteUrl("/insights"),
+      lastModified: insightStats.lastUpdated,
       changeFrequency: "weekly",
       priority: 0.8,
     },
@@ -242,7 +245,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   )
 
-  const insightStats = buildInsightsStats(listings)
   for (const slug of getPublishedInsightPages(insightStats)) {
     routes.push({
       url: absoluteUrl(`/insights/${slug}`),

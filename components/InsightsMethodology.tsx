@@ -51,6 +51,13 @@ export default function InsightsMethodology({ stats }: { stats: InsightsStats })
           </Link>{" "}
           before publishing a story.
         </li>
+        <li>
+          The flagship annual publication is the{" "}
+          <Link href="/uk-rage-room-report-2026" className="font-semibold text-orange-500 hover:text-orange-400">
+            UK Rage Room Report 2026
+          </Link>
+          , which uses the same methodology and links to the aggregate dataset.
+        </li>
       </ul>
     </section>
   )

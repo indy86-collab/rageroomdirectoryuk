@@ -103,6 +103,7 @@ export const ROUTE_INVENTORY: ExpectedRoute[] = [
   { path: "/search", expectStatus: 200, group: "directory", requireHeaderFooter: true },
   { path: "/list-your-rage-room", expectStatus: 200, group: "directory", requireHeaderFooter: true },
   { path: "/insights", expectStatus: 200, group: "editorial", requireHeaderFooter: true },
+  { path: "/uk-rage-room-report-2026", expectStatus: 200, group: "editorial", requireHeaderFooter: true },
   { path: "/for-venues/badge", expectStatus: 200, group: "directory", requireHeaderFooter: true },
   { path: "/for-publishers", expectStatus: 200, group: "directory", requireHeaderFooter: true },
   {

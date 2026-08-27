@@ -125,15 +125,32 @@ describe("nearby and index-quality rules", () => {
 })
 
 describe("report data", () => {
-  it("builds aggregate statistics and a private-data-free CSV", () => {
+  it("builds aggregate statistics and a private-data-free CSV using Insights methodology", () => {
     const report = buildRageRoomReportData([
       listing({ id: "1", city: "London", price: 30, priceUnit: "per-person", lastVerified: "2026-08-01" }),
       listing({ id: "2", city: "Leeds", region: "Yorkshire", price: 50, priceUnit: "per-person", lastVerified: "2026-08-02" }),
+      listing({ id: "3", city: "Bath", region: "Somerset", price: 40, priceUnit: "per-person", lastVerified: "2026-08-02" }),
+      listing({ id: "4", city: "York", region: "Yorkshire", price: 20, priceUnit: "per-person", lastVerified: "2026-08-02" }),
+      listing({ id: "5", city: "Derby", region: "Derbyshire", price: 60, priceUnit: "per-person", lastVerified: "2026-08-02" }),
     ])
     expect(report.averageStartingPrice).toBe(40)
-    expect(report.citiesCovered).toBe(2)
+    expect(report.citiesCovered).toBe(5)
+    expect(report.stats.pricing.byUnit.find((row) => row.unit === "per-person")?.count).toBe(5)
     const csv = buildAggregateReportCsv(report)
-    expect(csv).toContain("average_per_person_starting_price_gbp,40")
+    expect(csv).toContain("per_person_average_gbp,40")
+    expect(csv).toContain("fixed_location_cities,5")
     expect(csv).not.toContain("example.com")
+    expect(csv).not.toContain("SW1A 1AA")
+    expect(csv).not.toContain("Example Rage Room")
+  })
+
+  it("does not publish a per-person average below the sample-size threshold", () => {
+    const report = buildRageRoomReportData([
+      listing({ id: "1", city: "London", price: 30, priceUnit: "per-person" }),
+      listing({ id: "2", city: "Leeds", region: "Yorkshire", price: 50, priceUnit: "per-person" }),
+    ])
+    expect(report.averageStartingPrice).toBeNull()
+    expect(report.minimumStartingPrice).toBeNull()
+    expect(buildAggregateReportCsv(report)).toContain("per_person_average_gbp,")
   })
 })
