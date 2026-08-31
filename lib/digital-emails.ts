@@ -8,6 +8,7 @@ import {
   isInteractiveDigitalProduct,
 } from "@/lib/digital-products"
 import { createDownloadToken, createLeadDownloadToken } from "@/lib/download-token"
+import { buildLeadMagnetEmailHtml } from "@/lib/lead-magnet-email"
 import { absoluteUrl } from "@/lib/site-url"
 import { escapeEmailHtml } from "@/lib/listing-submissions"
 
@@ -265,12 +266,6 @@ export async function sendLeadMagnetEmail({
     return { sent: false as const, reason: "missing_api_key" as const }
   }
 
-  const directoryUrl = absoluteUrl("/listings")
-  const hubUrl = absoluteUrl("/digital-downloads")
-  const greeting = firstName?.trim()
-    ? `Hi ${firstName.trim()},`
-    : "Hi,"
-
   const audienceId = process.env.RESEND_AUDIENCE_ID?.trim()
   if (audienceId && marketingOptIn) {
     try {
@@ -291,17 +286,11 @@ export async function sendLeadMagnetEmail({
       from: getFromAddress(),
       to: toEmail,
       subject: "Your Rage Room First Visit Prep Pack",
-      html: `
-      <div style="font-family:system-ui,sans-serif;max-width:560px;margin:0 auto;color:#18181b">
-        <h1 style="font-size:22px">Your prep pack is ready</h1>
-        <p>${greeting}</p>
-        <p>Here’s your free Rage Room First Visit Prep Pack — what happens, what to wear, what to ask before you book, and a final arrival checklist.</p>
-        <p style="margin:24px 0"><a href="${downloadUrl}" style="display:inline-block;background:#f97316;color:#fff;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:6px">Download Prep Pack (PDF)</a></p>
-        <p style="margin:16px 0"><a href="${directoryUrl}">Find a rage room near you</a></p>
-        <p style="color:#52525b;font-size:14px"><a href="${hubUrl}">Browse other digital guides</a> on RageRoom Directory.</p>
-        <p style="color:#52525b;font-size:14px">You’re getting this because you asked for the free prep pack. This email is transactional. Reply anytime if you need help.</p>
-      </div>
-    `,
+      html: buildLeadMagnetEmailHtml({
+        firstName,
+        downloadUrl,
+        marketingOptIn,
+      }),
     }),
     notifyLeadMagnetSignup({
       resend,

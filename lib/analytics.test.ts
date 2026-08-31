@@ -5,6 +5,9 @@ import {
   trackAffiliateClick,
   trackAuthorityEvent,
   trackDirectoryEvent,
+  trackFirstVisitChecklistFindVenueClick,
+  trackFirstVisitChecklistIntent,
+  trackFirstVisitChecklistUpsellClick,
   trackPurchase,
 } from "./analytics"
 
@@ -335,5 +338,91 @@ describe("authority analytics", () => {
       destinationPath: "/city/london",
     })
     expect(JSON.stringify(gtag.mock.calls)).not.toContain("utm=secret")
+  })
+})
+
+describe("prep pack upsell analytics", () => {
+  const gtag = vi.fn()
+
+  beforeEach(() => {
+    gtag.mockClear()
+    const consent = JSON.stringify({
+      version: 1,
+      analytics: true,
+      decidedAt: Date.now(),
+    })
+    vi.stubGlobal("window", {
+      gtag,
+      localStorage: {
+        getItem: vi.fn((key: string) =>
+          key === "rageroom:privacy-consent" ? consent : null
+        ),
+      },
+      location: {
+        origin: "https://rageroomdirectory.co.uk",
+        pathname: "/digital-downloads/rage-room-first-visit-prep-pack",
+      },
+    })
+  })
+
+  afterEach(() => {
+    vi.unstubAllGlobals()
+  })
+
+  it("tracks intent and upsell clicks without PII", () => {
+    trackFirstVisitChecklistIntent("group", "first-visit-product")
+    trackFirstVisitChecklistUpsellClick("party_planner", "first-visit-product")
+    trackFirstVisitChecklistFindVenueClick("first-visit-product")
+    trackAffiliateClick({
+      provider: "getyourguide",
+      placement: "lead_magnet",
+      city: "Manchester",
+      recommendationId: "prep_pack_day_out",
+    })
+
+    expect(gtag).toHaveBeenCalledWith("event", "first_visit_checklist_intent", {
+      lead_magnet: "first_visit_checklist",
+      intent: "group",
+      lead_source: "first-visit-product",
+    })
+    expect(gtag).toHaveBeenCalledWith(
+      "event",
+      "first_visit_checklist_upsell_click",
+      {
+        lead_magnet: "first_visit_checklist",
+        offer: "party_planner",
+        lead_source: "first-visit-product",
+      }
+    )
+    expect(gtag).toHaveBeenCalledWith(
+      "event",
+      "first_visit_checklist_find_venue_click",
+      {
+        lead_magnet: "first_visit_checklist",
+        lead_source: "first-visit-product",
+      }
+    )
+    expect(gtag).toHaveBeenCalledWith("event", "affiliate_click", {
+      affiliate_provider: "getyourguide",
+      affiliate_placement: "lead_magnet",
+      city: "Manchester",
+      recommendation_id: "prep_pack_day_out",
+    })
+    expect(JSON.stringify(gtag.mock.calls)).not.toMatch(/@|email|name/i)
+  })
+
+  it("does not send prep pack upsell events without analytics consent", () => {
+    vi.stubGlobal("window", {
+      gtag,
+      localStorage: { getItem: vi.fn(() => null) },
+      location: {
+        origin: "https://rageroomdirectory.co.uk",
+        pathname: "/digital-downloads/rage-room-first-visit-prep-pack",
+      },
+    })
+
+    trackFirstVisitChecklistIntent("gift")
+    trackFirstVisitChecklistUpsellClick("gift_voucher")
+    expect(gtag).not.toHaveBeenCalled()
   })
 })

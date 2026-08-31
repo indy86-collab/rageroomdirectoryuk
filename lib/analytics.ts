@@ -584,6 +584,41 @@ export function trackFirstVisitChecklistFindVenueClick(source?: string) {
   })
 }
 
+export const PREP_PACK_INTENTS = ["group", "gift", "couple", "work"] as const
+export type PrepPackIntent = (typeof PREP_PACK_INTENTS)[number]
+
+export const PREP_PACK_UPSELL_OFFERS = [
+  "party_planner",
+  "gift_voucher",
+  "bundle",
+  "getyourguide",
+  "corporate_builder",
+  "listings",
+] as const
+export type PrepPackUpsellOffer = (typeof PREP_PACK_UPSELL_OFFERS)[number]
+
+export function trackFirstVisitChecklistIntent(
+  intent: PrepPackIntent,
+  source?: string
+) {
+  trackEvent("first_visit_checklist_intent", {
+    lead_magnet: "first_visit_checklist",
+    intent,
+    ...(source ? { lead_source: source } : {}),
+  })
+}
+
+export function trackFirstVisitChecklistUpsellClick(
+  offer: PrepPackUpsellOffer,
+  source?: string
+) {
+  trackEvent("first_visit_checklist_upsell_click", {
+    lead_magnet: "first_visit_checklist",
+    offer,
+    ...(source ? { lead_source: source } : {}),
+  })
+}
+
 /** Corporate Event Builder funnel (no PII — never send names, emails, or message bodies). */
 const CORPORATE_BUILDER_PRODUCT = "corporate_event_builder"
 

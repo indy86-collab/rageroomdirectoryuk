@@ -4,12 +4,14 @@ type ListingLeadCaptureProps = {
   source: string
   className?: string
   idPrefix?: string
+  city?: string
 }
 
 export default function ListingLeadCapture({
   source,
   className = "",
   idPrefix = "listing-lead",
+  city,
 }: ListingLeadCaptureProps) {
   return (
     <aside
@@ -29,6 +31,7 @@ export default function ListingLeadCapture({
       <LeadMagnetForm
         source={source}
         compact
+        city={city}
         showInlinePreviewOnSuccess={false}
         idPrefix={idPrefix}
       />

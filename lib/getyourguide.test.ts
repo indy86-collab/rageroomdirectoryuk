@@ -97,7 +97,7 @@ describe("buildGetYourGuideBrowseUrl", () => {
 })
 
 describe("buildAffiliateCampaign", () => {
-  it("labels city, listing, planner, occasion and new surfaces", () => {
+  it("labels city, listing, planner, occasion, lead magnet and new surfaces", () => {
     expect(buildAffiliateCampaign({ placement: "city" })).toBe("rageroom_city")
     expect(buildAffiliateCampaign({ placement: "listing" })).toBe(
       "rageroom_listing"
@@ -118,6 +118,9 @@ describe("buildAffiliateCampaign", () => {
     expect(buildAffiliateCampaign({ placement: "guide" })).toBe("rageroom_guide")
     expect(buildAffiliateCampaign({ placement: "activity" })).toBe(
       "rageroom_activity"
+    )
+    expect(buildAffiliateCampaign({ placement: "lead_magnet" })).toBe(
+      "rageroom_lead_magnet"
     )
   })
 })

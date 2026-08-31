@@ -2,16 +2,16 @@
 
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
-import { ArrowRight, CheckCircle, Download, Loader2, MapPin } from "lucide-react"
+import { ArrowRight, CheckCircle, Download, Loader2 } from "lucide-react"
 import {
   trackFirstVisitChecklistCtaClick,
   trackFirstVisitChecklistDownload,
   trackFirstVisitChecklistEmailSubmit,
-  trackFirstVisitChecklistFindVenueClick,
   trackFirstVisitChecklistSuccess,
   trackFirstVisitChecklistView,
 } from "@/lib/analytics"
 import { storeDigitalCheckoutEmail } from "@/lib/digital-checkout-email"
+import PrepPackUpsell from "@/components/PrepPackUpsell"
 
 type LeadMagnetFormProps = {
   source?: string
@@ -21,6 +21,8 @@ type LeadMagnetFormProps = {
   idPrefix?: string
   /** Email-first, full-width submit — for listing / near-me embeds. */
   compact?: boolean
+  /** City for GetYourGuide day-out links after signup. */
+  city?: string
 }
 
 export default function LeadMagnetForm({
@@ -29,6 +31,7 @@ export default function LeadMagnetForm({
   className = "",
   idPrefix = "lead-magnet",
   compact = false,
+  city,
 }: LeadMagnetFormProps) {
   const [email, setEmail] = useState("")
   const [firstName, setFirstName] = useState("")
@@ -105,24 +108,17 @@ export default function LeadMagnetForm({
               {message && (
                 <p className="mt-1 text-xs text-zinc-500">{message}</p>
               )}
-              <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-5">
                 <a
                   href={downloadUrl}
                   onClick={() => trackFirstVisitChecklistDownload(source)}
-                  className="btn-rage inline-flex min-h-[48px] items-center justify-center gap-2 px-5 text-sm uppercase tracking-wider"
+                  className="btn-rage inline-flex min-h-[48px] w-full items-center justify-center gap-2 px-5 text-sm uppercase tracking-wider sm:w-auto"
                 >
                   <Download className="h-4 w-4" />
                   Download Prep Pack
                 </a>
-                <Link
-                  href="/listings"
-                  onClick={() => trackFirstVisitChecklistFindVenueClick(source)}
-                  className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-md border border-zinc-700 bg-transparent px-5 text-sm font-semibold uppercase tracking-wider text-white transition-colors hover:border-rage-500 hover:text-rage-500"
-                >
-                  <MapPin className="h-4 w-4" />
-                  Find a Rage Room Near You
-                </Link>
               </div>
+              <PrepPackUpsell source={source} city={city} compact={compact} />
             </div>
           </div>
         </div>

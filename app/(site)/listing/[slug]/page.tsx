@@ -663,6 +663,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
             <ListingLeadCapture
               source={`listing:${listing.slug || listing.id}`}
               idPrefix={`listing-${listing.slug || listing.id}`}
+              city={listing.city}
             />
           </div>
         )}

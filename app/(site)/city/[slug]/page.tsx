@@ -389,6 +389,7 @@ export default async function CityPage({ params }: CityPageProps) {
               {hasRageRoom && <ListingLeadCapture
                 source={`city:${params.slug}`}
                 idPrefix={`city-${params.slug}`}
+                city={cityName}
               />}
               {hasRageRoom && <RageResetCTA surface="city" variant="secondary" />}
               {hasRageRoom && <DigitalGuidesChooser highlight="firstVisit" />}
