@@ -16,7 +16,7 @@ import {
   getLocationDiscoveryPageData,
   isDiscoveryLandingPageEligible,
 } from "@/lib/location-discovery"
-import { shouldShowAffiliateOnOccasion } from "@/lib/getyourguide"
+import { shouldShowAffiliateOnActivity, shouldShowAffiliateOnOccasion } from "@/lib/getyourguide"
 import type { Listing } from "@/types/listing"
 
 const listings = listingsData as Listing[]
@@ -272,5 +272,25 @@ describe("location discovery routes and metadata", () => {
       "/occasions/corporate-team-building/edinburgh",
       "/occasions/corporate-team-building/london",
     ])
+  })
+
+  it("attaches GetYourGuide affiliate to rage-room activity locations and skips paint-splatter", () => {
+    const pages = getEligibleLocationDiscoveryPages(listings, "activity")
+    const withAffiliate = pages.filter((page) =>
+      shouldShowAffiliateOnActivity(page.category.slug)
+    )
+    const withoutAffiliate = pages.filter(
+      (page) => !shouldShowAffiliateOnActivity(page.category.slug)
+    )
+
+    expect(withAffiliate.map((page) => page.href)).toEqual(
+      expect.arrayContaining([
+        "/activities/rage-rooms/london",
+        "/activities/rage-rooms/birmingham",
+      ])
+    )
+    expect(withoutAffiliate.map((page) => page.href)).toEqual(
+      expect.arrayContaining(["/activities/paint-splatter/london"])
+    )
   })
 })

@@ -4,6 +4,7 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 import GuideMeta from "@/components/GuideMeta"
 import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
 import RageResetCTA from "@/components/RageResetCTA"
+import NearbyActivitiesAffiliate from "@/components/NearbyActivitiesAffiliate"
 import FAQ from "@/components/FAQ"
 import InArticleAd from "@/components/InArticleAd"
 import ListingsGrid from "@/components/ListingsGrid"
@@ -292,6 +293,14 @@ export default async function RageRoomsForHenPartiesPage() {
               ))}
             </div>
           </section>
+
+          <div className="mb-10">
+            <NearbyActivitiesAffiliate
+              placement="guide"
+              variant="chips"
+              cities={CITY_PICKS.map((pick) => pick.city)}
+            />
+          </div>
 
           <section aria-labelledby="cost-heading" className="mb-10">
             <h2

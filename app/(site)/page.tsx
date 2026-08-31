@@ -4,6 +4,7 @@ import Hero from "@/components/Hero"
 import FeaturedRooms from "@/components/FeaturedRooms"
 import FAQ from "@/components/FAQ"
 import DigitalGuidesChooser from "@/components/DigitalGuidesChooser"
+import NearbyActivitiesAffiliate from "@/components/NearbyActivitiesAffiliate"
 import RageResetHomeFeature from "@/components/RageResetHomeFeature"
 import { globalFAQs } from "@/lib/faqs"
 import Image from "next/image"
@@ -475,6 +476,12 @@ export default async function Home() {
           </div>
 
           <FeaturedRooms listings={featuredListings} />
+        </div>
+      </section>
+
+      <section className="w-full pb-10 sm:pb-14 section-textured">
+        <div className="w-full px-3 sm:px-5 lg:px-6">
+          <NearbyActivitiesAffiliate placement="home" variant="chips" />
         </div>
       </section>
 

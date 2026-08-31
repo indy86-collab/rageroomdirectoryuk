@@ -19,7 +19,7 @@ export default function PrivacyPage() {
     { label: "Privacy", href: "/privacy" },
   ]
 
-  const lastUpdated = "22 August 2026"
+  const lastUpdated = "31 August 2026"
 
   return (
     <div className="py-6 sm:py-8">
@@ -173,9 +173,9 @@ export default function PrivacyPage() {
                     <td className="p-3 align-top">Separate user-requested feature</td>
                   </tr>
                   <tr>
-                    <th className="p-3 align-top text-white">GetYourGuide widget</th>
-                    <td className="p-3">No GetYourGuide widget or script is requested until you press the show-activities button. GetYourGuide may then receive request, device and network information and set an affiliate cookie under its own policy.</td>
-                    <td className="p-3 align-top">Separate user-requested feature</td>
+                    <th className="p-3 align-top text-white">GetYourGuide affiliate links</th>
+                    <td className="p-3">Outbound links to GetYourGuide tours around a rage-room visit. No GetYourGuide widget or script is loaded on this site. If you follow a link, GetYourGuide may receive request, device and network information and set an affiliate cookie under its own policy.</td>
+                    <td className="p-3 align-top">No — outbound affiliate links</td>
                   </tr>
                 </tbody>
               </table>
@@ -344,10 +344,10 @@ export default function PrivacyPage() {
             </h2>
             <p>
               Our site links to external businesses, including GetYourGuide for
-              complementary tours around a rage-room visit. The GetYourGuide
-              widget and script load only when you press the show-activities
-              button; this choice is separate from analytics. We are not
-              responsible for their privacy practices.
+              complementary tours around a rage-room visit. Those are outbound
+              affiliate links; we do not load a GetYourGuide widget or script.
+              If you follow a link, GetYourGuide may set its own affiliate
+              cookie. We are not responsible for their privacy practices.
             </p>
           </section>
 

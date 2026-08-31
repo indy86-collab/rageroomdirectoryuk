@@ -7,6 +7,7 @@ import { getCityFAQs } from "@/lib/faqs"
 import { getGuideCityContent } from "@/lib/guide-city-content"
 import { getCityHeroImagePath } from "@/lib/city-images"
 import LocationHero from "@/components/LocationHero"
+import NearbyActivitiesAffiliate from "@/components/NearbyActivitiesAffiliate"
 import { cityToSlug } from "@/lib/location"
 import { formatListingPrice } from "@/lib/discovery"
 import type { Listing } from "@/types/listing"
@@ -260,6 +261,10 @@ export default async function CityGuidePage({
               </p>
             </section>
           )}
+
+          <div className="mb-10">
+            <NearbyActivitiesAffiliate city={city} placement="guide" />
+          </div>
 
           {inCity.length > 0 && (
             <>

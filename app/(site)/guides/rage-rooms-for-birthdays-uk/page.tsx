@@ -3,6 +3,7 @@ import Link from "next/link"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import GuideMeta from "@/components/GuideMeta"
 import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
+import NearbyActivitiesAffiliate from "@/components/NearbyActivitiesAffiliate"
 import FAQ from "@/components/FAQ"
 import InArticleAd from "@/components/InArticleAd"
 import ListingsGrid from "@/components/ListingsGrid"
@@ -215,6 +216,9 @@ export default async function RageRoomsForBirthdaysPage() {
             <ListingsGrid listings={matchingVenues.slice(0, 3)} />
           </section>
 
+          <div className="mb-10">
+            <NearbyActivitiesAffiliate placement="guide" variant="chips" />
+          </div>
 
           <section aria-labelledby="package-heading" className="mb-10">
             <h2

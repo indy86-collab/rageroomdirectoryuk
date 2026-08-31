@@ -319,6 +319,12 @@ export default async function CityPage({ params }: CityPageProps) {
               </section>
             )}
 
+            {hasRageRoom && inCity.length > 0 && (
+              <div className="mt-8 mb-6">
+                <NearbyActivitiesAffiliate city={cityName} placement="city" />
+              </div>
+            )}
+
             {nearby.length > 0 && (
               <section
                 aria-label={`Verified venues near ${cityName}`}
@@ -340,7 +346,7 @@ export default async function CityPage({ params }: CityPageProps) {
               </section>
             )}
 
-            {hasRageRoom && (
+            {hasRageRoom && inCity.length === 0 && (
               <div className="mt-8 mb-6">
                 <NearbyActivitiesAffiliate city={cityName} placement="city" />
               </div>

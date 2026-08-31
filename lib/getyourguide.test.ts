@@ -1,20 +1,17 @@
-import { afterEach, describe, expect, it, vi } from "vitest"
+import { describe, expect, it } from "vitest"
 import {
+  AFFILIATE_CHIP_CITIES,
   buildAffiliateCampaign,
   buildGetYourGuideBrowseUrl,
   buildGetYourGuideUrl,
-  ensureGetYourGuideWidgetScript,
   GETYOURGUIDE_PARTNER_ID,
-  GETYOURGUIDE_WIDGET_SCRIPT_SRC,
   getComplementaryActivityQuery,
-  getGetYourGuideWidgetDataset,
   getOccasionPlannerGroup,
-  getWidgetSearchQuery,
-  isGetYourGuideWidgetScriptPresent,
+  getThemedActivityCards,
   PLANNER_GROUPS,
   PLANNER_TIMINGS,
   PLANNER_VIBES,
-  resetGetYourGuideWidgetScriptForTests,
+  shouldShowAffiliateOnActivity,
   shouldShowAffiliateOnOccasion,
   usesCompetitorInventoryQuery,
 } from "@/lib/getyourguide"
@@ -75,6 +72,19 @@ describe("buildGetYourGuideBrowseUrl", () => {
     expect(url.pathname).toBe("/newcastle-upon-tyne-l444/")
   })
 
+  it("uses destination pages for Brighton, Sheffield and Nottingham", () => {
+    expect(
+      new URL(buildGetYourGuideBrowseUrl("Brighton", "rageroom_home")).pathname
+    ).toBe("/brighton-l440/")
+    expect(
+      new URL(buildGetYourGuideBrowseUrl("Sheffield", "rageroom_guide")).pathname
+    ).toBe("/sheffield-l95510/")
+    expect(
+      new URL(buildGetYourGuideBrowseUrl("Nottingham", "rageroom_near_me"))
+        .pathname
+    ).toBe("/nottingham-l145813/")
+  })
+
   it("falls back to search for unmapped cities", () => {
     const url = new URL(
       buildGetYourGuideBrowseUrl("Stockport", "rageroom_listing")
@@ -87,7 +97,7 @@ describe("buildGetYourGuideBrowseUrl", () => {
 })
 
 describe("buildAffiliateCampaign", () => {
-  it("labels city, listing, planner and occasion placements", () => {
+  it("labels city, listing, planner, occasion and new surfaces", () => {
     expect(buildAffiliateCampaign({ placement: "city" })).toBe("rageroom_city")
     expect(buildAffiliateCampaign({ placement: "listing" })).toBe(
       "rageroom_listing"
@@ -101,29 +111,44 @@ describe("buildAffiliateCampaign", () => {
     expect(
       buildAffiliateCampaign({ placement: "city", personalised: true })
     ).toBe("rageroom_planner")
+    expect(buildAffiliateCampaign({ placement: "home" })).toBe("rageroom_home")
+    expect(buildAffiliateCampaign({ placement: "near_me" })).toBe(
+      "rageroom_near_me"
+    )
+    expect(buildAffiliateCampaign({ placement: "guide" })).toBe("rageroom_guide")
+    expect(buildAffiliateCampaign({ placement: "activity" })).toBe(
+      "rageroom_activity"
+    )
   })
 })
 
-describe("complementary widget queries", () => {
-  it("defaults to walking tours rather than competing smash inventory", () => {
-    const query = getWidgetSearchQuery("Manchester")
-    expect(query).toBe(
-      "walking tours and attractions in Manchester, United Kingdom"
-    )
-    expect(usesCompetitorInventoryQuery(query)).toBe(false)
+describe("themed complementary links", () => {
+  it("defaults to walking, food and evening cards without competitor inventory", () => {
+    const cards = getThemedActivityCards()
+    expect(cards.map((card) => card.id)).toEqual([
+      "sightseeing",
+      "food-drink",
+      "evening",
+    ])
+    for (const card of cards) {
+      expect(usesCompetitorInventoryQuery(card.query)).toBe(false)
+    }
   })
 
-  it("combines vibe, evening timing and couple group without competitor terms", () => {
-    const query = getComplementaryActivityQuery({
+  it("personalises the first card from planner answers", () => {
+    const cards = getThemedActivityCards({
       group: "couple",
       vibe: "food-drink",
       timing: "after",
     })
 
-    expect(query).toContain("food tours")
-    expect(query).toContain("evening experiences")
-    expect(query).toContain("couples")
-    expect(usesCompetitorInventoryQuery(query)).toBe(false)
+    expect(cards[0]?.id).toBe("best-match")
+    expect(cards[0]?.query).toContain("food tours")
+    expect(cards[0]?.query).toContain("evening experiences")
+    expect(cards[0]?.query).toContain("couples")
+    expect(cards).toHaveLength(3)
+    expect(cards.some((card) => card.id === "food-drink")).toBe(false)
+    expect(cards.some((card) => card.id === "sightseeing")).toBe(true)
   })
 
   it("never recommends rage rooms, smash rooms or axe throwing", () => {
@@ -132,26 +157,16 @@ describe("complementary widget queries", () => {
         for (const timing of PLANNER_TIMINGS) {
           const query = getComplementaryActivityQuery({ group, vibe, timing })
           expect(usesCompetitorInventoryQuery(query)).toBe(false)
+          for (const card of getThemedActivityCards({ group, vibe, timing })) {
+            expect(usesCompetitorInventoryQuery(card.query)).toBe(false)
+          }
         }
       }
     }
   })
-
-  it("describes the official activity widget with locale, partner and campaign", () => {
-    const dataset = getGetYourGuideWidgetDataset(
-      "walking tours and attractions in Leeds, United Kingdom",
-      "rageroom_city"
-    )
-
-    expect(dataset["data-gyg-widget"]).toBe("activities")
-    expect(dataset["data-gyg-partner-id"]).toBe("IZRRCJT")
-    expect(dataset["data-gyg-locale-code"]).toBe("en-GB")
-    expect(dataset["data-gyg-number-of-items"]).toBe("3")
-    expect(dataset["data-gyg-cmp"]).toBe("rageroom_city")
-  })
 })
 
-describe("occasion affiliate eligibility", () => {
+describe("occasion and activity affiliate eligibility", () => {
   it("pre-seeds planner groups for day-out occasions and skips corporate", () => {
     expect(getOccasionPlannerGroup("stag-parties")).toBe("friends")
     expect(getOccasionPlannerGroup("hen-parties")).toBe("friends")
@@ -161,52 +176,26 @@ describe("occasion affiliate eligibility", () => {
     expect(shouldShowAffiliateOnOccasion("corporate-team-building")).toBe(false)
     expect(getOccasionPlannerGroup("corporate-team-building")).toBeNull()
   })
-})
 
-describe("GetYourGuide widget script loading", () => {
-  afterEach(() => {
-    resetGetYourGuideWidgetScriptForTests()
-    vi.unstubAllGlobals()
+  it("shows affiliate on rage-room activity pages and skips paint-splatter", () => {
+    expect(shouldShowAffiliateOnActivity("rage-rooms")).toBe(true)
+    expect(shouldShowAffiliateOnActivity("paint-splatter")).toBe(false)
   })
 
-  it("reports the script as absent until a visitor asks to load it", () => {
-    vi.stubGlobal("document", {
-      querySelector: vi.fn(() => null),
-    })
-
-    expect(isGetYourGuideWidgetScriptPresent()).toBe(false)
-  })
-
-  it("injects the widget script once when requested", async () => {
-    const created: Array<{
-      src: string
-      onload: (() => void) | null
-    }> = []
-    const appendChild = vi.fn(
-      (element: { src: string; onload: (() => void) | null }) => {
-        created.push(element)
-        queueMicrotask(() => element.onload?.())
-      }
-    )
-
-    vi.stubGlobal("document", {
-      querySelector: vi.fn(() => null),
-      createElement: vi.fn(() => ({
-        src: "",
-        async: false,
-        defer: false,
-        onload: null as (() => void) | null,
-        onerror: null,
-      })),
-      body: { appendChild },
-    })
-
-    await Promise.all([
-      ensureGetYourGuideWidgetScript(),
-      ensureGetYourGuideWidgetScript(),
+  it("exposes compact chip cities with destination browse URLs", () => {
+    expect([...AFFILIATE_CHIP_CITIES]).toEqual([
+      "London",
+      "Manchester",
+      "Birmingham",
+      "Edinburgh",
+      "Liverpool",
+      "Leeds",
     ])
-
-    expect(appendChild).toHaveBeenCalledTimes(1)
-    expect(created[0]?.src).toBe(GETYOURGUIDE_WIDGET_SCRIPT_SRC)
+    for (const city of AFFILIATE_CHIP_CITIES) {
+      const url = new URL(buildGetYourGuideBrowseUrl(city, "rageroom_home"))
+      expect(url.origin).toBe("https://www.getyourguide.com")
+      expect(url.searchParams.get("partner_id")).toBe(GETYOURGUIDE_PARTNER_ID)
+      expect(url.pathname).not.toBe("/s/")
+    }
   })
 })

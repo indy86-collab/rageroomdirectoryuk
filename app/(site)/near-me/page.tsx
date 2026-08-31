@@ -8,6 +8,7 @@ import ListingsGrid from "@/components/ListingsGrid"
 import ListingLeadCapture from "@/components/ListingLeadCapture"
 import NearMeMap from "@/components/NearMeMap"
 import RageResetCTA from "@/components/RageResetCTA"
+import NearbyActivitiesAffiliate from "@/components/NearbyActivitiesAffiliate"
 import { absoluteUrl } from "@/lib/site-url"
 
 export const metadata: Metadata = {
@@ -133,6 +134,10 @@ export default async function NearMePage() {
             <ListingsGrid listings={nearbyListings} />
           </section>
         )}
+
+        <div className="mb-12">
+          <NearbyActivitiesAffiliate placement="near_me" variant="chips" />
+        </div>
 
         {/* Big List of Cities */}
         <section aria-labelledby="cities-heading" className="mb-12">

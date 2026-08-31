@@ -15,13 +15,13 @@ import {
   trackAffiliatePlannerAnswer,
   trackAffiliatePlannerComplete,
   trackAffiliatePlannerStart,
-  trackAffiliateWidgetLoad,
 } from "@/lib/analytics"
-import GetYourGuideWidget from "@/components/GetYourGuideWidget"
 import {
+  AFFILIATE_CHIP_CITIES,
   buildAffiliateCampaign,
   buildGetYourGuideBrowseUrl,
-  getWidgetSearchQuery,
+  buildGetYourGuideUrl,
+  getThemedActivityCards,
   PLANNER_GROUPS,
   PLANNER_LABELS,
   PLANNER_TIMINGS,
@@ -33,12 +33,14 @@ import {
 } from "@/lib/getyourguide"
 
 type NearbyActivitiesAffiliateProps = {
-  city: string
+  city?: string
   placement: AffiliatePlacement
   listingSlug?: string
   venueName?: string
   occasionSlug?: string
   initialGroup?: PlannerGroup
+  variant?: "full" | "chips"
+  cities?: string[]
 }
 
 type PlannerStep = "idle" | "group" | "vibe" | "timing"
@@ -68,6 +70,8 @@ export default function NearbyActivitiesAffiliate({
   venueName,
   occasionSlug,
   initialGroup,
+  variant = "full",
+  cities,
 }: NearbyActivitiesAffiliateProps) {
   const containerRef = useRef<HTMLElement>(null)
   const hasTrackedView = useRef(false)
@@ -75,17 +79,20 @@ export default function NearbyActivitiesAffiliate({
   const [group, setGroup] = useState<PlannerGroup | null>(initialGroup ?? null)
   const [vibe, setVibe] = useState<PlannerVibe | null>(null)
   const [timing, setTiming] = useState<PlannerTiming | null>(null)
-  const [widgetLoaded, setWidgetLoaded] = useState(false)
   const provider = "getyourguide"
+  const chipCities = cities?.length ? cities : [...AFFILIATE_CHIP_CITIES]
+  const analyticsCity = city || "UK"
 
   const baseAnalytics = {
     provider,
     placement,
-    city,
+    city: analyticsCity,
     listingSlug,
   }
 
   useEffect(() => {
+    if (variant === "chips") return
+
     try {
       const stored = window.sessionStorage.getItem(STORAGE_KEY)
       if (!stored) return
@@ -98,7 +105,7 @@ export default function NearbyActivitiesAffiliate({
     } catch {
       // Safari private browsing or malformed storage must not block the planner.
     }
-  }, [])
+  }, [variant])
 
   useEffect(() => {
     const element = containerRef.current
@@ -119,21 +126,21 @@ export default function NearbyActivitiesAffiliate({
     return () => observer.disconnect()
     // The page context is stable for the lifetime of this mounted component.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [city, listingSlug, placement])
+  }, [city, listingSlug, placement, variant])
 
   const planComplete = group !== null && vibe !== null && timing !== null
   const plan = planComplete ? { group, vibe, timing } : undefined
-  const widgetQuery = getWidgetSearchQuery(city, plan)
   const placementCampaign = buildAffiliateCampaign({
     placement,
     occasionSlug,
   })
-  const widgetCampaign = buildAffiliateCampaign({
+  const cardCampaign = buildAffiliateCampaign({
     placement,
     occasionSlug,
     personalised: planComplete,
   })
-  const browseUrl = buildGetYourGuideBrowseUrl(city, placementCampaign)
+  const themedCards = getThemedActivityCards(plan)
+  const headingId = `nearby-activities-${placement}`
 
   function startPlanner() {
     trackAffiliatePlannerStart(baseAnalytics)
@@ -208,11 +215,11 @@ export default function NearbyActivitiesAffiliate({
     if (step === "timing") setStep("vibe")
   }
 
-  function requestWidgetLoad() {
-    setWidgetLoaded(true)
-    trackAffiliateWidgetLoad({
+  function trackClick(recommendationId: string, clickCity = analyticsCity) {
+    trackAffiliateClick({
       ...baseAnalytics,
-      recommendationId: planComplete ? "personalised" : "city_default",
+      city: clickCity,
+      recommendationId,
       ...(group ? { plannerGroup: group } : {}),
       ...(vibe ? { plannerVibe: vibe } : {}),
       ...(timing ? { plannerTiming: timing } : {}),
@@ -232,7 +239,7 @@ export default function NearbyActivitiesAffiliate({
   return (
     <section
       ref={containerRef}
-      aria-labelledby={`nearby-activities-${placement}`}
+      aria-labelledby={headingId}
       className="relative overflow-hidden rounded-lg border border-orange-500/30 bg-gradient-to-br from-[#21160f] via-[#181818] to-[#181818] p-4 sm:p-6"
     >
       <div className="absolute -right-10 -top-12 h-32 w-32 rounded-full bg-orange-500/10 blur-2xl" />
@@ -243,154 +250,185 @@ export default function NearbyActivitiesAffiliate({
           Add something around your smash
         </div>
         <h2
-          id={`nearby-activities-${placement}`}
+          id={headingId}
           className="text-xl font-bold text-white sm:text-2xl"
         >
-          Build the rest of your smash day in {city}
+          {variant === "chips" || !city
+            ? "Build the rest of your smash day"
+            : `Build the rest of your smash day in ${city}`}
         </h2>
         <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-300 sm:text-base">
-          Rage rooms last about an hour. Load bookable tours, tastings and city
-          walks that fit around your session — photos, prices and ratings come
-          from GetYourGuide.
+          {variant === "chips"
+            ? "Rage rooms last about an hour. Pick a city to browse bookable tours, tastings and walks that fit around your session — availability and prices come from GetYourGuide."
+            : "Rage rooms last about an hour. Browse bookable tours, tastings and city walks that fit around your session — availability and prices come from GetYourGuide."}
         </p>
 
-        <div className="mt-5">
-          <GetYourGuideWidget
-            key={`${widgetQuery}:${widgetCampaign}`}
-            query={widgetQuery}
-            campaign={widgetCampaign}
-            city={city}
-            loaded={widgetLoaded}
-            onRequestLoad={requestWidgetLoad}
-          />
-        </div>
-
-        <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <a
-            href={browseUrl}
-            target="_blank"
-            rel="sponsored noopener noreferrer"
-            onClick={() =>
-              trackAffiliateClick({
-                ...baseAnalytics,
-                recommendationId: "browse_all",
-                ...(group ? { plannerGroup: group } : {}),
-                ...(vibe ? { plannerVibe: vibe } : {}),
-                ...(timing ? { plannerTiming: timing } : {}),
-              })
-            }
-            className="inline-flex min-h-[44px] items-center justify-center gap-1 px-2 text-sm font-semibold text-zinc-300 underline decoration-zinc-600 underline-offset-4 hover:text-orange-400"
-          >
-            Browse everything in {city}
-            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-          </a>
-        </div>
-
-        {step === "idle" && (
-          <div className="mt-5">
-            {planComplete ? (
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                <div>
-                  <div className="flex flex-wrap gap-2">
-                    {[
-                      PLANNER_LABELS.groups[group],
-                      PLANNER_LABELS.vibes[vibe],
-                      PLANNER_LABELS.timings[timing],
-                    ].map((label) => (
-                      <span
-                        key={label}
-                        className="inline-flex items-center gap-1 rounded-full border border-orange-500/30 bg-orange-500/10 px-2.5 py-1 text-xs font-semibold text-orange-300"
-                      >
-                        <Check className="h-3 w-3" aria-hidden="true" />
-                        {label}
-                      </span>
-                    ))}
-                  </div>
-                  {suggestedOrder && (
-                    <p className="mt-2 text-sm text-zinc-400">{suggestedOrder}</p>
-                  )}
-                </div>
-                <button
-                  type="button"
-                  onClick={resetPlanner}
-                  className="inline-flex min-h-[44px] items-center gap-1 self-start px-2 text-sm text-zinc-400 hover:text-white"
-                >
-                  <RotateCcw className="h-4 w-4" aria-hidden="true" />
-                  Change answers
-                </button>
-              </div>
-            ) : (
-              <button
-                type="button"
-                onClick={startPlanner}
-                className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-md border border-orange-500/40 bg-orange-500/10 px-5 py-3 font-semibold text-orange-200 transition-colors hover:bg-orange-500/20 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-offset-2 focus:ring-offset-[#181818]"
+        {variant === "chips" ? (
+          <div className="mt-5 flex flex-wrap gap-3">
+            {chipCities.map((chipCity) => (
+              <a
+                key={chipCity}
+                href={buildGetYourGuideBrowseUrl(chipCity, placementCampaign)}
+                target="_blank"
+                rel="sponsored noopener noreferrer"
+                onClick={() => trackClick("city_chip", chipCity)}
+                className="inline-flex min-h-[44px] items-center justify-center gap-1 rounded-md border border-orange-500/50 bg-orange-500/10 px-4 py-2 text-sm font-semibold text-orange-200 transition-colors hover:border-orange-400 hover:bg-orange-500/20 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-offset-2 focus:ring-offset-[#181818]"
               >
-                <Sparkles className="h-4 w-4" aria-hidden="true" />
-                Personalise these picks
-              </button>
-            )}
+                Browse tours in {chipCity}
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </a>
+            ))}
           </div>
-        )}
-
-        {(step === "group" || step === "vibe" || step === "timing") && (
-          <div className="mt-5">
-            <div className="mb-4 flex items-center justify-between gap-3">
-              <p className="text-xs font-semibold uppercase tracking-wider text-orange-400">
-                Step {step === "group" ? "1" : step === "vibe" ? "2" : "3"}
-                {" of 3"}
-              </p>
-              <button
-                type="button"
-                onClick={goBack}
-                className="inline-flex min-h-[44px] items-center gap-1 px-2 text-sm text-zinc-400 hover:text-white"
+        ) : city ? (
+          <>
+            <div className="mt-5">
+              <a
+                href={buildGetYourGuideBrowseUrl(city, placementCampaign)}
+                target="_blank"
+                rel="sponsored noopener noreferrer"
+                onClick={() => trackClick("browse_all")}
+                className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-md border border-orange-500/60 bg-orange-500/15 px-5 py-3 text-sm font-semibold text-orange-100 transition-colors hover:border-orange-400 hover:bg-orange-500/25 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-offset-2 focus:ring-offset-[#181818] sm:w-auto"
               >
-                <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-                Back
-              </button>
+                Browse tours in {city}
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </a>
             </div>
 
-            {step === "group" && (
-              <PlannerQuestion
-                question="Who are you going with?"
-                options={PLANNER_GROUPS.map((value) => ({
-                  value,
-                  label: PLANNER_LABELS.groups[value],
-                }))}
-                selected={group}
-                onChoose={(value) => chooseGroup(value as PlannerGroup)}
-              />
+            <div className="mt-5 grid gap-3 lg:grid-cols-3">
+              {themedCards.map((card) => (
+                <a
+                  key={card.id}
+                  href={buildGetYourGuideUrl(city, {
+                    query: card.query,
+                    campaign: cardCampaign,
+                  })}
+                  target="_blank"
+                  rel="sponsored noopener noreferrer"
+                  onClick={() => trackClick(card.id)}
+                  className="flex h-full flex-col rounded-lg border border-zinc-700 bg-black/20 p-4 transition-colors hover:border-orange-500/60 hover:bg-orange-500/5 focus:outline-none focus:ring-2 focus:ring-orange-300"
+                >
+                  <h3 className="text-base font-semibold text-white">
+                    {card.title}
+                  </h3>
+                  <p className="mt-2 flex-1 text-sm leading-5 text-zinc-400">
+                    {card.description}
+                  </p>
+                  <span className="mt-3 inline-flex min-h-[44px] items-center gap-1 text-sm font-semibold text-orange-300">
+                    Browse on GetYourGuide
+                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                </a>
+              ))}
+            </div>
+
+            {step === "idle" && (
+              <div className="mt-5">
+                {planComplete ? (
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <div className="flex flex-wrap gap-2">
+                        {[
+                          PLANNER_LABELS.groups[group],
+                          PLANNER_LABELS.vibes[vibe],
+                          PLANNER_LABELS.timings[timing],
+                        ].map((label) => (
+                          <span
+                            key={label}
+                            className="inline-flex items-center gap-1 rounded-full border border-orange-500/30 bg-orange-500/10 px-2.5 py-1 text-xs font-semibold text-orange-300"
+                          >
+                            <Check className="h-3 w-3" aria-hidden="true" />
+                            {label}
+                          </span>
+                        ))}
+                      </div>
+                      {suggestedOrder && (
+                        <p className="mt-2 text-sm text-zinc-400">
+                          {suggestedOrder}
+                        </p>
+                      )}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={resetPlanner}
+                      className="inline-flex min-h-[44px] items-center gap-1 self-start px-2 text-sm text-zinc-400 hover:text-white"
+                    >
+                      <RotateCcw className="h-4 w-4" aria-hidden="true" />
+                      Change answers
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={startPlanner}
+                    className="inline-flex min-h-[44px] items-center justify-center gap-2 rounded-md border border-zinc-700 bg-black/20 px-5 py-3 text-sm font-semibold text-zinc-200 transition-colors hover:border-orange-500/40 hover:text-white focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-offset-2 focus:ring-offset-[#181818]"
+                  >
+                    <Sparkles className="h-4 w-4" aria-hidden="true" />
+                    Personalise these picks
+                  </button>
+                )}
+              </div>
             )}
-            {step === "vibe" && (
-              <PlannerQuestion
-                question="What kind of day do you want?"
-                options={PLANNER_VIBES.map((value) => ({
-                  value,
-                  label: PLANNER_LABELS.vibes[value],
-                }))}
-                selected={vibe}
-                onChoose={(value) => chooseVibe(value as PlannerVibe)}
-              />
+
+            {(step === "group" || step === "vibe" || step === "timing") && (
+              <div className="mt-5">
+                <div className="mb-4 flex items-center justify-between gap-3">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-orange-400">
+                    Step {step === "group" ? "1" : step === "vibe" ? "2" : "3"}
+                    {" of 3"}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={goBack}
+                    className="inline-flex min-h-[44px] items-center gap-1 px-2 text-sm text-zinc-400 hover:text-white"
+                  >
+                    <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+                    Back
+                  </button>
+                </div>
+
+                {step === "group" && (
+                  <PlannerQuestion
+                    question="Who are you going with?"
+                    options={PLANNER_GROUPS.map((value) => ({
+                      value,
+                      label: PLANNER_LABELS.groups[value],
+                    }))}
+                    selected={group}
+                    onChoose={(value) => chooseGroup(value as PlannerGroup)}
+                  />
+                )}
+                {step === "vibe" && (
+                  <PlannerQuestion
+                    question="What kind of day do you want?"
+                    options={PLANNER_VIBES.map((value) => ({
+                      value,
+                      label: PLANNER_LABELS.vibes[value],
+                    }))}
+                    selected={vibe}
+                    onChoose={(value) => chooseVibe(value as PlannerVibe)}
+                  />
+                )}
+                {step === "timing" && (
+                  <PlannerQuestion
+                    question="When should the extra activity happen?"
+                    options={PLANNER_TIMINGS.map((value) => ({
+                      value,
+                      label: PLANNER_LABELS.timings[value],
+                    }))}
+                    selected={timing}
+                    onChoose={(value) => chooseTiming(value as PlannerTiming)}
+                  />
+                )}
+              </div>
             )}
-            {step === "timing" && (
-              <PlannerQuestion
-                question="When should the extra activity happen?"
-                options={PLANNER_TIMINGS.map((value) => ({
-                  value,
-                  label: PLANNER_LABELS.timings[value],
-                }))}
-                selected={timing}
-                onChoose={(value) => chooseTiming(value as PlannerTiming)}
-              />
-            )}
-          </div>
-        )}
+          </>
+        ) : null}
       </div>
 
       <p className="relative mt-5 border-t border-zinc-700/70 pt-3 text-xs leading-5 text-zinc-500">
         Affiliate links: if you make a booking, RageRoom Directory may earn a
-        commission at no extra cost to you. Recommendations are based on your
-        answers; availability and prices are set by GetYourGuide and its
-        activity providers.
+        commission at no extra cost to you. Availability and prices are set by
+        GetYourGuide and its activity providers.
       </p>
     </section>
   )

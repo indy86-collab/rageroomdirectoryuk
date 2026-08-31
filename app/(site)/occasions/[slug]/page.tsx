@@ -17,8 +17,10 @@ import { getAllListingsForAdmin, getListingsByOccasions } from "@/lib/listings"
 import { getEligibleLocationDiscoveryPages } from "@/lib/location-discovery"
 import { buildBreadcrumbSchema, buildItemListSchema } from "@/lib/seo-schema"
 import DirectoryInsightCallout from "@/components/DirectoryInsightCallout"
+import NearbyActivitiesAffiliate from "@/components/NearbyActivitiesAffiliate"
 import { getOccasionDirectoryInsight } from "@/lib/directory-insights"
 import { buildInsightsStats } from "@/lib/insights-stats"
+import { shouldShowAffiliateOnOccasion } from "@/lib/getyourguide"
 
 interface OccasionPageProps {
   params: { slug: string }
@@ -112,6 +114,12 @@ export default async function OccasionPage({ params }: OccasionPageProps) {
           showOccasions={false}
           resultsLabel="suitable venues"
         />
+
+        {shouldShowAffiliateOnOccasion(occasion.slug) && (
+          <div className="mt-10">
+            <NearbyActivitiesAffiliate placement="occasion" occasionSlug={occasion.slug} variant="chips" />
+          </div>
+        )}
 
         {locationPages.length > 0 && (
           <nav className="mt-10 rounded-lg border border-zinc-800 bg-[#181818] p-5 sm:p-6" aria-label={`Inventory-backed city pages for ${occasion.shortLabel}`}>

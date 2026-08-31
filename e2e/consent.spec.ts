@@ -114,9 +114,12 @@ test.describe("consent-aware analytics", () => {
     await expect(
       page.locator('script[src*="widget.getyourguide.com"]')
     ).toHaveCount(0)
-    await expect(
-      page.getByRole("button", { name: "Show nearby GetYourGuide activities in Maidstone" })
-    ).toBeVisible()
+    const affiliate = page.getByRole("link", { name: "Browse tours in Maidstone" })
+    await expect(affiliate).toBeVisible()
+    await expect(affiliate).toHaveAttribute(
+      "href",
+      /https:\/\/www\.getyourguide\.com\/.*partner_id=IZRRCJT/
+    )
     const booking = page.getByRole("link", { name: "Book Your Session →" })
     await expect(booking).toHaveAttribute("href", /^https?:\/\//)
     await clickWithoutNavigation(booking)

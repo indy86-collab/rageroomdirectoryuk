@@ -23,6 +23,7 @@ import LocationHero from "@/components/LocationHero"
 import NearbyActivitiesAffiliate from "@/components/NearbyActivitiesAffiliate"
 import {
   getOccasionPlannerGroup,
+  shouldShowAffiliateOnActivity,
   shouldShowAffiliateOnOccasion,
 } from "@/lib/getyourguide"
 
@@ -134,6 +135,17 @@ export default function LocationDiscoveryPage({
                 placement="occasion"
                 occasionSlug={occasion.slug}
                 initialGroup={getOccasionPlannerGroup(occasion.slug) ?? undefined}
+              />
+            </div>
+          )}
+
+        {page.type === "activity" &&
+          activity &&
+          shouldShowAffiliateOnActivity(activity.slug) && (
+            <div className="mt-8">
+              <NearbyActivitiesAffiliate
+                city={page.location.name}
+                placement="activity"
               />
             </div>
           )}

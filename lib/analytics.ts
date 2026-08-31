@@ -528,10 +528,6 @@ export function trackAffiliatePlannerComplete(params: AffiliateEventParams) {
   trackEvent("affiliate_planner_complete", affiliateEventParams(params))
 }
 
-export function trackAffiliateWidgetLoad(params: AffiliateEventParams) {
-  trackEvent("affiliate_widget_load", affiliateEventParams(params))
-}
-
 export function trackProductDownload(
   product: AnalyticsProduct,
   fileName: string
