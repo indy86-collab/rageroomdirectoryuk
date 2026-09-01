@@ -18,6 +18,7 @@ describe("isAdEligiblePath", () => {
     expect(isAdEligiblePath("/activities/rage-rooms")).toBe(false)
     expect(isAdEligiblePath("/activities/rage-rooms/london")).toBe(false)
     expect(isAdEligiblePath("/search")).toBe(false)
+    expect(isAdEligiblePath("/find")).toBe(false)
     expect(isAdEligiblePath("/checkout/cancel")).toBe(false)
     expect(isAdEligiblePath("/order/success")).toBe(false)
     expect(isAdEligiblePath("/rage-reset")).toBe(false)

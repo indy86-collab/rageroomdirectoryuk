@@ -65,7 +65,9 @@ export default function ListingCard({
         : discoveryContext.pageType === "activity_location" ||
             discoveryContext.pageType === "occasion_location"
           ? "location_results"
-          : "venue_card"
+          : discoveryContext.pageType === "find_results"
+            ? "find_option"
+            : "venue_card"
 
   return (
     <article className="card-base card-hover group relative flex h-full flex-col overflow-hidden">

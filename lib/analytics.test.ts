@@ -339,6 +339,18 @@ describe("authority analytics", () => {
     })
     expect(JSON.stringify(gtag.mock.calls)).not.toContain("utm=secret")
   })
+
+  it("tracks trip search without query text or PII", () => {
+    trackAuthorityEvent("trip_search", {
+      locationKind: "city",
+      resultCount: 3,
+    })
+
+    expect(gtag).toHaveBeenCalledWith("event", "trip_search", {
+      locationKind: "city",
+      resultCount: 3,
+    })
+  })
 })
 
 describe("prep pack upsell analytics", () => {

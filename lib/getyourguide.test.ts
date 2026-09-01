@@ -122,6 +122,7 @@ describe("buildAffiliateCampaign", () => {
     expect(buildAffiliateCampaign({ placement: "lead_magnet" })).toBe(
       "rageroom_lead_magnet"
     )
+    expect(buildAffiliateCampaign({ placement: "find" })).toBe("rageroom_find")
   })
 })
 

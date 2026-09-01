@@ -25,6 +25,7 @@ export type AffiliatePlacement =
   | "guide"
   | "activity"
   | "lead_magnet"
+  | "find"
 
 export const PLANNER_LABELS = {
   groups: {
@@ -215,6 +216,7 @@ export function buildAffiliateCampaign({
   if (placement === "guide") return "rageroom_guide"
   if (placement === "activity") return "rageroom_activity"
   if (placement === "lead_magnet") return "rageroom_lead_magnet"
+  if (placement === "find") return "rageroom_find"
   return "rageroom_city"
 }
 

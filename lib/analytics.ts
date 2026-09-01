@@ -25,6 +25,7 @@ export const DIRECTORY_PAGE_TYPES = [
   "occasion_location",
   "comparison",
   "search_results",
+  "find_results",
   "guide",
 ] as const
 
@@ -43,6 +44,7 @@ export const DIRECTORY_CTA_PLACEMENTS = [
   "location_results",
   "homepage_featured",
   "near_me_results",
+  "find_option",
   "listing_owner_panel",
 ] as const
 
@@ -173,6 +175,10 @@ export type AuthorityEventMap = {
     destinationKind: "city" | "region" | "activity" | "occasion" | "listings" | "prices"
     destinationPath: string
   }
+  trip_search: {
+    locationKind: "city" | "region" | "postcode" | "none"
+    resultCount: number
+  }
 }
 
 export type AuthorityEventName = keyof AuthorityEventMap
@@ -271,6 +277,7 @@ const AUTHORITY_EVENT_PROPERTIES: {
   report_citation_copied: ["surface"],
   report_dataset_downloaded: ["format"],
   insight_directory_click: ["destinationKind", "destinationPath"],
+  trip_search: ["locationKind", "resultCount"],
 }
 
 type GtagEventParams = Record<

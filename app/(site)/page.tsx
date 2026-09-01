@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import { cityToSlug } from "@/lib/location"
 import Hero from "@/components/Hero"
+import TripFinderPanel from "@/components/TripFinderPanel"
 import FeaturedRooms from "@/components/FeaturedRooms"
 import FAQ from "@/components/FAQ"
 import DigitalGuidesChooser from "@/components/DigitalGuidesChooser"
@@ -243,6 +244,8 @@ export default async function Home() {
   return (
     <>
       <Hero featuredListings={featuredListings} />
+
+      <TripFinderPanel />
 
       <section aria-labelledby="choose-experience-heading" className="w-full py-10 sm:py-14 section-textured">
         <div className="w-full px-3 sm:px-5 lg:px-6">

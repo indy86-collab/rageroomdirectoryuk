@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest"
 import sitemap from "@/app/sitemap"
 import { generateMetadata as generateCityMetadata } from "@/app/(site)/city/[slug]/page"
 import { generateMetadata as generateSearchMetadata } from "@/app/(site)/search/page"
+import { generateMetadata as generateFindMetadata } from "@/app/(site)/find/page"
 import { metadata as insightsMetadata } from "@/app/(site)/insights/page"
 import { generateMetadata as generateInsightMetadata } from "@/app/(site)/insights/[slug]/page"
 import { metadata as badgeMetadata } from "@/app/(site)/for-venues/badge/page"
@@ -68,6 +69,16 @@ describe("SEO regressions", () => {
 
     expect(emptySearch.robots).toEqual({ index: false, follow: true })
     expect(querySearch.robots).toEqual({ index: false, follow: true })
+  })
+
+  it("always marks trip finder results noindex", async () => {
+    const emptyFind = await generateFindMetadata({ searchParams: {} })
+    const queryFind = await generateFindMetadata({
+      searchParams: { query: "Birmingham birthday" },
+    })
+
+    expect(emptyFind.robots).toEqual({ index: false, follow: true })
+    expect(queryFind.robots).toEqual({ index: false, follow: true })
   })
 
   it("separates in-city and nearby venue counts in city titles", async () => {
