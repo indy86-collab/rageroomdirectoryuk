@@ -106,11 +106,11 @@ const guideCityContentMap: Record<string, GuideCityContent> = {
   },
   northampton: {
     intro:
-      "Northampton has a verified in-town smash room and sits within easy reach of other East Midlands venues. This guide keeps Destroy'd Rage Rooms separate from nearby options so travel time is clear before you book.",
+      "Northampton currently has no verified in-city smash room and sits within easy reach of other East Midlands venues. This guide keeps nearby options labelled by their real city so travel time is clear before you book.",
     sceneDescription:
-      "Destroy'd Rage Rooms on the NN3 side of town is the current in-city listing. Packages are typically priced per room rather than per person, so a couples or small-group booking can look expensive until you divide the room rate. Confirm session length, how many breakables are included and whether an escape-room add-on is sold separately.",
+      "The former Trapp'd Billing rage room is closed. Visitors from Northampton typically compare Leicester, Bedford or Birmingham listings. Packages are often priced per room rather than per person, so a couples or small-group booking can look expensive until you divide the room rate.",
     whatToLookFor:
-      "Check the postcode (NN3 9DA), whether the quoted figure is per room or per person, and the venue's own age rule — our listing does not yet carry a verified minimum age. If you are coming from Milton Keynes, Bedford or Leicester, compare driving time against a Leicester or Birmingham in-city option.",
+      "Confirm whether the quoted figure is per room or per person, the venue's own age rule, and how many breakables are included. If you are coming from Milton Keynes, Bedford or Leicester, compare driving time against a Leicester or Birmingham in-city option.",
     localTip:
       "Northampton station is on the West Coast line from London Euston. Weekend late-afternoon slots fill first for groups; confirm parking on the venue's own page before you travel.",
   },

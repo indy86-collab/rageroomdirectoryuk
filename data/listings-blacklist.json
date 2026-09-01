@@ -185,5 +185,101 @@
     "city": "Shrewsbury",
     "reason": "Pottery-painting and conventional craft operator without a qualifying high-energy paint/splatter experience.",
     "blacklistedAt": "2026-08-20"
+  },
+  {
+    "slug": "mission-classified-rage-room-grimsby",
+    "id": "f6e6cd12-77e2-45ea-b258-e60607b7c11b",
+    "name": "Mission Classified Rage Room",
+    "websiteContains": [
+      "missionclassified.co.uk"
+    ],
+    "postcode": "DN31 3ES",
+    "city": "Grimsby",
+    "reason": "Permanently closed with immediate effect in May 2026; the owner announced the closure and refunds for remaining bookings. Do not re-add.",
+    "blacklistedAt": "2026-08-31"
+  },
+  {
+    "slug": "destroyd-rage-rooms-northampton",
+    "id": "3f887440-4920-4d23-9260-de599f094245",
+    "name": "Destroy'd Rage Rooms",
+    "websiteContains": [
+      "trappd.com/rage-rooms"
+    ],
+    "postcode": "NN3 9DA",
+    "city": "Northampton",
+    "reason": "Trapp'd Billing Aquadrome is closed and the official rage-rooms page now returns 404. Do not re-add without a new live booking page.",
+    "blacklistedAt": "2026-08-31"
+  },
+  {
+    "slug": "the-smash-lab-wellingborough",
+    "id": "dfe5a71b-073e-4595-954e-93ed5f687f30",
+    "name": "The Smash Lab Wellingborough",
+    "websiteContains": [
+      "thesmashlab.co.uk"
+    ],
+    "postcode": "NN8 4LA",
+    "city": "Wellingborough",
+    "reason": "The operator announced it would cease all operations on 5 July 2026 and the official site now returns 404. Do not re-add.",
+    "blacklistedAt": "2026-08-31"
+  },
+  {
+    "slug": "the-underground-newport",
+    "id": "176522c9-6b9b-4aad-81f3-ddeaee3ea47f",
+    "name": "The Underground Newport",
+    "websiteContains": [
+      "theundergroundnewport.com"
+    ],
+    "postcode": "NP20 1EB",
+    "city": "Newport",
+    "reason": "Local press reported The Underground closed at Kingsway Shopping Centre in August 2026. Do not re-add without evidence of reopening.",
+    "blacklistedAt": "2026-08-31"
+  },
+  {
+    "slug": "whistle-punks-london",
+    "id": "22a9a2cf-a660-499a-8c78-80ab619074f1",
+    "name": "Whistle Punks London",
+    "websiteContains": [
+      "whistlepunks.com"
+    ],
+    "postcode": "W1W 8DN",
+    "city": "London",
+    "reason": "Whistle Punks UK Ltd entered creditors' voluntary liquidation in March 2025 after all four sites ceased trading. The former domain no longer represents the business. Do not re-add.",
+    "blacklistedAt": "2026-08-31"
+  },
+  {
+    "slug": "whistle-punks-manchester",
+    "id": "2cb4ec3e-82fb-4f4e-9ffc-5a9f99b118ae",
+    "name": "Whistle Punks Manchester",
+    "websiteContains": [
+      "whistlepunks.com"
+    ],
+    "postcode": "M3 4EN",
+    "city": "Manchester",
+    "reason": "Whistle Punks UK Ltd entered creditors' voluntary liquidation in March 2025 after all four sites ceased trading. Do not re-add.",
+    "blacklistedAt": "2026-08-31"
+  },
+  {
+    "slug": "whistle-punks-bristol",
+    "id": "5db5513d-fccf-4765-83ee-b3aebc48bba9",
+    "name": "Whistle Punks Bristol",
+    "websiteContains": [
+      "whistlepunks.com"
+    ],
+    "postcode": "BS1 2LZ",
+    "city": "Bristol",
+    "reason": "Whistle Punks UK Ltd entered creditors' voluntary liquidation in March 2025 after all four sites ceased trading. Do not re-add.",
+    "blacklistedAt": "2026-08-31"
+  },
+  {
+    "slug": "whistle-punks-leeds",
+    "id": "fafe9236-1ef0-4541-8427-9110030ee32f",
+    "name": "Whistle Punks Leeds",
+    "websiteContains": [
+      "whistlepunks.com"
+    ],
+    "postcode": "LS2 3AD",
+    "city": "Leeds",
+    "reason": "Whistle Punks UK Ltd entered creditors' voluntary liquidation in March 2025 after all four sites ceased trading. Do not re-add.",
+    "blacklistedAt": "2026-08-31"
   }
 ]

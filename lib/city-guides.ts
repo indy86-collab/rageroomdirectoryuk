@@ -110,7 +110,7 @@ export const EDITORIAL_CITY_GUIDES: EditorialCityGuide[] = [
     city: "Northampton",
     slug: "northampton",
     blurb:
-      "East Midlands smash rooms serving Northampton — compare Destroy'd and nearby venues on price and travel.",
+      "East Midlands smash rooms serving Northampton — compare nearby venues on price and travel after the in-city listing closed.",
   },
   {
     city: "Huddersfield",

@@ -25,14 +25,14 @@ function run(overrides: Partial<ListingFilterState> = {}) {
 
 describe("listing discovery filters", () => {
   it("returns the complete inventory after reset", () => {
-    expect(run()).toHaveLength(85)
+    expect(run()).toHaveLength(78)
   })
 
   it("uses AND semantics for combined activities", () => {
     const axe = run({ activities: ["axe-throwing"] })
     const rageAndAxe = run({ activities: ["rage-room", "axe-throwing"] })
-    expect(axe).toHaveLength(29)
-    expect(rageAndAxe).toHaveLength(14)
+    expect(axe).toHaveLength(24)
+    expect(rageAndAxe).toHaveLength(13)
     expect(axe.some((listing) => listing.slug === "just-axing-swansea")).toBe(true)
     expect(rageAndAxe.some((listing) => listing.slug === "just-axing-swansea")).toBe(false)
     expect(rageAndAxe.every((listing) =>

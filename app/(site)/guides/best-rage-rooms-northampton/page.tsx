@@ -10,8 +10,8 @@ export default function BestRageRoomsNorthamptonPage() {
       city="Northampton"
       path={getCityGuidePath("Northampton")}
       published="2026-08-22"
-      updated="22 August 2026"
-      modified="2026-08-22"
+      updated="31 August 2026"
+      modified="2026-08-31"
     />
   )
 }

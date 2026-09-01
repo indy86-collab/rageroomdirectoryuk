@@ -40,7 +40,7 @@ test.describe("audited discovery routes", () => {
     await expect(page.getByLabel("Location")).toHaveValue("Maidstone")
     await expect(page.getByText("1 venue found")).toBeVisible()
     await page.getByRole("button", { name: "Reset" }).click()
-    await expect(page.getByText("85 venues found")).toBeVisible()
+    await expect(page.getByText("78 venues found")).toBeVisible()
   })
 
   test("activity and occasion pages expose canonical routes and strict inventory", async ({ page }) => {
@@ -112,7 +112,7 @@ test.describe("audited discovery routes", () => {
     await page.goto("/activities/rage-rooms?activities=axe-throwing")
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /\/activities\/rage-rooms$/)
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/)
-    await expect(page.getByText("14 verified venues found")).toBeVisible()
+    await expect(page.getByText("13 verified venues found")).toBeVisible()
 
     await openFilters(page)
     await page.getByLabel("Location").selectOption("Derby")
@@ -121,7 +121,7 @@ test.describe("audited discovery routes", () => {
     await expect(page).toHaveURL(/activities=rage-room%2Caxe-throwing|activities=axe-throwing/)
 
     await page.getByRole("button", { name: "Reset" }).click()
-    await expect(page.getByText("48 verified venues found")).toBeVisible()
+    await expect(page.getByText("45 verified venues found")).toBeVisible()
   })
 
   test("booking CTA uses verified links and otherwise falls back to venue details", async ({ page }) => {
@@ -163,23 +163,23 @@ test.describe("audited discovery routes", () => {
 
   test("filters combine with AND semantics and reset to the complete inventory", async ({ page }) => {
     await page.goto("/listings")
-    await expect(page.getByText("85 venues found")).toBeVisible()
+    await expect(page.getByText("78 venues found")).toBeVisible()
     await openFilters(page)
 
     await page.getByRole("checkbox", { name: "Axe Throwing", exact: true }).check()
     const axeCount = Number((await page.getByText(/venues? found/).textContent())?.match(/\d+/)?.[0])
     expect(axeCount).toBeGreaterThan(0)
-    expect(axeCount).toBe(29)
+    expect(axeCount).toBe(24)
 
     await page.getByRole("checkbox", { name: "Rage Room", exact: true }).check()
-    await expect(page.getByText("14 venues found")).toBeVisible()
+    await expect(page.getByText("13 venues found")).toBeVisible()
 
     await page.getByLabel("Max per-person price").fill("25")
     const constrainedCount = Number((await page.getByText(/venues? found/).textContent())?.match(/\d+/)?.[0])
-    expect(constrainedCount).toBeLessThanOrEqual(14)
+    expect(constrainedCount).toBeLessThanOrEqual(13)
 
     await page.getByRole("button", { name: "Reset" }).click()
-    await expect(page.getByText("85 venues found")).toBeVisible()
+    await expect(page.getByText("78 venues found")).toBeVisible()
   })
 
   test("paint discovery covers standalone, combined, city, mobile and comparison journeys", async ({ page }) => {

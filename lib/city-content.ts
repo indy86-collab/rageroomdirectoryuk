@@ -175,11 +175,11 @@ const cityContentMap: Record<string, CityContent> = {
   },
   northampton: {
     intro:
-      "Northampton has a verified smash room in town. Compare Destroy'd Rage Rooms' published room rate with nearby East Midlands options before you book.",
+      "Northampton currently has no verified in-city smash room. Compare nearby East Midlands venues on price, travel time and booking before you go.",
     localContext:
-      "The NN3 listing is the in-city option. Nearby results keep their real city names so a Leicester or Birmingham venue is not presented as central Northampton.",
+      "The former Trapp'd Billing listing is closed. Nearby results keep their real city names so a Leicester, Bedford or Birmingham venue is not presented as central Northampton.",
     travelTip:
-      "Northampton station is on the West Coast line from London Euston. Weekend late-afternoon room bookings fill first.",
+      "Northampton station is on the West Coast line from London Euston. Check driving time to Leicester or Bedford before booking a weekend slot.",
   },
   huddersfield: {
     intro:

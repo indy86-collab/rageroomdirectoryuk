@@ -56,9 +56,9 @@ describe("discovery inventory", () => {
     const matches = listings.filter((listing) =>
       ["rage-room", "axe-throwing"].every((activity) => listing.activities.includes(activity as never))
     )
-    expect(matches.length).toBe(14)
+    expect(matches.length).toBe(13)
 
-    expect(listings.filter((listing) => listing.activities.includes("axe-throwing"))).toHaveLength(29)
+    expect(listings.filter((listing) => listing.activities.includes("axe-throwing"))).toHaveLength(24)
   })
 
   it("exposes the expanded paint inventory and its strict smash-and-paint subset", () => {

@@ -71,7 +71,7 @@ export const ROUTE_INVENTORY: ExpectedRoute[] = [
     requireHeaderFooter: true,
   },
   {
-    path: "/occasions/hen-parties/london",
+    path: "/occasions/hen-parties/birmingham",
     expectStatus: 200,
     group: "discovery",
     requireHeaderFooter: true,

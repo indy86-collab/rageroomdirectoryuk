@@ -10,7 +10,7 @@ const stats = buildInsightsStats(listingsData as Listing[])
 describe("directory insight callouts", () => {
   it("explains London city-field counts without contradicting directory routing", () => {
     const callout = getCityDirectoryInsight(stats, "london", "London")
-    expect(callout.statement).toContain("5 fixed-location venues with London as their city")
+    expect(callout.statement).toContain("4 fixed-location venues with London as their city")
     expect(callout.statement).toMatch(/nearby or canonical region matches/)
     expect(callout.href).toBe("/insights/rage-rooms-by-city")
   })
@@ -53,7 +53,7 @@ describe("flagship report copy", () => {
     expect(answers.howMuch).toContain("£11")
     expect(answers.howMuch).toContain("£45")
     expect(answers.howMuch).toContain("average of £29")
-    expect(answers.topCity).toContain("London")
+    expect(answers.topCity).toContain("Birmingham")
     expect(answers.publishedPrices).toContain(`${stats.pricing.usable} of ${stats.verifiedListings}`)
     expect(answers.citation("https://www.rageroomdirectory.co.uk/uk-rage-room-report-2026")).toContain(
       "UK Rage Room Report 2026"
