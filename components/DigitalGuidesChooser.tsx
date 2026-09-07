@@ -4,6 +4,7 @@ import {
   getDigitalProduct,
   getDigitalProductAnalytics,
 } from "@/lib/digital-products"
+import { EDITORIAL_PRODUCT_PROMOS_ENABLED } from "@/lib/monetization"
 
 export type DigitalGuideIntent = "firstVisit" | "party" | "corporate" | "gift"
 
@@ -48,6 +49,7 @@ export default function DigitalGuidesChooser({
   highlight,
   className = "",
 }: DigitalGuidesChooserProps) {
+  if (!EDITORIAL_PRODUCT_PROMOS_ENABLED) return null
   return (
     <aside
       className={`rounded-lg border border-zinc-800 bg-[#181818] p-4 sm:p-5 ${className}`}

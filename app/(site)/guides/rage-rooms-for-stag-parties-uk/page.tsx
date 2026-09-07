@@ -2,7 +2,8 @@ import { Metadata } from "next"
 import Link from "next/link"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import GuideMeta from "@/components/GuideMeta"
-import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
+import DigitalBundleOffer from "@/components/DigitalBundleOffer"
+import DigitalBundleStickyBar from "@/components/DigitalBundleStickyBar"
 import NearbyActivitiesAffiliate from "@/components/NearbyActivitiesAffiliate"
 import FAQ from "@/components/FAQ"
 import InArticleAd from "@/components/InArticleAd"
@@ -230,6 +231,9 @@ export default async function RageRoomsForStagPartiesPage() {
             <ListingsGrid listings={matchingVenues.slice(0, 3)} />
           </section>
 
+          <div className="mb-10">
+            <DigitalBundleOffer />
+          </div>
 
           <section aria-labelledby="cities-heading" className="mb-10">
             <h2
@@ -538,10 +542,6 @@ export default async function RageRoomsForStagPartiesPage() {
             </ul>
           </section>
 
-          <div className="my-8">
-            <DigitalDownloadCTA variant="party" />
-          </div>
-
           <FAQ
             items={FAQS.map((f) => ({ question: f.q, answer: f.a }))}
             title="Stag-party rage room FAQs"
@@ -555,6 +555,7 @@ export default async function RageRoomsForStagPartiesPage() {
               Browse UK Rage Rooms
             </Link>
           </div>
+          <DigitalBundleStickyBar />
         </article>
       </div>
     </div>

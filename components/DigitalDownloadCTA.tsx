@@ -6,6 +6,7 @@ import {
   getDigitalProductAnalytics,
 } from "@/lib/digital-products"
 import { DIGITAL_SALE, isDigitalSaleActive } from "@/lib/digital-promo"
+import { EDITORIAL_PRODUCT_PROMOS_ENABLED } from "@/lib/monetization"
 
 type DigitalDownloadCTAVariant = "party" | "corporate" | "gift" | "firstVisit"
 
@@ -48,6 +49,7 @@ export default function DigitalDownloadCTA({
   if (variant === "firstVisit") {
     return <FirstVisitChecklistCTA compact={compact} source="guide-cta" />
   }
+  if (!EDITORIAL_PRODUCT_PROMOS_ENABLED) return null
 
   const copy = ctaCopy[variant]
   const product = getDigitalProduct(copy.productId)

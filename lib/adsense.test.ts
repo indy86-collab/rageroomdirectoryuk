@@ -1,5 +1,22 @@
 import { describe, expect, it } from "vitest"
-import { isAdEligiblePath, splitMarkdownForInArticleAd } from "./adsense"
+import {
+  isAdEligiblePath,
+  isValidAdsenseAdSlot,
+  splitMarkdownForInArticleAd,
+} from "./adsense"
+
+describe("isValidAdsenseAdSlot", () => {
+  it("accepts numeric AdSense unit IDs", () => {
+    expect(isValidAdsenseAdSlot("1234567890")).toBe(true)
+  })
+
+  it("rejects missing, malformed and publisher IDs", () => {
+    expect(isValidAdsenseAdSlot("")).toBe(false)
+    expect(isValidAdsenseAdSlot(undefined)).toBe(false)
+    expect(isValidAdsenseAdSlot("ca-pub-9868896840591922")).toBe(false)
+    expect(isValidAdsenseAdSlot("1234abc890")).toBe(false)
+  })
+})
 
 describe("isAdEligiblePath", () => {
   it("allows editorial guide and blog article URLs", () => {

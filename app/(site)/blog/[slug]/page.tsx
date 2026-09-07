@@ -1,8 +1,8 @@
-import { notFound } from "next/navigation"
+import { notFound, permanentRedirect } from "next/navigation"
 import { Metadata } from "next"
 import Link from "next/link"
 import { getBlogPost, getAllBlogPosts } from "@/lib/blog-posts"
-import { getBlogGuideCanonical, getBlogGuideLink } from "@/lib/blog-guide-canonicals"
+import { getBlogGuideCanonical } from "@/lib/blog-guide-canonicals"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import InArticleAd from "@/components/InArticleAd"
 import Script from "next/script"
@@ -58,6 +58,9 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
   if (!post) {
     notFound()
   }
+
+  const guideCanonical = getBlogGuideCanonical(params.slug)
+  if (guideCanonical) permanentRedirect(guideCanonical)
 
   const baseUrl = getSiteUrl()
   const postUrl = absoluteUrl(`/blog/${post.slug}`)
@@ -134,8 +137,6 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
   const { before, after } = splitMarkdownForInArticleAd(post.content)
   const formattedBefore = formatContent(before)
   const formattedAfter = after ? formatContent(after) : ""
-  const guideLink = getBlogGuideLink(params.slug)
-
   return (
     <div className="py-8">
       <div className="max-w-4xl mx-auto px-4">
@@ -148,20 +149,6 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
         <Breadcrumbs items={breadcrumbItems} />
 
         <article className="mt-4">
-          {guideLink && (
-            <div className="mb-6 p-4 bg-[#181818] border border-orange-500/40 rounded-lg">
-              <p className="text-zinc-300 text-sm">
-                This topic is covered in our canonical guide.{" "}
-                <Link
-                  href={guideLink.href}
-                  className="text-orange-500 hover:text-orange-400 font-semibold underline"
-                >
-                  {guideLink.label} →
-                </Link>
-              </p>
-            </div>
-          )}
-
           {/* Header */}
           <header className="mb-8">
             <div className="flex items-center gap-3 mb-4">
@@ -244,4 +231,3 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     </div>
   )
 }
-

@@ -2,7 +2,8 @@ import { Metadata } from "next"
 import Link from "next/link"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import GuideMeta from "@/components/GuideMeta"
-import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
+import DigitalBundleOffer from "@/components/DigitalBundleOffer"
+import DigitalBundleStickyBar from "@/components/DigitalBundleStickyBar"
 import NearbyActivitiesAffiliate from "@/components/NearbyActivitiesAffiliate"
 import FAQ from "@/components/FAQ"
 import InArticleAd from "@/components/InArticleAd"
@@ -217,6 +218,10 @@ export default async function RageRoomsForBirthdaysPage() {
           </section>
 
           <div className="mb-10">
+            <DigitalBundleOffer />
+          </div>
+
+          <div className="mb-10">
             <NearbyActivitiesAffiliate placement="guide" variant="chips" />
           </div>
 
@@ -428,10 +433,6 @@ export default async function RageRoomsForBirthdaysPage() {
             </ul>
           </section>
 
-          <div className="my-8">
-            <DigitalDownloadCTA variant="party" />
-          </div>
-
           <FAQ
             items={FAQS.map((f) => ({ question: f.q, answer: f.a }))}
             title="Birthday rage room FAQs"
@@ -445,6 +446,7 @@ export default async function RageRoomsForBirthdaysPage() {
               Browse UK Rage Rooms
             </Link>
           </div>
+          <DigitalBundleStickyBar />
         </article>
       </div>
     </div>

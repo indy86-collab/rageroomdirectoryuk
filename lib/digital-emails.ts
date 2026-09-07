@@ -21,7 +21,7 @@ function getResendClient() {
 function getFromAddress() {
   return (
     process.env.EMAIL_FROM ||
-    "RageRoom Directory <onboarding@resend.dev>"
+    "RageRoom Directory <orders@rageroomdirectory.co.uk>"
   )
 }
 

@@ -2,7 +2,8 @@ import { Metadata } from "next"
 import Link from "next/link"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import GuideMeta from "@/components/GuideMeta"
-import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
+import DigitalBundleOffer from "@/components/DigitalBundleOffer"
+import DigitalBundleStickyBar from "@/components/DigitalBundleStickyBar"
 import RageResetCTA from "@/components/RageResetCTA"
 import NearbyActivitiesAffiliate from "@/components/NearbyActivitiesAffiliate"
 import FAQ from "@/components/FAQ"
@@ -240,6 +241,9 @@ export default async function RageRoomsForHenPartiesPage() {
             <ListingsGrid listings={matchingVenues.slice(0, 3)} />
           </section>
 
+          <div className="mb-10">
+            <DigitalBundleOffer />
+          </div>
 
           <section aria-labelledby="cities-heading" className="mb-10">
             <h2
@@ -479,10 +483,7 @@ export default async function RageRoomsForHenPartiesPage() {
           </section>
 
           <div className="my-8">
-            <DigitalDownloadCTA variant="party" />
-            <div className="mt-4">
-              <RageResetCTA surface="guide" compact />
-            </div>
+            <RageResetCTA surface="guide" compact />
           </div>
 
           <FAQ
@@ -498,6 +499,7 @@ export default async function RageRoomsForHenPartiesPage() {
               Browse UK Rage Rooms
             </Link>
           </div>
+          <DigitalBundleStickyBar />
         </article>
       </div>
     </div>

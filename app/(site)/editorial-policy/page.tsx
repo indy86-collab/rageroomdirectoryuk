@@ -44,7 +44,7 @@ export const revalidate = 86400
 
 // Last major editorial review of the policy itself. Bump this whenever
 // the policy text changes so Google sees a genuine dateModified signal.
-const LAST_REVIEWED = "2026-04-24"
+const LAST_REVIEWED = "2026-09-07"
 
 export default function EditorialPolicyPage() {
   const breadcrumbItems = [
@@ -67,22 +67,18 @@ export default function EditorialPolicyPage() {
     about: { "@id": `${baseUrl}#organization` },
     dateModified: LAST_REVIEWED,
     lastReviewed: LAST_REVIEWED,
-    reviewedBy: { "@id": `${baseUrl}/editorial-policy#editorial-team` },
+    reviewedBy: { "@id": `${baseUrl}/editorial-policy#editor` },
   }
 
-  // Named Person schema representing our editorial team. Having a named
-  // `Person` (with role and affiliation) that all our articles cite via
-  // `author` is a core Google E-E-A-T signal and a strong hint to LLMs
-  // that there is a real editorial entity behind the content.
   const editorPersonSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
-    "@id": `${baseUrl}/editorial-policy#editorial-team`,
-    name: "The RageRoom Directory Editorial Team",
-    url: `${baseUrl}/editorial-policy`,
-    jobTitle: "Editorial Team",
+    "@id": `${baseUrl}/editorial-policy#editor`,
+    name: "Indy Singh",
+    url: `${baseUrl}/about`,
+    jobTitle: "Founder and editor",
     description:
-      "The in-house editorial team at RageRoom Directory is responsible for researching, verifying and maintaining every rage room and smash room listing published on the site.",
+      "Indy Singh founded RageRoom Directory and is responsible for researching, verifying and maintaining its UK venue listings and guides.",
     knowsAbout: [
       "UK rage rooms",
       "smash rooms",
@@ -91,7 +87,7 @@ export default function EditorialPolicyPage() {
       "stress relief activities",
       "experiential leisure venues",
       "team-building activities",
-      "health and safety for immersive venues",
+      "web research and venue data verification",
     ],
     worksFor: { "@id": `${baseUrl}#organization` },
     knowsLanguage: ["en-GB"],
@@ -134,20 +130,20 @@ export default function EditorialPolicyPage() {
           </p>
 
           <div
-            id="editorial-team"
+            id="editor"
             className="bg-[#181818] rounded-lg border border-zinc-800 p-5 sm:p-6"
           >
             <h2 className="text-xl sm:text-2xl font-bold text-white mb-3">
-              About our editorial team
+              About the editor
             </h2>
             <p className="mb-3">
-              All content on RageRoom Directory is produced and reviewed by
-              our in-house editorial team — journalists and researchers
-              specialising in UK experiential leisure, small independent
-              venues, and consumer-facing venue directories.
+              RageRoom Directory is researched and maintained by its founder
+              and editor, Indy Singh. Indy is an engineer and product builder
+              who created the directory to make fragmented UK venue information
+              easier to compare.
             </p>
             <p className="mb-3">
-              Our editorial team is responsible for:
+              The editor is responsible for:
             </p>
             <ul className="list-disc list-inside space-y-2 ml-2">
               <li>Researching and vetting every new rage room added to the directory</li>
@@ -157,10 +153,9 @@ export default function EditorialPolicyPage() {
               <li>Curating which venues are featured on the homepage and city pages</li>
             </ul>
             <p className="mt-3 text-sm text-zinc-400">
-              We use the byline &ldquo;The RageRoom Directory Editorial Team&rdquo; to
-              signal that an article has been reviewed collectively, not
-              attributed to any single contributor. Named contributor bylines
-              are used when we publish long-form journalism.
+              We do not claim first-hand visits unless a page explicitly says
+              so. Directory facts are checked against venue websites, booking
+              pages and other named sources.
             </p>
           </div>
 
@@ -340,10 +335,8 @@ export default function EditorialPolicyPage() {
             </h2>
             <p className="mb-3">
               Descriptive content on listing pages, city pages, and guide pages is written and
-              maintained by the RageRoom Directory editorial team. Where listings include
-              automatically generated summaries, these are produced using rule-based logic
-              that draws from the venue's actual data (location, price, description, features) —
-              not generic templates.
+              maintained by Indy Singh. Listing descriptions are based on source material from
+              the venue and are not presented as first-hand reviews.
             </p>
             <p>
               Our{" "}
@@ -374,7 +367,7 @@ export default function EditorialPolicyPage() {
 
           <p className="text-sm text-zinc-500 mt-8">
             Last reviewed:{" "}
-            <time dateTime={LAST_REVIEWED}>24 April 2026</time>
+            <time dateTime={LAST_REVIEWED}>7 September 2026</time>
           </p>
         </div>
       </div>

@@ -4,15 +4,13 @@ import Link from "next/link"
 interface GuideMetaProps {
   /** Shown as "Last updated: <date>" — any human date string works. */
   updated: string
-  /** Optional byline; defaults to the editorial team. */
+  /** Optional byline; defaults to the site's named editor. */
   author?: string
   /** Short takeaway bullets rendered in a highlighted callout box. */
   keyTakeaways: string[]
   /**
    * Optional reading time in minutes. When omitted we compute it from
-   * `wordCount` at ~225 WPM. UX-wise, a "6 min read" label measurably
-   * improves dwell time and bounce; for SEO it's also a subtle
-   * freshness/quality signal.
+   * `wordCount` at ~225 WPM.
    */
   readingTimeMinutes?: number
   /** Rough word count, used to compute reading time if needed. */
@@ -27,13 +25,12 @@ function computeReadingTime(words: number): number {
 /**
  * Editorial metadata strip + "Key takeaways" callout for guide pages.
  *
- * - Last-updated date + byline give LLMs / Google E-E-A-T signals.
- * - Key takeaways are what AI answer engines (ChatGPT Search, Perplexity,
- *   Gemini) tend to quote verbatim, so we keep them crisp and scannable.
+ * Last-updated date, a named byline and concise takeaways help readers
+ * understand who is responsible for the guide and when it was reviewed.
  */
 export default function GuideMeta({
   updated,
-  author = "RageRoom Directory Editorial Team",
+  author = "Indy Singh",
   keyTakeaways,
   readingTimeMinutes,
   wordCount,
@@ -50,7 +47,7 @@ export default function GuideMeta({
           <span>
             By{" "}
             <Link
-              href="/editorial-policy"
+              href="/about"
               className="underline-offset-2 hover:underline hover:text-orange-500 transition-colors"
             >
               {author}

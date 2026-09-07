@@ -4,12 +4,11 @@ import type { Listing } from "@/types/listing"
 import Image from "next/image"
 import { 
   Shield, Package, Users, 
-  CheckCircle, Star, MapPin, Zap
+  Zap
 } from "lucide-react"
 import { getListingBySlug, getListingById, getSimilarListings, getAllListingsForAdmin } from "@/lib/listings"
 import { cityToSlug } from "@/lib/location"
 import { getGooglePlaceReviewData } from "@/lib/google-places"
-import { generateListingContent, generateListingFAQs } from "@/lib/ai-content"
 import { calculateDistance } from "@/lib/distance"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import Link from "next/link"
@@ -33,8 +32,9 @@ import { absoluteUrl, getSiteUrl, listingUrl as buildListingUrl } from "@/lib/si
 import {
   buildListingMediaSchema,
   getAuthorisedMedia,
+  getAuthorisedListingImage,
+  isIndexableListingPage,
 } from "@/lib/listing-quality"
-import { CITY_PRICE_PAGE_CITIES } from "@/lib/priority-seo-cities"
 import {
   ACTIVITY_DEFINITIONS,
   formatListingPrice,
@@ -82,7 +82,7 @@ function buildListingMetadata(listing: Listing | null): Metadata {
   const experienceLabel = getListingExperienceLabel(listing)
   const activitySummary = getListingExperienceSummary(listing)
   const locationLabel = listing.locationType === "mobile-service" ? "UK-wide" : listing.city
-  const ogImage = listing.image || buildOgImageUrl({
+  const ogImage = getAuthorisedListingImage(listing) || buildOgImageUrl({
     title: listing.name,
     subtitle: `${experienceLabel} in ${locationLabel}`,
     badge: "Verified venue",
@@ -94,6 +94,9 @@ function buildListingMetadata(listing: Listing | null): Metadata {
     title: `${listing.name} | ${experienceLabel} in ${locationLabel}`,
     description,
     alternates: { canonical: canonicalUrl },
+    ...(!isIndexableListingPage(listing)
+      ? { robots: { index: false, follow: true } }
+      : {}),
     openGraph: {
       title: `${listing.name} — ${experienceLabel} in ${locationLabel}`,
       description,
@@ -225,10 +228,6 @@ export default async function ListingPage({ params }: ListingPageProps) {
         MIN_OCCASION_PAGE_LISTINGS,
     }))
 
-  // Generate AI-optimized content
-  const aiContent = await generateListingContent(listing, similarListings)
-  const listingFAQs = generateListingFAQs(listing, similarListings)
-
   const formattedStartingPrice = formatListingPrice(listing)
 
   const baseUrl = getSiteUrl()
@@ -236,6 +235,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
   const venueSlug = listing.slug || listing.id
   const primaryBookingUrl = listing.bookingUrl || null
   const authorisedMedia = getAuthorisedMedia(listing)
+  const authorisedImage = getAuthorisedListingImage(listing)
   const mediaSchema = buildListingMediaSchema(listing, listingUrl)
   const showCorporateCTA =
     listing.corporatePackages === true ||
@@ -332,9 +332,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
       ? authorisedMedia
           .filter((media) => media.type === "image")
           .map((media) => absoluteUrl(media.url))
-      : listing.image
-        ? [absoluteUrl(listing.image)]
-        : [absoluteUrl("/og-image.png")],
+      : [absoluteUrl("/og-image.png")],
     ...(getListingSchemaAddress(listing)
       ? { address: getListingSchemaAddress(listing) }
       : {}),
@@ -424,20 +422,6 @@ export default async function ListingPage({ params }: ListingPageProps) {
   ]
   const breadcrumbSchema = buildBreadcrumbSchema(listingBreadcrumbs)
 
-  // FAQ Schema
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: listingFAQs.map(faq => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
-  }
-
   return (
     <div className="py-6 sm:py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -449,11 +433,6 @@ export default async function ListingPage({ params }: ListingPageProps) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-
         <Breadcrumbs
           items={[
             { label: "Home", href: "/" },
@@ -470,10 +449,10 @@ export default async function ListingPage({ params }: ListingPageProps) {
           <div className="grid grid-cols-1 lg:grid-cols-2">
             {/* Image */}
             <div className="bg-zinc-900">
-              {listing.image ? (
+              {authorisedImage ? (
                 <div className="aspect-video w-full relative">
                   <Image
-                    src={listing.image}
+                    src={authorisedImage}
                     alt={`${listing.name} ${experienceLabel.toLowerCase()} experience${isMobileService ? "" : ` in ${listing.city}`}`}
                     fill
                     className="object-cover"
@@ -889,7 +868,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
                 lat={location.lat}
                 lng={location.lng}
                 title={`${listing.name} — ${listing.city}`}
-                previewImage={listing.image || undefined}
+                previewImage={authorisedImage || undefined}
               />
             </div>
             <a
@@ -952,14 +931,14 @@ export default async function ListingPage({ params }: ListingPageProps) {
             >
               Find venues near a postcode
             </Link>
-            {hasRageRoom && (CITY_PRICE_PAGE_CITIES as readonly string[]).includes(listing.city) && (
+            {hasRageRoom && (
               <>
                 <span className="text-zinc-500 hidden sm:inline">•</span>
                 <Link
-                  href={`/rage-room-prices/${cityToSlug(listing.city)}`}
+                  href="/rage-room-prices-uk"
                   className="text-orange-500 hover:text-orange-600 underline text-sm sm:text-base py-2"
                 >
-                  Compare {listing.city} prices
+                  Compare UK rage room prices
                 </Link>
               </>
             )}
@@ -1037,65 +1016,10 @@ export default async function ListingPage({ params }: ListingPageProps) {
           </div>
         </div>}
 
-        {/* About Section with AI Summary */}
-        <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
-          <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
-            About
-          </h2>
-          <p className="text-white mb-4">
-            {aiContent.summary}
-          </p>
-          {listing.description && (
-            <p className="text-zinc-300 whitespace-pre-line text-sm">
-              {listing.description}
-            </p>
-          )}
-        </div>
-
-        {/* Highlights Section */}
-        <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
-          <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
-            Highlights
-          </h2>
-          <ul className="space-y-2">
-            {aiContent.highlights.map((highlight, index) => (
-              <li key={index} className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" />
-                <span className="text-zinc-300">{highlight}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Verified venue differentiators */}
-        <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
-          <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
-            Why {listing.name} is Unique
-          </h2>
-          <ul className="space-y-3">
-            {aiContent.uniquePoints.map((point, index) => (
-              <li key={index} className="flex items-start gap-3">
-                <Star className="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0 fill-orange-500" />
-                <span className="text-zinc-300">{point}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Nearby Recommendations */}
-        {aiContent.nearbyRecommendations.length > 0 && (
-          <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-6 mb-8">
-            <h2 className="text-2xl font-bold text-white mb-4">
-              Nearby Recommendations
-            </h2>
-            <ul className="space-y-2">
-              {aiContent.nearbyRecommendations.map((rec, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" />
-                  <span className="text-zinc-300">{rec}</span>
-                </li>
-              ))}
-            </ul>
+        {listing.description && (
+          <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">About</h2>
+            <p className="text-zinc-300 whitespace-pre-line">{listing.description}</p>
           </div>
         )}
 
@@ -1167,28 +1091,6 @@ export default async function ListingPage({ params }: ListingPageProps) {
           listingName={listing.name}
           listingCity={listing.city}
         />
-
-        {/* Venue FAQ */}
-        {listingFAQs.length > 0 && (
-          <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
-              Frequently Asked Questions About {listing.name}
-            </h2>
-            <div className="space-y-4">
-              {listingFAQs.map((faq, index) => (
-                <details key={index} className="group border-b border-zinc-700 last:border-0 pb-4 last:pb-0">
-                  <summary className="flex items-center justify-between cursor-pointer text-white font-medium py-1 hover:text-orange-500 transition-colors">
-                    {faq.question}
-                    <svg className="w-5 h-5 text-zinc-400 group-open:rotate-180 transition-transform flex-shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </summary>
-                  <p className="text-zinc-300 text-sm mt-2 leading-relaxed">{faq.answer}</p>
-                </details>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* Reviews Section */}
         <section aria-labelledby="reviews-heading" className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6">

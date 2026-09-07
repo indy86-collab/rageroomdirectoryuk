@@ -3,6 +3,7 @@ import Image from "next/image"
 import { MapPin, CheckCircle2 } from "lucide-react"
 import type { Listing } from "@/types/listing"
 import { formatListingPrice } from "@/lib/discovery"
+import { getAuthorisedListingImage } from "@/lib/listing-quality"
 
 interface FeaturedRoomsProps {
   listings: Listing[]
@@ -40,12 +41,13 @@ export default function FeaturedRooms({ listings, variant = "grid" }: FeaturedRo
 function FeaturedCard({ listing }: { listing: Listing }) {
   const href = `/listing/${listing.slug || listing.id}`
   const startingPrice = formatListingPrice(listing)
+  const image = getAuthorisedListingImage(listing)
   return (
     <div className="card-base card-hover overflow-hidden flex flex-col group">
       <Link href={href} className="relative block w-full h-40 sm:h-44 overflow-hidden bg-dark-800">
-        {listing.image ? (
+        {image ? (
           <Image
-            src={listing.image}
+            src={image}
             alt={`${listing.name} rage room in ${listing.city}`}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
@@ -96,12 +98,13 @@ function FeaturedCard({ listing }: { listing: Listing }) {
 function FeaturedCompactCard({ listing }: { listing: Listing }) {
   const href = `/listing/${listing.slug || listing.id}`
   const startingPrice = formatListingPrice(listing)
+  const image = getAuthorisedListingImage(listing)
   return (
     <div className="card-base card-hover overflow-hidden flex flex-col group">
       <Link href={href} className="relative block w-full h-24 sm:h-28 overflow-hidden bg-dark-800">
-        {listing.image ? (
+        {image ? (
           <Image
-            src={listing.image}
+            src={image}
             alt={`${listing.name} rage room in ${listing.city}`}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-[1.05]"

@@ -2,7 +2,14 @@ export const ADSENSE_CLIENT =
   process.env.NEXT_PUBLIC_ADSENSE_CLIENT || "ca-pub-9868896840591922"
 
 export const ADSENSE_INARTICLE_SLOT =
-  process.env.NEXT_PUBLIC_ADSENSE_INARTICLE_SLOT ?? ""
+  process.env.NEXT_PUBLIC_ADSENSE_INARTICLE_SLOT?.trim() || "5555492233"
+
+/** AdSense ad-unit IDs are numeric. Never emit an incomplete manual ad tag. */
+export function isValidAdsenseAdSlot(
+  slot: string | null | undefined
+): slot is string {
+  return typeof slot === "string" && /^\d{5,20}$/.test(slot.trim())
+}
 
 const EXCLUDED_EXACT = new Set([
   "/",

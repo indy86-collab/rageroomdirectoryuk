@@ -22,7 +22,8 @@ export async function sendListingSubmissionEmail(data: ListingSubmission) {
   const to =
     process.env.LISTING_SUBMISSIONS_TO?.trim() || "ukrageroom@gmail.com"
   const from =
-    process.env.EMAIL_FROM || "RageRoom Directory <onboarding@resend.dev>"
+    process.env.EMAIL_FROM ||
+    "RageRoom Directory <orders@rageroomdirectory.co.uk>"
   const subject = `[Listing ${data.requestType}] ${data.businessName} — ${data.city}`
   const rows = [
     row("Request", data.requestType),

@@ -14,6 +14,7 @@ import {
 } from "@/lib/discovery"
 import type { DirectoryDiscoveryContext } from "@/lib/analytics"
 import TrackedBookingLink from "./TrackedBookingLink"
+import { getAuthorisedListingImage } from "@/lib/listing-quality"
 
 export type ListingDiscoveryContext = DirectoryDiscoveryContext & {
   surface: "activity" | "occasion" | "directory"
@@ -57,6 +58,7 @@ export default function ListingCard({
   const startingPrice = formatListingPrice(listing)
   const experienceLabel = getListingExperienceLabel(listing)
   const listingSlug = listing.slug || listing.id
+  const image = getAuthorisedListingImage(listing)
   const ctaPlacement =
     discoveryContext.pageType === "activity"
       ? "activity_results"
@@ -73,9 +75,9 @@ export default function ListingCard({
     <article className="card-base card-hover group relative flex h-full flex-col overflow-hidden">
       <Link href={href} className="block" aria-label={`View ${listing.name}`}>
         <div className="relative aspect-video w-full overflow-hidden">
-          {listing.image ? (
+          {image ? (
             <Image
-              src={listing.image}
+              src={image}
               alt={`${listing.name} in ${listing.city}`}
               fill
               className="object-cover transition-transform duration-200 group-hover:scale-105"

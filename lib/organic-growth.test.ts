@@ -65,7 +65,7 @@ describe("listing enrichment SEO", () => {
     expect(JSON.stringify(schemas)).not.toContain("unapproved.jpg")
   })
 
-  it("puts authorised venue images and first-party covers in the image sitemap", () => {
+  it("puts only explicitly authorised venue images in the image sitemap", () => {
     const xml = buildImageSitemapXml([
       listing({
         media: [
@@ -92,7 +92,7 @@ describe("listing enrichment SEO", () => {
       }),
     ])
     expect(xml).toContain("authorised.jpg")
-    expect(xml).toContain("venue-cover.jpg")
+    expect(xml).not.toContain("venue-cover.jpg")
     expect(xml).not.toContain("private.jpg")
     expect(xml).not.toContain("private-cover.jpg")
     expect(xml).not.toContain("image:caption")
@@ -117,9 +117,10 @@ describe("nearby and index-quality rules", () => {
     expect(JSON.stringify(results)).not.toContain("hidden")
   })
 
-  it("indexes in-city inventory and curated nearby pages, but not generic nearby-only pages", () => {
-    expect(isIndexableLocationPage({ city: "Bath", inCity: [listing()], nearby: [] })).toBe(true)
-    expect(isIndexableLocationPage({ city: "Oxford", inCity: [], nearby: [listing()] })).toBe(true)
+  it("indexes comparison-worthy inventory, but not one-venue or generic nearby pages", () => {
+    expect(isIndexableLocationPage({ city: "Bath", inCity: [listing(), listing({ id: "2" })], nearby: [] })).toBe(true)
+    expect(isIndexableLocationPage({ city: "Oxford", inCity: [], nearby: [listing(), listing({ id: "2" }), listing({ id: "3" })] })).toBe(true)
+    expect(isIndexableLocationPage({ city: "Bath", inCity: [listing()], nearby: [] })).toBe(false)
     expect(isIndexableLocationPage({ city: "Uncurated Town", inCity: [], nearby: [listing()] })).toBe(false)
   })
 })

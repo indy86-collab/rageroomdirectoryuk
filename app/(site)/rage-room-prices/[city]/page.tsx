@@ -9,7 +9,6 @@ import {
 import { cityToSlug, slugToCity } from "@/lib/location"
 import { buildOgImageUrl } from "@/lib/seo-schema"
 import { absoluteUrl } from "@/lib/site-url"
-import { isIndexableLocationPage } from "@/lib/location-indexing"
 import { formatListingPrice } from "@/lib/discovery"
 
 type PageProps = {
@@ -34,13 +33,6 @@ export async function generateMetadata({
   }
 
   const cityName = slugToCity(params.city)
-  const { getListingsNearCity } = await import("@/lib/listings")
-  const { inCity, nearby } = await getListingsNearCity(cityName)
-  const isIndexable = isIndexableLocationPage({
-    city: cityName,
-    inCity,
-    nearby,
-  })
   const ogImage = buildOgImageUrl({
     title: `Rage Room Prices in ${cityName}`,
     subtitle: "Starting prices compared · Book verified venues",
@@ -51,7 +43,7 @@ export async function generateMetadata({
     title: `Rage Room Prices in ${cityName} | Starting Costs 2026`,
     description: `Compare rage room prices in ${cityName}. See starting prices for verified smash rooms near ${cityName}, what packages usually include, and book directly with venues.`,
     alternates: { canonical: `/rage-room-prices/${params.city}` },
-    ...(!isIndexable ? { robots: { index: false, follow: true } } : {}),
+    robots: { index: false, follow: true },
     openGraph: {
       title: `Rage Room Prices in ${cityName}`,
       description: `Starting prices and packages for rage rooms near ${cityName}.`,

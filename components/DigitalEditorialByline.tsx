@@ -15,7 +15,7 @@ export default function DigitalEditorialByline({
         align === "center" ? "text-center" : ""
       } ${className}`}
     >
-      Made by the RageRoom Directory editorial team ·{" "}
+      Made by Indy Singh, founder and editor ·{" "}
       <Link
         href="/about"
         className="font-semibold text-zinc-400 underline-offset-2 hover:text-zinc-200 hover:underline"

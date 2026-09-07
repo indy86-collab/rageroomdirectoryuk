@@ -29,9 +29,9 @@
 
 ### `EMAIL_FROM`
 - **Description**: From address for transactional digital-download emails
-- **Format**: `RageRoom Directory <orders@yourdomain.com>`
-- **Default**: `RageRoom Directory <onboarding@resend.dev>` (Resend test sender)
-- **Required**: Recommended in production with a verified domain
+- **Format**: `RageRoom Directory <orders@rageroomdirectory.co.uk>`
+- **Default**: `RageRoom Directory <orders@rageroomdirectory.co.uk>`
+- **Required**: Production must use the verified Resend domain (not `onboarding@resend.dev`)
 
 ### `LEAD_SIGNUPS_TO`
 - **Description**: Inbox that receives a copy of every free First Visit Prep Pack signup (email, optional name, source, marketing opt-in)
@@ -118,6 +118,15 @@ Also ensure these digital-product env vars are present in Production for fulfilm
 - `EMAIL_FROM` (recommended)
 - `DOWNLOAD_TOKEN_SECRET` (recommended; falls back to `STRIPE_SECRET_KEY` if unset)
 - `NEXT_PUBLIC_SITE_URL` (recommended; defaults to the canonical live domain)
+
+## Optional commercial modules
+
+Leave these unset or set to `false` while the site is under AdSense review:
+
+- `NEXT_PUBLIC_AFFILIATE_LINKS_ENABLED` — enables third-party activity affiliate blocks
+- `NEXT_PUBLIC_EDITORIAL_PRODUCT_PROMOS_ENABLED` — enables paid-download promotions inside editorial and directory pages
+
+The digital product pages remain accessible when these promotional modules are disabled.
 
 ## Data storage
 

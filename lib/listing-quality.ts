@@ -26,6 +26,34 @@ export function getAuthorisedMedia(listing: Listing): ListingMedia[] {
   )
 }
 
+export function getAuthorisedListingImage(listing: Listing): string | null {
+  return getAuthorisedMedia(listing).find((media) => media.type === "image")?.url ?? null
+}
+
+export function isIndexableListingPage(listing: Listing): boolean {
+  const descriptionWords = listing.description?.trim().split(/\s+/).filter(Boolean).length ?? 0
+  const usefulSignals = [
+    listing.price != null,
+    listing.ageMin != null,
+    hasItems(listing.sessionLengths),
+    Boolean(listing.bookingUrl),
+    Boolean(listing.phone),
+    Boolean(listing.googlePlaceId),
+    hasItems(listing.openingHours),
+    hasItems(listing.features),
+    hasItems(listing.occasions),
+  ].filter(Boolean).length
+
+  return Boolean(
+    listing.verified &&
+      listing.website &&
+      listing.sourceUrl &&
+      listing.lastVerified &&
+      descriptionWords >= 20 &&
+      usefulSignals >= 4
+  )
+}
+
 export function getListingCompleteness(listing: Listing) {
   const checks: Record<CompletenessField, boolean> = {
     bookingUrl: Boolean(listing.bookingUrl),

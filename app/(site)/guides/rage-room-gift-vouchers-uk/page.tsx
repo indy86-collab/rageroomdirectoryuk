@@ -4,6 +4,8 @@ import Breadcrumbs from "@/components/Breadcrumbs"
 import GuideMeta from "@/components/GuideMeta"
 import FAQ from "@/components/FAQ"
 import DigitalDownloadCTA from "@/components/DigitalDownloadCTA"
+import DigitalBundleOffer from "@/components/DigitalBundleOffer"
+import DigitalBundleStickyBar from "@/components/DigitalBundleStickyBar"
 import InArticleAd from "@/components/InArticleAd"
 import {
   buildArticleSchema,
@@ -284,6 +286,10 @@ export default function RageRoomGiftVouchersUKPage() {
             </ul>
           </section>
 
+          <div className="mb-10">
+            <DigitalBundleOffer />
+          </div>
+
           <section aria-labelledby="find-voucher-heading" className="mb-10">
             <h2 id="find-voucher-heading" className="text-2xl sm:text-3xl font-bold text-white mb-4">
               Where to buy a rage room voucher
@@ -351,10 +357,6 @@ export default function RageRoomGiftVouchersUKPage() {
 
           <FAQ items={FAQS.map((f) => ({ question: f.question, answer: f.answer }))} title="Gift voucher FAQs" />
 
-          <div className="mt-10">
-            <DigitalDownloadCTA variant="gift" />
-          </div>
-
           <div className="mt-10 text-center">
             <Link
               href="/listings"
@@ -363,6 +365,7 @@ export default function RageRoomGiftVouchersUKPage() {
               Find a Venue to Buy From
             </Link>
           </div>
+          <DigitalBundleStickyBar />
         </article>
       </div>
     </div>

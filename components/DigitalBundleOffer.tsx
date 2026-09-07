@@ -6,8 +6,10 @@ import {
   getDigitalProduct,
   getDigitalProductAnalytics,
 } from "@/lib/digital-products"
+import { EDITORIAL_PRODUCT_PROMOS_ENABLED } from "@/lib/monetization"
 
 export default function DigitalBundleOffer() {
+  if (!EDITORIAL_PRODUCT_PROMOS_ENABLED) return null
   const bundle = getDigitalProduct("party-gift-bundle")
   if (!bundle) return null
 

@@ -8,10 +8,11 @@ import {
 import { cityToSlug, regionToSlug } from "@/lib/location"
 import { getAllBlogPosts } from "@/lib/blog-posts"
 import { getBlogGuideCanonical } from "@/lib/blog-guide-canonicals"
-import { mergeCitiesWithPriority, CITY_PRICE_PAGE_CITIES } from "@/lib/priority-seo-cities"
+import { mergeCitiesWithPriority } from "@/lib/priority-seo-cities"
 import { getCityGuideSlugs } from "@/lib/city-guides"
 import { absoluteUrl, getSiteUrl, listingUrl } from "@/lib/site-url"
-import { isIndexableLocationPage } from "@/lib/location-indexing"
+import { isIndexableLocationPage, isIndexableRegionPage } from "@/lib/location-indexing"
+import { isIndexableListingPage } from "@/lib/listing-quality"
 import {
   ACTIVITY_DEFINITIONS,
   MIN_ACTIVITY_PAGE_LISTINGS,
@@ -322,17 +323,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   })
 
-  // Programmatic city pricing pages
-  for (const city of CITY_PRICE_PAGE_CITIES) {
-    const { inCity, nearby } = await getListingsNearCity(city)
-    if (!isIndexableLocationPage({ city, inCity, nearby })) continue
-    routes.push({
-      url: absoluteUrl(`/rage-room-prices/${cityToSlug(city)}`),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    })
-  }
-
   // City pages (listing cities + priority SEO cities)
   cityEntries.forEach(({ city, lastModified }) => {
     routes.push({
@@ -348,6 +338,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const regionListings = listings.filter(
       (listing) => listing.region.toLowerCase() === region.toLowerCase()
     )
+    if (!isIndexableRegionPage(regionListings)) return
     routes.push({
       url: absoluteUrl(`/region/${regionToSlug(region)}`),
       lastModified: latestListingDate(regionListings),
@@ -358,6 +349,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Listing pages (use slug if available, fallback to id)
   listings.forEach((listing) => {
+    if (!isIndexableListingPage(listing)) return
     const url = listingUrl(listing.slug || listing.id)
     routes.push({
       url,

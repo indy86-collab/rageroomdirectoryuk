@@ -31,6 +31,7 @@ import {
   type PlannerTiming,
   type PlannerVibe,
 } from "@/lib/getyourguide"
+import { THIRD_PARTY_AFFILIATE_LINKS_ENABLED } from "@/lib/monetization"
 
 type NearbyActivitiesAffiliateProps = {
   city?: string
@@ -91,6 +92,7 @@ export default function NearbyActivitiesAffiliate({
   }
 
   useEffect(() => {
+    if (!THIRD_PARTY_AFFILIATE_LINKS_ENABLED) return
     if (variant === "chips") return
 
     try {
@@ -108,6 +110,7 @@ export default function NearbyActivitiesAffiliate({
   }, [variant])
 
   useEffect(() => {
+    if (!THIRD_PARTY_AFFILIATE_LINKS_ENABLED) return
     const element = containerRef.current
     if (!element || hasTrackedView.current) return
 
@@ -141,6 +144,8 @@ export default function NearbyActivitiesAffiliate({
   })
   const themedCards = getThemedActivityCards(plan)
   const headingId = `nearby-activities-${placement}`
+
+  if (!THIRD_PARTY_AFFILIATE_LINKS_ENABLED) return null
 
   function startPlanner() {
     trackAffiliatePlannerStart(baseAnalytics)

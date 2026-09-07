@@ -7,6 +7,7 @@ import {
   ADSENSE_CLIENT,
   ADSENSE_INARTICLE_SLOT,
   isAdEligiblePath,
+  isValidAdsenseAdSlot,
 } from "@/lib/adsense"
 
 declare global {
@@ -19,17 +20,19 @@ declare global {
  * Single mid-article AdSense unit for long editorial pages.
  *
  * The AdSense script is loaded only when this unit mounts, so directory,
- * checkout and game pages never request ads. Overlay/vignette Auto ads are
- * disabled in the tag; turn Auto ads off in AdSense as well so Google does
- * not inject extra units around this one.
+ * checkout and game pages never request ads. If no valid manual unit ID is
+ * configured, only the base script loads (which can still serve account-side
+ * Auto ads) and no incomplete manual ad request is sent.
  */
 export default function InArticleAd() {
   const pathname = usePathname()
   const insRef = useRef<HTMLModElement>(null)
   const pushed = useRef(false)
+  const hasManualSlot = isValidAdsenseAdSlot(ADSENSE_INARTICLE_SLOT)
 
   useEffect(() => {
     if (pathname && !isAdEligiblePath(pathname)) return
+    if (!hasManualSlot) return
     const el = insRef.current
     if (!el || pushed.current) return
 
@@ -64,9 +67,21 @@ export default function InArticleAd() {
     )
     observer.observe(el)
     return () => observer.disconnect()
-  }, [pathname])
+  }, [hasManualSlot, pathname])
 
   if (pathname && !isAdEligiblePath(pathname)) return null
+
+  const loader = (
+    <Script
+      id="adsense-manual"
+      async
+      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+      crossOrigin="anonymous"
+      strategy="afterInteractive"
+    />
+  )
+
+  if (!hasManualSlot) return loader
 
   return (
     <aside
@@ -76,15 +91,7 @@ export default function InArticleAd() {
       <p className="mb-3 text-center text-[10px] font-semibold uppercase tracking-[0.22em] text-zinc-500">
         Advertisement
       </p>
-      <Script
-        id="adsense-manual"
-        async
-        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
-        crossOrigin="anonymous"
-        strategy="afterInteractive"
-        data-overlays="{overlay:false}"
-        data-vignette="{vignette:false}"
-      />
+      {loader}
       <ins
         ref={insRef}
         className="adsbygoogle"
@@ -92,9 +99,7 @@ export default function InArticleAd() {
         data-ad-client={ADSENSE_CLIENT}
         data-ad-layout="in-article"
         data-ad-format="fluid"
-        {...(ADSENSE_INARTICLE_SLOT
-          ? { "data-ad-slot": ADSENSE_INARTICLE_SLOT }
-          : {})}
+        data-ad-slot={ADSENSE_INARTICLE_SLOT}
       />
     </aside>
   )

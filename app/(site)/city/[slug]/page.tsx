@@ -23,6 +23,7 @@ import LocationHero from "@/components/LocationHero"
 import DirectoryInsightCallout from "@/components/DirectoryInsightCallout"
 import { getCityDirectoryInsight } from "@/lib/directory-insights"
 import { buildInsightsStats } from "@/lib/insights-stats"
+import { getAuthorisedListingImage } from "@/lib/listing-quality"
 
 interface CityPageProps {
   params: { slug: string }
@@ -148,7 +149,7 @@ export default async function CityPage({ params }: CityPageProps) {
           "@id": `${url}#localbusiness`,
           name: listing.name,
           url,
-          image: listing.image || absoluteUrl("/og-image.png"),
+          image: getAuthorisedListingImage(listing) || absoluteUrl("/og-image.png"),
           address: {
             "@type": "PostalAddress",
             ...(listing.streetAddress ? { streetAddress: listing.streetAddress } : {}),

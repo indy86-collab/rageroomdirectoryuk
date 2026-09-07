@@ -10,6 +10,7 @@ import { listingUrl } from "@/lib/site-url"
 import DirectoryInsightCallout from "@/components/DirectoryInsightCallout"
 import { getRegionDirectoryInsight } from "@/lib/directory-insights"
 import { buildInsightsStats } from "@/lib/insights-stats"
+import { isIndexableRegionPage } from "@/lib/location-indexing"
 
 interface RegionPageProps {
   params: { slug: string }
@@ -23,11 +24,13 @@ export async function generateMetadata({
   const listings = await getListingsByRegion(regionName)
   const count = listings.length
   const rageRoomCount = listings.filter((listing) => listing.activities.includes("rage-room")).length
+  const isIndexable = isIndexableRegionPage(listings)
   
   return {
     title: `Rage Rooms & Destructive Experiences in ${regionName} — ${count} ${count === 1 ? "Venue" : "Venues"}`,
     description: `Browse ${count} verified ${count === 1 ? "venue" : "venues"} in ${regionName}${rageRoomCount ? `, including ${rageRoomCount} ${rageRoomCount === 1 ? "rage room" : "rage rooms"}` : ""}. Compare activities, prices and booking options.`,
     alternates: { canonical: `/region/${params.slug}` },
+    ...(!isIndexable ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
       title: `Rage Rooms & Destructive Experiences in ${regionName}`,
       description: `Discover ${count} verified ${count === 1 ? "venue" : "venues"} in ${regionName}. Compare activities and prices.`,

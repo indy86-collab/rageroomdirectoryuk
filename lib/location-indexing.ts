@@ -14,8 +14,14 @@ export function isIndexableLocationPage({
   inCity: Listing[]
   nearby: Listing[]
 }) {
-  if (inCity.some((listing) => listing.verified)) return true
-  return (
-    nearby.some((listing) => listing.verified) && getCityContent(city) != null
-  )
+  const verifiedInCity = inCity.filter((listing) => listing.verified).length
+  const verifiedNearby = nearby.filter((listing) => listing.verified).length
+
+  // Index pages that support a real comparison, not one-venue doorway pages.
+  if (verifiedInCity >= 2) return true
+  return getCityContent(city) != null && verifiedInCity + verifiedNearby >= 3
+}
+
+export function isIndexableRegionPage(listings: Listing[]) {
+  return listings.filter((listing) => listing.verified).length >= 3
 }

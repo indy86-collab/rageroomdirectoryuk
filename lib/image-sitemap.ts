@@ -43,13 +43,6 @@ export function buildImageSitemapXml(listings: Listing[]) {
         if (url) urls.add(url)
       }
 
-      // First-party listing cover images hosted on the site are safe to
-      // advertise even before a full authorised media gallery exists.
-      if (listing.image) {
-        const coverUrl = sitemapImageUrl(listing.image)
-        if (coverUrl) urls.add(coverUrl)
-      }
-
       if (urls.size === 0) return ""
 
       const imageEntries = [...urls]
