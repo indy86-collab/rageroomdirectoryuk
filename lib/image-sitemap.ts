@@ -32,7 +32,17 @@ function sitemapImageUrl(value: string) {
 }
 
 export function buildImageSitemapXml(listings: Listing[]) {
-  const entries = listings
+  const homepageImage = sitemapImageUrl("/og-image.png")
+  const homepageEntry = homepageImage
+    ? `  <url>
+    <loc>${xmlEscape(absoluteUrl("/"))}</loc>
+    <image:image>
+      <image:loc>${xmlEscape(homepageImage)}</image:loc>
+    </image:image>
+  </url>`
+    : ""
+
+  const listingEntries = listings
     .map((listing) => {
       if (!listing.verified) return ""
 
@@ -60,6 +70,8 @@ ${imageEntries}
     })
     .filter(Boolean)
     .join("\n")
+
+  const entries = [homepageEntry, listingEntries].filter(Boolean).join("\n")
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">

@@ -91,6 +91,7 @@ describe("listing enrichment SEO", () => {
         media: [],
       }),
     ])
+    expect(xml).toContain("og-image.png")
     expect(xml).toContain("authorised.jpg")
     expect(xml).not.toContain("venue-cover.jpg")
     expect(xml).not.toContain("private.jpg")
