@@ -23,19 +23,6 @@ export default function DigitalPriceDisplay({
       ? "text-lg font-semibold text-zinc-500 line-through"
       : "text-base font-semibold text-zinc-500 line-through"
 
-  if (product.isFree) {
-    return (
-      <div className={className}>
-        <div className="flex flex-wrap items-baseline gap-2">
-          <span className={`${priceClass} text-rage-500`}>{product.priceLabel}</span>
-        </div>
-        <p className="mt-1 text-xs font-semibold text-zinc-400">
-          Free 12-page PDF · email unlock · no payment
-        </p>
-      </div>
-    )
-  }
-
   const saleOn =
     isDigitalSaleActive() &&
     Boolean(product.compareAtLabel) &&

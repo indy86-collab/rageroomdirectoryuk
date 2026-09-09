@@ -75,12 +75,12 @@ export default async function Footer() {
 
   return (
     <footer className="mt-16 w-full border-t border-zinc-800/80 bg-[#0a0a0a] pb-[env(safe-area-inset-bottom)]">
-      <div className="w-full px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 sm:gap-10">
+      <div className="site-container py-10 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 sm:gap-10">
           <div className="lg:col-span-2">
             <Logo />
             <p className="mt-4 text-sm text-zinc-400 max-w-sm leading-relaxed">
-              The UK&rsquo;s leading directory for rage rooms and smash experiences. Compare venues, view prices and book with confidence.
+              Find rage rooms and smash experiences across the UK. Compare venues, view prices and book with confidence.
             </p>
             {topRegions.length > 0 && (
               <div className="mt-5">
@@ -107,8 +107,8 @@ export default async function Footer() {
               <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-white mb-3">
                 {col.heading}
               </h3>
-              <ul className="space-y-2">
-                {col.links.map((link) => (
+              <ul className="space-y-1">
+                {col.links.slice(0, 4).map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
@@ -119,6 +119,7 @@ export default async function Footer() {
                   </li>
                 ))}
               </ul>
+              {col.links.length > 4 && <details className="mt-1 text-sm text-zinc-300"><summary className="flex min-h-11 cursor-pointer items-center text-rage-300">{col.heading === "Explore" ? "More to explore" : col.heading === "Company" ? "More about us" : "More guides"}</summary><ul>{col.links.slice(4).map(link => <li key={link.href}><Link href={link.href} className="inline-flex min-h-11 items-center hover:text-rage-300">{link.label}</Link></li>)}</ul></details>}
             </div>
           ))}
         </div>

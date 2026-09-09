@@ -1,113 +1,25 @@
 import { Metadata } from "next"
-import ListingsGrid from "@/components/ListingsGrid"
+import Link from "next/link"
+import ListingsPageClient from "@/components/ListingsPageClient"
 import HomeSearchBox from "@/components/HomeSearchBox"
-import DigitalGuidesChooser, {
-  type DigitalGuideIntent,
-} from "@/components/DigitalGuidesChooser"
+import { orderDiscoveryListings } from "@/lib/discovery-order"
 
-interface SearchPageProps {
-  searchParams: { query?: string }
+interface SearchPageProps { searchParams: { query?: string } }
+export const dynamic = "force-dynamic"
+export async function generateMetadata({ searchParams }: SearchPageProps): Promise<Metadata> {
+  return { title: searchParams.query ? `Search: ${searchParams.query}` : "Search Rage Rooms", description: "Find UK rage rooms by town, postcode or venue name. Compare prices and booking options.", alternates: { canonical: "/search" }, robots: { index: false, follow: true } }
 }
-
-// Mark this route as dynamic
-export const dynamic = 'force-dynamic'
-
-export async function generateMetadata({
-  searchParams,
-}: SearchPageProps): Promise<Metadata> {
-  const query = searchParams.query
-
-  return {
-    title: query ? `Search: ${query}` : "Search Rage Rooms",
-    description: query
-      ? `Search results for "${query}" - Find rage rooms and smash rooms matching your search.`
-      : "Search for rage rooms and smash rooms across the UK. Find venues by city, postcode, or name.",
-    alternates: { canonical: "/search" },
-    robots: { index: false, follow: true },
-  }
-}
-
 export default async function SearchPage({ searchParams }: SearchPageProps) {
-  const query = searchParams.query
-  // Lazy load to prevent build-time initialization
+  const query = searchParams.query?.trim() || ""
   const { searchListings } = await import("@/lib/listings")
-  const listings = await searchListings(query)
-  const normalizedQuery = (query ?? "").toLowerCase()
-  const showCorporateCTA = [
-    "corporate",
-    "team",
-    "team building",
-    "work",
-    "office",
-    "staff",
-    "company",
-    "offsite",
-    "group booking",
-    "group",
-  ].some((term) => normalizedQuery.includes(term))
-  const showGiftCTA = [
-    "gift",
-    "voucher",
-    "birthday",
-    "date night",
-    "breakup",
-    "present",
-    "christmas",
-    "holiday",
-    "experience gift",
-    "gift idea",
-    "best friend",
-  ].some((term) => normalizedQuery.includes(term))
-  const showDownloadCTA = listings.length > 0
-  const chooserHighlight: DigitalGuideIntent = showGiftCTA
-    ? "gift"
-    : showCorporateCTA
-      ? "corporate"
-      : "firstVisit"
-  const firstResults = showDownloadCTA ? listings.slice(0, 3) : listings
-  const remainingResults = showDownloadCTA ? listings.slice(3) : []
-
-  return (
-    <div className="py-6 sm:py-8">
-      <div className="max-w-6xl mx-auto px-4">
-        <h1 className="mb-4 break-words text-3xl font-bold text-white sm:text-4xl">
-          {query ? `Search results for "${query}"` : "Search Rage Rooms"}
-        </h1>
-
-        {!query && (
-          <p className="text-base sm:text-lg text-zinc-300 mb-6">
-            Search our UK directory by venue name, city, or postcode to find rage rooms near you.
-            You can also browse the full directory from our{" "}
-            <a href="/listings" className="text-orange-500 hover:text-orange-600 underline">all listings</a>{" "}
-            page or explore by{" "}
-            <a href="/near-me" className="text-orange-500 hover:text-orange-600 underline">location</a>.
-          </p>
-        )}
-
-        {query && (
-          <p className="text-sm text-zinc-400 mb-4">
-            {listings.length} {listings.length === 1 ? "result" : "results"} found for &ldquo;{query}&rdquo;
-          </p>
-        )}
-
-        <div className="mb-8">
-          <HomeSearchBox />
-        </div>
-
-        <section aria-label={query ? `Search results for ${query}` : "All rage rooms"}>
-          <ListingsGrid listings={firstResults} />
-          {showDownloadCTA && listings.length > 0 && (
-            <div className="my-8">
-              <DigitalGuidesChooser highlight={chooserHighlight} />
-            </div>
-          )}
-          {remainingResults.length > 0 && (
-            <div className="mt-6">
-              <ListingsGrid listings={remainingResults} />
-            </div>
-          )}
-        </section>
-      </div>
-    </div>
-  )
+  const listings = orderDiscoveryListings(await searchListings(query), query)
+  return <div className="site-container py-8 sm:py-10">
+    <h1 className="mb-3 break-words text-3xl font-bold sm:text-4xl">{query ? `Search results for "${query}"` : "Find your rage room"}</h1>
+    <p className="mb-5 max-w-2xl text-zinc-300">Compare rage rooms first, then explore related activities. Narrow your choices by price, age and group size.</p>
+    <div className="mb-8"><HomeSearchBox key={query} initialQuery={query} /></div>
+    <section aria-label={query ? `Search results for ${query}` : "All rage rooms"}>
+      <ListingsPageClient key={query} initialListings={listings} />
+    </section>
+    <p className="mt-8 text-sm text-zinc-400">Looking a little further afield? <Link href="/near-me" className="text-rage-300 underline">Find venues near a postcode</Link>.</p>
+  </div>
 }

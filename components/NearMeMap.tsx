@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
 import type { Listing } from "@/types/listing"
 import Link from "next/link"
 import TrackedBookingLink from "@/components/TrackedBookingLink"
@@ -21,29 +22,35 @@ export default function NearMeMap({ listings }: NearMeMapProps) {
   const [postcodeStatus, setPostcodeStatus] = useState<"idle" | "loading" | "error">("idle")
   const [postcodeError, setPostcodeError] = useState("")
   const [mapLoaded, setMapLoaded] = useState(false)
+  const searchParams = useSearchParams()
 
-  async function searchPostcode(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault()
+  useEffect(() => {
+    const initialPostcode = searchParams.get("postcode")?.trim()
+    if (!initialPostcode) return
+    setPostcode(initialPostcode)
+    void searchPostcodeValue(initialPostcode)
+  }, [searchParams])
+
+  async function searchPostcodeValue(value: string) {
     setPostcodeStatus("loading")
     setPostcodeError("")
     try {
-      const response = await fetch(`/api/nearby?postcode=${encodeURIComponent(postcode)}`, {
-        cache: "no-store",
-      })
-      const result = (await response.json()) as {
-        postcode?: string
-        results?: NearbyListingResult[]
-        error?: string
-      }
+      const response = await fetch(`/api/nearby?postcode=${encodeURIComponent(value)}`, { cache: "no-store" })
+      const result = (await response.json()) as { postcode?: string; results?: NearbyListingResult[]; error?: string }
       if (!response.ok) throw new Error(result.error || "Unable to search that postcode")
       setPostcodeResults(result.results || [])
-      setPostcodeLabel(result.postcode || postcode)
+      setPostcodeLabel(result.postcode || value)
       setPostcodeStatus("idle")
     } catch (error) {
       setPostcodeResults([])
       setPostcodeStatus("error")
       setPostcodeError(error instanceof Error ? error.message : "Unable to search that postcode")
     }
+  }
+
+  async function searchPostcode(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    await searchPostcodeValue(postcode)
   }
 
   useEffect(() => {
@@ -129,7 +136,7 @@ export default function NearMeMap({ listings }: NearMeMapProps) {
       <div className="rounded-lg border border-orange-500/30 bg-orange-500/10 p-4 sm:p-5">
         <h3 className="text-lg font-semibold text-white">Find the closest venue by postcode</h3>
         <p className="mt-1 text-sm text-zinc-300">
-          Your postcode is used only for this search and is not stored. Results stay on this page, so no thin postcode URLs are created for search engines.
+          Your postcode is used to find nearby venues and is not stored.
         </p>
         <form onSubmit={searchPostcode} className="mt-4 flex flex-col gap-3 sm:flex-row">
           <label className="sr-only" htmlFor="nearby-postcode">UK postcode</label>

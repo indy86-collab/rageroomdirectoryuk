@@ -1,3 +1,4 @@
+import { orderDiscoveryListings } from "@/lib/discovery-order"
 import { Metadata } from "next"
 import { slugToCity, cityToSlug } from "@/lib/location"
 import { getCityContent, getGenericCityContent } from "@/lib/city-content"
@@ -20,9 +21,6 @@ import { getEligibleLocationDiscoveryPages } from "@/lib/location-discovery"
 import { getCityGuidePath, hasEditorialCityGuide } from "@/lib/city-guides"
 import { getCityHeroImagePath } from "@/lib/city-images"
 import LocationHero from "@/components/LocationHero"
-import DirectoryInsightCallout from "@/components/DirectoryInsightCallout"
-import { getCityDirectoryInsight } from "@/lib/directory-insights"
-import { buildInsightsStats } from "@/lib/insights-stats"
 import { getAuthorisedListingImage } from "@/lib/listing-quality"
 
 interface CityPageProps {
@@ -113,11 +111,6 @@ export default async function CityPage({ params }: CityPageProps) {
   const { getAllListingsForAdmin, getListingsNearCity } = await import("@/lib/listings")
   const { inCity, nearby, allForSchema } = await getListingsNearCity(cityName)
   const directoryListings = await getAllListingsForAdmin()
-  const insightCallout = getCityDirectoryInsight(
-    buildInsightsStats(directoryListings),
-    cityToSlug(cityName),
-    cityName
-  )
   const locationDiscoveryPages = getEligibleLocationDiscoveryPages(directoryListings).filter(
     (page) => page.location.slug === cityToSlug(cityName)
   )
@@ -244,39 +237,13 @@ export default async function CityPage({ params }: CityPageProps) {
           {hasNearbyOnly ? `Destructive Experiences Near ${cityName}` : `Rage Rooms & Destructive Experiences in ${cityName}`}
         </h1>
 
-        {hasEditorialCityGuide(cityName) && (
-          <p className="mb-6 rounded-lg border border-orange-500/40 bg-[#181818] px-4 py-3 text-sm text-zinc-300 sm:text-base">
-            Looking for a ranked comparison? Read the{" "}
-            <Link
-              href={getCityGuidePath(cityName)}
-              className="font-semibold text-orange-500 underline hover:text-orange-400"
-            >
-              best rage rooms in {cityName} guide
-            </Link>
-            . This page is the booking list.
-          </p>
-        )}
-
-        {/* Unique city-specific intro; ad after first paragraph only. */}
-        <div className="text-base sm:text-lg text-zinc-300 mb-6 sm:mb-8 space-y-3 sm:space-y-4">
-          <p>
-            {hasNearbyOnly
-              ? `We do not currently list a verified venue in central ${cityName}, but there ${nearby.length === 1 ? "is" : "are"} ${nearby.length} verified ${nearby.length === 1 ? "option" : "options"} within travelling distance.`
-              : hasRageRoom
-                ? cityContent.intro
-                : `Browse verified destructive and adrenaline experiences in ${cityName}. The inventory below may include standalone specialists as well as multi-activity venues.`}
-          </p>
-          {hasRageRoom && <p>{cityContent.localContext}</p>}
-        </div>
-
-        <DirectoryInsightCallout {...insightCallout} />
-
+        <p className="mb-5 text-zinc-300">{hasNearbyOnly ? `No venues currently listed in ${cityName}. Explore the nearby options below.` : `Compare activities, prices and booking options in and around ${cityName}.`}</p>
         {/* Quick stats bar */}
         {!isEmpty && (
           <div className="bg-[#181818] rounded-lg border border-zinc-800 p-4 mb-6 flex flex-wrap gap-4 sm:gap-8">
             <div>
               <p className="text-zinc-400 text-xs uppercase tracking-wider">
-                {hasNearbyOnly ? "Nearby Venues" : "In-City Venues"}
+                {hasNearbyOnly ? "Nearby Venues" : `In ${cityName}`}
               </p>
               <p className="text-white text-xl font-bold">
                 {hasNearbyOnly ? nearby.length : inCity.length}
@@ -285,7 +252,7 @@ export default async function CityPage({ params }: CityPageProps) {
             {!hasNearbyOnly && nearby.length > 0 && (
               <div>
                 <p className="text-zinc-400 text-xs uppercase tracking-wider">
-                  Nearby Options
+                  Nearby venues
                 </p>
                 <p className="text-white text-xl font-bold">{nearby.length}</p>
               </div>
@@ -308,9 +275,9 @@ export default async function CityPage({ params }: CityPageProps) {
         {!isEmpty ? (
           <>
             {inCity.length > 0 && (
-              <section aria-label={`Verified venues in ${cityName}`}>
+              <section aria-label={`Verified venues in ${cityName}`}><h2 className="mb-4 text-xl font-bold">In {cityName}</h2>
                 <ListingsGrid
-                  listings={inCity}
+                  listings={orderDiscoveryListings(inCity)}
                   discoveryContext={{
                     surface: "directory",
                     pageType: "city",
@@ -374,6 +341,11 @@ export default async function CityPage({ params }: CityPageProps) {
               </nav>
             )}
             
+            <section className="mt-10 mb-6" aria-label="Local planning advice">
+              <h2 className="mb-3 text-2xl font-bold">Planning a visit to {cityName}</h2>
+              {hasRageRoom && <p className="mb-4 max-w-3xl text-zinc-300">{cityContent.localContext}</p>}
+              {hasEditorialCityGuide(cityName) && <Link href={getCityGuidePath(cityName)} className="inline-flex min-h-11 items-center text-rage-300 underline">Read the {cityName} rage room guide →</Link>}
+            </section>
             {/* Travel tip */}
             <div className="mt-8 mb-6">
               <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6">

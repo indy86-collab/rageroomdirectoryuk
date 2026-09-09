@@ -7,7 +7,6 @@ import { globalFAQs } from "@/lib/faqs"
 import ListingsGrid from "@/components/ListingsGrid"
 import ListingLeadCapture from "@/components/ListingLeadCapture"
 import NearMeMap from "@/components/NearMeMap"
-import RageResetCTA from "@/components/RageResetCTA"
 import NearbyActivitiesAffiliate from "@/components/NearbyActivitiesAffiliate"
 import { absoluteUrl } from "@/lib/site-url"
 
@@ -82,39 +81,7 @@ export default async function NearMePage() {
           Rage Room Near Me
         </h1>
         
-        <div className="text-base sm:text-lg text-zinc-300 mb-6 sm:mb-8 space-y-3 sm:space-y-4">
-          <p>
-            Looking for a rage room near you? Use the map below to find the closest verified UK smash room to your postcode — then compare starting prices, age limits and booking links before you travel.
-          </p>
-          <p>
-            Each listing includes{" "}
-            <Link href="/rage-room-prices-uk" className="text-orange-500 hover:text-orange-600 underline">
-              pricing and packages
-            </Link>
-            ,{" "}
-            <Link href="/guides/are-rage-rooms-safe-uk" className="text-orange-500 hover:text-orange-600 underline">
-              safety notes
-            </Link>
-            , and direct booking options. Prefer browsing by city first? See the{" "}
-            <Link href="/guides/rage-room-near-me" className="text-orange-500 hover:text-orange-600 underline">
-              UK city guide
-            </Link>
-            {" "}or the full{" "}
-            <Link href="/uk-map" className="text-orange-500 hover:text-orange-600 underline">
-              UK rage room map
-            </Link>
-            .
-          </p>
-          <p>
-            Rage rooms (also known as smash rooms, break rooms, or anger rooms) provide a safe, controlled environment to release stress by breaking items like plates, electronics, and glass bottles. Perfect for date nights, team building, or simply letting off steam.
-          </p>
-        </div>
-
-        <div className="mb-8 grid gap-4 lg:grid-cols-2">
-          <ListingLeadCapture source="near-me" idPrefix="near-me-lead" />
-          <RageResetCTA surface="near-me" compact />
-        </div>
-
+        <p className="mb-6 max-w-2xl text-zinc-300">Enter a UK postcode to compare nearby venues, distances and starting prices.</p>
         {/* Interactive Map Section */}
         <section aria-labelledby="map-heading" className="mb-12">
           <h2 id="map-heading" className="text-2xl font-bold text-white mb-6">
@@ -139,6 +106,7 @@ export default async function NearMePage() {
           <NearbyActivitiesAffiliate placement="near_me" variant="chips" />
         </div>
 
+        <div className="mb-10"><ListingLeadCapture source="near-me" idPrefix="near-me-lead" /></div>
         {/* Big List of Cities */}
         <section aria-labelledby="cities-heading" className="mb-12">
           <h2 id="cities-heading" className="text-2xl font-bold text-white mb-6">

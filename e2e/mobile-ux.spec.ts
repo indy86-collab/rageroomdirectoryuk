@@ -28,7 +28,7 @@ test.describe("mobile-first directory UX", () => {
       await expect(page.getByRole("button", { name: "Open menu" })).toBeVisible()
       await page.getByRole("button", { name: "Open menu" }).click()
       await expect(page.getByRole("navigation", { name: "Mobile navigation" })).toBeVisible()
-      await expect(page.getByRole("link", { name: "Find a Rage Room" }).last()).toBeVisible()
+      await expect(page.getByRole("link", { name: "Find a room" }).last()).toBeVisible()
       await page.getByRole("button", { name: "Close menu" }).click()
       await expect(page.getByRole("navigation", { name: "Mobile navigation" })).toHaveCount(0)
     }
@@ -43,7 +43,7 @@ test.describe("mobile-first directory UX", () => {
     await page.goto("/listing/rage-out-maidstone-maidstone")
 
     await expect(page.getByRole("heading", { level: 1, name: "Rage Out Maidstone" })).toBeVisible()
-    await expect(page.getByRole("link", { name: "Book Your Session →" })).toBeVisible()
+    await expect(page.getByRole("link", { name: "Check availability →" })).toBeVisible()
     expect(await hasHorizontalOverflow(page)).toBeFalsy()
 
     if (isMobile) {

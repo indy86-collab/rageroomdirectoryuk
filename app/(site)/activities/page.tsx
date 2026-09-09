@@ -1,3 +1,4 @@
+import ActivityArtwork from "@/components/ActivityArtwork"
 import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
@@ -52,9 +53,7 @@ export default async function ActivitiesPage() {
             Choose Your Experience
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-zinc-300">
-            Start with the UK&apos;s verified rage-room inventory, or explore closely related
-            destructive and adrenaline experiences. Activity pages include both standalone
-            specialists and multi-activity venues when each offering has been verified.
+            Smash, splash or try your aim. Pick an activity to compare venues, prices and booking options across the UK.
           </p>
         </div>
 
@@ -69,8 +68,8 @@ export default async function ActivitiesPage() {
                 destinationPath={`/activities/${activity.slug}`}
                 className="group"
               >
-              <div className="flex h-full flex-col rounded-lg border border-zinc-800 bg-[#181818] p-5 transition-colors group-hover:border-rage-500/60">
-                <div className="text-3xl" aria-hidden="true">{activity.emoji}</div>
+              <div className="flex h-full flex-col overflow-hidden rounded-xl border border-zinc-800 bg-[#181818] p-5 transition-colors group-hover:border-rage-500/60">
+                <ActivityArtwork activity={activity.value} className="-mx-5 -mt-5 h-44" />
                 <h2 className="mt-4 text-xl font-bold text-white">{activity.label}</h2>
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-zinc-400">
                   {activity.description}

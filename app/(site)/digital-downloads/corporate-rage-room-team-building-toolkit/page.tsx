@@ -157,13 +157,13 @@ export default function CorporateEventBuilderProductPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
       />
       <ProductViewTracker product={analyticsProduct} />
-      <section className="px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+      <section className="px-4 py-8 sm:px-6 sm:py-10">
+        <div className="mx-auto grid max-w-6xl items-start gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
           <div>
             <p className="text-sm font-bold uppercase tracking-widest text-rage-500">
               Corporate Event Builder
             </p>
-            <h1 className="mt-4 text-4xl font-black uppercase tracking-wide text-white sm:text-5xl lg:text-6xl">
+            <h1 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
               Corporate Rage Room Event Builder
             </h1>
             <DigitalEditorialByline className="mt-3" />
@@ -204,6 +204,7 @@ export default function CorporateEventBuilderProductPage() {
           </div>
           {product.marketingImage && (
             <DigitalProductCover
+              className="order-first mx-auto w-full max-w-md lg:order-none lg:max-w-none lg:sticky lg:top-24"
               src={product.marketingImage}
               alt={`${product.name} cover`}
               priority

@@ -8,7 +8,7 @@ export default function LocationHero({
   image: string
 }) {
   return (
-    <div className="relative mb-6 overflow-hidden rounded-lg border border-zinc-800 aspect-[21/9] min-h-[180px] sm:min-h-[240px] bg-zinc-900">
+    <div className="relative mb-5 overflow-hidden rounded-lg border border-zinc-800 h-32 sm:h-44 bg-zinc-900">
       <Image
         src={image}
         alt={`${city} skyline`}

@@ -1,3 +1,4 @@
+import GuideTopics from "@/components/GuideTopics"
 import { Metadata } from "next"
 import Link from "next/link"
 import { buildOgImageUrl } from "@/lib/seo-schema"
@@ -267,6 +268,7 @@ export default function GuidesPage() {
           nights and corporate team events.
         </p>
 
+        <GuideTopics />
         <section aria-labelledby="city-guides-heading">
           <h2
             id="city-guides-heading"

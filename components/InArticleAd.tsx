@@ -1,12 +1,13 @@
 "use client"
 
 import Script from "next/script"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { usePathname } from "next/navigation"
 import {
   ADSENSE_CLIENT,
   ADSENSE_INARTICLE_SLOT,
   isAdEligiblePath,
+  isLiveAdsenseHost,
   isValidAdsenseAdSlot,
 } from "@/lib/adsense"
 
@@ -20,18 +21,23 @@ declare global {
  * Single mid-article AdSense unit for long editorial pages.
  *
  * The AdSense script is loaded only when this unit mounts, so directory,
- * checkout and game pages never request ads. If no valid manual unit ID is
+ * checkout and game pages do not mount this loader. Account-side Auto ads
+ * exclusions are still needed when navigating after the script has loaded. If no valid manual unit ID is
  * configured, only the base script loads (which can still serve account-side
  * Auto ads) and no incomplete manual ad request is sent.
  */
 export default function InArticleAd() {
   const pathname = usePathname()
+  const [liveHost, setLiveHost] = useState(false)
+  useEffect(() => {
+    setLiveHost(isLiveAdsenseHost(window.location.hostname, process.env.NODE_ENV))
+  }, [])
   const insRef = useRef<HTMLModElement>(null)
   const pushed = useRef(false)
   const hasManualSlot = isValidAdsenseAdSlot(ADSENSE_INARTICLE_SLOT)
 
   useEffect(() => {
-    if (pathname && !isAdEligiblePath(pathname)) return
+    if (!liveHost || !pathname || !isAdEligiblePath(pathname)) return
     if (!hasManualSlot) return
     const el = insRef.current
     if (!el || pushed.current) return
@@ -67,9 +73,9 @@ export default function InArticleAd() {
     )
     observer.observe(el)
     return () => observer.disconnect()
-  }, [hasManualSlot, pathname])
+  }, [hasManualSlot, pathname, liveHost])
 
-  if (pathname && !isAdEligiblePath(pathname)) return null
+  if (!liveHost || !pathname || !isAdEligiblePath(pathname)) return null
 
   const loader = (
     <Script

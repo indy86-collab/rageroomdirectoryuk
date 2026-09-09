@@ -1,3 +1,5 @@
+import { orderDiscoveryListings } from "@/lib/discovery-order"
+import HomeSearchBox from "@/components/HomeSearchBox"
 import { Metadata } from "next"
 import ListingsPageClient from "@/components/ListingsPageClient"
 import UGCButtons from "@/components/UGCButtons"
@@ -39,11 +41,6 @@ export default async function AllListingsPage() {
     .sort((a, b) => b.count - a.count)
     .slice(0, 8)
 
-  const priceRange = listings.filter(l => l.price).map(l => l.price!)
-  const minPrice = priceRange.length > 0 ? Math.min(...priceRange) : null
-  const maxPrice = priceRange.length > 0 ? Math.max(...priceRange) : null
-  const avgPrice = priceRange.length > 0 ? priceRange.reduce((a, b) => a + b, 0) / priceRange.length : null
-
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -73,43 +70,12 @@ export default async function AllListingsPage() {
           UK Rage Rooms & Destructive Experiences
         </h1>
 
-        <div className="text-base sm:text-lg text-zinc-300 mb-6 space-y-3">
-          <p>
-            This is the complete RageRoom Directory: rage rooms remain at its core, alongside
-            verified axe throwing, paint splatter, car smash and mobile smash experiences that fit
-            the same high-energy proposition. Each activity shown on a listing is evidence-backed.
-          </p>
-          <p>
-            We manually verify listings and update them regularly. If you spot anything out of
-            date or know of a venue we've missed, you can let us know using the links at the
-            bottom of this page.
-          </p>
-        </div>
-
-        {/* Stats overview */}
-        <div className="bg-[#181818] rounded-lg border border-zinc-800 p-4 mb-6 flex flex-wrap gap-4 sm:gap-8">
-          <div>
-            <p className="text-zinc-400 text-xs uppercase tracking-wider">Total Venues</p>
-            <p className="text-white text-xl font-bold">{listings.length}</p>
-          </div>
-          <div>
-            <p className="text-zinc-400 text-xs uppercase tracking-wider">Cities Covered</p>
-            <p className="text-white text-xl font-bold">{cities.length}</p>
-          </div>
-          {minPrice !== null && (
-            <div>
-              <p className="text-zinc-400 text-xs uppercase tracking-wider">Cheapest From</p>
-              <p className="text-orange-500 text-xl font-bold">£{minPrice.toFixed(0)}</p>
-            </div>
-          )}
-          {avgPrice !== null && (
-            <div>
-              <p className="text-zinc-400 text-xs uppercase tracking-wider">Average Price</p>
-              <p className="text-orange-500 text-xl font-bold">£{Math.round(avgPrice)}</p>
-            </div>
-          )}
-        </div>
-
+        <p className="mb-6 max-w-2xl text-zinc-300">Find your next day out. Compare rage rooms and related activities by location, price and who’s coming.</p>
+        <div className="mb-8"><HomeSearchBox /></div>
+        <ListingsPageClient initialListings={orderDiscoveryListings(listings)} />
+        <details className="mt-10 rounded-xl border border-zinc-800 p-5">
+          <summary className="cursor-pointer font-semibold text-zinc-200">Browse all cities and regions</summary>
+          <div className="mt-5">
         {/* Browse by city */}
         {cities.length > 1 && (
           <div className="mb-8">
@@ -145,7 +111,8 @@ export default async function AllListingsPage() {
           </div>
         )}
 
-        <ListingsPageClient initialListings={listings} />
+          </div>
+        </details>
 
         {/* Useful guides */}
         <div className="mt-10 bg-[#181818] rounded-lg border border-zinc-800 p-4 sm:p-6">

@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation"
 import { useState, useEffect, useRef } from "react"
 import { Search } from "lucide-react"
+import { isCompleteUkPostcode, normaliseUkPostcode } from "@/lib/uk-postcode"
 
 interface Suggestion {
   type: "city" | "listing"
@@ -11,9 +12,9 @@ interface Suggestion {
   city?: string
 }
 
-export default function HomeSearchBox() {
+export default function HomeSearchBox({ initialQuery = "", id = "directory-search", label = "City or postcode", buttonLabel = "Find rooms" }: { initialQuery?: string; id?: string; label?: string; buttonLabel?: string }) {
   const router = useRouter()
-  const [query, setQuery] = useState("")
+  const [query, setQuery] = useState(initialQuery)
   const [suggestions, setSuggestions] = useState<Suggestion[]>([])
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(-1)
@@ -21,6 +22,7 @@ export default function HomeSearchBox() {
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
+    const controller = new AbortController()
     const fetchSuggestions = async () => {
       if (query.length < 2) {
         setSuggestions([])
@@ -29,8 +31,10 @@ export default function HomeSearchBox() {
       }
 
       try {
-        const response = await fetch(`/api/search/suggestions?q=${encodeURIComponent(query)}`)
+        const response = await fetch(`/api/search/suggestions?q=${encodeURIComponent(query)}`, { signal: controller.signal })
+        if (!response.ok) return
         const data = await response.json()
+        if (controller.signal.aborted) return
 
         const allSuggestions: Suggestion[] = [
           ...data.cities,
@@ -38,9 +42,10 @@ export default function HomeSearchBox() {
         ]
 
         setSuggestions(allSuggestions.slice(0, 8))
-        setShowSuggestions(allSuggestions.length > 0)
+        setShowSuggestions(allSuggestions.length > 0 && document.activeElement === inputRef.current)
         setSelectedIndex(-1)
       } catch (error) {
+        if (controller.signal.aborted) return
         console.error("Error fetching suggestions:", error)
         setSuggestions([])
         setShowSuggestions(false)
@@ -48,7 +53,7 @@ export default function HomeSearchBox() {
     }
 
     const debounceTimer = setTimeout(fetchSuggestions, 300)
-    return () => clearTimeout(debounceTimer)
+    return () => { clearTimeout(debounceTimer); controller.abort() }
   }, [query])
 
   useEffect(() => {
@@ -65,7 +70,12 @@ export default function HomeSearchBox() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (query.trim()) {
-      router.push(`/search?query=${encodeURIComponent(query.trim())}`)
+      const value = query.trim()
+      if (isCompleteUkPostcode(value)) {
+        router.push(`/near-me?postcode=${encodeURIComponent(normaliseUkPostcode(value))}`)
+      } else {
+        router.push(`/search?query=${encodeURIComponent(value)}`)
+      }
       setShowSuggestions(false)
     } else {
       router.push("/search")
@@ -103,11 +113,11 @@ export default function HomeSearchBox() {
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
           <div className="relative min-w-0 flex-1">
-            <label htmlFor="directory-search" className="sr-only">
-              City or postcode
+            <label htmlFor={id} className="sr-only">
+              {label}
             </label>
             <input
-              id="directory-search"
+              id={id}
               ref={inputRef}
               type="search"
               value={query}
@@ -116,15 +126,23 @@ export default function HomeSearchBox() {
               onKeyDown={handleKeyDown}
               placeholder="City or postcode"
               autoComplete="off"
+              role="combobox"
+              aria-autocomplete="list"
+              aria-expanded={showSuggestions && suggestions.length > 0}
+              aria-controls={`${id}-suggestions`}
+              aria-activedescendant={selectedIndex >= 0 && showSuggestions ? `${id}-option-${selectedIndex}` : undefined}
               enterKeyHint="search"
-              className="min-h-12 w-full rounded-lg bg-white px-4 py-3.5 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 sm:px-6 sm:text-lg"
+              className="min-h-12 w-full rounded-lg border border-zinc-600 bg-zinc-950/90 px-4 py-3.5 text-base text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-orange-500 sm:px-4"
             />
 
             {showSuggestions && suggestions.length > 0 && (
-              <div className="absolute z-50 mt-2 max-h-64 w-full overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-xl sm:max-h-96">
+              <div id={`${id}-suggestions`} role="listbox" aria-label="Search suggestions" className="absolute z-50 mt-2 max-h-64 w-full overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-xl sm:max-h-96">
                 {suggestions.map((suggestion, index) => (
                   <button
                     key={`${suggestion.type}-${index}`}
+                    id={`${id}-option-${index}`}
+                    role="option"
+                    aria-selected={index === selectedIndex}
                     type="button"
                     onClick={() => handleSuggestionClick(suggestion)}
                     className={`w-full min-h-11 px-4 py-3 text-left transition-colors hover:bg-orange-50 ${
@@ -188,11 +206,10 @@ export default function HomeSearchBox() {
 
           <button
             type="submit"
-            className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-orange-500 px-6 py-3.5 text-base font-bold uppercase tracking-wider text-white transition-colors hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-900 sm:w-auto sm:px-8 sm:text-lg"
+            className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-orange-500 px-6 py-3.5 text-base font-bold text-white transition-colors hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-900 sm:w-auto sm:px-5"
           >
             <Search className="h-5 w-5 sm:hidden" aria-hidden="true" />
-            <span className="sm:hidden">Search</span>
-            <span className="hidden sm:inline">Find your rage</span>
+            <span>{buttonLabel}</span>
           </button>
         </div>
       </form>

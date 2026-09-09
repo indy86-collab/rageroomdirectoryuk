@@ -22,7 +22,7 @@ const intents: {
   {
     id: "firstVisit",
     label: "First time",
-    hint: "Free prep pack — what to wear & expect",
+    hint: "£1 supporter pack — what to wear & expect",
     productId: "rage-room-first-visit-prep",
   },
   {
@@ -61,7 +61,7 @@ export default function DigitalGuidesChooser({
             What are you planning?
           </h2>
           <p className="mt-1 text-sm text-zinc-400">
-            Pick the checklist that matches — free first-timer tool, paid planners for groups.
+            Pick the planning tool that matches. The £1 first-timer pack helps maintain the directory; paid planners support groups.
           </p>
         </div>
         <Link

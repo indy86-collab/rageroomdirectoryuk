@@ -1,3 +1,4 @@
+import GuideTopics from "@/components/GuideTopics"
 import { Metadata } from "next"
 import Link from "next/link"
 import { getAllBlogPosts } from "@/lib/blog-posts"
@@ -37,6 +38,7 @@ export default function BlogPage() {
           From first-time preparation to team building events, find everything you need to know.
         </p>
 
+        <GuideTopics />
         {/* Blog Listing with Filters */}
         <BlogListing posts={posts} />
 

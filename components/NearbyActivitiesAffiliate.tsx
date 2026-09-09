@@ -254,6 +254,7 @@ export default function NearbyActivitiesAffiliate({
           <MapPin className="h-4 w-4" aria-hidden="true" />
           Add something around your smash
         </div>
+        <p className="mb-3 text-[11px] text-zinc-500">Sponsored links · RageRoom Directory may earn a commission.</p>
         <h2
           id={headingId}
           className="text-xl font-bold text-white sm:text-2xl"

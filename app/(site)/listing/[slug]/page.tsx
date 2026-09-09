@@ -1,3 +1,4 @@
+import ActivityArtwork from "@/components/ActivityArtwork"
 import { notFound, redirect } from "next/navigation"
 import { Metadata } from "next"
 import type { Listing } from "@/types/listing"
@@ -446,7 +447,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
 
         {/* Main Listing Card */}
         <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 mb-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2">
+          <div className={`grid grid-cols-1 ${authorisedImage ? "lg:grid-cols-2" : "lg:grid-cols-[0.7fr_1.3fr]"}`} >
             {/* Image */}
             <div className="bg-zinc-900">
               {authorisedImage ? (
@@ -461,11 +462,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
                   />
                 </div>
               ) : (
-                <div className="aspect-video w-full bg-zinc-800 flex items-center justify-center">
-                  <span className="text-zinc-400 text-lg">
-                    No image available
-                  </span>
-                </div>
+                <ActivityArtwork activity={listing.activities[0] || "rage-room"} className="h-44 lg:h-full lg:min-h-64" venueFallback />
               )}
             </div>
 
@@ -478,8 +475,8 @@ export default async function ListingPage({ params }: ListingPageProps) {
                   </h1>
                   <div className="mb-2 flex flex-wrap items-center gap-2">
                     {listing.verified && (
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-green-600 text-white">
-                        Verified
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium border border-zinc-600 bg-zinc-800 text-zinc-200">
+                        Details checked
                       </span>
                     )}
                     {overallRating && (
@@ -538,6 +535,11 @@ export default async function ListingPage({ params }: ListingPageProps) {
                 )}
               </div>
 
+              <dl className="mb-5 grid grid-cols-2 gap-x-5 gap-y-3 border-y border-zinc-700 py-4">
+                <div className="col-span-2"><dt className="text-sm text-zinc-400">Starting price</dt><dd className="mt-1 text-2xl font-bold text-white">{formattedStartingPrice || "Ask the venue for prices"}</dd></div>
+                <div><dt className="text-sm text-zinc-400">Duration</dt><dd className="mt-1 font-semibold">{listing.sessionLengths?.length ? listing.sessionLengths.map(n => `${n} min`).join(" / ") : "Check with venue"}</dd></div>
+                <div><dt className="text-sm text-zinc-400">Minimum age</dt><dd className="mt-1 font-semibold">{listing.ageMin != null ? `${listing.ageMin}+` : "Check with venue"}</dd></div>
+              </dl>
               {/* Contact Info */}
               <div className="space-y-2 mb-6">
                 {listing.phone && (
@@ -564,15 +566,11 @@ export default async function ListingPage({ params }: ListingPageProps) {
                       ctaPlacement="venue_contact"
                       className="inline-flex min-h-11 max-w-full items-center break-all text-white hover:text-orange-500 transition-colors"
                     >
-                      {listing.website.replace(/^https?:\/\//, "")}
+                      Venue website
                     </TrackedWebsiteLink>
                   </div>
                 )}
-                {listing.ageMin != null && (
-                  <div>
-                    <p className="text-white">Minimum age: {listing.ageMin}+</p>
-                  </div>
-                )}
+
               </div>
 
               {/* Booking Link */}
@@ -586,7 +584,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
                     ctaPlacement="venue_hero"
                     className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors text-base font-semibold min-h-[44px]"
                   >
-                    Book Your Session →
+                    Check availability →
                   </TrackedBookingLink>
                 </div>
               )}
@@ -637,30 +635,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
           </section>
         </div>
 
-        {hasRageRoom && (
-          <div className="mb-6 sm:mb-8">
-            <ListingLeadCapture
-              source={`listing:${listing.slug || listing.id}`}
-              idPrefix={`listing-${listing.slug || listing.id}`}
-              city={listing.city}
-            />
-          </div>
-        )}
-
         <ListingMediaGallery media={authorisedMedia} venueName={listing.name} />
-
-        {hasRageRoom && (
-          <>
-            <div className="mb-4 sm:mb-5">
-              <RageResetCTA surface="listing" variant="secondary" />
-            </div>
-            <div className="mb-6 sm:mb-8">
-              <DigitalGuidesChooser
-                highlight={showCorporateCTA ? "corporate" : "firstVisit"}
-              />
-            </div>
-          </>
-        )}
 
         {/* Pricing Overview */}
         <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
@@ -674,8 +649,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
                 <span className="text-orange-500 font-semibold text-lg">{formattedStartingPrice}</span>
               </div>
               <p className="text-zinc-400 text-sm">
-                This is the lowest supported {experienceLabel.toLowerCase()} price in our current source data. Visit the venue&apos;s
-                website for current availability and exact package inclusions.
+                Check the venue’s website for current availability and what’s included in your chosen package.
               </p>
               {listing.priceNote && (
                 <p className="text-zinc-300 text-sm">{listing.priceNote}</p>
@@ -902,6 +876,31 @@ export default async function ListingPage({ params }: ListingPageProps) {
         )}
 
         {/* Cross-links */}
+        {hasRageRoom && (
+          <div className="mb-6 sm:mb-8">
+            <ListingLeadCapture
+              source={`listing:${listing.slug || listing.id}`}
+              idPrefix={`listing-${listing.slug || listing.id}`}
+              city={listing.city}
+            />
+          </div>
+        )}
+
+
+        {hasRageRoom && (
+          <>
+            <div className="mb-4 sm:mb-5">
+              <RageResetCTA surface="listing" variant="secondary" />
+            </div>
+            <div className="mb-6 sm:mb-8">
+              <DigitalGuidesChooser
+                highlight={showCorporateCTA ? "corporate" : "firstVisit"}
+              />
+            </div>
+          </>
+        )}
+
+
         <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
           <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
             Explore More

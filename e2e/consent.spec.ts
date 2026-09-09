@@ -120,7 +120,7 @@ test.describe("consent-aware analytics", () => {
       "href",
       /https:\/\/www\.getyourguide\.com\/.*partner_id=IZRRCJT/
     )
-    const booking = page.getByRole("link", { name: "Book Your Session →" })
+    const booking = page.getByRole("link", { name: "Check availability →" })
     await expect(booking).toHaveAttribute("href", /^https?:\/\//)
     await clickWithoutNavigation(booking)
     expect(analyticsRequests(requests)).toEqual([])
@@ -175,7 +175,7 @@ test.describe("consent-aware analytics", () => {
       deniedUpdate: "1",
     })
 
-    await clickWithoutNavigation(page.getByRole("link", { name: "Book Your Session →" }))
+    await clickWithoutNavigation(page.getByRole("link", { name: "Check availability →" }))
     expect(await recordedEvents(page, "booking_click")).toEqual([])
   })
 

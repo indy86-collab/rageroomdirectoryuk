@@ -13,7 +13,7 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { label: "Find a Rage Room", href: "/listings" },
+  { label: "Find a room", href: "/listings" },
   {
     label: "Activities",
     href: "/activities",
@@ -38,7 +38,7 @@ const navItems: NavItem[] = [
   },
   { label: "Cities", href: "/uk-map" },
   { label: "Guides", href: "/guides" },
-  { label: "For Venue Owners", href: "/list-your-rage-room" },
+  { label: "Venue owners", href: "/list-your-rage-room" },
 ]
 
 export default function Header() {
@@ -82,7 +82,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-zinc-800/70 bg-dark-900/95 pt-[env(safe-area-inset-top)]">
-      <div className="w-full px-3 sm:px-5 lg:px-6">
+      <div className="site-container">
         <div className="flex h-14 items-center gap-2 sm:h-16 sm:gap-4 lg:h-20">
           <div className="shrink-0"><Logo /></div>
 
@@ -90,10 +90,10 @@ export default function Header() {
             {navItems.map((item) => {
               const active = isActive(item.href)
               return (
-                <div key={item.href} className="group relative">
+                <div key={item.href} className={`group relative ${item.href === "/list-your-rage-room" ? "ml-auto" : ""}`}>
                   <Link
                     href={item.href}
-                    className={`relative flex min-h-11 items-center gap-1 px-2 py-2 text-[10px] font-semibold uppercase tracking-[0.12em] transition-colors xl:px-2.5 xl:text-[11px] ${active ? "nav-active-underline text-white" : "text-zinc-300 hover:text-white"}`}
+                    className={`relative flex min-h-11 items-center gap-1 px-2 py-2 text-sm font-semibold transition-colors xl:px-2.5 xl:text-sm ${active ? "nav-active-underline text-white" : "text-zinc-300 hover:text-white"}`}
                   >
                     {item.label}
                     {item.children && <ChevronDown className="h-3 w-3" aria-hidden="true" />}
@@ -114,7 +114,7 @@ export default function Header() {
 
           <form
             onSubmit={handleHeaderSearch}
-            className="flex h-11 min-w-0 flex-1 items-center overflow-hidden rounded-md border border-zinc-800 bg-dark-800 transition-colors focus-within:border-rage-500/60 lg:flex-none lg:w-[210px] xl:w-[280px]"
+            className="flex h-11 min-w-0 flex-1 items-center overflow-hidden rounded-md border border-zinc-800 bg-dark-800 transition-colors focus-within:border-rage-500/60 lg:flex-none lg:w-[180px] xl:w-[240px]"
           >
             <label htmlFor="header-search" className="sr-only">Find a Rage Room near you</label>
             <input
@@ -155,23 +155,15 @@ export default function Header() {
                   <Link
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`flex min-h-11 items-center rounded-md px-3 py-3 text-sm font-semibold uppercase tracking-[0.12em] transition-colors ${isActive(item.href) ? "bg-rage-500 text-white" : "text-zinc-300 hover:bg-dark-800 hover:text-white"}`}
+                    className={`flex min-h-11 items-center rounded-md px-3 py-3 text-sm font-semibold transition-colors ${isActive(item.href) ? "bg-rage-500 text-white" : "text-zinc-300 hover:bg-dark-800 hover:text-white"}`}
                   >
                     {item.label}
                   </Link>
                   {item.children && (
-                    <div className="ml-3 border-l border-zinc-800 py-1 pl-3">
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.href + child.label}
-                          href={child.href}
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="flex min-h-11 items-center py-2 text-sm text-zinc-400 hover:text-rage-400"
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
-                    </div>
+                    <details className="ml-3 border-l border-zinc-700 pl-3">
+                      <summary className="flex min-h-11 cursor-pointer items-center text-sm text-zinc-300">Browse {item.label.toLowerCase()}</summary>
+                      {item.children.map(child => <Link key={child.href} href={child.href} onClick={() => setMobileMenuOpen(false)} className="flex min-h-11 items-center text-sm text-zinc-300 hover:text-rage-300">{child.label}</Link>)}
+                    </details>
                   )}
                 </div>
               ))}

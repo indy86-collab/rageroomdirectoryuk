@@ -1,6 +1,7 @@
 import type { Listing, ListingActivity, ListingOccasion } from "@/types/listing"
 
 export type ListingSortOption =
+  | "recommended"
   | "newest"
   | "price-asc"
   | "price-desc"
@@ -67,6 +68,8 @@ export function filterAndSortListings(
 
   return filtered.sort((a, b) => {
     switch (filters.sortBy) {
+      case "recommended":
+        return 0 // Keep the relevance order supplied by the page.
       case "price-asc": {
         const aPrice = a.priceUnit === "per-person" ? a.price : null
         const bPrice = b.priceUnit === "per-person" ? b.price : null

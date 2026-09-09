@@ -64,7 +64,7 @@ export default function ListingFilters({
   const [distanceMiles, setDistanceMiles] = useState("")
   const [userLocation, setUserLocation] = useState<Coordinates | null>(null)
   const [locationStatus, setLocationStatus] = useState<"idle" | "loading" | "ready" | "error">("idle")
-  const [sortBy, setSortBy] = useState<ListingSortOption>("newest")
+  const [sortBy, setSortBy] = useState<ListingSortOption>("recommended")
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const [resultCount, setResultCount] = useState(listings.length)
 
@@ -107,16 +107,17 @@ export default function ListingFilters({
     setCorporateOnly(params.get("corporate") === "1")
     setVerifiedOnly(params.get("verified") === "1")
     setSortBy(
-      selectedSort && ["newest", "price-asc", "price-desc", "rating", "distance", "name"].includes(selectedSort)
+      selectedSort && ["recommended", "newest", "price-asc", "price-desc", "rating", "distance", "name"].includes(selectedSort)
         ? selectedSort
-        : "newest"
+        : "recommended"
     )
     setUrlStateReady(true)
   }, [])
 
   useEffect(() => {
     if (!urlStateReady) return
-    const params = new URLSearchParams()
+    const params = new URLSearchParams(window.location.search)
+    for (const key of ["activities", "occasions", "city", "maxPrice", "age", "group", "rating", "online", "corporate", "verified", "sort"]) params.delete(key)
     if (activities.length) params.set("activities", activities.join(","))
     if (occasions.length) params.set("occasions", occasions.join(","))
     if (city) params.set("city", city)
@@ -127,7 +128,7 @@ export default function ListingFilters({
     if (onlineBookingOnly) params.set("online", "1")
     if (corporateOnly) params.set("corporate", "1")
     if (verifiedOnly) params.set("verified", "1")
-    if (sortBy !== "newest" && sortBy !== "distance") params.set("sort", sortBy)
+    if (sortBy !== "recommended" && sortBy !== "distance") params.set("sort", sortBy)
     const query = params.toString()
     const nextUrl = `${window.location.pathname}${query ? `?${query}` : ""}`
     window.history.replaceState(window.history.state, "", nextUrl)
@@ -267,7 +268,7 @@ export default function ListingFilters({
       occasions.length +
       [city, maxPrice, visitorAge, groupSize, minimumRating, distanceMiles].filter(Boolean).length +
       [onlineBookingOnly, corporateOnly, verifiedOnly].filter(Boolean).length +
-      (sortBy !== "newest" ? 1 : 0)
+      (sortBy !== "recommended" ? 1 : 0)
     if (filterCount > 0) {
       trackDirectoryEvent("filter_clear", {
         pageType: discoveryContext.pageType,
@@ -288,7 +289,7 @@ export default function ListingFilters({
     setDistanceMiles("")
     setUserLocation(null)
     setLocationStatus("idle")
-    setSortBy("newest")
+    setSortBy("recommended")
   }
 
   const activeFilterCount =
@@ -298,7 +299,8 @@ export default function ListingFilters({
     [onlineBookingOnly, corporateOnly, verifiedOnly].filter(Boolean).length
 
   return (
-    <aside className="mb-6 rounded-lg border border-zinc-800 bg-[#181818] p-4 sm:p-5 lg:sticky lg:top-24 lg:mb-8 lg:max-h-[calc(100dvh-7rem)] lg:overflow-y-auto" aria-label="Venue filters">
+    <aside className="mb-6 rounded-2xl border border-zinc-800 bg-[#151515] p-4 shadow-xl shadow-black/10 sm:p-5 lg:sticky lg:top-24 lg:mb-8 lg:max-h-[calc(100dvh-7rem)] lg:overflow-y-auto" aria-label="Venue filters">
+      <div className="border-b border-zinc-800 pb-4">
       <div className="flex items-center justify-between gap-3">
         <button
           type="button"
@@ -321,9 +323,43 @@ export default function ListingFilters({
           Reset
         </button>
       </div>
+      <p className="mt-2 text-xs leading-5 text-zinc-500">Refine by what matters for your visit. Results update as you choose.</p>
+      </div>
 
       <div id="venue-filter-panel" className={`${mobileFiltersOpen ? "block" : "hidden"} mt-5 lg:block`}>
-        <div className="max-h-[65vh] space-y-6 overflow-y-auto pr-1 lg:max-h-none lg:overflow-visible lg:pr-0">
+        <div className="max-h-[65vh] space-y-6 overflow-y-auto pr-1 pt-5 lg:max-h-none lg:overflow-visible lg:pr-0">
+        <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-3">
+          <label htmlFor="filter-sort" className="mb-2 block text-sm font-bold text-white">Sort by</label>
+          <select id="filter-sort" value={sortBy} onChange={(event) => {
+            const value = event.target.value as ListingSortOption
+            trackFilterChange("sort", value.replace(/-/g, "_"), value === "recommended" ? "remove" : "set")
+            setSortBy(value)
+          }} className={controlClass}>
+            <option value="recommended">Recommended</option>
+            <option value="newest">Newest first</option>
+            <option value="price-asc">Per-person price: low to high</option>
+            <option value="price-desc">Per-person price: high to low</option>
+            <option value="rating">Highest rated</option>
+            <option value="distance" disabled={!userLocation}>Nearest first</option>
+            <option value="name">Name: A to Z</option>
+          </select>
+        </div>
+        <div className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-3">
+          <label htmlFor="filter-city" className="mb-2 block text-sm font-bold text-white">Location</label>
+          <select
+            id="filter-city"
+            value={city}
+            onChange={(event) => {
+              const value = event.target.value
+              trackFilterChange("city", normalizeFilterValue(value || city), value ? "set" : "remove")
+              setCity(value)
+            }}
+            className={controlClass}
+          >
+            <option value="">All UK locations</option>
+            {cities.map((value) => <option key={value} value={value}>{value}</option>)}
+          </select>
+        </div>
         {showActivities && <fieldset>
           <legend className="mb-2 text-sm font-bold text-white">Activities</legend>
           <p className="mb-3 text-xs text-zinc-500">Select more than one to find venue combinations.</p>
@@ -373,22 +409,7 @@ export default function ListingFilters({
           </div>
         </fieldset>}
 
-        <div>
-          <label htmlFor="filter-city" className="mb-2 block text-sm font-bold text-white">Location</label>
-          <select
-            id="filter-city"
-            value={city}
-            onChange={(event) => {
-              const value = event.target.value
-              trackFilterChange("city", normalizeFilterValue(value || city), value ? "set" : "remove")
-              setCity(value)
-            }}
-            className={controlClass}
-          >
-            <option value="">All UK locations</option>
-            {cities.map((value) => <option key={value} value={value}>{value}</option>)}
-          </select>
-        </div>
+
 
         <div>
           <div className="mb-2 flex items-center justify-between gap-2">
@@ -460,21 +481,7 @@ export default function ListingFilters({
           ))}
         </fieldset>
 
-        <div>
-          <label htmlFor="filter-sort" className="mb-2 block text-sm font-bold text-white">Sort by</label>
-          <select id="filter-sort" value={sortBy} onChange={(event) => {
-            const value = event.target.value as ListingSortOption
-            trackFilterChange("sort", value.replace(/-/g, "_"), value === "newest" ? "remove" : "set")
-            setSortBy(value)
-          }} className={controlClass}>
-            <option value="newest">Newest first</option>
-            <option value="price-asc">Per-person price: low to high</option>
-            <option value="price-desc">Per-person price: high to low</option>
-            <option value="rating">Highest rated</option>
-            <option value="distance" disabled={!userLocation}>Nearest first</option>
-            <option value="name">Name: A to Z</option>
-          </select>
-        </div>
+
         </div>
         <button
           type="button"

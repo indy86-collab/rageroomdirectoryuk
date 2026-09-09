@@ -4,12 +4,12 @@ import Link from "next/link"
 import { ArrowRight, FileText, Package } from "lucide-react"
 import DigitalEditorialByline from "@/components/DigitalEditorialByline"
 import DigitalGuidesChooser from "@/components/DigitalGuidesChooser"
+import DigitalCheckoutButton from "@/components/DigitalCheckoutButton"
 import DigitalPriceDisplay from "@/components/DigitalPriceDisplay"
 import { DigitalPurchaseReassurance } from "@/components/DigitalPurchaseDetails"
 import DigitalSaleBanner from "@/components/DigitalSaleBanner"
 import FAQ from "@/components/FAQ"
 import FirstVisitChecklistCTA from "@/components/FirstVisitChecklistCTA"
-import LeadMagnetForm from "@/components/LeadMagnetForm"
 import ProductListViewTracker from "@/components/ProductListViewTracker"
 import TrackedProductLink from "@/components/TrackedProductLink"
 import {
@@ -64,19 +64,19 @@ const hubFaqs = [
       "No. These are planning and template packs only. You still book directly with your chosen rage room venue.",
   },
   {
-    question: "Is the First Visit Prep Pack free?",
+    question: "Why is the First Visit Prep Pack £1?",
     answer:
       "Yes. Enter your email on this page or the prep pack page for instant access. No payment or account required.",
   },
   {
     question: "What format do I get?",
     answer:
-      "The free First Visit Prep Pack and most paid packs are printable PDF downloads. The Corporate Event Builder is a free interactive planner; you pay only for a clean PDF of your plan plus the toolkit. The Corporate Booking System is an interactive workspace for venue owners. The gift voucher pack is a ZIP with printable and digital templates. Paid products unlock after payment, plus an email with your access link.",
+      "The £1 First Visit Prep Pack helps maintain the site and ongoing venue research. Most other packs are printable PDF downloads. The Corporate Event Builder is a free interactive planner; you pay only for a clean PDF of your plan plus the toolkit. The Corporate Booking System is an interactive workspace for venue owners. The gift voucher pack is a ZIP with printable and digital templates. Paid products unlock after payment, plus an email with your access link.",
   },
   {
     question: "Can I preview before buying?",
     answer:
-      "Yes. Paid packs show sample pages on this site, plus a free sample PDF on each product page. The First Visit Prep Pack is entirely free.",
+      "Yes. Paid packs show sample pages on this site, plus a sample PDF on each product page. The First Visit Prep Pack is £1.",
   },
   {
     question: "What if a paid file is faulty?",
@@ -91,7 +91,7 @@ const hubFaqs = [
   {
     question: "Why are some prices reduced right now?",
     answer:
-      "We're running a limited-time 20% demand drop on paid planning packs. The lower price is already applied at Stripe checkout — no promo code needed. The First Visit Prep Pack stays free.",
+      "Prices are now back at their standard levels. The £1 First Visit Prep Pack helps maintain the directory and its venue research.",
   },
 ]
 
@@ -201,7 +201,7 @@ export default function DigitalDownloadsPage() {
           Digital Guides
         </h1>
         <p className="mt-4 max-w-3xl text-lg text-zinc-300">
-          Start with the free First Visit Prep Pack, then grab printable planning packs,
+          Start with the £1 First Visit Prep Pack, then grab printable planning packs,
           the Corporate Event Builder and gift templates when you need them.
         </p>
         <DigitalEditorialByline className="mt-3" />
@@ -236,7 +236,7 @@ export default function DigitalDownloadsPage() {
             <div className="flex flex-col gap-4 p-5 sm:p-6">
               <div>
                 <p className="text-xs font-bold uppercase tracking-widest text-rage-500">
-                  FREE
+                  £1 SUPPORTER PACK
                 </p>
                 <h2 className="mt-1 text-2xl font-bold text-white">
                   {freeProduct.name}
@@ -246,11 +246,15 @@ export default function DigitalDownloadsPage() {
                 </p>
               </div>
               <DigitalPriceDisplay product={freeProduct} size="md" />
-              <LeadMagnetForm
-                source="digital-downloads"
-                showInlinePreviewOnSuccess={false}
-                idPrefix="hub-free-checklist"
-              />
+              <DigitalCheckoutButton
+                productId={freeProduct.id}
+                analyticsProduct={freeAnalytics}
+                checkoutSource="digital-downloads"
+                collectEmail
+                className="btn-rage inline-flex min-h-11 w-full items-center justify-center text-sm uppercase tracking-wider"
+              >
+                Get the prep pack — {freeProduct.priceLabel}
+              </DigitalCheckoutButton>
               <TrackedProductLink
                 href={`/digital-downloads/${freeProduct.slug}`}
                 product={freeAnalytics}

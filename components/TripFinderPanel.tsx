@@ -94,7 +94,7 @@ export default function TripFinderPanel({
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </button>
               <p className="text-xs text-zinc-500 sm:text-right">
-                City or postcode search is still in the hero and header.
+                Include your town, group size and budget for a closer match.
               </p>
             </div>
           </form>

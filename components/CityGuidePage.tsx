@@ -97,7 +97,10 @@ export default async function CityGuidePage({
   modified = "2026-08-04",
 }: CityGuidePageProps) {
   const { getListingsNearCity } = await import("@/lib/listings")
-  const { inCity, nearby, allForSchema } = await getListingsNearCity(city)
+  const cityListings = await getListingsNearCity(city)
+  const inCity = cityListings.inCity.filter(l => l.activities.includes("rage-room"))
+  const nearby = cityListings.nearby.filter(l => l.activities.includes("rage-room"))
+  const allForSchema = cityListings.allForSchema.filter(l => l.activities.includes("rage-room"))
   const content = getGuideCityContent(city)
   const faqs = getCityFAQs(city)
 
@@ -170,6 +173,11 @@ export default async function CityGuidePage({
             </p>
           )}
 
+          <nav aria-label="On this page" className="my-5 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-rage-300">
+            {comparisonListings.length > 0 && <Link href={`#${citySlug}-comparison`} className="inline-flex min-h-11 items-center">Compare venues</Link>}
+            <Link href="#visit-advice" className="inline-flex min-h-11 items-center">Visit advice</Link>
+            <Link href="#guide-questions" className="inline-flex min-h-11 items-center">Common questions</Link>
+          </nav>
           <GuideMeta
             updated={updated}
             readingTimeMinutes={6}
@@ -313,7 +321,7 @@ export default async function CityGuidePage({
             </div>
           )}
 
-          <div className="bg-[#181818] rounded-lg border border-zinc-800 p-5 sm:p-6 mb-8">
+          <div id="visit-advice" className="bg-[#181818] rounded-lg border border-zinc-800 p-5 sm:p-6 mb-8">
             <h2 className="text-xl sm:text-2xl font-bold text-white mb-3">
               What to Look For
             </h2>
@@ -325,10 +333,10 @@ export default async function CityGuidePage({
             <p className="text-zinc-300">{content?.localTip}</p>
           </div>
 
-          <FAQ
+          <div id="guide-questions"><FAQ
             items={faqs}
             title={`Frequently Asked Questions About Rage Rooms in ${city}`}
-          />
+          /></div>
 
           <div className="bg-[#181818] rounded-lg border border-zinc-800 p-5 sm:p-6 mb-8 mt-10">
             <h2 className="text-xl sm:text-2xl font-bold text-white mb-3">

@@ -7,7 +7,7 @@ import { DigitalValueStack } from "@/components/DigitalPurchaseDetails"
 import DigitalSampleStrip from "@/components/DigitalSampleStrip"
 import FAQ from "@/components/FAQ"
 import FirstVisitChecklistCTA from "@/components/FirstVisitChecklistCTA"
-import LeadMagnetForm from "@/components/LeadMagnetForm"
+import DigitalCheckoutButton from "@/components/DigitalCheckoutButton"
 import ProductViewTracker from "@/components/ProductViewTracker"
 import TrackedProductLink from "@/components/TrackedProductLink"
 import {
@@ -24,9 +24,9 @@ const giftProduct = getDigitalProduct("rage-room-gift-voucher-template-pack")!
 const giftAnalyticsProduct = getDigitalProductAnalytics(giftProduct)
 
 export const metadata: Metadata = {
-  title: "FREE Rage Room First Visit Prep Pack | Printable UK First-Timer Kit",
+  title: "£1 Rage Room First Visit Prep Pack | Printable UK First-Timer Kit",
   description:
-    "Free printable rage room first visit prep pack. Includes what happens, what to wear, can-I-take-part checks, venue questions, waiver tips and a final arrival checklist. Free download — no account required.",
+    "A £1 printable rage room first visit prep pack covering what happens, what to wear, can-I-take-part checks, venue questions, waiver tips and an arrival checklist.",
   alternates: {
     canonical: "/digital-downloads/rage-room-first-visit-prep-pack",
   },
@@ -70,9 +70,9 @@ const audiences = [
 
 const faqs = [
   {
-    question: "Is this really free?",
+    question: "Why does the prep pack cost £1?",
     answer:
-      "Yes. Enter your email and you get the full 12-page prep pack immediately. No payment, no account, no Stripe checkout.",
+      "The small £1 contribution helps maintain RageRoom Directory, update venue research and keep the planning tools useful. It is not a venue booking.",
   },
   {
     question: "Does this include a rage room booking?",
@@ -101,7 +101,7 @@ const faqs = [
   {
     question: "How is this different from the Party Planner Pack?",
     answer:
-      "This free pack is for first-timers getting ready for a session. The Party Planner Pack is a paid kit for organising a full group event with budgets, RSVPs and invites.",
+      "This £1 pack is for first-timers getting ready for a session. The Party Planner Pack is a paid kit for organising a full group event with budgets, RSVPs and invites.",
   },
 ]
 
@@ -132,14 +132,14 @@ export default function RageRoomFirstVisitPrepPackPage({ searchParams }: PagePro
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
       />
       <ProductViewTracker product={analyticsProduct} />
-      <section className="px-4 py-12 sm:px-6 sm:py-16 lg:py-20">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+      <section className="px-4 py-8 sm:px-6 sm:py-10">
+        <div className="mx-auto grid max-w-6xl items-start gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
           <div>
             <p className="text-sm font-bold uppercase tracking-widest text-rage-500">
-              Free digital download
+              £1 digital download
             </p>
-            <h1 className="mt-4 text-4xl font-black uppercase tracking-wide text-white sm:text-5xl lg:text-6xl">
-              FREE Rage Room First Visit Prep Pack
+            <h1 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              Rage Room First Visit Prep Pack
             </h1>
             <DigitalEditorialByline className="mt-3" />
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-zinc-300">
@@ -150,15 +150,24 @@ export default function RageRoomFirstVisitPrepPackPage({ searchParams }: PagePro
               <DigitalPriceDisplay product={product} />
             </div>
             <div id="get-checklist" className="mt-8 scroll-mt-24 rounded-lg border border-rage-500/35 bg-[#181818] p-5">
-              <h2 className="text-lg font-bold text-white">Get the Free Prep Pack</h2>
+              <h2 className="text-lg font-bold text-white">Support the directory and get the prep pack</h2>
               <p className="mt-1 mb-4 text-sm text-zinc-400">
-                Enter your email for the full 12-page PDF. No account required.
+                Pay £1 at Stripe for the full 12-page PDF. Your small contribution helps maintain the site and its venue research.
               </p>
-              <LeadMagnetForm source={source} idPrefix="first-visit-product" />
+              <DigitalCheckoutButton
+                productId={product.id}
+                analyticsProduct={analyticsProduct}
+                checkoutSource={source}
+                collectEmail
+                className="btn-rage inline-flex min-h-12 w-full items-center justify-center text-sm uppercase tracking-wider"
+              >
+                Get the prep pack — {product.priceLabel}
+              </DigitalCheckoutButton>
             </div>
           </div>
           {product.marketingImage && (
             <DigitalProductCover
+              className="order-first mx-auto w-full max-w-md lg:order-none lg:max-w-none lg:sticky lg:top-24"
               src={product.marketingImage}
               alt={`${product.name} cover`}
               priority

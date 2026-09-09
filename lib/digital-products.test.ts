@@ -8,23 +8,23 @@ import {
   sessionAmountMatchesProduct,
 } from "@/lib/digital-products"
 
-describe("first-timer checklist lead magnet", () => {
-  it("marks the first visit product as free without zeroing historical unitAmount", () => {
+describe("first-timer checklist product", () => {
+  it("prices the first visit pack at £1 and keeps the historical amount valid", () => {
     const product = getDigitalProduct(FIRST_VISIT_CHECKLIST_PRODUCT_ID)
     expect(product).toBeTruthy()
-    expect(product?.isFree).toBe(true)
-    expect(product?.priceLabel).toBe("FREE")
-    expect(product?.unitAmount).toBe(400)
+    expect(product?.isFree).toBeFalsy()
+    expect(product?.priceLabel).toBe("£1")
+    expect(product?.unitAmount).toBe(100)
     expect(product?.name).toMatch(/First Visit Prep Pack/i)
     expect(product?.downloadFilename).toBe("rage-room-first-visit-prep-pack.pdf")
     expect(product?.pageCount).toBe(12)
-    expect(isFreeDigitalProduct(product)).toBe(true)
+    expect(isFreeDigitalProduct(product)).toBe(false)
   })
 
-  it("reports zero analytics price for the free prep pack", () => {
+  it("reports the £1 analytics price for the prep pack", () => {
     const product = getDigitalProduct(FIRST_VISIT_CHECKLIST_PRODUCT_ID)!
     const analytics = getDigitalProductAnalytics(product)
-    expect(analytics.price).toBe(0)
+    expect(analytics.price).toBe(1)
     expect(analytics.item_id).toBe("rage_first_visit_prep_pack")
   })
 
@@ -43,8 +43,8 @@ describe("first-timer checklist lead magnet", () => {
       expect(product.priceLabel).not.toBe("FREE")
     }
 
-    expect(party.unitAmount).toBe(560)
-    expect(corporate.unitAmount).toBe(1520)
+    expect(party.unitAmount).toBe(399)
+    expect(corporate.unitAmount).toBe(999)
     expect(corporate.name).toMatch(/Event Builder/i)
     expect(corporate.includedSections[0]).toBe("Downloadable event plan PDF")
     expect(corporate.checkoutBlurb).toMatch(/builder itself is free/i)
@@ -52,8 +52,8 @@ describe("first-timer checklist lead magnet", () => {
     expect(bookingSystem.priceLabel).toBe("£79")
     expect(bookingSystem.isInteractive).toBe(true)
     expect(bookingSystem.filePath).toBeFalsy()
-    expect(gift.unitAmount).toBe(400)
-    expect(bundle.unitAmount).toBe(720)
+    expect(gift.unitAmount).toBe(299)
+    expect(bundle.unitAmount).toBe(499)
   })
 
   it("accepts current and legacy compare-at amounts for Event Builder entitlement", () => {

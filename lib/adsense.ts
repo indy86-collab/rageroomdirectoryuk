@@ -4,6 +4,12 @@ export const ADSENSE_CLIENT =
 export const ADSENSE_INARTICLE_SLOT =
   process.env.NEXT_PUBLIC_ADSENSE_INARTICLE_SLOT?.trim() || "5555492233"
 
+/** Keep local, test and preview traffic away from live advertising. */
+export function isLiveAdsenseHost(hostname: string, environment: string): boolean {
+  return environment === "production" &&
+    ["rageroomdirectory.co.uk", "www.rageroomdirectory.co.uk"].includes(hostname.toLowerCase())
+}
+
 /** AdSense ad-unit IDs are numeric. Never emit an incomplete manual ad tag. */
 export function isValidAdsenseAdSlot(
   slot: string | null | undefined
@@ -55,7 +61,8 @@ const EXCLUDED_PREFIXES = [
 
 /**
  * Ads load only on long editorial URLs. Directory, booking, checkout,
- * game and legal pages stay ad-free so Auto ads cannot overlay CTAs.
+ * game and legal pages do not mount manual units. Also configure account-side
+ * Auto ads exclusions; this route check cannot revoke an already loaded script.
  */
 export function isAdEligiblePath(pathname: string): boolean {
   if (!pathname) return false

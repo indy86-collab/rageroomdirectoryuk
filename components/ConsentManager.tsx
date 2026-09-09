@@ -132,20 +132,17 @@ export default function ConsentManager({
       {!preferences && !settingsOpen && (
         <section
           aria-label="Privacy choices"
-          className="fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-[120] mx-auto max-w-4xl rounded-xl border border-zinc-700 bg-zinc-950 p-4 shadow-2xl sm:p-5"
+          className="fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-[120] mx-auto max-w-5xl rounded-xl border border-zinc-700 bg-zinc-950 p-4 shadow-2xl sm:p-5"
           data-testid="consent-banner"
         >
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div className="max-w-2xl">
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-xl">
               <h2 className="text-base font-bold text-white">Your privacy choices</h2>
               <p className="mt-1 text-sm leading-relaxed text-zinc-300">
-                We use optional analytics to understand directory use and improve the site.
-                They stay off unless you accept. Ads, if shown, are consented separately
-                through Google&apos;s privacy message. Essential browser storage keeps requested
-                features working. <Link href="/privacy" className="underline hover:text-orange-400">Privacy details</Link>.
+                Optional analytics help us improve the site and stay off until you accept. Essential storage keeps features working. Ad choices are managed separately. <Link href="/privacy" className="underline hover:text-orange-400">Privacy details</Link>.
               </p>
             </div>
-            <div className="grid grid-cols-1 gap-2 sm:flex sm:flex-wrap">
+            <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap lg:min-w-[350px]">
               <button
                 type="button"
                 onClick={() => applyDecision(false)}
@@ -159,7 +156,7 @@ export default function ConsentManager({
                   previousFocusRef.current = document.activeElement as HTMLElement
                   setSettingsOpen(true)
                 }}
-                className="min-h-12 rounded-md border border-zinc-600 px-4 text-sm font-semibold text-white hover:border-zinc-400"
+                className="order-3 col-span-2 min-h-11 rounded-md border border-zinc-600 px-4 text-sm font-semibold text-white hover:border-zinc-400"
               >
                 Manage preferences
               </button>

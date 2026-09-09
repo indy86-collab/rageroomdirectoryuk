@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest"
 import {
   isAdEligiblePath,
+  isLiveAdsenseHost,
   isValidAdsenseAdSlot,
   splitMarkdownForInArticleAd,
 } from "./adsense"
@@ -66,5 +67,18 @@ describe("splitMarkdownForInArticleAd", () => {
     const split = splitMarkdownForInArticleAd(content)
     expect(split.before).toBe(intro)
     expect(split.after.startsWith("\n# Next section")).toBe(true)
+  })
+})
+
+
+describe("live ad environment", () => {
+  it("allows only production builds on the two public hosts", () => {
+    expect(isLiveAdsenseHost("www.rageroomdirectory.co.uk", "production")).toBe(true)
+    expect(isLiveAdsenseHost("rageroomdirectory.co.uk", "production")).toBe(true)
+    for (const hostname of ["localhost", "127.0.0.1", "preview.vercel.app", "www.rageroomdirectory.co.uk.example.com"]) {
+      expect(isLiveAdsenseHost(hostname, "production")).toBe(false)
+    }
+    expect(isLiveAdsenseHost("www.rageroomdirectory.co.uk", "development")).toBe(false)
+    expect(isLiveAdsenseHost("www.rageroomdirectory.co.uk", "test")).toBe(false)
   })
 })

@@ -64,7 +64,7 @@ test.describe("directory conversion attribution", () => {
       venueCity: "Maidstone",
     })
 
-    await clickWithoutNavigation(page.getByRole("link", { name: "Book Your Session →" }))
+    await clickWithoutNavigation(page.getByRole("link", { name: "Check availability →" }))
     const bookingEvents = await capturedEvents(page, "booking_click")
     expect(bookingEvents).toHaveLength(1)
     expect(bookingEvents[0].properties).toMatchObject({
@@ -74,7 +74,7 @@ test.describe("directory conversion attribution", () => {
       sourcePath: "/listing/rage-out-maidstone-maidstone",
     })
 
-    await clickWithoutNavigation(page.getByRole("link", { name: "rageout.co.uk/" }))
+    await clickWithoutNavigation(page.getByRole("link", { name: "Venue website", exact: true }))
     expect(await capturedEvents(page, "website_click")).toHaveLength(1)
     expect(await capturedEvents(page, "booking_click")).toHaveLength(1)
 

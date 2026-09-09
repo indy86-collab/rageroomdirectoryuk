@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import ActivityArtwork from "./ActivityArtwork"
 import Image from "next/image"
 import type { Listing, ListingActivity } from "@/types/listing"
 import { ArrowRight, CalendarCheck, Clock, MapPin, Star, Users } from "lucide-react"
@@ -74,7 +75,7 @@ export default function ListingCard({
   return (
     <article className="card-base card-hover group relative flex h-full flex-col overflow-hidden">
       <Link href={href} className="block" aria-label={`View ${listing.name}`}>
-        <div className="relative aspect-video w-full overflow-hidden">
+        <div className={`relative w-full overflow-hidden ${image ? "aspect-video" : "h-32"}`}>
           {image ? (
             <Image
               src={image}
@@ -85,14 +86,11 @@ export default function ListingCard({
               loading="lazy"
             />
           ) : (
-            <div className="flex aspect-video w-full items-center justify-center bg-gradient-to-br from-dark-800 to-dark-900">
-              <span className="text-sm font-medium text-zinc-600">No image</span>
-            </div>
+            <ActivityArtwork activity={listing.activities[0] || "rage-room"} className="h-32" venueFallback />
           )}
-          <div className="absolute bottom-0 right-0 h-12 w-12 bg-rage-600 opacity-70" style={{ clipPath: "polygon(100% 0, 100% 100%, 0 100%)" }} />
           {listing.verified && (
-            <div className="absolute left-3 top-3 rounded-full border border-rage-400/50 bg-rage-500 px-3 py-1 text-xs font-bold text-white shadow-lg">
-              VERIFIED
+            <div className="absolute left-3 top-3 rounded-full border border-zinc-600 bg-zinc-950/90 px-3 py-1 text-xs font-bold text-white shadow-lg">
+              Details checked
             </div>
           )}
         </div>
@@ -101,7 +99,7 @@ export default function ListingCard({
       <div className="flex flex-grow flex-col p-5">
         <div className="mb-3 flex flex-wrap gap-1.5">
           {activityBadges.map((activity) => (
-            <span key={activity.value} className="inline-flex items-center gap-1 rounded-full border border-rage-500/30 bg-rage-500/10 px-2 py-1 text-[11px] font-bold text-rage-300">
+            <span key={activity.value} className="inline-flex items-center gap-1 rounded-full border border-zinc-700 bg-zinc-800/50 px-2 py-1 text-[11px] font-semibold text-zinc-200">
               <span aria-hidden="true">{activity.emoji}</span> {activity.shortLabel}
             </span>
           ))}
@@ -119,21 +117,21 @@ export default function ListingCard({
         </div>
 
         <div className="mb-4 grid grid-cols-2 gap-2 text-xs text-zinc-300">
-          <div className="rounded-md border border-zinc-800 bg-dark-900/60 p-2">
-            <span className="block text-[10px] uppercase tracking-wider text-zinc-500">{experienceLabel} price</span>
-            <span className="font-bold text-white">{startingPrice ?? "Not provided"}</span>
+          <div className="py-1">
+            <span className="block text-xs text-zinc-400">{experienceLabel} price</span>
+            <span className="text-base font-bold text-white">{startingPrice ?? "Check with venue"}</span>
           </div>
-          <div className="rounded-md border border-zinc-800 bg-dark-900/60 p-2">
-            <span className="block text-[10px] uppercase tracking-wider text-zinc-500">Minimum age</span>
-            <span className="font-bold text-white">{listing.ageMin != null ? `${listing.ageMin}+` : "Not provided"}</span>
+          <div className="py-1">
+            <span className="block text-xs text-zinc-400">Minimum age</span>
+            <span className="font-bold text-white">{listing.ageMin != null ? `${listing.ageMin}+` : "Check with venue"}</span>
           </div>
-          <div className="flex items-center gap-1.5 rounded-md border border-zinc-800 bg-dark-900/60 p-2">
+          <div className="flex items-center gap-1.5 py-1">
             <Clock className="h-3.5 w-3.5 text-rage-500" />
-            <span>{duration ?? "Not provided"}</span>
+            <span>{duration ?? "Check with venue"}</span>
           </div>
-          <div className="flex items-center gap-1.5 rounded-md border border-zinc-800 bg-dark-900/60 p-2">
+          <div className="flex items-center gap-1.5 py-1">
             {listing.rating != null ? <Star className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" /> : <Users className="h-3.5 w-3.5 text-rage-500" />}
-            <span>{listing.rating != null ? `${listing.rating.toFixed(1)} rating` : "Group options"}</span>
+            <span>{listing.rating != null ? `${listing.rating.toFixed(1)} rating` : listing.groupSizeMax ? `Up to ${listing.groupSizeMax} people` : "Ask about groups"}</span>
           </div>
         </div>
 
@@ -168,7 +166,8 @@ export default function ListingCard({
               <ArrowRight className="h-4 w-4" />
             </Link>
           )}
-          <div className="mt-2 grid grid-cols-2 gap-2">
+          {/* Reserve the secondary-action row so primary buttons align across cards. */}
+          <div className="mt-2 grid min-h-11 grid-cols-2 gap-2">
             {listing.bookingUrl && (
               <Link
                 href={href}

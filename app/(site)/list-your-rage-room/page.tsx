@@ -41,10 +41,25 @@ export default function ListYourRageRoomPage({
       <div className="mx-auto max-w-4xl px-4">
         <h1 className="mb-4 text-4xl font-bold text-white">List Your Rage Room</h1>
         <p className="mb-8 text-lg text-zinc-300">
-          Are you a rage room business owner? Get your venue listed on the UK&apos;s
-          premier rage room directory and reach thousands of potential customers.
+          Add your venue for free or update an existing listing. Our editors check the details before publishing.
         </p>
 
+        <nav aria-label="Venue owner actions" className="mb-6 flex flex-wrap gap-3">
+          <Link href="/list-your-rage-room?type=new#submission-form" className="btn-rage">Add a venue</Link>
+          <Link href="/list-your-rage-room?type=claim#submission-form" className="btn-secondary">Update a listing</Link>
+        </nav>
+        <div id="submission-form" className="overflow-hidden rounded-lg border border-zinc-800 bg-[#181818] p-6">
+          <h2 className="mb-2 text-2xl font-bold text-white">Submit or update a venue</h2>
+          <p className="mb-6 text-sm text-zinc-400">
+            Nothing is published automatically. Our editors verify the details, sources and media permission before updating the directory.
+          </p>
+          <ListingSubmissionForm key={`${initialType}:${searchParams?.listing || ""}`}
+            initialListingSlug={searchParams?.listing || ""}
+            initialRequestType={initialType}
+          />
+        </div>
+
+<div className="mt-10">
         <div className="mb-8 rounded-lg border border-rage-500/40 bg-rage-500/10 p-6">
           <h2 className="mb-3 text-2xl font-bold text-white">
             Featured listing placement
@@ -149,17 +164,8 @@ export default function ListYourRageRoomPage({
           </ul>
         </div>
 
-        <div id="submission-form" className="overflow-hidden rounded-lg border border-zinc-800 bg-[#181818] p-6">
-          <h2 className="mb-2 text-2xl font-bold text-white">Submit or update a venue</h2>
-          <p className="mb-6 text-sm text-zinc-400">
-            Nothing is published automatically. Our editors verify the details, sources and media permission before updating the directory.
-          </p>
-          <ListingSubmissionForm
-            initialListingSlug={searchParams?.listing || ""}
-            initialRequestType={initialType}
-          />
-        </div>
 
+</div>
         <div className="mt-8 text-center">
           <Link href="/" className="text-orange-500 hover:text-orange-600">
             ← Back to Home
