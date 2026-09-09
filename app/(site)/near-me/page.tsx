@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 // ISR: directory data updates infrequently; distance sort happens client-side.
 export const revalidate = 86400
 
-export default async function NearMePage() {
+export default async function NearMePage({ searchParams }: { searchParams: { postcode?: string } }) {
   // Lazy load to prevent build-time initialization
   const { getDistinctCities, getFeaturedListings, getListingsWithLocation } = await import("@/lib/listings")
   const cities = await getDistinctCities()
@@ -88,7 +88,7 @@ export default async function NearMePage() {
             Find Rage Rooms on the Map
           </h2>
           <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4">
-            <NearMeMap listings={allLocatedListings} />
+            <NearMeMap listings={allLocatedListings} initialPostcode={searchParams.postcode} />
           </div>
         </section>
 

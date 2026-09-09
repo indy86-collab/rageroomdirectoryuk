@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useSearchParams } from "next/navigation"
 import type { Listing } from "@/types/listing"
 import Link from "next/link"
 import TrackedBookingLink from "@/components/TrackedBookingLink"
@@ -10,9 +9,10 @@ import { formatListingPrice } from "@/lib/discovery"
 
 interface NearMeMapProps {
   listings: Listing[]
+  initialPostcode?: string
 }
 
-export default function NearMeMap({ listings }: NearMeMapProps) {
+export default function NearMeMap({ listings, initialPostcode }: NearMeMapProps) {
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null)
   const [locationError, setLocationError] = useState<string | null>(null)
   const [sortedListings, setSortedListings] = useState<Listing[]>(listings)
@@ -22,14 +22,13 @@ export default function NearMeMap({ listings }: NearMeMapProps) {
   const [postcodeStatus, setPostcodeStatus] = useState<"idle" | "loading" | "error">("idle")
   const [postcodeError, setPostcodeError] = useState("")
   const [mapLoaded, setMapLoaded] = useState(false)
-  const searchParams = useSearchParams()
 
   useEffect(() => {
-    const initialPostcode = searchParams.get("postcode")?.trim()
-    if (!initialPostcode) return
-    setPostcode(initialPostcode)
-    void searchPostcodeValue(initialPostcode)
-  }, [searchParams])
+    if (!initialPostcode?.trim()) return
+    const value = initialPostcode.trim()
+    setPostcode(value)
+    void searchPostcodeValue(value)
+  }, [initialPostcode])
 
   async function searchPostcodeValue(value: string) {
     setPostcodeStatus("loading")
