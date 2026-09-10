@@ -30,6 +30,14 @@ export function getAuthorisedListingImage(listing: Listing): string | null {
   return getAuthorisedMedia(listing).find((media) => media.type === "image")?.url ?? null
 }
 
+/**
+ * Image used in the visitor-facing directory UI. Legacy listing covers remain
+ * valid display assets; authorisation is required for media/schema output.
+ */
+export function getListingDisplayImage(listing: Listing): string | null {
+  return getAuthorisedListingImage(listing) ?? listing.image ?? null
+}
+
 export function isIndexableListingPage(listing: Listing): boolean {
   const descriptionWords = listing.description?.trim().split(/\s+/).filter(Boolean).length ?? 0
   const usefulSignals = [

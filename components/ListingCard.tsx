@@ -15,7 +15,7 @@ import {
 } from "@/lib/discovery"
 import type { DirectoryDiscoveryContext } from "@/lib/analytics"
 import TrackedBookingLink from "./TrackedBookingLink"
-import { getAuthorisedListingImage } from "@/lib/listing-quality"
+import { getListingDisplayImage } from "@/lib/listing-quality"
 
 export type ListingDiscoveryContext = DirectoryDiscoveryContext & {
   surface: "activity" | "occasion" | "directory"
@@ -59,7 +59,7 @@ export default function ListingCard({
   const startingPrice = formatListingPrice(listing)
   const experienceLabel = getListingExperienceLabel(listing)
   const listingSlug = listing.slug || listing.id
-  const image = getAuthorisedListingImage(listing)
+  const image = getListingDisplayImage(listing)
   const ctaPlacement =
     discoveryContext.pageType === "activity"
       ? "activity_results"

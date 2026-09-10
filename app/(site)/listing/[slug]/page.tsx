@@ -34,6 +34,7 @@ import {
   buildListingMediaSchema,
   getAuthorisedMedia,
   getAuthorisedListingImage,
+  getListingDisplayImage,
   isIndexableListingPage,
 } from "@/lib/listing-quality"
 import {
@@ -236,7 +237,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
   const venueSlug = listing.slug || listing.id
   const primaryBookingUrl = listing.bookingUrl || null
   const authorisedMedia = getAuthorisedMedia(listing)
-  const authorisedImage = getAuthorisedListingImage(listing)
+  const displayImage = getListingDisplayImage(listing)
   const mediaSchema = buildListingMediaSchema(listing, listingUrl)
   const showCorporateCTA =
     listing.corporatePackages === true ||
@@ -447,13 +448,13 @@ export default async function ListingPage({ params }: ListingPageProps) {
 
         {/* Main Listing Card */}
         <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 mb-8">
-          <div className={`grid grid-cols-1 ${authorisedImage ? "lg:grid-cols-2" : "lg:grid-cols-[0.7fr_1.3fr]"}`} >
+          <div className={`grid grid-cols-1 ${displayImage ? "lg:grid-cols-2" : "lg:grid-cols-[0.7fr_1.3fr]"}`} >
             {/* Image */}
             <div className="bg-zinc-900">
-              {authorisedImage ? (
+              {displayImage ? (
                 <div className="aspect-video w-full relative">
                   <Image
-                    src={authorisedImage}
+                    src={displayImage}
                     alt={`${listing.name} ${experienceLabel.toLowerCase()} experience${isMobileService ? "" : ` in ${listing.city}`}`}
                     fill
                     className="object-cover"
@@ -842,7 +843,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
                 lat={location.lat}
                 lng={location.lng}
                 title={`${listing.name} — ${listing.city}`}
-                previewImage={authorisedImage || undefined}
+                previewImage={displayImage || undefined}
               />
             </div>
             <a
