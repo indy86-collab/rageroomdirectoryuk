@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import ClaimedListingBadge from "./ClaimedListingBadge"
 import ActivityArtwork from "./ActivityArtwork"
 import Image from "next/image"
 import type { Listing, ListingActivity } from "@/types/listing"
@@ -98,6 +99,7 @@ export default function ListingCard({
 
       <div className="flex flex-grow flex-col p-5">
         <div className="mb-3 flex flex-wrap gap-1.5">
+          {listing.claimed && <ClaimedListingBadge />}
           {activityBadges.map((activity) => (
             <span key={activity.value} className="inline-flex items-center gap-1 rounded-full border border-zinc-700 bg-zinc-800/50 px-2 py-1 text-[11px] font-semibold text-zinc-200">
               <span aria-hidden="true">{activity.emoji}</span> {activity.shortLabel}

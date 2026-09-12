@@ -1,3 +1,4 @@
+import ClaimedListingBadge from "@/components/ClaimedListingBadge"
 import ActivityArtwork from "@/components/ActivityArtwork"
 import { notFound, redirect } from "next/navigation"
 import { Metadata } from "next"
@@ -475,6 +476,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
                     {listing.name}
                   </h1>
                   <div className="mb-2 flex flex-wrap items-center gap-2">
+                    {listing.claimed && <ClaimedListingBadge />}
                     {listing.verified && (
                       <span className="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium border border-zinc-600 bg-zinc-800 text-zinc-200">
                         Details checked
@@ -1057,10 +1059,19 @@ export default async function ListingPage({ params }: ListingPageProps) {
         <div className="mb-6 rounded-lg border border-zinc-800 bg-[#181818] p-4 sm:mb-8 sm:p-6">
           <h2 className="text-lg font-bold text-white">Venue owners</h2>
           <p className="mt-2 text-sm text-zinc-400">
-            Own or manage {listing.name}? Claim the listing to submit corrections to activities,
-            pricing, photos, offers and booking details.
+            {listing.claimed
+              ? "This listing has been claimed. Manage this venue? Contact us to update activities, pricing, photos, offers and booking details."
+              : `Own or manage ${listing.name}? Claim the listing to submit corrections to activities, pricing, photos, offers and booking details.`}
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
+            {listing.claimed ? (
+              <a
+                href={`mailto:ukrageroom@gmail.com?subject=${encodeURIComponent(`Listing update: ${listing.name}`)}`}
+                className="inline-flex min-h-11 items-center justify-center rounded-md bg-rage-500 px-4 py-2 text-sm font-bold text-white hover:bg-rage-600"
+              >
+                Request a listing update
+              </a>
+            ) : (
             <TrackedClaimLink
               href={`/list-your-rage-room?type=claim&listing=${encodeURIComponent(listing.slug || listing.id)}#submission-form`}
               venueSlug={venueSlug}
@@ -1071,6 +1082,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
             >
               Claim this listing
             </TrackedClaimLink>
+            )}
             <a
               href={`mailto:ukrageroom@gmail.com?subject=${encodeURIComponent(`Featured listing: ${listing.name}`)}`}
               className="inline-flex min-h-11 items-center text-sm font-semibold text-orange-500 hover:text-orange-400"

@@ -129,6 +129,8 @@ export interface Listing {
   }> | null
   sourceUrl?: string | null
   image: string | null
+  /** Set manually after an accepted venue claim; submissions do not set this automatically. */
+  claimed?: boolean
   verified: boolean
   googlePlaceId: string | null
   slug: string | null
