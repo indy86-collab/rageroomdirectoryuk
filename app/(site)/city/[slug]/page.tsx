@@ -16,6 +16,7 @@ import TrackedDiscoveryLink from "@/components/TrackedDiscoveryLink"
 import { buildOgImageUrl } from "@/lib/seo-schema"
 import { absoluteUrl, listingUrl } from "@/lib/site-url"
 import { isIndexableLocationPage } from "@/lib/location-indexing"
+import CommercialOffers from "@/components/CommercialOffers"
 import NearbyActivitiesAffiliate from "@/components/NearbyActivitiesAffiliate"
 import { getEligibleLocationDiscoveryPages } from "@/lib/location-discovery"
 import { getCityGuidePath, hasEditorialCityGuide } from "@/lib/city-guides"
@@ -118,6 +119,7 @@ export default async function CityPage({ params }: CityPageProps) {
   const hasNearbyOnly = inCity.length === 0 && nearby.length > 0
   const isEmpty = listings.length === 0
   const hasRageRoom = listings.some((listing) => listing.activities.includes("rage-room"))
+  const hasLocalRageRoom = inCity.some((listing) => listing.activities.includes("rage-room"))
 
   const cityUrl = absoluteUrl(`/city/${cityToSlug(cityName)}`)
 
@@ -272,6 +274,8 @@ export default async function CityPage({ params }: CityPageProps) {
           </div>
         )}
         
+        {!hasLocalRageRoom && <CommercialOffers intent="alternatives" city={cityName} placement="city_alternatives" />}
+
         {!isEmpty ? (
           <>
             {inCity.length > 0 && (
@@ -287,7 +291,7 @@ export default async function CityPage({ params }: CityPageProps) {
               </section>
             )}
 
-            {hasRageRoom && inCity.length > 0 && (
+            {hasLocalRageRoom && (
               <div className="mt-8 mb-6">
                 <NearbyActivitiesAffiliate city={cityName} placement="city" />
               </div>
@@ -312,12 +316,6 @@ export default async function CityPage({ params }: CityPageProps) {
                   }}
                 />
               </section>
-            )}
-
-            {hasRageRoom && inCity.length === 0 && (
-              <div className="mt-8 mb-6">
-                <NearbyActivitiesAffiliate city={cityName} placement="city" />
-              </div>
             )}
 
             {locationDiscoveryPages.length > 0 && (

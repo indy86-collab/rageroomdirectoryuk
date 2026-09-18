@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import type { Listing } from "@/types/listing"
 import ListingsGrid from "./ListingsGrid"
+import CommercialOffers from "./CommercialOffers"
 import ListingFilters from "./ListingFilters"
 import VenueCompareTable from "./VenueCompareTable"
 import {
@@ -126,6 +127,7 @@ export default function ListingsPageClient({
               }
             />
           </section>
+          {filteredListings.length === 0 && <CommercialOffers intent="alternatives" placement="empty_filters" />}
         </div>
       </div>
     </>

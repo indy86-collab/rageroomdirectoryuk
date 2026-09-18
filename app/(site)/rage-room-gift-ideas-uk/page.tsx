@@ -1,3 +1,4 @@
+import CommercialOffers from "@/components/CommercialOffers"
 import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowRight, CheckCircle, Gift } from "lucide-react"
@@ -46,6 +47,8 @@ export default function RageRoomGiftIdeasUKPage() {
           A rage room session can make a brilliant unusual experience gift, especially
           when you present it like a proper gift instead of sending a plain booking link.
         </p>
+
+        <CommercialOffers intent="gift" placement="gift_ideas" />
 
         <section className="mt-10 space-y-8 text-zinc-300">
           <div>

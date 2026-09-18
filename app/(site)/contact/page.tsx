@@ -1,3 +1,4 @@
+import EventPlanningEnquiry from "@/components/EventPlanningEnquiry"
 import { Metadata } from "next"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import Link from "next/link"
@@ -81,6 +82,8 @@ export default function ContactPage() {
             </a>
           </div>
         </div>
+
+        <EventPlanningEnquiry placement="contact" />
 
         {/* Response time note */}
         <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-5 sm:p-6 mb-8">

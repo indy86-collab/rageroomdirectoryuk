@@ -1,3 +1,4 @@
+import EventPlanningEnquiry from "@/components/EventPlanningEnquiry"
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -114,6 +115,8 @@ export default async function OccasionPage({ params }: OccasionPageProps) {
           showOccasions={false}
           resultsLabel="suitable venues"
         />
+
+        {occasion.slug === "corporate-team-building" && <EventPlanningEnquiry placement="occasion_corporate" />}
 
         {shouldShowAffiliateOnOccasion(occasion.slug) && (
           <div className="mt-10">

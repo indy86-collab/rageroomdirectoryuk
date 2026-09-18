@@ -1,4 +1,6 @@
 import { Metadata } from "next"
+import CommercialOffers from "@/components/CommercialOffers"
+import EventPlanningEnquiry from "@/components/EventPlanningEnquiry"
 import DigitalGuidesChooser from "@/components/DigitalGuidesChooser"
 import ListingsGrid from "@/components/ListingsGrid"
 import NearbyActivitiesAffiliate from "@/components/NearbyActivitiesAffiliate"
@@ -129,13 +131,18 @@ export default async function FindPage({ searchParams }: FindPageProps) {
           </p>
         ) : null}
 
+        {hasQuery && query.location && origin && resultCount === 0 && (
+          <CommercialOffers intent="alternatives" city={query.location.kind === "postcode" ? undefined : cityName} placement="empty_find" />
+        )}
+        {query.occasions.includes("corporate-team-building") && <EventPlanningEnquiry placement="find_corporate" />}
+
         {ranked.options.length > 0 ? (
           <div className="my-10">
             <DigitalGuidesChooser highlight={tripGuideIntent(query)} />
           </div>
         ) : null}
 
-        {showAffiliate && cityName ? (
+        {showAffiliate && cityName && resultCount > 0 ? (
           <div className="mb-10">
             <NearbyActivitiesAffiliate
               city={cityName}

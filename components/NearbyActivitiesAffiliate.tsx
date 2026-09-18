@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import CommercialOffers from "./CommercialOffers"
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -80,6 +81,7 @@ export default function NearbyActivitiesAffiliate({
   const [group, setGroup] = useState<PlannerGroup | null>(initialGroup ?? null)
   const [vibe, setVibe] = useState<PlannerVibe | null>(null)
   const [timing, setTiming] = useState<PlannerTiming | null>(null)
+  const groupOffer = ["birthdays", "hen-parties", "stag-parties"].includes(occasionSlug || "")
   const provider = "getyourguide"
   const chipCities = cities?.length ? cities : [...AFFILIATE_CHIP_CITIES]
   const analyticsCity = city || "UK"
@@ -146,6 +148,7 @@ export default function NearbyActivitiesAffiliate({
   const headingId = `nearby-activities-${placement}`
 
   if (!THIRD_PARTY_AFFILIATE_LINKS_ENABLED) return null
+  if (groupOffer) return <CommercialOffers intent="group" city={city} placement={`${placement}_${occasionSlug}`} />
 
   function startPlanner() {
     trackAffiliatePlannerStart(baseAnalytics)

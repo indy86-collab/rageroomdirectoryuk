@@ -1,3 +1,4 @@
+import { recordPhysicalOrder } from "@/lib/shop/fulfilment"
 import { NextResponse } from "next/server"
 import Stripe from "stripe"
 import {
@@ -127,6 +128,17 @@ export async function POST(request: Request) {
       { error: "Invalid Stripe signature" },
       { status: 400 }
     )
+  }
+
+  if (event.type.startsWith("checkout.session.")) {
+    const session = event.data.object as Stripe.Checkout.Session
+    if (session.metadata?.orderType === "physical") {
+      if (["checkout.session.completed", "checkout.session.async_payment_succeeded"].includes(event.type) && session.payment_status === "paid") {
+        try { await recordPhysicalOrder(session) }
+        catch { return NextResponse.json({ error: "Physical order recording failed" }, { status: 500 }) }
+      }
+      return NextResponse.json({ received: true })
+    }
   }
 
   const lifecycleEvent = checkoutSessionEvents[event.type]

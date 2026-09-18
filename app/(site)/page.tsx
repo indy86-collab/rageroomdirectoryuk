@@ -4,6 +4,7 @@ import Link from "next/link"
 import { ArrowRight, MapPin, Gift, Users, Gamepad2, CheckCircle2 } from "lucide-react"
 import Hero from "@/components/Hero"
 import FeaturedRooms from "@/components/FeaturedRooms"
+import ShopHomeAnnouncement from "@/components/shop/ShopHomeAnnouncement"
 import FAQ from "@/components/FAQ"
 import ActivityArtwork from "@/components/ActivityArtwork"
 import TrackedDiscoveryLink from "@/components/TrackedDiscoveryLink"
@@ -85,6 +86,7 @@ export default async function Home() {
         <FeaturedRooms listings={rooms} />
       </div>
     </section>
+    <ShopHomeAnnouncement />
     <section className="site-container py-12 sm:py-16" aria-labelledby="choose-experience-heading">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3"><div><p className="eyebrow mb-2">Make a little mess</p><h2 id="choose-experience-heading" className="section-title">Choose your experience</h2></div><Link href="/activities" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-rage-300">All activities<ArrowRight className="h-4 w-4" /></Link></div>
       <div className="grid gap-5 sm:grid-cols-3">{activities.map(a => <TrackedDiscoveryLink key={a.value} eventName="activity_discovery_click" sourcePageType="homepage" destinationIdentifier={a.slug} destinationPath={`/activities/${a.slug}`} className="card-base card-hover group overflow-hidden">

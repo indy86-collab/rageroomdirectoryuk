@@ -38,6 +38,7 @@ const navItems: NavItem[] = [
   },
   { label: "Cities", href: "/uk-map" },
   { label: "Guides", href: "/guides" },
+  { label: "Shop", href: "/shop" },
   { label: "Venue owners", href: "/list-your-rage-room" },
 ]
 

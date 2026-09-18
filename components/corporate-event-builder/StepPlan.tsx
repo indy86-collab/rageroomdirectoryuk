@@ -1,5 +1,6 @@
 "use client"
 
+import EventPlanningEnquiry from "@/components/EventPlanningEnquiry"
 import { useState } from "react"
 import {
   EVENT_CHECKLIST,
@@ -213,6 +214,8 @@ export default function StepPlan({
           ))}
         </ul>
       </div>
+
+      <EventPlanningEnquiry event={event} placement="builder_plan" />
 
       {!paid ? (
         <div className={`${sectionClass} border-rage-500/30`}>

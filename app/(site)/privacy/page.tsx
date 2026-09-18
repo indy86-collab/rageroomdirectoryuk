@@ -19,7 +19,7 @@ export default function PrivacyPage() {
     { label: "Privacy", href: "/privacy" },
   ]
 
-  const lastUpdated = "31 August 2026"
+  const lastUpdated = "18 September 2026"
 
   return (
     <div className="py-6 sm:py-8">
@@ -91,6 +91,9 @@ export default function PrivacyPage() {
             <p className="mt-3 text-sm text-zinc-400">
               Payment card details are handled by Stripe and are not stored on our servers.
             </p>
+
+            <h3 className="text-lg sm:text-xl font-semibold text-white mt-4 mb-2">Physical merchandise orders</h3>
+            <p>Stripe collects your checkout email, billing details and delivery name and address. We use these details and your selected product, size and quantity to process your order, arrange delivery and handle returns. For manual fulfilment, we share the delivery and product details needed to make and ship your order with our print supplier and delivery provider. We do not receive your full card details. Order records are held in Stripe and with the fulfilment provider as needed to fulfil the contract and meet accounting obligations.</p>
 
             <h3 className="text-lg sm:text-xl font-semibold text-white mt-4 sm:mt-6 mb-2 sm:mb-3">
               B4. Corporate Event Builder (organiser tool)

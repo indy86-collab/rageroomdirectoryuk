@@ -1,3 +1,4 @@
+import EventPlanningEnquiry from "@/components/EventPlanningEnquiry"
 import Link from "next/link"
 import { ArrowDown, Banknote, CalendarCheck, Layers3, Users } from "lucide-react"
 import Breadcrumbs from "@/components/Breadcrumbs"
@@ -125,6 +126,8 @@ export default function LocationDiscoveryPage({
           showOccasions={page.type === "activity"}
           resultsLabel={page.type === "activity" ? "verified venues" : "suitable venues"}
         />
+
+        {occasion?.slug === "corporate-team-building" && <EventPlanningEnquiry placement="occasion_location_corporate" />}
 
         {page.type === "occasion" &&
           occasion &&

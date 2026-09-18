@@ -1,3 +1,4 @@
+import EventPlanningEnquiry from "@/components/EventPlanningEnquiry"
 import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowRight, CheckCircle, Clock, ClipboardCheck } from "lucide-react"
@@ -38,6 +39,8 @@ export default function CorporateTeamBuildingGuidePage() {
           Rage rooms can make a memorable team social, morale reward or offsite activity,
           but work events need more planning than a casual night out.
         </p>
+
+        <EventPlanningEnquiry placement="corporate_guide" />
 
         <section className="mt-10 space-y-8 text-zinc-300">
           <div>
