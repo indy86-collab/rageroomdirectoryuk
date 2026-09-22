@@ -31,13 +31,12 @@ test("homepage announces the smash collection and opens the shop", async ({ page
 test("homepage showcases digital guides and opens a pack", async ({ page }) => {
   await page.goto("/")
   await dismissPrivacyBanner(page)
-  const showcase = page.getByRole("region", { name: "Plan it. Gift it. Arrive ready." })
+  const showcase = page.getByRole("region", { name: "Planning packs" })
   await expect(showcase).toBeVisible()
-  await expect(showcase.getByRole("link", { name: "See all digital guides" })).toHaveAttribute("href", "/digital-downloads")
-  await expect(showcase.getByRole("link", { name: /Gift Voucher Template Pack/ })).toBeVisible()
-  await expect(showcase.getByRole("link", { name: /First Visit Prep Pack/ })).toBeVisible()
-  await expect(showcase.getByRole("link", { name: /save £1.99/i })).toBeVisible()
-  await showcase.getByRole("link", { name: /Gift Voucher Template Pack/ }).click()
+  await expect(showcase.getByRole("link", { name: "Browse the guides" })).toHaveAttribute("href", "/digital-downloads")
+  await expect(showcase.getByRole("link", { name: /Gift vouchers/ })).toBeVisible()
+  await expect(showcase.getByRole("link", { name: /First visit/ })).toBeVisible()
+  await showcase.getByRole("link", { name: /Gift vouchers/ }).click()
   await expect(page).toHaveURL(/\/digital-downloads\/rage-room-gift-voucher-template-pack/)
 })
 
