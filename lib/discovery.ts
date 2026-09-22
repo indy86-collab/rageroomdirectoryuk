@@ -388,6 +388,35 @@ export function formatListingPrice(
   return `${options?.includeFrom === false ? "" : "From "}${formatPriceAmount(listing.price)} ${unit}`
 }
 
+export function getListingDocumentTitle({
+  name,
+  experienceLabel,
+  locationLabel,
+  price,
+  priceUnit,
+}: {
+  name: string
+  experienceLabel: string
+  locationLabel: string
+  price?: number | null
+  priceUnit?: Listing["priceUnit"] | null
+}) {
+  const base = `${name} | ${experienceLabel} in ${locationLabel}`
+  const formatted = formatListingPrice({ price: price ?? null, priceUnit: priceUnit ?? null })
+  return formatted ? `${base} | ${formatted}` : base
+}
+
+const CHECKED_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+export function formatCheckedDate(value: string | null | undefined) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(value ?? "")
+  if (!match) return null
+  const month = Number(match[2])
+  const day = Number(match[3])
+  if (month < 1 || month > 12 || day < 1 || day > 31) return null
+  return `${day} ${CHECKED_MONTHS[month - 1]} ${match[1]}`
+}
+
 export function getCharacterisedPriceRange(listings: Listing[]) {
   const prices = listings
     .filter((listing) => listing.priceUnit === "per-person" && listing.price != null)

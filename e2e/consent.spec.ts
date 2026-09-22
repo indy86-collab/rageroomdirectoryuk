@@ -184,7 +184,7 @@ test.describe("consent-aware analytics", () => {
     const requests = await mockTrackingProviders(page)
     await page.goto("/listings")
     await expect(page.getByTestId("consent-banner")).toHaveCount(0)
-    await expect(page.getByRole("heading", { name: "UK Rage Rooms & Destructive Experiences" })).toBeVisible()
+    await expect(page.getByRole("heading", { name: "UK Rage Rooms" })).toBeVisible()
     expect(analyticsRequests(requests)).toEqual([])
   })
 

@@ -2,6 +2,7 @@ import { orderDiscoveryListings } from "@/lib/discovery-order"
 import { Metadata } from "next"
 import { slugToCity, cityToSlug } from "@/lib/location"
 import { getCityContent, getGenericCityContent } from "@/lib/city-content"
+import CityPriceComparison from "@/components/CityPriceComparison"
 import ListingsGrid from "@/components/ListingsGrid"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import FAQ from "@/components/FAQ"
@@ -28,6 +29,26 @@ interface CityPageProps {
   params: { slug: string }
 }
 
+function venueWord(count: number) {
+  return count === 1 ? "Venue" : "Venues"
+}
+
+function citySearchHeading(cityName: string, hasNearbyOnly: boolean) {
+  return hasNearbyOnly ? `Rage Rooms near ${cityName}` : `Rage Rooms in ${cityName}`
+}
+
+function citySearchTitle(
+  cityName: string,
+  counts: { hasNearbyOnly: boolean; isEmpty: boolean; inCityCount: number; nearbyCount: number }
+) {
+  if (counts.hasNearbyOnly) {
+    return `Rage Rooms near ${cityName} — ${counts.nearbyCount} ${venueWord(counts.nearbyCount)}`
+  }
+  if (counts.isEmpty) return `Rage Rooms near ${cityName}`
+  const nearby = counts.nearbyCount > 0 ? ` + ${counts.nearbyCount} Nearby` : ""
+  return `Rage Rooms in ${cityName} — ${counts.inCityCount} ${venueWord(counts.inCityCount)}${nearby}`
+}
+
 export async function generateMetadata({
   params,
 }: CityPageProps): Promise<Metadata> {
@@ -38,7 +59,6 @@ export async function generateMetadata({
   const nearbyCount = nearby.length
   const hasNearbyOnly = inCity.length === 0 && nearby.length > 0
   const isEmpty = allForSchema.length === 0
-  const rageRoomCount = allForSchema.filter((listing) => listing.activities.includes("rage-room")).length
   const isIndexable = isIndexableLocationPage({
     city: cityName,
     inCity,
@@ -52,8 +72,11 @@ export async function generateMetadata({
     ? Math.min(...pricedListings.map((l) => l.price))
     : null
 
+  const heading = citySearchHeading(cityName, hasNearbyOnly)
+  const title = citySearchTitle(cityName, { hasNearbyOnly, isEmpty, inCityCount, nearbyCount })
+
   const ogImage = buildOgImageUrl({
-    title: hasNearbyOnly ? `Destructive Experiences Near ${cityName}` : `Rage Rooms & Destructive Experiences in ${cityName}`,
+    title: heading,
     subtitle: isEmpty
       ? "Browse verified UK venues nearby"
       : hasNearbyOnly
@@ -64,31 +87,25 @@ export async function generateMetadata({
   })
 
   return {
-    title: hasNearbyOnly
-      ? `Destructive Experiences Near ${cityName} — ${nearbyCount} ${nearbyCount === 1 ? "Venue" : "Venues"}`
-      : isEmpty
-        ? `Rage Rooms & Destructive Experiences Near ${cityName}`
-        : `Rage Rooms & Destructive Experiences in ${cityName} — ${inCityCount} ${inCityCount === 1 ? "Venue" : "Venues"}${nearbyCount > 0 ? ` + ${nearbyCount} Nearby` : ""}`,
+    title,
     description: hasNearbyOnly
-      ? `Find verified destructive and adrenaline experiences near ${cityName}. Compare ${nearbyCount} nearby ${nearbyCount === 1 ? "venue" : "venues"}, published prices and booking options.`
+      ? `Compare rage rooms near ${cityName}. ${nearbyCount} verified ${nearbyCount === 1 ? "venue" : "venues"}, with published prices and booking links.`
       : isEmpty
-        ? `We do not have a verified destructive experience in ${cityName} yet. Browse nearby UK venues or suggest a missing one.`
-        : `Compare ${inCityCount} verified ${inCityCount === 1 ? "venue" : "venues"} in ${cityName}${rageRoomCount > 0 ? `, including ${rageRoomCount} ${rageRoomCount === 1 ? "rage room" : "rage rooms"}` : ""}${nearbyCount > 0 ? ` plus ${nearbyCount} nearby ${nearbyCount === 1 ? "option" : "options"}` : ""}.`,
+        ? `No verified rage room in ${cityName} yet. Browse nearby UK venues or suggest a missing one.`
+        : `Compare rage rooms in ${cityName}. ${inCityCount} verified ${inCityCount === 1 ? "venue" : "venues"}${nearbyCount > 0 ? ` and ${nearbyCount} nearby` : ""}, with prices, age limits and booking links.`,
     alternates: { canonical: `/city/${cityToSlug(cityName)}` },
     ...(!isIndexable ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
-      title: hasNearbyOnly
-        ? `Destructive Experiences Near ${cityName} | RageRoom Directory`
-        : `Rage Rooms & Destructive Experiences in ${cityName} | RageRoom Directory`,
+      title: `${heading} | RageRoom Directory`,
       description: hasNearbyOnly
-        ? `Browse ${nearbyCount} verified ${nearbyCount === 1 ? "venue" : "venues"} near ${cityName}. Compare activities and prices.`
-        : `Browse ${inCityCount} verified ${inCityCount === 1 ? "venue" : "venues"} in ${cityName}${nearbyCount > 0 ? ` and ${nearbyCount} nearby` : ""}.`,
+        ? `Browse ${nearbyCount} verified rage rooms near ${cityName}. Compare prices and book with the venue.`
+        : `Browse verified rage rooms in ${cityName}${nearbyCount > 0 ? ` and ${nearbyCount} nearby` : ""}. Compare prices and book with the venue.`,
       type: "website",
-      images: [{ url: ogImage, width: 1200, height: 630, alt: hasNearbyOnly ? `Destructive experiences near ${cityName}` : `Rage rooms and destructive experiences in ${cityName}` }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: heading }],
     },
     twitter: {
       card: "summary_large_image",
-      title: hasNearbyOnly ? `Destructive Experiences Near ${cityName}` : `Rage Rooms & Destructive Experiences in ${cityName}`,
+      title: heading,
       description: hasNearbyOnly
         ? `${nearbyCount} verified venues near ${cityName}. Compare activities and prices.`
         : `${primaryCount} verified ${primaryCount === 1 ? "venue" : "venues"} in ${cityName}${nearbyCount > 0 ? ` plus ${nearbyCount} nearby` : ""}.`,
@@ -127,10 +144,10 @@ export default async function CityPage({ params }: CityPageProps) {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "@id": `${cityUrl}#itemlist`,
-    name: hasNearbyOnly ? `Destructive Experiences Near ${cityName}` : `Rage Rooms & Destructive Experiences in ${cityName}`,
+    name: citySearchHeading(cityName, hasNearbyOnly),
     description: hasNearbyOnly
-      ? `Directory of verified destructive and adrenaline experiences near ${cityName}`
-      : `Directory of verified rage rooms and closely related experiences in ${cityName}`,
+      ? `Rage rooms near ${cityName}, with published prices and booking links`
+      : `Rage rooms in ${cityName}, with published prices and booking links`,
     numberOfItems: listings.length,
     itemListOrder: "https://schema.org/ItemListOrderDescending",
     itemListElement: listings.map((listing, index) => {
@@ -201,9 +218,9 @@ export default async function CityPage({ params }: CityPageProps) {
           itemOffered: {
             "@type": "Service",
             name: hasNearbyOnly
-              ? `Destructive experiences near ${cityName}`
-              : `Destructive experiences in ${cityName}`,
-            serviceType: "Destructive and adrenaline activity experiences",
+              ? `Rage rooms near ${cityName}`
+              : `Rage rooms in ${cityName}`,
+            serviceType: "Rage room",
             areaServed: { "@type": "City", name: cityName },
           },
         }
@@ -236,10 +253,10 @@ export default async function CityPage({ params }: CityPageProps) {
         )}
 
         <h1 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 text-white">
-          {hasNearbyOnly ? `Destructive Experiences Near ${cityName}` : `Rage Rooms & Destructive Experiences in ${cityName}`}
+          {citySearchHeading(cityName, hasNearbyOnly)}
         </h1>
 
-        <p className="mb-5 text-zinc-300">{hasNearbyOnly ? `No venues currently listed in ${cityName}. Explore the nearby options below.` : `Compare activities, prices and booking options in and around ${cityName}.`}</p>
+        <p className="mb-5 text-zinc-300">{hasNearbyOnly ? `No rage room is listed in ${cityName} yet. These are the nearest verified venues.` : `Compare rage rooms in and around ${cityName}, including prices, age limits and booking links.`}</p>
         {/* Quick stats bar */}
         {!isEmpty && (
           <div className="bg-[#181818] rounded-lg border border-zinc-800 p-4 mb-6 flex flex-wrap gap-4 sm:gap-8">
@@ -273,7 +290,16 @@ export default async function CityPage({ params }: CityPageProps) {
             )}
           </div>
         )}
-        
+
+        {!isEmpty && (
+          <CityPriceComparison
+            listings={hasNearbyOnly ? nearby : inCity}
+            cityName={cityName}
+            nearbyOnly={hasNearbyOnly}
+            locationSlug={params.slug}
+          />
+        )}
+
         {!hasLocalRageRoom && <CommercialOffers intent="alternatives" city={cityName} placement="city_alternatives" />}
 
         {!isEmpty ? (

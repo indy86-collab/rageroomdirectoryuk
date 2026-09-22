@@ -13,7 +13,7 @@ export default function Hero() {
         <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-black/90 via-black/70 to-black/15" aria-hidden="true" />
         <div className="relative max-w-3xl px-5 py-10 sm:px-10 sm:py-16 lg:px-14 lg:py-20">
           <p className="eyebrow mb-4">A different kind of day out</p>
-          <h1 className="font-display text-5xl leading-[1] text-white sm:text-7xl lg:text-8xl">Find your next<br /><span className="text-rage-400">smash session.</span></h1>
+          <h1 className="font-display text-5xl leading-[1] text-white sm:text-7xl lg:text-8xl">Find a rage room<br /><span className="text-rage-400">near you.</span></h1>
           <p className="mt-5 max-w-lg text-base leading-relaxed text-zinc-200 sm:text-lg">Find rage rooms across the UK. Compare the price, the experience and the journey—then book with the venue.</p>
           <div className="mt-7"><HomeSearchBox id="hero-search" label="Enter city or postcode" buttonLabel="Find Rage Rooms" /></div>
           <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm">

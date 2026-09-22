@@ -12,9 +12,9 @@ import { getAllListingsForAdmin } from "@/lib/listings"
 import { buildBreadcrumbSchema } from "@/lib/seo-schema"
 
 export const metadata: Metadata = {
-  title: "Rage Rooms & Destructive Activities Across the UK",
+  title: "Rage Rooms, Axe Throwing & Paint Rooms in the UK",
   description:
-    "Find UK rage rooms, axe throwing, paint splatter, car smash and mobile destructive experiences at verified standalone and multi-activity venues.",
+    "Compare UK rage rooms, axe throwing and paint splatter rooms. See verified venues, prices and booking links.",
   alternates: { canonical: "/activities" },
 }
 
@@ -50,7 +50,7 @@ export default async function ActivitiesPage() {
             Rage rooms first
           </p>
           <h1 className="mt-2 text-3xl font-black uppercase tracking-wide text-white sm:text-5xl">
-            Choose Your Experience
+            Rage rooms and other activities
           </h1>
           <p className="mt-4 text-lg leading-relaxed text-zinc-300">
             Smash, splash or try your aim. Pick an activity to compare venues, prices and booking options across the UK.

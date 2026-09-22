@@ -11,9 +11,9 @@ export default function FeaturedVenueBadge({
   venueName: string
 }) {
   return (
-    <details className="mt-6 rounded-lg border border-zinc-800 bg-zinc-950/40 p-4">
+    <details id="listing-badge" className="mt-6 scroll-mt-24 rounded-lg border border-zinc-800 bg-zinc-950/40 p-4">
       <summary className="cursor-pointer font-semibold text-white">
-        Promote your RageRoom listing
+        Add a link to this listing
       </summary>
       <p className="mt-3 text-sm text-zinc-400">
         Display a free “Listed on RageRoom Directory” badge on your website. It is

@@ -6,8 +6,10 @@ import {
   MIN_ACTIVITY_PAGE_LISTINGS,
   MIN_OCCASION_PAGE_LISTINGS,
   OCCASION_DEFINITIONS,
+  formatCheckedDate,
   formatListingPrice,
   getActivityCombinationHref,
+  getListingDocumentTitle,
   getListingHref,
   getListingPrimaryAction,
   matchesOccasionDefinition,
@@ -126,5 +128,24 @@ describe("venue discovery actions", () => {
   it("keeps internal venue links stable and unknown prices explicit", () => {
     expect(getListingHref({ id: "id-only", slug: null })).toBe("/listing/id-only")
     expect(formatListingPrice({ price: null, priceUnit: null })).toBeNull()
+  })
+
+  it("puts a published price in the venue title and dates a price check", () => {
+    expect(getListingDocumentTitle({
+      name: "Smash Room",
+      experienceLabel: "Rage Room",
+      locationLabel: "Leeds",
+      price: 35,
+      priceUnit: "per-person",
+    })).toBe("Smash Room | Rage Room in Leeds | From £35 per person")
+    expect(getListingDocumentTitle({
+      name: "Smash Room",
+      experienceLabel: "Rage Room",
+      locationLabel: "Leeds",
+      price: null,
+      priceUnit: null,
+    })).toBe("Smash Room | Rage Room in Leeds")
+    expect(formatCheckedDate("2026-09-12")).toBe("12 Sep 2026")
+    expect(formatCheckedDate(null)).toBeNull()
   })
 })

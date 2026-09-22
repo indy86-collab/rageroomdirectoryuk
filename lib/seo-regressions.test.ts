@@ -86,7 +86,7 @@ describe("SEO regressions", () => {
     const metadata = await generateCityMetadata({ params: { slug: "london" } })
 
     expect(metadata.title).toBe(
-      `Rage Rooms & Destructive Experiences in London — ${inCity.length} Venues + ${nearby.length} Nearby`
+      `Rage Rooms in London — ${inCity.length} Venues + ${nearby.length} Nearby`
     )
   })
 

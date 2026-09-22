@@ -40,7 +40,9 @@ import {
 } from "@/lib/listing-quality"
 import {
   ACTIVITY_DEFINITIONS,
+  formatCheckedDate,
   formatListingPrice,
+  getListingDocumentTitle,
   getListingExperienceLabel,
   getListingExperienceSummary,
   getOccasionLabel,
@@ -92,16 +94,23 @@ function buildListingMetadata(listing: Listing | null): Metadata {
     ...(formatListingPrice(listing) ? { price: formatListingPrice(listing)! } : {}),
   })
   const description = `${listing.name} offers verified ${activitySummary.toLowerCase()} ${listing.locationType === "mobile-service" ? "services across " : "experiences in "}${locationLabel}. View published prices, activity details and booking options.`
+  const title = getListingDocumentTitle({
+    name: listing.name,
+    experienceLabel,
+    locationLabel,
+    price: listing.price,
+    priceUnit: listing.priceUnit,
+  })
 
   return {
-    title: `${listing.name} | ${experienceLabel} in ${locationLabel}`,
+    title,
     description,
     alternates: { canonical: canonicalUrl },
     ...(!isIndexableListingPage(listing)
       ? { robots: { index: false, follow: true } }
       : {}),
     openGraph: {
-      title: `${listing.name} — ${experienceLabel} in ${locationLabel}`,
+      title,
       description,
       type: "website",
       url: canonicalUrl,
@@ -517,11 +526,8 @@ export default async function ListingPage({ params }: ListingPageProps) {
               <p className="text-xs text-zinc-500 mb-3">
                 Listing added {new Date(listing.createdAt).toLocaleDateString("en-GB", { month: "long", year: "numeric" })}
                 {listing.verified && " · Verified by RageRoom Directory"}
-                {listing.lastVerified &&
-                  ` · Last checked ${new Date(listing.lastVerified).toLocaleDateString("en-GB", {
-                    month: "long",
-                    year: "numeric",
-                  })}`}
+                {formatCheckedDate(listing.lastVerified) &&
+                  ` · Prices checked ${formatCheckedDate(listing.lastVerified)}`}
               </p>
 
               {/* Location */}
@@ -1063,6 +1069,14 @@ export default async function ListingPage({ params }: ListingPageProps) {
               ? "This listing has been claimed. Manage this venue? Contact us to update activities, pricing, photos, offers and booking details."
               : `Own or manage ${listing.name}? Claim the listing to submit corrections to activities, pricing, photos, offers and booking details.`}
           </p>
+          {listing.verified && (
+            <p className="mt-2 text-sm text-zinc-400">
+              <a href="#listing-badge" className="font-semibold text-orange-500 hover:text-orange-400">
+                Add a link to this listing
+              </a>{" "}
+              on your own website. The badge is free and does not change your position in the directory.
+            </p>
+          )}
           <div className="mt-4 flex flex-wrap gap-3">
             {listing.claimed ? (
               <a

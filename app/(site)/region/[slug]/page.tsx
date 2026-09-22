@@ -27,12 +27,12 @@ export async function generateMetadata({
   const isIndexable = isIndexableRegionPage(listings)
   
   return {
-    title: `Rage Rooms & Destructive Experiences in ${regionName} — ${count} ${count === 1 ? "Venue" : "Venues"}`,
-    description: `Browse ${count} verified ${count === 1 ? "venue" : "venues"} in ${regionName}${rageRoomCount ? `, including ${rageRoomCount} ${rageRoomCount === 1 ? "rage room" : "rage rooms"}` : ""}. Compare activities, prices and booking options.`,
+    title: `Rage Rooms in ${regionName} — ${count} ${count === 1 ? "Venue" : "Venues"}`,
+    description: `Compare rage rooms in ${regionName}. ${count} verified ${count === 1 ? "venue" : "venues"}${rageRoomCount ? `, including ${rageRoomCount} ${rageRoomCount === 1 ? "rage room" : "rage rooms"}` : ""}, with prices and booking links.`,
     alternates: { canonical: `/region/${params.slug}` },
     ...(!isIndexable ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
-      title: `Rage Rooms & Destructive Experiences in ${regionName}`,
+      title: `Rage Rooms in ${regionName}`,
       description: `Discover ${count} verified ${count === 1 ? "venue" : "venues"} in ${regionName}. Compare activities and prices.`,
       type: "website",
     },
@@ -77,8 +77,8 @@ export default async function RegionPage({ params }: RegionPageProps) {
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: `Rage Rooms & Destructive Experiences in ${regionName}`,
-    description: `Verified directory of rage rooms and closely related destructive experiences in ${regionName}`,
+    name: `Rage Rooms in ${regionName}`,
+    description: `Rage rooms in ${regionName}, with published prices and booking links`,
     numberOfItems: listings.length,
     itemListElement: listings.map((listing, index) => ({
       "@type": "ListItem",
@@ -108,7 +108,7 @@ export default async function RegionPage({ params }: RegionPageProps) {
         />
 
         <h1 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 text-white">
-          Rage Rooms & Destructive Experiences in {regionName}
+          Rage Rooms in {regionName}
         </h1>
 
         <div className="text-base sm:text-lg text-zinc-300 mb-6 space-y-3">

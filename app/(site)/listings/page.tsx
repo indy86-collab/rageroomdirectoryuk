@@ -12,8 +12,8 @@ export function generateMetadata({
   searchParams?: Record<string, string | string[] | undefined>
 }): Metadata {
   return {
-    title: "UK Rage Rooms & Destructive Experiences — Complete Directory",
-    description: "Browse verified UK rage rooms and closely related destructive experiences. Compare activities, cities, published prices and booking options.",
+    title: "UK Rage Rooms | Compare Venues, Prices & Book",
+    description: "Browse verified rage rooms across the UK. Compare cities, published prices, age limits and booking links.",
     alternates: { canonical: "/listings" },
     ...(Object.keys(searchParams).length > 0
       ? { robots: { index: false, follow: true } }
@@ -44,8 +44,8 @@ export default async function AllListingsPage() {
   const itemListSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "UK Rage Rooms & Destructive Experiences",
-    description: "Complete verified directory of rage rooms and closely related destructive experiences across the UK",
+    name: "UK Rage Rooms",
+    description: "Verified rage rooms across the UK, with published prices and booking links",
     numberOfItems: listings.length,
     itemListElement: listings.map((listing, index) => ({
       "@type": "ListItem",
@@ -67,10 +67,10 @@ export default async function AllListingsPage() {
         />
 
         <h1 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 text-white">
-          UK Rage Rooms & Destructive Experiences
+          UK Rage Rooms
         </h1>
 
-        <p className="mb-6 max-w-2xl text-zinc-300">Find your next day out. Compare rage rooms and related activities by location, price and who’s coming.</p>
+        <p className="mb-6 max-w-2xl text-zinc-300">Compare verified rage rooms by city, price and who’s coming, then book with the venue.</p>
         <div className="mb-8"><HomeSearchBox /></div>
         <ListingsPageClient initialListings={orderDiscoveryListings(listings)} />
         <details className="mt-10 rounded-xl border border-zinc-800 p-5">

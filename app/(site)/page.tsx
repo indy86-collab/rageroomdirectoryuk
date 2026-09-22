@@ -12,6 +12,7 @@ import TrackedDiscoveryLink from "@/components/TrackedDiscoveryLink"
 import { globalFAQs } from "@/lib/faqs"
 import { ACTIVITY_DEFINITIONS, OCCASION_DEFINITIONS, MIN_ACTIVITY_PAGE_LISTINGS, formatListingPrice, getListingExperienceLabel, getListingHref } from "@/lib/discovery"
 import { getCityHeroImagePath } from "@/lib/city-images"
+import { getCityGuidePath } from "@/lib/city-guides"
 import { buildOgImageUrl } from "@/lib/seo-schema"
 import { getSiteUrl } from "@/lib/site-url"
 import { pickDailyListings } from "@/lib/daily-inspiration"
@@ -97,6 +98,7 @@ export default async function Home() {
         </Link>)}
       </div>
       <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm text-zinc-300">{["Manchester", "Leeds", "Edinburgh", "Bristol", "Newcastle", "Nottingham"].map(city => <Link key={city} href={`/city/${city.toLowerCase()}`} className="inline-flex min-h-11 items-center gap-1 hover:text-rage-300"><MapPin className="h-3.5 w-3.5" />{city}</Link>)}</div>
+      <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm text-zinc-300">{["London", "Manchester", "Birmingham", "Leeds", "Liverpool", "Bristol"].map(city => <Link key={city} href={getCityGuidePath(city)} className="inline-flex min-h-11 items-center hover:text-rage-300">Best rage rooms in {city}</Link>)}</div>
     </section>
     <section className="border-y border-zinc-800/70 bg-[radial-gradient(ellipse_at_top_left,rgba(249,115,22,0.14),transparent_46%),#101010] py-10 sm:py-14" aria-labelledby="featured-verified-heading">
       <div className="site-container">
@@ -129,7 +131,7 @@ export default async function Home() {
     </section>
     <section id="faq" className="site-container pb-12 sm:pb-16" aria-labelledby="first-visit-heading">
       <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
-        <div><p className="eyebrow mb-2">Know before you go</p><h2 id="first-visit-heading" className="section-title">First time? You’re in the right place.</h2><p className="mt-4 max-w-md text-zinc-300">What to wear, what you can smash, and what to ask before booking. A little preparation makes the day easier.</p><Link href="/guides/what-happens-in-a-rage-room" className="mt-5 inline-flex min-h-11 items-center gap-2 font-semibold text-rage-300">Read the first-visit guide<ArrowRight className="h-4 w-4" /></Link><Link href="/digital-downloads/rage-room-first-visit-prep-pack" className="mt-2 flex min-h-11 items-center gap-2 text-sm text-zinc-200"><CheckCircle2 className="h-4 w-4" />Get the £1 prep pack — helps maintain the site</Link></div>
+        <div><p className="eyebrow mb-2">Know before you go</p><h2 id="first-visit-heading" className="section-title">First time? You’re in the right place.</h2><p className="mt-4 max-w-md text-zinc-300">What to wear, what you can smash, and what to ask before booking. A little preparation makes the day easier.</p><div className="mt-4 flex flex-col">{[{href:"/guides/what-happens-in-a-rage-room",label:"What happens in a rage room"},{href:"/guides/what-to-wear-to-a-rage-room",label:"What to wear"},{href:"/guides/are-rage-rooms-safe-uk",label:"Are rage rooms safe?"},{href:"/rage-room-prices-uk",label:"How much it costs"},{href:"/guides/rage-room-near-me",label:"Rage rooms near me"}].map(item => <Link key={item.href} href={item.href} className="inline-flex min-h-11 items-center gap-2 font-semibold text-rage-300">{item.label}<ArrowRight className="h-4 w-4" /></Link>)}</div><Link href="/digital-downloads/rage-room-first-visit-prep-pack" className="mt-2 flex min-h-11 items-center gap-2 text-sm text-zinc-200"><CheckCircle2 className="h-4 w-4" />Get the £1 prep pack — helps maintain the site</Link></div>
         <FAQ items={globalFAQs.slice(0,5)} title="Common questions" />
       </div>
     </section>
