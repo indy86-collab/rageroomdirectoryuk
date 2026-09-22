@@ -28,6 +28,19 @@ test("homepage announces the smash collection and opens the shop", async ({ page
   await expect(page.getByRole("button", { name: /Buy with Stripe|Try test checkout/ })).toHaveCount(5)
 })
 
+test("homepage showcases digital guides and opens a pack", async ({ page }) => {
+  await page.goto("/")
+  await dismissPrivacyBanner(page)
+  const showcase = page.getByRole("region", { name: "Plan it. Gift it. Arrive ready." })
+  await expect(showcase).toBeVisible()
+  await expect(showcase.getByRole("link", { name: "See all digital guides" })).toHaveAttribute("href", "/digital-downloads")
+  await expect(showcase.getByRole("link", { name: /Gift Voucher Template Pack/ })).toBeVisible()
+  await expect(showcase.getByRole("link", { name: /First Visit Prep Pack/ })).toBeVisible()
+  await expect(showcase.getByRole("link", { name: /save £1.99/i })).toBeVisible()
+  await showcase.getByRole("link", { name: /Gift Voucher Template Pack/ }).click()
+  await expect(page).toHaveURL(/\/digital-downloads\/rage-room-gift-voucher-template-pack/)
+})
+
 test("shop checkout posts the selected variant and opens Stripe", async ({ page }) => {
   const checkoutPosts: unknown[] = []
   await mockShopCheckout(page)

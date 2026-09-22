@@ -3,17 +3,19 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, MapPin, Gift, Users, Gamepad2, CheckCircle2 } from "lucide-react"
 import Hero from "@/components/Hero"
-import FeaturedRooms from "@/components/FeaturedRooms"
+import InspiredRoomsCarousel from "@/components/InspiredRoomsCarousel"
+import DigitalHomeShowcase from "@/components/DigitalHomeShowcase"
 import ShopHomeAnnouncement from "@/components/shop/ShopHomeAnnouncement"
 import FAQ from "@/components/FAQ"
 import ActivityArtwork from "@/components/ActivityArtwork"
 import TrackedDiscoveryLink from "@/components/TrackedDiscoveryLink"
 import { globalFAQs } from "@/lib/faqs"
-import { ACTIVITY_DEFINITIONS, OCCASION_DEFINITIONS, MIN_ACTIVITY_PAGE_LISTINGS } from "@/lib/discovery"
+import { ACTIVITY_DEFINITIONS, OCCASION_DEFINITIONS, MIN_ACTIVITY_PAGE_LISTINGS, formatListingPrice, getListingExperienceLabel, getListingHref } from "@/lib/discovery"
 import { getCityHeroImagePath } from "@/lib/city-images"
 import { buildOgImageUrl } from "@/lib/seo-schema"
 import { getSiteUrl } from "@/lib/site-url"
-import { getAuthorisedListingImage } from "@/lib/listing-quality"
+import { pickDailyListings } from "@/lib/daily-inspiration"
+import { getAuthorisedMedia, getListingDisplayImage } from "@/lib/listing-quality"
 
 export const revalidate = 900
 
@@ -58,10 +60,26 @@ export const metadata: Metadata = {
 }
 
 export default async function Home() {
-  const { getFeaturedListings, getAllListingsForAdmin } = await import("@/lib/listings")
+  const { getAllListingsForAdmin } = await import("@/lib/listings")
   const listings = await getAllListingsForAdmin()
-  const featured = await getFeaturedListings(12, { excludeSlugs: ["rage-x-treme-polegate"] })
-  const rooms = featured.filter(l => l.activities.includes("rage-room")).sort((a,b) => Number(Boolean(getAuthorisedListingImage(b))) - Number(Boolean(getAuthorisedListingImage(a)))).slice(0,3)
+  const inspiredRooms = pickDailyListings(
+    listings.filter((listing) => listing.locationType !== "mobile-service" && listing.activities.includes("rage-room") && listing.slug !== "rage-x-treme-polegate" && getListingDisplayImage(listing)),
+    9
+  ).flatMap((listing) => {
+    const image = getListingDisplayImage(listing)
+    if (!image) return []
+    const alt = getAuthorisedMedia(listing).find((media) => media.type === "image")?.alt
+    return [{
+      id: listing.id,
+      name: listing.name,
+      city: listing.city,
+      href: getListingHref(listing),
+      image,
+      alt: alt || `${listing.name} in ${listing.city}`,
+      price: formatListingPrice(listing),
+      experience: getListingExperienceLabel(listing),
+    }]
+  })
   const activities = ACTIVITY_DEFINITIONS.filter(a => ["rage-room", "paint-splatter", "axe-throwing"].includes(a.value)).map(a => ({ ...a, count: listings.filter(l => l.activities.includes(a.value)).length })).filter(a => a.count >= MIN_ACTIVITY_PAGE_LISTINGS)
   const cities = ["London", "Birmingham", "Liverpool", "Brighton"]
   return <>
@@ -80,13 +98,21 @@ export default async function Home() {
       </div>
       <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-sm text-zinc-300">{["Manchester", "Leeds", "Edinburgh", "Bristol", "Newcastle", "Nottingham"].map(city => <Link key={city} href={`/city/${city.toLowerCase()}`} className="inline-flex min-h-11 items-center gap-1 hover:text-rage-300"><MapPin className="h-3.5 w-3.5" />{city}</Link>)}</div>
     </section>
-    <section className="border-y border-zinc-800/70 bg-[#141414] py-10 sm:py-14" aria-labelledby="featured-verified-heading">
+    <section className="border-y border-zinc-800/70 bg-[radial-gradient(ellipse_at_top_left,rgba(249,115,22,0.14),transparent_46%),#101010] py-10 sm:py-14" aria-labelledby="featured-verified-heading">
       <div className="site-container">
-        <div className="mb-6 flex flex-wrap items-center justify-between gap-3"><div><p className="eyebrow mb-2">Get inspired</p><h2 id="featured-verified-heading" className="section-title">Find a room worth smashing</h2></div><Link href="/listings" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-rage-300">Browse all venues<ArrowRight className="h-4 w-4" /></Link></div>
-        <FeaturedRooms listings={rooms} />
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+          <div className="max-w-2xl">
+            <p className="eyebrow mb-2">Get inspired</p>
+            <h2 id="featured-verified-heading" className="section-title">Find a room worth smashing</h2>
+            <p className="mt-3 text-sm text-zinc-300">Nine UK rage rooms, shuffled again each day. Let them play, or pick one.</p>
+          </div>
+          <Link href="/listings" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-rage-300">Browse all venues<ArrowRight className="h-4 w-4" /></Link>
+        </div>
+        <InspiredRoomsCarousel rooms={inspiredRooms} />
       </div>
     </section>
     <ShopHomeAnnouncement />
+    <DigitalHomeShowcase />
     <section className="site-container py-12 sm:py-16" aria-labelledby="choose-experience-heading">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3"><div><p className="eyebrow mb-2">Make a little mess</p><h2 id="choose-experience-heading" className="section-title">Choose your experience</h2></div><Link href="/activities" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-rage-300">All activities<ArrowRight className="h-4 w-4" /></Link></div>
       <div className="grid gap-5 sm:grid-cols-3">{activities.map(a => <TrackedDiscoveryLink key={a.value} eventName="activity_discovery_click" sourcePageType="homepage" destinationIdentifier={a.slug} destinationPath={`/activities/${a.slug}`} className="card-base card-hover group overflow-hidden">
