@@ -19,6 +19,8 @@ import {
 import { buildExecutiveFindings, insightAnswers } from "@/lib/insights-copy"
 import {
   REPORT_CSV_PATH,
+  REPORT_DATASET_LICENSE_NAME,
+  REPORT_DATASET_LICENSE_PATH,
   REPORT_META,
   REPORT_PATH,
   REPORT_PUBLISHED,
@@ -111,6 +113,11 @@ export default async function UkRageRoomReport2026Page() {
     url: canonicalUrl,
     dateModified: stats.lastUpdated,
     isAccessibleForFree: true,
+    license: {
+      "@type": "CreativeWork",
+      name: REPORT_DATASET_LICENSE_NAME,
+      url: absoluteUrl(REPORT_DATASET_LICENSE_PATH),
+    },
     creator: {
       "@type": "Organization",
       name: "RageRoom Directory",
@@ -499,6 +506,13 @@ export default async function UkRageRoomReport2026Page() {
             </div>
             <p className="mt-4 text-sm text-zinc-400">
               Publisher: RageRoom Directory. Canonical URL: {canonicalUrl}. Dataset last verified {citationAsOf}.
+            </p>
+            <p className="mt-3 text-sm text-zinc-400">
+              Reuse of the aggregate CSV and published statistics is covered by the{" "}
+              <Link href={REPORT_DATASET_LICENSE_PATH} className="font-semibold text-orange-500 hover:text-orange-400">
+                {REPORT_DATASET_LICENSE_NAME}
+              </Link>
+              .
             </p>
           </section>
 

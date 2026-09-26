@@ -10,7 +10,13 @@ import { metadata as badgeMetadata } from "@/app/(site)/for-venues/badge/page"
 import { metadata as publishersMetadata } from "@/app/(site)/for-publishers/page"
 import { metadata as embedMetadata } from "@/app/(embed)/embed/rage-room-finder/page"
 import { metadata as reportMetadata } from "@/app/(site)/uk-rage-room-report-2026/page"
-import { INSIGHT_PAGE_META, REPORT_META, REPORT_PATH } from "@/lib/insights-pages"
+import {
+  INSIGHT_PAGE_META,
+  REPORT_DATASET_LICENSE_NAME,
+  REPORT_DATASET_LICENSE_PATH,
+  REPORT_META,
+  REPORT_PATH,
+} from "@/lib/insights-pages"
 import { getListingsNearCity } from "@/lib/listings"
 import { buildArticleSchema } from "@/lib/seo-schema"
 import robots from "@/app/robots"
@@ -174,6 +180,8 @@ describe("SEO regressions", () => {
     expect(String(reportMetadata.title)).toBe(REPORT_META.title)
     expect(String(reportMetadata.title)).not.toMatch(/Live Venue|Near You|Live Comparison/)
     expect(reportMetadata.openGraph?.url).toBe(REPORT_PATH)
+    expect(REPORT_DATASET_LICENSE_PATH).toBe("/terms#dataset-licence")
+    expect(REPORT_DATASET_LICENSE_NAME).toContain("aggregate dataset licence")
   })
 
   it("keeps Insights titles statistical rather than interchangeable with directory pages", () => {

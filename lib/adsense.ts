@@ -4,6 +4,34 @@ export const ADSENSE_CLIENT =
 export const ADSENSE_INARTICLE_SLOT =
   process.env.NEXT_PUBLIC_ADSENSE_INARTICLE_SLOT?.trim() || "5555492233"
 
+export const ADSENSE_SCRIPT_SRC =
+  `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`
+
+export const MAX_MANUAL_ADS_PER_PAGE = 1
+
+export function shouldMountManualAd(input: {
+  hostname: string
+  environment: string
+  pathname: string
+  slot?: string | null
+}): boolean {
+  return (
+    isLiveAdsenseHost(input.hostname, input.environment) &&
+    isAdEligiblePath(input.pathname) &&
+    isValidAdsenseAdSlot(input.slot)
+  )
+}
+
+/** Only the first in-article unit on a page may request an ad. */
+export function isFillableManualAdSlot(
+  el: Element | null,
+  root: ParentNode | null
+): boolean {
+  if (!el || !root) return false
+  const slots = Array.from(root.querySelectorAll("ins.adsbygoogle"))
+  return slots.length <= MAX_MANUAL_ADS_PER_PAGE && slots[0] === el
+}
+
 /** Keep local, test and preview traffic away from live advertising. */
 export function isLiveAdsenseHost(hostname: string, environment: string): boolean {
   return environment === "production" &&
@@ -60,9 +88,10 @@ const EXCLUDED_PREFIXES = [
 ]
 
 /**
- * Ads load only on long editorial URLs. Directory, booking, checkout,
- * game and legal pages do not mount manual units. Also configure account-side
- * Auto ads exclusions; this route check cannot revoke an already loaded script.
+ * Manual ads load only on long editorial URLs. Directory, booking, checkout,
+ * game and legal pages do not mount a unit or the AdSense script. Turn Auto
+ * ads off in the AdSense UI; a later client navigation cannot unload a script
+ * that already ran on an article.
  */
 export function isAdEligiblePath(pathname: string): boolean {
   if (!pathname) return false

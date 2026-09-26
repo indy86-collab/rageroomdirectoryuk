@@ -18,7 +18,7 @@ export default function TermsPage() {
     { label: "Terms", href: "/terms" },
   ]
 
-  const lastUpdated = "6 July 2026"
+  const lastUpdated = "26 September 2026"
 
   return (
     <div className="py-6 sm:py-8">
@@ -153,9 +153,25 @@ export default function TermsPage() {
             </p>
           </section>
 
+          <section id="dataset-licence">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mt-6 sm:mt-8 mb-3 sm:mb-4">
+              7. Aggregate Dataset Licence
+            </h2>
+            <p>
+              The UK Rage Room Report 2026 aggregate CSV and the published statistics on{" "}
+              <a href="/uk-rage-room-report-2026" className="text-orange-500 hover:text-orange-600 underline">
+                the report page
+              </a>{" "}
+              may be reused, quoted and republished with attribution. Please credit RageRoom Directory and link to the report.
+            </p>
+            <p className="mt-4">
+              This licence covers those aggregate counts and the downloadable CSV only. It does not permit scraping, copying or republishing individual venue listings, contact details, booking URLs or other directory content.
+            </p>
+          </section>
+
           <section>
             <h2 className="text-xl sm:text-2xl font-bold text-white mt-6 sm:mt-8 mb-3 sm:mb-4">
-              7. Changes to Terms
+              8. Changes to Terms
             </h2>
             <p>
               These Terms may be updated at any time. Continued use of the website means you accept updated terms.

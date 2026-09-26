@@ -6,9 +6,9 @@ import { usePathname } from "next/navigation"
 import {
   ADSENSE_CLIENT,
   ADSENSE_INARTICLE_SLOT,
-  isAdEligiblePath,
-  isLiveAdsenseHost,
-  isValidAdsenseAdSlot,
+  ADSENSE_SCRIPT_SRC,
+  isFillableManualAdSlot,
+  shouldMountManualAd,
 } from "@/lib/adsense"
 
 declare global {
@@ -20,30 +20,35 @@ declare global {
 /**
  * Single mid-article AdSense unit for long editorial pages.
  *
- * The AdSense script is loaded only when this unit mounts, so directory,
- * checkout and game pages do not mount this loader. Account-side Auto ads
- * exclusions are still needed when navigating after the script has loaded. If no valid manual unit ID is
- * configured, only the base script loads (which can still serve account-side
- * Auto ads) and no incomplete manual ad request is sent.
+ * The script and the unit mount together, and only on a live eligible URL
+ * with a valid slot. A missing slot no longer loads adsbygoogle.js by itself,
+ * which would otherwise be enough for account-side Auto ads to start.
  */
 export default function InArticleAd() {
   const pathname = usePathname()
-  const [liveHost, setLiveHost] = useState(false)
+  const [allowed, setAllowed] = useState(false)
   useEffect(() => {
-    setLiveHost(isLiveAdsenseHost(window.location.hostname, process.env.NODE_ENV))
-  }, [])
+    setAllowed(
+      shouldMountManualAd({
+        hostname: window.location.hostname,
+        environment: process.env.NODE_ENV,
+        pathname: pathname || "",
+        slot: ADSENSE_INARTICLE_SLOT,
+      })
+    )
+  }, [pathname])
   const insRef = useRef<HTMLModElement>(null)
   const pushed = useRef(false)
-  const hasManualSlot = isValidAdsenseAdSlot(ADSENSE_INARTICLE_SLOT)
 
   useEffect(() => {
-    if (!liveHost || !pathname || !isAdEligiblePath(pathname)) return
-    if (!hasManualSlot) return
+    if (!allowed) return
     const el = insRef.current
     if (!el || pushed.current) return
+    if (!isFillableManualAdSlot(el, document)) return
 
     const fill = () => {
       if (pushed.current) return
+      if (!isFillableManualAdSlot(el, document)) return
       if (el.getAttribute("data-adsbygoogle-status")) {
         pushed.current = true
         return
@@ -73,21 +78,9 @@ export default function InArticleAd() {
     )
     observer.observe(el)
     return () => observer.disconnect()
-  }, [hasManualSlot, pathname, liveHost])
+  }, [allowed])
 
-  if (!liveHost || !pathname || !isAdEligiblePath(pathname)) return null
-
-  const loader = (
-    <Script
-      id="adsense-manual"
-      async
-      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
-      crossOrigin="anonymous"
-      strategy="afterInteractive"
-    />
-  )
-
-  if (!hasManualSlot) return loader
+  if (!allowed) return null
 
   return (
     <aside
@@ -97,7 +90,13 @@ export default function InArticleAd() {
       <p className="mb-3 text-center text-[10px] font-semibold uppercase tracking-[0.22em] text-zinc-500">
         Advertisement
       </p>
-      {loader}
+      <Script
+        id="adsense-manual"
+        async
+        src={ADSENSE_SCRIPT_SRC}
+        crossOrigin="anonymous"
+        strategy="afterInteractive"
+      />
       <ins
         ref={insRef}
         className="adsbygoogle"

@@ -4,6 +4,10 @@ export const INSIGHTS_PUBLISHED = "2026-08-27"
 export const REPORT_PUBLISHED = "2026-07-14"
 export const REPORT_PATH = "/uk-rage-room-report-2026"
 export const REPORT_CSV_PATH = "/uk-rage-room-report-2026/data.csv"
+/** Versioned custom licence URL for Dataset structured data (Google recommended property). */
+export const REPORT_DATASET_LICENSE_PATH = "/terms#dataset-licence"
+export const REPORT_DATASET_LICENSE_NAME =
+  "RageRoom Directory aggregate dataset licence (2026)"
 
 export const INSIGHT_HUB_META = {
   title: "UK Rage Room Statistics & Insights 2026",

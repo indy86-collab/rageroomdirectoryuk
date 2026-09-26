@@ -37,7 +37,14 @@ test.describe("UK Rage Room Report 2026", () => {
     expect(html).toContain("/uk-rage-room-report-2026/data.csv")
     expect(html).toContain('"@type":"Article"')
     expect(html).toContain('"@type":"Dataset"')
+    expect(html).toContain('"@type":"CreativeWork"')
+    expect(html).toContain('"license"')
+    expect(html).toContain("/terms#dataset-licence")
     expect(html).not.toContain("rageroom.co.uk")
+
+    const termsHtml = await (await request.get("/terms")).text()
+    expect(termsHtml).toContain('id="dataset-licence"')
+    expect(termsHtml).toContain("Aggregate Dataset Licence")
     expect(html).not.toMatch(/noindex/)
 
     await page.goto("/uk-rage-room-report-2026")
@@ -48,6 +55,10 @@ test.describe("UK Rage Room Report 2026", () => {
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("UK Rage Room Report 2026")
     await expect(page.getByRole("heading", { name: "Executive summary" })).toBeVisible()
     await expect(page.getByRole("heading", { name: "Cite this report" })).toBeVisible()
+    await expect(page.getByRole("link", { name: /aggregate dataset licence/i })).toHaveAttribute(
+      "href",
+      "/terms#dataset-licence"
+    )
     await expect(page.getByRole("heading", { name: "Methodology" })).toBeVisible()
     await expect(page.getByRole("link", { name: /Download the aggregate CSV/i })).toHaveAttribute(
       "href",

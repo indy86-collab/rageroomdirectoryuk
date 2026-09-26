@@ -1,8 +1,14 @@
+import { existsSync, readFileSync, readdirSync } from "node:fs"
+import { join } from "node:path"
 import { describe, expect, it } from "vitest"
 import {
+  ADSENSE_SCRIPT_SRC,
+  MAX_MANUAL_ADS_PER_PAGE,
   isAdEligiblePath,
+  isFillableManualAdSlot,
   isLiveAdsenseHost,
   isValidAdsenseAdSlot,
+  shouldMountManualAd,
   splitMarkdownForInArticleAd,
 } from "./adsense"
 
@@ -80,5 +86,76 @@ describe("live ad environment", () => {
     }
     expect(isLiveAdsenseHost("www.rageroomdirectory.co.uk", "development")).toBe(false)
     expect(isLiveAdsenseHost("www.rageroomdirectory.co.uk", "test")).toBe(false)
+  })
+})
+
+describe("shouldMountManualAd", () => {
+  const live = {
+    hostname: "www.rageroomdirectory.co.uk",
+    environment: "production",
+    pathname: "/guides/what-to-wear-to-a-rage-room",
+    slot: "5555492233",
+  }
+
+  it("mounts only when host, path and slot are all valid", () => {
+    expect(shouldMountManualAd(live)).toBe(true)
+  })
+
+  it("does not load ads when the slot is missing", () => {
+    expect(shouldMountManualAd({ ...live, slot: "" })).toBe(false)
+    expect(shouldMountManualAd({ ...live, slot: undefined })).toBe(false)
+  })
+
+  it("does not load ads on directory or local hosts", () => {
+    expect(shouldMountManualAd({ ...live, pathname: "/listing/rage-remedies-romford" })).toBe(false)
+    expect(shouldMountManualAd({ ...live, hostname: "localhost" })).toBe(false)
+    expect(shouldMountManualAd({ ...live, environment: "development" })).toBe(false)
+  })
+})
+
+describe("manual ad density", () => {
+  it("caps fillable units at one per page", () => {
+    expect(MAX_MANUAL_ADS_PER_PAGE).toBe(1)
+    const first = { className: "adsbygoogle" } as unknown as Element
+    const second = { className: "adsbygoogle" } as unknown as Element
+    const root = {
+      querySelectorAll: () => [first, second],
+    } as unknown as ParentNode
+    expect(isFillableManualAdSlot(first, root)).toBe(false)
+    expect(isFillableManualAdSlot(second, root)).toBe(false)
+
+    const singleRoot = {
+      querySelectorAll: () => [first],
+    } as unknown as ParentNode
+    expect(isFillableManualAdSlot(first, singleRoot)).toBe(true)
+    expect(isFillableManualAdSlot(null, singleRoot)).toBe(false)
+  })
+
+  it("keeps the official script URL and never ships a script-only Auto ads fallback", () => {
+    expect(ADSENSE_SCRIPT_SRC).toMatch(/^https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=ca-pub-/)
+    const source = readFileSync(join(process.cwd(), "components/InArticleAd.tsx"), "utf8")
+    expect(source).toContain("if (!allowed) return null")
+    expect(source).not.toMatch(/if \(!hasManualSlot\) return loader/)
+  })
+
+  it("places at most one InArticleAd in each page or shared template", () => {
+    const roots = ["app", "components"]
+    const files: string[] = []
+
+    function walk(dir: string) {
+      if (!existsSync(dir)) return
+      for (const entry of readdirSync(dir, { withFileTypes: true })) {
+        const path = join(dir, entry.name)
+        if (entry.isDirectory()) walk(path)
+        else if (entry.name.endsWith(".tsx")) files.push(path)
+      }
+    }
+    roots.forEach(walk)
+
+    const offenders = files.flatMap((file) => {
+      const matches = readFileSync(file, "utf8").match(/<InArticleAd\b/g) ?? []
+      return matches.length > 1 ? [`${file}: ${matches.length}`] : []
+    })
+    expect(offenders).toEqual([])
   })
 })
