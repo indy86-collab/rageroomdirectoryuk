@@ -2,11 +2,13 @@
 
 The shop now uses five rage-room designs with orange, cream and charcoal graphics and RAGE ROOM DIRECTORY branding. Created with built-in imagegen; prompts and mockup/edit instructions are in shop-smash-artwork-prompts.json.
 
-- Smash Crew: bats, goggles and shattered plate emblem.
-- Less Talk. More Smash.: smashed monitor/team outing graphic.
-- Smash Session Recovery Fuel: post-session mug wrap.
-- The Smash List: shattered-plate checklist notebook cover.
-- Keep Calm? Book a Rage Room.: intact-to-shattered plate mouse mat.
+- Smash Club: vintage club badge, crossed sledgehammers and shattered plate.
+- I Came. I Saw. I Smashed.: cobalt impact graphic and venue-neutral souvenir line.
+- Caffeine & Consequences: retro diner/tattoo-flash mug wrap.
+- Things I’m Not Saying Out Loud: editorial cracked-speech-bubble notebook cover.
+- Ctrl + Alt + Destroy: neon techwear keyboard graphic for the mouse mat.
+
+The v4 range intentionally carries no RageRoom Directory or venue branding, so it can be bought after visiting any operator.
 
 Current source PNGs: public/shop/artwork/*-v3.png. Current concept mockups: public/shop/mockup/*-v3.png. These remain concept sources requiring printer preflight, print size/resolution and background treatment. The mug uses a flat wrap; final heat-reveal coverage must be confirmed. Approve manufactured samples and replace concept imagery with verified mockups/photos before activation.
 

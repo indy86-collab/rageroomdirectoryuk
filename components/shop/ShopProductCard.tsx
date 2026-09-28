@@ -1,26 +1,18 @@
 "use client"
 import Image from "next/image"
 import { useState } from "react"
-import { type ShopProduct, SHIPPING_PER_ITEM, gbp } from "@/lib/shop/catalog"
-import { trackEvent } from "@/lib/analytics"
-export default function ShopProductCard({ product, mode }: { product: ShopProduct; mode: "preview" | "test" | "live" }) {
+import { type ShopProduct, DELIVERY_MESSAGE, gbp } from "@/lib/shop/catalog"
+import { useShopBasket } from "./ShopBasket"
+export default function ShopProductCard({ product }: { product: ShopProduct }) {
   const [showArtwork, setShowArtwork] = useState(false)
   const [variant, setVariant] = useState<string>(product.variants[0])
   const [quantity, setQuantity] = useState(1)
-  const [busy, setBusy] = useState(false)
+  const { add } = useShopBasket()
+  const [message, setMessage] = useState("")
   const [error, setError] = useState("")
-  const [requestId, setRequestId] = useState<string | null>(null)
-  async function checkout() {
-    if (busy) return
-    setBusy(true); setError("")
-    const id = requestId || crypto.randomUUID(); setRequestId(id)
-    try {
-      const res = await fetch("/api/checkout/shop", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ productId: product.id, variant, quantity, requestId: id }) })
-      const data = await res.json()
-      if (!res.ok || !data.url) throw new Error(data.error || "Unable to open checkout.")
-      trackEvent("shop_checkout_start", { product_id: product.id, quantity })
-      window.location.assign(data.url)
-    } catch (e) { setError(e instanceof Error ? e.message : "Please try again."); setBusy(false) }
+  function addToBasket() {
+    try { add({ productId: product.id, variant, quantity }); setMessage(`${quantity} added to your basket.`); setError("") }
+    catch (e) { setMessage(""); setError(e instanceof Error ? e.message : "Please try again.") }
   }
   return <article id={product.id} className="overflow-hidden rounded-2xl border border-zinc-800 bg-[#181818] scroll-mt-24">
     <div className="relative aspect-square bg-[#111820]">
@@ -36,12 +28,12 @@ export default function ShopProductCard({ product, mode }: { product: ShopProduc
       <p className="mt-3 text-sm leading-6 text-zinc-300">{product.description}</p>
       <details className="mt-3 text-xs leading-5 text-zinc-400"><summary className="cursor-pointer py-2">Product details</summary>{product.details}</details>
       <div className="mt-4 grid grid-cols-[1fr_85px] gap-3">
-        <label className="text-xs text-zinc-300" htmlFor={`${product.id}-variant`}>Size / finish<select disabled={busy} id={`${product.id}-variant`} value={variant} onChange={e => { setVariant(e.target.value); setRequestId(null) }} className="mt-2 min-h-11 w-full rounded-md border border-zinc-700 bg-zinc-950 px-2 text-sm">{product.variants.map(v => <option key={v}>{v}</option>)}</select></label>
-        <label className="text-xs text-zinc-300" htmlFor={`${product.id}-quantity`}>Quantity<select disabled={busy} id={`${product.id}-quantity`} value={quantity} onChange={e => { setQuantity(Number(e.target.value)); setRequestId(null) }} className="mt-2 min-h-11 w-full rounded-md border border-zinc-700 bg-zinc-950 px-2 text-sm">{Array.from({ length: 10 }, (_,i) => <option key={i} value={i+1}>{i+1}</option>)}</select></label>
+        <label className="text-xs text-zinc-300" htmlFor={`${product.id}-variant`}>Size / finish<select id={`${product.id}-variant`} value={variant} onChange={e => { setVariant(e.target.value); setMessage("") }} className="mt-2 min-h-11 w-full rounded-md border border-zinc-700 bg-zinc-950 px-2 text-sm">{product.variants.map(v => <option key={v}>{v}</option>)}</select></label>
+        <label className="text-xs text-zinc-300" htmlFor={`${product.id}-quantity`}>Quantity<select id={`${product.id}-quantity`} value={quantity} onChange={e => { setQuantity(Number(e.target.value)); setMessage("") }} className="mt-2 min-h-11 w-full rounded-md border border-zinc-700 bg-zinc-950 px-2 text-sm">{Array.from({ length: 10 }, (_,i) => <option key={i} value={i+1}>{i+1}</option>)}</select></label>
       </div>
-      <p className="mt-4 text-sm text-zinc-300">{gbp((product.price + SHIPPING_PER_ITEM) * quantity)} total · includes {gbp(SHIPPING_PER_ITEM * quantity)} UK delivery</p>
-      <button onClick={checkout} disabled={mode === "preview" || busy} className="mt-4 min-h-12 w-full rounded-md bg-orange-600 px-4 font-bold text-white hover:bg-orange-700 disabled:bg-zinc-800 disabled:text-zinc-400">{busy ? "Opening checkout…" : mode === "preview" ? "Checkout unavailable" : mode === "test" ? "Try test checkout" : "Buy with Stripe"}</button>
-      <p className="mt-2 text-xs leading-5 text-zinc-500">{mode === "preview" ? "Stripe is not configured, so checkout cannot start yet." : "One design per checkout. Estimated delivery: 7–12 working days. Items may arrive separately."}</p>
+      <p className="mt-4 text-xs leading-5 text-zinc-400">{DELIVERY_MESSAGE}</p>
+      <button onClick={addToBasket} className="mt-4 min-h-12 w-full rounded-md bg-orange-600 px-4 font-bold text-white hover:bg-orange-700">Add to basket</button>
+      <div role="status" className="mt-2 text-sm text-zinc-300">{message && <>{message} <a href="#basket" className="inline-block min-h-11 content-center text-orange-400 underline">View basket</a> or continue shopping.</>}</div>
       {error && <p role="alert" className="mt-3 text-sm text-red-300">{error}</p>}
     </div>
   </article>

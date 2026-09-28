@@ -4,8 +4,8 @@ Updated the five-item catalogue to more accessible regular prices. No artificial
 
 | Product | Previous item price | Revised item price | One item including £4.99 delivery |
 |---|---:|---:|---:|
-| Smash Crew tee | £24.99 | £19.99 | £24.98 |
-| Less Talk. More Smash. tee | £24.99 | £19.99 | £24.98 |
+| Smash Club tee | £24.99 | £19.99 | £24.98 |
+| I Came. I Saw. I Smashed. tee | £24.99 | £19.99 | £24.98 |
 | Heat-reveal mug | £24.99 | £17.99 | £22.98 |
 | Hardback notebook | £19.99 | £14.99 | £19.98 |
 | Mouse mat | £17.99 | £11.99 | £16.98 |

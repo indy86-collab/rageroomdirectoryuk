@@ -9,15 +9,57 @@ import { shopCheckoutMode, shopSessionOptions } from "./checkout"
 import { recordPhysicalOrder, validPaidShopSession } from "./fulfilment"
 import { POST as checkout } from "@/app/api/checkout/shop/route"
 import { POST as webhook } from "@/app/api/webhooks/stripe/route"
-const body = { productId: "smash-crew", variant: "Black / M", quantity: 2, requestId: "12345678-1234-1234-1234-123456789abc" }
+const item = { productId: "smash-crew", variant: "Black / M", quantity: 2 }
+const body = { items: [item], requestId: "12345678-1234-1234-1234-123456789abc" }
 // Historical paid orders retain their original price snapshot after catalogue repricing.
 function paidSession() { return { id: "cs_test_123", metadata: { orderType: "physical", unitAmount: "2499", quantity: "2", shippingAmount: "998" }, currency: "gbp", payment_status: "paid", amount_subtotal: 4998, amount_total: 5996, payment_intent: "pi_123", collected_information: { shipping_details: { address: { country: "GB" } } } } as unknown as Stripe.Checkout.Session }
 beforeEach(() => { vi.clearAllMocks(); vi.stubEnv("STRIPE_SECRET_KEY", "sk_test_dummy"); vi.stubEnv("STRIPE_WEBHOOK_SECRET", "whsec_dummy") })
 afterEach(() => vi.unstubAllEnvs())
 describe("shop checkout", () => {
+ it.each([
+   { items: [{ ...item, quantity: 1 }] },
+   { items: [item] },
+   { items: [item, { productId: "reset", variant: "Black / 11oz", quantity: 1 }] },
+ ])("charges delivery once for basket %j", ({ items }) => {
+   const options = shopSessionOptions(parseShopOrder({ ...body, items }), "http://localhost")
+   expect(options.shipping_options).toHaveLength(1)
+   expect(options.shipping_options?.[0].shipping_rate_data?.fixed_amount?.amount).toBe(499)
+ })
+ it("preserves variants, designs and quantities with the correct mixed-order total", async () => {
+   const items = [item, { ...item, variant: "Black / S", quantity: 1 }, { productId: "reset", variant: "Black / 11oz", quantity: 1 }]
+   const options = shopSessionOptions(parseShopOrder({ ...body, items: items.map(i => ({ ...i, price: 1, unitAmount: 1 })), shipping: 0 }), "http://localhost")
+   expect(options.line_items).toHaveLength(3)
+   expect(options.line_items?.map(i => [i.quantity, i.price_data?.unit_amount, i.price_data?.product_data?.metadata?.variant])).toEqual([[2, 1999, "Black / M"], [1, 1999, "Black / S"], [1, 1799, "Black / 11oz"]])
+   expect(JSON.parse(String(options.metadata?.item_2))).toMatchObject({ productId: "reset", quantity: 1, design: "/shop/artwork/caffeine-consequences-v4.png" })
+   expect(options.payment_intent_data?.metadata).toEqual(options.metadata)
+   const example = shopSessionOptions(parseShopOrder({ ...body, items: [item, items[2]] }), "http://localhost")
+   const subtotal = example.line_items!.reduce((sum, i) => sum + i.price_data!.unit_amount! * i.quantity!, 0)
+   expect(subtotal).toBe(5797)
+   expect(subtotal + example.shipping_options![0].shipping_rate_data!.fixed_amount!.amount).toBe(6296)
+   mocks.create.mockResolvedValue({ id: "cs_test_123", url: "https://checkout.stripe.com/test" })
+   expect((await checkout(new Request("http://localhost/api/checkout/shop", { method: "POST", body: JSON.stringify({ ...body, items }) }))).status).toBe(200)
+   expect(mocks.create).toHaveBeenCalledTimes(1)
+   expect(mocks.create.mock.calls[0][0].line_items).toHaveLength(3)
+ })
+ it.each([{ items: [] }, { items: null }, { items: [{ ...item, quantity: 10 }, item] }])("rejects empty or excessive baskets", async ({ items }) => {
+   expect((await checkout(new Request("http://localhost/api/checkout/shop", { method: "POST", body: JSON.stringify({ ...body, items }) }))).status).toBe(400)
+   expect(mocks.create).not.toHaveBeenCalled()
+ })
+ it("rejects invalid request IDs", () => expect(() => parseShopOrder({ ...body, requestId: "bad" })).toThrow())
+ it("validates mixed paid orders from their immutable snapshots", async () => {
+   const options = shopSessionOptions(parseShopOrder({ ...body, items: [item, { productId: "reset", variant: "Black / 11oz", quantity: 1 }] }), "http://localhost")
+   const s = { ...paidSession(), metadata: options.metadata, amount_subtotal: 5797, amount_total: 6296 } as Stripe.Checkout.Session
+   expect(validPaidShopSession(s)).toBe(true)
+   await recordPhysicalOrder(s)
+   expect(mocks.update).toHaveBeenCalled()
+   expect(validPaidShopSession({ ...s, amount_total: 7294 })).toBe(false)
+   expect(validPaidShopSession({ ...s, metadata: { ...s.metadata, item_1: "{}" } })).toBe(false)
+   expect(validPaidShopSession({ ...s, metadata: { ...s.metadata, item_0: "invalid" } })).toBe(false)
+ })
+
  it("opens checkout from the Stripe key", () => { expect(shopCheckoutMode()).toBe("test"); vi.stubEnv("STRIPE_SECRET_KEY", "sk_live_dummy"); expect(shopCheckoutMode()).toBe("live"); vi.stubEnv("STRIPE_SECRET_KEY", ""); expect(shopCheckoutMode()).toBe("preview") })
- it.each([{ quantity: 0 }, { quantity: 11 }, { quantity: 1.5 }, { quantity: "2" }, { variant: "unknown" }, { productId: "missing" }, { requestId: "bad" }])("rejects invalid orders %j", change => { expect(() => parseShopOrder({ ...body, ...change })).toThrow() })
- it("uses catalogue prices and UK-only shipping despite client amounts", () => { const options = shopSessionOptions(parseShopOrder({ ...body, price: 1, shipping: 0 }), "http://localhost:3107"); expect(options.line_items?.[0].price_data?.unit_amount).toBe(1999); expect(options.shipping_options?.[0].shipping_rate_data?.fixed_amount?.amount).toBe(998); expect(options.shipping_address_collection?.allowed_countries).toEqual(["GB"]); expect(options.payment_intent_data?.metadata?.orderType).toBe("physical"); expect(options.locale).toBe("en-GB"); expect(options.adaptive_pricing).toEqual({ enabled: false }) })
+ it.each([{ quantity: 0 }, { quantity: 11 }, { quantity: 1.5 }, { quantity: "2" }, { variant: "unknown" }, { productId: "missing" }, ])("rejects invalid orders %j", change => { expect(() => parseShopOrder({ ...body, items: [{ ...item, ...change }] })).toThrow() })
+ it("uses catalogue prices and UK-only shipping despite client amounts", () => { const options = shopSessionOptions(parseShopOrder({ ...body, price: 1, shipping: 0 }), "http://localhost:3107"); expect(options.line_items?.[0].price_data?.unit_amount).toBe(1999); expect(options.shipping_options?.[0].shipping_rate_data?.fixed_amount?.amount).toBe(499); expect(options.shipping_address_collection?.allowed_countries).toEqual(["GB"]); expect(options.payment_intent_data?.metadata?.orderType).toBe("physical"); expect(options.locale).toBe("en-GB"); expect(options.adaptive_pricing).toEqual({ enabled: false }) })
  it("blocks checkout when Stripe is not configured", async () => { vi.stubEnv("STRIPE_SECRET_KEY", ""); const res = await checkout(new Request("http://localhost/api/checkout/shop", { method: "POST", body: JSON.stringify(body) })); expect(res.status).toBe(503); expect(mocks.create).not.toHaveBeenCalled() })
  it("creates an idempotent hosted session", async () => { mocks.create.mockResolvedValue({ url: "https://checkout.stripe.com/test" }); const res = await checkout(new Request("http://localhost/api/checkout/shop", { method: "POST", body: JSON.stringify(body) })); expect(res.status).toBe(200); expect(mocks.create.mock.calls[0][1]).toEqual({ idempotencyKey: `shop-${body.requestId}` }) })
 })

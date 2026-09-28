@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     const origin = shopCheckoutMode() === "test" ? new URL(request.url).origin : new URL(absoluteUrl()).origin
     const session = await getStripe().checkout.sessions.create(shopSessionOptions(order, origin), { idempotencyKey: `shop-${order.requestId}` })
     logCheckoutLifecycle("checkout_session_created", checkoutSessionLogFields(session))
-    return NextResponse.json({ url: session.url })
+    return NextResponse.json({ url: session.url, sessionId: session.id })
   } catch (error) {
     console.error("Shop checkout error", error)
     return NextResponse.json({ error: "Checkout could not start. Please try again." }, { status: 502 })

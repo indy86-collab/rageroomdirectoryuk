@@ -9,7 +9,7 @@ export default function Hero() {
   return (
     <section className="site-container pt-5 sm:pt-8 pb-8 sm:pb-12">
       <div className="relative isolate rounded-2xl border border-zinc-800 bg-[#20201e]">
-        <Image src="/images/hero/rage.jpg" alt="Person in protective gear enjoying a rage room experience" fill priority sizes="(max-width: 1280px) 100vw, 1216px" className="rounded-2xl object-cover object-[65%_center]" />
+        <Image src="/images/hero/rage-v2.jpg" alt="Woman in protective equipment smashing a computer in a rage room" fill priority sizes="(max-width: 1280px) 100vw, 1216px" className="rounded-2xl object-cover object-[92%_center] sm:object-center" />
         <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-black/90 via-black/70 to-black/15" aria-hidden="true" />
         <div className="relative max-w-3xl px-5 py-10 sm:px-10 sm:py-16 lg:px-14 lg:py-20">
           <p className="eyebrow mb-4">A different kind of day out</p>
