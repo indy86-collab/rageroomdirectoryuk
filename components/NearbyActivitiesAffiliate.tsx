@@ -20,8 +20,9 @@ import {
 import {
   AFFILIATE_CHIP_CITIES,
   buildAffiliateCampaign,
+  buildGetYourGuideCardUrl,
   buildGetYourGuideBrowseUrl,
-  buildGetYourGuideUrl,
+  buildOfferCampaign,
   getThemedActivityCards,
   PLANNER_GROUPS,
   PLANNER_LABELS,
@@ -144,7 +145,7 @@ export default function NearbyActivitiesAffiliate({
     occasionSlug,
     personalised: planComplete,
   })
-  const themedCards = getThemedActivityCards(plan)
+  const themedCards = getThemedActivityCards(plan, city)
   const headingId = `nearby-activities-${placement}`
 
   if (!THIRD_PARTY_AFFILIATE_LINKS_ENABLED) return null
@@ -268,8 +269,8 @@ export default function NearbyActivitiesAffiliate({
         </h2>
         <p className="mt-3 max-w-3xl text-sm leading-6 text-zinc-300 sm:text-base">
           {variant === "chips"
-            ? "Rage rooms last about an hour. Pick a city to browse bookable tours, tastings and walks that fit around your session — availability and prices come from GetYourGuide."
-            : "Rage rooms last about an hour. Browse bookable tours, tastings and city walks that fit around your session — availability and prices come from GetYourGuide."}
+            ? "Rage rooms last about an hour. Pick a city to see an experience that can fit around your session — live dates and prices come from GetYourGuide."
+            : "Start with a relevant local pick, then check live dates and prices on GetYourGuide. We favour short, group-friendly experiences that can fit around a rage-room booking."}
         </p>
 
         {variant === "chips" ? (
@@ -277,45 +278,45 @@ export default function NearbyActivitiesAffiliate({
             {chipCities.map((chipCity) => (
               <a
                 key={chipCity}
-                href={buildGetYourGuideBrowseUrl(chipCity, placementCampaign)}
+                href={buildGetYourGuideCardUrl(
+                  chipCity,
+                  getThemedActivityCards(undefined, chipCity)[0],
+                  buildOfferCampaign(
+                    placementCampaign,
+                    getThemedActivityCards(undefined, chipCity)[0].id
+                  )
+                )}
                 target="_blank"
                 rel="sponsored noopener noreferrer"
                 onClick={() => trackClick("city_chip", chipCity)}
                 className="inline-flex min-h-[44px] items-center justify-center gap-1 rounded-md border border-orange-500/50 bg-orange-500/10 px-4 py-2 text-sm font-semibold text-orange-200 transition-colors hover:border-orange-400 hover:bg-orange-500/20 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-offset-2 focus:ring-offset-[#181818]"
               >
-                Browse tours in {chipCity}
+                See our {chipCity} pick
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </a>
             ))}
           </div>
         ) : city ? (
           <>
-            <div className="mt-5">
-              <a
-                href={buildGetYourGuideBrowseUrl(city, placementCampaign)}
-                target="_blank"
-                rel="sponsored noopener noreferrer"
-                onClick={() => trackClick("browse_all")}
-                className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-md border border-orange-500/60 bg-orange-500/15 px-5 py-3 text-sm font-semibold text-orange-100 transition-colors hover:border-orange-400 hover:bg-orange-500/25 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-offset-2 focus:ring-offset-[#181818] sm:w-auto"
-              >
-                Browse tours in {city}
-                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-              </a>
-            </div>
-
             <div className="mt-5 grid gap-3 lg:grid-cols-3">
               {themedCards.map((card) => (
                 <a
                   key={card.id}
-                  href={buildGetYourGuideUrl(city, {
-                    query: card.query,
-                    campaign: cardCampaign,
-                  })}
+                  href={buildGetYourGuideCardUrl(
+                    city,
+                    card,
+                    buildOfferCampaign(cardCampaign, card.id)
+                  )}
                   target="_blank"
                   rel="sponsored noopener noreferrer"
                   onClick={() => trackClick(card.id)}
                   className="flex h-full flex-col rounded-lg border border-zinc-700 bg-black/20 p-4 transition-colors hover:border-orange-500/60 hover:bg-orange-500/5 focus:outline-none focus:ring-2 focus:ring-orange-300"
                 >
+                  {card.badge && (
+                    <span className="mb-2 text-[11px] font-bold uppercase tracking-wider text-orange-400">
+                      {card.badge}
+                    </span>
+                  )}
                   <h3 className="text-base font-semibold text-white">
                     {card.title}
                   </h3>
@@ -323,11 +324,27 @@ export default function NearbyActivitiesAffiliate({
                     {card.description}
                   </p>
                   <span className="mt-3 inline-flex min-h-[44px] items-center gap-1 text-sm font-semibold text-orange-300">
-                    Browse on GetYourGuide
+                    Check dates & price
                     <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                   </span>
                 </a>
               ))}
+            </div>
+
+            <div className="mt-4">
+              <a
+                href={buildGetYourGuideBrowseUrl(
+                  city,
+                  buildOfferCampaign(placementCampaign, "browse-all")
+                )}
+                target="_blank"
+                rel="sponsored noopener noreferrer"
+                onClick={() => trackClick("browse_all")}
+                className="inline-flex min-h-[44px] items-center gap-1 text-sm font-semibold text-zinc-300 underline decoration-zinc-600 underline-offset-4 hover:text-white"
+              >
+                See all GetYourGuide activities in {city}
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </a>
             </div>
 
             {step === "idle" && (

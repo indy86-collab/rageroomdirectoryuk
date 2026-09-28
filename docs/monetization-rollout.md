@@ -2,7 +2,7 @@
 
 ## Implemented locally
 
-- Birthday, hen and stag affiliate modules now use group-oriented offers rather than generic sightseeing. Existing GetYourGuide attribution is preserved. National group pages offer city searches; local pages offer location-specific searches. These are clearly described as searches, not verified inventory or live availability.
+- Birthday, hen and stag affiliate modules use group-oriented offers rather than generic sightseeing. Manchester, Edinburgh and Liverpool lead with a specific, high-review activity; London and Birmingham lead with a tightly scoped activity search. Other cities use complementary immersive, food and evening searches. Existing GetYourGuide attribution is preserved, and every recommendation now has its own campaign suffix so clicks can be compared in the partner dashboard. Live price, availability and provider terms remain on GetYourGuide.
 - Cities without local venues (or without rage-room inventory), empty filtered listings and zero-result planner searches offer explicit alternatives while preserving directory results. UK category links remain usable when commercial modules are disabled.
 - Corporate occasion pages, corporate guide, contact page and the final event-builder step offer a reviewable planning enquiry. The draft includes only location, headcount, date, budget and standard purpose. Attendees, organiser details, access tokens and booking references are excluded. Visitors send it themselves through their email app, or copy it to webmail. Opening a draft is not a submitted lead.
 - Gift offers are placed on the gift-ideas page, and new partner offers activate only when complete approved URLs are configured.

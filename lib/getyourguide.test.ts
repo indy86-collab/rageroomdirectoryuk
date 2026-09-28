@@ -2,8 +2,10 @@ import { describe, expect, it } from "vitest"
 import {
   AFFILIATE_CHIP_CITIES,
   buildAffiliateCampaign,
+  buildGetYourGuideCardUrl,
   buildGetYourGuideBrowseUrl,
   buildGetYourGuideUrl,
+  buildOfferCampaign,
   GETYOURGUIDE_PARTNER_ID,
   getComplementaryActivityQuery,
   getOccasionPlannerGroup,
@@ -62,27 +64,27 @@ describe("buildGetYourGuideBrowseUrl", () => {
     )
 
     expect(url.origin).toBe("https://www.getyourguide.com")
-    expect(url.pathname).toBe("/manchester-l1128/")
+    expect(url.pathname).toBe("/destinations/manchester-l1128/")
     expect(url.searchParams.get("partner_id")).toBe(GETYOURGUIDE_PARTNER_ID)
     expect(url.searchParams.get("cmp")).toBe("rageroom_city")
   })
 
   it("maps Newcastle directory cities onto the GYG destination page", () => {
     const url = new URL(buildGetYourGuideBrowseUrl("Newcastle", "rageroom_city"))
-    expect(url.pathname).toBe("/newcastle-upon-tyne-l444/")
+    expect(url.pathname).toBe("/destinations/newcastle-upon-tyne-l444/")
   })
 
   it("uses destination pages for Brighton, Sheffield and Nottingham", () => {
     expect(
       new URL(buildGetYourGuideBrowseUrl("Brighton", "rageroom_home")).pathname
-    ).toBe("/brighton-l440/")
+    ).toBe("/destinations/brighton-l440/")
     expect(
       new URL(buildGetYourGuideBrowseUrl("Sheffield", "rageroom_guide")).pathname
-    ).toBe("/sheffield-l95510/")
+    ).toBe("/destinations/sheffield-l95510/")
     expect(
       new URL(buildGetYourGuideBrowseUrl("Nottingham", "rageroom_near_me"))
         .pathname
-    ).toBe("/nottingham-l145813/")
+    ).toBe("/destinations/nottingham-l145813/")
   })
 
   it("falls back to search for unmapped cities", () => {
@@ -127,15 +129,15 @@ describe("buildAffiliateCampaign", () => {
 })
 
 describe("themed complementary links", () => {
-  it("defaults to walking, food and evening cards without competitor inventory", () => {
+  it("defaults to immersive, food and evening cards without competitor inventory", () => {
     const cards = getThemedActivityCards()
     expect(cards.map((card) => card.id)).toEqual([
-      "sightseeing",
+      "immersive-games",
       "food-drink",
       "evening",
     ])
     for (const card of cards) {
-      expect(usesCompetitorInventoryQuery(card.query)).toBe(false)
+      expect(usesCompetitorInventoryQuery(card.query ?? "")).toBe(false)
     }
   })
 
@@ -152,7 +154,7 @@ describe("themed complementary links", () => {
     expect(cards[0]?.query).toContain("couples")
     expect(cards).toHaveLength(3)
     expect(cards.some((card) => card.id === "food-drink")).toBe(false)
-    expect(cards.some((card) => card.id === "sightseeing")).toBe(true)
+    expect(cards.some((card) => card.id === "immersive-games")).toBe(true)
   })
 
   it("never recommends rage rooms, smash rooms or axe throwing", () => {
@@ -162,11 +164,37 @@ describe("themed complementary links", () => {
           const query = getComplementaryActivityQuery({ group, vibe, timing })
           expect(usesCompetitorInventoryQuery(query)).toBe(false)
           for (const card of getThemedActivityCards({ group, vibe, timing })) {
-            expect(usesCompetitorInventoryQuery(card.query)).toBe(false)
+            expect(usesCompetitorInventoryQuery(card.query ?? "")).toBe(false)
           }
         }
       }
     }
+  })
+
+  it("uses specific high-intent city picks with offer-level campaigns", () => {
+    const manchester = getThemedActivityCards(undefined, "Manchester")
+    expect(manchester[0]).toMatchObject({
+      id: "etihad-tour",
+      path: expect.stringContaining("t155085"),
+    })
+    const campaign = buildOfferCampaign("rageroom_listing", manchester[0]!.id)
+    const url = new URL(
+      buildGetYourGuideCardUrl("Manchester", manchester[0]!, campaign)
+    )
+    expect(url.pathname).toContain("t155085")
+    expect(url.searchParams.get("partner_id")).toBe(GETYOURGUIDE_PARTNER_ID)
+    expect(url.searchParams.get("cmp")).toBe("rageroom_listing_etihad-tour")
+
+    const london = getThemedActivityCards(undefined, "London")
+    const searchUrl = new URL(
+      buildGetYourGuideCardUrl(
+        "London",
+        london[0]!,
+        buildOfferCampaign("rageroom_city", london[0]!.id)
+      )
+    )
+    expect(searchUrl.pathname).toBe("/s/")
+    expect(searchUrl.searchParams.get("q")).toContain("Sandbox VR")
   })
 })
 
