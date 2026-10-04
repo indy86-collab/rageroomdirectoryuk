@@ -3762,5 +3762,340 @@
     "accessibility": null,
     "rating": null,
     "reviewCount": null
+  },
+  {
+    "id": "69f20f9d-80f6-4563-8da5-b5ce0cf969d0",
+    "googlePlaceId": null,
+    "verified": true,
+    "lastVerified": "2026-10-02",
+    "createdAt": "2026-10-02T10:00:00.000Z",
+    "walkInsAccepted": null,
+    "giftVouchers": null,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "locationType": "fixed-venue",
+    "name": "Rage Room Reading",
+    "slug": "rage-room-reading",
+    "description": "Town-centre rage room on the first floor of 106 Friar Street in Reading. Guests smash prepared breakables in a supervised room with protective gear supplied. The official site publishes two packages and asks customers to call to book.",
+    "streetAddress": "First Floor, 106 Friar Street",
+    "city": "Reading",
+    "region": "Berkshire",
+    "postcode": "RG1 1EP",
+    "location": {
+      "lat": 51.456479,
+      "lng": -0.97437
+    },
+    "website": "https://rageroomreading.co.uk/",
+    "bookingUrl": null,
+    "phone": "+44 7429 147597",
+    "price": 45,
+    "priceUnit": "per-person",
+    "priceNote": "Package A (Curious) is £45 per person; Package B (Furious) is £65 per person. Call to book.",
+    "ageMin": null,
+    "minimumAgeNote": null,
+    "openingHours": [],
+    "sessionLengths": [],
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeMin": 1,
+    "groupSizeMax": 8,
+    "sourceUrl": "https://rageroomreading.co.uk/faq/",
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/rage-room-reading.jpg",
+        "alt": "Rage Room Reading smash room lit in UV light, ready for a session",
+        "caption": "Official venue photograph from the Rage Room Reading website.",
+        "width": 1800,
+        "height": 1350,
+        "credit": "Rage Room Reading",
+        "sourceUrl": "https://rageroomreading.co.uk/wp-content/uploads/2026/03/IMG_3421-scaled.jpeg",
+        "authorised": false
+      }
+    ],
+    "image": "/images/venues/rage-room-reading.jpg",
+    "activities": [
+      "rage-room"
+    ],
+    "features": [],
+    "occasions": [],
+    "onlineBooking": false
+  },
+  {
+    "id": "6cfbe7c3-c36f-495f-8505-cfd17c2a4088",
+    "googlePlaceId": null,
+    "verified": true,
+    "lastVerified": "2026-10-02",
+    "createdAt": "2026-10-02T10:00:00.000Z",
+    "walkInsAccepted": null,
+    "giftVouchers": null,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "locationType": "fixed-venue",
+    "name": "We Are Maxesive – The Guildford Rage Room",
+    "slug": "we-are-maxesive-guildford",
+    "description": "Guildford rage room run by We Are Maxesive at The Holroyd Arms on Aldershot Road, alongside axe throwing and private karaoke. The official page lists room packages for up to four people with 30 or 45 minutes of smash time and online booking.",
+    "streetAddress": "The Holroyd Arms, 36 Aldershot Road",
+    "city": "Guildford",
+    "region": "Surrey",
+    "postcode": "GU2 8AF",
+    "location": {
+      "lat": 51.250003,
+      "lng": -0.590005
+    },
+    "website": "https://wearemaxesive.co.uk/rage-room-2/",
+    "bookingUrl": "https://wannabook.online/booking/maxesive",
+    "phone": "+44 7948 624022",
+    "price": 50,
+    "priceUnit": "per-room",
+    "priceNote": "Smashing 1 is £50 for up to two people and 30 minutes of smash time; larger packages are £90 for up to three and £150 for up to four.",
+    "ageMin": null,
+    "minimumAgeNote": "The official rules state over-18s only (ID on request) but also mention supervision for under-16s and under-18s; confirm with the venue before booking minors.",
+    "openingHours": [],
+    "sessionLengths": [
+      30,
+      45
+    ],
+    "sessionDurationType": "activity-time",
+    "sessionDurationNote": "Package smash times as listed on the official rage-room page.",
+    "groupSizeMin": 1,
+    "groupSizeMax": 4,
+    "sourceUrl": "https://wearemaxesive.co.uk/rage-room-2/",
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/we-are-maxesive-guildford.jpg",
+        "alt": "We Are Maxesive logo with crossed baseball bats and the tagline \"Rage Rooms in the Suburbs\"",
+        "caption": "Official logo from the We Are Maxesive website; the site publishes no venue photography of the rage room.",
+        "width": 1800,
+        "height": 1227,
+        "credit": "We Are Maxesive",
+        "sourceUrl": "https://wearemaxesive.co.uk/wp-content/uploads/2023/11/Rage-Rooms-Intro-Slider-2.png",
+        "authorised": false
+      }
+    ],
+    "image": "/images/venues/we-are-maxesive-guildford.jpg",
+    "activities": [
+      "rage-room",
+      "axe-throwing"
+    ],
+    "features": [],
+    "occasions": [],
+    "onlineBooking": true
+  },
+  {
+    "id": "0ccea064-3097-46fd-84f6-5f85ae99ce67",
+    "googlePlaceId": null,
+    "verified": true,
+    "lastVerified": "2026-10-02",
+    "createdAt": "2026-10-02T10:00:00.000Z",
+    "walkInsAccepted": null,
+    "giftVouchers": true,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "locationType": "fixed-venue",
+    "name": "Rage Cage Newquay",
+    "slug": "rage-cage-newquay",
+    "description": "Indoor rage room on St Michaels Road in Newquay, Cornwall. Rage Cage sells 30-minute sessions online for groups of up to four, with breakables, a large ticket item, a range of weapons and full safety equipment included. Approved bring-your-own items can be arranged.",
+    "streetAddress": "22 St Michaels Road",
+    "city": "Newquay",
+    "region": "Cornwall",
+    "postcode": "TR7 1RA",
+    "location": {
+      "lat": 50.412394,
+      "lng": -5.083521
+    },
+    "website": "https://rageroomnewquay.com/",
+    "bookingUrl": "https://rageroomnewquay.digitickets.co.uk/event-tickets/63890?catID=61014",
+    "phone": null,
+    "price": 60,
+    "priceUnit": "per-group",
+    "priceNote": "£60 for up to 2 people, £90 for 3 people and £120 for 4 people.",
+    "ageMin": 13,
+    "minimumAgeNote": "Ages 13–17 must have a parent or guardian on the premises.",
+    "openingHours": [],
+    "sessionLengths": [
+      30
+    ],
+    "sessionDurationType": "published-session",
+    "sessionDurationNote": "30-minute sessions as listed on the official site.",
+    "groupSizeMin": 1,
+    "groupSizeMax": 4,
+    "sourceUrl": "https://rageroomnewquay.com/",
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/rage-cage-newquay.jpg",
+        "alt": "Rage Cage Newquay logo",
+        "caption": "Official logo from the Rage Cage Newquay website; the site publishes no venue photography.",
+        "width": 1200,
+        "height": 1200,
+        "credit": "Rage Cage Newquay",
+        "sourceUrl": "https://img1.wsimg.com/isteam/ip/15a6128f-ec9d-4d71-af33-9c007a473b5f/RAGE%20CAGE%2072dpi.jpg",
+        "authorised": false
+      }
+    ],
+    "image": "/images/venues/rage-cage-newquay.jpg",
+    "activities": [
+      "rage-room"
+    ],
+    "features": [
+      "byo-smashables",
+      "corporate-groups"
+    ],
+    "occasions": [
+      "corporate-team-building"
+    ],
+    "onlineBooking": true
+  },
+  {
+    "id": "187daa74-fc6a-4a24-a929-74a8592f9c9d",
+    "googlePlaceId": null,
+    "verified": true,
+    "lastVerified": "2026-10-02",
+    "createdAt": "2026-10-02T10:00:00.000Z",
+    "walkInsAccepted": null,
+    "giftVouchers": null,
+    "corporatePackages": null,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "locationType": "fixed-venue",
+    "name": "Smash Therapy Coventry",
+    "slug": "smash-therapy-coventry",
+    "description": "Coventry rage room on Bilton Road Industrial Estate off Humber Road, with a standard room and a larger room for groups of four or more. The official Square booking page lists 30-minute rage sessions for one to eight people, a UV paint room and combined rage-and-paint hours.",
+    "streetAddress": "Unit 36, Bilton Road Industrial Estate, Humber Road",
+    "city": "Coventry",
+    "region": "West Midlands",
+    "postcode": "CV3 1JL",
+    "location": {
+      "lat": 52.4019185,
+      "lng": -1.4869435
+    },
+    "website": "https://square.site/book/LQJSWGPMW2X61/smash-therapy-coventry",
+    "bookingUrl": "https://book.squareup.com/appointments/aucwzv7ql42a61/location/LQJSWGPMW2X61",
+    "phone": "07581 377416",
+    "price": 35,
+    "priceUnit": "per-person",
+    "priceNote": "Rage for 1 is £35 and Rage for 2 is £60, with packages up to eight people. Rage and UV paint combo is £55 for one or £50 per person for two or more.",
+    "ageMin": null,
+    "minimumAgeNote": null,
+    "openingHours": [
+      "Monday-Friday: 18:30-21:00",
+      "Saturday-Sunday: 11:00-21:00"
+    ],
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "sessionDurationType": "published-session",
+    "sessionDurationNote": "Rage and paint sessions are 30 minutes each; the combo is one hour in total.",
+    "groupSizeMin": 1,
+    "groupSizeMax": 8,
+    "sourceUrl": "https://book.squareup.com/appointments/aucwzv7ql42a61/location/LQJSWGPMW2X61",
+    "media": [],
+    "image": null,
+    "activities": [
+      "rage-room",
+      "paint-splatter"
+    ],
+    "features": [
+      "couples"
+    ],
+    "occasions": [
+      "date-nights",
+      "birthdays"
+    ],
+    "onlineBooking": true
+  },
+  {
+    "id": "d21484df-5b49-438c-a357-54dd3bbf7da7",
+    "googlePlaceId": null,
+    "verified": true,
+    "lastVerified": "2026-10-02",
+    "createdAt": "2026-10-02T10:00:00.000Z",
+    "walkInsAccepted": null,
+    "giftVouchers": null,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "locationType": "fixed-venue",
+    "name": "MessyPaints & PrisonSmash – Prison Smash Rage Room",
+    "slug": "prison-smash-prudhoe",
+    "description": "Prison-themed rage room at MessyPaints & PrisonSmash on Front Street in Prudhoe, Northumberland. Guests suit up in orange jumpsuits and helmets for 20-minute smash sessions, booked online. The same venue runs Messy Paints splatter-painting sessions.",
+    "streetAddress": "Unit 10, 1B/1C Front Street",
+    "city": "Prudhoe",
+    "region": "Northumberland",
+    "postcode": "NE42 5HJ",
+    "location": {
+      "lat": 54.96171,
+      "lng": -1.850054
+    },
+    "website": "https://www.messypaintsprisonsmash.co.uk/",
+    "bookingUrl": "https://www.messypaintsprisonsmash.co.uk/booking-calendar/prison-smash-rage-room",
+    "phone": "07914 016095",
+    "price": 20,
+    "priceUnit": "per-person",
+    "priceNote": "Prison Smash Rage Room is listed at £20 for a 20-minute session.",
+    "ageMin": 18,
+    "minimumAgeNote": "Prison Smash is strictly 18+.",
+    "openingHours": [
+      "Daily: 10:00-20:15"
+    ],
+    "sessionLengths": [
+      20
+    ],
+    "sessionDurationType": "published-session",
+    "sessionDurationNote": "20-minute session as listed on the official booking page.",
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "sourceUrl": "https://www.messypaintsprisonsmash.co.uk/prisonsmash-info",
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/prison-smash-prudhoe.jpg",
+        "alt": "Guest in an orange jumpsuit and helmet swinging a bat behind prison bars at Prison Smash in Prudhoe",
+        "caption": "Official venue photograph from the MessyPaints & PrisonSmash website.",
+        "width": 1350,
+        "height": 1800,
+        "credit": "MessyPaints & PrisonSmash",
+        "sourceUrl": "https://static.wixstatic.com/media/4e4a74_39c9042d9a414420b09479144426702b~mv2.jpg",
+        "authorised": false
+      }
+    ],
+    "image": "/images/venues/prison-smash-prudhoe.jpg",
+    "activities": [
+      "rage-room",
+      "paint-splatter"
+    ],
+    "features": [
+      "corporate-groups",
+      "birthday-parties",
+      "hen-stag-parties"
+    ],
+    "occasions": [
+      "birthdays",
+      "stag-parties",
+      "hen-parties",
+      "corporate-team-building"
+    ],
+    "onlineBooking": true
   }
 ]
