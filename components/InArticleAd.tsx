@@ -7,9 +7,12 @@ import {
   ADSENSE_CLIENT,
   ADSENSE_INARTICLE_SLOT,
   ADSENSE_SCRIPT_SRC,
+  isAdEligiblePath,
   isFillableManualAdSlot,
+  isLiveAdsenseHost,
   shouldMountManualAd,
 } from "@/lib/adsense"
+import { DISPLAY_AD_PROVIDER, JOURNEY_SCRIPT_URL } from "@/lib/display-ads"
 
 declare global {
   interface Window {
@@ -41,7 +44,7 @@ export default function InArticleAd() {
   const pushed = useRef(false)
 
   useEffect(() => {
-    if (!allowed) return
+    if (!allowed || DISPLAY_AD_PROVIDER !== "adsense") return
     const el = insRef.current
     if (!el || pushed.current) return
     if (!isFillableManualAdSlot(el, document)) return

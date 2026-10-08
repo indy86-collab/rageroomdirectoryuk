@@ -713,6 +713,18 @@ export default async function ListingPage({ params }: ListingPageProps) {
           />
         </div>}
 
+        {hasRageRoom && (
+          <GiftVoucherOffers
+            className="mb-6 sm:mb-8"
+            placement="listing"
+            venueSlug={listing.slug || listing.id}
+            venueName={listing.name}
+            city={listing.city}
+            region={listing.region}
+            venueSellsVouchers={listing.giftVouchers}
+          />
+        )}
+
         {/* Venue Details & Booking Info */}
         <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
           <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">

@@ -1,5 +1,6 @@
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
+import ExitIntentPrepPack from "@/components/ExitIntentPrepPack"
 
 export default function SiteLayout({
   children,
@@ -13,6 +14,7 @@ export default function SiteLayout({
         {children}
       </main>
       <Footer />
+      <ExitIntentPrepPack />
     </div>
   )
 }

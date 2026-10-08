@@ -16,9 +16,11 @@ export default function ConsentControlledProviders({
   useEffect(() => {
     window.dataLayer = window.dataLayer || []
     if (!window.gtag) {
-      window.gtag = function gtag(...args: unknown[]) {
-        window.dataLayer?.push(args)
-      }
+      // gtag.js only processes Arguments objects; pushing a plain array is ignored.
+      window.gtag = function gtag() {
+        // eslint-disable-next-line prefer-rest-params
+        window.dataLayer?.push(arguments)
+      } as NonNullable<Window["gtag"]>
     }
 
     window.gtag("consent", "default", {
