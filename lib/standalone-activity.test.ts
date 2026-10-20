@@ -42,6 +42,8 @@ describe("standalone and mobile activity inventory", () => {
     expect(bySlug("escape-time-lichfield").activities).toEqual([
       "rage-room",
       "paint-splatter",
+      "escape-room",
+      "vr",
     ])
     expect(bySlug("the-activity-dome-weston-super-mare").activities).toEqual([
       "rage-room",

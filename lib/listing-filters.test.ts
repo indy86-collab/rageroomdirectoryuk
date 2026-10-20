@@ -25,14 +25,14 @@ function run(overrides: Partial<ListingFilterState> = {}) {
 
 describe("listing discovery filters", () => {
   it("returns the complete inventory after reset", () => {
-    expect(run()).toHaveLength(78)
+    expect(run()).toHaveLength(127)
   })
 
   it("uses AND semantics for combined activities", () => {
     const axe = run({ activities: ["axe-throwing"] })
     const rageAndAxe = run({ activities: ["rage-room", "axe-throwing"] })
-    expect(axe).toHaveLength(24)
-    expect(rageAndAxe).toHaveLength(13)
+    expect(axe).toHaveLength(63)
+    expect(rageAndAxe).toHaveLength(14)
     expect(axe.some((listing) => listing.slug === "just-axing-swansea")).toBe(true)
     expect(rageAndAxe.some((listing) => listing.slug === "just-axing-swansea")).toBe(false)
     expect(rageAndAxe.every((listing) =>
@@ -60,13 +60,17 @@ describe("listing discovery filters", () => {
       activities: ["rage-room", "axe-throwing", "paint-splatter"],
     })
 
-    expect(paint).toHaveLength(34)
-    expect(rageAndPaint).toHaveLength(12)
+    expect(paint).toHaveLength(45)
+    expect(rageAndPaint).toHaveLength(18)
     expect(axeAndPaint.map((listing) => listing.slug)).toEqual([
-      "the-activity-dome-weston-super-mare",
+      "down-range-rage-room-gosport",
+      "rage-remedies-romford",
+      "the-activity-dome-weston-super-mare"
     ])
     expect(rageAxeAndPaint.map((listing) => listing.slug)).toEqual([
-      "the-activity-dome-weston-super-mare",
+      "down-range-rage-room-gosport",
+      "rage-remedies-romford",
+      "the-activity-dome-weston-super-mare"
     ])
     expect(rageAndPaint.every((listing) =>
       listing.activities.includes("rage-room") &&
@@ -78,6 +82,7 @@ describe("listing discovery filters", () => {
     const result = run({ city: "Sheffield", activities: ["paint-splatter"] })
     expect(result.map((listing) => listing.slug)).toEqual([
       "off-the-canvas-sheffield",
+      "splash-art-republic-sheffield",
       "splatter-central-sheffield",
     ])
   })

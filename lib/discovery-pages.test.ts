@@ -58,17 +58,17 @@ describe("discovery inventory", () => {
     const matches = listings.filter((listing) =>
       ["rage-room", "axe-throwing"].every((activity) => listing.activities.includes(activity as never))
     )
-    expect(matches.length).toBe(13)
+    expect(matches.length).toBe(14)
 
-    expect(listings.filter((listing) => listing.activities.includes("axe-throwing"))).toHaveLength(24)
+    expect(listings.filter((listing) => listing.activities.includes("axe-throwing"))).toHaveLength(63)
   })
 
   it("exposes the expanded paint inventory and its strict smash-and-paint subset", () => {
     const paint = listings.filter((listing) => listing.activities.includes("paint-splatter"))
     const rageAndPaint = paint.filter((listing) => listing.activities.includes("rage-room"))
 
-    expect(paint).toHaveLength(34)
-    expect(rageAndPaint).toHaveLength(12)
+    expect(paint).toHaveLength(45)
+    expect(rageAndPaint).toHaveLength(18)
     expect(getActivityCombinationHref("paint-splatter", "rage-room")).toBe(
       "/activities/paint-splatter?activities=rage-room#venues"
     )

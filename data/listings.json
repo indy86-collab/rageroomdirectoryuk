@@ -120,7 +120,7 @@
     "packages": null,
     "sourceUrl": "https://all-the-rage.co.uk/",
     "image": "/images/all-the-rage-birmingham.jpg",
-    "verified": true,
+    "verified": false,
     "googlePlaceId": null,
     "slug": "all-the-rage-birmingham",
     "createdAt": "2026-08-17T20:45:00.000Z",
@@ -439,7 +439,7 @@
     "groupSizeNote": null,
     "features": []
   },
-    {
+  {
     "id": "a203c2d9-20ab-4ec2-a744-c022e6bd8341",
     "name": "Down Range Rage Room",
     "description": "Gosport rage room from Down Range Axe Throwing. A controlled smash-room experience where visitors can break household items and old electronics with protective equipment provided.",
@@ -462,7 +462,8 @@
     "sourceUrl": "https://downrange-axethrowing.co.uk/rage-room/",
     "activities": [
       "rage-room",
-      "axe-throwing"
+      "axe-throwing",
+      "paint-splatter"
     ],
     "occasions": [],
     "walkInsAccepted": null,
@@ -716,7 +717,7 @@
       "lat": 52.6376,
       "lng": -1.1292
     },
-    "website": "https://visitleicester.info/point-of-interest/house-of-rage-rage-room/",
+    "website": "https://www.gameofthrowing.co.uk/game-of-throwing-leicester",
     "phone": "+44 116 410 5013",
     "price": null,
     "image": "/images/houseofrage_leicester.jpeg",
@@ -725,7 +726,7 @@
     "slug": "house-of-rage-rage-room-leicester",
     "createdAt": "2026-05-01T22:16:35.728Z",
     "lastVerified": "2026-08-19",
-    "sourceUrl": "https://visitleicester.info/point-of-interest/house-of-rage-rage-room/",
+    "sourceUrl": "https://www.gameofthrowing.co.uk/game-of-throwing-leicester",
     "ageMin": null,
     "openingHours": [
       "Monday-Friday: 12:00-22:00",
@@ -761,11 +762,12 @@
     "sessionDurationNote": null,
     "groupSizeNote": null,
     "priceNote": null,
-    "bookingUrl": null,
+    "bookingUrl": "https://gotleicester.resova.co.uk/",
     "sessionLengths": null,
     "groupSizeMin": null,
     "groupSizeMax": null,
-    "packages": null
+    "packages": null,
+    "streetAddress": "21 Hotel Street"
   },
   {
     "id": "v9w8x7y6-z5a4-4b3c-d2e1-f0g9h8i7j6k5",
@@ -830,7 +832,7 @@
       "hen-stag-parties"
     ]
   },
-    {
+  {
     "id": "f8c6b3d7-4c9a-4f2e-a167-3d0c8b4f6e59",
     "name": "Players – The Rage Rooms",
     "description": "Brighton and Hove's first rage room at the seafront Players battle bar. 15-minute smash sessions for 1–2 people with full protective gear. Bring your own breakables by arrangement. Ages 18+ only.",
@@ -1075,7 +1077,8 @@
     "packages": null,
     "activities": [
       "rage-room",
-      "axe-throwing"
+      "axe-throwing",
+      "paint-splatter"
     ],
     "occasions": [
       "corporate-team-building",
@@ -1745,7 +1748,8 @@
     ],
     "activities": [
       "rage-room",
-      "escape-room"
+      "escape-room",
+      "paint-splatter"
     ],
     "occasions": [
       "birthdays"
@@ -1830,7 +1834,7 @@
   {
     "id": "b4e2d9f3-0e5c-4b8a-c723-9f6e4d0b2a15",
     "name": "The Rabbit Hole Rage Room",
-    "description": "Swindon's first rage room on Cheney Manor Industrial Estate. Vent stress by smashing bottles, glasses, TVs, and picture frames in a supervised, controlled environment. Open Wed, Sat, and Sun.",
+    "description": "Swindon rage room offering supervised smash sessions with protective equipment. Published sessions are 20 minutes for two or three people, or 30 minutes for a group of four.",
     "city": "Swindon",
     "region": "Wiltshire",
     "postcode": "SN2 2DS",
@@ -1838,16 +1842,16 @@
       "lat": 51.570811,
       "lng": -1.804881
     },
-    "website": "https://www.facebook.com/the.rabbit.hole.rage.room/",
+    "website": "https://therabbithole.rocks/",
     "phone": null,
-    "price": null,
+    "price": 30,
     "image": "/images/the-rabbit-hole-rage-room-swindon.jpg",
     "verified": true,
     "googlePlaceId": "ChIJyQX-MtJFcUgR9Q4m0iRcg5U",
     "slug": "the-rabbit-hole-rage-room-swindon",
     "createdAt": "2026-06-02T12:00:00.000Z",
-    "lastVerified": "2026-08-19",
-    "sourceUrl": "https://www.facebook.com/the.rabbit.hole.rage.room/",
+    "lastVerified": "2026-10-20",
+    "sourceUrl": "https://therabbithole.rocks/",
     "features": [
       "hen-stag-parties"
     ],
@@ -1861,23 +1865,26 @@
     "walkInsAccepted": null,
     "onlineBooking": null,
     "giftVouchers": null,
-    "corporatePackages": null,
+    "corporatePackages": true,
     "privateHire": null,
     "accessibility": null,
     "rating": null,
     "reviewCount": null,
-    "priceCurrency": null,
-    "priceUnit": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
     "minimumAgeNote": null,
-    "sessionDurationType": null,
+    "sessionDurationType": "published-session",
     "sessionDurationNote": null,
     "groupSizeNote": null,
-    "priceNote": null,
-    "bookingUrl": null,
+    "priceNote": "£30 per person for four people (30 minutes); £35 per person for two or three people (20 minutes).",
+    "bookingUrl": "https://therabbithole.rocks/",
     "ageMin": null,
-    "sessionLengths": null,
-    "groupSizeMin": null,
-    "groupSizeMax": null,
+    "sessionLengths": [
+      20,
+      30
+    ],
+    "groupSizeMin": 2,
+    "groupSizeMax": 4,
     "packages": null
   },
   {
@@ -1895,7 +1902,7 @@
     "phone": "+44 1782 204392",
     "price": null,
     "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJ2R0ziCVDekgRCv7JBCT8k0w/image-1764201103388-e9545eb1.jpg",
-    "verified": true,
+    "verified": false,
     "googlePlaceId": "ChIJ2R0ziCVDekgRCv7JBCT8k0w",
     "slug": "the-rage-house-newcastle-under-lyme",
     "createdAt": "2025-11-27T21:28:46.261Z",
@@ -1930,7 +1937,7 @@
     "packages": null,
     "features": []
   },
-    {
+  {
     "id": "0ca388aa-95ca-4ec8-b4e1-f11221888369",
     "name": "The Snake Room Urban Axe Throwing",
     "description": "Chesterfield rage room operated by The Snake Room. A £50 private session accommodates up to two people and includes 30 minutes of supervised smash time.",
@@ -1945,7 +1952,7 @@
     "phone": null,
     "price": 50,
     "image": "https://storage.googleapis.com/directorly-listings/1b00dd9a-7a25-45c0-8696-e15860b13687/ChIJp8f9yISFeUgRxtoo5qRwsOc/image-1764201103602-d3464978.png",
-    "verified": true,
+    "verified": false,
     "googlePlaceId": "ChIJp8f9yISFeUgRxtoo5qRwsOc",
     "slug": "the-snake-room-urban-axe-throwing-chesterfield",
     "createdAt": "2025-11-27T21:28:46.300Z",
@@ -1985,7 +1992,7 @@
     "groupSizeNote": null,
     "ageMin": null
   },
-    {
+  {
     "id": "ba70cd2a-780d-4081-ba5b-113a31da0512",
     "name": "Urban Xtreme Colchester",
     "description": "Colchester rage room with Bronze, Silver and Gold 30-minute packages. Sessions include protective equipment, breakables and a choice of smashing tools.",
@@ -2212,7 +2219,7 @@
       "lng": -2.093141
     },
     "website": "https://www.wreckitroom.co.uk/",
-    "phone": "+44 1224 506427",
+    "phone": "01224 506427",
     "price": null,
     "image": "/images/Wreck-ItRoomAberdeen.png",
     "verified": true,
@@ -2225,8 +2232,9 @@
     "priceNote": null,
     "ageMin": 8,
     "openingHours": [
-      "Friday: 15:00-20:00",
-      "Saturday-Sunday: 10:00-20:00"
+      "Monday–Thursday: closed",
+      "Friday: 15:00–20:00",
+      "Saturday–Sunday: 10:00–20:00"
     ],
     "features": [
       "corporate-groups",
@@ -2259,9 +2267,10 @@
     "bookingUrl": null,
     "groupSizeMin": null,
     "groupSizeMax": null,
-    "packages": null
+    "packages": null,
+    "streetAddress": "Unit 22, Murcar Commercial Park, Bridge of Don"
   },
-          {
+  {
     "id": "24f0dae6-3b7a-459f-b6c6-c77b2485a6ed",
     "name": "TimberJacks Shrewsbury",
     "description": "Standalone Shrewsbury axe-throwing venue with coached sessions, five lanes and bookable party formats. The branch is one of four current locations listed by TimberJacks.",
@@ -2270,7 +2279,10 @@
     "city": "Shrewsbury",
     "region": "Shropshire",
     "postcode": "SY1 3FE",
-    "location": { "lat": 52.745656, "lng": -2.73502 },
+    "location": {
+      "lat": 52.745656,
+      "lng": -2.73502
+    },
     "website": "https://timberjacks.club/shrewsbury-sub/index",
     "bookingUrl": "https://timberjacks.club/shrewsbury-sub/index",
     "phone": "+44 1743 624232",
@@ -2280,18 +2292,28 @@
     "priceNote": "Published standard-session price for 45 minutes; longer sessions cost more and online pre-purchase discounts may apply.",
     "ageMin": 8,
     "lastVerified": "2026-08-20",
-    "sessionLengths": [45, 60, 75],
+    "sessionLengths": [
+      45,
+      60,
+      75
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": 1,
     "groupSizeMax": 16,
     "sourceUrl": "https://timberjacks.club/",
     "image": "/images/venues/timberjacks-shrewsbury.jpg",
-    "verified": true,
+    "verified": false,
     "googlePlaceId": null,
     "slug": "timberjacks-shrewsbury",
     "createdAt": "2026-08-20T09:04:00.000Z",
-    "activities": ["axe-throwing"],
-    "occasions": ["birthdays", "corporate-team-building", "kids"],
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "corporate-team-building",
+      "kids"
+    ],
     "onlineBooking": true,
     "giftVouchers": true,
     "corporatePackages": true,
@@ -2307,7 +2329,10 @@
     "city": "Kidderminster",
     "region": "Worcestershire",
     "postcode": "DY10 1RD",
-    "location": { "lat": 52.382902, "lng": -2.248067 },
+    "location": {
+      "lat": 52.382902,
+      "lng": -2.248067
+    },
     "website": "https://timberjacks.club/kidderminster-sub/index",
     "bookingUrl": "https://timberjacks.club/kidderminster-sub/index",
     "phone": "+44 1562 310041",
@@ -2317,18 +2342,28 @@
     "priceNote": "Published standard-session price for 45 minutes; longer sessions cost more and online pre-purchase discounts may apply.",
     "ageMin": 8,
     "lastVerified": "2026-08-20",
-    "sessionLengths": [45, 60, 75],
+    "sessionLengths": [
+      45,
+      60,
+      75
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": 1,
     "groupSizeMax": 40,
     "sourceUrl": "https://timberjacks.club/",
     "image": "/images/venues/timberjacks-kidderminster.jpg",
-    "verified": true,
+    "verified": false,
     "googlePlaceId": null,
     "slug": "timberjacks-kidderminster",
     "createdAt": "2026-08-20T09:05:00.000Z",
-    "activities": ["axe-throwing"],
-    "occasions": ["birthdays", "corporate-team-building", "kids"],
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "corporate-team-building",
+      "kids"
+    ],
     "onlineBooking": true,
     "giftVouchers": true,
     "corporatePackages": true,
@@ -2344,7 +2379,10 @@
     "city": "Leeds",
     "region": "West Yorkshire",
     "postcode": "LS4 2PU",
-    "location": { "lat": 53.810294, "lng": -1.586065 },
+    "location": {
+      "lat": 53.810294,
+      "lng": -1.586065
+    },
     "website": "https://timberjacks.club/leeds-sub/index",
     "bookingUrl": "https://timberjacks.club/leeds-sub/index",
     "phone": "+44 113 418 2177",
@@ -2354,18 +2392,28 @@
     "priceNote": "Published standard-session price for 45 minutes; longer sessions cost more and online pre-purchase discounts may apply.",
     "ageMin": 8,
     "lastVerified": "2026-08-20",
-    "sessionLengths": [45, 60, 75],
+    "sessionLengths": [
+      45,
+      60,
+      75
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": 1,
     "groupSizeMax": 40,
     "sourceUrl": "https://timberjacks.club/leeds-sub/index",
     "image": "/images/venues/timberjacks-leeds.jpg",
-    "verified": true,
+    "verified": false,
     "googlePlaceId": null,
     "slug": "timberjacks-leeds",
     "createdAt": "2026-08-20T09:06:00.000Z",
-    "activities": ["axe-throwing"],
-    "occasions": ["birthdays", "corporate-team-building", "kids"],
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "corporate-team-building",
+      "kids"
+    ],
     "onlineBooking": true,
     "giftVouchers": true,
     "corporatePackages": true,
@@ -2381,7 +2429,10 @@
     "city": "Liverpool",
     "region": "Merseyside",
     "postcode": "L9 7BD",
-    "location": { "lat": 53.45952, "lng": -2.94922 },
+    "location": {
+      "lat": 53.45952,
+      "lng": -2.94922
+    },
     "website": "https://timberjacks.club/liverpool-sub/index",
     "bookingUrl": "https://timberjacks.club/liverpool-sub/index",
     "phone": "+44 151 374 0193",
@@ -2391,18 +2442,28 @@
     "priceNote": "Published standard-session price for 45 minutes; longer sessions cost more and online pre-purchase discounts may apply.",
     "ageMin": 8,
     "lastVerified": "2026-08-20",
-    "sessionLengths": [45, 60, 75],
+    "sessionLengths": [
+      45,
+      60,
+      75
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": 1,
     "groupSizeMax": 40,
     "sourceUrl": "https://timberjacks.club/",
     "image": "/images/venues/timberjacks-liverpool.jpg",
-    "verified": true,
+    "verified": false,
     "googlePlaceId": null,
     "slug": "timberjacks-liverpool",
     "createdAt": "2026-08-20T09:07:00.000Z",
-    "activities": ["axe-throwing"],
-    "occasions": ["birthdays", "corporate-team-building", "kids"],
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "corporate-team-building",
+      "kids"
+    ],
     "onlineBooking": true,
     "giftVouchers": true,
     "corporatePackages": true,
@@ -2418,7 +2479,10 @@
     "city": "Swansea",
     "region": "Swansea",
     "postcode": "SA1 4AQ",
-    "location": { "lat": 51.618956, "lng": -3.950097 },
+    "location": {
+      "lat": 51.618956,
+      "lng": -3.950097
+    },
     "website": "https://swansealumberjackaxethrowing.co.uk/",
     "bookingUrl": "https://swansealumberjackaxethrowing.co.uk/product/axe-throwing-cardiff/",
     "phone": "+44 2920 274113",
@@ -2428,7 +2492,9 @@
     "priceNote": "Published adult price for the Swansea 90-minute session.",
     "ageMin": 10,
     "lastVerified": "2026-08-20",
-    "sessionLengths": [90],
+    "sessionLengths": [
+      90
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": 1,
     "groupSizeMax": 6,
@@ -2438,8 +2504,16 @@
     "googlePlaceId": null,
     "slug": "lumberjack-axe-throwing-swansea",
     "createdAt": "2026-08-20T09:08:00.000Z",
-    "activities": ["axe-throwing"],
-    "occasions": ["stag-parties", "hen-parties", "corporate-team-building", "date-nights", "families"],
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "stag-parties",
+      "hen-parties",
+      "corporate-team-building",
+      "date-nights",
+      "families"
+    ],
     "onlineBooking": true,
     "giftVouchers": null,
     "corporatePackages": true,
@@ -2455,7 +2529,10 @@
     "city": "Cardiff",
     "region": "Cardiff",
     "postcode": "CF24 2RZ",
-    "location": { "lat": 51.492381, "lng": -3.14205 },
+    "location": {
+      "lat": 51.492381,
+      "lng": -3.14205
+    },
     "website": "https://lumberjackaxethrowing.co.uk/",
     "bookingUrl": "https://lumberjackaxethrowing.co.uk/",
     "phone": "+44 2920 274113",
@@ -2464,7 +2541,9 @@
     "priceUnit": null,
     "ageMin": 10,
     "lastVerified": "2026-08-20",
-    "sessionLengths": [90],
+    "sessionLengths": [
+      90
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": 1,
     "groupSizeMax": 24,
@@ -2475,8 +2554,16 @@
     "googlePlaceId": null,
     "slug": "lumberjack-axe-throwing-cardiff",
     "createdAt": "2026-08-20T09:09:00.000Z",
-    "activities": ["axe-throwing"],
-    "occasions": ["stag-parties", "hen-parties", "corporate-team-building", "date-nights", "families"],
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "stag-parties",
+      "hen-parties",
+      "corporate-team-building",
+      "date-nights",
+      "families"
+    ],
     "onlineBooking": true,
     "giftVouchers": null,
     "corporatePackages": true,
@@ -2492,7 +2579,10 @@
     "city": "Belfast",
     "region": "County Antrim",
     "postcode": "BT15 1WA",
-    "location": { "lat": 54.60871, "lng": -5.926492 },
+    "location": {
+      "lat": 54.60871,
+      "lng": -5.926492
+    },
     "website": "https://blackaxethrowing.com/belfast/",
     "bookingUrl": "https://blackaxethrowing.com/belfast/",
     "phone": "+44 7809 351301",
@@ -2511,7 +2601,9 @@
     "googlePlaceId": null,
     "slug": "black-axe-throwing-belfast",
     "createdAt": "2026-08-20T09:10:00.000Z",
-    "activities": ["axe-throwing"],
+    "activities": [
+      "axe-throwing"
+    ],
     "occasions": [],
     "onlineBooking": true,
     "giftVouchers": true,
@@ -2528,7 +2620,10 @@
     "city": "Edinburgh",
     "region": "City of Edinburgh",
     "postcode": "EH3 8BJ",
-    "location": { "lat": 55.945973, "lng": -3.206526 },
+    "location": {
+      "lat": 55.945973,
+      "lng": -3.206526
+    },
     "website": "https://www.gameofthrowing.co.uk/game-of-throwing-edinburgh",
     "bookingUrl": "https://www.gameofthrowing.co.uk/game-of-throwing-edinburgh",
     "phone": "+44 7557 362664",
@@ -2546,8 +2641,16 @@
     "googlePlaceId": null,
     "slug": "game-of-throwing-edinburgh",
     "createdAt": "2026-08-20T09:11:00.000Z",
-    "activities": ["axe-throwing", "escape-room"],
-    "occasions": ["birthdays", "stag-parties", "hen-parties", "corporate-team-building"],
+    "activities": [
+      "axe-throwing",
+      "escape-room"
+    ],
+    "occasions": [
+      "birthdays",
+      "stag-parties",
+      "hen-parties",
+      "corporate-team-building"
+    ],
     "onlineBooking": true,
     "giftVouchers": null,
     "corporatePackages": true,
@@ -2563,7 +2666,10 @@
     "city": "London",
     "region": "London",
     "postcode": "N19 4NF",
-    "location": { "lat": 51.566223, "lng": -0.122238 },
+    "location": {
+      "lat": 51.566223,
+      "lng": -0.122238
+    },
     "website": "https://splatterroomstudio.co.uk/",
     "bookingUrl": "https://splatterroomstudio.co.uk/",
     "phone": "+44 208 159 1191",
@@ -2573,7 +2679,9 @@
     "priceNote": "Published starting price for 60-minute classic or glow-in-the-dark splatter sessions.",
     "ageMin": null,
     "lastVerified": "2026-08-20",
-    "sessionLengths": [60],
+    "sessionLengths": [
+      60
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": 1,
     "groupSizeMax": 20,
@@ -2583,8 +2691,14 @@
     "googlePlaceId": null,
     "slug": "splatter-room-studio-london",
     "createdAt": "2026-08-20T09:12:00.000Z",
-    "activities": ["paint-splatter"],
-    "occasions": ["birthdays", "corporate-team-building", "kids"],
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "corporate-team-building",
+      "kids"
+    ],
     "onlineBooking": true,
     "giftVouchers": null,
     "corporatePackages": true,
@@ -2600,7 +2714,10 @@
     "city": "London",
     "region": "London",
     "postcode": "SE1 6FX",
-    "location": { "lat": 51.494983, "lng": -0.099338 },
+    "location": {
+      "lat": 51.494983,
+      "lng": -0.099338
+    },
     "website": "https://www.kedistudio.co.uk/",
     "bookingUrl": "https://www.kedistudio.co.uk/booking",
     "phone": "+44 7513 631818",
@@ -2611,7 +2728,9 @@
     "ageMin": 3,
     "minimumAgeNote": "Children under 16 require an adult supervisor. Under-6s can share a station with an adult.",
     "lastVerified": "2026-08-20",
-    "sessionLengths": [60],
+    "sessionLengths": [
+      60
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": 1,
     "groupSizeMax": 32,
@@ -2623,16 +2742,51 @@
     "googlePlaceId": null,
     "slug": "kedi-studio-london",
     "createdAt": "2026-08-20T09:13:00.000Z",
-    "activities": ["paint-splatter"],
-    "occasions": ["birthdays", "hen-parties", "corporate-team-building", "date-nights", "families", "kids"],
-    "features": ["corporate-groups", "birthday-parties", "hen-stag-parties", "couples", "accessible-venue"],
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "corporate-team-building",
+      "date-nights",
+      "families",
+      "kids"
+    ],
+    "features": [
+      "corporate-groups",
+      "birthday-parties",
+      "hen-stag-parties",
+      "couples",
+      "accessible-venue"
+    ],
     "walkInsAccepted": false,
-    "openingHours": ["Monday 12:00–19:00", "Tuesday 12:00–19:00", "Wednesday 12:00–19:00", "Thursday 12:00–19:00", "Friday 10:00–21:00", "Saturday 10:00–21:00", "Sunday 10:00–19:00"],
+    "openingHours": [
+      "Monday 12:00–19:00",
+      "Tuesday 12:00–19:00",
+      "Wednesday 12:00–19:00",
+      "Thursday 12:00–19:00",
+      "Friday 10:00–21:00",
+      "Saturday 10:00–21:00",
+      "Sunday 10:00–19:00"
+    ],
     "packages": [
-      { "name": "Adult", "price": 45 },
-      { "name": "Child", "price": 43 },
-      { "name": "Adult + Child (Shared Canvas)", "price": 48 },
-      { "name": "Couple’s Session (Shared Canvas)", "price": 55 }
+      {
+        "name": "Adult",
+        "price": 45
+      },
+      {
+        "name": "Child",
+        "price": 43
+      },
+      {
+        "name": "Adult + Child (Shared Canvas)",
+        "price": 48
+      },
+      {
+        "name": "Couple’s Session (Shared Canvas)",
+        "price": 55
+      }
     ],
     "onlineBooking": true,
     "giftVouchers": true,
@@ -2649,7 +2803,10 @@
     "city": "Manchester",
     "region": "Greater Manchester",
     "postcode": "M41 0TS",
-    "location": { "lat": 53.44907, "lng": -2.352854 },
+    "location": {
+      "lat": 53.44907,
+      "lng": -2.352854
+    },
     "website": "https://www.paintsplat.co.uk/",
     "bookingUrl": "https://www.paintsplat.co.uk/booking-gift-vouchers/",
     "phone": "+44 7503 063053",
@@ -2659,7 +2816,9 @@
     "priceNote": "Published standard paint-splat session price; neon sessions cost more.",
     "ageMin": null,
     "lastVerified": "2026-08-20",
-    "sessionLengths": [60],
+    "sessionLengths": [
+      60
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": null,
     "groupSizeMax": 15,
@@ -2669,8 +2828,15 @@
     "googlePlaceId": null,
     "slug": "paint-splat-manchester",
     "createdAt": "2026-08-20T09:14:00.000Z",
-    "activities": ["paint-splatter"],
-    "occasions": ["birthdays", "stag-parties", "hen-parties", "corporate-team-building"],
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "stag-parties",
+      "hen-parties",
+      "corporate-team-building"
+    ],
     "onlineBooking": true,
     "giftVouchers": true,
     "corporatePackages": true,
@@ -2686,7 +2852,10 @@
     "city": "Liverpool",
     "region": "Merseyside",
     "postcode": "L1 5AG",
-    "location": { "lat": 53.401014, "lng": -2.979883 },
+    "location": {
+      "lat": 53.401014,
+      "lng": -2.979883
+    },
     "website": "https://splashart.uk/",
     "bookingUrl": "https://splashart.uk/",
     "phone": "+44 7951 600659",
@@ -2695,7 +2864,9 @@
     "priceUnit": null,
     "ageMin": null,
     "lastVerified": "2026-08-20",
-    "sessionLengths": [60],
+    "sessionLengths": [
+      60
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": null,
     "groupSizeMax": null,
@@ -2705,8 +2876,17 @@
     "googlePlaceId": null,
     "slug": "splash-art-liverpool",
     "createdAt": "2026-08-20T09:15:00.000Z",
-    "activities": ["paint-splatter"],
-    "occasions": ["birthdays", "stag-parties", "hen-parties", "date-nights", "families", "kids"],
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "stag-parties",
+      "hen-parties",
+      "date-nights",
+      "families",
+      "kids"
+    ],
     "onlineBooking": true,
     "giftVouchers": null,
     "corporatePackages": true,
@@ -2722,7 +2902,10 @@
     "city": "Edinburgh",
     "region": "City of Edinburgh",
     "postcode": "EH6 6JJ",
-    "location": { "lat": 55.980053, "lng": -3.17967 },
+    "location": {
+      "lat": 55.980053,
+      "lng": -3.17967
+    },
     "website": "https://www.splashandglow.co.uk/",
     "bookingUrl": "https://www.splashandglow.co.uk/experience/splash-glow-session",
     "phone": null,
@@ -2733,7 +2916,9 @@
     "ageMin": null,
     "minimumAgeNote": "The operator says all ages are welcome; at least one adult must attend.",
     "lastVerified": "2026-08-20",
-    "sessionLengths": [60],
+    "sessionLengths": [
+      60
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": 1,
     "groupSizeMax": 12,
@@ -2743,8 +2928,15 @@
     "googlePlaceId": null,
     "slug": "splash-and-glow-edinburgh",
     "createdAt": "2026-08-20T09:16:00.000Z",
-    "activities": ["paint-splatter"],
-    "occasions": ["birthdays", "stag-parties", "hen-parties", "corporate-team-building"],
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "stag-parties",
+      "hen-parties",
+      "corporate-team-building"
+    ],
     "onlineBooking": true,
     "giftVouchers": null,
     "corporatePackages": true,
@@ -2760,7 +2952,10 @@
     "city": "Milton Keynes",
     "region": "Buckinghamshire",
     "postcode": "MK19 7HQ",
-    "location": { "lat": 52.111587, "lng": -0.834483 },
+    "location": {
+      "lat": 52.111587,
+      "lng": -0.834483
+    },
     "website": "https://www.thesplashhouse.co.uk/",
     "bookingUrl": "https://www.thesplashhouse.co.uk/packages",
     "phone": "+44 1908 751031",
@@ -2771,7 +2966,11 @@
     "ageMin": 3,
     "minimumAgeNote": "Published UV painting is suitable from age 3; some paint-battle formats are 4+.",
     "lastVerified": "2026-08-20",
-    "sessionLengths": [30, 60, 90],
+    "sessionLengths": [
+      30,
+      60,
+      90
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": 2,
     "groupSizeMax": null,
@@ -2781,8 +2980,18 @@
     "googlePlaceId": null,
     "slug": "splash-house-milton-keynes",
     "createdAt": "2026-08-20T09:17:00.000Z",
-    "activities": ["paint-splatter"],
-    "occasions": ["birthdays", "stag-parties", "hen-parties", "corporate-team-building", "date-nights", "families", "kids"],
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "stag-parties",
+      "hen-parties",
+      "corporate-team-building",
+      "date-nights",
+      "families",
+      "kids"
+    ],
     "onlineBooking": true,
     "giftVouchers": null,
     "corporatePackages": true,
@@ -2798,7 +3007,10 @@
     "city": "Birmingham",
     "region": "West Midlands",
     "postcode": "B12 0UD",
-    "location": { "lat": 52.467047, "lng": -1.884842 },
+    "location": {
+      "lat": 52.467047,
+      "lng": -1.884842
+    },
     "website": "https://www.thesplashhouse.co.uk/",
     "bookingUrl": "https://www.thesplashhouse.co.uk/",
     "phone": "+44 121 517 2665",
@@ -2816,8 +3028,18 @@
     "googlePlaceId": null,
     "slug": "splash-house-birmingham",
     "createdAt": "2026-08-20T09:18:00.000Z",
-    "activities": ["paint-splatter"],
-    "occasions": ["birthdays", "stag-parties", "hen-parties", "corporate-team-building", "date-nights", "families", "kids"],
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "stag-parties",
+      "hen-parties",
+      "corporate-team-building",
+      "date-nights",
+      "families",
+      "kids"
+    ],
     "onlineBooking": true,
     "giftVouchers": null,
     "corporatePackages": true,
@@ -2833,8 +3055,13 @@
     "city": "UK-wide",
     "region": "United Kingdom",
     "postcode": "",
-    "serviceAreas": ["United Kingdom"],
-    "location": { "lat": null, "lng": null },
+    "serviceAreas": [
+      "United Kingdom"
+    ],
+    "location": {
+      "lat": null,
+      "lng": null
+    },
     "website": "https://www.rageroomevents.co.uk/",
     "bookingUrl": null,
     "phone": null,
@@ -2852,8 +3079,14 @@
     "googlePlaceId": null,
     "slug": "rage-room-events-mobile-uk",
     "createdAt": "2026-08-20T09:19:00.000Z",
-    "activities": ["rage-room", "mobile-rage-room", "paint-splatter"],
-    "occasions": ["corporate-team-building"],
+    "activities": [
+      "rage-room",
+      "mobile-rage-room",
+      "paint-splatter"
+    ],
+    "occasions": [
+      "corporate-team-building"
+    ],
     "onlineBooking": false,
     "giftVouchers": null,
     "corporatePackages": true,
@@ -2869,8 +3102,13 @@
     "city": "UK-wide",
     "region": "United Kingdom",
     "postcode": "",
-    "serviceAreas": ["United Kingdom"],
-    "location": { "lat": null, "lng": null },
+    "serviceAreas": [
+      "United Kingdom"
+    ],
+    "location": {
+      "lat": null,
+      "lng": null
+    },
     "website": "https://www.aeventhire.co.uk/pages/mobile-rage-room",
     "bookingUrl": null,
     "phone": "+44 7377 395669",
@@ -2888,8 +3126,17 @@
     "googlePlaceId": null,
     "slug": "a-event-hire-mobile-rage-room",
     "createdAt": "2026-08-20T09:20:00.000Z",
-    "activities": ["rage-room", "mobile-rage-room", "paint-splatter"],
-    "occasions": ["birthdays", "stag-parties", "hen-parties", "corporate-team-building"],
+    "activities": [
+      "rage-room",
+      "mobile-rage-room",
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "stag-parties",
+      "hen-parties",
+      "corporate-team-building"
+    ],
     "onlineBooking": false,
     "giftVouchers": null,
     "corporatePackages": true,
@@ -2905,8 +3152,13 @@
     "city": "UK-wide",
     "region": "United Kingdom",
     "postcode": "",
-    "serviceAreas": ["United Kingdom"],
-    "location": { "lat": null, "lng": null },
+    "serviceAreas": [
+      "United Kingdom"
+    ],
+    "location": {
+      "lat": null,
+      "lng": null
+    },
     "website": "https://www.king-of-the-castles.com/pages/mobile-rage-room-hire",
     "bookingUrl": null,
     "phone": "+44 7792 386514",
@@ -2925,8 +3177,16 @@
     "googlePlaceId": null,
     "slug": "king-of-the-castles-mobile-rage-room",
     "createdAt": "2026-08-20T09:21:00.000Z",
-    "activities": ["rage-room", "mobile-rage-room"],
-    "occasions": ["birthdays", "stag-parties", "hen-parties", "corporate-team-building"],
+    "activities": [
+      "rage-room",
+      "mobile-rage-room"
+    ],
+    "occasions": [
+      "birthdays",
+      "stag-parties",
+      "hen-parties",
+      "corporate-team-building"
+    ],
     "onlineBooking": false,
     "giftVouchers": null,
     "corporatePackages": true,
@@ -2942,7 +3202,10 @@
     "city": "Swansea",
     "region": "Swansea",
     "postcode": "SA7 9AG",
-    "location": { "lat": 51.662096, "lng": -3.905563 },
+    "location": {
+      "lat": 51.662096,
+      "lng": -3.905563
+    },
     "website": "https://justaxing.com/",
     "bookingUrl": "https://justaxing.com/",
     "phone": "+44 1792 807877",
@@ -2952,7 +3215,9 @@
     "priceNote": "Published price per person for one hour of throwing.",
     "ageMin": 18,
     "lastVerified": "2026-08-20",
-    "sessionLengths": [60],
+    "sessionLengths": [
+      60
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": 1,
     "groupSizeMax": 6,
@@ -2963,7 +3228,9 @@
     "googlePlaceId": null,
     "slug": "just-axing-swansea",
     "createdAt": "2026-08-20T09:22:00.000Z",
-    "activities": ["axe-throwing"],
+    "activities": [
+      "axe-throwing"
+    ],
     "occasions": [],
     "onlineBooking": true,
     "giftVouchers": null,
@@ -2980,7 +3247,10 @@
     "city": "Belfast",
     "region": "County Antrim",
     "postcode": "BT12 6QA",
-    "location": { "lat": 54.574651, "lng": -5.96101 },
+    "location": {
+      "lat": 54.574651,
+      "lng": -5.96101
+    },
     "website": "https://prisonislandbelfast.com/axe-yard/",
     "bookingUrl": "https://prisonislandbelfast.com/axe-yard/",
     "phone": "+44 2890 380862",
@@ -2990,7 +3260,9 @@
     "priceNote": "Published two-thrower ticket price; additional throwers are £23 per person.",
     "ageMin": 18,
     "lastVerified": "2026-08-20",
-    "sessionLengths": [60],
+    "sessionLengths": [
+      60
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": 2,
     "groupSizeMax": 4,
@@ -3001,8 +3273,16 @@
     "googlePlaceId": null,
     "slug": "axe-yard-prison-island-belfast",
     "createdAt": "2026-08-20T09:23:00.000Z",
-    "activities": ["axe-throwing"],
-    "occasions": ["birthdays", "stag-parties", "hen-parties", "corporate-team-building", "date-nights"],
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "stag-parties",
+      "hen-parties",
+      "corporate-team-building",
+      "date-nights"
+    ],
     "onlineBooking": true,
     "giftVouchers": true,
     "corporatePackages": true,
@@ -3018,7 +3298,10 @@
     "city": "Portadown",
     "region": "County Armagh",
     "postcode": "BT63 5NE",
-    "location": { "lat": 54.414685, "lng": -6.392721 },
+    "location": {
+      "lat": 54.414685,
+      "lng": -6.392721
+    },
     "website": "https://themillni.com/",
     "bookingUrl": "https://booking.themillni.com/book/activity",
     "phone": "+44 7960 355542",
@@ -3036,8 +3319,18 @@
     "googlePlaceId": null,
     "slug": "the-mill-ni-portadown",
     "createdAt": "2026-08-20T09:24:00.000Z",
-    "activities": ["axe-throwing", "archery", "airsoft-target"],
-    "occasions": ["birthdays", "stag-parties", "hen-parties", "corporate-team-building", "kids"],
+    "activities": [
+      "axe-throwing",
+      "archery",
+      "airsoft-target"
+    ],
+    "occasions": [
+      "birthdays",
+      "stag-parties",
+      "hen-parties",
+      "corporate-team-building",
+      "kids"
+    ],
     "onlineBooking": true,
     "giftVouchers": null,
     "corporatePackages": true,
@@ -3053,7 +3346,10 @@
     "city": "Glasgow",
     "region": "Glasgow City",
     "postcode": "G1 5QN",
-    "location": { "lat": 55.855945, "lng": -4.246032 },
+    "location": {
+      "lat": 55.855945,
+      "lng": -4.246032
+    },
     "website": "https://splatterartstudio.co.uk/glasgow/splatter-art/",
     "bookingUrl": "https://splatterartstudio.co.uk/glasgow/splatter-art/",
     "phone": null,
@@ -3064,7 +3360,9 @@
     "ageMin": 3,
     "minimumAgeNote": "Minimum age 3; under-16s require an adult supervisor and under-6s may share a station with one adult.",
     "lastVerified": "2026-08-20",
-    "sessionLengths": [60],
+    "sessionLengths": [
+      60
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": 1,
     "groupSizeMax": null,
@@ -3074,8 +3372,17 @@
     "googlePlaceId": null,
     "slug": "splatter-art-studio-glasgow",
     "createdAt": "2026-08-20T10:00:00.000Z",
-    "activities": ["paint-splatter"],
-    "occasions": ["birthdays", "stag-parties", "hen-parties", "corporate-team-building", "families", "kids"],
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "stag-parties",
+      "hen-parties",
+      "corporate-team-building",
+      "families",
+      "kids"
+    ],
     "onlineBooking": true,
     "giftVouchers": true,
     "corporatePackages": true,
@@ -3091,7 +3398,10 @@
     "city": "Edinburgh",
     "region": "City of Edinburgh",
     "postcode": "EH6 6PX",
-    "location": { "lat": 55.97563, "lng": -3.16684 },
+    "location": {
+      "lat": 55.97563,
+      "lng": -3.16684
+    },
     "website": "https://splatterartstudio.co.uk/edinburgh/splatter-art/",
     "bookingUrl": "https://splatterartstudio.co.uk/edinburgh/splatter-art/",
     "phone": null,
@@ -3102,7 +3412,9 @@
     "ageMin": 3,
     "minimumAgeNote": "Minimum age 3; under-16s require an adult supervisor and ages 3–6 have a shared adult-and-child station option.",
     "lastVerified": "2026-08-20",
-    "sessionLengths": [60],
+    "sessionLengths": [
+      60
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": 1,
     "groupSizeMax": null,
@@ -3112,8 +3424,17 @@
     "googlePlaceId": null,
     "slug": "splatter-art-studio-edinburgh",
     "createdAt": "2026-08-20T10:01:00.000Z",
-    "activities": ["paint-splatter"],
-    "occasions": ["birthdays", "stag-parties", "hen-parties", "corporate-team-building", "families", "kids"],
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "stag-parties",
+      "hen-parties",
+      "corporate-team-building",
+      "families",
+      "kids"
+    ],
     "onlineBooking": true,
     "giftVouchers": true,
     "corporatePackages": true,
@@ -3129,7 +3450,10 @@
     "city": "Newcastle",
     "region": "Tyne and Wear",
     "postcode": "NE1 1SA",
-    "location": { "lat": 54.96949, "lng": -1.613018 },
+    "location": {
+      "lat": 54.96949,
+      "lng": -1.613018
+    },
     "website": "https://splatterartstudio.co.uk/newcastle/splatter-art-newcastle/",
     "bookingUrl": "https://splatterartstudio.co.uk/newcastle/splatter-art-newcastle/",
     "phone": null,
@@ -3140,7 +3464,9 @@
     "ageMin": 3,
     "minimumAgeNote": "Minimum age 3; under-16s require an adult supervisor and under-6s may share a station with one adult.",
     "lastVerified": "2026-08-20",
-    "sessionLengths": [60],
+    "sessionLengths": [
+      60
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": 1,
     "groupSizeMax": null,
@@ -3150,8 +3476,17 @@
     "googlePlaceId": null,
     "slug": "splatter-art-studio-newcastle",
     "createdAt": "2026-08-20T10:02:00.000Z",
-    "activities": ["paint-splatter"],
-    "occasions": ["birthdays", "stag-parties", "hen-parties", "corporate-team-building", "families", "kids"],
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "stag-parties",
+      "hen-parties",
+      "corporate-team-building",
+      "families",
+      "kids"
+    ],
     "onlineBooking": true,
     "giftVouchers": true,
     "corporatePackages": true,
@@ -3167,7 +3502,10 @@
     "city": "Bath",
     "region": "Somerset",
     "postcode": "BA2 4JT",
-    "location": { "lat": 51.376368, "lng": -2.35432 },
+    "location": {
+      "lat": 51.376368,
+      "lng": -2.35432
+    },
     "website": "https://splasherist.com/bath-1",
     "bookingUrl": "https://splasherist.com/bath-1",
     "phone": "+44 1225 596094",
@@ -3178,7 +3516,10 @@
     "ageMin": 5,
     "minimumAgeNote": "Minimum age 5; participants under 16 must be accompanied by an adult.",
     "lastVerified": "2026-08-20",
-    "sessionLengths": [45, 50],
+    "sessionLengths": [
+      45,
+      50
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": 1,
     "groupSizeMax": 26,
@@ -3188,8 +3529,13 @@
     "googlePlaceId": null,
     "slug": "splasherist-bath",
     "createdAt": "2026-08-20T10:03:00.000Z",
-    "activities": ["paint-splatter"],
-    "occasions": ["birthdays", "corporate-team-building"],
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "corporate-team-building"
+    ],
     "onlineBooking": true,
     "giftVouchers": true,
     "corporatePackages": true,
@@ -3205,7 +3551,10 @@
     "city": "Bristol",
     "region": "Bristol",
     "postcode": "BS3 4AZ",
-    "location": { "lat": 51.44353, "lng": -2.592023 },
+    "location": {
+      "lat": 51.44353,
+      "lng": -2.592023
+    },
     "website": "https://splasherist.com/bristol-1",
     "bookingUrl": "https://splasherist.com/bristol-1",
     "phone": "+44 7828 225087",
@@ -3216,7 +3565,10 @@
     "ageMin": 5,
     "minimumAgeNote": "Minimum age 5; participants under 16 must be accompanied by an adult.",
     "lastVerified": "2026-08-20",
-    "sessionLengths": [45, 50],
+    "sessionLengths": [
+      45,
+      50
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": 1,
     "groupSizeMax": 26,
@@ -3226,8 +3578,13 @@
     "googlePlaceId": null,
     "slug": "splasherist-bristol",
     "createdAt": "2026-08-20T10:04:00.000Z",
-    "activities": ["paint-splatter"],
-    "occasions": ["birthdays", "corporate-team-building"],
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "corporate-team-building"
+    ],
     "onlineBooking": true,
     "giftVouchers": true,
     "corporatePackages": true,
@@ -3243,7 +3600,10 @@
     "city": "Worcester",
     "region": "Worcestershire",
     "postcode": "WR1 2DN",
-    "location": { "lat": 52.19116, "lng": -2.218632 },
+    "location": {
+      "lat": 52.19116,
+      "lng": -2.218632
+    },
     "website": "https://splasherist.com/worcester",
     "bookingUrl": "https://splasherist.com/worcester",
     "phone": "+44 7960 146764",
@@ -3254,7 +3614,10 @@
     "ageMin": 5,
     "minimumAgeNote": "Minimum age 5; participants under 16 must be accompanied by an adult.",
     "lastVerified": "2026-08-20",
-    "sessionLengths": [45, 50],
+    "sessionLengths": [
+      45,
+      50
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": 1,
     "groupSizeMax": 15,
@@ -3264,8 +3627,13 @@
     "googlePlaceId": null,
     "slug": "splasherist-worcester",
     "createdAt": "2026-08-20T10:05:00.000Z",
-    "activities": ["paint-splatter"],
-    "occasions": ["birthdays", "corporate-team-building"],
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "corporate-team-building"
+    ],
     "onlineBooking": true,
     "giftVouchers": true,
     "corporatePackages": true,
@@ -3281,7 +3649,10 @@
     "city": "Alcester",
     "region": "Warwickshire",
     "postcode": "B49 5AD",
-    "location": { "lat": 52.214685, "lng": -1.8697 },
+    "location": {
+      "lat": 52.214685,
+      "lng": -1.8697
+    },
     "website": "https://themadsplatter.co.uk/",
     "bookingUrl": "https://themadsplatter.co.uk/",
     "phone": "+44 7970 574009",
@@ -3292,18 +3663,28 @@
     "ageMin": 4,
     "minimumAgeNote": "Junior sessions start at age 4; different teen and 16+ formats are published, and the studio is adults-only after 6pm.",
     "lastVerified": "2026-08-20",
-    "sessionLengths": [60, 90],
+    "sessionLengths": [
+      60,
+      90
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": 1,
     "groupSizeMax": 10,
     "sourceUrl": "https://themadsplatter.co.uk/",
     "image": "/images/venues/the-mad-splatter-alcester.jpg",
-    "verified": true,
+    "verified": false,
     "googlePlaceId": null,
     "slug": "the-mad-splatter-alcester",
     "createdAt": "2026-08-20T10:06:00.000Z",
-    "activities": ["paint-splatter"],
-    "occasions": ["birthdays", "date-nights", "families", "kids"],
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "date-nights",
+      "families",
+      "kids"
+    ],
     "onlineBooking": true,
     "giftVouchers": null,
     "corporatePackages": null,
@@ -3319,7 +3700,10 @@
     "city": "Lichfield",
     "region": "Staffordshire",
     "postcode": "WS13 6RJ",
-    "location": { "lat": 52.686322, "lng": -1.804115 },
+    "location": {
+      "lat": 52.686322,
+      "lng": -1.804115
+    },
     "website": "https://www.escapetimelichfield.co.uk/",
     "bookingUrl": "https://www.escapetimelichfield.co.uk/",
     "phone": "+44 1543 390270",
@@ -3330,7 +3714,9 @@
     "ageMin": 5,
     "minimumAgeNote": "Published Paint Splatter minimum age is 5.",
     "lastVerified": "2026-08-20",
-    "sessionLengths": [60],
+    "sessionLengths": [
+      60
+    ],
     "sessionDurationType": "total-booking",
     "sessionDurationNote": "The 60-minute experience includes 30 minutes inside the paint-splatter room.",
     "groupSizeMin": 2,
@@ -3341,8 +3727,16 @@
     "googlePlaceId": null,
     "slug": "escape-time-lichfield",
     "createdAt": "2026-08-20T10:07:00.000Z",
-    "activities": ["rage-room", "paint-splatter"],
-    "occasions": ["birthdays", "corporate-team-building"],
+    "activities": [
+      "rage-room",
+      "paint-splatter",
+      "escape-room",
+      "vr"
+    ],
+    "occasions": [
+      "birthdays",
+      "corporate-team-building"
+    ],
     "onlineBooking": true,
     "giftVouchers": true,
     "corporatePackages": true,
@@ -3358,7 +3752,10 @@
     "city": "Sheffield",
     "region": "South Yorkshire",
     "postcode": "S1 4QW",
-    "location": { "lat": 53.37585, "lng": -1.471234 },
+    "location": {
+      "lat": 53.37585,
+      "lng": -1.471234
+    },
     "website": "https://www.offthecanvas.co.uk/splatter-room",
     "bookingUrl": "https://www.sumupbookings.com/off-the-canvas",
     "phone": "+44 7889 887193",
@@ -3369,7 +3766,9 @@
     "ageMin": 2,
     "minimumAgeNote": "Minimum age 2; children under 7 must take part with a ticket-holding adult.",
     "lastVerified": "2026-08-20",
-    "sessionLengths": [40],
+    "sessionLengths": [
+      40
+    ],
     "sessionDurationType": "activity-time",
     "sessionDurationNote": "The venue publishes 40 minutes in the Splatter Room plus a 10-minute briefing and time to gear up.",
     "groupSizeMin": 1,
@@ -3380,8 +3779,13 @@
     "googlePlaceId": null,
     "slug": "off-the-canvas-sheffield",
     "createdAt": "2026-08-20T10:08:00.000Z",
-    "activities": ["paint-splatter"],
-    "occasions": ["date-nights", "families"],
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "date-nights",
+      "families"
+    ],
     "walkInsAccepted": null,
     "onlineBooking": true,
     "giftVouchers": null,
@@ -3398,7 +3802,10 @@
     "city": "Lancaster",
     "region": "Lancashire",
     "postcode": "LA1 1UU",
-    "location": { "lat": 54.047349, "lng": -2.798798 },
+    "location": {
+      "lat": 54.047349,
+      "lng": -2.798798
+    },
     "website": "https://www.northerndyehouse.com/splatter-studio-lancaster",
     "bookingUrl": "https://www.northerndyehouse.com/splatter-studio-lancaster",
     "phone": null,
@@ -3409,7 +3816,9 @@
     "ageMin": 4,
     "minimumAgeNote": "Minimum age 4; supervision requirements vary for ages 4–15 and must be matched to the correct booking type.",
     "lastVerified": "2026-08-20",
-    "sessionLengths": [45],
+    "sessionLengths": [
+      45
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": 2,
     "groupSizeMax": 8,
@@ -3419,8 +3828,18 @@
     "googlePlaceId": null,
     "slug": "splatter-studio-lancaster",
     "createdAt": "2026-08-20T10:09:00.000Z",
-    "activities": ["paint-splatter"],
-    "occasions": ["birthdays", "stag-parties", "hen-parties", "corporate-team-building", "date-nights", "families", "kids"],
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "stag-parties",
+      "hen-parties",
+      "corporate-team-building",
+      "date-nights",
+      "families",
+      "kids"
+    ],
     "onlineBooking": true,
     "giftVouchers": null,
     "corporatePackages": true,
@@ -3436,7 +3855,10 @@
     "city": "Faversham",
     "region": "Kent",
     "postcode": "ME13 8UJ",
-    "location": { "lat": 51.312523, "lng": 0.911075 },
+    "location": {
+      "lat": 51.312523,
+      "lng": 0.911075
+    },
     "website": "https://www.thepotteryroom.co.uk/about-1",
     "bookingUrl": "https://www.thepotteryroom.co.uk/book-online",
     "phone": null,
@@ -3447,7 +3869,11 @@
     "ageMin": null,
     "minimumAgeNote": "The venue describes standard splatter sessions as suitable for all ages but does not publish a numeric minimum.",
     "lastVerified": "2026-08-20",
-    "sessionLengths": [60, 75, 90],
+    "sessionLengths": [
+      60,
+      75,
+      90
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": null,
     "groupSizeMax": null,
@@ -3457,8 +3883,16 @@
     "googlePlaceId": null,
     "slug": "the-pottery-room-splatter-room-faversham",
     "createdAt": "2026-08-20T10:10:00.000Z",
-    "activities": ["paint-splatter"],
-    "occasions": ["birthdays", "hen-parties", "corporate-team-building", "date-nights", "families"],
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "corporate-team-building",
+      "date-nights",
+      "families"
+    ],
     "onlineBooking": true,
     "giftVouchers": null,
     "corporatePackages": true,
@@ -3474,7 +3908,10 @@
     "city": "Saffron Walden",
     "region": "Essex",
     "postcode": "CB10 1EJ",
-    "location": { "lat": 52.021726, "lng": 0.240498 },
+    "location": {
+      "lat": 52.021726,
+      "lng": 0.240498
+    },
     "website": "https://effytheartist.com/",
     "bookingUrl": "https://effytheartist.com/collections/the-splatter-room",
     "phone": "+44 7544 098533",
@@ -3485,7 +3922,10 @@
     "ageMin": 5,
     "minimumAgeNote": "Minimum age 5; general tickets are for ages 8+ and separate Mini Messy sessions are offered for younger children.",
     "lastVerified": "2026-08-20",
-    "sessionLengths": [25, 40],
+    "sessionLengths": [
+      25,
+      40
+    ],
     "sessionDurationType": "activity-time",
     "sessionDurationNote": "Painting time is 25 minutes for Mini Messy or 40 minutes for general sessions, with changing and briefing time around it.",
     "groupSizeMin": 1,
@@ -3496,8 +3936,15 @@
     "googlePlaceId": null,
     "slug": "the-splatter-room-saffron-walden",
     "createdAt": "2026-08-20T10:11:00.000Z",
-    "activities": ["paint-splatter"],
-    "occasions": ["birthdays", "stag-parties", "hen-parties", "corporate-team-building"],
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "stag-parties",
+      "hen-parties",
+      "corporate-team-building"
+    ],
     "onlineBooking": true,
     "giftVouchers": true,
     "corporatePackages": true,
@@ -3513,7 +3960,10 @@
     "city": "Reading",
     "region": "Berkshire",
     "postcode": "RG2 0LR",
-    "location": { "lat": 51.433321, "lng": -0.970818 },
+    "location": {
+      "lat": 51.433321,
+      "lng": -0.970818
+    },
     "website": "https://ragensplatter.co.uk/",
     "bookingUrl": null,
     "phone": "+44 7999 407907",
@@ -3533,8 +3983,17 @@
     "googlePlaceId": null,
     "slug": "rage-n-splatter-reading",
     "createdAt": "2026-08-20T10:12:00.000Z",
-    "activities": ["rage-room", "paint-splatter"],
-    "occasions": ["birthdays", "stag-parties", "hen-parties", "corporate-team-building"],
+    "activities": [
+      "rage-room",
+      "paint-splatter",
+      "mobile-rage-room"
+    ],
+    "occasions": [
+      "birthdays",
+      "stag-parties",
+      "hen-parties",
+      "corporate-team-building"
+    ],
     "onlineBooking": null,
     "giftVouchers": null,
     "corporatePackages": true,
@@ -3550,28 +4009,35 @@
     "city": "Brighton",
     "region": "East Sussex",
     "postcode": "BN1 2PA",
-    "location": { "lat": 50.825221, "lng": -0.154352 },
+    "location": {
+      "lat": 50.825221,
+      "lng": -0.154352
+    },
     "website": "https://seasidesplatter.co.uk/about",
     "bookingUrl": "https://seasidesplatter.co.uk/about",
     "phone": null,
-    "price": 20,
+    "price": 30,
     "priceCurrency": "GBP",
     "priceUnit": "per-person",
-    "priceNote": "Published Regular Painting price; Neon Painting costs £30 per person.",
-    "ageMin": 3,
-    "minimumAgeNote": "Minimum age 3; under-18s must be accompanied and supervised by a responsible adult.",
+    "priceNote": "Regular Splatter £30 per person; adults-only regular £35, neon £40. £20 Little Splatters is marked starting soon and is excluded.",
+    "ageMin": null,
+    "minimumAgeNote": "Check minimum age for the selected session; the advertised ages 2–4 Little Splatters format is marked starting soon.",
     "lastVerified": "2026-08-20",
-    "sessionLengths": [60],
+    "sessionLengths": [
+      60
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": 1,
-    "groupSizeMax": 10,
+    "groupSizeMax": 12,
     "sourceUrl": "https://seasidesplatter.co.uk/about",
     "image": "/images/venues/seaside-splatter-brighton.png",
     "verified": true,
     "googlePlaceId": null,
     "slug": "seaside-splatter-brighton",
     "createdAt": "2026-08-20T10:13:00.000Z",
-    "activities": ["paint-splatter"],
+    "activities": [
+      "paint-splatter"
+    ],
     "occasions": [],
     "onlineBooking": true,
     "giftVouchers": true,
@@ -3588,7 +4054,10 @@
     "city": "Gravesend",
     "region": "Kent",
     "postcode": "DA11 0AA",
-    "location": { "lat": 51.442612, "lng": 0.367717 },
+    "location": {
+      "lat": 51.442612,
+      "lng": 0.367717
+    },
     "website": "https://splatterstudio.co.uk/",
     "bookingUrl": "https://splatterstudio.co.uk/book-now/",
     "phone": "+44 1474 450029",
@@ -3599,7 +4068,10 @@
     "ageMin": null,
     "minimumAgeNote": "Official pages conflict between 3+ and 4+ guidance; confirm eligibility directly for children under 4.",
     "lastVerified": "2026-08-20",
-    "sessionLengths": [60, 90],
+    "sessionLengths": [
+      60,
+      90
+    ],
     "sessionDurationType": "published-session",
     "groupSizeMin": 1,
     "groupSizeMax": 10,
@@ -3609,8 +4081,17 @@
     "googlePlaceId": null,
     "slug": "splatter-studio-gravesend",
     "createdAt": "2026-08-20T10:14:00.000Z",
-    "activities": ["paint-splatter"],
-    "occasions": ["birthdays", "hen-parties", "corporate-team-building", "date-nights", "families", "kids"],
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "corporate-team-building",
+      "date-nights",
+      "families",
+      "kids"
+    ],
     "walkInsAccepted": true,
     "onlineBooking": true,
     "giftVouchers": null,
@@ -3627,7 +4108,10 @@
     "city": "Sheffield",
     "region": "South Yorkshire",
     "postcode": "S1 2AX",
-    "location": { "lat": 53.383728, "lng": -1.463996 },
+    "location": {
+      "lat": 53.383728,
+      "lng": -1.463996
+    },
     "website": "https://splatter-central.sumupstore.com/",
     "bookingUrl": "https://splatter-central.sumupstore.com/",
     "phone": null,
@@ -3638,19 +4122,27 @@
     "ageMin": null,
     "minimumAgeNote": "The operator says the experience is for every age but does not publish a numeric minimum.",
     "lastVerified": "2026-08-20",
-    "sessionLengths": [60],
+    "sessionLengths": [
+      60
+    ],
     "sessionDurationType": "total-booking",
     "sessionDurationNote": "The one-hour booking includes introduction, protective gear and 40 minutes at the splatter station.",
     "groupSizeMin": 1,
     "groupSizeMax": null,
     "sourceUrl": "https://splatter-central.sumupstore.com/",
     "image": "/images/venues/splatter-central-sheffield.jpg",
-    "verified": true,
+    "verified": false,
     "googlePlaceId": null,
     "slug": "splatter-central-sheffield",
     "createdAt": "2026-08-20T10:15:00.000Z",
-    "activities": ["paint-splatter"],
-    "occasions": ["birthdays", "corporate-team-building", "date-nights"],
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "corporate-team-building",
+      "date-nights"
+    ],
     "walkInsAccepted": true,
     "onlineBooking": true,
     "giftVouchers": null,
@@ -3661,13 +4153,16 @@
   {
     "id": "7a2cecbe-b071-4e12-8e3b-32528a42cf69",
     "name": "Boom Lab London",
-    "description": "High-energy London team challenge across six physical and logical game rooms, ending in a participant-facing paint explosion. Full protective equipment is provided for the private 75-minute experience.",
+    "description": "London team escape-room experience across six immersive rooms with physical and logical challenges. The experience lasts approximately 75 minutes and is offered for groups of 2–16.",
     "locationType": "fixed-venue",
     "streetAddress": "83 Rivington Street, Shoreditch",
     "city": "London",
     "region": "London",
     "postcode": "EC2A 3AY",
-    "location": { "lat": 51.526082, "lng": -0.079041 },
+    "location": {
+      "lat": 51.526082,
+      "lng": -0.079041
+    },
     "website": "https://boomlabexperience.com/london/",
     "bookingUrl": "https://boomlabexperience.com/london/",
     "phone": null,
@@ -3675,21 +4170,31 @@
     "priceCurrency": null,
     "priceUnit": null,
     "priceNote": null,
-    "ageMin": null,
-    "minimumAgeNote": "Recommended for ages 12+; under-15s require a ticket-holding adult and height guidance also applies.",
+    "ageMin": 12,
+    "minimumAgeNote": "Under 15s must be accompanied by an adult; ages 15–17 attending alone need a pre-signed waiver.",
     "lastVerified": "2026-08-20",
-    "sessionLengths": [75],
-    "sessionDurationType": "published-session",
+    "sessionLengths": [
+      75
+    ],
+    "sessionDurationType": "total-booking",
     "groupSizeMin": 2,
-    "groupSizeMax": 8,
+    "groupSizeMax": 16,
     "sourceUrl": "https://boomlabexperience.com/london/",
     "image": "/images/venues/boom-lab-london.jpg",
     "verified": true,
     "googlePlaceId": null,
     "slug": "boom-lab-london",
     "createdAt": "2026-08-20T10:16:00.000Z",
-    "activities": ["paint-splatter"],
-    "occasions": ["birthdays", "stag-parties", "hen-parties", "corporate-team-building", "families"],
+    "activities": [
+      "escape-room"
+    ],
+    "occasions": [
+      "birthdays",
+      "stag-parties",
+      "hen-parties",
+      "corporate-team-building",
+      "families"
+    ],
     "onlineBooking": true,
     "giftVouchers": null,
     "corporatePackages": true,
@@ -3924,7 +4429,7 @@
     "priceUnit": "per-group",
     "priceNote": "£60 for up to 2 people, £90 for 3 people and £120 for 4 people.",
     "ageMin": 13,
-    "minimumAgeNote": "Ages 13–17 must have a parent or guardian on the premises.",
+    "minimumAgeNote": "Rage room 16+; Paint Rage 12+. Under 18s need a parent/guardian on site; under 16s need a participating adult.",
     "openingHours": [],
     "sessionLengths": [
       30
@@ -3949,7 +4454,8 @@
     ],
     "image": "/images/venues/rage-cage-newquay.jpg",
     "activities": [
-      "rage-room"
+      "rage-room",
+      "paint-splatter"
     ],
     "features": [
       "byo-smashables",
@@ -4097,5 +4603,3170 @@
       "corporate-team-building"
     ],
     "onlineBooking": true
+  },
+  {
+    "id": "694d252f-1f40-53da-bbaa-231d4921af98",
+    "name": "Game of Throwing Chelmsford",
+    "description": "Axe throwing in Chelmsford with instructor guidance and games. The operator publishes this branch address and accepts group and event enquiries.",
+    "city": "Chelmsford",
+    "region": "Essex",
+    "postcode": "CM2 9TQ",
+    "location": {
+      "lat": null,
+      "lng": null
+    },
+    "website": "https://www.gameofthrowing.co.uk/game-of-throwing-chelmsford",
+    "bookingUrl": "https://gotchelmsford.resova.co.uk/",
+    "phone": "07778 105776",
+    "price": null,
+    "priceNote": null,
+    "ageMin": 10,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      75
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/game-of-throwing-chelmsford.jpg",
+        "alt": "Game of Throwing Chelmsford — official operator image",
+        "caption": "Operator-provided axe-throwing image published on the official branch page; may be shared across branches.",
+        "width": 1600,
+        "height": 1069,
+        "credit": "Game of Throwing Chelmsford / official operator website",
+        "sourceUrl": "https://www.gameofthrowing.co.uk/game-of-throwing-chelmsford",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://www.gameofthrowing.co.uk/game-of-throwing-chelmsford",
+    "image": "/images/venues/game-of-throwing-chelmsford.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "game-of-throwing-chelmsford",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": "Ages 10–16 must be accompanied by an adult.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "streetAddress": "41 Beehive Lane",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "4265afd1-8d32-5b55-bd32-84ace33c9458",
+    "name": "Game of Throwing Glasgow",
+    "description": "Axe throwing in Glasgow with instructor guidance and games. The operator publishes this branch address and accepts group and event enquiries.",
+    "city": "Glasgow",
+    "region": "Glasgow City",
+    "postcode": "G2 2RA",
+    "location": {
+      "lat": null,
+      "lng": null
+    },
+    "website": "https://www.gameofthrowing.co.uk/game-of-throwing-glasgow",
+    "bookingUrl": "https://escapeglasgow.resova.co.uk/",
+    "phone": "0141 332 6110",
+    "price": 15,
+    "priceNote": "Children aged 10–15 £15; adults aged 16+ £25.",
+    "ageMin": 10,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/game-of-throwing-glasgow.jpg",
+        "alt": "Game of Throwing Glasgow — official operator image",
+        "caption": "Operator-provided axe-throwing image published on the official branch page; may be shared across branches.",
+        "width": 1600,
+        "height": 1069,
+        "credit": "Game of Throwing Glasgow / official operator website",
+        "sourceUrl": "https://www.gameofthrowing.co.uk/game-of-throwing-glasgow",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://www.gameofthrowing.co.uk/game-of-throwing-glasgow",
+    "image": "/images/venues/game-of-throwing-glasgow.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "game-of-throwing-glasgow",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Children must be accompanied by an adult.",
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "streetAddress": "62 Renfield Street",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "db0ab267-99b1-5069-a427-73b393469e13",
+    "name": "Game of Throwing Hull",
+    "description": "Axe throwing in Hull with instructor guidance and games. The operator publishes this branch address and accepts group and event enquiries.",
+    "city": "Hull",
+    "region": "East Yorkshire",
+    "postcode": "HU1 3DL",
+    "location": {
+      "lat": null,
+      "lng": null
+    },
+    "website": "https://www.gameofthrowing.co.uk/game-of-throwing-hull",
+    "bookingUrl": "https://escape-hull.resova.co.uk/",
+    "phone": "01482 323 542",
+    "price": null,
+    "priceNote": null,
+    "ageMin": null,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/game-of-throwing-hull.jpg",
+        "alt": "Game of Throwing Hull — official operator image",
+        "caption": "Operator-provided axe-throwing image published on the official branch page; may be shared across branches.",
+        "width": 1600,
+        "height": 1069,
+        "credit": "Game of Throwing Hull / official operator website",
+        "sourceUrl": "https://www.gameofthrowing.co.uk/game-of-throwing-hull",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://www.gameofthrowing.co.uk/game-of-throwing-hull",
+    "image": "/images/venues/game-of-throwing-hull.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "game-of-throwing-hull",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": null,
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "streetAddress": "4 Dock Street",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "b1d9200a-279e-5819-83e0-1abe7dc740e1",
+    "name": "Game of Throwing Newcastle",
+    "description": "Axe throwing in Newcastle with instructor guidance and games. The operator publishes this branch address and accepts group and event enquiries.",
+    "city": "Newcastle",
+    "region": "Tyne and Wear",
+    "postcode": "NE1 4XQ",
+    "location": {
+      "lat": null,
+      "lng": null
+    },
+    "website": "https://www.gameofthrowing.co.uk/game-of-throwing-newcastle",
+    "bookingUrl": "https://gotnewcastle.resova.co.uk/",
+    "phone": "07876 203975",
+    "price": null,
+    "priceNote": null,
+    "ageMin": null,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/game-of-throwing-newcastle.jpg",
+        "alt": "Game of Throwing Newcastle — official operator image",
+        "caption": "Operator-provided axe-throwing image published on the official branch page; may be shared across branches.",
+        "width": 1600,
+        "height": 1069,
+        "credit": "Game of Throwing Newcastle / official operator website",
+        "sourceUrl": "https://www.gameofthrowing.co.uk/game-of-throwing-newcastle",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://www.gameofthrowing.co.uk/game-of-throwing-newcastle",
+    "image": "/images/venues/game-of-throwing-newcastle.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "game-of-throwing-newcastle",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": null,
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "streetAddress": "Unit G2, The Gate, Newgate Street",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "77882400-8faa-503c-a370-dec1c8fb14e5",
+    "name": "Game of Throwing Plymouth",
+    "description": "Axe throwing in Plymouth with instructor guidance and games. The operator publishes this branch address and accepts group and event enquiries.",
+    "city": "Plymouth",
+    "region": "Devon",
+    "postcode": "PL1 2TE",
+    "location": {
+      "lat": null,
+      "lng": null
+    },
+    "website": "https://www.gameofthrowing.co.uk/game-of-throwing-plymouth",
+    "bookingUrl": "https://gotplymouth.resova.co.uk/",
+    "phone": "01752 218297",
+    "price": 12.5,
+    "priceNote": "Published 75-minute session price.",
+    "ageMin": 10,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      75
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/game-of-throwing-plymouth.jpg",
+        "alt": "Game of Throwing Plymouth — official operator image",
+        "caption": "Operator-provided axe-throwing image published on the official branch page; may be shared across branches.",
+        "width": 1600,
+        "height": 900,
+        "credit": "Game of Throwing Plymouth / official operator website",
+        "sourceUrl": "https://www.gameofthrowing.co.uk/game-of-throwing-plymouth",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://www.gameofthrowing.co.uk/game-of-throwing-plymouth",
+    "image": "/images/venues/game-of-throwing-plymouth.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "game-of-throwing-plymouth",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Children must be accompanied by an adult.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "streetAddress": "12 Derrys Cross",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "fbabb699-7e3f-5c68-b614-64edb7094a3f",
+    "name": "Game of Throwing Stirling",
+    "description": "Axe throwing in Stirling with instructor guidance and games. The operator publishes this branch address and accepts group and event enquiries.",
+    "city": "Stirling",
+    "region": "Stirling",
+    "postcode": "FK8 1AX",
+    "location": {
+      "lat": null,
+      "lng": null
+    },
+    "website": "https://www.gameofthrowing.co.uk/game-of-throwing-stirling",
+    "bookingUrl": "https://gotstirling.resova.co.uk/",
+    "phone": "01786 445401",
+    "price": 20,
+    "priceNote": "Ages 10–16 £20; adults £25.",
+    "ageMin": 10,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      75
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/game-of-throwing-stirling.jpg",
+        "alt": "Game of Throwing Stirling — official operator image",
+        "caption": "Operator-provided axe-throwing image published on the official branch page; may be shared across branches.",
+        "width": 1500,
+        "height": 844,
+        "credit": "Game of Throwing Stirling / official operator website",
+        "sourceUrl": "https://www.gameofthrowing.co.uk/game-of-throwing-stirling",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://www.gameofthrowing.co.uk/game-of-throwing-stirling",
+    "image": "/images/venues/game-of-throwing-stirling.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "game-of-throwing-stirling",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Children must be accompanied by an adult.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "streetAddress": "Stirling Arcade, King Street",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "6da9fa71-63d5-5eeb-9360-ad01335c5042",
+    "name": "Game of Throwing Aberdeen",
+    "description": "Axe throwing in Aberdeen with instructor guidance and games. The operator publishes this branch address and accepts group and event enquiries.",
+    "city": "Aberdeen",
+    "region": "Aberdeenshire",
+    "postcode": "AB11 6HD",
+    "location": {
+      "lat": null,
+      "lng": null
+    },
+    "website": "https://www.gameofthrowing.co.uk/game-of-throwing-aberdeen",
+    "bookingUrl": "https://lvlsaberdeen.resova.co.uk/items/availability",
+    "phone": "07345 568911",
+    "price": null,
+    "priceNote": null,
+    "ageMin": null,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/game-of-throwing-aberdeen.jpg",
+        "alt": "Game of Throwing Aberdeen — official operator image",
+        "caption": "Operator-provided axe-throwing image published on the official branch page; may be shared across branches.",
+        "width": 1600,
+        "height": 1069,
+        "credit": "Game of Throwing Aberdeen / official operator website",
+        "sourceUrl": "https://www.gameofthrowing.co.uk/game-of-throwing-aberdeen",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://www.gameofthrowing.co.uk/game-of-throwing-aberdeen",
+    "image": "/images/venues/game-of-throwing-aberdeen.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "game-of-throwing-aberdeen",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": null,
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "streetAddress": "LVLS Aberdeen, 29A Crown Terrace",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "37517d6c-4984-51ae-badb-c08318d5dd69",
+    "name": "Game of Throwing Newcastle at LVLS",
+    "description": "Axe throwing at LVLS on Princess Square in Newcastle. The operator lists this venue separately from its branch at The Gate.",
+    "city": "Newcastle",
+    "region": "Tyne and Wear",
+    "postcode": "NE1 8ER",
+    "location": {
+      "lat": null,
+      "lng": null
+    },
+    "website": "https://www.gameofthrowing.co.uk/game-of-throwing-newcastle",
+    "bookingUrl": "https://gotnewcastle.resova.co.uk/",
+    "phone": "07876 203975",
+    "price": null,
+    "priceNote": null,
+    "ageMin": null,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/game-of-throwing-newcastle-lvls.jpg",
+        "alt": "Game of Throwing Newcastle at LVLS — official operator image",
+        "caption": "Operator-provided axe-throwing image published on the official branch page; may be shared across branches.",
+        "width": 1600,
+        "height": 1069,
+        "credit": "Game of Throwing Newcastle / official operator website",
+        "sourceUrl": "https://www.gameofthrowing.co.uk/game-of-throwing-newcastle",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://www.gameofthrowing.co.uk/game-of-throwing-newcastle",
+    "image": "/images/venues/game-of-throwing-newcastle-lvls.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "game-of-throwing-newcastle-lvls",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": null,
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "streetAddress": "15 Princess Square",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "023a241a-e479-567d-aef7-5e554f44fa44",
+    "name": "Game of Throwing London",
+    "description": "Hammersmith axe-throwing venue with real axes, interactive targets and instructor-led training. Digital scoring supports up to 22 games.",
+    "city": "London",
+    "region": "London",
+    "postcode": "W6 0QU",
+    "location": {
+      "lat": null,
+      "lng": null
+    },
+    "website": "https://www.gameofthrowinglondon.co.uk/",
+    "bookingUrl": "https://gotlondon.resova.co.uk/items/availability",
+    "phone": "0330 122 8877",
+    "price": null,
+    "priceNote": null,
+    "ageMin": null,
+    "openingHours": [
+      "Monday–Friday: 14:00–22:00",
+      "Saturday–Sunday: 10:00–22:00"
+    ],
+    "lastVerified": "2026-10-20",
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/game-of-throwing-london.jpg",
+        "alt": "Game of Throwing London — official operator image",
+        "caption": "Venue interior published on the official London website.",
+        "width": 900,
+        "height": 600,
+        "credit": "Game of Throwing London / official operator website",
+        "sourceUrl": "https://www.gameofthrowinglondon.co.uk/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://www.gameofthrowinglondon.co.uk/",
+    "image": "/images/venues/game-of-throwing-london.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "game-of-throwing-london",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "corporate-team-building",
+      "date-nights"
+    ],
+    "walkInsAccepted": true,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": null,
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "streetAddress": "136 King Street, Hammersmith",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "197fe532-3d71-5032-94ba-38219c894303",
+    "name": "Splash Art Republic Nottingham",
+    "description": "Nottingham action-art studio offering paint splattering and creative group experiences. The operator publishes a current studio address and online booking link.",
+    "city": "Nottingham",
+    "region": "Nottinghamshire",
+    "postcode": "NG1 3FH",
+    "location": {
+      "lat": null,
+      "lng": null
+    },
+    "website": "https://www.splashartrepublic.co.uk/nottingham/",
+    "bookingUrl": "https://www.splashartrepublic.co.uk/nottingham/pages/nottingham-home-booking/",
+    "phone": "0115 686 0209",
+    "price": null,
+    "priceNote": null,
+    "ageMin": null,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/splash-art-republic-nottingham.jpg",
+        "alt": "Splash Art Republic Nottingham — official operator image",
+        "caption": "Official studio promotional photograph supplied by Splash Art Republic.",
+        "width": 1200,
+        "height": 630,
+        "credit": "Splash Art Republic Nottingham / official operator website",
+        "sourceUrl": "https://www.splashartrepublic.co.uk/nottingham/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://www.splashartrepublic.co.uk/nottingham/",
+    "image": "/images/venues/splash-art-republic-nottingham.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "splash-art-republic-nottingham",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "kids",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": null,
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "streetAddress": "59 Mansfield Road",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "571e7a8f-862b-5f20-9399-21bd941360ee",
+    "name": "Splash Art Republic Birmingham",
+    "description": "Birmingham action-art studio offering paint splattering and creative group experiences. The operator publishes a current studio address and online booking link.",
+    "city": "Birmingham",
+    "region": "West Midlands",
+    "postcode": "B3 1HL",
+    "location": {
+      "lat": null,
+      "lng": null
+    },
+    "website": "https://www.splashartrepublic.co.uk/birmingham/",
+    "bookingUrl": "https://www.splashartrepublic.co.uk/birmingham/pages/birmingham-home-booking/",
+    "phone": "0121 822 0595",
+    "price": null,
+    "priceNote": null,
+    "ageMin": null,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/splash-art-republic-birmingham.jpg",
+        "alt": "Splash Art Republic Birmingham — official operator image",
+        "caption": "Official studio promotional photograph supplied by Splash Art Republic.",
+        "width": 1200,
+        "height": 630,
+        "credit": "Splash Art Republic Birmingham / official operator website",
+        "sourceUrl": "https://www.splashartrepublic.co.uk/birmingham/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://www.splashartrepublic.co.uk/birmingham/",
+    "image": "/images/venues/splash-art-republic-birmingham.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "splash-art-republic-birmingham",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "kids",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": null,
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "streetAddress": "Arch 33, Water Street",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "9a4ec8b7-a4f0-5c77-aa9c-ddfe4311ed9d",
+    "name": "Splash Art Republic Sheffield",
+    "description": "Sheffield action-art studio offering paint splattering and creative group experiences. The operator publishes a current studio address and online booking link.",
+    "city": "Sheffield",
+    "region": "South Yorkshire",
+    "postcode": "S1 4RE",
+    "location": {
+      "lat": null,
+      "lng": null
+    },
+    "website": "https://www.splashartrepublic.co.uk/sheffield/",
+    "bookingUrl": "https://www.splashartrepublic.co.uk/sheffield/pages/sheffield-booking-home/",
+    "phone": "0114 483 0385",
+    "price": null,
+    "priceNote": null,
+    "ageMin": null,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/splash-art-republic-sheffield.jpg",
+        "alt": "Splash Art Republic Sheffield — official operator image",
+        "caption": "Official studio promotional photograph supplied by Splash Art Republic.",
+        "width": 1200,
+        "height": 630,
+        "credit": "Splash Art Republic Sheffield / official operator website",
+        "sourceUrl": "https://www.splashartrepublic.co.uk/sheffield/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://www.splashartrepublic.co.uk/sheffield/",
+    "image": "/images/venues/splash-art-republic-sheffield.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "splash-art-republic-sheffield",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "kids",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": null,
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "streetAddress": "156 Arundel Street",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "bdf8818f-cb1f-56a1-9b0a-72de4284ab9e",
+    "name": "ChromaticAF",
+    "description": "Digbeth splatter-paint studio with one-hour sessions, protective gear and a take-home canvas. Children under 16 must attend with an adult.",
+    "city": "Birmingham",
+    "region": "West Midlands",
+    "postcode": "B5 5JG",
+    "location": {
+      "lat": null,
+      "lng": null
+    },
+    "website": "https://chromaticaf.com/",
+    "bookingUrl": "https://bookeo.com/chromaticaf",
+    "phone": "0121 663 6486",
+    "price": 25,
+    "priceNote": "Splatter paint sessions advertised from £25; canvas-sharing options also available.",
+    "ageMin": 3,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/chromaticaf-birmingham.jpg",
+        "alt": "ChromaticAF — official operator image",
+        "caption": "Official ChromaticAF website image.",
+        "width": 1095,
+        "height": 729,
+        "credit": "ChromaticAF / official operator website",
+        "sourceUrl": "https://chromaticaf.com/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://chromaticaf.com/",
+    "image": "/images/venues/chromaticaf-birmingham.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "chromaticaf-birmingham",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "kids",
+      "families",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": null,
+    "sessionDurationType": "published-session",
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "streetAddress": "3 Shaw’s Passage, Digbeth",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "f4196e19-8a4c-5a32-9abc-16620a3a576e",
+    "name": "Splatter Art Studio Manchester",
+    "description": "Manchester splatter-art studio with one-hour sessions, protective equipment and a canvas to take home. The shared studio has individual splatter stations and welcomes ages three and over.",
+    "city": "Manchester",
+    "region": "Greater Manchester",
+    "postcode": "M12 6HR",
+    "location": {
+      "lat": null,
+      "lng": null
+    },
+    "website": "https://splatterartstudio.co.uk/manchester/splatter-art-manchester-2/",
+    "bookingUrl": "https://splatterartstudio.co.uk/manchester/book-now/",
+    "phone": null,
+    "price": 38,
+    "priceNote": "Standard one-hour splatter session from £38 per person.",
+    "ageMin": 3,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      60
+    ],
+    "groupSizeMin": 1,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/splatter-art-studio-manchester.jpg",
+        "alt": "Splatter Art Studio Manchester — official operator image",
+        "caption": "Manchester studio photograph published on the official branch page.",
+        "width": 1130,
+        "height": 1600,
+        "credit": "Splatter Art Studio Manchester / official operator website",
+        "sourceUrl": "https://splatterartstudio.co.uk/manchester/splatter-art-manchester-2/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://splatterartstudio.co.uk/manchester/splatter-art-manchester-2/",
+    "image": "/images/venues/splatter-art-studio-manchester.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "splatter-art-studio-manchester",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "kids",
+      "families",
+      "corporate-team-building",
+      "hen-parties",
+      "stag-parties",
+      "date-nights"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Under 16s must be accompanied by an adult; under 6s may share a station with one adult using the shared ticket.",
+    "sessionDurationType": "published-session",
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "streetAddress": "103 Temperance Street",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "8c2bf0c9-86d9-5608-8207-ebb39f53c86c",
+    "name": "Splash House London",
+    "description": "Private UV paint experience in Brentford, with splatter painting and a take-home canvas. The official operator lists the London branch address and telephone alongside its Milton Keynes and Birmingham studios.",
+    "city": "London",
+    "region": "London",
+    "postcode": "TW8 0PP",
+    "location": {
+      "lat": null,
+      "lng": null
+    },
+    "website": "https://www.thesplashhouse.co.uk/",
+    "bookingUrl": "https://bookeo.com/splashroommk",
+    "phone": "0203 488 7475",
+    "price": null,
+    "priceNote": null,
+    "ageMin": null,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": null,
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/splash-house-london.jpg",
+        "alt": "Splash House London — official operator image",
+        "caption": "Shared official Splash House operator image; not asserted to depict the London branch.",
+        "width": 1398,
+        "height": 1600,
+        "credit": "Splash House London / official operator website",
+        "sourceUrl": "https://www.thesplashhouse.co.uk/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://www.thesplashhouse.co.uk/contact",
+    "image": "/images/venues/splash-house-london.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "splash-house-london",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "paint-splatter"
+    ],
+    "occasions": [
+      "birthdays",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": null,
+    "corporatePackages": null,
+    "privateHire": true,
+    "accessibility": null,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": null,
+    "priceUnit": null,
+    "minimumAgeNote": null,
+    "sessionDurationType": null,
+    "sessionDurationNote": null,
+    "groupSizeNote": null,
+    "streetAddress": "Unit 18, Brook Lane Business Centre, Brook Lane North, Brentford",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "063d3f5e-972b-5d75-8203-0cbcd5df1ca7",
+    "name": "BOOM Battle Bar Bath",
+    "description": "Indoor axe throwing at BOOM Battle Bar Bath, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Bath",
+    "region": "Somerset",
+    "postcode": "BA1 2BX",
+    "location": {
+      "lat": 51.3806,
+      "lng": -2.365
+    },
+    "website": "https://boombattlebar.com/uk/bath/",
+    "bookingUrl": "https://bath.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 15.0,
+    "priceNote": "Published axe-throwing rate 15 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-bath.jpg",
+        "alt": "BOOM Battle Bar Bath — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Bath / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/bath/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/bath/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-bath.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-bath",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "5-10, James Street West",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "632e09cd-599f-5b9c-9a15-53a4dd5c98bf",
+    "name": "BOOM Battle Bar Birmingham Broad Street",
+    "description": "Indoor axe throwing at BOOM Battle Bar Birmingham Broad Street, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Birmingham",
+    "region": "West Midlands",
+    "postcode": "B15 1DA",
+    "location": {
+      "lat": 52.4746,
+      "lng": -1.915
+    },
+    "website": "https://boombattlebar.com/uk/birmingham-broad-street/",
+    "bookingUrl": "https://birmingham.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 8.0,
+    "priceNote": "Published axe-throwing rate 8–15 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-birmingham-broad-street.jpg",
+        "alt": "BOOM Battle Bar Birmingham Broad Street — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Birmingham Broad Street / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/birmingham-broad-street/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/birmingham-broad-street/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-birmingham-broad-street.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-birmingham-broad-street",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "Unit 7, Broad Street",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "cfa195f9-8bab-52d7-b78a-278bef6a88b2",
+    "name": "BOOM Battle Bar Bournemouth",
+    "description": "Indoor axe throwing at BOOM Battle Bar Bournemouth, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Bournemouth",
+    "region": "Dorset",
+    "postcode": "BH2 5AU",
+    "location": {
+      "lat": 50.7191,
+      "lng": -1.8794
+    },
+    "website": "https://boombattlebar.com/uk/bournemouth/",
+    "bookingUrl": "https://bournemouth.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 8.0,
+    "priceNote": "Published axe-throwing rate 8–15 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-bournemouth.jpg",
+        "alt": "BOOM Battle Bar Bournemouth — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Bournemouth / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/bournemouth/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/bournemouth/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-bournemouth.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-bournemouth",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "Unit LG 2,3 & 4, Exeter Crescent",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "a5b9fd2e-cad6-50e6-832c-d6f94b086281",
+    "name": "BOOM Battle Bar Cambridge",
+    "description": "Indoor axe throwing at BOOM Battle Bar Cambridge, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Cambridge",
+    "region": "Cambridgeshire",
+    "postcode": "CB2 3AR",
+    "location": {
+      "lat": 52.2031,
+      "lng": 0.1235
+    },
+    "website": "https://boombattlebar.com/uk/cambridge/",
+    "bookingUrl": "https://cambridge.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 8.0,
+    "priceNote": "Published axe-throwing rate 8–15 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-cambridge.jpg",
+        "alt": "BOOM Battle Bar Cambridge — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Cambridge / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/cambridge/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/cambridge/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-cambridge.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-cambridge",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": false,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "36, Saint Andrew's Street",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "3395b76e-f57e-55ee-9c0c-ed25c3bcca87",
+    "name": "BOOM Battle Bar Canterbury",
+    "description": "Indoor axe throwing at BOOM Battle Bar Canterbury, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Canterbury",
+    "region": "Kent",
+    "postcode": "CT1 1BN",
+    "location": {
+      "lat": 51.2856,
+      "lng": 1.0865
+    },
+    "website": "https://boombattlebar.com/uk/canterbury/",
+    "bookingUrl": "https://canterbury.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 8.0,
+    "priceNote": "Published axe-throwing rate 8–15 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-canterbury.jpg",
+        "alt": "BOOM Battle Bar Canterbury — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Canterbury / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/canterbury/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/canterbury/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-canterbury.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-canterbury",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "Kingsmead Road",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "97f39c35-0f08-51fb-8e68-8cd6ada64b74",
+    "name": "BOOM Battle Bar Cardiff",
+    "description": "Indoor axe throwing at BOOM Battle Bar Cardiff, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Cardiff",
+    "region": "Cardiff",
+    "postcode": "CF10 1FG",
+    "location": {
+      "lat": 51.4783,
+      "lng": -3.1769
+    },
+    "website": "https://boombattlebar.com/uk/cardiff/",
+    "bookingUrl": "https://cardiff.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 7.0,
+    "priceNote": "Published axe-throwing rate 7–15 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-cardiff.jpg",
+        "alt": "BOOM Battle Bar Cardiff — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Cardiff / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/cardiff/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/cardiff/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-cardiff.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-cardiff",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": false,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "The Old Brewery Quarter",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "1544cc65-b4ae-56f9-9a05-1c84011814c8",
+    "name": "BOOM Battle Bar Chelmsford",
+    "description": "Indoor axe throwing at BOOM Battle Bar Chelmsford, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Chelmsford",
+    "region": "Essex",
+    "postcode": "CM1 1GH",
+    "location": {
+      "lat": 51.7337,
+      "lng": 0.4756
+    },
+    "website": "https://boombattlebar.com/uk/chelmsford/",
+    "bookingUrl": "https://chelmsford.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 8.0,
+    "priceNote": "Published axe-throwing rate 8–15 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-chelmsford.jpg",
+        "alt": "BOOM Battle Bar Chelmsford — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Chelmsford / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/chelmsford/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/chelmsford/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-chelmsford.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-chelmsford",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "106-108, Bond Street",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "e7cb23c4-860f-5a97-b989-3985f2d39392",
+    "name": "BOOM Battle Bar Coventry",
+    "description": "Indoor axe throwing at BOOM Battle Bar Coventry, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Coventry",
+    "region": "West Midlands",
+    "postcode": "CV1 1LL",
+    "location": {
+      "lat": null,
+      "lng": null
+    },
+    "website": "https://boombattlebar.com/uk/coventry/",
+    "bookingUrl": "https://coventry.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 10.0,
+    "priceNote": "Published axe-throwing rate 10–12 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-coventry.jpg",
+        "alt": "BOOM Battle Bar Coventry — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Coventry / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/coventry/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/coventry/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-coventry.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-coventry",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "Unit 10, Cathedral Lanes, Broadgate",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "29fd6681-1bce-50da-817b-2317fecb1452",
+    "name": "BOOM Battle Bar Ealing",
+    "description": "Indoor axe throwing at BOOM Battle Bar Ealing, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "London",
+    "region": "London",
+    "postcode": "W5 5FA",
+    "location": {
+      "lat": 51.5121,
+      "lng": -0.306
+    },
+    "website": "https://boombattlebar.com/uk/ealing/",
+    "bookingUrl": "https://ealing.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 8.0,
+    "priceNote": "Published axe-throwing rate 8–15 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-ealing.jpg",
+        "alt": "BOOM Battle Bar Ealing — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Ealing / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/ealing/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/ealing/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-ealing.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-ealing",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "Filmworks Walk",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "ff5e3e1a-f2a8-5a38-8793-8e1da72c8c99",
+    "name": "BOOM Battle Bar Eastbourne",
+    "description": "Indoor axe throwing at BOOM Battle Bar Eastbourne, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Eastbourne",
+    "region": "East Sussex",
+    "postcode": "BN21 3NW",
+    "location": {
+      "lat": null,
+      "lng": null
+    },
+    "website": "https://boombattlebar.com/uk/eastbourne/",
+    "bookingUrl": "https://eastbourne.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 9.5,
+    "priceNote": "Published axe-throwing rates £9.50–£17 per person; check the selected session.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-eastbourne.jpg",
+        "alt": "BOOM Battle Bar Eastbourne — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Eastbourne / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/eastbourne/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/eastbourne/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-eastbourne.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-eastbourne",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": null,
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "101–102 The Beacon",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "f8b38f4d-a8e1-525b-b73a-4b218d64b0e8",
+    "name": "BOOM Battle Bar Edinburgh",
+    "description": "Indoor axe throwing at BOOM Battle Bar Edinburgh, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Edinburgh",
+    "region": "City of Edinburgh",
+    "postcode": "EH1 3AU",
+    "location": {
+      "lat": 55.9561,
+      "lng": -3.1854
+    },
+    "website": "https://boombattlebar.com/uk/edinburgh/",
+    "bookingUrl": "https://edinburgh.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 8.0,
+    "priceNote": "Published axe-throwing rate 8–15 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-edinburgh.jpg",
+        "alt": "BOOM Battle Bar Edinburgh — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Edinburgh / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/edinburgh/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/edinburgh/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-edinburgh.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-edinburgh",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "Omni Centre",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "1b65fcdb-6002-5ec6-9c08-14287865578e",
+    "name": "BOOM Battle Bar Exeter",
+    "description": "Indoor axe throwing at BOOM Battle Bar Exeter, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Exeter",
+    "region": "Devon",
+    "postcode": "EX4 3HP",
+    "location": {
+      "lat": 50.7237,
+      "lng": -3.5324
+    },
+    "website": "https://boombattlebar.com/uk/exeter/",
+    "bookingUrl": "https://exeter.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 8.0,
+    "priceNote": "Published axe-throwing rate 8–15 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-exeter.jpg",
+        "alt": "BOOM Battle Bar Exeter — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Exeter / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/exeter/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/exeter/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-exeter.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-exeter",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "Unit 24 and 28, High Street",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "5807ad49-6819-5883-9795-138fa22d48c3",
+    "name": "BOOM Battle Bar Glasgow",
+    "description": "Indoor axe throwing at BOOM Battle Bar Glasgow, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Glasgow",
+    "region": "Glasgow City",
+    "postcode": "G1 4BW",
+    "location": {
+      "lat": 55.8572,
+      "lng": -4.2542
+    },
+    "website": "https://boombattlebar.com/uk/glasgow/",
+    "bookingUrl": "https://glasgow.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 8.0,
+    "priceNote": "Published axe-throwing rate 8–15 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-glasgow.jpg",
+        "alt": "BOOM Battle Bar Glasgow — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Glasgow / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/glasgow/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/glasgow/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-glasgow.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-glasgow",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "Saint Enoch Square",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "9e9638fd-583c-53a3-84f5-036b59f1951c",
+    "name": "BOOM Battle Bar Ipswich",
+    "description": "Indoor axe throwing at BOOM Battle Bar Ipswich, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Ipswich",
+    "region": "Suffolk",
+    "postcode": "IP1 1DT",
+    "location": {
+      "lat": 52.0565,
+      "lng": 1.1544
+    },
+    "website": "https://boombattlebar.com/uk/ipswich/",
+    "bookingUrl": "https://ipswich.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 8.0,
+    "priceNote": "Published axe-throwing rate 8–15 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-ipswich.jpg",
+        "alt": "BOOM Battle Bar Ipswich — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 783,
+        "credit": "BOOM Battle Bar Ipswich / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/ipswich/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/ipswich/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-ipswich.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-ipswich",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "4, Saint Stephens Lane",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "b376173c-72d2-5521-ab4c-f6fda5674ae0",
+    "name": "BOOM Battle Bar Lakeside",
+    "description": "Indoor axe throwing at BOOM Battle Bar Lakeside, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Grays",
+    "region": "Essex",
+    "postcode": "RM20 2ZP",
+    "location": {
+      "lat": 51.4881,
+      "lng": 0.2821
+    },
+    "website": "https://boombattlebar.com/uk/lakeside/",
+    "bookingUrl": "https://lakeside.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 8.0,
+    "priceNote": "Published axe-throwing rate 8–15 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-lakeside.jpg",
+        "alt": "BOOM Battle Bar Lakeside — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Lakeside / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/lakeside/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/lakeside/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-lakeside.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-lakeside",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "Units 2, 5, West Thurrock Way",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "e34ca96c-41ec-540b-8790-16fe49b6ff27",
+    "name": "BOOM Battle Bar Leeds",
+    "description": "Indoor axe throwing at BOOM Battle Bar Leeds, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Leeds",
+    "region": "West Yorkshire",
+    "postcode": "LS2 7AR",
+    "location": {
+      "lat": 53.7978,
+      "lng": -1.5392
+    },
+    "website": "https://boombattlebar.com/uk/leeds/",
+    "bookingUrl": "https://leeds.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 8.0,
+    "priceNote": "Published axe-throwing rate 8–15 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-leeds.jpg",
+        "alt": "BOOM Battle Bar Leeds — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Leeds / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/leeds/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/leeds/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-leeds.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-leeds",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": null,
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "47a77247-46ac-5820-87a2-70fbb10c13ec",
+    "name": "BOOM Battle Bar Liverpool",
+    "description": "Indoor axe throwing at BOOM Battle Bar Liverpool, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Liverpool",
+    "region": "Merseyside",
+    "postcode": "L1 1LU",
+    "location": {
+      "lat": 53.4073,
+      "lng": -2.9802
+    },
+    "website": "https://boombattlebar.com/uk/liverpool/",
+    "bookingUrl": "https://liverpool.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 7.0,
+    "priceNote": "Published axe-throwing rate 7–15 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-liverpool.jpg",
+        "alt": "BOOM Battle Bar Liverpool — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Liverpool / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/liverpool/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/liverpool/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-liverpool.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-liverpool",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": false,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "101-110, Saint George's Place",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "e9a9eddb-f32e-52aa-aaa6-00d42de67c72",
+    "name": "BOOM Battle Bar London Liverpool Street",
+    "description": "Indoor axe throwing at BOOM Battle Bar London Liverpool Street, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "London",
+    "region": "London",
+    "postcode": "E1 8QG",
+    "location": {
+      "lat": 51.5147,
+      "lng": -0.0688
+    },
+    "website": "https://boombattlebar.com/uk/london-liverpool-street/",
+    "bookingUrl": "https://liverpoolst.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 8.0,
+    "priceNote": "Published axe-throwing rate 8–17 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-london-liverpool-street.jpg",
+        "alt": "BOOM Battle Bar London Liverpool Street — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar London Liverpool Street / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/london-liverpool-street/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/london-liverpool-street/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-london-liverpool-street.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-london-liverpool-street",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "Goodman's Fields, 19, Chaucer Gardens",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "b2d3a1dc-4cd7-5c34-87ac-d6177114ab49",
+    "name": "BOOM Battle Bar London Oxford Street",
+    "description": "Indoor axe throwing at BOOM Battle Bar London Oxford Street, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "London",
+    "region": "London",
+    "postcode": "W1D 1BP",
+    "location": {
+      "lat": 51.5163,
+      "lng": -0.1339
+    },
+    "website": "https://boombattlebar.com/uk/london-oxford-street/",
+    "bookingUrl": "https://londonoxfordst.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 8.0,
+    "priceNote": "Published axe-throwing rate 8–17 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-london-oxford-street.jpg",
+        "alt": "BOOM Battle Bar London Oxford Street — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar London Oxford Street / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/london-oxford-street/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/london-oxford-street/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-london-oxford-street.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-london-oxford-street",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "70-88, Oxford Street",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "856d83cc-d83d-5eac-9f8e-4d3e016e4f1a",
+    "name": "BOOM Battle Bar Manchester",
+    "description": "Indoor axe throwing at BOOM Battle Bar Manchester, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Manchester",
+    "region": "Greater Manchester",
+    "postcode": "M4 2BS",
+    "location": {
+      "lat": 53.4852,
+      "lng": -2.2414
+    },
+    "website": "https://boombattlebar.com/uk/manchester/",
+    "bookingUrl": "https://manchester.book.boombattlebar.com/games/en/products/",
+    "phone": null,
+    "price": 8.0,
+    "priceNote": "Published axe-throwing rate 8–15 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-manchester.jpg",
+        "alt": "BOOM Battle Bar Manchester — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Manchester / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/manchester/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/manchester/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-manchester.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-manchester",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": false,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "27, Withy Grove",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "ed159c07-d9aa-5267-afe6-6125a18f0b43",
+    "name": "BOOM Battle Bar Norwich",
+    "description": "Indoor axe throwing at BOOM Battle Bar Norwich, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Norwich",
+    "region": "Norfolk",
+    "postcode": "NR1 3DD",
+    "location": {
+      "lat": 52.6267,
+      "lng": 1.2959
+    },
+    "website": "https://boombattlebar.com/uk/norwich/",
+    "bookingUrl": "https://norwich.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 8.0,
+    "priceNote": "Published axe-throwing rate 8–15 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-norwich.jpg",
+        "alt": "BOOM Battle Bar Norwich — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Norwich / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/norwich/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/norwich/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-norwich.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-norwich",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "Timber Hill",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "7ae00a87-e37e-5c42-9550-f9352bbb2d8f",
+    "name": "BOOM Battle Bar Plymouth",
+    "description": "Indoor axe throwing at BOOM Battle Bar Plymouth, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Plymouth",
+    "region": "Devon",
+    "postcode": "PL4 0FE",
+    "location": {
+      "lat": 50.3711,
+      "lng": -4.1365
+    },
+    "website": "https://boombattlebar.com/uk/plymouth/",
+    "bookingUrl": "https://plymouth.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 8.0,
+    "priceNote": "Published axe-throwing rate 8–15 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-plymouth.jpg",
+        "alt": "BOOM Battle Bar Plymouth — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Plymouth / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/plymouth/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/plymouth/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-plymouth.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-plymouth",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "Unit 6, Charles Cross Roundabout",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "ddf3c107-4d6b-5dfe-80da-6c7b507a5018",
+    "name": "BOOM Battle Bar Reading",
+    "description": "Indoor axe throwing at BOOM Battle Bar Reading, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Reading",
+    "region": "Berkshire",
+    "postcode": "RG1 1JX",
+    "location": {
+      "lat": 51.4574,
+      "lng": -0.972
+    },
+    "website": "https://boombattlebar.com/uk/reading/",
+    "bookingUrl": "https://reading.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 8.0,
+    "priceNote": "Published axe-throwing rate 8–15 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-reading.jpg",
+        "alt": "BOOM Battle Bar Reading — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Reading / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/reading/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/reading/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-reading.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-reading",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "12-14, Station Road",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "2c5cd98b-5855-5fc0-aca5-f41fd0a55a85",
+    "name": "BOOM Battle Bar Sheffield",
+    "description": "Indoor axe throwing at BOOM Battle Bar Sheffield, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Sheffield",
+    "region": "South Yorkshire",
+    "postcode": "S1 4PA",
+    "location": {
+      "lat": null,
+      "lng": null
+    },
+    "website": "https://boombattlebar.com/uk/sheffield/",
+    "bookingUrl": "https://sheffield.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 35,
+    "priceNote": "£35 per lane for 30 minutes; £70 per lane for 60 minutes. This is a lane price, not a per-person price.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-sheffield.jpg",
+        "alt": "BOOM Battle Bar Sheffield — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Sheffield / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/sheffield/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/sheffield/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-sheffield.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-sheffield",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-group",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": null,
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "Unit 4 & 5, 24 The Moor",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "227865d3-cbb1-51e2-9e4c-f12c887e5288",
+    "name": "BOOM Battle Bar Southampton",
+    "description": "Indoor axe throwing at BOOM Battle Bar Southampton, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Southampton",
+    "region": "Hampshire",
+    "postcode": "SO15 1DE",
+    "location": {
+      "lat": 50.9019,
+      "lng": -1.4068
+    },
+    "website": "https://boombattlebar.com/uk/southampton/",
+    "bookingUrl": "https://southampton.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 8.0,
+    "priceNote": "Published axe-throwing rate 8–15 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-southampton.jpg",
+        "alt": "BOOM Battle Bar Southampton — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Southampton / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/southampton/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/southampton/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-southampton.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-southampton",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "Unit WM03, Western Esplanade",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "e3eae5a3-4710-5a89-8f4b-8c6cc2e86917",
+    "name": "BOOM Battle Bar Stevenage",
+    "description": "Indoor axe throwing at BOOM Battle Bar Stevenage, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Stevenage",
+    "region": "Hertfordshire",
+    "postcode": "SG1 2UA",
+    "location": {
+      "lat": null,
+      "lng": null
+    },
+    "website": "https://boombattlebar.com/uk/stevenage/",
+    "bookingUrl": "https://stevenage.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 40,
+    "priceNote": "£40 per lane for 30 minutes; £70 per lane for 60 minutes. This is a lane price, not a per-person price.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-stevenage.jpg",
+        "alt": "BOOM Battle Bar Stevenage — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Stevenage / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/stevenage/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/stevenage/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-stevenage.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-stevenage",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-group",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": null,
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "Unit 3A, Stevenage Leisure Park, Kings Way",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "87aa12a0-048e-56a9-bfd7-5233909eaa25",
+    "name": "BOOM Battle Bar The O2",
+    "description": "Indoor axe throwing at BOOM Battle Bar The O2, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "London",
+    "region": "London",
+    "postcode": "SE10 0DY",
+    "location": {
+      "lat": 51.5036,
+      "lng": 0.0046
+    },
+    "website": "https://boombattlebar.com/uk/theo2/",
+    "bookingUrl": "https://o2.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 8.0,
+    "priceNote": "Published axe-throwing rate 8–17 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-theo2.jpg",
+        "alt": "BOOM Battle Bar The O2 — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar The O2 / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/theo2/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/theo2/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-theo2.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-theo2",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": null,
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "be2900ce-ed2c-5915-a8ec-31c930e58f3c",
+    "name": "BOOM Battle Bar Wandsworth",
+    "description": "Indoor axe throwing at BOOM Battle Bar Wandsworth, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "London",
+    "region": "London",
+    "postcode": "SW18 1UL",
+    "location": {
+      "lat": 51.4576,
+      "lng": -0.1938
+    },
+    "website": "https://boombattlebar.com/uk/wandsworth/",
+    "bookingUrl": "https://wandsworth.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 8.0,
+    "priceNote": "Published axe-throwing rate 8–15 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-wandsworth.jpg",
+        "alt": "BOOM Battle Bar Wandsworth — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Wandsworth / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/wandsworth/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/wandsworth/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-wandsworth.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-wandsworth",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "9, Barley Walk",
+    "locationType": "fixed-venue"
+  },
+  {
+    "id": "a670108e-b6c6-5858-8ba2-e9a10b5c794c",
+    "name": "BOOM Battle Bar Watford",
+    "description": "Indoor axe throwing at BOOM Battle Bar Watford, with instruction and lane games. Axe throwing is for ages 18 and over; check the branch booking page for session availability and group requirements.",
+    "city": "Watford",
+    "region": "Hertfordshire",
+    "postcode": "WD17 2AU",
+    "location": {
+      "lat": 51.6564,
+      "lng": -0.3967
+    },
+    "website": "https://boombattlebar.com/uk/watford/",
+    "bookingUrl": "https://watford.book.boombattlebar.com/games/en/products",
+    "phone": null,
+    "price": 8.0,
+    "priceNote": "Published axe-throwing rate 8–15 GBP per person; depends on session/date. Check live booking prices.",
+    "ageMin": 18,
+    "openingHours": null,
+    "lastVerified": "2026-10-20",
+    "sessionLengths": [
+      30,
+      60
+    ],
+    "groupSizeMin": null,
+    "groupSizeMax": null,
+    "features": [],
+    "media": [
+      {
+        "type": "image",
+        "url": "/images/venues/boom-battle-bar-watford.jpg",
+        "alt": "BOOM Battle Bar Watford — official operator image",
+        "caption": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "width": 1600,
+        "height": 784,
+        "credit": "BOOM Battle Bar Watford / official operator website",
+        "sourceUrl": "https://boombattlebar.com/uk/watford/battleground/axe-throwing/",
+        "authorised": false
+      }
+    ],
+    "packages": null,
+    "sourceUrl": "https://boombattlebar.com/uk/watford/battleground/axe-throwing/",
+    "image": "/images/venues/boom-battle-bar-watford.jpg",
+    "verified": true,
+    "googlePlaceId": null,
+    "slug": "boom-battle-bar-watford",
+    "createdAt": "2026-10-20T12:00:00.000Z",
+    "activities": [
+      "axe-throwing"
+    ],
+    "occasions": [
+      "birthdays",
+      "hen-parties",
+      "stag-parties",
+      "date-nights",
+      "corporate-team-building"
+    ],
+    "walkInsAccepted": null,
+    "onlineBooking": true,
+    "giftVouchers": true,
+    "corporatePackages": true,
+    "privateHire": null,
+    "accessibility": true,
+    "rating": null,
+    "reviewCount": null,
+    "priceCurrency": "GBP",
+    "priceUnit": "per-person",
+    "minimumAgeNote": "Axe throwing is 18+ at all times; general venue entry rules differ.",
+    "sessionDurationType": "total-booking",
+    "sessionDurationNote": "Published duration is for the whole group experience, not per-person throwing time.",
+    "groupSizeNote": "Lane limits and minimum booking charges vary by session; check the branch booking page.",
+    "streetAddress": "1, Charter Place",
+    "locationType": "fixed-venue"
   }
 ]

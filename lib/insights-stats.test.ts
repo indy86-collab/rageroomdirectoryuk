@@ -339,22 +339,22 @@ describe("insights statistics against the current listings dataset", () => {
   it("recalculates headline counts independently from the repository dataset", () => {
     expect(stats.analysedListings).toBe(listings.length)
     expect(stats.verifiedListings).toBe(verified.length)
-    expect(stats.verifiedListings).toBe(78)
-    expect(stats.rageRooms).toBe(45)
-    expect(stats.axeThrowing).toBe(24)
-    expect(stats.paintSplatter).toBe(34)
+    expect(stats.verifiedListings).toBe(118)
+    expect(stats.rageRooms).toBe(47)
+    expect(stats.axeThrowing).toBe(57)
+    expect(stats.paintSplatter).toBe(42)
     expect(stats.carSmash).toBe(3)
-    expect(stats.mobileRageRooms).toBe(4)
-    expect(stats.citiesRepresented).toBe(58)
-    expect(stats.regionsRepresented).toBe(42)
-    expect(stats.birthdayVenues).toBe(52)
-    expect(stats.corporateVenues).toBe(46)
-    expect(stats.stagVenues).toBe(33)
-    expect(stats.henVenues).toBe(36)
-    expect(stats.stagOrHenVenues).toBe(36)
-    expect(stats.pricing.usable).toBe(48)
-    expect(stats.pricing.unavailable).toBe(30)
-    expect(stats.lastUpdated.startsWith("2026-08-31")).toBe(true)
+    expect(stats.mobileRageRooms).toBe(5)
+    expect(stats.citiesRepresented).toBe(71)
+    expect(stats.regionsRepresented).toBe(50)
+    expect(stats.birthdayVenues).toBe(90)
+    expect(stats.corporateVenues).toBe(86)
+    expect(stats.stagVenues).toBe(72)
+    expect(stats.henVenues).toBe(75)
+    expect(stats.stagOrHenVenues).toBe(75)
+    expect(stats.pricing.usable).toBe(81)
+    expect(stats.pricing.unavailable).toBe(37)
+    expect(stats.lastUpdated.startsWith("2026-10-20")).toBe(true)
   })
 
   it("keeps unknown prices distinct from zero and does not average mixed units", () => {
@@ -368,22 +368,22 @@ describe("insights statistics against the current listings dataset", () => {
       ).length
     )
     expect(stats.pricing.byUnit.find((row) => row.unit === "per-person")).toMatchObject({
-      count: 34,
-      minimum: 11,
+      count: 64,
+      minimum: 7,
       maximum: 45,
-      average: 29,
+      average: 21
     })
     expect(stats.pricing.byUnit.find((row) => row.unit === "per-room")).toMatchObject({
       count: 10,
       minimum: 30,
       maximum: 75,
-      average: 48,
+      average: 48
     })
     expect(stats.pricing.byUnit.find((row) => row.unit === "per-group")).toMatchObject({
-      count: 4,
-      minimum: null,
-      maximum: null,
-      average: null,
+      count: 7,
+      minimum: 26,
+      maximum: 60,
+      average: 44
     })
   })
 
@@ -397,10 +397,22 @@ describe("insights statistics against the current listings dataset", () => {
   })
 
   it("ranks cities from recorded city fields on fixed venues only", () => {
-    expect(stats.topCities[0]).toMatchObject({ label: "Birmingham", count: 4, href: "/city/birmingham" })
-    expect(stats.topCities[1]).toMatchObject({ label: "London", count: 4, href: "/city/london" })
+    expect(stats.topCities[0]).toMatchObject({
+      label: "London",
+      count: 11,
+      href: "/city/london"
+    })
+    expect(stats.topCities[1]).toMatchObject({
+      label: "Birmingham",
+      count: 6,
+      href: "/city/birmingham"
+    })
     expect(stats.allCities.find((row) => /uk-wide/i.test(row.label))).toBeUndefined()
-    expect(stats.topRegions[0]).toMatchObject({ label: "London", count: 5, href: "/region/london" })
+    expect(stats.topRegions[0]).toMatchObject({
+      label: "London",
+      count: 12,
+      href: "/region/london"
+    })
 
     const londonCityField = fixed.filter((item) => cityToSlug(item.city) === "london").length
     const londonRegionField = fixed.filter((item) => regionToSlug(item.region) === "london").length
@@ -408,9 +420,9 @@ describe("insights statistics against the current listings dataset", () => {
       listingMatchesCanonicalCity(item, getCanonicalCityLocation("London"))
     ).length
 
-    expect(londonCityField).toBe(4)
-    expect(londonRegionField).toBe(5)
-    expect(londonCanonical).toBe(6)
+    expect(londonCityField).toBe(11)
+    expect(londonRegionField).toBe(12)
+    expect(londonCanonical).toBe(13)
     expect(stats.allCities.find((row) => row.key === "london")?.count).toBe(londonCityField)
     expect(stats.allRegions.find((row) => row.key === "london")?.count).toBe(londonRegionField)
     expect(londonCanonical).not.toBe(londonCityField)
@@ -430,9 +442,9 @@ describe("insights statistics against the current listings dataset", () => {
     expect(stats.occasions.find((row) => row.key === "birthdays")?.href).toBe("/occasions/birthdays")
   })
 
-  it("lists high-demand cities without a verified fixed city-field listing as coverage gaps", () => {
-    expect(stats.coverageGaps.some((row) => row.key === "nottingham")).toBe(true)
-    expect(stats.allCities.some((row) => row.key === "nottingham")).toBe(false)
+  it("removes newly covered Nottingham from the city coverage gaps", () => {
+    expect(stats.coverageGaps.some((row) => row.key === "nottingham")).toBe(false)
+    expect(stats.allCities.some((row) => row.key === "nottingham")).toBe(true)
     expect(stats.coverageGaps.every((row) => row.href.startsWith("/city/"))).toBe(true)
   })
 })

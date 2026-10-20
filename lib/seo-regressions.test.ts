@@ -134,7 +134,7 @@ describe("SEO regressions", () => {
     expect(urls.has("https://www.rageroomdirectory.co.uk/guides/can-you-smash-your-own-stuff-uk")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/guides/rage-room-vs-paint-splatter")).toBe(true)
     expect(urls.has("https://www.rageroomdirectory.co.uk/activities/paint-splatter/london")).toBe(true)
-    expect(urls.has("https://www.rageroomdirectory.co.uk/activities/paint-splatter/birmingham")).toBe(false)
+    expect(urls.has("https://www.rageroomdirectory.co.uk/activities/paint-splatter/birmingham")).toBe(true)
     expect(
       urls.has("https://www.rageroomdirectory.co.uk/blog/why-rage-rooms-are-becoming-popular-in-the-uk")
     ).toBe(false)

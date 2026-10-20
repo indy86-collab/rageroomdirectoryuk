@@ -1,0 +1,2245 @@
+{
+  "checkedAt": "2026-10-20",
+  "scope": "Website, operating-evidence and activity-category review of all 83 existing listings, plus category discovery. Not a full re-verification of every historical price, age, hour or package.",
+  "beforeCount": 83,
+  "afterCount": 127,
+  "addedCount": 44,
+  "removedCount": 0,
+  "existingChangedCount": 20,
+  "categoryCountsBefore": {
+    "rage-room": 50,
+    "paint-splatter": 36,
+    "car-smash": 3,
+    "vr": 2,
+    "axe-throwing": 25,
+    "escape-room": 3,
+    "mobile-rage-room": 4,
+    "airsoft-target": 4,
+    "archery": 2
+  },
+  "categoryCountsAfter": {
+    "rage-room": 50,
+    "paint-splatter": 45,
+    "car-smash": 3,
+    "vr": 3,
+    "axe-throwing": 63,
+    "escape-room": 5,
+    "mobile-rage-room": 5,
+    "airsoft-target": 4,
+    "archery": 2
+  },
+  "listings": [
+    {
+      "slug": "act-your-rage-therapies-par",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room"
+      ],
+      "sources": [
+        "https://actyourragetherapies.simplybook.it/v2/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://actyourragetherapies.simplybook.it/v2/",
+      "outcome": "client-rendered-booking-follow-up",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "all-the-rage-birmingham",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://all-the-rage.co.uk/"
+      ],
+      "httpStatus": 503,
+      "finalUrl": "https://all-the-rage.co.uk/",
+      "outcome": "follow-up-required",
+      "notes": [
+        "Current operator evidence blocked/unavailable or only a client-rendered shell; retain listing, flag unverified, do not infer closure."
+      ]
+    },
+    {
+      "slug": "all-the-rage-scarborough",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://alltheragescarborough.simplybook.it/v2/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://alltheragescarborough.simplybook.it/v2/",
+      "outcome": "client-rendered-booking-follow-up",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "anger-issues-rage-rooms-ltd-ellesmere-port",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room"
+      ],
+      "sources": [
+        "http://www.angerissuesragerooms.com/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.angerissuesragerooms.com/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "angry-smash-ltd-southend-on-sea",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "car-smash"
+      ],
+      "sources": [
+        "https://www.angrysmash.com/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.angrysmash.com/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "arcadia-rage-room-darlington",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "paint-splatter",
+        "vr"
+      ],
+      "sources": [
+        "https://arcadiadarlington.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://arcadiadarlington.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "axed-and-enraged",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://www.axedandenraged.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.axedandenraged.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "down-range-rage-room-gosport",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "axe-throwing",
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://downrange-axethrowing.co.uk/rage-room/",
+        "https://downrange-axethrowing.co.uk/messy-room/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://downrange-axethrowing.co.uk/rage-room/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "Official Messy Room page confirms UV paint splatter."
+      ]
+    },
+    {
+      "slug": "game-vault-ayrshire-kilmarnock",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "escape-room",
+        "vr"
+      ],
+      "sources": [
+        "https://gamevaultayrshire.com/rage-room/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://gamevaultayrshire.com/rage-room/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "go-rage-birmingham-rage-room-birmingham",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room"
+      ],
+      "sources": [
+        "https://www.gorageuk.com/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.gorageuk.com/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "hatchet-harrys-rage-room-derby",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://hatchetharrys.co.uk/derby/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://hatchetharrys.co.uk/derby/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "hatchet-harrys-rage-room-liverpool",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://hatchetharrys.co.uk/liverpool/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://hatchetharrys.co.uk/liverpool/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "house-of-rage-rage-room-leicester",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://visitleicester.info/point-of-interest/house-of-rage-rage-room/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://visitleicester.info/point-of-interest/house-of-rage-rage-room/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "Use operator branch page and booking link; preserve existing venue identity."
+      ]
+    },
+    {
+      "slug": "just-rage-rooms-henlow",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room"
+      ],
+      "sources": [
+        "https://justragerooms.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://justragerooms.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "players-the-rage-rooms-brighton",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room"
+      ],
+      "sources": [
+        "https://playersbrighton.com/pages/theragerooms"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://playersbrighton.com/pages/theragerooms",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "rage-cage-uk-croydon",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "paint-splatter",
+        "car-smash"
+      ],
+      "sources": [
+        "https://www.ragecageuk.com/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.ragecageuk.com/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "rage-it-out-consett",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://rageitout.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://rageitout.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "rage-out-maidstone-maidstone",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "axe-throwing"
+      ],
+      "sources": [
+        "http://rageout.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.rageout.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "rage-remedies-romford",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "axe-throwing",
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://www.rageremedies.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.rageremedies.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "Official homepage now advertises paint splatter."
+      ]
+    },
+    {
+      "slug": "rage-remedy-margate",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room"
+      ],
+      "sources": [
+        "https://www.rageremedy.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.rageremedy.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "rage-room-birmingham-birmingham",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room"
+      ],
+      "sources": [
+        "http://www.rageroombirmingham.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.rageroombirmingham.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "rage-room-hull",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room"
+      ],
+      "sources": [
+        "https://rageroomhull.simplybook.it/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://rageroomhull.simplybook.it/v2/",
+      "outcome": "client-rendered-booking-follow-up",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "rage-room-leicester",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room"
+      ],
+      "sources": [
+        "http://www.rageroomleicester.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://rageroomleicester.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "rage-rooms-leamington-spa-royal-leamington-spa",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://ragerooms-leamingtonspa.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://ragerooms-leamingtonspa.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "rage-rooms-norwich-norwich",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "paint-splatter",
+        "mobile-rage-room",
+        "car-smash"
+      ],
+      "sources": [
+        "https://ragerooms-norwich.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://ragerooms-norwich.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "rage-x-treme-polegate",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://ragex-treme.co.uk"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://ragex-treme.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "raging-bath",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room"
+      ],
+      "sources": [
+        "https://www.ragingbath.com/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.ragingbath.com/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "smash-it-huddersfield",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room"
+      ],
+      "sources": [
+        "https://whitewolfs.co.uk/smash-room"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://whitewolfs.co.uk/smash-room",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "smash-it-rage-room-ltd-london",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room"
+      ],
+      "sources": [
+        "http://smashitragerooms.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://smashitragerooms.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "smash-palace-lincoln",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room"
+      ],
+      "sources": [
+        "https://smashpalace.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://smashpalace.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "smash-space-uk-newcastle",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "escape-room",
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://www.smashspace.co.uk/",
+        "https://www.smashspace.co.uk/art-launch"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.smashspace.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "Official Art Launch page confirms throwing paint at a canvas."
+      ]
+    },
+    {
+      "slug": "the-break-rooms-leominster",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room"
+      ],
+      "sources": [
+        "https://www.dayoutwiththekids.co.uk/attractions/thebreakrooms-o1u8r400"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.dayoutwiththekids.co.uk/attractions/thebreakrooms-o1u8r400",
+      "outcome": "third-party-only-follow-up",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "the-rabbit-hole-rage-room-swindon",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room"
+      ],
+      "sources": [
+        "https://www.facebook.com/the.rabbit.hole.rage.room/",
+        "https://therabbithole.rocks/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.facebook.com/the.rabbit.hole.rage.room/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "Found official website; replace Facebook link and add published group prices and durations."
+      ]
+    },
+    {
+      "slug": "the-rage-house-newcastle-under-lyme",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "axe-throwing",
+        "airsoft-target"
+      ],
+      "sources": [
+        "https://www.theragehouse.com/"
+      ],
+      "httpStatus": null,
+      "finalUrl": null,
+      "outcome": "follow-up-required",
+      "notes": [
+        "Current operator evidence blocked/unavailable or only a client-rendered shell; retain listing, flag unverified, do not infer closure."
+      ]
+    },
+    {
+      "slug": "the-snake-room-urban-axe-throwing-chesterfield",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://snakeroom.co.uk/"
+      ],
+      "httpStatus": 403,
+      "finalUrl": "https://snakeroom.co.uk/",
+      "outcome": "follow-up-required",
+      "notes": [
+        "Current operator evidence blocked/unavailable or only a client-rendered shell; retain listing, flag unverified, do not infer closure."
+      ]
+    },
+    {
+      "slug": "urban-xtreme-colchester-colchester",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "axe-throwing",
+        "airsoft-target"
+      ],
+      "sources": [
+        "https://www.urbanxtreme.co.uk/rage-room-colchester/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.urbanxtreme.co.uk/rage-room-colchester/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "venture-games-bedford-rage-room",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://www.venturegamesbedford.co.uk/rage-room/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.venturegamesbedford.co.uk/rage-room/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "the-activity-dome-weston-super-mare",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "axe-throwing",
+        "paint-splatter",
+        "archery",
+        "airsoft-target"
+      ],
+      "sources": [
+        "https://theactivitydome.com/activities/weston-rage-rooms/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://theactivitydome.com/activities/weston-rage-rooms/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "wreck-it-room-aberdeen",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room"
+      ],
+      "sources": [
+        "https://www.wreckitroom.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.wreckitroom.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "Current official venue address and phone."
+      ]
+    },
+    {
+      "slug": "timberjacks-shrewsbury",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://timberjacks.club/shrewsbury-sub/index",
+        "https://www.tripadvisor.com.au/Attraction_Review-g186368-d14106420-Reviews-TimberJacks_Shrewsbury-Shrewsbury_Shropshire_England.html"
+      ],
+      "httpStatus": 403,
+      "finalUrl": "https://timberjacks.club/shrewsbury-sub/index",
+      "outcome": "follow-up-required",
+      "notes": [
+        "Current operator evidence blocked/unavailable or only a client-rendered shell; retain listing, flag unverified, do not infer closure.",
+        "Tripadvisor reports permanently closed, but indexed operator pages still advertise four branches. Closure is disputed: retain unverified pending operator confirmation."
+      ]
+    },
+    {
+      "slug": "timberjacks-kidderminster",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://timberjacks.club/kidderminster-sub/index"
+      ],
+      "httpStatus": 403,
+      "finalUrl": "https://timberjacks.club/kidderminster-sub/index",
+      "outcome": "follow-up-required",
+      "notes": [
+        "Current operator evidence blocked/unavailable or only a client-rendered shell; retain listing, flag unverified, do not infer closure."
+      ]
+    },
+    {
+      "slug": "timberjacks-leeds",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://timberjacks.club/leeds-sub/index"
+      ],
+      "httpStatus": 403,
+      "finalUrl": "https://timberjacks.club/leeds-sub/index",
+      "outcome": "follow-up-required",
+      "notes": [
+        "Current operator evidence blocked/unavailable or only a client-rendered shell; retain listing, flag unverified, do not infer closure."
+      ]
+    },
+    {
+      "slug": "timberjacks-liverpool",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://timberjacks.club/liverpool-sub/index"
+      ],
+      "httpStatus": 403,
+      "finalUrl": "https://timberjacks.club/liverpool-sub/index",
+      "outcome": "follow-up-required",
+      "notes": [
+        "Current operator evidence blocked/unavailable or only a client-rendered shell; retain listing, flag unverified, do not infer closure."
+      ]
+    },
+    {
+      "slug": "lumberjack-axe-throwing-swansea",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://swansealumberjackaxethrowing.co.uk/",
+        "https://swansealumberjackaxethrowing.co.uk/"
+      ],
+      "httpStatus": 403,
+      "finalUrl": "https://swansealumberjackaxethrowing.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "lumberjack-axe-throwing-cardiff",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://lumberjackaxethrowing.co.uk/",
+        "https://lumberjackaxethrowing.co.uk/"
+      ],
+      "httpStatus": 403,
+      "finalUrl": "https://lumberjackaxethrowing.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "black-axe-throwing-belfast",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://blackaxethrowing.com/belfast/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://blackaxethrowing.com/belfast/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "game-of-throwing-edinburgh",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing",
+        "escape-room"
+      ],
+      "sources": [
+        "https://www.gameofthrowing.co.uk/game-of-throwing-edinburgh"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.gameofthrowing.co.uk/game-of-throwing-edinburgh",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "splatter-room-studio-london",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://splatterroomstudio.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://splatterroomstudio.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "kedi-studio-london",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://www.kedistudio.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.kedistudio.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "paint-splat-manchester",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://www.paintsplat.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.paintsplat.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "splash-art-liverpool",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://splashart.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://splashart.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "splash-and-glow-edinburgh",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://www.splashandglow.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.splashandglow.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "splash-house-milton-keynes",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://www.thesplashhouse.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.thesplashhouse.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "splash-house-birmingham",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://www.thesplashhouse.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.thesplashhouse.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "rage-room-events-mobile-uk",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "mobile-rage-room",
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://www.rageroomevents.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.rageroomevents.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "a-event-hire-mobile-rage-room",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "mobile-rage-room",
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://www.aeventhire.co.uk/pages/mobile-rage-room"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.aeventhire.co.uk/pages/mobile-rage-room",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "king-of-the-castles-mobile-rage-room",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "mobile-rage-room"
+      ],
+      "sources": [
+        "https://www.king-of-the-castles.com/pages/mobile-rage-room-hire"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.king-of-the-castles.com/pages/mobile-rage-room-hire",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "just-axing-swansea",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://justaxing.com/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://justaxing.com/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "axe-yard-prison-island-belfast",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://prisonislandbelfast.com/axe-yard/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://prisonislandbelfast.com/axe-yard/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "the-mill-ni-portadown",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing",
+        "archery",
+        "airsoft-target"
+      ],
+      "sources": [
+        "https://themillni.com/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://themillni.com/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "splatter-art-studio-glasgow",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://splatterartstudio.co.uk/glasgow/splatter-art/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://splatterartstudio.co.uk/glasgow/splatter-art/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "splatter-art-studio-edinburgh",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://splatterartstudio.co.uk/edinburgh/splatter-art/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://splatterartstudio.co.uk/edinburgh/splatter-art/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "splatter-art-studio-newcastle",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://splatterartstudio.co.uk/newcastle/splatter-art-newcastle/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://splatterartstudio.co.uk/newcastle/splatter-art-newcastle/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "splasherist-bath",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://splasherist.com/bath-1"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://splasherist.com",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "splasherist-bristol",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://splasherist.com/bristol-1"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://splasherist.com",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "splasherist-worcester",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://splasherist.com/worcester"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://splasherist.com",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "the-mad-splatter-alcester",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://themadsplatter.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://themadsplatter.co.uk/",
+      "outcome": "follow-up-required",
+      "notes": [
+        "Current operator evidence blocked/unavailable or only a client-rendered shell; retain listing, flag unverified, do not infer closure."
+      ]
+    },
+    {
+      "slug": "escape-time-lichfield",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "paint-splatter",
+        "escape-room",
+        "vr"
+      ],
+      "sources": [
+        "https://www.escapetimelichfield.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.escapetimelichfield.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "Official site confirms escape rooms.",
+        "Official site confirms VR gaming."
+      ]
+    },
+    {
+      "slug": "off-the-canvas-sheffield",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://www.offthecanvas.co.uk/splatter-room"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.offthecanvas.co.uk/splatter-room",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "splatter-studio-lancaster",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://www.northerndyehouse.com/splatter-studio-lancaster"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.northerndyehouse.com/splatter-studio-lancaster",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "the-pottery-room-splatter-room-faversham",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://www.thepotteryroom.co.uk/about-1"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.thepotteryroom.co.uk/about-1",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "the-splatter-room-saffron-walden",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://effytheartist.com/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://effytheartist.com/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "rage-n-splatter-reading",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "paint-splatter",
+        "mobile-rage-room"
+      ],
+      "sources": [
+        "https://ragensplatter.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://ragensplatter.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "Official site offers a staffed mobile smash service."
+      ]
+    },
+    {
+      "slug": "seaside-splatter-brighton",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://seasidesplatter.co.uk/about"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://seasidesplatter.co.uk/about",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "Exclude unlaunched Little Splatters price; use current regular splatter price and capacity."
+      ]
+    },
+    {
+      "slug": "splatter-studio-gravesend",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://splatterstudio.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://splatterstudio.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "splatter-central-sheffield",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://splatter-central.sumupstore.com/"
+      ],
+      "httpStatus": 403,
+      "finalUrl": "https://splatter-central.sumupstore.com/",
+      "outcome": "follow-up-required",
+      "notes": [
+        "Current operator evidence blocked/unavailable or only a client-rendered shell; retain listing, flag unverified, do not infer closure."
+      ]
+    },
+    {
+      "slug": "boom-lab-london",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "escape-room"
+      ],
+      "sources": [
+        "https://boomlabexperience.com/london/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://boomlabexperience.com/london/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "Current site describes six escape rooms, no paint experience."
+      ]
+    },
+    {
+      "slug": "contain-your-rage-newton-aycliffe",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room"
+      ],
+      "sources": [
+        "https://booksy.com/en-gb/187188_contain-your-rage_other_493678_aycliffe-business-park"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://booksy.com/en-gb/187188_contain-your-rage_other_493678_aycliffe-business-park",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "rage-room-reading",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room"
+      ],
+      "sources": [
+        "https://rageroomreading.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://rageroomreading.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "we-are-maxesive-guildford",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://wearemaxesive.co.uk/rage-room-2/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://wearemaxesive.co.uk/rage-room-2/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "rage-cage-newquay",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://rageroomnewquay.com/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://rageroomnewquay.com/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "Official site offers Paint Rage sessions.",
+        "Document separate paint/rage minimum ages."
+      ]
+    },
+    {
+      "slug": "smash-therapy-coventry",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://square.site/book/LQJSWGPMW2X61/smash-therapy-coventry"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://book.squareup.com/appointments/aucwzv7ql42a61/location/LQJSWGPMW2X61",
+      "outcome": "client-rendered-booking-follow-up",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "prison-smash-prudhoe",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "rage-room",
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://www.messypaintsprisonsmash.co.uk/"
+      ],
+      "httpStatus": 200,
+      "finalUrl": "https://www.messypaintsprisonsmash.co.uk/",
+      "outcome": "operator-page-reviewed",
+      "notes": [
+        "No confirmed closure or supported listing correction found in this pass."
+      ]
+    },
+    {
+      "slug": "game-of-throwing-chelmsford",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://www.gameofthrowing.co.uk/game-of-throwing-chelmsford"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/game-of-throwing-chelmsford.jpg",
+        "sourcePage": "https://www.gameofthrowing.co.uk/game-of-throwing-chelmsford",
+        "assetUrl": "https://images.squarespace-cdn.com/content/v1/5f96ae852e14f81cac176e94/d7953224-2399-4458-84ba-ec5017ad245f/GOT_STILLS_006.jpg",
+        "note": "Operator-provided axe-throwing image published on the official branch page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "game-of-throwing-glasgow",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://www.gameofthrowing.co.uk/game-of-throwing-glasgow"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/game-of-throwing-glasgow.jpg",
+        "sourcePage": "https://www.gameofthrowing.co.uk/game-of-throwing-glasgow",
+        "assetUrl": "https://images.squarespace-cdn.com/content/v1/5f96ae852e14f81cac176e94/d7953224-2399-4458-84ba-ec5017ad245f/GOT_STILLS_006.jpg",
+        "note": "Operator-provided axe-throwing image published on the official branch page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "game-of-throwing-hull",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://www.gameofthrowing.co.uk/game-of-throwing-hull"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/game-of-throwing-hull.jpg",
+        "sourcePage": "https://www.gameofthrowing.co.uk/game-of-throwing-hull",
+        "assetUrl": "https://images.squarespace-cdn.com/content/v1/5f96ae852e14f81cac176e94/d7953224-2399-4458-84ba-ec5017ad245f/GOT_STILLS_006.jpg",
+        "note": "Operator-provided axe-throwing image published on the official branch page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "game-of-throwing-newcastle",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://www.gameofthrowing.co.uk/game-of-throwing-newcastle"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/game-of-throwing-newcastle.jpg",
+        "sourcePage": "https://www.gameofthrowing.co.uk/game-of-throwing-newcastle",
+        "assetUrl": "https://images.squarespace-cdn.com/content/v1/5f96ae852e14f81cac176e94/d7953224-2399-4458-84ba-ec5017ad245f/GOT_STILLS_006.jpg",
+        "note": "Operator-provided axe-throwing image published on the official branch page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "game-of-throwing-plymouth",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://www.gameofthrowing.co.uk/game-of-throwing-plymouth"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/game-of-throwing-plymouth.jpg",
+        "sourcePage": "https://www.gameofthrowing.co.uk/game-of-throwing-plymouth",
+        "assetUrl": "https://images.squarespace-cdn.com/content/v1/5f96ae852e14f81cac176e94/1705487957564-Q8REOJKJJ5PNOKZJ0Z60/image-asset.jpeg",
+        "note": "Operator-provided axe-throwing image published on the official branch page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "game-of-throwing-stirling",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://www.gameofthrowing.co.uk/game-of-throwing-stirling"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/game-of-throwing-stirling.jpg",
+        "sourcePage": "https://www.gameofthrowing.co.uk/game-of-throwing-stirling",
+        "assetUrl": "https://static1.squarespace.com/static/5f96ae852e14f81cac176e94/t/67095923fa31ff3f478ff70a/1728665891792/0F6A2249.jpg?format=1500w",
+        "note": "Operator-provided axe-throwing image published on the official branch page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "game-of-throwing-aberdeen",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://www.gameofthrowing.co.uk/game-of-throwing-aberdeen"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/game-of-throwing-aberdeen.jpg",
+        "sourcePage": "https://www.gameofthrowing.co.uk/game-of-throwing-aberdeen",
+        "assetUrl": "https://images.squarespace-cdn.com/content/v1/5f96ae852e14f81cac176e94/d7953224-2399-4458-84ba-ec5017ad245f/GOT_STILLS_006.jpg",
+        "note": "Operator-provided axe-throwing image published on the official branch page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "game-of-throwing-newcastle-lvls",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://www.gameofthrowing.co.uk/game-of-throwing-newcastle"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/game-of-throwing-newcastle-lvls.jpg",
+        "sourcePage": "https://www.gameofthrowing.co.uk/game-of-throwing-newcastle",
+        "assetUrl": "https://images.squarespace-cdn.com/content/v1/5f96ae852e14f81cac176e94/d7953224-2399-4458-84ba-ec5017ad245f/GOT_STILLS_006.jpg",
+        "note": "Operator-provided axe-throwing image published on the official branch page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "game-of-throwing-london",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://www.gameofthrowinglondon.co.uk/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/game-of-throwing-london.jpg",
+        "sourcePage": "https://www.gameofthrowinglondon.co.uk/",
+        "assetUrl": "https://images.squarespace-cdn.com/content/v1/66f07cd91ef466624f18b79d/b5b74475-1b7a-46b8-9427-119eb10ddd91/img-8140-900w.webp?format=1000w",
+        "note": "Venue interior published on the official London website.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "splash-art-republic-nottingham",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://www.splashartrepublic.co.uk/nottingham/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/splash-art-republic-nottingham.jpg",
+        "sourcePage": "https://www.splashartrepublic.co.uk/nottingham/",
+        "assetUrl": "https://cms.splashartrepublic.co.uk/uploads/img/transforms/_1200x630_crop_center-center_82_none/25-8-4-Splash-Art-Republic-0828.jpg?mtime=1774612633",
+        "note": "Official studio promotional photograph supplied by Splash Art Republic.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "splash-art-republic-birmingham",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://www.splashartrepublic.co.uk/birmingham/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/splash-art-republic-birmingham.jpg",
+        "sourcePage": "https://www.splashartrepublic.co.uk/birmingham/",
+        "assetUrl": "https://cms.splashartrepublic.co.uk/uploads/img/transforms/_1200x630_crop_center-center_82_none/25-12-13-Splash-Art-Republic-Birmingham-0539.jpg?mtime=1780574800",
+        "note": "Official studio promotional photograph supplied by Splash Art Republic.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "splash-art-republic-sheffield",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://www.splashartrepublic.co.uk/sheffield/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/splash-art-republic-sheffield.jpg",
+        "sourcePage": "https://www.splashartrepublic.co.uk/sheffield/",
+        "assetUrl": "https://cms.splashartrepublic.co.uk/uploads/img/transforms/_1200x630_crop_center-center_82_none/25-8-4-Splash-Art-Republic-0818.jpg?mtime=1770942429",
+        "note": "Official studio promotional photograph supplied by Splash Art Republic.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "chromaticaf-birmingham",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://chromaticaf.com/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/chromaticaf-birmingham.jpg",
+        "sourcePage": "https://chromaticaf.com/",
+        "assetUrl": "https://img1.wsimg.com/isteam/ip/0791e22a-9aa9-4150-a3f8-867abcee0f93/DSC_3767.JPG/:/rs=w:1095,cg:true,m",
+        "note": "Official ChromaticAF website image.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "splatter-art-studio-manchester",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://splatterartstudio.co.uk/manchester/splatter-art-manchester-2/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/splatter-art-studio-manchester.jpg",
+        "sourcePage": "https://splatterartstudio.co.uk/manchester/splatter-art-manchester-2/",
+        "assetUrl": "https://splatterartstudio.co.uk/wp-content/uploads/2026/02/MANCHASTER-STUDIO--1446x2048.jpg",
+        "note": "Manchester studio photograph published on the official branch page.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "splash-house-london",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "paint-splatter"
+      ],
+      "sources": [
+        "https://www.thesplashhouse.co.uk/",
+        "https://www.thesplashhouse.co.uk/contact"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/splash-house-london.jpg",
+        "sourcePage": "https://www.thesplashhouse.co.uk/",
+        "assetUrl": "https://static.wixstatic.com/media/7a205f_341abd522a46447f851cc0cf895fcefd~mv2.jpg/v1/fill/w_2500,h_2862,al_c/7a205f_341abd522a46447f851cc0cf895fcefd~mv2.jpg",
+        "note": "Shared official Splash House operator image; not asserted to depict the London branch.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-bath",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/bath/",
+        "https://boombattlebar.com/uk/bath/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-bath.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/bath/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/bath/wp-content/uploads/sites/18/2021/11/AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-birmingham-broad-street",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/birmingham-broad-street/",
+        "https://boombattlebar.com/uk/birmingham-broad-street/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-birmingham-broad-street.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/birmingham-broad-street/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/birmingham-broad-street/wp-content/uploads/sites/28/2023/10/AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-bournemouth",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/bournemouth/",
+        "https://boombattlebar.com/uk/bournemouth/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-bournemouth.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/bournemouth/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/bournemouth/wp-content/uploads/sites/29/2021/11/AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-cambridge",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/cambridge/",
+        "https://boombattlebar.com/uk/cambridge/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-cambridge.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/cambridge/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/cambridge/wp-content/uploads/sites/37/2026/02/AR-AxeThrowing_Boom-Games-Hero-1.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-canterbury",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/canterbury/",
+        "https://boombattlebar.com/uk/canterbury/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-canterbury.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/canterbury/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/canterbury/wp-content/uploads/sites/35/2022/10/AR-AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-cardiff",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/cardiff/",
+        "https://boombattlebar.com/uk/cardiff/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-cardiff.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/cardiff/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/cardiff/wp-content/uploads/sites/9/2021/11/AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-chelmsford",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/chelmsford/",
+        "https://boombattlebar.com/uk/chelmsford/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-chelmsford.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/chelmsford/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/chelmsford/wp-content/uploads/sites/27/2021/11/AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-coventry",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/coventry/",
+        "https://boombattlebar.com/uk/coventry/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-coventry.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/coventry/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/coventry/wp-content/uploads/sites/14/2021/11/AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-ealing",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/ealing/",
+        "https://boombattlebar.com/uk/ealing/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-ealing.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/ealing/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/ealing/wp-content/uploads/sites/20/2021/11/AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-eastbourne",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/eastbourne/",
+        "https://boombattlebar.com/uk/eastbourne/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-eastbourne.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/eastbourne/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/eastbourne/wp-content/uploads/sites/10/2021/11/AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-edinburgh",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/edinburgh/",
+        "https://boombattlebar.com/uk/edinburgh/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-edinburgh.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/edinburgh/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/edinburgh/wp-content/uploads/sites/23/2021/11/AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-exeter",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/exeter/",
+        "https://boombattlebar.com/uk/exeter/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-exeter.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/exeter/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/exeter/wp-content/uploads/sites/8/2021/11/AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-glasgow",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/glasgow/",
+        "https://boombattlebar.com/uk/glasgow/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-glasgow.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/glasgow/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/glasgow/wp-content/uploads/sites/16/2021/11/AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-ipswich",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/ipswich/",
+        "https://boombattlebar.com/uk/ipswich/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-ipswich.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/ipswich/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/ipswich/wp-content/uploads/sites/17/2021/11/AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-lakeside",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/lakeside/",
+        "https://boombattlebar.com/uk/lakeside/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-lakeside.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/lakeside/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/lakeside/wp-content/uploads/sites/2/2021/11/AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-leeds",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/leeds/",
+        "https://boombattlebar.com/uk/leeds/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-leeds.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/leeds/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/leeds/wp-content/uploads/sites/25/2023/10/AxeThrowing_Boom-Games-Hero-1.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-liverpool",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/liverpool/",
+        "https://boombattlebar.com/uk/liverpool/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-liverpool.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/liverpool/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/liverpool/wp-content/uploads/sites/11/2021/11/AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-london-liverpool-street",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/london-liverpool-street/",
+        "https://boombattlebar.com/uk/london-liverpool-street/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-london-liverpool-street.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/london-liverpool-street/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/london-liverpool-street/wp-content/uploads/sites/19/2021/11/AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-london-oxford-street",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/london-oxford-street/",
+        "https://boombattlebar.com/uk/london-oxford-street/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-london-oxford-street.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/london-oxford-street/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/london-oxford-street/wp-content/uploads/sites/30/2022/10/AR-AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-manchester",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/manchester/",
+        "https://boombattlebar.com/uk/manchester/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-manchester.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/manchester/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/manchester/wp-content/uploads/sites/22/2023/10/AxeThrowing_Boom-Games-Hero-2.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-norwich",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/norwich/",
+        "https://boombattlebar.com/uk/norwich/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-norwich.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/norwich/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/norwich/wp-content/uploads/sites/12/2021/11/AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-plymouth",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/plymouth/",
+        "https://boombattlebar.com/uk/plymouth/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-plymouth.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/plymouth/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/plymouth/wp-content/uploads/sites/26/2024/05/AxeThrowing_Boom-Games-Hero-2.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-reading",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/reading/",
+        "https://boombattlebar.com/uk/reading/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-reading.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/reading/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/reading/wp-content/uploads/sites/39/2024/10/AxeThrowing_Boom-Games-Hero-3.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-sheffield",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/sheffield/",
+        "https://boombattlebar.com/uk/sheffield/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-sheffield.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/sheffield/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/sheffield/wp-content/uploads/sites/24/2021/11/AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-southampton",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/southampton/",
+        "https://boombattlebar.com/uk/southampton/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-southampton.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/southampton/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/southampton/wp-content/uploads/sites/31/2022/10/AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-stevenage",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/stevenage/",
+        "https://boombattlebar.com/uk/stevenage/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-stevenage.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/stevenage/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/stevenage/wp-content/uploads/sites/32/2021/11/AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-theo2",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/theo2/",
+        "https://boombattlebar.com/uk/theo2/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-theo2.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/theo2/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/theo2/wp-content/uploads/sites/6/2021/11/AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-wandsworth",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/wandsworth/",
+        "https://boombattlebar.com/uk/wandsworth/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-wandsworth.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/wandsworth/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/wandsworth/wp-content/uploads/sites/7/2021/11/AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    },
+    {
+      "slug": "boom-battle-bar-watford",
+      "checkedAt": "2026-10-20",
+      "activities": [
+        "axe-throwing"
+      ],
+      "sources": [
+        "https://boombattlebar.com/uk/watford/",
+        "https://boombattlebar.com/uk/watford/battleground/axe-throwing/"
+      ],
+      "outcome": "added-from-official-operator",
+      "image": {
+        "localPath": "/images/venues/boom-battle-bar-watford.jpg",
+        "sourcePage": "https://boombattlebar.com/uk/watford/battleground/axe-throwing/",
+        "assetUrl": "https://s40091.pcdn.co/uk/watford/wp-content/uploads/sites/15/2021/11/AxeThrowing_Boom-Games-Hero.jpg",
+        "note": "Official operator axe-throwing hero image published on this branch’s activity page; may be shared across branches.",
+        "reusePermissionConfirmed": false
+      }
+    }
+  ]
+}
