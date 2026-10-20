@@ -7,7 +7,6 @@ import InspiredRoomsCarousel from "@/components/InspiredRoomsCarousel"
 import DigitalHomeShowcase from "@/components/DigitalHomeShowcase"
 import ShopHomeAnnouncement from "@/components/shop/ShopHomeAnnouncement"
 import FAQ from "@/components/FAQ"
-import ActivityArtwork from "@/components/ActivityArtwork"
 import TrackedDiscoveryLink from "@/components/TrackedDiscoveryLink"
 import { globalFAQs } from "@/lib/faqs"
 import { ACTIVITY_DEFINITIONS, OCCASION_DEFINITIONS, MIN_ACTIVITY_PAGE_LISTINGS, formatListingPrice, getListingExperienceLabel, getListingHref } from "@/lib/discovery"
@@ -17,6 +16,21 @@ import { buildOgImageUrl } from "@/lib/seo-schema"
 import { getSiteUrl } from "@/lib/site-url"
 import { pickDailyListings } from "@/lib/daily-inspiration"
 import { getAuthorisedMedia, getListingDisplayImage } from "@/lib/listing-quality"
+
+const experienceImages: Record<string, { src: string; alt: string }> = {
+  "rage-room": {
+    src: "/images/all-the-rage-birmingham.jpg",
+    alt: "Guest with a smashed television at All The Rage Birmingham",
+  },
+  "axe-throwing": {
+    src: "/images/venues/lumberjack-axe-throwing-cardiff.png",
+    alt: "Guests throwing axes towards wooden targets at Lumberjack Axe Throwing Cardiff",
+  },
+  "paint-splatter": {
+    src: "/images/venues/paint-splat-manchester.jpg",
+    alt: "Fluorescent paint and splatter tools at Paint Splat Manchester",
+  },
+}
 
 export const revalidate = 900
 
@@ -118,7 +132,11 @@ export default async function Home() {
     <section className="site-container py-12 sm:py-16" aria-labelledby="choose-experience-heading">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3"><div><p className="eyebrow mb-2">Make a little mess</p><h2 id="choose-experience-heading" className="section-title">Choose your experience</h2></div><Link href="/activities" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-rage-300">All activities<ArrowRight className="h-4 w-4" /></Link></div>
       <div className="grid gap-5 sm:grid-cols-3">{activities.map(a => <TrackedDiscoveryLink key={a.value} eventName="activity_discovery_click" sourcePageType="homepage" destinationIdentifier={a.slug} destinationPath={`/activities/${a.slug}`} className="card-base card-hover group overflow-hidden">
-        <ActivityArtwork activity={a.value} className="h-48 lg:h-56" />
+        <div className="relative h-48 overflow-hidden bg-zinc-900 lg:h-56">
+          <Image src={experienceImages[a.value].src} alt={experienceImages[a.value].alt} fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 400px"
+            className="object-cover transition-transform duration-300 group-hover:scale-105" />
+        </div>
         <div className="p-5"><h3 className="text-xl font-bold">{a.label}</h3><p className="mt-2 text-sm text-zinc-300">{a.description}</p><p className="mt-4 flex items-center justify-between text-sm font-semibold text-rage-300">Explore {a.count} venues<ArrowRight className="h-4 w-4" /></p></div>
       </TrackedDiscoveryLink>)}</div>
       <div className="mt-10 flex flex-wrap items-center justify-between gap-4"><h3 className="text-xl font-bold">What’s the occasion?</h3><Link href="/occasions" className="text-sm text-rage-300">All occasions →</Link></div>
