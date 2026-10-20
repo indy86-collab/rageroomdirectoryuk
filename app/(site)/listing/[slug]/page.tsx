@@ -704,15 +704,6 @@ export default async function ListingPage({ params }: ListingPageProps) {
           )}
         </div>
 
-        {hasRageRoom && !isMobileService && <div className="mb-6 sm:mb-8">
-          <NearbyActivitiesAffiliate
-            city={listing.city}
-            placement="listing"
-            listingSlug={listing.slug || listing.id}
-            venueName={listing.name}
-          />
-        </div>}
-
         {/* Venue Details & Booking Info */}
         <div className="bg-[#181818] rounded-lg overflow-hidden border border-zinc-800 p-4 sm:p-6 mb-6 sm:mb-8">
           <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
@@ -832,6 +823,15 @@ export default async function ListingPage({ params }: ListingPageProps) {
             </div>
           </div>
         </div>
+
+        {hasRageRoom && !isMobileService && <div className="mb-6 sm:mb-8">
+          <NearbyActivitiesAffiliate
+            city={listing.city}
+            placement="listing"
+            listingSlug={listing.slug || listing.id}
+            venueName={listing.name}
+          />
+        </div>}
 
         {/* Map & Directions */}
         {location && (

@@ -4,6 +4,8 @@ import path from "path"
 export default defineConfig({
   test: {
     environment: "node",
+    // Exercise the opt-in pilot catalogue in unit tests; production defaults to measurement first.
+    env: { NEXT_PUBLIC_GYG_CURATED_ENABLED: "true" },
     include: ["lib/**/*.test.ts", "components/**/*.test.ts"],
   },
   resolve: {

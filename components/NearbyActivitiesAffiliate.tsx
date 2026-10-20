@@ -1,7 +1,11 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
+import GetYourGuideIntroduction from "./GetYourGuideIntroduction"
 import CommercialOffers from "./CommercialOffers"
+import CuratedActivitiesAffiliate from "./CuratedActivitiesAffiliate"
+import { AffiliateModule, AffiliateLink } from "./AffiliateTracking"
+import { GYG_CURATED_ENABLED, getYourGuideCampaign } from "@/lib/getyourguide-catalogue"
 import {
   ArrowLeft,
   ArrowUpRight,
@@ -11,18 +15,14 @@ import {
   Sparkles,
 } from "lucide-react"
 import {
-  trackAffiliateClick,
-  trackAffiliateOfferView,
   trackAffiliatePlannerAnswer,
   trackAffiliatePlannerComplete,
   trackAffiliatePlannerStart,
 } from "@/lib/analytics"
 import {
   AFFILIATE_CHIP_CITIES,
-  buildAffiliateCampaign,
   buildGetYourGuideCardUrl,
   buildGetYourGuideBrowseUrl,
-  buildOfferCampaign,
   getThemedActivityCards,
   PLANNER_GROUPS,
   PLANNER_LABELS,
@@ -35,7 +35,7 @@ import {
 } from "@/lib/getyourguide"
 import { THIRD_PARTY_AFFILIATE_LINKS_ENABLED } from "@/lib/monetization"
 
-type NearbyActivitiesAffiliateProps = {
+export type NearbyActivitiesAffiliateProps = {
   city?: string
   placement: AffiliatePlacement
   listingSlug?: string
@@ -66,7 +66,7 @@ function isSavedPlan(value: unknown): value is SavedPlan {
   )
 }
 
-export default function NearbyActivitiesAffiliate({
+function LegacyNearbyActivitiesAffiliate({
   city,
   placement,
   listingSlug,
@@ -76,8 +76,6 @@ export default function NearbyActivitiesAffiliate({
   variant = "full",
   cities,
 }: NearbyActivitiesAffiliateProps) {
-  const containerRef = useRef<HTMLElement>(null)
-  const hasTrackedView = useRef(false)
   const [step, setStep] = useState<PlannerStep>("idle")
   const [group, setGroup] = useState<PlannerGroup | null>(initialGroup ?? null)
   const [vibe, setVibe] = useState<PlannerVibe | null>(null)
@@ -92,6 +90,8 @@ export default function NearbyActivitiesAffiliate({
     placement,
     city: analyticsCity,
     listingSlug,
+    occasion: occasionSlug,
+    campaign: getYourGuideCampaign({ placement, city: analyticsCity, occasion: occasionSlug, recommendationId: "module" }),
   }
 
   useEffect(() => {
@@ -104,47 +104,16 @@ export default function NearbyActivitiesAffiliate({
       const saved: unknown = JSON.parse(stored)
       if (!isSavedPlan(saved)) return
 
-      setGroup(saved.group)
+      setGroup(initialGroup === "family" ? "family" : saved.group)
       setVibe(saved.vibe)
       setTiming(saved.timing)
     } catch {
       // Safari private browsing or malformed storage must not block the planner.
     }
-  }, [variant])
-
-  useEffect(() => {
-    if (!THIRD_PARTY_AFFILIATE_LINKS_ENABLED) return
-    const element = containerRef.current
-    if (!element || hasTrackedView.current) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry?.isIntersecting || hasTrackedView.current) return
-
-        hasTrackedView.current = true
-        trackAffiliateOfferView(baseAnalytics)
-        observer.disconnect()
-      },
-      { threshold: 0.25 }
-    )
-
-    observer.observe(element)
-    return () => observer.disconnect()
-    // The page context is stable for the lifetime of this mounted component.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [city, listingSlug, placement, variant])
+  }, [variant, initialGroup])
 
   const planComplete = group !== null && vibe !== null && timing !== null
   const plan = planComplete ? { group, vibe, timing } : undefined
-  const placementCampaign = buildAffiliateCampaign({
-    placement,
-    occasionSlug,
-  })
-  const cardCampaign = buildAffiliateCampaign({
-    placement,
-    occasionSlug,
-    personalised: planComplete,
-  })
   const themedCards = getThemedActivityCards(plan, city)
   const headingId = `nearby-activities-${placement}`
 
@@ -224,17 +193,6 @@ export default function NearbyActivitiesAffiliate({
     if (step === "timing") setStep("vibe")
   }
 
-  function trackClick(recommendationId: string, clickCity = analyticsCity) {
-    trackAffiliateClick({
-      ...baseAnalytics,
-      city: clickCity,
-      recommendationId,
-      ...(group ? { plannerGroup: group } : {}),
-      ...(vibe ? { plannerVibe: vibe } : {}),
-      ...(timing ? { plannerTiming: timing } : {}),
-    })
-  }
-
   const venueLabel = venueName || "your rage room"
   const suggestedOrder =
     timing === "before"
@@ -246,9 +204,7 @@ export default function NearbyActivitiesAffiliate({
           : null
 
   return (
-    <section
-      ref={containerRef}
-      aria-labelledby={headingId}
+    <AffiliateModule analytics={baseAnalytics} label="Optional activities"
       className="relative overflow-hidden rounded-lg border border-orange-500/30 bg-gradient-to-br from-[#21160f] via-[#181818] to-[#181818] p-4 sm:p-6"
     >
       <div className="absolute -right-10 -top-12 h-32 w-32 rounded-full bg-orange-500/10 blur-2xl" />
@@ -273,43 +229,37 @@ export default function NearbyActivitiesAffiliate({
             : "Start with a relevant local pick, then check live dates and prices on GetYourGuide. We favour short, group-friendly experiences that can fit around a rage-room booking."}
         </p>
 
+        <GetYourGuideIntroduction />
+
         {variant === "chips" ? (
           <div className="mt-5 flex flex-wrap gap-3">
             {chipCities.map((chipCity) => (
-              <a
+              <AffiliateLink analytics={{ ...baseAnalytics, city: chipCity, recommendationId: getThemedActivityCards(undefined, chipCity)[0].id }}
                 key={chipCity}
                 href={buildGetYourGuideCardUrl(
                   chipCity,
                   getThemedActivityCards(undefined, chipCity)[0],
-                  buildOfferCampaign(
-                    placementCampaign,
-                    getThemedActivityCards(undefined, chipCity)[0].id
-                  )
+                  getYourGuideCampaign({ placement, city: chipCity, occasion: occasionSlug,
+                    recommendationId: getThemedActivityCards(undefined, chipCity)[0].id })
                 )}
-                target="_blank"
-                rel="sponsored noopener noreferrer"
-                onClick={() => trackClick("city_chip", chipCity)}
                 className="inline-flex min-h-[44px] items-center justify-center gap-1 rounded-md border border-orange-500/50 bg-orange-500/10 px-4 py-2 text-sm font-semibold text-orange-200 transition-colors hover:border-orange-400 hover:bg-orange-500/20 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-offset-2 focus:ring-offset-[#181818]"
               >
                 See our {chipCity} pick
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-              </a>
+              </AffiliateLink>
             ))}
           </div>
         ) : city ? (
           <>
             <div className="mt-5 grid gap-3 lg:grid-cols-3">
               {themedCards.map((card) => (
-                <a
+                <AffiliateLink analytics={{ ...baseAnalytics, recommendationId: card.id }}
                   key={card.id}
                   href={buildGetYourGuideCardUrl(
                     city,
                     card,
-                    buildOfferCampaign(cardCampaign, card.id)
+                    getYourGuideCampaign({ placement, city, occasion: occasionSlug, recommendationId: card.id })
                   )}
-                  target="_blank"
-                  rel="sponsored noopener noreferrer"
-                  onClick={() => trackClick(card.id)}
                   className="flex h-full flex-col rounded-lg border border-zinc-700 bg-black/20 p-4 transition-colors hover:border-orange-500/60 hover:bg-orange-500/5 focus:outline-none focus:ring-2 focus:ring-orange-300"
                 >
                   {card.badge && (
@@ -327,24 +277,21 @@ export default function NearbyActivitiesAffiliate({
                     Check dates & price
                     <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                   </span>
-                </a>
+                </AffiliateLink>
               ))}
             </div>
 
             <div className="mt-4">
-              <a
+              <AffiliateLink analytics={{ ...baseAnalytics, recommendationId: "browse-all" }}
                 href={buildGetYourGuideBrowseUrl(
                   city,
-                  buildOfferCampaign(placementCampaign, "browse-all")
+                  getYourGuideCampaign({ placement, city, occasion: occasionSlug, recommendationId: "browse-all" })
                 )}
-                target="_blank"
-                rel="sponsored noopener noreferrer"
-                onClick={() => trackClick("browse_all")}
                 className="inline-flex min-h-[44px] items-center gap-1 text-sm font-semibold text-zinc-300 underline decoration-zinc-600 underline-offset-4 hover:text-white"
               >
                 See all GetYourGuide activities in {city}
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-              </a>
+              </AffiliateLink>
             </div>
 
             {step === "idle" && (
@@ -456,7 +403,7 @@ export default function NearbyActivitiesAffiliate({
         commission at no extra cost to you. Availability and prices are set by
         GetYourGuide and its activity providers.
       </p>
-    </section>
+    </AffiliateModule>
   )
 }
 
@@ -498,4 +445,8 @@ function PlannerQuestion({
       </div>
     </fieldset>
   )
+}
+
+export default function NearbyActivitiesAffiliate(props: NearbyActivitiesAffiliateProps) {
+  return GYG_CURATED_ENABLED ? <CuratedActivitiesAffiliate {...props} /> : <LegacyNearbyActivitiesAffiliate {...props} />
 }

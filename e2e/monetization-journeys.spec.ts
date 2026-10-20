@@ -1,19 +1,19 @@
 import { expect, test } from "@playwright/test"
 
 test.beforeEach(async ({ page }) => {
-  await page.route(/googlesyndication\.com|doubleclick\.net|googletagmanager\.com|google-analytics\.com|cloudflareinsights\.com/, route => route.abort())
+  await page.route(/googlesyndication\.com|doubleclick\.net|googletagmanager\.com|google-analytics\.com|cloudflareinsights\.com|widget\.getyourguide\.com/, route => route.abort())
 })
 
 test("group occasion has attributed relevant offers without replacing venue discovery", async ({ page }) => {
   await page.goto("/occasions/birthdays")
-  const offers = page.getByRole("region", { name: "Make a day of your group outing" })
+  const offers = page.getByRole("region", { name: /Plan the rest of your day|Make a day of your group outing/ })
   await expect(offers).toBeVisible()
   await expect(offers).toContainText("Sponsored links")
   const links = offers.locator('a[rel~="sponsored"]')
   expect(await links.count()).toBeGreaterThan(0)
   const href = await links.first().getAttribute("href")
   expect(href).toContain("partner_id=IZRRCJT")
-  expect(href).toContain("cmp=rageroom_group")
+  expect(href).toMatch(/cmp=rr2_occasion(?:_london_birthdays_browse-all|-birthdays_london_group_browse-all)/)
   await expect(page.getByRole("region", { name: "Filtered venues" })).toBeVisible()
   expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false)
 })
@@ -36,5 +36,5 @@ test("a city without local venues offers explicit alternatives", async ({ page }
   const alternatives = page.getByRole("region", { name: "A different experience could fit your plan" })
   await expect(alternatives).toBeVisible()
   await expect(alternatives.getByRole("link", { name: "Compare axe throwing" })).toHaveAttribute("href", "/activities/axe-throwing")
-  await expect(alternatives).toContainText("search suggestions")
+  await expect(alternatives).toContainText(/local alternatives|search suggestions/)
 })

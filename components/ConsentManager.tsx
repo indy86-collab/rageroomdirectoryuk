@@ -211,7 +211,7 @@ export default function ConsentManager({
                 <span>
                   <span className="block font-semibold text-white">Analytics</span>
                   <span className="mt-1 block text-sm text-zinc-400">
-                    Allows GA4, Vercel Web Analytics and Cloudflare Web Analytics to measure visits, conversions and performance. We do not send form text, contact details or precise location.
+                    Allows GA4, Vercel Web Analytics and Cloudflare Web Analytics to measure visits, conversions and performance. On pages with affiliate offers, this also enables the GetYourGuide Integration Analyzer. We do not send form text, contact details or precise location.
                   </span>
                 </span>
                 <input

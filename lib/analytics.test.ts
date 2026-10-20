@@ -3,6 +3,8 @@ import {
   getDirectorySourcePath,
   getSafeDirectoryReferrerPath,
   trackAffiliateClick,
+  trackAffiliateModuleView,
+  trackAffiliateOfferView,
   trackAuthorityEvent,
   trackDirectoryEvent,
   trackFirstVisitChecklistFindVenueClick,
@@ -41,6 +43,26 @@ describe("directory conversion analytics", () => {
 
   afterEach(() => {
     vi.unstubAllGlobals()
+  })
+
+  it("separates affiliate module and product views and joins outbound campaigns", () => {
+    const context = { provider: "getyourguide", placement: "guide", city: "Manchester", campaign: "rr2_guide_manchester_general_etihad-tour", productId: "155085", recommendationId: "etihad-tour", sourcePath: "/guides/best-rage-rooms-manchester?private=value#detail" }
+    expect(trackAffiliateModuleView({ ...context, productId: undefined })).toBe(true)
+    expect(trackAffiliateOfferView(context)).toBe(true)
+    trackAffiliateClick(context)
+    expect(gtag.mock.calls.map(call => call[1])).toEqual(["affiliate_module_view", "affiliate_offer_view", "affiliate_click"])
+    expect(gtag).toHaveBeenLastCalledWith("event", "affiliate_click", expect.objectContaining({ campaign_id: context.campaign, product_id: "155085", source_path: "/guides/best-rage-rooms-manchester" }))
+    expect(JSON.stringify(gtag.mock.calls)).not.toContain("private=value")
+  })
+
+  it("does not mark an affiliate impression as recorded without consent or a ready tag", () => {
+    const context = { provider: "getyourguide", placement: "city", city: "London" }
+    vi.stubGlobal("window", { localStorage: { getItem: () => null }, gtag })
+    expect(trackAffiliateOfferView(context)).toBe(false)
+    expect(trackAffiliateModuleView(context)).toBe(false)
+    expect(gtag).not.toHaveBeenCalled()
+    vi.stubGlobal("window", { localStorage: { getItem: () => JSON.stringify({ version: 1, analytics: true, decidedAt: Date.now() }) } })
+    expect(trackAffiliateOfferView(context)).toBe(false)
   })
 
   it("fires one primary booking conversion with sanitised attribution", () => {

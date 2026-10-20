@@ -23,7 +23,7 @@ async function mockTrackingProviders(page: Page) {
     if (isProviderRequest(request.url())) requests.push(request.url())
   })
   await page.route(
-    /googletagmanager\.com|google-analytics\.com|cloudflareinsights\.com|va\.vercel-scripts\.com|\/_vercel\/insights|googlesyndication\.com|doubleclick\.net/,
+    /googletagmanager\.com|google-analytics\.com|cloudflareinsights\.com|va\.vercel-scripts\.com|\/_vercel\/insights|googlesyndication\.com|doubleclick\.net|widget\.getyourguide\.com/,
     (route) => route.abort()
   )
   return requests
@@ -36,6 +36,8 @@ function analyticsRequests(requests: string[]) {
 async function setStoredConsent(page: Page, analytics: boolean) {
   await page.addInitScript(
     ({ key, allowed }) => {
+      // Seed a returning visitor once; never overwrite a later withdrawal on reload.
+      if (localStorage.getItem(key) !== null) return
       localStorage.setItem(
         key,
         JSON.stringify({ version: 1, analytics: allowed, decidedAt: Date.now() })
@@ -114,7 +116,7 @@ test.describe("consent-aware analytics", () => {
     await expect(
       page.locator('script[src*="widget.getyourguide.com"]')
     ).toHaveCount(0)
-    const affiliate = page.getByRole("link", { name: "Browse tours in Maidstone" })
+    const affiliate = page.getByRole("link", { name: /Browse local experiences in Maidstone|See all GetYourGuide activities in Maidstone/ })
     await expect(affiliate).toBeVisible()
     await expect(affiliate).toHaveAttribute(
       "href",

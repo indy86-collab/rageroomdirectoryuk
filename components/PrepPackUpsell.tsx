@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { ArrowUpRight, RotateCcw } from "lucide-react"
 import TrackedProductLink from "@/components/TrackedProductLink"
+import { cityBrowseOffer } from "@/lib/getyourguide-catalogue"
 import {
   type AnalyticsProduct,
   type PrepPackIntent,
@@ -15,12 +16,10 @@ import {
 } from "@/lib/analytics"
 import {
   AFFILIATE_CHIP_CITIES,
-  buildAffiliateCampaign,
-  buildGetYourGuideBrowseUrl,
 } from "@/lib/getyourguide"
 
 const LIST_NAME = "Prep Pack Upsell"
-const GYG_CAMPAIGN = buildAffiliateCampaign({ placement: "lead_magnet" })
+
 
 const INTENTS: Array<{ value: PrepPackIntent; label: string; hint: string }> = [
   {
@@ -91,7 +90,7 @@ type PrepPackUpsellProps = {
 }
 
 function gygBrowseUrl(city: string) {
-  return buildGetYourGuideBrowseUrl(city, GYG_CAMPAIGN)
+  return cityBrowseOffer(city, "lead_magnet").href
 }
 
 function trackOffer(offer: PrepPackUpsellOffer, source?: string) {
@@ -116,7 +115,8 @@ export default function PrepPackUpsell({
       provider: "getyourguide",
       placement: "lead_magnet",
       city: targetCity,
-      recommendationId: "prep_pack_day_out",
+      recommendationId: "browse-all",
+      campaign: cityBrowseOffer(targetCity, "lead_magnet").campaign,
     })
   }
 

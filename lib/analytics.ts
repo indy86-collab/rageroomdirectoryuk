@@ -473,7 +473,11 @@ export function trackPurchase(order: AnalyticsOrder) {
   })
 }
 
-type AffiliateEventParams = {
+export type AffiliateEventParams = {
+  campaign?: string
+  productId?: string
+  occasion?: string
+  sourcePath?: string
   provider: string
   placement: string
   city: string
@@ -485,6 +489,7 @@ type AffiliateEventParams = {
 }
 
 function affiliateEventParams({
+  campaign, productId, occasion, sourcePath,
   provider,
   placement,
   city,
@@ -496,6 +501,10 @@ function affiliateEventParams({
 }: AffiliateEventParams) {
   return {
     affiliate_provider: provider.slice(0, 80),
+    ...(campaign ? { campaign_id: campaign.slice(0, 100) } : {}),
+    ...(productId ? { product_id: productId.slice(0, 40) } : {}),
+    ...(occasion ? { occasion: occasion.slice(0, 80) } : {}),
+    ...(sourcePath ? { source_path: cleanDirectoryPath(sourcePath) } : {}),
     affiliate_placement: placement.slice(0, 80),
     city: city.slice(0, 80),
     ...(listingSlug ? { listing_slug: listingSlug.slice(0, 80) } : {}),
@@ -508,23 +517,27 @@ function affiliateEventParams({
   }
 }
 
+export function trackAffiliateModuleView(params: AffiliateEventParams) {
+  return trackEvent("affiliate_module_view", affiliateEventParams(params))
+}
+
 /** Affiliate offer visibility and outbound click events — no PII. */
 export function trackAffiliateOfferView(params: AffiliateEventParams) {
-  trackEvent("affiliate_offer_view", affiliateEventParams(params))
+  return trackEvent("affiliate_offer_view", affiliateEventParams(params))
 }
 
 export function trackAffiliateClick(params: AffiliateEventParams) {
-  trackEvent("affiliate_click", affiliateEventParams(params))
+  return trackEvent("affiliate_click", affiliateEventParams(params))
 }
 
 export function trackAffiliatePlannerStart(params: AffiliateEventParams) {
-  trackEvent("affiliate_planner_start", affiliateEventParams(params))
+  return trackEvent("affiliate_planner_start", affiliateEventParams(params))
 }
 
 export function trackAffiliatePlannerAnswer(
   params: AffiliateEventParams & { step: string; choice: string }
 ) {
-  trackEvent("affiliate_planner_answer", {
+  return trackEvent("affiliate_planner_answer", {
     ...affiliateEventParams(params),
     planner_step: params.step.slice(0, 80),
     planner_choice: params.choice.slice(0, 80),
@@ -532,7 +545,7 @@ export function trackAffiliatePlannerAnswer(
 }
 
 export function trackAffiliatePlannerComplete(params: AffiliateEventParams) {
-  trackEvent("affiliate_planner_complete", affiliateEventParams(params))
+  return trackEvent("affiliate_planner_complete", affiliateEventParams(params))
 }
 
 export function trackProductDownload(

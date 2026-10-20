@@ -17,6 +17,7 @@ export type PlannerGroup = (typeof PLANNER_GROUPS)[number]
 export type PlannerVibe = (typeof PLANNER_VIBES)[number]
 export type PlannerTiming = (typeof PLANNER_TIMINGS)[number]
 export type AffiliatePlacement =
+  | "preview"
   | "city"
   | "listing"
   | "occasion"

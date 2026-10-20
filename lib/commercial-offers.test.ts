@@ -36,9 +36,9 @@ describe("commercial offers", () => {
       for (const offer of commercialOffers(intent, "Newcastle upon Tyne")) {
         const url = new URL(offer.href)
         expect(url.hostname).toBe("www.getyourguide.com")
-        expect(url.searchParams.get("q")).toContain("Newcastle upon Tyne, United Kingdom")
+        expect(url.pathname).toBe("/destinations/newcastle-upon-tyne-l444/")
         expect(url.searchParams.get("partner_id")).toBe("IZRRCJT")
-        expect(url.searchParams.get("cmp")).toContain(`rageroom_${intent}`)
+        expect(url.searchParams.get("cmp")).toContain(`rr2_${intent}_newcastle-upon-tyne_${intent}_browse-all`)
       }
     }
   })

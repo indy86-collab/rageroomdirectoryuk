@@ -300,8 +300,6 @@ export default async function CityPage({ params }: CityPageProps) {
           />
         )}
 
-        {!hasLocalRageRoom && <CommercialOffers intent="alternatives" city={cityName} placement="city_alternatives" />}
-
         {!isEmpty ? (
           <>
             {inCity.length > 0 && (
@@ -343,6 +341,8 @@ export default async function CityPage({ params }: CityPageProps) {
                 />
               </section>
             )}
+
+            {!hasLocalRageRoom && <CommercialOffers intent="alternatives" city={cityName} placement="city_alternatives" />}
 
             {locationDiscoveryPages.length > 0 && (
               <nav className="mt-8 mb-6 rounded-lg border border-zinc-800 bg-[#181818] p-4 sm:p-6" aria-label={`Experiences available in ${cityName}`}>
@@ -452,6 +452,7 @@ export default async function CityPage({ params }: CityPageProps) {
 
         {hasRageRoom && <FAQ items={cityFAQs} title={`Frequently Asked Questions About Rage Rooms in ${cityName}`} />}
 
+        {isEmpty && <CommercialOffers intent="alternatives" city={cityName} placement="city_alternatives" />}
         <div className="mt-12">
           <UGCButtons />
         </div>

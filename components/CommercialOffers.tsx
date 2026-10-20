@@ -1,38 +1,27 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import GetYourGuideIntroduction from "./GetYourGuideIntroduction"
+import AffiliateProductImage from "./AffiliateProductImage"
 import Link from "next/link"
 import { commercialOffers, type CommercialIntent } from "@/lib/commercial-offers"
 import { THIRD_PARTY_AFFILIATE_LINKS_ENABLED } from "@/lib/monetization"
-import { trackAffiliateClick, trackAffiliateOfferView, trackEvent } from "@/lib/analytics"
+import { trackEvent } from "@/lib/analytics"
+
+import { getYourGuideCampaign } from "@/lib/getyourguide-catalogue"
+import { AffiliateModule, AffiliateLink } from "./AffiliateTracking"
 
 export default function CommercialOffers({ intent, city, placement }: {
   intent: CommercialIntent; city?: string; placement: string
 }) {
-  const ref = useRef<HTMLElement>(null)
-  const offers = THIRD_PARTY_AFFILIATE_LINKS_ENABLED ? commercialOffers(intent, city) : []
-  const offerKey = offers.map(offer => offer.id).join(",")
-  useEffect(() => {
-    const element = ref.current
-    if (!element || !THIRD_PARTY_AFFILIATE_LINKS_ENABLED) return
-    const observer = new IntersectionObserver(([entry]) => {
-      if (!entry?.isIntersecting) return
-      for (const offer of commercialOffers(intent, city)) {
-        trackAffiliateOfferView({ provider: offer.provider, placement, city: city || "UK", recommendationId: offer.id })
-      }
-      observer.disconnect()
-    }, { threshold: 0.25 })
-    observer.observe(element)
-    return () => observer.disconnect()
-  }, [intent, city, placement, offerKey])
-
+  const offers = THIRD_PARTY_AFFILIATE_LINKS_ENABLED ? commercialOffers(intent, city, placement) : []
+  const analytics = { provider: "getyourguide", placement, city: city || "UK", occasion: intent, campaign: getYourGuideCampaign({ city: city || "UK", placement, occasion: intent, recommendationId: "module" }) }
   if (!offers.length && intent !== "alternatives") return null
   const title = intent === "group" ? "Make a day of your group outing"
     : intent === "gift" ? "Give an experience they can book"
     : "A different experience could fit your plan"
 
   return (
-    <section ref={ref} aria-label={title} className="my-8 rounded-lg border border-orange-500/30 bg-[#181818] p-5 text-left sm:p-6">
+    <AffiliateModule analytics={analytics} label={title} className="my-8 rounded-lg border border-orange-500/30 bg-[#181818] p-5 text-left sm:p-6">
       <p className="text-xs font-bold uppercase tracking-wider text-orange-400">
         {intent === "alternatives" ? "Open to alternatives?" : intent === "gift" ? "Experience gifts" : "Plan the whole occasion"}
       </p>
@@ -44,13 +33,17 @@ export default function CommercialOffers({ intent, city, placement }: {
       </p>
       {offers.length > 0 && <>
         <p className="mt-3 text-xs text-zinc-400">Sponsored links · We may earn a commission at no extra cost to you. Prices and availability are set by the provider.</p>
+        {offers.some(offer => offer.provider === "getyourguide") && <GetYourGuideIntroduction />}
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          {offers.map(offer => <a key={offer.id} href={offer.href} target="_blank" rel="sponsored noopener noreferrer"
-            onClick={() => trackAffiliateClick({ provider: offer.provider, placement, city: city || "UK", recommendationId: offer.id })}
+          {offers.map(offer => <AffiliateLink key={offer.id} href={offer.href}
+            analytics={{ ...analytics, provider: offer.provider, city: offer.city || city || "UK", recommendationId: offer.id, campaign: offer.campaign, productId: offer.product?.productId }}
             className="rounded-md border border-zinc-700 p-4 transition-colors hover:border-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-orange-400">
+            <AffiliateProductImage key={offer.product?.image?.src} image={offer.product?.image} />
             <h3 className="font-semibold text-white">{offer.title} ↗</h3>
+            {offer.product && <p className="mt-2 text-sm text-zinc-300">{offer.product.location} · {offer.product.duration}<br />{offer.product.audience}</p>}
             <p className="mt-2 text-sm leading-6 text-zinc-400">{offer.description}</p>
-          </a>)}
+            {offer.product && <span className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-orange-300">View dates &amp; prices on GetYourGuide ↗</span>}
+          </AffiliateLink>)}
         </div>
       </>}
       {intent === "alternatives" && <div className="mt-4 flex flex-wrap gap-3">
@@ -62,6 +55,6 @@ export default function CommercialOffers({ intent, city, placement }: {
           </Link>)}
         <p className="w-full text-xs text-zinc-500">Directory links show UK options; narrow by location and check each venue&apos;s requirements.</p>
       </div>}
-    </section>
+    </AffiliateModule>
   )
 }

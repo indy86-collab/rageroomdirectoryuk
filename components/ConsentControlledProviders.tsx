@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
+import GetYourGuideAnalyzer from "./GetYourGuideAnalyzer"
 import { Analytics } from "@vercel/analytics/next"
 import { ANALYTICS_READY_EVENT } from "@/lib/consent"
 
@@ -71,5 +72,5 @@ export default function ConsentControlledProviders({
     window.dispatchEvent(new Event(ANALYTICS_READY_EVENT))
   }, [cloudflareToken, gaMeasurementId])
 
-  return <Analytics />
+  return <><Analytics /><GetYourGuideAnalyzer /></>
 }
